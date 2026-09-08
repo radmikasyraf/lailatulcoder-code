@@ -1,0 +1,295 @@
+/**
+ * @license
+ * Copyright 2026 Qwen Team
+ * SPDX-License-Identifier: Apache-2.0
+ */
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { ToolNames } from '../tools/tool-names.js';
+import { isShellCommandReadOnlyASTInDirectory } from '../utils/shellAstParser.js';
+import { stripShellWrapper } from '../utils/shell-utils.js';
+import { AUTO_MEMORY_PINNED_DIRNAME, getAutoMemoryRoot, getAutoMemoryTrustedAnchor, getUserAutoMemoryRoot, } from './paths.js';
+function isScopedTool(toolName, opts) {
+    return ((opts.restrictReadsToMemoryPaths &&
+        (toolName === ToolNames.READ_FILE ||
+            toolName === ToolNames.GREP ||
+            toolName === ToolNames.LS)) ||
+        toolName === ToolNames.EDIT ||
+        toolName === ToolNames.WRITE_FILE ||
+        toolName === ToolNames.SHELL);
+}
+function mergePermissionDecision(scopedDecision, baseDecision, opts) {
+    if (opts.bypassBaseAskForScopedPaths &&
+        scopedDecision === 'allow' &&
+        baseDecision === 'ask') {
+        return 'allow';
+    }
+    const priority = {
+        deny: 4,
+        ask: 3,
+        allow: 2,
+        default: 1,
+    };
+    return priority[baseDecision] > priority[scopedDecision]
+        ? baseDecision
+        : scopedDecision;
+}
+export function isAllowedMemoryPath(filePath, projectRoot, options = {}) {
+    if (!filePath)
+        return false;
+    return isAllowedResolvedMemoryPath(realpathExistingOrNew(filePath), projectRoot, options);
+}
+function isAllowedResolvedMemoryPath(resolvedPath, projectRoot, options = {}) {
+    if (!resolvedPath)
+        return false;
+    const includeUserMemory = options.includeUserMemory ?? true;
+    const projectMemoryRoot = resolveTrustedMemoryRoot(getAutoMemoryRoot(projectRoot), getAutoMemoryTrustedAnchor(projectRoot));
+    const userMemoryRoot = realpathOrResolved(getUserAutoMemoryRoot());
+    const isAllowed = (candidate) => isWithinRoot(candidate, projectMemoryRoot) ||
+        (includeUserMemory && isWithinRoot(candidate, userMemoryRoot));
+    return isAllowed(resolvedPath);
+}
+function createPinnedMemoryRoots(projectRoot, includeUserMemory) {
+    const memoryRoots = [getAutoMemoryRoot(projectRoot)];
+    if (includeUserMemory) {
+        memoryRoots.push(getUserAutoMemoryRoot());
+    }
+    return memoryRoots.map((memoryRoot) => {
+        const literalPath = path.resolve(memoryRoot, AUTO_MEMORY_PINNED_DIRNAME);
+        // Snapshot the resolved root for this agent run. Literal containment still
+        // protects the reserved path if it is created later; retargeting symlinks
+        // during a run is outside the automatic worker's capabilities.
+        return {
+            literalPath,
+            resolvedPath: realpathExistingOrNew(literalPath),
+        };
+    });
+}
+function isProtectedPinnedMemoryPath(filePath, pinnedRoots, resolvedCandidate) {
+    if (!filePath)
+        return false;
+    const literalCandidate = path.resolve(filePath);
+    return pinnedRoots.some((pinnedRoot) => {
+        if (isWithinRootCaseInsensitive(literalCandidate, pinnedRoot.literalPath)) {
+            return true;
+        }
+        return (!!resolvedCandidate &&
+            !!pinnedRoot.resolvedPath &&
+            isWithinRootCaseInsensitive(resolvedCandidate, pinnedRoot.resolvedPath));
+    });
+}
+function realpathExistingOrNew(filePath) {
+    try {
+        return fs.realpathSync(filePath);
+    }
+    catch (err) {
+        if (err.code !== 'ENOENT')
+            return undefined;
+        try {
+            if (fs.lstatSync(filePath).isSymbolicLink())
+                return undefined;
+        }
+        catch {
+            // The leaf is truly absent; resolve the closest existing parent.
+        }
+        return realpathNewPath(filePath);
+    }
+}
+function realpathNewPath(filePath) {
+    let current = path.dirname(path.resolve(filePath));
+    let remainder = path.basename(filePath);
+    while (true) {
+        try {
+            return path.join(fs.realpathSync(current), remainder);
+        }
+        catch (err) {
+            if (err.code !== 'ENOENT')
+                return undefined;
+            const parent = path.dirname(current);
+            if (parent === current)
+                return undefined;
+            remainder = path.join(path.basename(current), remainder);
+            current = parent;
+        }
+    }
+}
+function realpathOrResolved(filePath) {
+    try {
+        return fs.realpathSync(filePath);
+    }
+    catch {
+        // The root may not exist yet (e.g. before the first managed-memory write).
+        // Resolve the nearest existing ancestor's real path — the same way the
+        // candidate is resolved via realpathExistingOrNew — so a symlinked
+        // component in the path (e.g. a linked worktree, or macOS `/var` ->
+        // `/private/var`) stays symmetric on both sides. Otherwise a symlinked
+        // root compared against a realpath'd candidate makes isWithinRoot false
+        // and misclassifies allowed writes as outside managed memory.
+        return realpathNewPath(filePath) ?? path.resolve(filePath);
+    }
+}
+/**
+ * Resolve a managed-memory root for the write-boundary comparison.
+ *
+ * The candidate path is always realpath-resolved, so the root must resolve the
+ * same symlinks in its trusted prefix (macOS `/var` -> `/private/var`, a
+ * symlinked project dir or linked worktree) to avoid false denials. But it must
+ * NOT follow a symlink that lives inside the managed suffix — e.g. a repo-
+ * tracked `.lailatulcoder -> /outside` under `QWEN_CODE_MEMORY_LOCAL` — which would
+ * relocate the "allowed" root out of the project and let the first managed
+ * write land outside it. So we canonicalize the trusted anchor only and append
+ * the managed suffix literally.
+ */
+function resolveTrustedMemoryRoot(literalRoot, anchor) {
+    const suffix = path.relative(anchor, literalRoot);
+    if (suffix === '' ||
+        suffix === '..' ||
+        suffix.startsWith(`..${path.sep}`) ||
+        path.isAbsolute(suffix)) {
+        // The root is not under its expected anchor (unexpected layout); resolve
+        // the whole path, matching the behavior before this anchor guard existed.
+        return realpathOrResolved(literalRoot);
+    }
+    return path.join(realpathOrResolved(anchor), suffix);
+}
+function isWithinRoot(filePath, root) {
+    const rel = path.relative(root, filePath);
+    return (rel === '' ||
+        (rel !== '..' && !rel.startsWith(`..${path.sep}`) && !path.isAbsolute(rel)));
+}
+function isWithinRootCaseInsensitive(filePath, root) {
+    // Lowercase the complete paths so case variants cannot fail open on a
+    // case-insensitive filesystem. This is deliberately fail-closed, and
+    // String.prototype.toLowerCase is locale-independent.
+    return isWithinRoot(filePath.toLowerCase(), root.toLowerCase());
+}
+async function evaluateScopedDecision(ctx, projectRoot, opts, pinnedRoots) {
+    switch (ctx.toolName) {
+        case ToolNames.SHELL: {
+            if (!opts.allowShell || !ctx.command) {
+                return 'deny';
+            }
+            const isReadOnly = await isShellCommandReadOnlyASTInDirectory(stripShellWrapper(ctx.command), ctx.cwd ?? projectRoot);
+            return isReadOnly ? 'allow' : 'deny';
+        }
+        case ToolNames.READ_FILE:
+        case ToolNames.GREP:
+        case ToolNames.LS:
+            if (!opts.restrictReadsToMemoryPaths)
+                return 'default';
+            return isAllowedMemoryPath(ctx.filePath, projectRoot, {
+                includeUserMemory: opts.includeUserMemory,
+            })
+                ? 'allow'
+                : 'deny';
+        case ToolNames.EDIT:
+        case ToolNames.WRITE_FILE: {
+            const resolvedCandidate = ctx.filePath
+                ? realpathExistingOrNew(ctx.filePath)
+                : undefined;
+            const isPinned = opts.protectPinnedMemory &&
+                isProtectedPinnedMemoryPath(ctx.filePath, pinnedRoots, resolvedCandidate);
+            if (isPinned)
+                return 'deny';
+            return isAllowedResolvedMemoryPath(resolvedCandidate, projectRoot, {
+                includeUserMemory: opts.includeUserMemory,
+            })
+                ? 'allow'
+                : 'deny';
+        }
+        default:
+            return 'default';
+    }
+}
+function getScopedDenyRule(ctx, projectRoot, opts, pinnedRoots) {
+    const allowedRoots = opts.includeUserMemory
+        ? `${getUserAutoMemoryRoot()} or ${getAutoMemoryRoot(projectRoot)}`
+        : getAutoMemoryRoot(projectRoot);
+    switch (ctx.toolName) {
+        case ToolNames.SHELL:
+            return opts.allowShell
+                ? 'ManagedAutoMemory(run_shell_command: read-only only)'
+                : 'ManagedAutoMemory(run_shell_command: disabled)';
+        case ToolNames.READ_FILE:
+            if (!opts.restrictReadsToMemoryPaths)
+                return undefined;
+            return `ManagedAutoMemory(read_file: only within ` + `${allowedRoots})`;
+        case ToolNames.GREP:
+            if (!opts.restrictReadsToMemoryPaths)
+                return undefined;
+            return `ManagedAutoMemory(grep_search: only within ` + `${allowedRoots})`;
+        case ToolNames.LS:
+            if (!opts.restrictReadsToMemoryPaths)
+                return undefined;
+            return (`ManagedAutoMemory(list_directory: only within ` + `${allowedRoots})`);
+        case ToolNames.EDIT:
+        case ToolNames.WRITE_FILE: {
+            const resolvedCandidate = ctx.filePath
+                ? realpathExistingOrNew(ctx.filePath)
+                : undefined;
+            const isAllowed = isAllowedResolvedMemoryPath(resolvedCandidate, projectRoot, { includeUserMemory: opts.includeUserMemory });
+            if (isAllowed &&
+                opts.protectPinnedMemory &&
+                isProtectedPinnedMemoryPath(ctx.filePath, pinnedRoots, resolvedCandidate)) {
+                return `ManagedAutoMemory(${ctx.toolName}: pinned memory is read-only)`;
+            }
+            return `ManagedAutoMemory(${ctx.toolName}: only within ${allowedRoots})`;
+        }
+        default:
+            return undefined;
+    }
+}
+export function createMemoryScopedAgentConfig(config, projectRoot, options = {}) {
+    const opts = {
+        allowShell: options.allowShell ?? false,
+        bypassBaseAskForScopedPaths: options.bypassBaseAskForScopedPaths ?? false,
+        includeUserMemory: options.includeUserMemory ?? true,
+        protectPinnedMemory: options.protectPinnedMemory ?? false,
+        restrictReadsToMemoryPaths: options.restrictReadsToMemoryPaths ?? false,
+    };
+    const pinnedRoots = opts.protectPinnedMemory
+        ? createPinnedMemoryRoots(projectRoot, opts.includeUserMemory)
+        : [];
+    const basePm = config.getPermissionManager?.();
+    const scopedPm = {
+        hasRelevantRules(ctx) {
+            return (isScopedTool(ctx.toolName, opts) || !!basePm?.hasRelevantRules(ctx));
+        },
+        hasMatchingAskRule(ctx) {
+            return basePm?.hasMatchingAskRule(ctx) ?? false;
+        },
+        findMatchingDenyRule(ctx) {
+            const scoped = getScopedDenyRule(ctx, projectRoot, opts, pinnedRoots);
+            if (scoped) {
+                return scoped;
+            }
+            return basePm?.findMatchingDenyRule(ctx);
+        },
+        async evaluate(ctx) {
+            const scopedDecision = await evaluateScopedDecision(ctx, projectRoot, opts, pinnedRoots);
+            if (!basePm) {
+                return scopedDecision;
+            }
+            const baseDecision = basePm.hasRelevantRules(ctx)
+                ? await basePm.evaluate(ctx)
+                : 'default';
+            return mergePermissionDecision(scopedDecision, baseDecision, opts);
+        },
+        async isToolEnabled(toolName) {
+            if (toolName === ToolNames.SHELL) {
+                return opts.allowShell;
+            }
+            if (isScopedTool(toolName, opts)) {
+                return true;
+            }
+            if (basePm) {
+                return basePm.isToolEnabled(toolName);
+            }
+            return true;
+        },
+    };
+    const scopedConfig = Object.create(config);
+    scopedConfig.getPermissionManager = () => scopedPm;
+    return scopedConfig;
+}
+//# sourceMappingURL=memory-scoped-agent-config.js.map

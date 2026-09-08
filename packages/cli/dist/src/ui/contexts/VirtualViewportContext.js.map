@@ -1,0 +1,1 @@
+{"version":3,"file":"VirtualViewportContext.js","sourceRoot":"","sources":["../../../../src/ui/contexts/VirtualViewportContext.tsx"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH,OAAO,EAAE,aAAa,EAAE,UAAU,EAAE,MAAM,OAAO,CAAC;AAElD,MAAM,CAAC,MAAM,sBAAsB,GAAG,aAAa,CACjD,SAAS,CACV,CAAC;AAEF,MAAM,UAAU,kBAAkB,CAAC,QAAkB;IACnD,OAAO,UAAU,CAAC,sBAAsB,CAAC,IAAI,QAAQ,IAAI,KAAK,CAAC;AACjE,CAAC"}

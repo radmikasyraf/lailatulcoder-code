@@ -1,0 +1,286 @@
+/**
+ * @license
+ * Copyright 2025 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ */
+/**
+ * Prepares `historyToCompress` for the side-query summary model by
+ * stripping inline media. `inlineData` / `fileData` parts are replaced
+ * with a short `[image: <mime>]` / `[document: <mime>]` placeholder —
+ * the summary model usually cannot interpret raw base64 anyway, and
+ * shipping the bytes inflates the side-query payload.
+ *
+ * The function never mutates the input; it returns a fresh `Content[]`
+ * (or the identity-equal input when no changes were made).
+ */
+export const DEFAULT_IMAGE_TOKEN_ESTIMATE = 1600;
+/**
+ * Generic char/token conversion factor (claude-code's canonical heuristic).
+ * Exported so adjacent estimators (`tokenEstimation.ts`'s `CHARS_PER_TOKEN`)
+ * stay programmatically linked — if this ever moves, both sites move
+ * together rather than drifting silently.
+ */
+export const TOKEN_TO_CHAR_RATIO = 4;
+const DEFAULT_MIME = 'application/octet-stream';
+/**
+ * Strip characters that could break out of the placeholder envelope or
+ * inject prompt-shaped content into the summary side-query. MCP tools
+ * surface `mimeType` from arbitrary servers; an adversarial server
+ * could craft something like `image/png]\n\n[SYSTEM: …` and have it
+ * appear verbatim in the slimmed prompt.
+ */
+export function sanitizeMimeForPlaceholder(mime) {
+    return mime
+        .replace(/[\r\n\t]+/g, ' ')
+        .replace(/[[\]]/g, '')
+        .trim()
+        .slice(0, 128);
+}
+/**
+ * Placeholder templates. Centralized so the slimming module, the
+ * char-counter, and any future consumer agree on the exact wire format
+ * the summary model will see.
+ */
+const imagePlaceholder = (mime) => `[image: ${sanitizeMimeForPlaceholder(mime)}]`;
+const documentPlaceholder = (mime) => `[document: ${sanitizeMimeForPlaceholder(mime)}]`;
+/**
+ * Resolves slimming-related knobs in priority order: env > settings >
+ * default. Invalid (non-finite or out-of-range) values fall through to
+ * the next source.
+ */
+export function resolveSlimmingConfig(settings) {
+    return {
+        imageTokenEstimate: resolveNumber(process.env['QWEN_IMAGE_TOKEN_ESTIMATE'], settings?.imageTokenEstimate, DEFAULT_IMAGE_TOKEN_ESTIMATE, { minInclusive: 1 }),
+    };
+}
+function resolveNumber(envValue, settingsValue, defaultValue, { integer = false, minInclusive, }) {
+    const isValid = (value) => Number.isFinite(value) &&
+        (!integer || Number.isSafeInteger(value)) &&
+        value >= minInclusive;
+    if (envValue !== undefined && envValue !== '') {
+        const trimmed = envValue.trim();
+        if (integer && !/^\d+$/.test(trimmed)) {
+            return settingsValue !== undefined && isValid(settingsValue)
+                ? settingsValue
+                : defaultValue;
+        }
+        const parsed = Number(trimmed);
+        if (isValid(parsed)) {
+            return parsed;
+        }
+    }
+    if (settingsValue !== undefined && isValid(settingsValue)) {
+        return settingsValue;
+    }
+    return defaultValue;
+}
+export const DEFAULT_MAX_RECENT_FILES = 5;
+export const DEFAULT_MAX_RECENT_IMAGES = 3;
+export const DEFAULT_SCREENSHOT_TRIGGER_ENABLED = true;
+export const DEFAULT_SCREENSHOT_TRIGGER_THRESHOLD = 20;
+export const DEFAULT_IMAGE_PAYLOAD_THRESHOLD = 20;
+/**
+ * Resolves the post-compact retention + screenshot-trigger knobs in
+ * priority order env > settings > default. Count-like fields require
+ * integer values because downstream collectors compare against integer
+ * lengths.
+ *
+ * The screenshot trigger counts only images nested in
+ * `functionResponse.parts` (tool results). Compaction replaces those with
+ * the summary, and the surviving images are re-embedded as TOP-LEVEL parts
+ * in the restoration block — which the counter ignores. So compaction
+ * always resets the tool-image count to ~0 and the trigger cannot
+ * immediately re-fire, independent of `maxRecentImages`.
+ */
+export function resolveCompactionTuning(settings) {
+    return {
+        maxRecentFiles: resolveNumber(process.env['QWEN_COMPACT_MAX_RECENT_FILES'], settings?.maxRecentFilesToRetain, DEFAULT_MAX_RECENT_FILES, { integer: true, minInclusive: 0 }),
+        maxRecentImages: resolveNumber(process.env['QWEN_COMPACT_MAX_RECENT_IMAGES'], settings?.maxRecentImagesToRetain, DEFAULT_MAX_RECENT_IMAGES, { integer: true, minInclusive: 0 }),
+        enableScreenshotTrigger: resolveBoolean(process.env['QWEN_COMPACT_SCREENSHOT_TRIGGER'], settings?.enableScreenshotTrigger, DEFAULT_SCREENSHOT_TRIGGER_ENABLED),
+        screenshotTriggerThreshold: resolveNumber(process.env['QWEN_COMPACT_SCREENSHOT_THRESHOLD'], settings?.screenshotTriggerThreshold, DEFAULT_SCREENSHOT_TRIGGER_THRESHOLD, { integer: true, minInclusive: 1 }),
+        imagePayloadThreshold: resolveNumber(process.env['QWEN_IMAGE_PAYLOAD_THRESHOLD'], settings?.imagePayloadThreshold, DEFAULT_IMAGE_PAYLOAD_THRESHOLD, { integer: true, minInclusive: 1 }),
+    };
+}
+/**
+ * Resolves a boolean knob in priority order env > settings > default.
+ * Accepts `1`/`true` and `0`/`false` (case-sensitive, matching the
+ * existing `getEmitToolUseSummaries` convention); any other env string
+ * is ignored so a typo falls through rather than silently flipping the
+ * flag.
+ */
+function resolveBoolean(envValue, settingsValue, defaultValue) {
+    if (envValue === '1' || envValue === 'true')
+        return true;
+    if (envValue === '0' || envValue === 'false')
+        return false;
+    if (typeof settingsValue === 'boolean')
+        return settingsValue;
+    return defaultValue;
+}
+/**
+ * Approximate char count for a single `Part`, used by
+ * `estimateContentChars` and by the slimming module's own budget
+ * accounting. Binary parts get a fixed budget (in chars) derived from
+ * the configured token estimate; this keeps base64 payloads from
+ * skewing compression size estimation or token-budget math.
+ */
+export function estimatePartChars(part, imageTokenEstimate) {
+    if (part.inlineData || part.fileData) {
+        return imageTokenEstimate * TOKEN_TO_CHAR_RATIO;
+    }
+    if (typeof part.text === 'string') {
+        return part.text.length;
+    }
+    // Tool results in lailatul-coder carry media on `functionResponse.parts`
+    // (an extension to the @google/genai schema; see
+    // `coreToolScheduler.createFunctionResponsePart`). Walk into those
+    // nested parts so a base64 image attached to a `read_file` result
+    // isn't billed as ~350K chars by `JSON.stringify`.
+    if (part.functionResponse) {
+        let total = 0;
+        const output = part.functionResponse.response?.['output'];
+        const error = part.functionResponse.response?.['error'];
+        if (typeof output === 'string') {
+            total += output.length;
+        }
+        else if (typeof error === 'string') {
+            total += error.length;
+        }
+        const nested = getFunctionResponseParts(part);
+        if (nested) {
+            for (const inner of nested) {
+                total += estimatePartChars(inner, imageTokenEstimate);
+            }
+        }
+        // Add a small fixed floor for the wrapper metadata (id, name) so a
+        // pure media-only response isn't reported as just the image budget.
+        return total + 64;
+    }
+    return JSON.stringify(part ?? {}).length;
+}
+/**
+ * Returns the nested-parts array from a `functionResponse`, if present.
+ * lailatul-coder attaches media here (see
+ * `coreToolScheduler.createFunctionResponsePart`); the standard
+ * `@google/genai` FunctionResponse type does not declare it.
+ *
+ * Exported so post-compact image extraction/counting walks the SAME
+ * carrier the slimmer strips — otherwise the two disagree on where tool
+ * media lives and screenshots silently vanish from restoration.
+ */
+export function getFunctionResponseParts(part) {
+    const fr = part.functionResponse;
+    return Array.isArray(fr?.parts) ? fr.parts : undefined;
+}
+export function estimateContentChars(content, imageTokenEstimate) {
+    if (!content.parts)
+        return 0;
+    let total = 0;
+    for (const part of content.parts) {
+        total += estimatePartChars(part, imageTokenEstimate);
+    }
+    return total;
+}
+/**
+ * Strip inline media from compaction input. The returned array has the
+ * same length and ordering as the input; identity-equal when nothing
+ * changed.
+ */
+export function slimCompactionInput(history, supportedModalities) {
+    const stats = {
+        imagesStripped: 0,
+        documentsStripped: 0,
+    };
+    let anyChange = false;
+    const slimmed = history.map((content) => {
+        if (!content.parts || content.parts.length === 0)
+            return content;
+        let touched = false;
+        const newParts = content.parts.map((part) => {
+            const replacement = transformPart(part, stats, supportedModalities);
+            if (replacement !== part) {
+                touched = true;
+                return replacement;
+            }
+            return part;
+        });
+        if (!touched)
+            return content;
+        anyChange = true;
+        return { ...content, parts: newParts };
+    });
+    return {
+        slimmedHistory: anyChange ? slimmed : history,
+        stats,
+    };
+}
+function transformPart(part, stats, supportedModalities) {
+    if (part.inlineData) {
+        if (supportsMimeType(part.inlineData.mimeType, supportedModalities) === true) {
+            return part;
+        }
+        return mediaPlaceholderPart(part.inlineData.mimeType, stats);
+    }
+    if (part.fileData) {
+        if (supportsMimeType(part.fileData.mimeType, supportedModalities) === true) {
+            return part;
+        }
+        return mediaPlaceholderPart(part.fileData.mimeType, stats);
+    }
+    // Walk into functionResponse.parts (lailatul-coder's nested-media carrier
+    // for tool results — see `coreToolScheduler.createFunctionResponsePart`).
+    // Without this, base64 images returned by read_file et al. leak into
+    // the side-query payload.
+    const nested = getFunctionResponseParts(part);
+    if (nested) {
+        let touched = false;
+        const newNested = nested.map((inner) => {
+            const replacement = transformPart(inner, stats, supportedModalities);
+            if (replacement !== inner) {
+                touched = true;
+            }
+            return replacement;
+        });
+        if (touched) {
+            return {
+                ...part,
+                functionResponse: {
+                    ...part.functionResponse,
+                    parts: newNested,
+                },
+            };
+        }
+    }
+    return part;
+}
+function supportsMimeType(mimeType, modalities) {
+    if (!modalities)
+        return undefined;
+    const mime = mimeType ?? DEFAULT_MIME;
+    if (mime.startsWith('image/'))
+        return modalities.image;
+    if (mime === 'application/pdf')
+        return modalities.pdf;
+    if (mime.startsWith('audio/'))
+        return modalities.audio;
+    if (mime.startsWith('video/'))
+        return modalities.video;
+    return false;
+}
+function mediaPlaceholderPart(mimeType, stats) {
+    const mime = mimeType ?? DEFAULT_MIME;
+    if (isNonImageMime(mime)) {
+        stats.documentsStripped++;
+        return { text: documentPlaceholder(mime) };
+    }
+    stats.imagesStripped++;
+    return { text: imagePlaceholder(mime) };
+}
+function isNonImageMime(mime) {
+    // Anything outside image/* is rendered with the `[document: ...]`
+    // placeholder. audio/video are rare on lailatul-coder's tool surface and
+    // the placeholder is purely informational, so the conservative
+    // grouping is acceptable.
+    return !mime.startsWith('image/');
+}
+//# sourceMappingURL=compactionInputSlimming.js.map

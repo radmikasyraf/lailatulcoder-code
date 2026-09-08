@@ -1,0 +1,273 @@
+/**
+ * @license
+ * Copyright 2026 Qwen Team
+ * SPDX-License-Identifier: Apache-2.0
+ */
+import { randomBytes } from 'node:crypto';
+import { logWorkflowRun } from '../../telemetry/loggers.js';
+import { WorkflowRunEvent } from '../../telemetry/types.js';
+import { createAbortController, createChildAbortController, } from '../../utils/abortController.js';
+import { isTerminalWorkflowStatus, } from '../workflow-run-registry.js';
+import { writeWorkflowSnapshot } from '../workflow-snapshot.js';
+import { createProductionDispatch, resolveConcurrencyLimit, WorkflowExecutionError, WorkflowOrchestrator, } from './workflow-orchestrator.js';
+import { WorkflowBudgetImpl } from './workflow-budget.js';
+import { WorkflowDispatchScheduler } from './workflow-dispatch-scheduler.js';
+import { WorkflowJournal } from './workflow-journal.js';
+import { resolveSavedWorkflowScript } from './workflow-saved.js';
+export class WorkflowRunHandle {
+    runId;
+    budget;
+    registry;
+    controller;
+    scheduler;
+    completion;
+    constructor(runId, budget, registry, controller, scheduler, start) {
+        this.runId = runId;
+        this.budget = budget;
+        this.registry = registry;
+        this.controller = controller;
+        this.scheduler = scheduler;
+        this.completion = Promise.resolve().then(start);
+    }
+    abort() {
+        this.controller.abort();
+    }
+    pause() {
+        return this.scheduler.pause();
+    }
+    resume() {
+        return this.scheduler.resume();
+    }
+}
+export class WorkflowRunner {
+    static async start(options) {
+        const config = options.config;
+        const runInBackground = options.runInBackground === true;
+        const budget = WorkflowBudgetImpl.fromEnv();
+        const loaded = options.scriptPath && options.script === undefined
+            ? await resolveSavedWorkflowScript({ scriptPath: options.scriptPath }, config)
+            : undefined;
+        const script = loaded?.script ?? options.script ?? '';
+        const scriptPath = loaded?.scriptPath ?? options.scriptPath;
+        const runId = options.resumeFromRunId ?? `wf_${randomBytes(8).toString('hex')}`;
+        const storage = config.storage;
+        const journal = storage
+            ? new WorkflowJournal(storage.getWorkflowRunJournalPath(runId))
+            : undefined;
+        const resumeReplay = options.resumeFromRunId
+            ? await journal?.load()
+            : undefined;
+        if (runInBackground && options.signal.aborted) {
+            throw new Error('Background workflow start was cancelled.');
+        }
+        const callerWasAbortedBeforeStart = options.signal.aborted;
+        const registry = config.getWorkflowRunRegistry?.();
+        let entry;
+        const isCurrentEntry = () => registry === undefined ||
+            (entry !== undefined && registry.get(runId) === entry);
+        const controller = runInBackground
+            ? createAbortController()
+            : createChildAbortController(options.signal);
+        const dispatch = options.dispatch ??
+            createProductionDispatch(config, controller.signal, (outputTokens) => budget.recordSpent(outputTokens), registry
+                ? (emitter, dispatchId) => isCurrentEntry()
+                    ? registry.bridgeApprovalEvents(runId, emitter, dispatchId, entry)
+                    : () => undefined
+                : undefined);
+        const orchestrator = new WorkflowOrchestrator(dispatch);
+        try {
+            entry = registry?.register({
+                runId,
+                toolUseId: options.toolUseId,
+                meta: null,
+                status: 'running',
+                startTime: Date.now(),
+                outputFile: '',
+                abortController: controller,
+                tokenBudgetTotal: budget.total,
+                script,
+                scriptPath,
+                args: options.args,
+                ...(options.resumeFromRunId
+                    ? {
+                        sourceRunId: options.resumeFromRunId,
+                        startMode: 'retry',
+                    }
+                    : {}),
+                isBackgrounded: runInBackground,
+            });
+        }
+        catch (error) {
+            controller.abort();
+            throw error;
+        }
+        const emitUpdate = () => {
+            if (!entry || !options.onUpdate || !isCurrentEntry())
+                return;
+            try {
+                options.onUpdate(entry);
+            }
+            catch {
+                // UI refresh failures must not affect workflow execution.
+            }
+        };
+        const emitter = {
+            phaseStarted: (title) => {
+                if (!isCurrentEntry())
+                    return;
+                registry?.onPhaseStarted(runId, title);
+                emitUpdate();
+            },
+            agentDispatched: () => {
+                if (!isCurrentEntry())
+                    return;
+                registry?.onAgentDispatched(runId);
+                emitUpdate();
+            },
+            agentCompleted: () => {
+                if (!isCurrentEntry())
+                    return;
+                // No emitUpdate: budgetUpdated fires right after and renders both
+                // updates together (avoids 2x TUI redraws per agent).
+                registry?.onAgentCompleted(runId);
+            },
+            dispatchQueued: (event) => {
+                if (!isCurrentEntry())
+                    return;
+                registry?.onDispatchQueued(runId, event);
+                emitUpdate();
+            },
+            dispatchStarted: (dispatchId, startedAt) => {
+                if (!isCurrentEntry())
+                    return;
+                registry?.onDispatchStarted(runId, dispatchId, startedAt);
+                emitUpdate();
+            },
+            dispatchSettled: (dispatchId, error, endedAt) => {
+                if (!isCurrentEntry())
+                    return;
+                registry?.onDispatchSettled(runId, dispatchId, error, endedAt, !runInBackground && options.signal.aborted);
+                emitUpdate();
+            },
+            // The registry records this without firing a status update, avoiding a
+            // TUI redraw per line while retaining the real replay timestamp.
+            logAppended: (line) => {
+                if (!isCurrentEntry())
+                    return;
+                registry?.onLogAppended(runId, line);
+            },
+            budgetUpdated: (spent, total) => {
+                if (!isCurrentEntry())
+                    return;
+                registry?.onBudgetUpdated(runId, spent, total);
+                emitUpdate();
+            },
+        };
+        const scheduler = new WorkflowDispatchScheduler(resolveConcurrencyLimit(), controller.signal, ({ state }) => {
+            if (!isCurrentEntry())
+                return;
+            registry?.onDispatchStateChange(runId, state);
+        });
+        const handle = new WorkflowRunHandle(runId, budget, registry, controller, scheduler, async () => {
+            try {
+                const outcome = await orchestrator.run({
+                    script,
+                    args: options.args,
+                    abortOnTimeout: controller,
+                    runId,
+                    emitter,
+                    budget,
+                    resolveSavedWorkflow: (ref) => resolveSavedWorkflowScript(ref, config),
+                    journal,
+                    resumeReplay,
+                    scheduler,
+                });
+                if (entry) {
+                    entry.meta = outcome.meta;
+                    if (outcome.meta?.name && entry.description === runId) {
+                        entry.description = outcome.meta.name;
+                    }
+                }
+                registry?.setRecentLogs(runId, outcome.logs);
+                // A held successful dispatch resolves its gate on abort, so a
+                // run whose entry settled terminal mid-script — cancelled via
+                // the dialog, or failed via resolvePendingApproval's
+                // contingency — can still finish normally. Settle with the
+                // entry's terminal state instead of reporting a success that
+                // contradicts the registry entry, telemetry, and snapshot.
+                if (entry && isTerminalWorkflowStatus(entry.status)) {
+                    return {
+                        ok: false,
+                        message: entry.status === 'cancelled'
+                            ? 'Workflow run cancelled.'
+                            : (entry.error ?? 'Workflow run failed.'),
+                    };
+                }
+                registry?.complete(runId, outcome.result, Date.now());
+                return { ok: true, outcome };
+            }
+            catch (error) {
+                const details = error instanceof WorkflowExecutionError ? error : undefined;
+                const message = extractErrorMessage(error);
+                if (entry && details?.meta && !entry.meta)
+                    entry.meta = details.meta;
+                if (details?.logs)
+                    registry?.setRecentLogs(runId, details.logs);
+                if (callerWasAbortedBeforeStart ||
+                    (!runInBackground && options.signal.aborted) ||
+                    entry?.status === 'cancelled') {
+                    registry?.cancel(runId, Date.now());
+                }
+                else {
+                    registry?.fail(runId, message, Date.now());
+                }
+                return { ok: false, message, details };
+            }
+            finally {
+                controller.abort();
+                if (entry && isTerminalWorkflowStatus(entry.status)) {
+                    // Capture the telemetry projection before the first await:
+                    // the finally path from complete()/fail() up to here has no
+                    // yield, so this IS the settlement-time state. In-flight
+                    // dispatches keep draining (mutating the live entry) across
+                    // the snapshot write's awaits, and a post-await read made
+                    // the snapshot and telemetry disagree with each other.
+                    const telemetryEvent = new WorkflowRunEvent({
+                        status: entry.status,
+                        agents_dispatched: entry.agentsDispatched,
+                        agents_completed: entry.agentsCompleted,
+                        phase_count: entry.phases.length,
+                        tokens_spent: entry.tokensSpent,
+                        duration_ms: (entry.endTime ?? entry.startTime) - entry.startTime,
+                    });
+                    await writeWorkflowSnapshot(config, entry);
+                    await journal?.drain();
+                    try {
+                        logWorkflowRun(config, telemetryEvent);
+                    }
+                    catch {
+                        // Telemetry must not affect workflow execution.
+                    }
+                }
+                registry?.releaseHandle(runId, handle);
+            }
+        });
+        registry?.attachHandle(handle);
+        return handle;
+    }
+}
+/**
+ * Duck-typed extraction so vm-realm Errors (raised inside the sandbox)
+ * don't coerce to "Error: <msg>" via toString(). See workflow-orchestrator.ts
+ * for the matching helper on the orchestrator side.
+ */
+function extractErrorMessage(error) {
+    if (error && typeof error === 'object' && 'message' in error) {
+        const message = error.message;
+        if (typeof message === 'string')
+            return message;
+        return String(message);
+    }
+    return String(error);
+}
+//# sourceMappingURL=workflow-runner.js.map

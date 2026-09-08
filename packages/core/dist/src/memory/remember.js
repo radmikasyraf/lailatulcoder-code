@@ -1,0 +1,173 @@
+/**
+ * @license
+ * Copyright 2026 Qwen Team
+ * SPDX-License-Identifier: Apache-2.0
+ */
+import { ToolNames } from '../tools/tool-names.js';
+import { createDebugLogger } from '../utils/debugLogger.js';
+import { runForkedAgent } from '../utils/forkedAgent.js';
+import { getAutoMemoryRoot, getUserAutoMemoryRoot } from './paths.js';
+import { buildManagedAutoMemoryPrompt } from './prompt.js';
+import { readAutoMemoryIndex, readUserAutoMemoryIndex, ensureAutoMemoryScaffold, ensureUserAutoMemoryScaffold, } from './store.js';
+import { rebuildManagedAutoMemoryIndex, rebuildUserAutoMemoryIndex, } from './indexer.js';
+import { createMemoryScopedAgentConfig, isAllowedMemoryPath, } from './memory-scoped-agent-config.js';
+const debugLogger = createDebugLogger('AUTO_MEMORY_REMEMBER');
+export function buildManagedRememberPrompt(fact, projectRoot, options = {}) {
+    const trimmed = fact.trim();
+    const projectDir = projectRoot ? getAutoMemoryRoot(projectRoot) : undefined;
+    const userDir = getUserAutoMemoryRoot();
+    const dirHint = projectDir !== undefined
+        ? ` Choose the destination directory by the type's \`<scope>\`: USER memory at \`${userDir}\` for cross-project facts, PROJECT memory at \`${projectDir}\` for this-project-only facts.`
+        : '';
+    const content = options.wrapUserContent
+        ? `<user-content>\n${trimmed}\n</user-content>`
+        : trimmed;
+    return `Please save the following to your memory system.${dirHint} Choose the most appropriate memory type (user, feedback, project, or reference) based on the content:\n\n${content}`;
+}
+export function buildBareRememberPrompt(fact) {
+    return `Please save the following fact to memory (e.g. append to QWEN.md in the project root):\n\n${fact.trim()}`;
+}
+async function buildCleanMemorySystemPrompt(projectRoot) {
+    await ensureAutoMemoryScaffold(projectRoot);
+    try {
+        await ensureUserAutoMemoryScaffold();
+    }
+    catch {
+        // User-level memory is best-effort elsewhere in managed memory. Keep
+        // project memory usable if ~/.lailatulcoder/memories cannot be scaffolded.
+    }
+    const [projectIndex, userIndex] = await Promise.all([
+        readAutoMemoryIndex(projectRoot),
+        readUserAutoMemoryIndex().catch(() => null),
+    ]);
+    return buildManagedAutoMemoryPrompt(getAutoMemoryRoot(projectRoot), projectIndex, {
+        memoryDir: getUserAutoMemoryRoot(),
+        indexContent: userIndex,
+    }, 
+    /* teamSection */ undefined, 
+    // The remember agent needs the full protocol (type definitions, scope routing,
+    // exclusion rules) to write correct memories — do not remove.
+    { forceFullProtocol: true });
+}
+function buildRememberSystemPrompt(memoryPrompt) {
+    return [
+        'You are saving one explicit durable memory for LailatulCoder Ai.',
+        '',
+        'Rules:',
+        '- Save only information provided in the task prompt.',
+        '- Use the managed auto-memory system only; do not write QWEN.md or AGENTS.md.',
+        '- Do not inspect or depend on any user-visible chat session history.',
+        '- Use read/list/search/write/edit tools only inside the managed memory directories.',
+        '- When finished, report only whether the memory update completed; do not quote or summarize memory content.',
+        '',
+        memoryPrompt,
+    ].join('\n');
+}
+function createHiddenRememberConfig(config, options = {}) {
+    const hiddenConfig = Object.create(config);
+    hiddenConfig.getChatRecordingService = () => undefined;
+    hiddenConfig.getTranscriptPath = () => '';
+    if (options.disableHooks) {
+        hiddenConfig.getDisableAllHooks = () => true;
+        hiddenConfig.getHookSystem = () => undefined;
+        hiddenConfig.getMessageBus = () => undefined;
+    }
+    return hiddenConfig;
+}
+function uniqueSortedScopes(scopes) {
+    return [...new Set(scopes)].sort();
+}
+function classifyTouchedScopes(filesTouched, projectRoot) {
+    const scopes = [];
+    for (const filePath of filesTouched) {
+        if (!isAllowedMemoryPath(filePath, projectRoot)) {
+            throw Object.assign(new Error(`Remember agent touched a non-memory path: ${filePath}`), { code: 'remember_path_escape' });
+        }
+        if (isAllowedMemoryPath(filePath, projectRoot, { includeUserMemory: false })) {
+            scopes.push('project');
+        }
+        else {
+            scopes.push('user');
+        }
+    }
+    return uniqueSortedScopes(scopes);
+}
+export async function runManagedRememberByAgent(params) {
+    if (!params.config.isManagedMemoryAvailable()) {
+        throw Object.assign(new Error('Managed memory is unavailable'), {
+            code: 'managed_memory_unavailable',
+        });
+    }
+    const memoryPrompt = await buildCleanMemorySystemPrompt(params.projectRoot);
+    // The remember agent's system prompt already embeds the full managed
+    // auto-memory protocol and MEMORY.md indexes (buildCleanMemorySystemPrompt
+    // with forceFullProtocol). AgentCore.buildChatSystemPrompt would otherwise
+    // append config.getAutoMemoryPrompt() a second time, duplicating the entire
+    // section — and in clean mode re-injecting parent-session memory into the
+    // intended blank-slate agent. Zero it out for every mode so the section is
+    // present exactly once, via the remember system prompt above.
+    const baseConfig = (() => {
+        const derived = Object.create(params.config);
+        derived.getAutoMemoryPrompt = () => '';
+        if (params.contextMode === 'clean') {
+            derived.getUserMemory = () => '';
+        }
+        return derived;
+    })();
+    const hiddenConfig = createHiddenRememberConfig(baseConfig, {
+        disableHooks: params.contextMode === 'clean',
+    });
+    const scopedConfig = createMemoryScopedAgentConfig(hiddenConfig, params.projectRoot, {
+        bypassBaseAskForScopedPaths: true,
+        restrictReadsToMemoryPaths: true,
+    });
+    const result = await runForkedAgent({
+        name: 'managed-auto-memory-remember',
+        config: scopedConfig,
+        taskPrompt: buildManagedRememberPrompt(params.content, params.projectRoot, {
+            wrapUserContent: true,
+        }),
+        systemPrompt: buildRememberSystemPrompt(memoryPrompt),
+        maxTurns: params.config.getMemoryAgentMaxTurns() ?? 6,
+        maxTimeMinutes: params.config.getMemoryAgentTimeoutMinutes() ?? 5,
+        extraHistory: params.contextMode === 'clean' ? [] : undefined,
+        preserveEmptyExtraHistory: params.contextMode === 'clean',
+        tools: [
+            ToolNames.READ_FILE,
+            ToolNames.GREP,
+            ToolNames.WRITE_FILE,
+            ToolNames.EDIT,
+        ],
+        abortSignal: params.abortSignal,
+        suppressChatRecording: true,
+    });
+    const filesWritten = result.filesWritten ?? [];
+    if (result.status === 'failed') {
+        throw new Error(result.terminateReason || 'Remember agent failed');
+    }
+    if (result.status === 'cancelled') {
+        throw new Error(result.terminateReason || 'Remember agent cancelled');
+    }
+    const touchedScopes = classifyTouchedScopes(filesWritten, params.projectRoot);
+    await Promise.all([
+        touchedScopes.includes('project')
+            ? rebuildManagedAutoMemoryIndex(params.projectRoot)
+            : Promise.resolve(),
+        touchedScopes.includes('user')
+            ? rebuildUserAutoMemoryIndex().catch((err) => {
+                // Mirrors existing managed-memory behavior: user memory is useful
+                // when available, but project memory writes should not fail because
+                // ~/.lailatulcoder/memories cannot be indexed.
+                debugLogger.error('User memory index rebuild failed:', err);
+            })
+            : Promise.resolve(),
+    ]);
+    return {
+        summary: filesWritten.length > 0
+            ? 'Memory update completed.'
+            : 'No memory files updated.',
+        filesTouched: filesWritten,
+        touchedScopes,
+    };
+}
+//# sourceMappingURL=remember.js.map

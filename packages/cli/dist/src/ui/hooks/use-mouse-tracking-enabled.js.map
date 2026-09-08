@@ -1,0 +1,1 @@
+{"version":3,"file":"use-mouse-tracking-enabled.js","sourceRoot":"","sources":["../../../../src/ui/hooks/use-mouse-tracking-enabled.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH,OAAO,EAAE,UAAU,EAAE,MAAM,OAAO,CAAC;AACnC,OAAO,EAAE,eAAe,EAAE,MAAM,gCAAgC,CAAC;AAEjE;;;;;GAKG;AACH,MAAM,UAAU,uBAAuB;IACrC,OAAO,UAAU,CAAC,eAAe,CAAC,EAAE,MAAM,CAAC,EAAE,EAAE,aAAa,KAAK,KAAK,CAAC;AACzE,CAAC"}

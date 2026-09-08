@@ -1,0 +1,1 @@
+{"version":3,"file":"invalid-stream-error.js","sourceRoot":"","sources":["../../../src/core/invalid-stream-error.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH;;GAEG;AACH,MAAM,OAAO,kBAAmB,SAAQ,KAAK;IAClC,IAAI,CAOoB;IAEjC,YAAY,OAAe,EAAE,IAAgC;QAC3D,KAAK,CAAC,OAAO,CAAC,CAAC;QACf,IAAI,CAAC,IAAI,GAAG,oBAAoB,CAAC;QACjC,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACnB,CAAC;CACF"}
