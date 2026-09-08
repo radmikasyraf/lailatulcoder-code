@@ -24,7 +24,6 @@ if (-not $nodeVersion -or $nodeVersion -notmatch 'v\d+') {
 $nodeMajor = [int]($nodeVersion -replace 'v(\d+)\..*', '$1')
 if ($nodeMajor -lt $MIN_NODE_VERSION) {
     Write-Host "ERROR: Node.js v$MIN_NODE_VERSION+ required. Found $nodeVersion" -ForegroundColor Red
-    Write-Host "Download from: https://nodejs.org/en/download" -ForegroundColor Yellow
     exit 1
 }
 Write-Host "Node.js $nodeVersion OK" -ForegroundColor Green
@@ -37,15 +36,13 @@ try {
     Invoke-WebRequest -Uri $RELEASE_URL -OutFile $zipPath -UseBasicParsing
     Write-Host "Download complete" -ForegroundColor Green
 } catch {
-    Write-Host "ERROR: Failed to download. Check your internet connection." -ForegroundColor Red
+    Write-Host "ERROR: Failed to download." -ForegroundColor Red
     exit 1
 }
 
 # Extract
 Write-Host "Extracting..." -ForegroundColor Yellow
-if (Test-Path $INSTALL_DIR) {
-    Remove-Item -Recurse -Force $INSTALL_DIR
-}
+if (Test-Path $INSTALL_DIR) { Remove-Item -Recurse -Force $INSTALL_DIR }
 New-Item -ItemType Directory -Path $INSTALL_DIR -Force | Out-Null
 Expand-Archive -Path $zipPath -DestinationPath $INSTALL_DIR -Force
 Remove-Item $zipPath -Force
@@ -53,13 +50,16 @@ Write-Host "Extracted to $INSTALL_DIR" -ForegroundColor Green
 
 # Install dependencies
 Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Yellow
-$npmOutput = Start-Process -FilePath "npm" -ArgumentList "install" -WorkingDirectory $INSTALL_DIR -Wait -PassThru -NoNewWindow -RedirectStandardOutput "$env:TEMP\npm-out.txt" -RedirectStandardError "$env:TEMP\npm-err.txt"
+Push-Location $INSTALL_DIR
+cmd /c "npm install > nul 2>&1"
+Pop-Location
 Write-Host "Dependencies installed" -ForegroundColor Green
 
 # Link CLI
 Write-Host "Setting up lailatulcoder command..." -ForegroundColor Yellow
-$cliDir = "$INSTALL_DIR\packages\cli"
-$linkOutput = Start-Process -FilePath "npm" -ArgumentList "link" -WorkingDirectory $cliDir -Wait -PassThru -NoNewWindow -RedirectStandardOutput "$env:TEMP\link-out.txt" -RedirectStandardError "$env:TEMP\link-err.txt"
+Push-Location "$INSTALL_DIR\packages\cli"
+cmd /c "npm link > nul 2>&1"
+Pop-Location
 Write-Host "Command linked" -ForegroundColor Green
 
 Write-Host ""
