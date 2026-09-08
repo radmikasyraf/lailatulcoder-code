@@ -13,7 +13,7 @@
  * It ships as per-platform, Developer-ID-signed + Apple-notarized binaries
  * attached to GitHub releases (tag `cua-driver-rs-v<version>`). We download
  * the pinned asset once into `~/.qwen/computer-use/`, preferring a
- * qwen-code-owned OSS mirror (reliable in CN where GitHub release downloads
+ * lailatul-coder-owned OSS mirror (reliable in CN where GitHub release downloads
  * are slow/blocked) and falling back to GitHub.
  *
  * Source: https://github.com/trycua/cua/tree/main/libs/cua-driver
@@ -25,7 +25,7 @@ import { join } from 'node:path';
 import { homedir } from 'node:os';
 
 /**
- * The exact `cua-driver-rs` release this build of qwen-code is pinned to.
+ * The exact `cua-driver-rs` release this build of lailatul-coder is pinned to.
  * Hardcoded `schemas.ts` is generated against this version.
  *
  * Exact pin (NOT a range) is deliberate: cua-driver is pre-1.0 and ships
@@ -40,7 +40,7 @@ import { homedir } from 'node:os';
 export const CUA_DRIVER_VERSION = '0.5.2';
 
 /**
- * qwen-code-owned OSS mirror base (primary download source — reliable in CN
+ * lailatul-coder-owned OSS mirror base (primary download source — reliable in CN
  * where GitHub release downloads are slow/blocked). Assets live under
  * `<base>/cua-driver-rs/v<version>/<asset>`, mirrored from the upstream
  * trycua/cua release by the "Sync cua-driver to Aliyun OSS" workflow
@@ -51,11 +51,11 @@ export const CUA_DRIVER_VERSION = '0.5.2';
  * mirrored there, the GitHub fallback (GITHUB_RELEASE_BASE) serves it
  * transparently.
  *
- * Hosted on the shared `qwen-code-assets` bucket (same one the CLI's own
+ * Hosted on the shared `lailatul-coder-assets` bucket (same one the CLI's own
  * release/installation assets use), under a `computer-use` namespace.
  */
 export const OSS_MIRROR_BASE =
-  'https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/computer-use';
+  'https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/computer-use';
 
 /** GitHub release download base for the pinned tag (fallback source). */
 export const GITHUB_RELEASE_BASE =

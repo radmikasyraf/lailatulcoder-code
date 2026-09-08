@@ -34,7 +34,7 @@ before their existing length and character-set validation. The emitted
 
 ## Deferred attribution
 
-Handler-resolved requests start without `qwen-code.workspace.hash`. The
+Handler-resolved requests start without `lailatul-coder.workspace.hash`. The
 middleware stores a private context on the Express response. Route code calls
 `setDaemonTelemetryWorkspace(res, runtime.workspaceCwd)` after a unique runtime
 has been selected. The setter is best-effort and first-selection-wins: a

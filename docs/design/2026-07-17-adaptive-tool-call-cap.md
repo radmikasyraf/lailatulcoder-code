@@ -12,7 +12,7 @@ of whether the model is actually stuck or doing productive work. Large
 multi-package implementation turns legitimately exceed 100 tool calls, so the
 cap kills productive work — a false positive.
 
-Concrete case: session `80db472f-…` (qwen-code-x1, "Web Shell git status/diff
+Concrete case: session `80db472f-…` (lailatul-coder-x1, "Web Shell git status/diff
 chip"). The `继续Phase 2` turn made exactly 100 tool calls and was hard-halted
 mid-`npm run build` with no completion summary. Analysis of that turn and its
 siblings:

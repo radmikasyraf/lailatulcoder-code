@@ -7,12 +7,12 @@
 import express from 'express';
 import type { Application } from 'express';
 import * as path from 'node:path';
-import type { DaemonStatusProvider } from '@qwen-code/acp-bridge';
+import type { DaemonStatusProvider } from '@lailatul-coder/acp-bridge';
 import {
   hashDaemonWorkspace,
   Storage,
   type DurableCronTask,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { DaemonLogger } from './daemon-logger.js';
 import type { DaemonTrustPolicySnapshot } from '../config/daemon-trust-policy.js';
 import type {
@@ -306,7 +306,7 @@ import {
   resolveLiveProviderCredential,
   type LiveProviderCredential,
 } from './live/provider-credentials.js';
-import type { ChildHeapPolicySnapshot } from '@qwen-code/acp-bridge/childHeapPolicy';
+import type { ChildHeapPolicySnapshot } from '@lailatul-coder/acp-bridge/childHeapPolicy';
 
 export {
   createDefaultFsAuditEmit,
@@ -441,7 +441,7 @@ export interface ServeAppDeps {
    */
   webShellDir?: string;
   /**
-   * Qwen Code version advertised to web/SDK clients. Production passes the
+   * LailatulCoder Ai version advertised to web/SDK clients. Production passes the
    * resolved CLI package version; tests/direct embeds may omit it.
    */
   qwenCodeVersion?: string;

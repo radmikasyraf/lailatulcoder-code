@@ -11,7 +11,7 @@ import { theme } from '../semantic-colors.js';
 import {
   REASONING_EFFORT_TIERS,
   type ReasoningEffort,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { RadioButtonSelect } from './shared/RadioButtonSelect.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { t } from '../../i18n/index.js';
@@ -104,3 +104,4 @@ export function EffortDialog({
     </Box>
   );
 }
+

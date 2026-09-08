@@ -10,12 +10,12 @@ import {
   resolveBranchName,
   watchRepoBranch,
   type GitWorkingTreeStatus,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { AcpSessionBridge } from './acp-session-bridge.js';
 import { writeStderrLineSafe } from '../utils/stdioHelpers.js';
 import { WorkspaceGitState } from './workspace-git-state.js';
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   getGitWorkingTreeStatus: vi.fn(),
   resolveBranchName: vi.fn(),
   watchRepoBranch: vi.fn(),

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import type { ChannelBaseOptions } from '@qwen-code/channel-base';
+import type { ChannelBaseOptions } from '@lailatul-coder/channel-base';
 
 const mockSetGlobalDispatcher = vi.hoisted(() => vi.fn());
 const mockEnvHttpProxyAgent = vi.hoisted(() =>
@@ -107,7 +107,7 @@ vi.mock('undici', () => ({
   setGlobalDispatcher: mockSetGlobalDispatcher,
 }));
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   addChannelMemoryEntries: mockAddChannelMemoryEntries,
   clearChannelMemory: mockClearChannelMemory,
   getChannelMemoryRevision: mockGetChannelMemoryRevision,
@@ -153,7 +153,7 @@ vi.mock('./channel-registry.js', () => ({
   registerPlugin: mockRegisterPlugin,
 }));
 
-vi.mock('@qwen-code/channel-base', () => ({
+vi.mock('@lailatul-coder/channel-base', () => ({
   AcpBridge: mockAcpBridge,
   ChannelLoopScheduler: mockChannelLoopScheduler,
   ChannelLoopStore: mockChannelLoopStore,

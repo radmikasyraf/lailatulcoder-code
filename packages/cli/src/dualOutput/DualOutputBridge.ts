@@ -16,9 +16,9 @@ import type {
   ServerGeminiStreamEvent,
   ToolCallRequestInfo,
   ToolCallResponseInfo,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { PermissionSuggestion } from '../nonInteractive/types.js';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import type { Part } from '@google/genai';
 import { StreamJsonOutputAdapter } from '../nonInteractive/io/index.js';
 import { reportChatRecordingFailureToAdapter } from '../utils/chat-recording-failure.js';
@@ -145,7 +145,7 @@ export class DualOutputBridge {
               throw new Error(
                 `--json-file "${target.filePath}": permission denied opening FIFO for read-write. ` +
                   'Check read/write permissions on the file and its parent directories, ' +
-                  'or start a reader before launching Qwen Code.',
+                  'or start a reader before launching LailatulCoder Ai.',
               );
             }
             throw retryErr;

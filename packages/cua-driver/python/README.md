@@ -1,7 +1,7 @@
 # cua-driver Python SDK
 
 Rust-backed Python SDK and bundled executable for
-[Qwen Cua Driver](https://github.com/QwenLM/qwen-code/tree/main/packages/cua-driver).
+[Qwen Cua Driver](https://github.com/LailatulCoder/lailatul-coder/tree/main/packages/cua-driver).
 
 ## Product boundary
 

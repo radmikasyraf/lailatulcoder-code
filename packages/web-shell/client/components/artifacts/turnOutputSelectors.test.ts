@@ -9,7 +9,7 @@ import type { ACPToolCall, Message } from '../../adapters/types';
 import type {
   DaemonSessionArtifact,
   DaemonTranscriptBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 type ToolGroupMessage = Extract<Message, { role: 'tool_group' }>;
 

@@ -1,10 +1,10 @@
 # Workflow 级 Span 粒度不足分析 (P1)
 
-> 基于 2026-05-13 对 qwen-code origin/main 的复核
+> 基于 2026-05-13 对 lailatul-coder origin/main 的复核
 
 ## 现状
 
-qwen-code 已具备 tracing 基础设施：
+lailatul-coder 已具备 tracing 基础设施：
 
 | 组件          | 位置                                             | 说明                                                     |
 | ------------- | ------------------------------------------------ | -------------------------------------------------------- |
@@ -171,11 +171,11 @@ startHookSpan(event, name, count, defs)       // → parent = toolContext ?? int
 endHookSpan(span, { success, blocking, ... })
 ```
 
-### qwen-code 现有架构 vs claude-code
+### lailatul-coder 现有架构 vs claude-code
 
 #### 根本差异：两套断裂的 span 创建路径
 
-这是 qwen-code 当前最关键的架构问题：
+这是 lailatul-coder 当前最关键的架构问题：
 
 | 层                 | 文件                 | 用法                                                                                        | parent 解析                                               |
 | ------------------ | -------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
@@ -209,7 +209,7 @@ session-root
 
 ##### 1. 双 ALS + 显式 parent 解析 — 可复用，是核心修复
 
-| 维度         | claude-code                                           | qwen-code                                    |
+| 维度         | claude-code                                           | lailatul-coder                                    |
 | ------------ | ----------------------------------------------------- | -------------------------------------------- |
 | ALS 数量     | 2 (`interactionContext` + `toolContext`)              | 1 (`interactionContext`，无 `toolContext`)   |
 | parent 解析  | 每种 span 类型显式指定从哪个 ALS 取 parent            | `withSpan` 统一走 `context.active()`         |
@@ -217,10 +217,10 @@ session-root
 
 **复用方案：**
 
-qwen-code 的 `session-tracing.ts` 已经实现了与 claude-code **几乎相同的 parent 解析模式**：
+lailatul-coder 的 `session-tracing.ts` 已经实现了与 claude-code **几乎相同的 parent 解析模式**：
 
 ```typescript
-// qwen-code session-tracing.ts (已有但未用)
+// lailatul-coder session-tracing.ts (已有但未用)
 export function startLLMRequestSpan(model, promptId): Span {
   const parentCtx = interactionContext.getStore();
   const ctx = parentCtx
@@ -241,13 +241,13 @@ export function startLLMRequestSpan(model, promptId): Span {
 
 ##### 2. tool.blocked_on_user — 需要适配审批流差异
 
-| 维度          | claude-code                                | qwen-code                                                                  |
+| 维度          | claude-code                                | lailatul-coder                                                                  |
 | ------------- | ------------------------------------------ | -------------------------------------------------------------------------- |
 | 审批位置      | 在 `toolExecution.ts` 内，tool span 内部   | 在 `coreToolScheduler._schedule()` 内，tool span 之前                      |
 | 审批模式      | 同步等待 `resolveHookPermissionDecision()` | 状态机驱动：`validating` → `awaiting_approval` → `scheduled` → `executing` |
 | span 覆盖范围 | tool span 包含 blocked + execution         | tool span(`withSpan`) 只包含 execution（从 `executeSingleToolCall` 开始）  |
 
-**关键差异：** qwen-code 的 `executeSingleToolCall` 入口检查 `toolCall.status !== 'scheduled'` 才继续——也就是说调用到这里时审批已经完成。Tool span 的 `withSpan` 包不住审批等待。
+**关键差异：** lailatul-coder 的 `executeSingleToolCall` 入口检查 `toolCall.status !== 'scheduled'` 才继续——也就是说调用到这里时审批已经完成。Tool span 的 `withSpan` 包不住审批等待。
 
 **适配方案（两种）：**
 
@@ -280,7 +280,7 @@ executeSingleToolCall():
 
 ##### 3. hook span — 可直接复用
 
-| 维度          | claude-code                         | qwen-code                                                            |
+| 维度          | claude-code                         | lailatul-coder                                                            |
 | ------------- | ----------------------------------- | -------------------------------------------------------------------- |
 | hook 执行入口 | `executeHooks()` in `hooks.ts`      | `firePreToolUseHook`/`firePostToolUseHook` via `hookEventHandler.ts` |
 | 现有记录方式  | OTel span + Perfetto span           | `HookCallEvent` → `QwenLogger` (无 OTel)                             |
@@ -296,7 +296,7 @@ executeSingleToolCall():
 
 ##### 4. tool.execution — 已有 helper，只需接线
 
-qwen-code 的 `startToolExecutionSpan(parentToolSpan)` / `endToolExecutionSpan(span, metadata)` 已经完整实现，只需在 `executeSingleToolCall` 中调用：
+lailatul-coder 的 `startToolExecutionSpan(parentToolSpan)` / `endToolExecutionSpan(span, metadata)` 已经完整实现，只需在 `executeSingleToolCall` 中调用：
 
 ```typescript
 // coreToolScheduler.ts executeSingleToolCall 内部
@@ -313,11 +313,11 @@ try {
 endToolSpan(toolSpan);
 ```
 
-注意：qwen-code 的 `startToolExecutionSpan` 接收显式 `parentToolSpan` 参数，而 claude-code 的是从 `toolContext` ALS 隐式获取。这不影响功能，只是风格差异。如果引入 `toolContext` ALS，可以统一改为隐式获取。
+注意：lailatul-coder 的 `startToolExecutionSpan` 接收显式 `parentToolSpan` 参数，而 claude-code 的是从 `toolContext` ALS 隐式获取。这不影响功能，只是风格差异。如果引入 `toolContext` ALS，可以统一改为隐式获取。
 
 ##### 5. subagent trace tree — 双方都不完整，不建议直接复用
 
-| 维度            | claude-code                                                             | qwen-code                                            |
+| 维度            | claude-code                                                             | lailatul-coder                                            |
 | --------------- | ----------------------------------------------------------------------- | ---------------------------------------------------- |
 | OTel trace 传播 | **无** — subagent 的 interaction 是新 root                              | **无** — subagent 无显式 trace 传播                  |
 | 身份关联        | Perfetto metadata（agent process/thread）+ `teammateContextStorage` ALS | `subagentNameContext` ALS + `SubagentExecutionEvent` |
@@ -330,13 +330,13 @@ claude-code 在 subagent OTel tracing 上**自己也没解决好**：
 
 **建议：**
 
-- 短期：沿用 qwen-code 现有的 `subagentNameContext` + 事件日志方案
+- 短期：沿用 lailatul-coder 现有的 `subagentNameContext` + 事件日志方案
 - 中期：在 subagent 启动时创建一个 `subagent` span（parent = 当前 toolContext），并用 `context.with()` 而非 `enterWith()` 来隔离并发 subagent 的 OTel context
 - 这是需要独立设计的工作项，不建议直接照搬 claude-code
 
 ##### 6. LLM request span — 路径明确
 
-qwen-code 当前在 `loggingContentGenerator.ts` 中用 `withSpan('api.generateContent', ...)` 和 `startSpanWithContext('api.generateContentStream', ...)`。
+lailatul-coder 当前在 `loggingContentGenerator.ts` 中用 `withSpan('api.generateContent', ...)` 和 `startSpanWithContext('api.generateContentStream', ...)`。
 
 改为调用 `startLLMRequestSpan` / `endLLMRequestSpan`（session-tracing 层已有实现）即可。streaming 场景需要注意：
 

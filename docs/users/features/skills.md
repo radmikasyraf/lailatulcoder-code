@@ -1,13 +1,13 @@
 # Agent Skills
 
-> Create, manage, and share Skills to extend Qwen Code's capabilities.
+> Create, manage, and share Skills to extend LailatulCoder Ai's capabilities.
 
-This guide shows you how to create, use, and manage Agent Skills in **Qwen Code**. Skills are modular capabilities that extend the model's effectiveness through organized folders containing instructions (and optionally scripts/resources).
+This guide shows you how to create, use, and manage Agent Skills in **LailatulCoder Ai**. Skills are modular capabilities that extend the model's effectiveness through organized folders containing instructions (and optionally scripts/resources).
 
 ## Prerequisites
 
-- Qwen Code (recent version)
-- Basic familiarity with Qwen Code ([Quickstart](../quickstart.md))
+- LailatulCoder Ai (recent version)
+- Basic familiarity with LailatulCoder Ai ([Quickstart](../quickstart.md))
 
 ## What are Agent Skills?
 
@@ -29,7 +29,7 @@ Start typing `/` to autocomplete and browse available Skills alongside their des
 
 ### Benefits
 
-- Extend Qwen Code for your workflows
+- Extend LailatulCoder Ai for your workflows
 - Share expertise across your team via git
 - Reduce repetitive prompting
 - Compose multiple Skills for complex tasks
@@ -97,7 +97,7 @@ Project Skills can be checked into git and automatically become available to tea
 
 ### Maintain auto-generated project Skills
 
-Qwen Code tracks successful uses of generated project Skills locally, including while new Auto Skill generation is disabled, so re-enabling maintenance cannot mistake a recently used skill for an inactive one. When **Auto Skill** is enabled, it periodically moves inactive generated Skills out of the active library. Only directories named `.qwen/skills/auto-skill-*` whose `SKILL.md` frontmatter contains `source: auto-skill` are managed; personal, extension, bundled, and hand-authored Skills are never selected.
+LailatulCoder Ai tracks successful uses of generated project Skills locally, including while new Auto Skill generation is disabled, so re-enabling maintenance cannot mistake a recently used skill for an inactive one. When **Auto Skill** is enabled, it periodically moves inactive generated Skills out of the active library. Only directories named `.qwen/skills/auto-skill-*` whose `SKILL.md` frontmatter contains `source: auto-skill` are managed; personal, extension, bundled, and hand-authored Skills are never selected.
 
 - After 30 days without a successful use or `SKILL.md` edit, an auto-skill is marked stale.
 - After 90 days, its complete directory is moved to `.qwen/archived-skills/`. Nothing is permanently deleted.
@@ -123,7 +123,7 @@ priority: 10
 # Your Skill Name
 
 ## Instructions
-Provide clear, step-by-step guidance for Qwen Code.
+Provide clear, step-by-step guidance for LailatulCoder Ai.
 
 ## Examples
 Show concrete examples of using this Skill.
@@ -131,7 +131,7 @@ Show concrete examples of using this Skill.
 
 ### Field requirements
 
-Qwen Code currently validates that:
+LailatulCoder Ai currently validates that:
 
 - `name` is a non-empty string matching `/^[\p{L}\p{N}_:.-]+$/u` — Unicode letters and digits (CJK / Cyrillic / accented Latin all OK), plus `_`, `:`, `.`, `-`. Whitespace, slashes, brackets and other structurally unsafe characters are rejected at parse time.
 - `description` is a non-empty string
@@ -219,12 +219,12 @@ python scripts/helper.py input.txt
 
 ## View available Skills
 
-Qwen Code discovers Skills from:
+LailatulCoder Ai discovers Skills from:
 
 - Personal Skills: `~/.qwen/skills/`
 - Project Skills: `.qwen/skills/`
 - Extension Skills: Skills provided by installed extensions
-- Bundled Skills: Skills shipped with Qwen Code
+- Bundled Skills: Skills shipped with LailatulCoder Ai
 
 ### Extension Skills
 
@@ -234,7 +234,7 @@ Extension skills are automatically discovered and loaded when the extension is i
 
 To see which extensions provide skills, check the extension's `qwen-extension.json` file for a `skills` field.
 
-To view available Skills, ask Qwen Code directly:
+To view available Skills, ask LailatulCoder Ai directly:
 
 ```text
 What Skills are available?
@@ -275,7 +275,7 @@ The model autonomously decides to use your Skill if it matches the request — y
 
 ## Debug a Skill
 
-If Qwen Code doesn't use your Skill, check these common issues:
+If LailatulCoder Ai doesn't use your Skill, check these common issues:
 
 ### Make the description specific
 
@@ -320,7 +320,7 @@ Ensure:
 
 ### View errors
 
-Run Qwen Code with debug mode to see Skill loading errors:
+Run LailatulCoder Ai with debug mode to see Skill loading errors:
 
 ```bash
 qwen --debug
@@ -352,10 +352,10 @@ code ~/.qwen/skills/my-skill/SKILL.md
 code .qwen/skills/my-skill/SKILL.md
 ```
 
-During a normal session, Qwen Code watches personal and project Skill
+During a normal session, LailatulCoder Ai watches personal and project Skill
 directories. Adding, editing, or removing a Skill refreshes the Skill list and
 invocation state automatically after a short delay. Bare mode does not start
-these watchers, so restart Qwen Code to load Skill changes in that mode.
+these watchers, so restart LailatulCoder Ai to load Skill changes in that mode.
 
 ## Remove a Skill
 

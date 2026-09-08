@@ -282,7 +282,7 @@ sequenceDiagram
 - `node:crypto` — `createHash`, `timingSafeEqual`.
 - `packages/cli/src/serve/loopback-binds.ts` — `isLoopbackBind`.
 - `packages/cli/src/serve/auth/device-flow.ts` — device-flow state machine.
-- `@qwen-code/acp-bridge` — surfaces device-flow events on the per-session SSE bus.
+- `@lailatul-coder/acp-bridge` — surfaces device-flow events on the per-session SSE bus.
 
 ## Configuration
 

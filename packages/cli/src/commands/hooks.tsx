@@ -5,7 +5,7 @@
  */
 
 import type { CommandModule } from 'yargs';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 
 const debugLogger = createDebugLogger('HOOKS_UI');
 
@@ -23,3 +23,4 @@ export const hooksCommand: CommandModule = {
     process.exit(0);
   },
 };
+

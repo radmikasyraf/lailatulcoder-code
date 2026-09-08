@@ -1,4 +1,4 @@
-import type { ChannelPlugin } from '@qwen-code/channel-base';
+import type { ChannelPlugin } from '@lailatul-coder/channel-base';
 import { GitlabChannel } from './GitlabAdapter.js';
 
 export { GitlabChannel };

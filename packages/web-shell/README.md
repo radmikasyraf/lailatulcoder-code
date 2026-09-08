@@ -1,15 +1,15 @@
-# @qwen-code/web-shell
+# @lailatul-coder/web-shell
 
-Qwen Code Web Shell 是面向浏览器的 daemon 会话终端 UI，可以作为 React
+LailatulCoder Ai Web Shell 是面向浏览器的 daemon 会话终端 UI，可以作为 React
 组件嵌入到其他项目中。
 
 ## 环境要求
 
 - React：`^18.0.0 || ^19.0.0`
 - React DOM：`^18.0.0 || ^19.0.0`
-- `@qwen-code/webui`：`>=0.0.1`
-- `@qwen-code/sdk`：`>=0.1.8`
-- 浏览器环境需要能访问 Qwen Code daemon serve 的 HTTP 接口。
+- `@lailatul-coder/webui`：`>=0.0.1`
+- `@lailatul-coder/sdk`：`>=0.1.8`
+- 浏览器环境需要能访问 LailatulCoder Ai daemon serve 的 HTTP 接口。
 
 组件包会自动注入自身的 CSS（包括 Tailwind 编译产物），接入方不需要配置
 Tailwind 或额外引入全局 CSS。
@@ -108,13 +108,13 @@ import { CheckIcon, XIcon } from 'lucide-react';
 ## 安装
 
 ```bash
-npm install @qwen-code/web-shell
+npm install @lailatul-coder/web-shell
 ```
 
 Peer dependencies 需要同时安装：
 
 ```bash
-npm install react react-dom @qwen-code/webui @qwen-code/sdk
+npm install react react-dom @lailatul-coder/webui @lailatul-coder/sdk
 ```
 
 ## 接入方式
@@ -127,7 +127,7 @@ WebShell 提供两种接入形态：
 `DaemonWorkspaceProvider` + `DaemonSessionProvider`。
 
 ```tsx
-import { WebShellWithProviders } from '@qwen-code/web-shell';
+import { WebShellWithProviders } from '@lailatul-coder/web-shell';
 
 export function QwenCodePanel() {
   return (
@@ -157,8 +157,8 @@ chat + terminal）。宿主自行提供 Provider，WebShell 只消费 hooks。
 import {
   DaemonWorkspaceProvider,
   DaemonSessionProvider,
-} from '@qwen-code/webui/daemon-react-sdk';
-import { WebShell } from '@qwen-code/web-shell';
+} from '@lailatul-coder/webui/daemon-react-sdk';
+import { WebShell } from '@lailatul-coder/web-shell';
 
 export function App() {
   return (
@@ -182,8 +182,8 @@ export function App() {
 投影：
 
 ```tsx
-import { projectChatRecordsToDaemonTranscript } from '@qwen-code/sdk/daemon/transcript';
-import { WebShellTranscript } from '@qwen-code/web-shell';
+import { projectChatRecordsToDaemonTranscript } from '@lailatul-coder/sdk/daemon/transcript';
+import { WebShellTranscript } from '@lailatul-coder/web-shell';
 
 const records = jsonl
   .split(/\r?\n/)
@@ -270,7 +270,7 @@ const projection = projectChatRecordsToDaemonTranscript(records);
 
 `WebShell` 已内置 `markdown-chart` renderer 和 ECharts 运行时。宿主只需将
 [`markdown-chart` skill](https://github.com/datafe/markdown-chart/tree/main/skills/markdown-chart)
-安装到 Qwen Code 的项目级或用户级 skills 目录；例如项目级安装结果为：
+安装到 LailatulCoder Ai 的项目级或用户级 skills 目录；例如项目级安装结果为：
 
 ```text
 .qwen/skills/markdown-chart/SKILL.md
@@ -294,7 +294,7 @@ WebShell 负责严格 JSON 校验、流式渲染、ECharts 生命周期以及 Ch
 import {
   createMarkdownChartRegistry,
   WebShellWithProviders,
-} from '@qwen-code/web-shell';
+} from '@lailatul-coder/web-shell';
 
 const chartRegistry = createMarkdownChartRegistry({
   resolveDataRef: async (ref, context) =>
@@ -317,9 +317,9 @@ Chart/Data 控件、无数据提示和错误提示默认跟随 WebShell 语言�
 ## 架构说明
 
 ```text
-@qwen-code/sdk/daemon         ← 协议层（SSE, REST, normalizer）
-@qwen-code/webui/daemon-react-sdk  ← React adapter（Provider, hooks, store）
-@qwen-code/web-shell          ← 终端 UI 组件
+@lailatul-coder/sdk/daemon         ← 协议层（SSE, REST, normalizer）
+@lailatul-coder/webui/daemon-react-sdk  ← React adapter（Provider, hooks, store）
+@lailatul-coder/web-shell          ← 终端 UI 组件
 ```
 
 - `WebShell` 必须在 `DaemonWorkspaceProvider` 和 `DaemonSessionProvider` 之下使用。
@@ -361,7 +361,7 @@ Chart/Data 控件、无数据提示和错误提示默认跟随 WebShell 语言�
 | `/compress`      | ACP 透传            | 通过摘要替换来压缩上下文。                                                                                              |
 | `/context`       | ACP 透传            | 显示上下文窗口使用情况，包含 `detail` 子命令。                                                                          |
 | `/diff`          | ACP 透传            | 显示工作区相对 `HEAD` 的变更统计。                                                                                      |
-| `/docs`          | ACP 透传            | 打开 Qwen Code 文档。                                                                                                   |
+| `/docs`          | ACP 透传            | 打开 LailatulCoder Ai 文档。                                                                                                   |
 | `/doctor`        | ACP 透传            | 执行安装与环境诊断，包含 `memory` 子命令。                                                                              |
 | `/export`        | ACP 透传            | 导出当前会话记录，包含 `html`、`md`、`json`、`jsonl` 子命令。                                                           |
 | `/goal`          | ACP 透传            | 设置目标，并持续工作直到条件满足。                                                                                      |

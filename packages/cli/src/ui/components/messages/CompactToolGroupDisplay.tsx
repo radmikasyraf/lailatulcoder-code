@@ -10,8 +10,8 @@ import stringWidth from 'string-width';
 import wrapAnsi from 'wrap-ansi';
 import type { IndividualToolCallDisplay } from '../../types.js';
 import { ToolCallStatus } from '../../types.js';
-import type { AnsiOutputDisplay } from '@qwen-code/qwen-code-core';
-import { ToolDisplayNames } from '@qwen-code/qwen-code-core';
+import type { AnsiOutputDisplay } from '@lailatul-coder/lailatul-coder-core';
+import { ToolDisplayNames } from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../../i18n/index.js';
 import { SHELL_COMMAND_NAME } from '../../constants.js';
 import {
@@ -506,3 +506,4 @@ export const CompactToolGroupDisplay: React.FC<
     </Box>
   );
 };
+

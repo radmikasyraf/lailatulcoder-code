@@ -4,7 +4,7 @@ import type {
   DaemonSessionListPage,
   DaemonSessionListPageOptions,
   DaemonSessionSummary,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 export type SessionCatalogRouteKind = 'legacy' | 'qualified';
 

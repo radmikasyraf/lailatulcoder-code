@@ -129,7 +129,7 @@ describe('getVersion', () => {
         // Mock the deprecation check
         if (
           command.includes(
-            'npm view @qwen-code/qwen-code@0.9.0-nightly.20250917.deprecated deprecated',
+            'npm view @lailatul-coder/lailatul-coder@0.9.0-nightly.20250917.deprecated deprecated',
           )
         )
           return 'This version is deprecated';
@@ -167,14 +167,14 @@ describe('getVersion', () => {
         // The calculated preview 0.8.0-preview.0 already exists on NPM
         if (
           command.includes(
-            'npm view @qwen-code/qwen-code@0.8.0-preview.0 version',
+            'npm view @lailatul-coder/lailatul-coder@0.8.0-preview.0 version',
           )
         )
           return '0.8.0-preview.0';
         // The next one is available
         if (
           command.includes(
-            'npm view @qwen-code/qwen-code@0.8.0-preview.1 version',
+            'npm view @lailatul-coder/lailatul-coder@0.8.0-preview.1 version',
           )
         )
           throw new Error('Not found');
@@ -192,7 +192,7 @@ describe('getVersion', () => {
       vi.mocked(execSync).mockImplementation((command) => {
         if (
           command.includes(
-            'npm view @qwen-code/channel-telegram@0.8.0-preview.0 version',
+            'npm view @lailatul-coder/channel-telegram@0.8.0-preview.0 version',
           )
         )
           return '0.8.0-preview.0';
@@ -668,16 +668,16 @@ describe('assertVersionUnreleased', () => {
     // package must update both this pin and the publish steps in
     // release.yml so every consumer is reviewed together.
     expect(PUBLISHED_PACKAGES).toEqual([
-      '@qwen-code/qwen-code',
-      '@qwen-code/audio-capture',
-      '@qwen-code/channel-base',
-      '@qwen-code/channel-dingtalk',
-      '@qwen-code/channel-feishu',
-      '@qwen-code/channel-github',
-      '@qwen-code/channel-qqbot',
-      '@qwen-code/channel-telegram',
-      '@qwen-code/channel-wecom',
-      '@qwen-code/channel-weixin',
+      '@lailatul-coder/lailatul-coder',
+      '@lailatul-coder/audio-capture',
+      '@lailatul-coder/channel-base',
+      '@lailatul-coder/channel-dingtalk',
+      '@lailatul-coder/channel-feishu',
+      '@lailatul-coder/channel-github',
+      '@lailatul-coder/channel-qqbot',
+      '@lailatul-coder/channel-telegram',
+      '@lailatul-coder/channel-wecom',
+      '@lailatul-coder/channel-weixin',
     ]);
   });
 

@@ -61,7 +61,7 @@ Only use 'attachments' for existing file paths on disk — the tool reads them a
       name: z.string().optional()
         .describe('Session name'),
       llmConnection: z.string().optional()
-        .describe('Connection slug (e.g., "qwen-code")'),
+        .describe('Connection slug (e.g., "lailatul-coder")'),
       model: z.string().optional()
         .describe('Model ID override'),
       enabledSourceSlugs: z.array(z.string()).optional()

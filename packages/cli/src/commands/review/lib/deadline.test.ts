@@ -719,7 +719,7 @@ describe('the CI wiring contract', () => {
         '..',
         '.github',
         'workflows',
-        'qwen-code-pr-review.yml',
+        'lailatul-coder-pr-review.yml',
       ),
       'utf8',
     );

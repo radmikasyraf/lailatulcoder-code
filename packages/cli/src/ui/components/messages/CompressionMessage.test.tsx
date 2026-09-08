@@ -7,7 +7,7 @@
 import { render } from 'ink-testing-library';
 import type { CompressionDisplayProps } from './CompressionMessage.js';
 import { CompressionMessage } from './CompressionMessage.js';
-import { CompressionStatus } from '@qwen-code/qwen-code-core';
+import { CompressionStatus } from '@lailatul-coder/lailatul-coder-core';
 import type { CompressionProps } from '../../types.js';
 import { describe, it, expect } from 'vitest';
 
@@ -196,3 +196,4 @@ describe('<CompressionMessage />', () => {
     });
   });
 });
+

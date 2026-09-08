@@ -7,7 +7,7 @@ import type {
   ChannelAgentBridge,
   ChannelConfig,
   Envelope,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 vi.mock('@gitbeaker/rest', () => ({
   Gitlab: vi.fn(),

@@ -9,7 +9,7 @@
  * 2. Persisted connection.models — previously fetched, survives offline/restart
  * 3. MODEL_REGISTRY — hardcoded offline seed data, last resort
  *
- * Qwen is the exception: Qwen Code's ACP response is the source of truth, so
+ * Qwen is the exception: LailatulCoder Ai's ACP response is the source of truth, so
  * discovered models are kept in memory and never persisted to config.json.
  */
 

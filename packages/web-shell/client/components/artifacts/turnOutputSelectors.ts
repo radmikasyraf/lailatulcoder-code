@@ -1,4 +1,4 @@
-import type { DaemonSessionArtifact } from '@qwen-code/sdk/daemon';
+import type { DaemonSessionArtifact } from '@lailatul-coder/sdk/daemon';
 import type { ACPToolCall, Message } from '../../adapters/types';
 import type {
   TurnOutputFileChange,

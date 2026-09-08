@@ -1,13 +1,13 @@
 ---
 name: memory-leak-debug
-description: Diagnose memory leaks in the Qwen Code CLI using heap snapshots and
+description: Diagnose memory leaks in the LailatulCoder Ai CLI using heap snapshots and
   the chrome-devtools CLI. Use when investigating high memory usage, unbounded
   growth, or suspected object retention issues.
 ---
 
 # Memory Leak Debugging
 
-Diagnose memory leaks in the Qwen Code Node.js CLI by capturing heap snapshots
+Diagnose memory leaks in the LailatulCoder Ai Node.js CLI by capturing heap snapshots
 and analyzing retained object sizes via `chrome-devtools` CLI tooling.
 
 ## Prerequisites

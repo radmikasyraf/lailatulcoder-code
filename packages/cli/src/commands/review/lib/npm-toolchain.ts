@@ -92,7 +92,7 @@ export function unresolvedWorkspaceDeps(
 ): string[] {
   const known = new Map(packages.map((p) => [p.name, p.dir]));
   const found = new Set<string>();
-  // `error TS2307: Cannot find module '@qwen-code/webui' or its corresponding
+  // `error TS2307: Cannot find module '@lailatul-coder/webui' or its corresponding
   // type declarations.` — and the same shape from a bundler.
   const re = /Cannot find module '([^']+)'|Could not resolve "([^"]+)"/g;
   let m: RegExpExecArray | null;
@@ -613,7 +613,7 @@ function runNpmToolchain(args: ToolchainRunArgs): BuildTestReport {
   // for the full run, or the merge-base probe measures a different tree than
   // the run it is the baseline for ("same set, same commands, same verdict").
   // The root goes FIRST: on a name collision a member must win (this repo's
-  // root and packages/cli share the name `@qwen-code/qwen-code`).
+  // root and packages/cli share the name `@lailatul-coder/lailatul-coder`).
   const scopeGraph = !singleRoot && rootPkg ? [rootPkg, ...packages] : packages;
 
   // With no affected workspace there is nothing to run at all. Three diffs land

@@ -24,7 +24,7 @@ describe('openUrlInBuiltInBrowser', () => {
     const browserPaneApi = makeBrowserPaneApi()
     const openExternal = mock(() => {})
 
-    await openUrlInBuiltInBrowser('https://github.com/QwenLM/qwen-code', {
+    await openUrlInBuiltInBrowser('https://github.com/LailatulCoder/lailatul-coder', {
       browserPaneApi,
       openExternal,
     })
@@ -37,7 +37,7 @@ describe('openUrlInBuiltInBrowser', () => {
     })
     expect(browserPaneApi.navigate).toHaveBeenCalledWith(
       'built-in-browser',
-      'https://github.com/QwenLM/qwen-code',
+      'https://github.com/LailatulCoder/lailatul-coder',
     )
     expect(browserPaneApi.focus).toHaveBeenCalledWith('built-in-browser')
     expect(openExternal).not.toHaveBeenCalled()
@@ -167,7 +167,7 @@ describe('openUrlInBuiltInBrowser', () => {
     const browserPaneApi = makeBrowserPaneApi()
     const openExternal = mock(() => {})
 
-    await openUrlInBuiltInBrowser('qwen code docs', {
+    await openUrlInBuiltInBrowser('LailatulCoder Ai docs', {
       browserPaneApi,
       isChannelAvailable: () => true,
       openExternal,
@@ -175,7 +175,7 @@ describe('openUrlInBuiltInBrowser', () => {
 
     expect(browserPaneApi.navigate).toHaveBeenCalledWith(
       'built-in-browser',
-      'qwen code docs',
+      'LailatulCoder Ai docs',
     )
     expect(openExternal).not.toHaveBeenCalled()
   })

@@ -2,21 +2,21 @@
 
 > **GenAI attribute migration:**
 > [`gen-ai-arms-field-alignment.md`](./gen-ai-arms-field-alignment.md) supersedes
-> the historical proposal to emit `gen_ai.provider.name=qwen-code` and the
+> the historical proposal to emit `gen_ai.provider.name=lailatul-coder` and the
 > temporary `gen_ai.agent.id`. Neither field is emitted. The
-> `qwen-code.subagent.*` lifecycle, identity, parenting,
+> `lailatul-coder.subagent.*` lifecycle, identity, parenting,
 > and linking design described here remains valid.
 
-> Issue #3731 — Phase 3 of hierarchical session tracing. Adds a `qwen-code.subagent` span so subagent invocations get isolated, queryable trace structure instead of interleaving silently under the parent `qwen-code.interaction` span.
+> Issue #3731 — Phase 3 of hierarchical session tracing. Adds a `lailatul-coder.subagent` span so subagent invocations get isolated, queryable trace structure instead of interleaving silently under the parent `lailatul-coder.interaction` span.
 >
 > Builds on Phase 1 (#4126), Phase 1.5 (#4302), and Phase 2 (#4321).
 
 ## Problem
 
-Today every `AgentTool.execute` invocation runs under the parent's `qwen-code.interaction` span. Three pathologies:
+Today every `AgentTool.execute` invocation runs under the parent's `lailatul-coder.interaction` span. Three pathologies:
 
 1. **Concurrent subagents interleave.** `coreToolScheduler.ts:728` marks `AGENT` as concurrency-safe — `Promise.all` runs up to 10 subagents in parallel. Their LLM-request / tool / hook spans all attach to the single shared parent interaction span, so trace explorers cannot distinguish "this LLM request belongs to subagent A" from "this one belongs to subagent B".
-2. **No span for the subagent boundary itself.** There's a `qwen-code.subagent_execution` LogRecord (emitted from `agent-headless.ts:268,329`) bridged to a span of the same name via `LogToSpanProcessor`, but it's a stand-alone marker, not a parent that nests the subagent's LLM / tool / hook spans underneath.
+2. **No span for the subagent boundary itself.** There's a `lailatul-coder.subagent_execution` LogRecord (emitted from `agent-headless.ts:268,329`) bridged to a span of the same name via `LogToSpanProcessor`, but it's a stand-alone marker, not a parent that nests the subagent's LLM / tool / hook spans underneath.
 3. **Fork / background subagents float free.** Fire-and-forget paths (`runInForkContext` / background) outlive the parent `AgentTool.execute` and emit spans across multiple subsequent user turns. The parent tool span is already ended by the time those spans appear, so OTel's `context.active()` doesn't help — they attach to whichever interaction happened to be active at firing time, or none at all.
 
 ## Existing surface (no change)
@@ -33,7 +33,7 @@ Today every `AgentTool.execute` invocation runs under the parent's `qwen-code.in
 ## Out-of-scope (deferred)
 
 - **Token usage aggregation per subagent** (`gen_ai.usage.*` summed across all LLM spans inside a subagent). Belongs in Phase 4 (LLM request decomposition).
-- **Migrating the `qwen-code.subagent_execution` LogRecord onto the new span as span events.** RUM and metrics are tightly coupled to the LogRecord; deferred to a follow-up that can renegotiate all 3 consumers together.
+- **Migrating the `lailatul-coder.subagent_execution` LogRecord onto the new span as span events.** RUM and metrics are tightly coupled to the LogRecord; deferred to a follow-up that can renegotiate all 3 consumers together.
 - **Auto-cost rollup.** Same reason — needs token usage first.
 - **Removing the AGENT-tool `concurrent: true` marker.** Concurrency is correct; we instrument it, we don't constrain it.
 
@@ -46,7 +46,7 @@ Today every `AgentTool.execute` invocation runs under the parent's `qwen-code.in
 | LangSmith — 25,000 runs / trace cap                                                                                    | Long agent sessions force trace splitting eventually; favors hybrid traceId design.                                                                                                                                                                                                                                          |
 | [Sentry — distributed tracing](https://docs.sentry.io/concepts/key-terms/tracing/distributed-tracing/)                 | "Child transactions may outlive the transactions containing their parent spans" — child-with-outliving-life is supported.                                                                                                                                                                                                    |
 | claude-code (Anthropic)                                                                                                | Has subagent hierarchy in local Perfetto JSON file only; OTel export is flat. No portable code.                                                                                                                                                                                                                              |
-| opencode (sst/opencode)                                                                                                | Uses `@effect/opentelemetry` auto-instrumentation; explicit `context.with(trace.setSpan(active, span), fn)` for `withRunSpan`. **Validates the context.with isolation pattern.** Their warning about manual `AsyncLocalStorageContextManager` registration doesn't apply — qwen-code's `NodeSDK` registers it automatically. |
+| opencode (sst/opencode)                                                                                                | Uses `@effect/opentelemetry` auto-instrumentation; explicit `context.with(trace.setSpan(active, span), fn)` for `withRunSpan`. **Validates the context.with isolation pattern.** Their warning about manual `AsyncLocalStorageContextManager` registration doesn't apply — lailatul-coder's `NodeSDK` registers it automatically. |
 
 ## Design — six decisions, each justified
 
@@ -54,7 +54,7 @@ Today every `AgentTool.execute` invocation runs under the parent's `qwen-code.in
 
 `agent.ts` (caller) constructs the span. The body — whether awaited (`runFramed`) or fire-and-forget (`runInForkContext` / background) — runs inside `runInSubagentSpanContext(span, fn)`, which calls `otelContext.with(trace.setSpan(active, span), fn)`.
 
-**Where exactly in `AgentTool.execute` does the span open?** Open it **right BEFORE the invocation-kind-specific setup** (`createAgentHeadless` / `createForkSubagent` etc.) — so setup time (config build, ToolRegistry rebuild, ContextOverride wiring) IS included in `qwen-code.subagent` duration. Operators tracking "why is this subagent slow?" see the full picture. Setup typically << LLM time, so this is noise-free.
+**Where exactly in `AgentTool.execute` does the span open?** Open it **right BEFORE the invocation-kind-specific setup** (`createAgentHeadless` / `createForkSubagent` etc.) — so setup time (config build, ToolRegistry rebuild, ContextOverride wiring) IS included in `lailatul-coder.subagent` duration. Operators tracking "why is this subagent slow?" see the full picture. Setup typically << LLM time, so this is noise-free.
 
 Alternative considered: open after setup, exclude setup time. Rejected because subagent's setup is itself work attributable to the subagent — hiding it makes total-duration math wrong when summing all subagent spans.
 
@@ -76,13 +76,13 @@ Both ends are needed. **The design is the bridge** — caller creates span + inv
 
 ```ts
 tracer.startSpan(
-  'qwen-code.subagent',
+  'lailatul-coder.subagent',
   {
     kind: SpanKind.INTERNAL,
     links: [
       {
         context: invokerSpanContext,
-        attributes: { 'qwen-code.link.kind': 'invoker' },
+        attributes: { 'lailatul-coder.link.kind': 'invoker' },
       },
     ],
   } /* explicit context = root, not inheriting active */,
@@ -108,7 +108,7 @@ const SPAN_TTL_MS_LONG = 4 * 60 * 60 * 1000; // 4h
 function ttlFor(ctx: SpanContext): number {
   if (
     ctx.type === 'subagent' &&
-    ctx.attributes['qwen-code.subagent.invocation_kind'] !== 'foreground'
+    ctx.attributes['lailatul-coder.subagent.invocation_kind'] !== 'foreground'
   ) {
     return SPAN_TTL_MS_LONG;
   }
@@ -120,10 +120,10 @@ On TTL expiry, subagent spans get stamped:
 
 ```ts
 {
-  'qwen-code.span.ttl_expired': true,
-  'qwen-code.span.duration_ms': age,
-  'qwen-code.subagent.status': 'aborted',
-  'qwen-code.subagent.terminate_reason': 'ttl_swept',
+  'lailatul-coder.span.ttl_expired': true,
+  'lailatul-coder.span.duration_ms': age,
+  'lailatul-coder.subagent.status': 'aborted',
+  'lailatul-coder.subagent.terminate_reason': 'ttl_swept',
 }
 ```
 
@@ -139,7 +139,7 @@ On TTL expiry, subagent spans get stamped:
 
 | Consumer                                                                           | Position                                          | Action                                                                                  |
 | ---------------------------------------------------------------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| OTel LogRecord → `LogToSpanProcessor` → bridge span `qwen-code.subagent_execution` | `loggers.ts:773` → `log-to-span-processor.ts:346` | **Skip this bridge** for the subagent event — new `qwen-code.subagent` span replaces it |
+| OTel LogRecord → `LogToSpanProcessor` → bridge span `lailatul-coder.subagent_execution` | `loggers.ts:773` → `log-to-span-processor.ts:346` | **Skip this bridge** for the subagent event — new `lailatul-coder.subagent` span replaces it |
 | QwenLogger RUM ingestion (Aliyun internal stats)                                   | `qwen-logger.ts:573-574`                          | Keep — RUM doesn't see OTel spans, only LogRecords                                      |
 | `recordSubagentExecutionMetrics` Counter                                           | `metrics.ts:829`                                  | Keep — metric consumer is independent of trace bridge                                   |
 
@@ -148,22 +148,22 @@ On TTL expiry, subagent spans get stamped:
 ```ts
 // log-to-span-processor.ts — inside onEmit, after deriveSpanName
 const skipBridge = new Set<string>([
-  EVENT_SUBAGENT_EXECUTION, // covered by native qwen-code.subagent span
+  EVENT_SUBAGENT_EXECUTION, // covered by native lailatul-coder.subagent span
 ]);
 if (skipBridge.has(eventName)) return;
 ```
 
-**Trace consumer impact**: dashboards that filter on span name `qwen-code.subagent_execution` start returning zero results. They should be updated to `qwen-code.subagent`. Note this in release notes.
+**Trace consumer impact**: dashboards that filter on span name `lailatul-coder.subagent_execution` start returning zero results. They should be updated to `lailatul-coder.subagent`. Note this in release notes.
 
 **Why not delete the LogRecord**: it's the input to RUM and metrics. Deleting it is a 3-system refactor; out of scope here.
 
-**Why not keep both**: trace would show two spans per subagent (`qwen-code.subagent` + `qwen-code.subagent_execution`) carrying overlapping info — confusing for operators reading traces, duplicate span volume.
+**Why not keep both**: trace would show two spans per subagent (`lailatul-coder.subagent` + `lailatul-coder.subagent_execution`) carrying overlapping info — confusing for operators reading traces, duplicate span volume.
 
 ### D5 — Span name + attrs: hybrid spec compliance, vendor-prefixed for extensions
 
-**Span name**: `qwen-code.subagent` (matches Phase 1/2 codebase convention: `qwen-code.interaction`, `qwen-code.tool`, `qwen-code.hook`, …).
+**Span name**: `lailatul-coder.subagent` (matches Phase 1/2 codebase convention: `lailatul-coder.interaction`, `lailatul-coder.tool`, `lailatul-coder.hook`, …).
 
-OTel GenAI spec says the canonical span name is `invoke_agent {gen_ai.agent.name}` — but **also** says "individual GenAI systems/frameworks MAY specify different span name formats." We use our own name and set `gen_ai.operation.name='invoke_agent'` so spec-aware tooling still identifies the span. Operators reading our trace tree see consistent `qwen-code.*` naming.
+OTel GenAI spec says the canonical span name is `invoke_agent {gen_ai.agent.name}` — but **also** says "individual GenAI systems/frameworks MAY specify different span name formats." We use our own name and set `gen_ai.operation.name='invoke_agent'` so spec-aware tooling still identifies the span. Operators reading our trace tree see consistent `lailatul-coder.*` naming.
 
 **Span kind**: `INTERNAL` (in-process subagent invocation, per spec).
 
@@ -173,20 +173,20 @@ OTel GenAI spec says the canonical span name is `invoke_agent {gen_ai.agent.name
 | ---------------------------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Required spec**                                                | `gen_ai.operation.name='invoke_agent'`          | literal                                                              | spec-required                                                                                                                                                                    |
 | **Omitted**                                                      | `gen_ai.provider.name`                          | —                                                                    | no hosted provider identity exists for the in-process agent                                                                                                                      |
-| **Vendor only**                                                  | `qwen-code.subagent.id`                         | `agentContext.agentId`                                               | per-invocation identity is not a stable `gen_ai.agent.id`                                                                                                                        |
-| **Required (dual-emit)**                                         | `gen_ai.agent.name` + `qwen-code.subagent.name` | `agentConfig.subagentType` (e.g. `Explore`, `code-reviewer`, `fork`) | same dual-emit                                                                                                                                                                   |
+| **Vendor only**                                                  | `lailatul-coder.subagent.id`                         | `agentContext.agentId`                                               | per-invocation identity is not a stable `gen_ai.agent.id`                                                                                                                        |
+| **Required (dual-emit)**                                         | `gen_ai.agent.name` + `lailatul-coder.subagent.name` | `agentConfig.subagentType` (e.g. `Explore`, `code-reviewer`, `fork`) | same dual-emit                                                                                                                                                                   |
 | **Recommended spec**                                             | `gen_ai.conversation.id`                        | `config.getSessionId()`                                              | enables cross-trace queries by session; co-exists with the existing `session.id` span attr (set globally per #4367) — both point at the same UUID, drop one when spec stabilises |
 | **Recommended spec**                                             | `gen_ai.request.model`                          | model override if any                                                | only when subagent overrides parent model                                                                                                                                        |
-| **Vendor**                                                       | `qwen-code.subagent.invocation_kind`            | `'foreground'` ❘ `'fork'` ❘ `'background'`                           | drives TTL + traceId strategy                                                                                                                                                    |
-| **Vendor**                                                       | `qwen-code.subagent.is_built_in`                | bool                                                                 | dashboard filter                                                                                                                                                                 |
-| **Vendor**                                                       | `qwen-code.subagent.parent_agent_id`            | parent ALS `agentId`                                                 | for nested subagents + cross-trace lineage                                                                                                                                       |
-| **Vendor**                                                       | `qwen-code.subagent.depth`                      | parent depth + 1 (top = 0)                                           | recursion-bug detector                                                                                                                                                           |
-| **Vendor**                                                       | `qwen-code.subagent.invoking_request_id`        | from `agentContext`                                                  | request-level correlation                                                                                                                                                        |
+| **Vendor**                                                       | `lailatul-coder.subagent.invocation_kind`            | `'foreground'` ❘ `'fork'` ❘ `'background'`                           | drives TTL + traceId strategy                                                                                                                                                    |
+| **Vendor**                                                       | `lailatul-coder.subagent.is_built_in`                | bool                                                                 | dashboard filter                                                                                                                                                                 |
+| **Vendor**                                                       | `lailatul-coder.subagent.parent_agent_id`            | parent ALS `agentId`                                                 | for nested subagents + cross-trace lineage                                                                                                                                       |
+| **Vendor**                                                       | `lailatul-coder.subagent.depth`                      | parent depth + 1 (top = 0)                                           | recursion-bug detector                                                                                                                                                           |
+| **Vendor**                                                       | `lailatul-coder.subagent.invoking_request_id`        | from `agentContext`                                                  | request-level correlation                                                                                                                                                        |
 | **End-of-span spec**                                             | `error.type` (on failure)                       | error class                                                          | OTel standard                                                                                                                                                                    |
 | **End-of-span spec**                                             | `exception.message` (on failure)                | `truncateSpanError(error.message)`                                   | OTel standard; reuses Phase 2 truncation                                                                                                                                         |
-| **End-of-span vendor**                                           | `qwen-code.subagent.status`                     | `'completed'` ❘ `'failed'` ❘ `'cancelled'` ❘ `'aborted'`             | finer than OTel SpanStatus (which is OK / ERROR / UNSET)                                                                                                                         |
-| **End-of-span vendor**                                           | `qwen-code.subagent.terminate_reason`           | from `SubagentExecutionEvent.terminate_reason`                       | e.g. `task_complete`, `max_iterations`, `user_abort`, `ttl_swept`                                                                                                                |
-| **End-of-span vendor**                                           | `qwen-code.subagent.result_summary_present`     | bool                                                                 | "did subagent produce output" — bounded                                                                                                                                          |
+| **End-of-span vendor**                                           | `lailatul-coder.subagent.status`                     | `'completed'` ❘ `'failed'` ❘ `'cancelled'` ❘ `'aborted'`             | finer than OTel SpanStatus (which is OK / ERROR / UNSET)                                                                                                                         |
+| **End-of-span vendor**                                           | `lailatul-coder.subagent.terminate_reason`           | from `SubagentExecutionEvent.terminate_reason`                       | e.g. `task_complete`, `max_iterations`, `user_abort`, `ttl_swept`                                                                                                                |
+| **End-of-span vendor**                                           | `lailatul-coder.subagent.result_summary_present`     | bool                                                                 | "did subagent produce output" — bounded                                                                                                                                          |
 | **Opt-in (sensitive)** gated on `includeSensitiveSpanAttributes` | `gen_ai.input.messages`                         | structured chat history                                              | reuses #4097's gate                                                                                                                                                              |
 | **Opt-in (sensitive)**                                           | `gen_ai.output.messages`                        | model responses                                                      | same gate                                                                                                                                                                        |
 | **Opt-in (sensitive)**                                           | `gen_ai.system_instructions`                    | system prompt                                                        | same gate                                                                                                                                                                        |
@@ -198,13 +198,13 @@ OTel GenAI spec says the canonical span name is `invoke_agent {gen_ai.agent.name
 - `status === 'failed'` → `SpanStatus { code: ERROR, message: truncated(error.message) }`
 - `status === 'cancelled'` or `'aborted'` → `SpanStatus { code: UNSET }` (matches Phase 2 convention)
 
-**Why retain vendor identity attributes**: the per-invocation `qwen-code.subagent.id` is not a stable Agent identity, so it is not copied to `gen_ai.agent.id`. The stable agent name is dual-emitted under the standard and vendor keys while the GenAI convention remains in Development; remove the vendor name key when the convention reaches Stable.
+**Why retain vendor identity attributes**: the per-invocation `lailatul-coder.subagent.id` is not a stable Agent identity, so it is not copied to `gen_ai.agent.id`. The stable agent name is dual-emitted under the standard and vendor keys while the GenAI convention remains in Development; remove the vendor name key when the convention reaches Stable.
 
-**Why `qwen-code.subagent.*` (not `qwen.subagent.*`)**: every existing vendor-prefixed key in `constants.ts` uses `qwen-code.*` (`qwen-code.user_prompt`, `qwen-code.tool_call`, etc.). Internal consistency > OTel naming-convention preference, since operators query ARMS by prefix.
+**Why `lailatul-coder.subagent.*` (not `qwen.subagent.*`)**: every existing vendor-prefixed key in `constants.ts` uses `lailatul-coder.*` (`lailatul-coder.user_prompt`, `lailatul-coder.tool_call`, etc.). Internal consistency > OTel naming-convention preference, since operators query ARMS by prefix.
 
 **Cardinality**: span attrs are not metric labels in OTel; UUID-keyed attrs (`id`, `parent_agent_id`, `invoking_request_id`) are safe at the span layer. Don't promote them to metric labels later.
 
-**~10-15 attrs per span** (depending on invocation kind, failure, nesting). Same order as `qwen-code.tool`.
+**~10-15 attrs per span** (depending on invocation kind, failure, nesting). Same order as `lailatul-coder.tool`.
 
 ### D6 — `AgentContext.depth` field added directly
 
@@ -237,7 +237,7 @@ function runWithAgentContext<T>(agentId: string, fn: () => T): T {
 
 Top-level subagent: no parent ALS → `depth: 0`. Nested: parent depth+1.
 
-A new tiny accessor `getCurrentAgentDepth(): number` returns `agentContextStorage.getStore()?.depth ?? 0` — used by `startSubagentSpan` to populate `qwen-code.subagent.depth`.
+A new tiny accessor `getCurrentAgentDepth(): number` returns `agentContextStorage.getStore()?.depth ?? 0` — used by `startSubagentSpan` to populate `lailatul-coder.subagent.depth`.
 
 **Why not a separate ALS just for telemetry**: would duplicate the same context shape we already maintain. Bad. Reuse the existing one.
 
@@ -245,7 +245,7 @@ A new tiny accessor `getCurrentAgentDepth(): number` returns `agentContextStorag
 
 ```ts
 // constants.ts
-export const SPAN_SUBAGENT = 'qwen-code.subagent';
+export const SPAN_SUBAGENT = 'lailatul-coder.subagent';
 
 // session-tracing.ts
 export interface StartSubagentSpanOptions {
@@ -315,7 +315,7 @@ function startSubagentSpan(opts: StartSubagentSpanOptions): Span {
       ? [
           {
             context: opts.invokerSpanContext,
-            attributes: { 'qwen-code.link.kind': 'invoker' },
+            attributes: { 'lailatul-coder.link.kind': 'invoker' },
           },
         ]
       : undefined,
@@ -345,7 +345,7 @@ const parentAgentId = getCurrentAgentId();  // BEFORE entering child frame
 // runWithAgentContext takes effect — OR compute it as
 // `(getCurrentAgentDepth() outside) + 1` from the caller side (simpler).
 const depth = getCurrentAgentDepth();  // outside frame; child will be this + 1
-// (set qwen-code.subagent.depth = depth in startSubagentSpan args)
+// (set lailatul-coder.subagent.depth = depth in startSubagentSpan args)
 
 const span = startSubagentSpan({
   agentId, subagentName, invocationKind: 'foreground',
@@ -404,27 +404,27 @@ Same shape as fork, with `invocationKind: 'background'` and `bgEventEmitter` ins
 
 ## Concurrent isolation — the headline guarantee
 
-Three concurrent subagent invocations from one user prompt (model emits 3 AGENT tool_use blocks → `coreToolScheduler.runConcurrently` runs 3 `executeSingleToolCall` in parallel; each opens its own `qwen-code.tool` span per Phase 2):
+Three concurrent subagent invocations from one user prompt (model emits 3 AGENT tool_use blocks → `coreToolScheduler.runConcurrently` runs 3 `executeSingleToolCall` in parallel; each opens its own `lailatul-coder.tool` span per Phase 2):
 
 ```
-qwen-code.interaction                         [traceId=T0]
-├─ qwen-code.tool [agent call #A]
-│  └─ qwen-code.subagent (A, foreground)     [traceId=T0, child]
-│     ├─ qwen-code.llm_request
-│     └─ qwen-code.tool [...]
-│        └─ qwen-code.tool.execution
-├─ qwen-code.tool [agent call #B]
-│  └─ qwen-code.subagent (B, foreground)     [traceId=T0, child]
-│     └─ qwen-code.llm_request
-└─ qwen-code.tool [agent call #C]
-   └─ qwen-code.subagent (C, fork)           [traceId=T1, linked root]
-      └─ qwen-code.llm_request                [traceId=T1]
+lailatul-coder.interaction                         [traceId=T0]
+├─ lailatul-coder.tool [agent call #A]
+│  └─ lailatul-coder.subagent (A, foreground)     [traceId=T0, child]
+│     ├─ lailatul-coder.llm_request
+│     └─ lailatul-coder.tool [...]
+│        └─ lailatul-coder.tool.execution
+├─ lailatul-coder.tool [agent call #B]
+│  └─ lailatul-coder.subagent (B, foreground)     [traceId=T0, child]
+│     └─ lailatul-coder.llm_request
+└─ lailatul-coder.tool [agent call #C]
+   └─ lailatul-coder.subagent (C, fork)           [traceId=T1, linked root]
+      └─ lailatul-coder.llm_request                [traceId=T1]
          └─ ...                               [traceId=T1, may emit hours later]
 ```
 
 `context.with(span, runX)` for each of A, B, C runs concurrently. `AsyncLocalStorageContextManager` (already auto-registered by NodeSDK at `sdk.ts:273`) scopes per fiber; no cross-talk. Each subagent's child LLM / tool / hook spans see `span` via `context.active()` inside their own async chain.
 
-Fork (C) is a separate trace — its child spans inherit `traceId=T1` even when emitted across multiple subsequent interactions of the parent session. ARMS query by `session.id` returns both T0 and T1; the Link from T1's root → C's invoking `qwen-code.tool` span provides explicit navigation.
+Fork (C) is a separate trace — its child spans inherit `traceId=T1` even when emitted across multiple subsequent interactions of the parent session. ARMS query by `session.id` returns both T0 and T1; the Link from T1's root → C's invoking `lailatul-coder.tool` span provides explicit navigation.
 
 ## Files to change
 
@@ -432,7 +432,7 @@ Fork (C) is a separate trace — its child spans inherit `traceId=T1` even when 
 | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `packages/core/src/telemetry/constants.ts`                  | Add `SPAN_SUBAGENT`, `SPAN_TTL_MS_LONG`, attribute key constants                                                                                                                              | +8      |
 | `packages/core/src/telemetry/session-tracing.ts`            | Add `startSubagentSpan` (foreground/linked-root branch), `endSubagentSpan`, `runInSubagentSpanContext`, types; extend `SpanType` union with `'subagent'`; extend TTL sweep with `ttlFor(ctx)` | +120    |
-| `packages/core/src/telemetry/log-to-span-processor.ts`      | Skip-list to bypass bridging `qwen-code.subagent_execution`                                                                                                                                   | +6      |
+| `packages/core/src/telemetry/log-to-span-processor.ts`      | Skip-list to bypass bridging `lailatul-coder.subagent_execution`                                                                                                                                   | +6      |
 | `packages/core/src/telemetry/index.ts`                      | Re-export new helpers + types                                                                                                                                                                 | +6      |
 | `packages/core/src/agents/runtime/agent-context.ts`         | Add `depth?: number` to `AgentContext` + `getCurrentAgentDepth()` accessor                                                                                                                    | +12     |
 | `packages/core/src/tools/agent/agent.ts`                    | Wrap 3 execution paths (foreground/fork/background) in `runInSubagentSpanContext` with try/catch/finally                                                                                      | +60     |
@@ -458,7 +458,7 @@ If review pushes back on size: split into 2 PRs — (A) telemetry helpers + test
 | `fork lifecycle: span survives AgentTool.execute return`                     | Fire-and-forget correctness                                     |
 | `TTL: subagent fork stays past 30min, gets stamped + ended at 4h`            | Type-aware TTL                                                  |
 | `TTL: foreground subagent at 30min gets default sweep`                       | TTL doesn't over-extend                                         |
-| `LogToSpanProcessor skips qwen-code.subagent_execution but still RUM-emits`  | Bridge skip works                                               |
+| `LogToSpanProcessor skips lailatul-coder.subagent_execution but still RUM-emits`  | Bridge skip works                                               |
 | `runConcurrently of 3 agent tool calls produces 3 distinct subagent spans`   | End-to-end at scheduler level                                   |
 | `failed subagent sets exception.message + error.type + SpanStatus=ERROR`     | OTel-standard error path                                        |
 | `opt-in attrs gated on includeSensitiveSpanAttributes`                       | Reuses #4097's gate correctly                                   |
@@ -473,21 +473,21 @@ If review pushes back on size: split into 2 PRs — (A) telemetry helpers + test
 | Subagent inside tool inside subagent (depth > 1)                                                                        | `depth` attr tracks; recommend soft `debugLogger.warn` at depth ≥ 5 (infinite-recursion detector)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Subagent spawned during a parent tool's `awaiting_approval`                                                             | Subagent span is a child of the AGENT tool span; the AGENT tool's `tool.blocked_on_user` is a sibling, not parent — both children of the AGENT tool span. Tree stays correct                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `signal.aborted` mid-subagent                                                                                           | `runInSubagentSpanContext`'s callback throws or resolves; `finally` sets `status='aborted'`, SpanStatus UNSET                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Fork still alive when parent session ends                                                                               | 4h TTL fires; sentinel attrs `qwen-code.span.ttl_expired:true`, `qwen-code.subagent.terminate_reason='ttl_swept'`, `status='aborted'`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Fork still alive when parent session ends                                                                               | 4h TTL fires; sentinel attrs `lailatul-coder.span.ttl_expired:true`, `lailatul-coder.subagent.terminate_reason='ttl_swept'`, `status='aborted'`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `endSubagentSpan` called twice                                                                                          | Idempotent — checks `activeSpans` map; second call no-ops (matches Phase 2 pattern)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | Subagent's LLM call uses a different model from parent                                                                  | `gen_ai.request.model` set on subagent span; LLM-request sub-span ALSO records the model — no conflict                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | Sister subagent prelude throw escapes `attemptExecutionOfScheduledCalls`                                                | Lands in Phase 2's recently-fixed `handleConfirmationResponse` catch which is OUTSIDE the try — not attributed to confirmed tool's span. Subagent span correctly closes via its own try/finally                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Concurrent fork + foreground from one parent                                                                            | Foreground inherits T0 traceId, fork gets T1. Both have correct context propagation independently. The parent tool span ends when its synchronous work returns; the fork span (separate trace) lives on                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Fork span starts in caller sync flow but body runs later                                                                | `startSubagentSpan` is called BEFORE `void runInForkContext(...)` so the span (and its Link to the invoker) is captured while the invoker's spanContext is still readable. Span duration therefore includes any microtask-queue scheduling delay before the body actually starts — typically sub-ms; if production shows non-trivial gaps a separate `qwen-code.subagent.scheduling_delay_ms` attribute can be added (open question)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Fork span starts in caller sync flow but body runs later                                                                | `startSubagentSpan` is called BEFORE `void runInForkContext(...)` so the span (and its Link to the invoker) is captured while the invoker's spanContext is still readable. Span duration therefore includes any microtask-queue scheduling delay before the body actually starts — typically sub-ms; if production shows non-trivial gaps a separate `lailatul-coder.subagent.scheduling_delay_ms` attribute can be added (open question)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | SDK not initialized (telemetry disabled)                                                                                | `startSubagentSpan` early-returns NOOP_SPAN (matches every other Phase 1/2 helper). `runInSubagentSpanContext(NOOP_SPAN, fn)` still calls `fn` normally. `endSubagentSpan(NOOP_SPAN, …)` is a no-op                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | Fork's log-bridge spans (`tool_call`, `api_request`, etc.) use session-derived traceId while fork's native spans use T1 | Pre-existing behavior — log-bridge spans always use `deriveTraceId(sessionId)`, native spans use OTel context. The divergence is invisible inside one trace but means an ARMS-by-traceId lookup on T1 won't include log-bridge children of the fork. Out of scope for this PR; called out as open question #5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Foreground vs background `SubagentStart` hook span parents differ                                                       | Foreground fires `fireSubagentStartEvent` inside `runSubagentWithHooks` → already inside `runInSubagentSpanContext`, so the hook span parents under `qwen-code.subagent`. Background fires it BEFORE the `runWithSubagentSpan` wrapping (so the subagent span doesn't yet exist), so its hook span parents under the AGENT `qwen-code.tool`. Operators querying "hook spans under subagent spans" should expect bg `SubagentStart` to be missing from that view. Moving the bg hook fire inside `framedBgBody` is mechanically simple (the `contextState` mutation reaches `bgSubagent.execute` either way), but it changes user-visible semantics: today the hook fires synchronously before `AgentTool.execute` returns the "Background agent launched" message, so any synchronous setup work the hook does happens inside the user-blocking turn; moving it makes the hook fire detached after the launch message returns. Deferred pending a deliberate decision on which semantic is preferred |
+| Foreground vs background `SubagentStart` hook span parents differ                                                       | Foreground fires `fireSubagentStartEvent` inside `runSubagentWithHooks` → already inside `runInSubagentSpanContext`, so the hook span parents under `lailatul-coder.subagent`. Background fires it BEFORE the `runWithSubagentSpan` wrapping (so the subagent span doesn't yet exist), so its hook span parents under the AGENT `lailatul-coder.tool`. Operators querying "hook spans under subagent spans" should expect bg `SubagentStart` to be missing from that view. Moving the bg hook fire inside `framedBgBody` is mechanically simple (the `contextState` mutation reaches `bgSubagent.execute` either way), but it changes user-visible semantics: today the hook fires synchronously before `AgentTool.execute` returns the "Background agent launched" message, so any synchronous setup work the hook does happens inside the user-blocking turn; moving it makes the hook fire detached after the launch message returns. Deferred pending a deliberate decision on which semantic is preferred |
 
 ## Rollback
 
-The change is additive at the OTel level — existing dashboards that don't filter on subagent-related span names keep working. Trace consumers that group by parent span will see new `qwen-code.subagent` nodes between `qwen-code.tool` and `qwen-code.llm_request`; document in release notes.
+The change is additive at the OTel level — existing dashboards that don't filter on subagent-related span names keep working. Trace consumers that group by parent span will see new `lailatul-coder.subagent` nodes between `lailatul-coder.tool` and `lailatul-coder.llm_request`; document in release notes.
 
-Behavior-affecting change is the LogToSpanProcessor skip — dashboards previously consuming `qwen-code.subagent_execution` span return zero. Mitigation: keep the LogRecord intact (RUM + metrics still see it); only the span bridge is removed. Existing log-based queries unaffected.
+Behavior-affecting change is the LogToSpanProcessor skip — dashboards previously consuming `lailatul-coder.subagent_execution` span return zero. Mitigation: keep the LogRecord intact (RUM + metrics still see it); only the span bridge is removed. Existing log-based queries unaffected.
 
 Rollback path: revert the single PR. The new span helpers are only invoked from `agent.ts`; dropping the wiring + the LogToSpanProcessor skip restores prior behavior 1:1.
 
@@ -498,7 +498,7 @@ Rollback path: revert the single PR. The new span helpers are only invoked from 
 | `foreground` (child span, same traceId)          | Inherits parent trace's sampled-or-not decision via parent-based sampler |
 | `fork` / `background` (linked root, new traceId) | Independent sampling decision at root creation                           |
 
-For qwen-code's current default (per `tracer.ts:shouldForceSampled()` — parentbased + always_on else always_on), every span is sampled, so the divergence doesn't bite. For deployments using probabilistic samplers (e.g. `traceidratio=0.1`), this means:
+For lailatul-coder's current default (per `tracer.ts:shouldForceSampled()` — parentbased + always_on else always_on), every span is sampled, so the divergence doesn't bite. For deployments using probabilistic samplers (e.g. `traceidratio=0.1`), this means:
 
 - A user prompt may be sampled (T0 fully captured) but its fork (T1) may be dropped, or vice versa.
 - Operators reading parent T0 see "Link: subagent C (T1)" — clicking through may 404 if T1 was not sampled.
@@ -521,12 +521,12 @@ These are all already gated; #4097's pattern is to call `addSubagentSensitiveAtt
 ## Sequencing
 
 - Independent of #4367 (resource attributes — in review). No merge-order constraint, but `gen_ai.conversation.id` on subagent spans benefits from #4367's `session.id` moved off resource. **Recommend landing #4367 first** so `getSessionId()` source-of-truth is settled.
-- Independent of Phase 4 (LLM request decomposition / TTFT). Phase 4 attaches to `qwen-code.llm_request` spans regardless of whether they're under a subagent or an interaction. Recommend Phase 3 before Phase 4 so Phase 4's per-attempt metrics can be aggregated per-subagent.
+- Independent of Phase 4 (LLM request decomposition / TTFT). Phase 4 attaches to `lailatul-coder.llm_request` spans regardless of whether they're under a subagent or an interaction. Recommend Phase 3 before Phase 4 so Phase 4's per-attempt metrics can be aggregated per-subagent.
 
 ## Open questions
 
 1. **`gen_ai.provider.name`**: omitted because an in-process subagent has no hosted-agent provider identity. Revisit only if the convention defines a matching identity.
-2. **Span name `qwen-code.subagent` vs spec `invoke_agent {name}`**: chose internal consistency. If GenAI-aware tooling adoption grows and `invoke_agent ${name}` becomes critical for auto-discovery, we can switch — span name is the most rebrandable thing in OTel.
+2. **Span name `lailatul-coder.subagent` vs spec `invoke_agent {name}`**: chose internal consistency. If GenAI-aware tooling adoption grows and `invoke_agent ${name}` becomes critical for auto-discovery, we can switch — span name is the most rebrandable thing in OTel.
 3. **Soft-warn at depth ≥ 5**: arbitrary number. Could be a config knob. Defer until production data shows a need.
 4. **`SubagentExecutionEvent.result`'s full LLM output is large**: today it bloats LogRecord volume. The migration plan (LogRecord → span events) is deferred but worth doing once token-usage aggregation lands in Phase 4.
 5. **Log-bridge spans inside a fork end up on the session-derived traceId, not the fork's T1**: see edge cases. The fix is the broader "interaction span doesn't inherit session root context" issue raised in the sessionId-vs-traceId thread — a separate design that affects all native spans, not just subagent. Out of scope.

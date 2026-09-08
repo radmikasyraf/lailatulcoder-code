@@ -23,7 +23,7 @@ export function handleAuthenticateUpdate(
 
   // Store reference to the current notification
   currentNotification = vscode.window.showInformationMessage(
-    `Qwen Code needs authentication. Click an action below:`,
+    `LailatulCoder Ai needs authentication. Click an action below:`,
     'Open in Browser',
     'Copy Link',
     'Dismiss',

@@ -17,7 +17,7 @@ export interface ProviderMetadata {
  */
 const PROVIDER_METADATA: Record<string, ProviderMetadata> = {
   qwen: {
-    name: 'Qwen Code',
+    name: 'LailatulCoder Ai',
     dashboardUrl: 'https://chat.qwen.ai',
   },
 }

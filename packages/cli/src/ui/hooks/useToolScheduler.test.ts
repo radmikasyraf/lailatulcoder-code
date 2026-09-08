@@ -24,7 +24,7 @@ import type {
   Status as ToolCallStatusType,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   DEFAULT_TRUNCATE_TOOL_OUTPUT_LINES,
   DEFAULT_TRUNCATE_TOOL_OUTPUT_THRESHOLD,
@@ -33,12 +33,12 @@ import {
   CoreToolScheduler,
   getRuntimeContentGenerator,
   MockTool,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { ToolCallStatus } from '../types.js';
 
 // Mocks
-vi.mock('@qwen-code/qwen-code-core', async () => {
-  const actual = await vi.importActual('@qwen-code/qwen-code-core');
+vi.mock('@lailatul-coder/lailatul-coder-core', async () => {
+  const actual = await vi.importActual('@lailatul-coder/lailatul-coder-core');
   return {
     ...actual,
     ToolRegistry: vi.fn(),

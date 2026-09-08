@@ -33,13 +33,13 @@ import {
   DaemonClient,
   DaemonHttpError,
   type DaemonSessionSummary,
-} from '@qwen-code/sdk';
-import { AcpWsTransport } from '@qwen-code/sdk/daemon/transports';
+} from '@lailatul-coder/sdk';
+import { AcpWsTransport } from '@lailatul-coder/sdk/daemon/transports';
 import {
   SESSION_TRANSCRIPT_MAX_INDEX_BYTES,
   Storage,
   type ChatRecord,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Match the rest of the integration suite: prefer the bundled CLI

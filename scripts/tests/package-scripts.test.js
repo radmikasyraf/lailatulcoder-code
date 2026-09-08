@@ -466,9 +466,9 @@ describe('package scripts', () => {
     const publishJob = getWorkflowJob(workflow, 'publish');
 
     for (const stepName of [
-      'Publish @qwen-code/audio-capture',
-      'Publish @qwen-code/qwen-code',
-      'Publish @qwen-code/channel-base',
+      'Publish @lailatul-coder/audio-capture',
+      'Publish @lailatul-coder/lailatul-coder',
+      'Publish @lailatul-coder/channel-base',
       'Publish remaining channel packages',
     ]) {
       const publishStep = getWorkflowStep(publishJob, stepName);
@@ -508,12 +508,12 @@ describe('package scripts', () => {
       [
         '.github/workflows/release.yml',
         'publish',
-        'Publish @qwen-code/audio-capture',
+        'Publish @lailatul-coder/audio-capture',
       ],
       [
         '.github/workflows/release-sdk.yml',
         'release-sdk',
-        'Publish @qwen-code/sdk',
+        'Publish @lailatul-coder/sdk',
       ],
       ['.github/workflows/cd-mobile-mcp.yml', 'build-and-publish', 'Publish'],
     ]) {
@@ -543,7 +543,7 @@ describe('package scripts', () => {
         readFileSync(path.join(root, packageDirectory, 'package.json'), 'utf8'),
       );
       expect(packageJson.repository?.url?.replace(/^git\+/, '')).toBe(
-        'https://github.com/QwenLM/qwen-code.git',
+        'https://github.com/LailatulCoder/lailatul-coder.git',
       );
     }
   });

@@ -19,7 +19,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { type Config, createDebugLogger } from '@qwen-code/qwen-code-core';
+import { type Config, createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import {
   type DialogEntry,
   useBackgroundTaskView,
@@ -381,3 +381,4 @@ export function BackgroundTaskViewProvider({
     </BackgroundTaskViewStateContext.Provider>
   );
 }
+

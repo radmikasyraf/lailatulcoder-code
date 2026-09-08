@@ -67,7 +67,7 @@ import type {
   ServeWorkspaceProvidersStatus,
   ServeWorkspaceEnvStatus,
   ServeWorkspacePreflightStatus,
-} from '@qwen-code/acp-bridge';
+} from '@lailatul-coder/acp-bridge';
 
 // --- Request Context ---
 
@@ -962,7 +962,7 @@ import { createFileService } from './fileService.js';
 import { createAuthService } from './authService.js';
 import { createAgentsService } from './agentsService.js';
 import { createMemoryService } from './memoryService.js';
-import { SERVE_STATUS_EXT_METHODS } from '@qwen-code/acp-bridge';
+import { SERVE_STATUS_EXT_METHODS } from '@lailatul-coder/acp-bridge';
 
 export {
   type DaemonWorkspaceService,

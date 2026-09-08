@@ -6,7 +6,7 @@
 
 关联：Issue #8908、PR0 #8890、PR1 #9181
 
-设计与实现审计基线：`origin/main` at `7091b8c76157501fab5761f96dafbc1612723456`。PR1 已通过 [#9181](https://github.com/QwenLM/qwen-code/pull/9181) 合入，merge commit 为 `889f0d8bbdf24ed55b32061cac3db7451afd80c0`。2026-08-17 integration checkpoint 已直接读取最终 main，而不是把脏设计分支先 rebase 到预期接口上。
+设计与实现审计基线：`origin/main` at `7091b8c76157501fab5761f96dafbc1612723456`。PR1 已通过 [#9181](https://github.com/LailatulCoder/lailatul-coder/pull/9181) 合入，merge commit 为 `889f0d8bbdf24ed55b32061cac3db7451afd80c0`。2026-08-17 integration checkpoint 已直接读取最终 main，而不是把脏设计分支先 rebase 到预期接口上。
 
 Integration checkpoint 锁定以下最终接口与增量：
 
@@ -631,9 +631,9 @@ npx vitest run src/tools/cron-create.test.ts src/config/config.test.ts
 
 ```bash
 npx prettier --check packages/acp-bridge/src packages/cli/src packages/core/src docs/design/standalone-daemon-sessions.md docs/plans/2026-08-14-standalone-pr2-core.md
-npm run lint --workspace @qwen-code/acp-bridge
-npm run lint --workspace @qwen-code/qwen-code
-npm run lint --workspace @qwen-code/qwen-code-core
+npm run lint --workspace @lailatul-coder/acp-bridge
+npm run lint --workspace @lailatul-coder/lailatul-coder
+npm run lint --workspace @lailatul-coder/lailatul-coder-core
 npm run build
 npm run typecheck
 git diff --check

@@ -20,7 +20,7 @@ import {
 } from '../utils/imageHandler.js';
 import { isAuthenticationRequiredError } from '../../utils/authErrors.js';
 import { getErrorMessage } from '../../utils/errorMessage.js';
-import { stripZeroWidthSpaces } from '@qwen-code/webui';
+import { stripZeroWidthSpaces } from '@lailatul-coder/webui';
 import {
   exportSessionToFile,
   parseExportSlashCommand,
@@ -369,7 +369,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
       if (this.authHandler) {
         await this.authHandler();
       } else {
-        await vscode.commands.executeCommand('qwen-code.auth');
+        await vscode.commands.executeCommand('lailatul-coder.auth');
       }
       return true;
     }
@@ -393,7 +393,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
       if (this.authHandler) {
         await this.authHandler();
       } else {
-        await vscode.commands.executeCommand('qwen-code.auth');
+        await vscode.commands.executeCommand('lailatul-coder.auth');
       }
       return 'auth';
     }
@@ -631,7 +631,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
 
       if (!this.agentManager.isConnected) {
         await this.promptAuth(
-          'You need to configure your provider to use Qwen Code.',
+          'You need to configure your provider to use LailatulCoder Ai.',
         );
         return;
       }
@@ -649,7 +649,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
           const errorMsg = this.getErrorMessage(createErr);
           if (this.shouldPromptAuth(createErr)) {
             await this.promptAuth(
-              'Your session has expired or is invalid. Please configure your provider to continue using Qwen Code.',
+              'Your session has expired or is invalid. Please configure your provider to continue using LailatulCoder Ai.',
             );
             return;
           }
@@ -818,7 +818,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
 
       // Show non-modal notification with Configure button
       await this.promptAuth(
-        'You need to configure your provider to use Qwen Code.',
+        'You need to configure your provider to use LailatulCoder Ai.',
       );
       return;
     }
@@ -837,7 +837,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
         const errorMsg = this.getErrorMessage(createErr);
         if (this.shouldPromptAuth(createErr)) {
           await this.promptAuth(
-            'Your session has expired or is invalid. Please configure your provider to continue using Qwen Code.',
+            'Your session has expired or is invalid. Please configure your provider to continue using LailatulCoder Ai.',
           );
           return;
         }
@@ -965,7 +965,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
       ) {
         // Show a more user-friendly error message for expired sessions
         await this.promptAuth(
-          'Your session has expired or is invalid. Please configure your provider to continue using Qwen Code.',
+          'Your session has expired or is invalid. Please configure your provider to continue using LailatulCoder Ai.',
         );
 
         // Send a specific error to the webview for better UI handling
@@ -1500,7 +1500,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
         });
         return;
       }
-      // Matches SESSION_TITLE_MAX_LENGTH from @qwen-code/qwen-code-core/sessionService
+      // Matches SESSION_TITLE_MAX_LENGTH from @lailatul-coder/lailatul-coder-core/sessionService
       if (trimmedTitle.length > 200) {
         this.sendToWebView({
           type: 'error',

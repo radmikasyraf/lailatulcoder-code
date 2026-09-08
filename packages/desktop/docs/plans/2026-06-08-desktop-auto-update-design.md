@@ -2,7 +2,7 @@
 
 ## Goal
 
-Enable stable-channel desktop auto-updates for packaged OpenWork and Qwen Code desktop builds using public GitHub Releases and `electron-updater`.
+Enable stable-channel desktop auto-updates for packaged OpenWork and LailatulCoder Ai desktop builds using public GitHub Releases and `electron-updater`.
 
 ## Scope
 
@@ -23,13 +23,13 @@ Before this change, the desktop app already had most of the runtime surface:
 Update source configuration belongs in `packages/shared/src/branding.ts` with the rest of desktop brand metadata. Each brand owns its release location:
 
 - `openwork` uses `modelstudioai/openwork`.
-- `qwen-code` uses a fixed `QwenLM/qwen-code` `desktop-latest` release download URL so desktop updates do not depend on the repository-wide GitHub latest release.
+- `lailatul-coder` uses a fixed `LailatulCoder/lailatul-coder` `desktop-latest` release download URL so desktop updates do not depend on the repository-wide GitHub latest release.
 
 The brand config exposes an update source plus `releasePageUrl`. GitHub sources use `provider`, `owner`, and `repo`; generic sources use `provider` and `url`. `scripts/electron-builder-config.ts` reads it and emits the `publish` block in `apps/electron/electron-builder.generated.yml`. Runtime code reads the same brand update source to decide whether packaged builds can check for updates.
 
 ## Release Flow
 
-The existing desktop release workflow remains responsible for uploading assets to GitHub Releases. `electron-builder` should generate updater metadata, but the workflow continues to publish assets itself. Qwen Code publishes versioned `desktop-v*` releases for history and also clobbers the fixed `desktop-latest` release used by the generic update feed.
+The existing desktop release workflow remains responsible for uploading assets to GitHub Releases. `electron-builder` should generate updater metadata, but the workflow continues to publish assets itself. LailatulCoder Ai publishes versioned `desktop-v*` releases for history and also clobbers the fixed `desktop-latest` release used by the generic update feed.
 
 Expected assets include platform installers and feed files:
 
@@ -61,7 +61,7 @@ Global interruption is deliberately minimal. Startup checks stay silent unless a
 
 Use focused local checks first:
 
-- Generate builder config for `openwork` and `qwen-code`, verifying each brand emits the right `publish` config.
+- Generate builder config for `openwork` and `lailatul-coder`, verifying each brand emits the right `publish` config.
 - Typecheck the Electron app.
 - Run i18n parity checks after adding Settings copy.
 

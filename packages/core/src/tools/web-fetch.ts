@@ -573,7 +573,7 @@ Status: ${entry.status} ${entry.statusText || 'OK'} | Content-Type: ${entry.cont
       // AFTER the fetch was already permitted and completed, never a
       // permission/network grant. Evaluated against the FINAL URL (post
       // blob→raw rewrite and followed redirects) so a redirect out of a
-      // path-scoped entry (github.com/QwenLM → elsewhere) falls back to
+      // path-scoped entry (github.com/LailatulCoder → elsewhere) falls back to
       // summarization instead of passing through unrelated content.
       const preapproved = isPreapprovedUrl(entry.finalUrl);
       if (

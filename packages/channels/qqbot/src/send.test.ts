@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import type {
   ChannelAgentBridge,
   ChannelTaskLifecycleEvent,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { isValidChatId, DeliveryError } from './QQChannel.js';
 
 const {
@@ -82,9 +82,9 @@ vi.mock('./login.js', () => ({
   qrCodeLogin: vi.fn(),
 }));
 
-vi.mock('@qwen-code/channel-base', async () => {
-  const real = await vi.importActual<typeof import('@qwen-code/channel-base')>(
-    '@qwen-code/channel-base',
+vi.mock('@lailatul-coder/channel-base', async () => {
+  const real = await vi.importActual<typeof import('@lailatul-coder/channel-base')>(
+    '@lailatul-coder/channel-base',
   );
   return {
     ChannelBase: class {

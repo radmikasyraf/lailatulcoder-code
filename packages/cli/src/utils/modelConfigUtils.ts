@@ -18,7 +18,7 @@ import {
   type ProviderModelConfig,
   type ProviderProtocolConfig,
   stripRuntimeSnapshotPrefix,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Settings } from '../config/settings.js';
 import { sanitizeProviderBaseUrl } from './acpModelUtils.js';
 

@@ -28,52 +28,52 @@ describe('parseRemoteUrl', () => {
   const cases: ParseCase[] = [
     {
       name: 'scp shape',
-      url: 'git@github.com:QwenLM/qwen-code.git',
+      url: 'git@github.com:LailatulCoder/lailatul-coder.git',
       want: {
         host: 'github.com',
-        owner: 'qwenlm',
-        repo: 'qwen-code',
-        groupPath: 'qwenlm/qwen-code',
+        owner: 'LailatulCoder',
+        repo: 'lailatul-coder',
+        groupPath: 'LailatulCoder/lailatul-coder',
       },
     },
     {
       name: 'scp shape without .git',
-      url: 'git@github.com:QwenLM/qwen-code',
+      url: 'git@github.com:LailatulCoder/lailatul-coder',
       want: {
         host: 'github.com',
-        owner: 'qwenlm',
-        repo: 'qwen-code',
-        groupPath: 'qwenlm/qwen-code',
+        owner: 'LailatulCoder',
+        repo: 'lailatul-coder',
+        groupPath: 'LailatulCoder/lailatul-coder',
       },
     },
     {
       name: 'https shape',
-      url: 'https://github.com/wenshao/qwen-code.git',
+      url: 'https://github.com/wenshao/lailatul-coder.git',
       want: {
         host: 'github.com',
         owner: 'wenshao',
-        repo: 'qwen-code',
-        groupPath: 'wenshao/qwen-code',
+        repo: 'lailatul-coder',
+        groupPath: 'wenshao/lailatul-coder',
       },
     },
     {
       name: 'https shape with trailing slash',
-      url: 'https://github.com/wenshao/qwen-code/',
+      url: 'https://github.com/wenshao/lailatul-coder/',
       want: {
         host: 'github.com',
         owner: 'wenshao',
-        repo: 'qwen-code',
-        groupPath: 'wenshao/qwen-code',
+        repo: 'lailatul-coder',
+        groupPath: 'wenshao/lailatul-coder',
       },
     },
     {
       name: 'https shape with userinfo',
-      url: 'https://user@github.com/wenshao/qwen-code.git',
+      url: 'https://user@github.com/wenshao/lailatul-coder.git',
       want: {
         host: 'github.com',
         owner: 'wenshao',
-        repo: 'qwen-code',
-        groupPath: 'wenshao/qwen-code',
+        repo: 'lailatul-coder',
+        groupPath: 'wenshao/lailatul-coder',
       },
     },
     {
@@ -113,12 +113,12 @@ describe('parseRemoteUrl', () => {
     },
     {
       name: 'bare local path',
-      url: '/srv/git/qwen-code.git',
+      url: '/srv/git/lailatul-coder.git',
       want: null,
     },
     {
       name: 'file scheme has no host',
-      url: 'file:///srv/git/qwen-code.git',
+      url: 'file:///srv/git/lailatul-coder.git',
       want: null,
     },
     {
@@ -133,7 +133,7 @@ describe('parseRemoteUrl', () => {
     },
     {
       name: 'owner missing',
-      url: 'https://github.com/qwen-code.git',
+      url: 'https://github.com/lailatul-coder.git',
       want: null,
     },
   ];
@@ -145,27 +145,27 @@ describe('parseRemoteUrl', () => {
 
 describe('normalizeSegment', () => {
   it('lowercases and strips one trailing .git', () => {
-    expect(normalizeSegment('QwenLM')).toBe('qwenlm');
-    expect(normalizeSegment('qwen-code.git')).toBe('qwen-code');
+    expect(normalizeSegment('LailatulCoder')).toBe('LailatulCoder');
+    expect(normalizeSegment('lailatul-coder.git')).toBe('lailatul-coder');
     // Uppercase .GIT pins the lowercase-THEN-strip order: strip-before-
     // lowercase would leave the suffix behind and fail every comparison.
-    expect(normalizeSegment('QWEN-CODE.GIT')).toBe('qwen-code');
-    expect(normalizeSegment('qwen-code.git.git')).toBe('qwen-code.git');
+    expect(normalizeSegment('lailatul-coder.GIT')).toBe('lailatul-coder');
+    expect(normalizeSegment('lailatul-coder.git.git')).toBe('lailatul-coder.git');
   });
 });
 
 describe('matchRemotes', () => {
   const FORK_LAYOUT = [
-    'origin\tgit@github.com:QwenLM/qwen-code.git (fetch)',
-    'origin\tgit@github.com:QwenLM/qwen-code.git (push)',
-    'wenshao\tgit@github.com:wenshao/qwen-code.git (fetch)',
-    'wenshao\tgit@github.com:wenshao/qwen-code.git (push)',
+    'origin\tgit@github.com:LailatulCoder/lailatul-coder.git (fetch)',
+    'origin\tgit@github.com:LailatulCoder/lailatul-coder.git (push)',
+    'wenshao\tgit@github.com:wenshao/lailatul-coder.git (fetch)',
+    'wenshao\tgit@github.com:wenshao/lailatul-coder.git (push)',
   ].join('\n');
 
   it('matches the upstream in a fork layout', () => {
     const { matched } = matchRemotes(FORK_LAYOUT, {
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual(['origin']);
   });
@@ -173,34 +173,34 @@ describe('matchRemotes', () => {
   it('matches the fork by its own owner', () => {
     const { matched } = matchRemotes(FORK_LAYOUT, {
       owner: 'wenshao',
-      repo: 'qwen-code',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual(['wenshao']);
   });
 
   it('compares case-insensitively', () => {
     const { matched } = matchRemotes(FORK_LAYOUT, {
-      owner: 'QWENLM',
-      repo: 'QWEN-CODE',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual(['origin']);
   });
 
   it('tolerates a .git suffix on the input repo', () => {
     const { matched } = matchRemotes(FORK_LAYOUT, {
-      owner: 'QwenLM',
-      repo: 'qwen-code.git',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder.git',
     });
     expect(matched).toEqual(['origin']);
   });
 
-  // The regression row: a substring comparison matched `shao/qwen-code`
+  // The regression row: a substring comparison matched `shao/lailatul-coder`
   // against the `wenshao` remote and one review read one repository while
   // posting to another. Exact segment equality must not.
   it('does not substring-match an owner contained in another', () => {
     const { matched } = matchRemotes(FORK_LAYOUT, {
       owner: 'shao',
-      repo: 'qwen-code',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual([]);
   });
@@ -225,8 +225,8 @@ describe('matchRemotes', () => {
 
   it('does not match a different host', () => {
     const { matched } = matchRemotes(FORK_LAYOUT, {
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
       host: 'ghe.example.com',
     });
     expect(matched).toEqual([]);
@@ -234,33 +234,33 @@ describe('matchRemotes', () => {
 
   it('matches a GHE remote only under its own host', () => {
     const remotes = [
-      'origin\tgit@github.com:QwenLM/qwen-code.git (fetch)',
-      'origin\tgit@github.com:QwenLM/qwen-code.git (push)',
-      'ghe\tgit@ghe.example.com:QwenLM/qwen-code.git (fetch)',
-      'ghe\tgit@ghe.example.com:QwenLM/qwen-code.git (push)',
+      'origin\tgit@github.com:LailatulCoder/lailatul-coder.git (fetch)',
+      'origin\tgit@github.com:LailatulCoder/lailatul-coder.git (push)',
+      'ghe\tgit@ghe.example.com:LailatulCoder/lailatul-coder.git (fetch)',
+      'ghe\tgit@ghe.example.com:LailatulCoder/lailatul-coder.git (push)',
     ].join('\n');
     expect(
       matchRemotes(remotes, {
-        owner: 'QwenLM',
-        repo: 'qwen-code',
+        owner: 'LailatulCoder',
+        repo: 'lailatul-coder',
         host: 'ghe.example.com',
       }).matched,
     ).toEqual(['ghe']);
     expect(
-      matchRemotes(remotes, { owner: 'QwenLM', repo: 'qwen-code' }).matched,
+      matchRemotes(remotes, { owner: 'LailatulCoder', repo: 'lailatul-coder' }).matched,
     ).toEqual(['origin']);
   });
 
   it('reports every match when several remotes serve the same repo', () => {
     const remotes = [
-      'upstream\thttps://github.com/QwenLM/qwen-code.git (fetch)',
-      'upstream\thttps://github.com/QwenLM/qwen-code.git (push)',
-      'mirror\tgit@github.com:QwenLM/qwen-code.git (fetch)',
-      'mirror\tgit@github.com:QwenLM/qwen-code.git (push)',
+      'upstream\thttps://github.com/LailatulCoder/lailatul-coder.git (fetch)',
+      'upstream\thttps://github.com/LailatulCoder/lailatul-coder.git (push)',
+      'mirror\tgit@github.com:LailatulCoder/lailatul-coder.git (fetch)',
+      'mirror\tgit@github.com:LailatulCoder/lailatul-coder.git (push)',
     ].join('\n');
     const { matched } = matchRemotes(remotes, {
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual(['upstream', 'mirror']);
   });
@@ -270,12 +270,12 @@ describe('matchRemotes', () => {
     // `git fetch <remote> pull/<n>/head`, so only it can match — and the
     // push line must not add a duplicate.
     const remotes = [
-      'origin\thttps://github.com/QwenLM/qwen-code.git (fetch)',
+      'origin\thttps://github.com/LailatulCoder/lailatul-coder.git (fetch)',
       'origin\thttps://github.com/someone-else/push-target.git (push)',
     ].join('\n');
     const { matched } = matchRemotes(remotes, {
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual(['origin']);
   });
@@ -283,11 +283,11 @@ describe('matchRemotes', () => {
   it('does not match when only the push URL points at the repo', () => {
     const remotes = [
       'origin\thttps://github.com/someone-else/fetch-side.git (fetch)',
-      'origin\thttps://github.com/QwenLM/qwen-code.git (push)',
+      'origin\thttps://github.com/LailatulCoder/lailatul-coder.git (push)',
     ].join('\n');
     const { matched } = matchRemotes(remotes, {
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual([]);
   });
@@ -298,34 +298,34 @@ describe('matchRemotes', () => {
     // marker and must not lose the remote (a silent exit-6 demotion for
     // every partial clone).
     const remotes = [
-      'origin\thttps://github.com/QwenLM/qwen-code.git (fetch) [blob:none]',
-      'origin\thttps://github.com/QwenLM/qwen-code.git (push)',
+      'origin\thttps://github.com/LailatulCoder/lailatul-coder.git (fetch) [blob:none]',
+      'origin\thttps://github.com/LailatulCoder/lailatul-coder.git (push)',
     ].join('\n');
     const { matched } = matchRemotes(remotes, {
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual(['origin']);
   });
 
   it('skips unparsable remotes', () => {
     const remotes = [
-      'local\t/srv/git/qwen-code.git (fetch)',
-      'local\t/srv/git/qwen-code.git (push)',
-      'origin\tgit@github.com:QwenLM/qwen-code.git (fetch)',
-      'origin\tgit@github.com:QwenLM/qwen-code.git (push)',
+      'local\t/srv/git/lailatul-coder.git (fetch)',
+      'local\t/srv/git/lailatul-coder.git (push)',
+      'origin\tgit@github.com:LailatulCoder/lailatul-coder.git (fetch)',
+      'origin\tgit@github.com:LailatulCoder/lailatul-coder.git (push)',
     ].join('\n');
     const { matched } = matchRemotes(remotes, {
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual(['origin']);
   });
 
   it('handles empty output', () => {
     const { matched } = matchRemotes('', {
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
     });
     expect(matched).toEqual([]);
   });

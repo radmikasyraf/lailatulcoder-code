@@ -2,7 +2,7 @@
   "name": "@craft-agent/messaging-whatsapp-worker",
   "version": "0.0.1",
   "license": "Apache-2.0",
-  "description": "WhatsApp worker subprocess for Qwen Code (Baileys-based, unofficial API)",
+  "description": "WhatsApp worker subprocess for LailatulCoder Ai (Baileys-based, unofficial API)",
   "type": "module",
   "main": "src/worker.ts",
   "exports": {

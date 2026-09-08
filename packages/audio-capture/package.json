@@ -1,10 +1,10 @@
 {
-  "name": "@qwen-code/audio-capture",
+  "name": "@lailatul-coder/audio-capture",
   "version": "0.21.14",
-  "description": "Native microphone capture backend for Qwen Code voice input",
+  "description": "Native microphone capture backend for LailatulCoder Ai voice input",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git",
+    "url": "git+https://github.com/LailatulCoder/lailatul-coder.git",
     "directory": "packages/audio-capture"
   },
   "type": "module",

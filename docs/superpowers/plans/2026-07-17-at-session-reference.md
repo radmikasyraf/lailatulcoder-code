@@ -6,7 +6,7 @@
 
 **Architecture:** Backend is a pure, unit-testable core service (`SessionReferenceService`) plus a ref parser (`session-mention-ref`); it loads a session via the existing `SessionService`, slims records to user/assistant text + one-line tool summaries, and tail-trims to a fixed token budget. `atCommandProcessor` gains a `@session:` routing branch that injects the slimmed block as a scoped-mention part. Frontend adds a `category` field to `Suggestion`, a session-suggestion producer in `useAtCompletion`, and a tab bar in `SuggestionsDisplay` driven by a new tab-switch keybinding.
 
-**Tech Stack:** TypeScript, React + Ink (TUI), Vitest, existing qwen-code `SessionService` / `atCommandProcessor` / completion hooks.
+**Tech Stack:** TypeScript, React + Ink (TUI), Vitest, existing lailatul-coder `SessionService` / `atCommandProcessor` / completion hooks.
 
 ## Global Constraints
 
@@ -15,7 +15,7 @@
 - Slimming keeps **user + assistant visible text** and a **one-line summary per tool call** (`[tool: <name> — <status>]`); never include tool result bodies.
 - Injected size cap: **fixed token budget with tail-retention** — drop oldest turns first, prepend `[earlier turns omitted]`, set `truncated: true`.
 - Unresolved / not-found / cross-project refs: **fall back to literal text with a surfaced note**, never silently drop.
-- No AI-authorship trailers in any commit message (`QwenLM/qwen-code` house rule).
+- No AI-authorship trailers in any commit message (`LailatulCoder/lailatul-coder` house rule).
 - Follow existing patterns: mirror `extension-mention-ref.ts` for the ref parser and producer; mirror `StatsDialog.tsx` tab trio for the tab UI.
 - Commit style: Conventional Commits (`feat:`, `test:`, `refactor:`).
 
@@ -464,7 +464,7 @@ import { describe, it, expect, vi } from 'vitest';
 // addItem). This test focuses only on the @session: branch.
 import { handleAtCommand } from './atCommandProcessor.js';
 
-vi.mock('@qwen-code/qwen-code-core', async (orig) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (orig) => {
   const actual = (await orig()) as Record<string, unknown>;
   return {
     ...actual,
@@ -508,7 +508,7 @@ In `atCommandProcessor.ts`, add imports at the top:
 
 ```ts
 import { parseSessionRef } from './session-mention-ref.js';
-import { SessionReferenceService } from '@qwen-code/qwen-code-core';
+import { SessionReferenceService } from '@lailatul-coder/lailatul-coder-core';
 ```
 
 Add this branch immediately after the `parseMcpServerRef` handling (~line 281) and before the filesystem `isPathWithinWorkspace` check (~line 320):
@@ -635,7 +635,7 @@ Producer test:
 // packages/cli/src/ui/hooks/session-completion.test.ts
 import { describe, it, expect, vi } from 'vitest';
 
-vi.mock('@qwen-code/qwen-code-core', async (orig) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (orig) => {
   const actual = (await orig()) as Record<string, unknown>;
   return {
     ...actual,
@@ -693,7 +693,7 @@ Expected: FAIL — `Cannot find module './session-completion.js'`.
 
 ```ts
 // packages/cli/src/ui/hooks/session-completion.ts
-import { SessionService } from '@qwen-code/qwen-code-core';
+import { SessionService } from '@lailatul-coder/lailatul-coder-core';
 import type { Suggestion } from '../components/SuggestionsDisplay.js';
 import {
   buildSessionRef,

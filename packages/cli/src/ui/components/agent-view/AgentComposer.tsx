@@ -24,7 +24,7 @@ import {
   isTerminalStatus,
   ApprovalMode,
   APPROVAL_MODES,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   useAgentViewState,
   useAgentViewActions,
@@ -307,3 +307,4 @@ export const AgentComposer: React.FC<AgentComposerProps> = ({ agentId }) => {
     </StreamingContext.Provider>
   );
 };
+

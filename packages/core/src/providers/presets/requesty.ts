@@ -34,8 +34,8 @@ export const requestyProvider: ProviderConfig = {
     }
   },
   customHeaders: {
-    'HTTP-Referer': 'https://github.com/QwenLM/qwen-code.git',
-    'X-Title': 'Qwen Code',
+    'HTTP-Referer': 'https://github.com/LailatulCoder/lailatul-coder.git',
+    'X-Title': 'LailatulCoder Ai',
   },
   documentationUrl: 'https://docs.requesty.ai',
   uiGroup: 'third-party',

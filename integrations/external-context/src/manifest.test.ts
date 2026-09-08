@@ -79,13 +79,13 @@ describe('extension manifest', () => {
     {
       platform: 'posix',
       command:
-        "exec '/absolute/path/to/node' '/administrator/path/to/qwen-code/integrations/external-context/dist/auto-recall.js'",
+        "exec '/absolute/path/to/node' '/administrator/path/to/lailatul-coder/integrations/external-context/dist/auto-recall.js'",
       shell: undefined,
     },
     {
       platform: 'windows',
       command:
-        "& 'C:\\Program Files\\nodejs\\node.exe' 'C:\\administrator\\qwen-code\\integrations\\external-context\\dist\\auto-recall.js'",
+        "& 'C:\\Program Files\\nodejs\\node.exe' 'C:\\administrator\\lailatul-coder\\integrations\\external-context\\dist\\auto-recall.js'",
       shell: 'powershell',
     },
   ])(
@@ -167,13 +167,13 @@ describe('extension manifest', () => {
     {
       platform: 'posix',
       command:
-        "exec '/absolute/path/to/node' '/administrator/path/to/qwen-code/integrations/external-context/dist/write-confirmation.js'",
+        "exec '/absolute/path/to/node' '/administrator/path/to/lailatul-coder/integrations/external-context/dist/write-confirmation.js'",
       shell: undefined,
     },
     {
       platform: 'windows',
       command:
-        "& 'C:\\Program Files\\nodejs\\node.exe' 'C:\\administrator\\qwen-code\\integrations\\external-context\\dist\\write-confirmation.js'",
+        "& 'C:\\Program Files\\nodejs\\node.exe' 'C:\\administrator\\lailatul-coder\\integrations\\external-context\\dist\\write-confirmation.js'",
       shell: 'powershell',
     },
   ])(
@@ -212,9 +212,9 @@ describe('extension manifest', () => {
     expect(server).toEqual({
       command: '/absolute/path/to/node',
       args: [
-        '/administrator/path/to/qwen-code/integrations/external-context/dist/main.js',
+        '/administrator/path/to/lailatul-coder/integrations/external-context/dist/main.js',
       ],
-      cwd: '/administrator/path/to/qwen-code/integrations/external-context',
+      cwd: '/administrator/path/to/lailatul-coder/integrations/external-context',
       includeTools: ['context_search', 'context_remember'],
     });
   });

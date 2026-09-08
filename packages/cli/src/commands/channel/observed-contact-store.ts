@@ -7,8 +7,8 @@ import type {
   ObservedChannelIdentity,
   ObservedChannelRelatedContact,
   ObservedChannelTopic,
-} from '@qwen-code/channel-base';
-import { atomicWriteFileSync } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/channel-base';
+import { atomicWriteFileSync } from '@lailatul-coder/lailatul-coder-core';
 
 const REGISTRY_VERSION = 1;
 const MAX_OBSERVATIONS = 500;

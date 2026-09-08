@@ -18044,7 +18044,7 @@ async function executeApiTool(config2, args, sessionPath) {
     return {
       content: [{
         type: "text",
-        text: `Authentication required for ${config2.name}. Please authenticate the source in Qwen Code settings.`
+        text: `Authentication required for ${config2.name}. Please authenticate the source in LailatulCoder Ai settings.`
       }],
       isError: true
     };

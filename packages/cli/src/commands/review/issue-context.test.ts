@@ -59,14 +59,14 @@ import { issueContextCommand, runIssueContext } from './issue-context.js';
 
 const ARGS = {
   prNumber: 9077,
-  repo: 'QwenLM/qwen-code',
+  repo: 'LailatulCoder/lailatul-coder',
   out: '/tmp/issue-context.md',
   extraIssues: [],
 };
 
 /** Same-repo extra requests, in the subcommand's RequestedIssue shape. */
 function ex(...numbers: number[]) {
-  return numbers.map((number) => ({ number, ownerRepo: 'QwenLM/qwen-code' }));
+  return numbers.map((number) => ({ number, ownerRepo: 'LailatulCoder/lailatul-coder' }));
 }
 
 function mockClosing(refs: unknown[]): void {
@@ -87,7 +87,7 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 9078,
-        repository: { name: 'qwen-code', owner: { login: 'QwenLM' } },
+        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
       },
     ]);
     ghMock.mockReturnValueOnce(
@@ -112,7 +112,7 @@ describe('runIssueContext', () => {
       'view',
       '9077',
       '--repo',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       '--json',
       'closingIssuesReferences',
     );
@@ -122,7 +122,7 @@ describe('runIssueContext', () => {
       'view',
       '9078',
       '--repo',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       '--json',
       'title,body,comments',
     );
@@ -137,14 +137,14 @@ describe('runIssueContext', () => {
       resolve('/tmp/issue-context.md'),
     );
     expect(written).toContain('untrusted user input');
-    expect(written).toContain('## Issue #9078 of QwenLM/qwen-code: the bug');
+    expect(written).toContain('## Issue #9078 of LailatulCoder/lailatul-coder: the bug');
     expect(written).toContain('repro steps');
     expect(written).toContain('**maintainer** (2026-08-01):');
     expect(written).toContain('confirmed');
     // The placeholder never accompanies a rendered thread.
     expect(written).not.toContain('_(no comments)_');
     expect(result.closingIssues).toEqual([
-      { number: 9078, ownerRepo: 'QwenLM/qwen-code', title: 'the bug' },
+      { number: 9078, ownerRepo: 'LailatulCoder/lailatul-coder', title: 'the bug' },
     ]);
     expect(result.unfetchable).toEqual([]);
     expect(result.outPath).toBe(resolve('/tmp/issue-context.md'));
@@ -191,7 +191,7 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 9,
-        repository: { name: 'qwen-code', owner: { login: 'QwenLM' } },
+        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
       },
     ]);
     ghMock.mockReturnValueOnce(
@@ -224,13 +224,13 @@ describe('runIssueContext', () => {
     expect(result.unfetchable).toEqual([
       {
         number: 555,
-        ownerRepo: 'QwenLM/qwen-code',
+        ownerRepo: 'LailatulCoder/lailatul-coder',
         error: 'HTTP 404: Not Found',
       },
     ]);
     const written = writeFileSyncMock.mock.calls[0][1] as string;
     expect(written).toContain(
-      '## Issue #555 of QwenLM/qwen-code — could not be fetched',
+      '## Issue #555 of LailatulCoder/lailatul-coder — could not be fetched',
     );
   });
 
@@ -265,7 +265,7 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 9078,
-        repository: { name: 'qwen-code', owner: { login: 'QwenLM' } },
+        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
       },
     ]);
     mockIssue('closing one');
@@ -281,7 +281,7 @@ describe('runIssueContext', () => {
       'view',
       '555',
       '--repo',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       '--json',
       'title,body,comments',
     );
@@ -293,7 +293,7 @@ describe('runIssueContext', () => {
       'Additionally fetched issues (referenced by the PR context, NOT in the closing set)',
     );
     expect(written).toContain(
-      '## Issue #555 of QwenLM/qwen-code: referenced only',
+      '## Issue #555 of LailatulCoder/lailatul-coder: referenced only',
     );
   });
 
@@ -317,13 +317,13 @@ describe('runIssueContext', () => {
       'view',
       '42',
       '--repo',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       '--json',
       'title,body,comments',
     );
     const written = writeFileSyncMock.mock.calls[0][1] as string;
     expect(written).toContain('## Issue #42 of acme/other: closing elsewhere');
-    expect(written).toContain('## Issue #42 of QwenLM/qwen-code: our own 42');
+    expect(written).toContain('## Issue #42 of LailatulCoder/lailatul-coder: our own 42');
   });
 
   it('dedups repeated --issue values', () => {
@@ -379,7 +379,7 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 1,
-        repository: { name: 'qwen-code', owner: { login: 'QwenLM' } },
+        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
       },
       {
         number: 2,
@@ -394,13 +394,13 @@ describe('runIssueContext', () => {
     const result = runIssueContext(ARGS);
 
     const written = writeFileSyncMock.mock.calls[0][1] as string;
-    expect(written).toContain('## Issue #1 of QwenLM/qwen-code: readable');
+    expect(written).toContain('## Issue #1 of LailatulCoder/lailatul-coder: readable');
     expect(written).toContain(
       '## Issue #2 of acme/restricted — could not be fetched',
     );
     expect(written).toContain('HTTP 404');
     expect(result.closingIssues).toEqual([
-      { number: 1, ownerRepo: 'QwenLM/qwen-code', title: 'readable' },
+      { number: 1, ownerRepo: 'LailatulCoder/lailatul-coder', title: 'readable' },
     ]);
     expect(result.unfetchable).toEqual([
       {
@@ -435,7 +435,7 @@ describe('runIssueContext', () => {
     const result = runIssueContext({ ...ARGS, extraIssues: ex(555) });
     expect(result.discoveryError).toBe('HTTP 403: secondary rate limit');
     const written = writeFileSyncMock.mock.calls[0][1] as string;
-    expect(written).toContain('## Issue #555 of QwenLM/qwen-code: five');
+    expect(written).toContain('## Issue #555 of LailatulCoder/lailatul-coder: five');
     expect(result.closingIssues).toEqual([]);
   });
 
@@ -443,7 +443,7 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 9078,
-        repository: { name: 'qwen-code', owner: { login: 'QwenLM' } },
+        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
       },
     ]);
     mockIssue('closing one');
@@ -453,8 +453,8 @@ describe('runIssueContext', () => {
     // the toLowerCase() fold in the dedup key.
     runIssueContext({
       ...ARGS,
-      repo: 'qwenlm/qwen-code',
-      extraIssues: [{ number: 9078, ownerRepo: 'qwenlm/qwen-code' }],
+      repo: 'LailatulCoder/lailatul-coder',
+      extraIssues: [{ number: 9078, ownerRepo: 'LailatulCoder/lailatul-coder' }],
     });
     // one discovery call + one issue fetch — no duplicate section
     expect(ghMock).toHaveBeenCalledTimes(2);
@@ -472,7 +472,7 @@ describe('runIssueContext', () => {
       'view',
       '77',
       '--repo',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       '--json',
       'title,body,comments',
     );
@@ -492,7 +492,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
       host: 'ghe.example.com',
     });
@@ -533,7 +533,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
     });
     expect(process.exitCode).toBeUndefined();
@@ -550,7 +550,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
       issue: [555],
     });
@@ -560,7 +560,7 @@ describe('issueContextCommand handler', () => {
       'view',
       '555',
       '--repo',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       '--json',
       'title,body,comments',
     );
@@ -577,7 +577,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
       issue: ['acme/widgets#7'],
     });
@@ -603,7 +603,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
       issue: ['../evil#7'],
     });
@@ -617,7 +617,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 0,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
     });
     expect(process.exitCode).toBe(2);
@@ -628,7 +628,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
       issue: [0],
     });
@@ -645,7 +645,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1.5,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
     });
     expect(process.exitCode).toBe(2);
@@ -658,7 +658,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '',
     });
     expect(process.exitCode).toBe(2);
@@ -671,7 +671,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: ' ',
     });
     expect(process.exitCode).toBe(2);
@@ -687,7 +687,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
       host: 'bad host; rm -rf /',
     });
@@ -704,7 +704,7 @@ describe('issueContextCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/ic.md',
     });
     expect(process.exitCode).toBe(1);

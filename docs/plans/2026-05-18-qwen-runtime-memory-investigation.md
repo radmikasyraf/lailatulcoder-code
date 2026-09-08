@@ -1,12 +1,12 @@
-# Qwen Code Runtime Memory Investigation Plan
+# LailatulCoder Ai Runtime Memory Investigation Plan
 
 Date: 2026-05-18
 
 ## Context
 
-Local benchmarks show Qwen Code using substantially more process-tree RSS than
+Local benchmarks show LailatulCoder Ai using substantially more process-tree RSS than
 Claude Code for similar non-interactive CLI task shapes. The latest five-case
-matrix found Qwen Code peaking around `0.83-1.04 GiB` while Claude Code stayed
+matrix found LailatulCoder Ai peaking around `0.83-1.04 GiB` while Claude Code stayed
 around `0.27-0.36 GiB`.
 
 This document proposes a draft investigation and optimization direction. It is
@@ -19,8 +19,8 @@ The investigation has reached the evidence-and-direction stage:
 
 - A repeatable local matrix has been built for small PR review, code navigation,
   and synthetic diff workloads.
-- Qwen Code has been compared across multiple models.
-- Qwen Code and Claude Code have been compared on the same task shapes where
+- LailatulCoder Ai has been compared across multiple models.
+- LailatulCoder Ai and Claude Code have been compared on the same task shapes where
   equivalent model endpoints were available.
 - The observed RSS gap is consistent enough to justify deeper runtime
   diagnostics.
@@ -42,7 +42,7 @@ The main evidence is:
 - The Qwen-vs-Claude RSS gap reproduced across small PR review, code
   navigation, and synthetic diff workloads.
 - The gap reproduced with both `pai/glm-5` and `qwen3.6-plus`.
-- Qwen Code used more tokens than Claude Code in every tested matrix cell.
+- LailatulCoder Ai used more tokens than Claude Code in every tested matrix cell.
 - Large diff size did not produce a clean linear memory increase, which suggests
   the baseline and bounded/truncated output paths matter more than raw diff
   bytes alone.
@@ -93,12 +93,12 @@ PR attempt to reduce memory.
 
 ## Working Inference
 
-The current data points toward a Qwen Code runtime/path issue more than a model
+The current data points toward a LailatulCoder Ai runtime/path issue more than a model
 provider issue.
 
 The strongest current inference is:
 
-> Qwen Code appears to carry a high non-interactive CLI task execution
+> LailatulCoder Ai appears to carry a high non-interactive CLI task execution
 > footprint, likely amplified by larger context/tool-result/session handling.
 > The likely problem area is the CLI runtime and agent data path, not the
 > selected model alone.
@@ -106,16 +106,16 @@ The strongest current inference is:
 More specifically, the evidence points away from "too many tool calls" as the
 primary cause. Tool-call counts were similar across CLIs, and Claude sometimes
 used more turns or tool calls while keeping lower RSS. The more plausible
-problem is that Qwen Code initializes or retains heavier state for the same
+problem is that LailatulCoder Ai initializes or retains heavier state for the same
 short non-interactive CLI task, then amplifies that execution footprint with
 larger context, tool-result, saved-output, or session-history data.
 
 The most likely buckets are:
 
-1. **Process and module startup/execution cost**: Qwen Code may initialize more
+1. **Process and module startup/execution cost**: LailatulCoder Ai may initialize more
    runtime, tools, UI/session infrastructure, or provider machinery than needed
    for non-interactive CLI tasks.
-2. **History and context assembly**: Qwen Code may retain or construct larger
+2. **History and context assembly**: LailatulCoder Ai may retain or construct larger
    model-facing context than Claude Code for the same task shape.
 3. **Tool-result retention**: large or repeated tool results may be retained in
    live history, UI history, chat recording, or saved-output recovery paths.
@@ -137,7 +137,7 @@ internal measurements to confirm or rule out each bucket.
 The first draft PR should be evidence and diagnostics focused:
 
 1. Commit the benchmark report and investigation plan.
-2. Add or extend local diagnostic output so Qwen Code can report:
+2. Add or extend local diagnostic output so LailatulCoder Ai can report:
    - V8 heap and heap-space statistics.
    - RSS versus heap split.
    - session message count and approximate retained size.
@@ -145,7 +145,7 @@ The first draft PR should be evidence and diagnostics focused:
    - truncation and saved-output recovery counters.
    - subagent/process-tree activity when available.
 3. Re-run the existing matrix against:
-   - current published Qwen Code,
+   - current published LailatulCoder Ai,
    - current `main`,
    - diagnostics-only branch,
    - candidate optimization branch.
@@ -172,7 +172,7 @@ These are candidates, not conclusions:
 
 Claude Code and OpenAI Codex (OpenAI's CLI coding agent) should be used as
 design references for diagnostic separation, bounded output retention, and lazy
-history loading. The implementation should still follow Qwen Code's own
+history loading. The implementation should still follow LailatulCoder Ai's own
 architecture and tests.
 
 ## Validation Plan
@@ -220,7 +220,7 @@ behavior. A minimal useful slice would add:
 
 After that lands locally, rerun the same Qwen model matrix and compare:
 
-- published Qwen Code;
+- published LailatulCoder Ai;
 - current `main`;
 - diagnostics-only branch;
 - candidate optimization branch.
@@ -235,6 +235,6 @@ This draft does not claim that:
 - single-run local measurements are sufficient for release-level performance
   claims.
 
-The intended claim is narrower: Qwen Code shows a consistent local RSS gap in
+The intended claim is narrower: LailatulCoder Ai shows a consistent local RSS gap in
 the tested workloads, and the project needs internal diagnostics to explain and
 reduce that gap.

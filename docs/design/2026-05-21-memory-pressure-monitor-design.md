@@ -8,7 +8,7 @@ status: 'implemented'
 
 ## Problem
 
-Long-running Qwen Code sessions can accumulate memory through large tool
+Long-running LailatulCoder Ai sessions can accumulate memory through large tool
 results, repeated file reads, chat history, and native/external allocations.
 Before this change, the core package had diagnostics and session-reset cleanup,
 but no runtime response when memory pressure rises during normal tool

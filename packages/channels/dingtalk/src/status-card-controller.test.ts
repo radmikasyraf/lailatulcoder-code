@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import type { ChannelOutputSegmentContext } from '@qwen-code/channel-base';
+import type { ChannelOutputSegmentContext } from '@lailatul-coder/channel-base';
 import type { DingtalkInteractiveCardClient } from './interactive-card-client.js';
 import { StatusCardController } from './status-card-controller.js';
 

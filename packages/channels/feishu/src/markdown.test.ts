@@ -138,8 +138,8 @@ describe('Feishu markdown utilities', () => {
     });
 
     it('returns default for empty text', () => {
-      expect(extractTitle('')).toBe('Qwen Code');
-      expect(extractTitle('###')).toBe('Qwen Code');
+      expect(extractTitle('')).toBe('LailatulCoder Ai');
+      expect(extractTitle('###')).toBe('LailatulCoder Ai');
     });
   });
 

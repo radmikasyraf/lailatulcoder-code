@@ -116,11 +116,11 @@ export function osc(...parts: Array<string | number>): string {
 
 /**
  * Wrap an OSC sequence for tmux / screen passthrough (DCS-passthrough, with
- * ESC doubling under tmux). Re-exported from `@qwen-code/qwen-code-core`, the
+ * ESC doubling under tmux). Re-exported from `@lailatul-coder/lailatul-coder-core`, the
  * single source of truth for this helper — core-side emitters need it too —
  * so this package's existing importers keep resolving unchanged.
  */
-export { wrapForMultiplexer } from '@qwen-code/qwen-code-core';
+export { wrapForMultiplexer } from '@lailatul-coder/lailatul-coder-core';
 
 // ── Encoding helpers ───────────────────────────────────────────────
 

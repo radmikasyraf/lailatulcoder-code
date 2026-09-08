@@ -10,7 +10,7 @@ import dts from 'vite-plugin-dts';
 import { resolve } from 'path';
 
 /**
- * Vite configuration for @qwen-code/webui library
+ * Vite configuration for @lailatul-coder/webui library
  *
  * Build outputs:
  * - Main entry:    dist/index.js, dist/index.cjs, dist/index.d.ts
@@ -22,11 +22,11 @@ export default defineConfig(({ command }) => ({
     command === 'serve'
       ? {
           alias: {
-            '@qwen-code/sdk/daemon': resolve(
+            '@lailatul-coder/sdk/daemon': resolve(
               __dirname,
               '../sdk-typescript/src/daemon/index.ts',
             ),
-            '@qwen-code/sdk': resolve(
+            '@lailatul-coder/sdk': resolve(
               __dirname,
               '../sdk-typescript/src/index.ts',
             ),
@@ -40,7 +40,7 @@ export default defineConfig(({ command }) => ({
       outDir: 'dist',
       rollupTypes: true,
       insertTypesEntry: true,
-      aliasesExclude: [/^@qwen-code\//],
+      aliasesExclude: [/^@lailatul-coder\//],
     }),
   ],
   build: {
@@ -53,16 +53,16 @@ export default defineConfig(({ command }) => ({
     },
     rollupOptions: {
       external: [
-        '@qwen-code/sdk',
-        '@qwen-code/sdk/daemon',
+        '@lailatul-coder/sdk',
+        '@lailatul-coder/sdk/daemon',
         'react',
         'react-dom',
         'react/jsx-runtime',
       ],
       output: {
         globals: {
-          '@qwen-code/sdk': 'QwenCodeSdk',
-          '@qwen-code/sdk/daemon': 'QwenCodeSdkDaemon',
+          '@lailatul-coder/sdk': 'QwenCodeSdk',
+          '@lailatul-coder/sdk/daemon': 'QwenCodeSdkDaemon',
           react: 'React',
           'react-dom': 'ReactDOM',
           'react/jsx-runtime': 'ReactJSXRuntime',

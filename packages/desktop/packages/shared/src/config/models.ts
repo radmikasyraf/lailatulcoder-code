@@ -1,7 +1,7 @@
 /**
  * Centralized model registry.
  *
- * Qwen Code reports the live model list through ACP at session startup. The
+ * LailatulCoder Ai reports the live model list through ACP at session startup. The
  * static registry below provides a stable fallback for first-run UI, tests, and
  * utility calls before ACP metadata is available.
  */
@@ -26,7 +26,7 @@ export const MODEL_REGISTRY: ModelDefinition[] = [
     id: DEFAULT_MODEL,
     name: 'Qwen3 Coder',
     shortName: 'Qwen',
-    description: 'Default Qwen Code model',
+    description: 'Default LailatulCoder Ai model',
     provider: 'qwen',
     contextWindow: 1_000_000,
   },

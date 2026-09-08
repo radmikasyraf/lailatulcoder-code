@@ -56,7 +56,7 @@ vi.mock('./login.js', () => ({
   qrCodeLogin: vi.fn(),
 }));
 
-vi.mock('@qwen-code/channel-base', () => ({
+vi.mock('@lailatul-coder/channel-base', () => ({
   ChannelBase: class {
     protected config: Record<string, unknown> = {};
     protected bridge: Record<string, unknown> = {};
@@ -145,7 +145,7 @@ function makeChannel(
       keywordTriggers: ['help', '问答'],
       ...configOverrides,
     },
-    {} as unknown as import('@qwen-code/channel-base').AcpBridge,
+    {} as unknown as import('@lailatul-coder/channel-base').AcpBridge,
   );
   return ch;
 }

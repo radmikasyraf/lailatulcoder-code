@@ -11,7 +11,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { basename, isAbsolute, join, relative, resolve } from 'node:path';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import {
   LEASE_PREFIX,
   REVIEW_TMP_DIR,

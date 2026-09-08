@@ -1,11 +1,11 @@
 /**
  * @license
- * Copyright 2026 Qwen Code
+ * Copyright 2026 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../config/settings.js';
 import {
   AppEvent,
@@ -34,7 +34,7 @@ const mockGetIdeClientInstance = vi.hoisted(() =>
 const mockInitializeTelemetry = vi.hoisted(() => vi.fn());
 const mockStartBackgroundHousekeeping = vi.hoisted(() => vi.fn());
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   createDebugLogger: () => ({
     debug: mockDebug,
     warn: mockWarn,
@@ -133,7 +133,7 @@ describe('startupPrefetch', () => {
       currentVersion: '1.0.0',
     });
     mockGetInstallationInfo.mockReturnValue({
-      updateCommand: 'npm install -g @qwen-code/qwen-code@latest',
+      updateCommand: 'npm install -g @lailatul-coder/lailatul-coder@latest',
       packageManager: 'npm',
       isStandalone: false,
     });
@@ -277,7 +277,7 @@ describe('startupPrefetch', () => {
   it('prompts non-npm installs when no parent supervisor is available', async () => {
     mockRequestUpdateOnExit.mockReturnValue(false);
     mockGetInstallationInfo.mockReturnValue({
-      updateCommand: 'pnpm add -g @qwen-code/qwen-code@latest',
+      updateCommand: 'pnpm add -g @lailatul-coder/lailatul-coder@latest',
       packageManager: 'pnpm',
       isGlobal: true,
     });
@@ -310,7 +310,7 @@ describe('startupPrefetch', () => {
       updateCommand: 'standalone update',
       packageManager: 'standalone',
       isStandalone: true,
-      standaloneDir: '/tmp/qwen-code',
+      standaloneDir: '/tmp/lailatul-coder',
     });
 
     startPostRenderPrefetches(config, makeSettings());
@@ -359,7 +359,7 @@ describe('startupPrefetch', () => {
     expect(mockHandleAutoUpdate).not.toHaveBeenCalled();
     expect(mockUpdateEventEmit).toHaveBeenCalledWith('update-info', {
       message:
-        'Update available\nUpdate Qwen Code on the host, then restart the sandbox.',
+        'Update available\nUpdate LailatulCoder Ai on the host, then restart the sandbox.',
     });
   });
 

@@ -382,7 +382,7 @@ behavior and must be rewritten with the change:
 - Sections A–D and F are independent and can land first.
 - Section E depends on #9189 merging; land #9189 first so there is
   exactly one deferral pipeline.
-- #9213 itself does not wait for this design: `@qwen-code /retry` is
+- #9213 itself does not wait for this design: `@lailatul-coder /retry` is
   today's manual equivalent of the `sound` exit, merging as-is plus
   follow-up issues is today's manual equivalent of the deferral exit.
 

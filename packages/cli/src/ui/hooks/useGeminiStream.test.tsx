@@ -25,7 +25,7 @@ import type {
   AnyToolInvocation,
   GoalTurnPermit,
   SteerInput,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   ApprovalMode,
   AUTONOMOUS_SENTINEL_DYNAMIC,
@@ -38,7 +38,7 @@ import {
   getRuntimeContentGenerator,
   getToolCallFingerprint,
   runWithRuntimeContentGenerator,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Part, PartListUnion } from '@google/genai';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 import type { HistoryItem, SlashCommandProcessorResult } from '../types.js';
@@ -135,7 +135,7 @@ vi.mock('../../dualOutput/DualOutputContext.js', () => ({
 }));
 const mockFinalizeToolResponses = vi.hoisted(() => vi.fn());
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actualCoreModule = (await importOriginal()) as any;
   mockFinalizeToolResponses.mockImplementation(
     actualCoreModule.finalizeToolResponses,
@@ -15635,3 +15635,4 @@ describe('useGeminiStream', () => {
     expect(event.turnCount).toBe(3);
   });
 });
+

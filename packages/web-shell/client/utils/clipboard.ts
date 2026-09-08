@@ -7,7 +7,7 @@
  * `http://10.x.x.x:4170`) leaves `navigator.clipboard` undefined and every
  * copy entry point used to fail. Fall back to the legacy
  * `document.execCommand('copy')` path so copying keeps working there.
- * See https://github.com/QwenLM/qwen-code/issues/9485.
+ * See https://github.com/LailatulCoder/lailatul-coder/issues/9485.
  *
  * Known edge: in a secure context where clipboard-write permission has never
  * been decided, `writeText` only settles when the user answers the permission

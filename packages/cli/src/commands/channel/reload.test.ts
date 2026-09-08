@@ -7,7 +7,7 @@ const mockDaemonClient = vi.hoisted(() =>
 const mockWriteStdoutLine = vi.hoisted(() => vi.fn());
 const mockWriteStderrLine = vi.hoisted(() => vi.fn());
 
-vi.mock('@qwen-code/sdk/daemon', () => ({
+vi.mock('@lailatul-coder/sdk/daemon', () => ({
   DaemonClient: mockDaemonClient,
 }));
 vi.mock('../../utils/stdioHelpers.js', () => ({

@@ -9,10 +9,10 @@ import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
 
-// Mock @qwen-code/qwen-code-core to avoid the undici dependency chain.
-// This is required so @qwen-code/acp-bridge/status can load (it imports
+// Mock @lailatul-coder/lailatul-coder-core to avoid the undici dependency chain.
+// This is required so @lailatul-coder/acp-bridge/status can load (it imports
 // SkillError from core).
-vi.mock('@qwen-code/qwen-code-core', () => {
+vi.mock('@lailatul-coder/lailatul-coder-core', () => {
   class SkillError extends Error {
     code: string;
     constructor(message: string, code: string) {
@@ -92,11 +92,11 @@ vi.mock('../../../utils/stdioHelpers.js', () => ({
 }));
 
 const { createDaemonWorkspaceService } = await import('../index.js');
-import { SessionNotFoundError } from '@qwen-code/acp-bridge/bridgeErrors';
+import { SessionNotFoundError } from '@lailatul-coder/acp-bridge/bridgeErrors';
 import {
   BridgeChannelClosedError,
   type ServeWorkspaceSkillsStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 import {
   resetHomeEnvBootstrapForTesting,
   SettingScope,

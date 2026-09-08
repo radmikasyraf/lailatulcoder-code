@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest';
-import type { ChatRecord, Config } from '@qwen-code/qwen-code-core';
+import type { ChatRecord, Config } from '@lailatul-coder/lailatul-coder-core';
 import { normalizeSessionData } from './normalize.js';
 import type { ExportConfig } from './types.js';
 

@@ -10,7 +10,7 @@ import type {
   GoalSnapshotV2,
   SessionTranscriptCursorState,
   SessionTranscriptRecordPage,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { SessionUpdate } from '@agentclientprotocol/sdk';
 import { Buffer } from 'node:buffer';
 import { afterEach, describe, expect, it, vi } from 'vitest';

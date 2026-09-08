@@ -16,13 +16,13 @@ import type {
   CoreWriteTextFileRequest,
   FileSystemService,
   ReadTextFileResponse,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   createDebugLogger,
   getErrorMessage,
   isSubpath,
-} from '@qwen-code/qwen-code-core';
-import { buildToolWriteOriginMeta } from '@qwen-code/qwen-code-core/toolWriteOrigin';
+} from '@lailatul-coder/lailatul-coder-core';
+import { buildToolWriteOriginMeta } from '@lailatul-coder/lailatul-coder-core/toolWriteOrigin';
 import { realpath } from 'node:fs/promises';
 import path from 'node:path';
 

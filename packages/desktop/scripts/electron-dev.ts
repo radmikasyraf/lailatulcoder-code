@@ -44,7 +44,7 @@ const BIN_EXT = IS_WINDOWS ? '.exe' : '';
 const VITE_BIN = join(ROOT_DIR, `node_modules/.bin/vite${BIN_EXT}`);
 const ELECTRON_BIN = join(ROOT_DIR, `node_modules/.bin/electron${BIN_EXT}`);
 const ELECTRON_CLI_ARGS = process.argv.slice(2).filter((arg) => arg !== '--');
-const QWEN_VENDOR_DIR = join(ELECTRON_DIR, 'vendor', 'qwen-code');
+const QWEN_VENDOR_DIR = join(ELECTRON_DIR, 'vendor', 'lailatul-coder');
 const QWEN_VENDOR_CLI_CANDIDATES = [
   join(QWEN_VENDOR_DIR, 'dist', 'cli.js'),
   join(QWEN_VENDOR_DIR, 'cli.js'),
@@ -86,7 +86,7 @@ async function ensureQwenRuntimeForDev(): Promise<void> {
     process.env.QWEN_CODE_ROOT ||
     process.env.QWEN_CODE_PATH
   ) {
-    console.log('🧭 Using Qwen Code runtime override from environment');
+    console.log('🧭 Using LailatulCoder Ai runtime override from environment');
     return;
   }
 
@@ -95,14 +95,14 @@ async function ensureQwenRuntimeForDev(): Promise<void> {
   );
   const monorepoRoot = join(ROOT_DIR, '..', '..');
   if (!requestedExternalArtifact && isQwenSourceRoot(monorepoRoot)) {
-    console.log('🧭 Using Qwen Code CLI from the local monorepo checkout');
+    console.log('🧭 Using LailatulCoder Ai CLI from the local monorepo checkout');
     return;
   }
 
   const vendoredCli = firstExistingPath(QWEN_VENDOR_CLI_CANDIDATES);
   if (vendoredCli && !requestedExternalArtifact) {
     process.env.QWEN_CODE_CLI = vendoredCli;
-    console.log(`🧭 Using vendored Qwen Code CLI: ${vendoredCli}`);
+    console.log(`🧭 Using vendored LailatulCoder Ai CLI: ${vendoredCli}`);
     return;
   }
 
@@ -111,7 +111,7 @@ async function ensureQwenRuntimeForDev(): Promise<void> {
     const defaultVersion = readDefaultQwenCodeVersion();
     if (!defaultVersion) {
       throw new Error(
-        'No Qwen Code CLI runtime configured. Set QWEN_CODE_VERSION, QWEN_CODE_TARBALL, QWEN_CODE_ROOT, or qwenCodeRuntime.version in package.json.',
+        'No LailatulCoder Ai CLI runtime configured. Set QWEN_CODE_VERSION, QWEN_CODE_TARBALL, QWEN_CODE_ROOT, or qwenCodeRuntime.version in package.json.',
       );
     }
     env.QWEN_CODE_VERSION = defaultVersion;
@@ -119,11 +119,11 @@ async function ensureQwenRuntimeForDev(): Promise<void> {
 
   const sourceLabel = env.QWEN_CODE_TARBALL
     ? `tarball ${env.QWEN_CODE_TARBALL}`
-    : `@qwen-code/qwen-code@${env.QWEN_CODE_VERSION}`;
-  console.log(`📦 Vendoring Qwen Code CLI from ${sourceLabel}...`);
+    : `@lailatul-coder/lailatul-coder@${env.QWEN_CODE_VERSION}`;
+  console.log(`📦 Vendoring LailatulCoder Ai CLI from ${sourceLabel}...`);
 
   const proc = spawn({
-    cmd: ['bun', 'run', 'scripts/vendor-qwen-code.ts'],
+    cmd: ['bun', 'run', 'scripts/vendor-lailatul-coder.ts'],
     cwd: ROOT_DIR,
     stdout: 'inherit',
     stderr: 'inherit',
@@ -131,15 +131,15 @@ async function ensureQwenRuntimeForDev(): Promise<void> {
   });
   const exitCode = await proc.exited;
   if (exitCode !== 0) {
-    throw new Error(`Failed to vendor Qwen Code CLI from ${sourceLabel}`);
+    throw new Error(`Failed to vendor LailatulCoder Ai CLI from ${sourceLabel}`);
   }
 
   const resolvedCli = firstExistingPath(QWEN_VENDOR_CLI_CANDIDATES);
   if (!resolvedCli) {
-    throw new Error(`Vendored Qwen Code CLI not found in ${QWEN_VENDOR_DIR}`);
+    throw new Error(`Vendored LailatulCoder Ai CLI not found in ${QWEN_VENDOR_DIR}`);
   }
   process.env.QWEN_CODE_CLI = resolvedCli;
-  console.log(`🧭 Using vendored Qwen Code CLI: ${resolvedCli}`);
+  console.log(`🧭 Using vendored LailatulCoder Ai CLI: ${resolvedCli}`);
 }
 
 function resolveBuildPlatform(): Platform {
@@ -399,7 +399,7 @@ function getElectronEnv(): Record<string, string> {
     CRAFT_CONFIG_DIR: process.env.CRAFT_CONFIG_DIR || '',
     CRAFT_USER_DATA_DIR: process.env.CRAFT_USER_DATA_DIR || '',
     CRAFT_SERVER_LOCK_FILE: process.env.CRAFT_SERVER_LOCK_FILE || '',
-    CRAFT_APP_NAME: process.env.CRAFT_APP_NAME || 'Qwen Code Desktop',
+    CRAFT_APP_NAME: process.env.CRAFT_APP_NAME || 'LailatulCoder Ai Desktop',
     CRAFT_DEEPLINK_SCHEME: process.env.CRAFT_DEEPLINK_SCHEME || 'craftagents',
     CRAFT_INSTANCE_NUMBER: process.env.CRAFT_INSTANCE_NUMBER || '',
   };

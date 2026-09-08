@@ -58,7 +58,7 @@ describe('translateAndCheckAbsoluteWorkspacePath', () => {
   it.skipIf(process.platform === 'win32')(
     'returns the translated mount for Windows-shaped input in a sandbox',
     () => {
-      vi.stubEnv('SANDBOX', 'qwen-code-sandbox-0');
+      vi.stubEnv('SANDBOX', 'lailatul-coder-sandbox-0');
       _setSandboxMountExistsForTest((p) => p === '/c/qwen-repro');
       try {
         expect(translateAndCheckAbsoluteWorkspacePath('C:\\qwen-repro')).toBe(
@@ -95,7 +95,7 @@ describe('translateAndCheckAbsoluteWorkspacePath', () => {
 describe('translateWindowsWorkspaceForPosixSandbox', () => {
   const sandboxOpts = (exists: boolean) => ({
     platform: 'linux' as NodeJS.Platform,
-    sandboxEnv: 'qwen-code-sandbox-0',
+    sandboxEnv: 'lailatul-coder-sandbox-0',
     exists: () => exists,
   });
 
@@ -159,7 +159,7 @@ describe('translateWindowsWorkspaceForPosixSandbox', () => {
     expect(
       translateWindowsWorkspaceForPosixSandbox('C:\\qwen-repro', {
         platform: 'win32',
-        sandboxEnv: 'qwen-code-sandbox-0',
+        sandboxEnv: 'lailatul-coder-sandbox-0',
         exists: () => true,
       }),
     ).toBe('C:\\qwen-repro');

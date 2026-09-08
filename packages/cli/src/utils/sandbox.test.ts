@@ -12,7 +12,7 @@ import {
   FatalSandboxError,
   PRIVATE_ACP_CAPABILITY_ENV,
   QWEN_DIR,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const spawnMock = vi.hoisted(() => vi.fn());
@@ -71,7 +71,7 @@ describe('start_sandbox', () => {
 
     const capability = 'private-capability';
     const result = start_sandbox(
-      { command: 'docker', image: 'example.com/qwen-code:latest' },
+      { command: 'docker', image: 'example.com/lailatul-coder:latest' },
       [],
       undefined,
       [process.execPath, '/path/to/cli.js', '--acp'],
@@ -107,7 +107,7 @@ describe('start_sandbox', () => {
     execSyncMock.mockReturnValue(Buffer.from(''));
 
     const digestImage =
-      'ghcr.io/qwenlm/qwen-code@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
+      'ghcr.io/LailatulCoder/lailatul-coder@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
 
     const imageCheck = Object.assign(new EventEmitter(), {
       stdout: new EventEmitter(),
@@ -292,37 +292,37 @@ describe('isContainerPathWithinWorkdir', () => {
 
 describe('parseSandboxImageName', () => {
   it('uses the image basename and tag for container names', () => {
-    expect(parseSandboxImageName('ghcr.io/qwenlm/qwen-code:0.18.3')).toBe(
-      'qwen-code-0.18.3',
+    expect(parseSandboxImageName('ghcr.io/LailatulCoder/lailatul-coder:0.18.3')).toBe(
+      'lailatul-coder-0.18.3',
     );
   });
 
   it('handles registry ports without treating them as tags', () => {
     expect(
-      parseSandboxImageName('localhost:5000/team/qwen-code-sandbox:dev'),
-    ).toBe('qwen-code-sandbox-dev');
+      parseSandboxImageName('localhost:5000/team/lailatul-coder-sandbox:dev'),
+    ).toBe('lailatul-coder-sandbox-dev');
   });
 
   it('handles registry ports when the image is untagged', () => {
-    expect(parseSandboxImageName('localhost:5000/team/qwen-code-sandbox')).toBe(
-      'qwen-code-sandbox',
+    expect(parseSandboxImageName('localhost:5000/team/lailatul-coder-sandbox')).toBe(
+      'lailatul-coder-sandbox',
     );
   });
 
   it('drops digests from generated container names', () => {
     expect(
       parseSandboxImageName(
-        'registry.example.com/team/qwen-code-sandbox@sha256:abcdef',
+        'registry.example.com/team/lailatul-coder-sandbox@sha256:abcdef',
       ),
-    ).toBe('qwen-code-sandbox');
+    ).toBe('lailatul-coder-sandbox');
   });
 
   it('keeps tags when dropping digests from generated container names', () => {
     expect(
       parseSandboxImageName(
-        'registry.example.com/team/qwen-code-sandbox:dev@sha256:abcdef',
+        'registry.example.com/team/lailatul-coder-sandbox:dev@sha256:abcdef',
       ),
-    ).toBe('qwen-code-sandbox-dev');
+    ).toBe('lailatul-coder-sandbox-dev');
   });
 });
 

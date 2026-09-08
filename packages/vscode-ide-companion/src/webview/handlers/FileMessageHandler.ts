@@ -19,7 +19,7 @@ import {
   FileDiscoveryService,
   FileSearchFactory,
   type FileSearch,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { getErrorMessage } from '../../utils/errorMessage.js';
 import { shouldResolveAgainstWorkspace } from '../../utils/file-path.js';
 

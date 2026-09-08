@@ -1,5 +1,5 @@
 import type { CommandModule } from 'yargs';
-import { PairingStore } from '@qwen-code/channel-base';
+import { PairingStore } from '@lailatul-coder/channel-base';
 import { writeStderrLine, writeStdoutLine } from '../../utils/stdioHelpers.js';
 
 // Pairing state is scoped by the channel's workspace (#7017), so the CLI has

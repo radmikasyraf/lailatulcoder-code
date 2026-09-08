@@ -20,7 +20,7 @@ import {
   isSDKSystemMessage,
   type SDKMessage,
   type SDKSystemMessage,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 import {
   SDKTestHelper,
   findToolResults,

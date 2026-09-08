@@ -1,8 +1,8 @@
 /* eslint-disable import/no-internal-modules */
 /**
- * Qwen Code Backend (ACP SDK Client)
+ * LailatulCoder Ai Backend (ACP SDK Client)
  *
- * Spawns Qwen Code in ACP mode and adapts ACP session updates into Craft's
+ * Spawns LailatulCoder Ai in ACP mode and adapts ACP session updates into Craft's
  * provider-agnostic AgentEvent stream.
  */
 
@@ -624,7 +624,7 @@ async function callQwenSettingsAcpMethod(
   const qwenCliPath = resolvedPaths.qwenCliPath;
   if (!qwenCliPath) {
     throw new Error(
-      'Qwen Code CLI not found. Build the current qwen-code checkout with npm run build && npm run bundle, or set QWEN_CODE_CLI to a dist/cli.js path.',
+      'LailatulCoder Ai CLI not found. Build the current lailatul-coder checkout with npm run build && npm run bundle, or set QWEN_CODE_CLI to a dist/cli.js path.',
     );
   }
 
@@ -1727,7 +1727,7 @@ interface QueuedMidTurnMessage extends MidTurnMessageMetadata {
 }
 
 export class QwenAgent extends BaseAgent {
-  protected backendName = 'Qwen Code';
+  protected backendName = 'LailatulCoder Ai';
 
   private acpLease: QwenAcpLease | null = null;
   private connection: ClientSideConnection | null = null;
@@ -2839,7 +2839,7 @@ export class QwenAgent extends BaseAgent {
     const qwenCliPath = runtime.paths?.qwenCli;
     if (!qwenCliPath) {
       throw new Error(
-        'Qwen Code CLI not found. Build the current qwen-code checkout with npm run build && npm run bundle, or set QWEN_CODE_CLI to a dist/cli.js path.',
+        'LailatulCoder Ai CLI not found. Build the current lailatul-coder checkout with npm run build && npm run bundle, or set QWEN_CODE_CLI to a dist/cli.js path.',
       );
     }
 
@@ -4372,7 +4372,7 @@ export class QwenAgent extends BaseAgent {
         const payload = toRecord(record.systemPayload);
         const uiEvent = toRecord(payload.uiEvent);
         if (
-          uiEvent['event.name'] === 'qwen-code.api_error' &&
+          uiEvent['event.name'] === 'lailatul-coder.api_error' &&
           (isQwenUserInterruptText(asString(uiEvent.error_message)) ||
             isQwenUserInterruptText(asString(uiEvent.error_type)))
         ) {
@@ -4479,7 +4479,7 @@ export class QwenAgent extends BaseAgent {
 
     const payload = toRecord(record.systemPayload);
     const uiEvent = toRecord(payload.uiEvent);
-    if (uiEvent['event.name'] !== 'qwen-code.tool_call') return undefined;
+    if (uiEvent['event.name'] !== 'lailatul-coder.tool_call') return undefined;
 
     const toolName = normalizeToolName(asString(uiEvent.function_name));
     const toolUseId =
@@ -5229,7 +5229,7 @@ export class QwenAgent extends BaseAgent {
 
     const kind = asString(toolCall.kind);
     const rawInput = toRecord(toolCall.rawInput);
-    const title = asString(toolCall.title) || 'Qwen Code requests permission';
+    const title = asString(toolCall.title) || 'LailatulCoder Ai requests permission';
     const toolName = normalizeToolName(
       asString(toRecord(toolCall._meta).toolName) || title,
       kind,

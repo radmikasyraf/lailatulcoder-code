@@ -83,7 +83,7 @@ export type CommandSource =
 - `src/utils/suggestions/commandSuggestions.ts`：补全排序同时考虑精确命中、alias 命中、prefix、fuzzy、skill usage；alias 命中时只展示用户实际命中的 alias。
 - `src/utils/suggestions/commandSuggestions.ts`：mid-input slash 使用 `findMidInputSlashCommand()`、`getBestCommandMatch()` 和 `findSlashCommandPositions()` 支持 ghost text 与高亮。
 - `src/components/HelpV2/Commands.tsx`：Help V2 是可浏览的命令目录，展示描述时会附带来源信息。
-- `src/commands.ts`：Claude Code 内置 `/doctor`、`/release-notes` 等命令，Qwen Code 当前已实现 `/doctor`；本阶段不实现 `/release-notes`。
+- `src/commands.ts`：Claude Code 内置 `/doctor`、`/release-notes` 等命令，LailatulCoder Ai 当前已实现 `/doctor`；本阶段不实现 `/release-notes`。
 
 Phase 3 采用“体验对齐，不复制架构”的方式借鉴上述点。
 
@@ -643,7 +643,7 @@ Interactive 场景建议使用独立临时目录，避免污染当前仓库：
 
 ```bash
 tmux new-session -d -s qwen-slash-phase3 -x 200 -y 50 \
-  "cd /tmp/qwen-slash-phase3 && /Users/mochi/code/qwen-code-test/dist/cli.js --approval-mode yolo"
+  "cd /tmp/qwen-slash-phase3 && /Users/mochi/code/lailatul-coder-test/dist/cli.js --approval-mode yolo"
 sleep 3
 ```
 

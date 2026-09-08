@@ -1,6 +1,6 @@
 # UserPromptSubmit hook context provenance
 
-Issue: https://github.com/QwenLM/qwen-code/issues/7940
+Issue: https://github.com/LailatulCoder/lailatul-coder/issues/7940
 
 ## Problem
 

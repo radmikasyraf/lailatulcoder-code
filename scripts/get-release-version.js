@@ -17,7 +17,7 @@ import {
 } from './lib/release-helpers.js';
 
 function getVersionFromNPM(distTag) {
-  const command = `npm view @qwen-code/qwen-code version --tag=${distTag}`;
+  const command = `npm view @lailatul-coder/lailatul-coder version --tag=${distTag}`;
   try {
     return execSync(command).toString().trim();
   } catch (error) {
@@ -29,7 +29,7 @@ function getVersionFromNPM(distTag) {
 }
 
 function getAllVersionsFromNPM() {
-  const command = `npm view @qwen-code/qwen-code versions --json`;
+  const command = `npm view @lailatul-coder/lailatul-coder versions --json`;
   try {
     const versionsJson = execSync(command).toString().trim();
     return JSON.parse(versionsJson);
@@ -42,7 +42,7 @@ function getAllVersionsFromNPM() {
 }
 
 function isVersionDeprecated(version) {
-  const command = `npm view @qwen-code/qwen-code@${version} deprecated`;
+  const command = `npm view @lailatul-coder/lailatul-coder@${version} deprecated`;
   try {
     const output = execSync(command).toString().trim();
     return output.length > 0;
@@ -181,16 +181,16 @@ function detectRollbackAndGetBaseline(npmDistTag) {
  * "taken" if it exists on *any* of them — not just the main package.
  */
 export const PUBLISHED_PACKAGES = [
-  '@qwen-code/qwen-code',
-  '@qwen-code/audio-capture',
-  '@qwen-code/channel-base',
-  '@qwen-code/channel-dingtalk',
-  '@qwen-code/channel-feishu',
-  '@qwen-code/channel-github',
-  '@qwen-code/channel-qqbot',
-  '@qwen-code/channel-telegram',
-  '@qwen-code/channel-wecom',
-  '@qwen-code/channel-weixin',
+  '@lailatul-coder/lailatul-coder',
+  '@lailatul-coder/audio-capture',
+  '@lailatul-coder/channel-base',
+  '@lailatul-coder/channel-dingtalk',
+  '@lailatul-coder/channel-feishu',
+  '@lailatul-coder/channel-github',
+  '@lailatul-coder/channel-qqbot',
+  '@lailatul-coder/channel-telegram',
+  '@lailatul-coder/channel-wecom',
+  '@lailatul-coder/channel-weixin',
 ];
 
 function doesVersionExist(version, { strict = false, shippedTo } = {}) {

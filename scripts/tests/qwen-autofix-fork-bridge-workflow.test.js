@@ -215,7 +215,7 @@ describe('qwen autofix fork bridge', () => {
     // change in qwen-autofix.yml fails HERE.
     expect(signalJob.if).toBe(
       [
-        "${{ github.repository == 'QwenLM/qwen-code'",
+        "${{ github.repository == 'LailatulCoder/lailatul-coder'",
         '&& github.event.pull_request.head.repo.full_name != github.repository',
         "&& github.event.pull_request.base.ref == 'main'",
         "&& github.event.pull_request.state == 'open'",
@@ -232,7 +232,7 @@ describe('qwen autofix fork bridge', () => {
     // the bridge job as well.
     expect(bridgeJob.if).toBe(
       [
-        "${{ github.repository == 'QwenLM/qwen-code'",
+        "${{ github.repository == 'LailatulCoder/lailatul-coder'",
         "&& github.event.workflow_run.conclusion == 'success' }}",
       ].join('\n'),
     );
@@ -443,7 +443,7 @@ exit 1
             env: {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               SIGNAL_HEAD_SHA: signalHeadSha,
               SIGNAL_TITLE: signalTitle,
               GITHUB_TOKEN: 'stub',

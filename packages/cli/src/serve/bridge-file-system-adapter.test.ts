@@ -475,7 +475,7 @@ describe('createBridgeFileSystemAdapter', () => {
 
   describe('same-host built-in tool writes', () => {
     const marker = {
-      'qwen-code/tool-write-origin': {
+      'lailatul-coder/tool-write-origin': {
         version: 1,
         source: 'write_file',
       },
@@ -558,7 +558,7 @@ describe('createBridgeFileSystemAdapter', () => {
         'malformed provenance',
         true,
         {
-          'qwen-code/tool-write-origin': {
+          'lailatul-coder/tool-write-origin': {
             version: 1,
             source: 'write_file',
             extra: true,

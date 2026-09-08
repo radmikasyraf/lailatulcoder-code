@@ -105,7 +105,7 @@ describe('official OpenAI prompt caching', () => {
       prompt_cache_options?: { mode?: string };
     };
 
-    expect(result.prompt_cache_key).toBe('qwen-code:session-123');
+    expect(result.prompt_cache_key).toBe('lailatul-coder:session-123');
     expect(result.prompt_cache_options).toEqual({ mode: 'explicit' });
     expect(result.messages[1]?.content).toEqual([
       {
@@ -142,7 +142,7 @@ describe('official OpenAI prompt caching', () => {
       prompt_cache_options?: unknown;
     };
 
-    expect(result.prompt_cache_key).toBe('qwen-code:session-123');
+    expect(result.prompt_cache_key).toBe('lailatul-coder:session-123');
     expect(result.prompt_cache_options).toBeUndefined();
     expect(result.messages).toEqual(request.messages);
   });
@@ -164,7 +164,7 @@ describe('official OpenAI prompt caching', () => {
       prompt_cache_options?: unknown;
     };
 
-    expect(result.prompt_cache_key).toBe('qwen-code:session-123');
+    expect(result.prompt_cache_key).toBe('lailatul-coder:session-123');
     expect(result.prompt_cache_options).toBeUndefined();
     expect(result.messages).toEqual(request.messages);
   });
@@ -183,7 +183,7 @@ describe('official OpenAI prompt caching', () => {
     );
 
     expect(result.prompt_cache_key).toBe(
-      'qwen-code:session-123:Explore-a1b2c3d4',
+      'lailatul-coder:session-123:Explore-a1b2c3d4',
     );
   });
 
@@ -205,7 +205,7 @@ describe('official OpenAI prompt caching', () => {
       prompt_cache_options?: unknown;
     };
 
-    expect(result.prompt_cache_key).toBe('qwen-code:session-123');
+    expect(result.prompt_cache_key).toBe('lailatul-coder:session-123');
     expect(result.prompt_cache_options).toBeUndefined();
     expect(result.messages).toEqual(request.messages);
   });

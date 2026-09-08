@@ -13,7 +13,7 @@ import type {
   ToolCallResponseInfo,
   SessionMetrics,
   McpToolProgressData,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   ApprovalMode,
   OutputFormat,
@@ -23,7 +23,7 @@ import {
   getMCPServerStatus,
   getPlanModeSystemReminder,
   isShellProgressData,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Part, PartListUnion } from '@google/genai';
 import type {
   CLIUserMessage,

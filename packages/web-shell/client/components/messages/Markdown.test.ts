@@ -1664,12 +1664,12 @@ describe('external links in the desktop shell', () => {
     const invoke = vi.fn().mockResolvedValue(undefined);
     (window as TauriWindow).__TAURI__ = { core: { invoke } };
     const c = renderMd(
-      '[issue](https://github.com/QwenLM/qwen-code/issues/9060)',
+      '[issue](https://github.com/LailatulCoder/lailatul-coder/issues/9060)',
     );
     const event = clickLink(c);
     expect(event.defaultPrevented).toBe(true);
     expect(invoke).toHaveBeenCalledWith('plugin:opener|open_url', {
-      url: 'https://github.com/QwenLM/qwen-code/issues/9060',
+      url: 'https://github.com/LailatulCoder/lailatul-coder/issues/9060',
     });
     (c as HTMLDivElement & { __unmount: () => void }).__unmount();
     c.remove();
@@ -1679,7 +1679,7 @@ describe('external links in the desktop shell', () => {
     const invoke = vi.fn().mockResolvedValue(undefined);
     (window as TauriWindow).__TAURI__ = { core: { invoke } };
     const c = renderMd(
-      '[issue](https://github.com/QwenLM/qwen-code/issues/9060)',
+      '[issue](https://github.com/LailatulCoder/lailatul-coder/issues/9060)',
     );
     const event = new MouseEvent('click', {
       bubbles: true,
@@ -1692,7 +1692,7 @@ describe('external links in the desktop shell', () => {
     });
     expect(event.defaultPrevented).toBe(true);
     expect(invoke).toHaveBeenCalledWith('plugin:opener|open_url', {
-      url: 'https://github.com/QwenLM/qwen-code/issues/9060',
+      url: 'https://github.com/LailatulCoder/lailatul-coder/issues/9060',
     });
     (c as HTMLDivElement & { __unmount: () => void }).__unmount();
     c.remove();
@@ -1706,7 +1706,7 @@ describe('external links in the desktop shell', () => {
       toasts.push((e as CustomEvent<ToastRequestDetail>).detail);
     window.addEventListener(TOAST_REQUEST_EVENT, handler);
     const c = renderMd(
-      '[issue](https://github.com/QwenLM/qwen-code/issues/9060)',
+      '[issue](https://github.com/LailatulCoder/lailatul-coder/issues/9060)',
     );
     const event = clickLink(c);
     expect(event.defaultPrevented).toBe(true);
@@ -1725,7 +1725,7 @@ describe('external links in the desktop shell', () => {
   it('keeps native anchor behavior outside the desktop shell', () => {
     const openSpy = vi.spyOn(window, 'open');
     const c = renderMd(
-      '[issue](https://github.com/QwenLM/qwen-code/issues/9060)',
+      '[issue](https://github.com/LailatulCoder/lailatul-coder/issues/9060)',
     );
     const a = c.querySelector('a')!;
     expect(a.getAttribute('target')).toBe('_blank');

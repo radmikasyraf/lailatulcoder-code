@@ -5,7 +5,7 @@
  */
 
 import type { Application, Request, Response } from 'express';
-import { getGitWorkingTreeStatus } from '@qwen-code/qwen-code-core';
+import { getGitWorkingTreeStatus } from '@lailatul-coder/lailatul-coder-core';
 import type { AcpSessionBridge } from '../acp-session-bridge.js';
 import type { SendBridgeError } from '../server/error-response.js';
 import type { WorkspaceGitState } from '../workspace-git-state.js';

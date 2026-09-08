@@ -11,7 +11,7 @@ import {
   createGitHubPullRequest,
   getDefaultBranch,
   type FetchGitHubPullRequestsResult,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { SendBridgeError } from '../server/error-response.js';
 import { safeBody } from '../server/request-helpers.js';
 import type { WorkspaceRegistry } from '../workspace-registry.js';

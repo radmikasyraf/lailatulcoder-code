@@ -10,11 +10,11 @@ import {
   MISSING_TRANSCRIPT_TOOL_RESULT_MESSAGE,
   type TranscriptReplayStateV1,
 } from './transcript-replay.js';
-import type { TranscriptRecordInput } from '@qwen-code/qwen-code-core/transcriptRecords';
+import type { TranscriptRecordInput } from '@lailatul-coder/lailatul-coder-core/transcriptRecords';
 import type {
   GoalRecord,
   GoalStateCause,
-} from '@qwen-code/qwen-code-core/goalWire';
+} from '@lailatul-coder/lailatul-coder-core/goalWire';
 
 const GOAL: GoalRecord = {
   goalId: 'goal-1',

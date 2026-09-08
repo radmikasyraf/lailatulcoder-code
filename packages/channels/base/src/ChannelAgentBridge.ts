@@ -16,7 +16,7 @@ export const CHANNEL_PROMPT_META_KEY = 'qwen.channel.prompt';
 // channel-base keeps a minimal dependency footprint, so the wire contract is
 // pinned by value in a cross-package test instead of imported.
 export const ACP_PRIVATE_PARENT_CAPABILITY_META_KEY =
-  'qwen-code/private-parent-capability';
+  'lailatul-coder/private-parent-capability';
 export const ACP_PRIVATE_PARENT_CAPABILITY_ENV =
   'QWEN_CODE_PRIVATE_ACP_CAPABILITY';
 

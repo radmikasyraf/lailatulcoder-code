@@ -29,7 +29,7 @@ import type {
   Config,
   SkillConfig,
   SkillLevel,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../../../config/settings.js';
 import { SettingScope } from '../../../config/settings.js';
 import {
@@ -679,3 +679,4 @@ export function SkillsManagerDialog({
     </Box>
   );
 }
+

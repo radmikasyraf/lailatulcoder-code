@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hashDaemonWorkspace, Storage } from '@qwen-code/qwen-code-core';
+import { hashDaemonWorkspace, Storage } from '@lailatul-coder/lailatul-coder-core';
 import type {
   SessionRouter,
   ChannelAgentBridge,
@@ -11,8 +11,8 @@ import type {
   PermissionRequestEvent,
   PermissionResolvedEvent,
   ToolCallEvent,
-} from '@qwen-code/channel-base';
-import { sanitizeLogText } from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
+import { sanitizeLogText } from '@lailatul-coder/channel-base';
 import { loadSettings, type LoadedSettings } from '../../config/settings.js';
 import { writeStderrLine, writeStdoutLine } from '../../utils/stdioHelpers.js';
 import { getExtensionManager } from '../extensions/utils.js';

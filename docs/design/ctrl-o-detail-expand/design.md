@@ -5,7 +5,7 @@
 - 分支：`feat/ctrl-o-detail-expand`
 - worktree：`<worktree-path>`
 - 状态：**实现进行中——本文档为当前 PR 实现的验收基线**（非 docs-only；当前 PR 已含实现文件改动）
-- 目标读者：qwen-code TUI 维护者
+- 目标读者：lailatul-coder TUI 维护者
 
 > **实现状态对照（当前 PR）**：
 >
@@ -25,7 +25,7 @@
 
 ## 1. 背景与问题
 
-qwen-code 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局二态开关**（`compactMode`，持久化到 `settings.ui.compactMode`）。开启后：
+lailatul-coder 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局二态开关**（`compactMode`，持久化到 `settings.ui.compactMode`）。开启后：
 
 - 隐藏已完成（Success）工具的结果输出；
 - 把思考块折叠成单行 `Thought for …`；
@@ -33,7 +33,7 @@ qwen-code 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局�
 
 这造成了"**精简模式 vs 详细模式**"的全局割裂：同一段历史会因为一个全局开关在两种完全不同的形态间整体跳变，心智负担大、视觉抖动明显，且与上游 gemini-cli、与 Claude Code 的设计哲学都背离。
 
-> **本方案叠加在 [#5661](https://github.com/QwenLM/qwen-code/pull/5661) 的 partition 基线之上（已合入 main）。** #5661 重构了工具组的默认渲染：把 `CompactToolGroupDisplay` 扩展为**按类别分区的摘要渲染器**（`ToolCategory` / `TOOL_NAME_TO_CATEGORY` / `CATEGORY_ORDER` / `getToolCategory` / `buildToolSummary`），并把 `ToolGroupMessage` 的折叠决策改为 **type-based partition**：用 `forceExpandAll` 逆向门控，把工具**按类型**拆成 `collapsibleTools`（read/search/list，经 `isCollapsibleTool(name)`）→ 折叠成 `CompactToolGroupDisplay` 分区摘要，与 `nonCollapsibleTools`（edit/write/command/agent 及 Canceled）→ **始终逐个** `ToolMessage`。**注意：#5661 与 `compactMode` 无关**——`compactMode` 不再影响工具渲染，分区折叠纯由工具类型 + `forceExpandAll` 决定。本 PR **不重建工具渲染基线**——它在 #5661 的 partition 基线 + #5751 的鼠标基础设施之上，叠加 (1) 删除残留的全局 `compactMode`、(2) Ctrl+O transcript 全详情屏、(3) 鼠标点击就地展开工具块。详见 §3.1（partition 基线）、§4.1 / §5（删除清单）、§9（栈式 commit 拆分）。
+> **本方案叠加在 [#5661](https://github.com/LailatulCoder/lailatul-coder/pull/5661) 的 partition 基线之上（已合入 main）。** #5661 重构了工具组的默认渲染：把 `CompactToolGroupDisplay` 扩展为**按类别分区的摘要渲染器**（`ToolCategory` / `TOOL_NAME_TO_CATEGORY` / `CATEGORY_ORDER` / `getToolCategory` / `buildToolSummary`），并把 `ToolGroupMessage` 的折叠决策改为 **type-based partition**：用 `forceExpandAll` 逆向门控，把工具**按类型**拆成 `collapsibleTools`（read/search/list，经 `isCollapsibleTool(name)`）→ 折叠成 `CompactToolGroupDisplay` 分区摘要，与 `nonCollapsibleTools`（edit/write/command/agent 及 Canceled）→ **始终逐个** `ToolMessage`。**注意：#5661 与 `compactMode` 无关**——`compactMode` 不再影响工具渲染，分区折叠纯由工具类型 + `forceExpandAll` 决定。本 PR **不重建工具渲染基线**——它在 #5661 的 partition 基线 + #5751 的鼠标基础设施之上，叠加 (1) 删除残留的全局 `compactMode`、(2) Ctrl+O transcript 全详情屏、(3) 鼠标点击就地展开工具块。详见 §3.1（partition 基线）、§4.1 / §5（删除清单）、§9（栈式 commit 拆分）。
 >
 > **修订说明（rebase 到 #5661 合入态）**：本文档早期版本基于 #5661 的早期 state-based 快照（`showCompact = (compactMode || allComplete)`、整组完成即整组折叠）撰写。#5661 在 review 中演进为上述 **type-based partition** 并已合入 main。§3.1 / §4.1 / §4.5 / 附录已据真实合入实现改写：核心符号是 `isCollapsibleTool` / `forceExpandAll`（**它们确实存在**），transcript 的 `fullDetail` 直接置 `forceExpandAll=true`（而非改一个已不存在的 `showCompact`）。
 
@@ -52,7 +52,7 @@ qwen-code 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局�
 
 ## 2. 三家行为对比（调研结论）
 
-| 维度        | qwen-code（现状/#5661 底座）                                 | Claude Code（真实）                          | gemini-cli（上游）                      |
+| 维度        | lailatul-coder（现状/#5661 底座）                                 | Claude Code（真实）                          | gemini-cli（上游）                      |
 | ----------- | ------------------------------------------------------------ | -------------------------------------------- | --------------------------------------- |
 | Ctrl+O 绑定 | `TOGGLE_COMPACT_MODE`                                        | `app:toggleTranscript`                       | `SHOW_MORE_LINES` + `EXPAND_PASTE`      |
 | 核心模型    | **全局精简/详细二态**（持久化）+ #5661 的 partition 自动折叠 | **全局 transcript 屏** + 块级 per-block 展开 | 全局 `constrainHeight` + per-tool 展开  |
@@ -72,7 +72,7 @@ qwen-code 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局�
 
 **gemini-cli 的 per-block 模型（取证补充）**：gemini-cli 走 per-tool 展开——`ToolActionsContext` 的 `expandedTools` / `toggleExpansion` 按单个工具维护展开态。这与 **qwen main 已有的 Alt+T per-block 思考展开（`ThoughtExpandedContext`）属同一思路**：都解决"就地展开单个块"。而本方案的 transcript 解决的是**不同维度**——"全会话的完整回顾"（alt-screen 冻结快照、全部块 fullDetail、可滚动），两者正交互补（详见 §4.7）。
 
-**关键利好**：qwen-code 本来就具备实现 transcript 屏所需的全部底座（`ScrollableList`/`VirtualizedList` + 已落地的 `AlternateScreen.tsx`），见 §4.4。
+**关键利好**：lailatul-coder 本来就具备实现 transcript 屏所需的全部底座（`ScrollableList`/`VirtualizedList` + 已落地的 `AlternateScreen.tsx`），见 §4.4。
 
 ---
 
@@ -80,7 +80,7 @@ qwen-code 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局�
 
 ### 3.1 默认基线（主视图）= #5661 的 partition 模型
 
-主视图对**所有历史项**采用单一、稳定的渲染规则，**不存在任何全局开关切换它**。该基线**不是本方案自建**，而是 [#5661](https://github.com/QwenLM/qwen-code/pull/5661) 已落地的 **type-based partition（按工具类型分区折叠）模型**——本方案保留它不动，仅删除与之无关的全局 `compactMode` 开关：
+主视图对**所有历史项**采用单一、稳定的渲染规则，**不存在任何全局开关切换它**。该基线**不是本方案自建**，而是 [#5661](https://github.com/LailatulCoder/lailatul-coder/pull/5661) 已落地的 **type-based partition（按工具类型分区折叠）模型**——本方案保留它不动，仅删除与之无关的全局 `compactMode` 开关：
 
 | 块类型                                                          | 默认基线渲染（#5661 type-based partition 模型）                                                                                                                                                                 | 是否在 transcript 才看全         |
 | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
@@ -104,7 +104,7 @@ qwen-code 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局�
 忠实还原 Claude Code 的 transcript（已从 claude-code 源码取证）：
 
 - 任意时刻按 **Ctrl+O**：切换到接管整屏的 transcript，渲染一个**冻结快照**：定格进入那一刻的历史，**解除 UI 层高度/行数截断**（思考全文、工具输出尽量完整），支持上下/翻页/Home/End 滚动。默认 VP 路径复用 ink root 已占用的 alternate screen；legacy `<Static>` 路径才由 `AlternateScreen` 组件写 DEC `1049`（`\x1b[?1049h`）临时进入。⚠️ “完整”只指 UI 层——**模型响应预算或历史 display 压缩已移除的内容无法从 UI history 恢复**（见 §4.4），不是字面“全文”。
-- **冻结快照语义（含 pending；存长度而非克隆 history）**：qwen-code 的历史是**两段**——已落定的 `history: HistoryItem[]`（`UIStateContext.tsx:45`）与流式进行中的 `pendingHistoryItems`（`:123`，渲染时以负 id 拼接，`MainContent.tsx:456-461`）。Claude Code 的 freeze 实际只存两个数字 `{ messagesLength, streamingToolUsesLength }`、render 时 slice，而非 entry-time 克隆。**qwen-code 据此同时冻结两段，但用最省的形式**：已落定 history **只存长度** `historyLength`（render 时 `history.slice(0, historyLength)`，不克隆整个 history），流式 `pendingItems: [...pendingHistoryItems]` **存浅副本**（pending 是临时区、会被后续重写或清空，必须副本才能定格那一刻形态）。transcript 渲染 `history.slice(0, historyLength)` 拼接**进入那一刻定格的** pending 快照。后台后续新增的 history / pending **均不进入** transcript，保证定格不抖动。
+- **冻结快照语义（含 pending；存长度而非克隆 history）**：lailatul-coder 的历史是**两段**——已落定的 `history: HistoryItem[]`（`UIStateContext.tsx:45`）与流式进行中的 `pendingHistoryItems`（`:123`，渲染时以负 id 拼接，`MainContent.tsx:456-461`）。Claude Code 的 freeze 实际只存两个数字 `{ messagesLength, streamingToolUsesLength }`、render 时 slice，而非 entry-time 克隆。**lailatul-coder 据此同时冻结两段，但用最省的形式**：已落定 history **只存长度** `historyLength`（render 时 `history.slice(0, historyLength)`，不克隆整个 history），流式 `pendingItems: [...pendingHistoryItems]` **存浅副本**（pending 是临时区、会被后续重写或清空，必须副本才能定格那一刻形态）。transcript 渲染 `history.slice(0, historyLength)` 拼接**进入那一刻定格的** pending 快照。后台后续新增的 history / pending **均不进入** transcript，保证定格不抖动。
 - **不影响主屏数据**：后台对话/流式继续运行（只是不渲染输入框/spinner）。退出时默认 VP 路径在同一个 root alt-screen 内恢复主树；legacy 路径退出临时 alt-screen 后通过 `refreshStatic()` 重挂当前 history，保证无重复、无缺失且不污染 scrollback。
 - **退出键**：`Esc` / `q`（less 风格）/ `Ctrl+C` 关闭；再按 **Ctrl+O** 亦 toggle 关闭。退出后回到主屏，可看到 transcript 打开期间后台新增的流式内容。
 - 行内 `(ctrl+o to expand)` 提示语义**统一为"按 Ctrl+O 进入 transcript 查看完整上下文"，而非"此处被截断"**。注意思考块摘要恒带该提示（无论原文长短），工具输出仅在被高度约束截断时带 `+N lines`——两者提示触发条件不同，属预期（见 §7 #7）。
@@ -118,7 +118,7 @@ qwen-code 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局�
 
 ### 3.4 实现效果截图（VHS 自动化捕获）
 
-下列两张为本分支构建（`node dist/cli.js --yolo`）在固定虚拟终端（1400×900 / FontSize 14）下、对同一会话先后捕获的 before/after，经 `qwen-code-mac-autotest` skill 录制（`session.tape` 可复现）。会话提示为：列文件 → 读 `README.md` → grep `export` → 一句话总结，触发 list/read/grep 三个**可折叠**工具。
+下列两张为本分支构建（`node dist/cli.js --yolo`）在固定虚拟终端（1400×900 / FontSize 14）下、对同一会话先后捕获的 before/after，经 `lailatul-coder-mac-autotest` skill 录制（`session.tape` 可复现）。会话提示为：列文件 → 读 `README.md` → grep `export` → 一句话总结，触发 list/read/grep 三个**可折叠**工具。
 
 **主视图（默认基线，§3.1）**——三个 read/search/list 工具折叠为单行分区摘要 `✔ Searched 1 pattern, read 1 file, listed 1 directory`，思考块折叠为 `Thought for Ns (option+t to expand)`：
 
@@ -159,7 +159,7 @@ qwen-code 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**全局�
 
 ### 4.2 新增 Transcript 屏状态机 + alt-screen 能力
 
-**alt-screen 能力已有现成组件可复用**：qwen-code 用的是上游官方 **`ink ^7.0.3`**（注意：与 gemini-cli **不同包不同大版本**——gemini-cli 用 fork `npm:@jrichman/ink@6.6.9`(v6)；**不要**再把两者当同版本看待）。更关键的是，**main 已落地可直接复用的 `packages/cli/src/ui/components/AlternateScreen.tsx`（PR #5627）**，无需新建、无需移植 hook、无需引入 ink fork：
+**alt-screen 能力已有现成组件可复用**：lailatul-coder 用的是上游官方 **`ink ^7.0.3`**（注意：与 gemini-cli **不同包不同大版本**——gemini-cli 用 fork `npm:@jrichman/ink@6.6.9`(v6)；**不要**再把两者当同版本看待）。更关键的是，**main 已落地可直接复用的 `packages/cli/src/ui/components/AlternateScreen.tsx`（PR #5627）**，无需新建、无需移植 hook、无需引入 ink fork：
 
 - **复用现成组件**：`AlternateScreen.tsx` 在 `useEffect` 中 `writeRaw(ENTER_ALT_SCREEN + CLEAR + HIDE_CURSOR)`，卸载/`process.on('exit')` 时 `writeRaw(SHOW_CURSOR + EXIT_ALT_SCREEN)`；内部用 `useTerminalOutput()`/`useTerminalSize()`。transcript 只需用 `<AlternateScreen>` 包裹 `TranscriptView` 即可获得"进入时进 alt-screen、卸载时回 normal buffer"的完整生命周期。
 - **默认交互路径已使用 ink root 的 `alternateScreen: true`**：启动时 `startInteractiveUI.tsx` 通过 `shouldUseVirtualViewport(setting, screenReader, isInteractiveTerminal())` 计算一次最终 VP 决策，并同时用于 ink 的 `alternateScreen` 与传给 `AppContainer` 的冻结初始值。正常交互式终端在设置未指定时默认进入 VP/alt-screen；显式 `ui.useTerminalBuffer: false`、screen-reader、CI、非 TTY 或 `TERM=dumb` 走 legacy `<Static>` + 原生 scrollback 路径。
@@ -289,7 +289,7 @@ transcript 走 alt-screen 接管整屏，但后台对话仍在跑——这带来
 
 除键盘（Ctrl+O→transcript、Alt+T→思考块）外,（后续 PR）提供**鼠标点击**作为就地展开的第二通道。以下为该 follow-up 的设计草案。
 
-**与 [#5751](https://github.com/QwenLM/qwen-code/pull/5751) 的分工（依赖关系，不重复造轮子）**：
+**与 [#5751](https://github.com/LailatulCoder/lailatul-coder/pull/5751) 的分工（依赖关系，不重复造轮子）**：
 
 - **#5751（已合入 main，2026-06-23）提供"鼠标基础设施"**：把终端鼠标追踪从 per-component 启停改为**全局引用计数**（修复"折叠块卸载时误关鼠标，导致 VP 下鼠标失效"）、为 `ScrollableList`/`VirtualizedList` 增加滚轮滚动与**滚动条点击拖拽**。涉及 `useMouseEvents.ts`、`ScrollableList.tsx`、`VirtualizedList.tsx`。本设计基于其已合入的基础设施。
 - **本 PR 不改这些鼠标底座文件**，避免与 #5751 冲突/重复；待 #5751 合入 main 后 rebase，在其稳定的鼠标基础上叠加下述"点击工具块展开"。若 #5751 迟迟未合并，再评估 cherry-pick（默认走依赖路径）。
@@ -442,7 +442,7 @@ claude code 的机制是"**存储层保留完整、显示层按 `verbose` 截断
 
 ## 7. 边界、风险与未决项
 
-1. **大历史性能**：transcript 渲染全部历史。虚拟滚动（`VirtualizedList`）按视口有界；区分两类上限——**只解除"行高"截断**（为显示，transcript 解除），但**保留"字符数"上限**（为性能，始终保留）。注意 qwen-code **不存在** `SlicingMaxSizedBox`（那是 gemini-cli 的）；qwen 侧的字符级保护是工具输出截断阈值 `DEFAULT_TRUNCATE_TOOL_OUTPUT_THRESHOLD`（~25000）。实现时验证万行级历史滚动流畅度。
+1. **大历史性能**：transcript 渲染全部历史。虚拟滚动（`VirtualizedList`）按视口有界；区分两类上限——**只解除"行高"截断**（为显示，transcript 解除），但**保留"字符数"上限**（为性能，始终保留）。注意 lailatul-coder **不存在** `SlicingMaxSizedBox`（那是 gemini-cli 的）；qwen 侧的字符级保护是工具输出截断阈值 `DEFAULT_TRUNCATE_TOOL_OUTPUT_THRESHOLD`（~25000）。实现时验证万行级历史滚动流畅度。
 2. **alt-screen 协调（复用现有组件已大幅降险）**：本方案**复用 main 已落地的 `AlternateScreen.tsx`（PR #5627）**进出 alt-screen，而非自行手写 `?1049h/l` 时序，风险显著低于初版设计。剩余需处理的两点：(a) **VP 模式 double-enter**——`useTerminalBuffer` 开启时 ink root 已占 alt-screen，必须传 `disabled={useVP}` 跳过转义（§4.2）；(b) **退出收尾重绘**——退出时主屏经 `refreshStatic()` 清屏重绘一次（§4.4），且 transcript 期间 `refreshStatic` 被 `isTranscriptOpenRef` 守卫跳过，避免污染 normal-buffer scrollback。注意旧 compact 是**每次 toggle** 都 refreshStatic，本方案只在 transcript **关闭时一次**，频率低得多。仍需在 tmux / iTerm2 / VSCode / Apple Terminal 验证。
 3. **force 安全语义（保留 #5661 内联条件，勿误删）**：本 PR 在 `forceExpandAll` 前缀加 `fullDetail || isToolExpanded(id) ||` 时，务必**保留**其余 `hasConfirmingTool || hasSubagentPendingConfirmation || hasErrorTool || isEmbeddedShellFocused || isUserInitiated || hasTerminalSubagent`，以及 `ToolMessage` 的 `shouldCollapseResult`（含 `isCollapsibleTool` 守卫）gate——这些是 #5661 已就位的"出错/待确认/用户发起/聚焦 shell/子代理 必须完整展示"安全语义（§4.5），误删会导致"出错的工具被折叠看不全"的回归。**不需要**迁移到任何新文件。
 4. **mouse / SGR 协调**：注意与 [[project_vp_text_selection]] 记录的"SGR mouse tracking 破坏原生文本选择"问题的潜在叠加——transcript 内是否启用鼠标滚轮需权衡（启用滚轮 vs 保留终端原生选择）。mouse 的进出处理随 `AlternateScreen` 与 VP root 既有机制走，无需额外手写。
@@ -466,14 +466,14 @@ claude code 的机制是"**存储层保留完整、显示层按 `verbose` 截断
   - **§4.9 完整明细透传（已实现 + 测试）**：core helper 从 `functionResponse.response.output` 提取 + media 占位 + 空/缺失降级；`detailedDisplay`（TUI 专属、`IndividualToolCallDisplay` 派生字段）在 **live（`useReactToolScheduler`）+ resume（`resumeHistoryUtils`）两路**都产出，尤其 **resume / 回放后 Ctrl+O transcript 仍展示录制时的完整 finalized detail**（不回退摘要）；**ACP 路无需 `detailedDisplay`**——`ToolCallEmitter.transformPartsToToolCallContent` 把同一 finalized `functionResponse.response.output` 写进 ACP `content[]`（其 SSE 客户端自行渲染，非 TUI transcript），故复用 `message: record.message.parts`、不新增协议字段即满足 §4.9；`ToolMessage` 仅 `fullDetail && isCollapsibleTool && detailedDisplay` 用完整明细，而 **`forceShowResult 但非 fullDetail`（主视图 user-initiated/error 等）仍用摘要 `resultDisplay`**（回归“主视图不变”）；覆盖 `glob`（或 legacy search displayName），不只 read/grep/list；**不做额外 UI 裁剪**（`read_file` 超 32K、但仍在最终批次预算内的 `output` 在 Ctrl+O 保持完整；超过模型响应预算的内容仍只能通过 persisted artifact 恢复）；极旧无-`parts` 记录降级摘要。
   - **方案 Y 前提保护（持久化/回放不丢 finalized detail）**：构造长度 > `MAX_RETAINED_TOOL_RESULT_DISPLAY_CHARS`、但低于 `toolOutputBatchBudget` 的 `functionResponse.response.output`，旁置 `toolCallResult.resultDisplay` 摘要并追加 `chat_compression` record；断言 `record.message.parts[0].functionResponse.response.output` 在 **recording / loadSession / `resumeHistoryUtils` / `HistoryReplayer` 四段都保留 finalized string**，且 `detailedDisplay` 从 `message.parts` 派生（**非** `resultDisplay`、**非** API `compressedHistory`）。**此用例失败即触发回退方案 X**（新增持久化 display 字段）。源码上前提成立：最终工具响应在 runtime 聚合边界先完成预算收敛，`ChatRecordingService.recordToolResult` 再以 `createUserContent(message)` 原样写 `record.message`、只 sanitize `resultDisplay`；TUI resume / ACP replay 走 `conversation.messages`、非 API `compressedHistory`。该前提保证的是“录制的 finalized detail 不再丢失”，不是“绕过模型响应预算保留生产者原文”。
 - **回归**：确认删除全局 compactMode 后无 CLI 残留引用（`grep -rE 'TOGGLE_COMPACT_MODE|useCompactMode|CompactModeContext|compactInline|compactToggleHasVisualEffect'` 在 `packages/cli/src` 非测试源应为空；`compactMode` 仅保留 web-shell 透传 `WEB_SHELL_SETTINGS` 与 `ToolConfirmationMessage` 的本地 layout prop）；**注意 `CompactToolGroupDisplay` 与 partition 符号（`getToolCategory`/`CATEGORY_ORDER`/`isCollapsibleTool` 等）应仍存在**（属 #5661 基线，不在删除范围）；`mergeCompactToolGroups.ts` 应已删除；typecheck/lint/test 全绿。
-- **TUI 快照（基线随 #5661 已变，本 PR 进一步微调，需重录）**：type-based partition 基线由 #5661 引入；本 PR 删全局 compactMode 后，工具组折叠不再受 `compactMode` 影响（始终走 type-based partition）。需重录 `qwen-code-mac-autotest`：默认 partition 基线（collapsible→摘要、non-collapsible→逐个、混合组并存）、含出错工具（force 逐个展示）、含长 shell 输出（non-collapsible 结果可见）、点击工具块就地展开、打开 transcript、transcript 内滚动到顶/底、transcript 内 resize、退出后主屏恢复。
+- **TUI 快照（基线随 #5661 已变，本 PR 进一步微调，需重录）**：type-based partition 基线由 #5661 引入；本 PR 删全局 compactMode 后，工具组折叠不再受 `compactMode` 影响（始终走 type-based partition）。需重录 `lailatul-coder-mac-autotest`：默认 partition 基线（collapsible→摘要、non-collapsible→逐个、混合组并存）、含出错工具（force 逐个展示）、含长 shell 输出（non-collapsible 结果可见）、点击工具块就地展开、打开 transcript、transcript 内滚动到顶/底、transcript 内 resize、退出后主屏恢复。
 - **终端兼容**：复用 `AlternateScreen` 的进出（含 VP `disabled` 路径与非 VP 写转义路径）在 tmux / iTerm2 / VSCode 集成终端 / Apple Terminal 下逐一验证（重绘、退出 `refreshStatic` 收尾、resize）。
 
 ---
 
 ## 9. 落地拆分（单 PR + 内部分 commit）
 
-本 PR 实现按 commit 拆分以便 review/回滚（下表为**实际/计划状态**，非纯 design-first 的"先文档后实现"）。**依赖基线 [#5661](https://github.com/QwenLM/qwen-code/pull/5661)（partition 基线）+ [#5751](https://github.com/QwenLM/qwen-code/pull/5751)（鼠标基础设施）均已合入 main**，本分支已 rebase 其上。**每个 commit 必须自身可编译可测**：
+本 PR 实现按 commit 拆分以便 review/回滚（下表为**实际/计划状态**，非纯 design-first 的"先文档后实现"）。**依赖基线 [#5661](https://github.com/LailatulCoder/lailatul-coder/pull/5661)（partition 基线）+ [#5751](https://github.com/LailatulCoder/lailatul-coder/pull/5751)（鼠标基础设施）均已合入 main**，本分支已 rebase 其上。**每个 commit 必须自身可编译可测**：
 
 1. `commit 1` — **删残留全局 compactMode（保留 type-based partition 基线）**：删 `CompactModeContext`/`useCompactMode`/`compactMode` settings(schema)/i18n，删失去引用的 `mergeCompactToolGroups.ts`（含 `compactToggleHasVisualEffect`）。**不动** `ToolGroupMessage` 的 `forceExpandAll`/分区决策（无 `showCompact`/`compactMode ||` 可删）。同步引入 `fullDetail` prop（默认 false）穿过 `HistoryItemDisplay`/`ToolGroupMessage`，并把 `fullDetail` 并入 `forceExpandAll`/`forceShowResult`、思考块折入 `resolvedThoughtExpanded`；主视图不传（沿用 #5661 的 type-based partition）。完成后主视图即为"#5661 type-based partition 基线、无全局开关"，Ctrl+O 暂为 no-op。
 2. `commit 2` — 接入 alt-screen 能力：**复用现有 `AlternateScreen.tsx`（PR #5627）**，验证 `disabled={useVP}` 跳过 double-enter、退出 `refreshStatic()` 重绘 + `isTranscriptOpenRef` 守卫期间 refreshStatic、非 TTY 退化。仅加能力、不接线。
@@ -489,7 +489,7 @@ claude code 的机制是"**存储层保留完整、显示层按 `verbose` 截断
 
 ## 10. 与既有设计文档 #3100 的互鉴
 
-前序工作 [PR #3100](https://github.com/QwenLM/qwen-code/pull/3100) 已产出 `docs/design/compact-mode/compact-mode-design.md`（284 行竞品分析）。本方案与之的关系：
+前序工作 [PR #3100](https://github.com/LailatulCoder/lailatul-coder/pull/3100) 已产出 `docs/design/compact-mode/compact-mode-design.md`（284 行竞品分析）。本方案与之的关系：
 
 1. **我们采纳了它分析过、但当时没走的那条路**。#3100 §4.4 已对比 "screen-level transcript（Claude Code）" vs "component-level toggle（qwen 当时选择）"，并指出前者"更简单、一致性有保证"。本方案正是转向 screen-level transcript。
 2. **修正一处事实错误**：#3100 表格断言 Claude Code "Frozen snapshot: None (no concept)"。经 claude-code 最新源码取证，**确有冻结快照**（`frozenTranscriptState` + `messages.slice(0, len)`）。本方案据真实实现采用冻结快照，并在 §3.2 标注来源。
@@ -520,7 +520,7 @@ claude code 的机制是"**存储层保留完整、显示层按 `verbose` 截断
 - 可复用滚动屏底座：`components/shared/ScrollableList.tsx`、`VirtualizedList.tsx`（`MainContent` 默认对其用恒定 `estimatedItemHeight=3`，transcript 须调大/自适应）；覆盖层 `DialogManager.tsx`、`layouts/DefaultAppLayout.tsx`；Esc 统一关闭 `hooks/useDialogClose.ts`
 - **可复用 alt-screen 组件（qwen 自身）**：`packages/cli/src/ui/components/AlternateScreen.tsx`（PR #5627）——`useEffect` 写 `ENTER_ALT_SCREEN+CLEAR+HIDE_CURSOR`、卸载/`process.on('exit')` 写 `SHOW_CURSOR+EXIT_ALT_SCREEN`，用 `useTerminalOutput()`/`useTerminalSize()`，带 `disabled?: boolean`（注释："Skip escape writes when the root Ink renderer already owns the alt screen (VP mode)"）
 - **VP 模式 alt-screen 决策**：`startInteractiveUI.tsx` 用 `shouldUseVirtualViewport(...)` 计算一次启动决策，同时传给 ink `render({ alternateScreen: useVP })` 和 `AppContainer`；`AppContainer` 冻结该值并供主内容、transcript 与鼠标消费者使用
-- **ink 版本（澄清）**：qwen-code 用上游官方 `ink ^7.0.3`；gemini-cli 用 fork `npm:@jrichman/ink@6.6.9`（v6）——**不同包不同大版本**，alt-screen 能力基于 qwen 自己的 ink v7 + 复用上述组件
+- **ink 版本（澄清）**：lailatul-coder 用上游官方 `ink ^7.0.3`；gemini-cli 用 fork `npm:@jrichman/ink@6.6.9`（v6）——**不同包不同大版本**，alt-screen 能力基于 qwen 自己的 ink v7 + 复用上述组件
 - **main per-block 思考机制（与本方案共存）**：`ThoughtExpandedContext`（Alt+T `TOGGLE_THINKING_EXPANDED`）、`ThinkingViewer`/`ThinkingViewerContext`、`thoughtExpanded`/`thinkingFullText` props、`buildThinkingFullTextMap`、`ClickableThinkMessage`（详见 §4.7）
 - **阻塞确认/对话框（全部需自动关闭 transcript）**：`DialogManager.tsx` 渲染 `shellConfirmationRequest`(ShellConfirmationDialog)、`loopDetectionConfirmationRequest`(LoopDetectionConfirmation)、`confirmationRequest`(ConsentPrompt)、`confirmUpdateExtensionRequests`(ConsentPrompt)、`providerUpdateRequest`(ProviderUpdatePrompt) 等（§4.6 #1）
 - **web-shell 独立 compact**：`packages/web-shell/client/App.tsx`（读 `'ui.compactMode'`、独立 `CompactModeContext`）——`WEB_SHELL_SETTINGS` 须保留该键透传（§6 / §7 #5）

@@ -8,7 +8,7 @@ import { describe, expect, it, vi } from 'vitest';
 import {
   CHANNEL_LOOP_MCP_SERVER_NAME,
   type ChannelWebhookTask,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { createChannelWorkerGroup } from './channel-worker-group.js';
 import { ClientMcpSenderRegistry } from './acp-http/client-mcp-sender-registry.js';
 import type {

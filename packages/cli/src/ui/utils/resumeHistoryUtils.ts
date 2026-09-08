@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -17,13 +17,13 @@ import type {
   GoalSnapshotV2,
   GoalStateCause,
   HistoryGap,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   getToolResponseDisplayText,
   isGoalCheckpointBookkeepingRecord,
   parseGoalStateRecordPayloadV2,
   projectUserTranscriptForDisplay,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   HistoryItem,
   HistoryItemInfo,

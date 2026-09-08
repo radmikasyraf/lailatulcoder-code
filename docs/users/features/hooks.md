@@ -1,8 +1,8 @@
-# Qwen Code Hooks
+# LailatulCoder Ai Hooks
 
 ## Overview
 
-Qwen Code hooks provide a powerful mechanism for extending and customizing the behavior of the Qwen Code application. Hooks allow users to execute custom scripts or programs at specific points in the application lifecycle, such as before tool execution, after tool execution, at session start/end, and during other key events.
+LailatulCoder Ai hooks provide a powerful mechanism for extending and customizing the behavior of the LailatulCoder Ai application. Hooks allow users to execute custom scripts or programs at specific points in the application lifecycle, such as before tool execution, after tool execution, at session start/end, and during other key events.
 
 Hooks are enabled by default. You can temporarily disable all hooks by setting `disableAllHooks` to `true` in your settings file (at the top level, alongside `hooks`):
 
@@ -19,7 +19,7 @@ This disables all hooks without deleting their configurations.
 
 ## What are Hooks?
 
-Hooks are user-defined scripts or programs that are automatically executed by Qwen Code at predefined points in the application flow. They allow users to:
+Hooks are user-defined scripts or programs that are automatically executed by LailatulCoder Ai at predefined points in the application flow. They allow users to:
 
 - Monitor and audit tool usage
 - Enforce security policies
@@ -30,7 +30,7 @@ Hooks are user-defined scripts or programs that are automatically executed by Qw
 
 ## Hook Types
 
-Qwen Code supports four hook executor types:
+LailatulCoder Ai supports four hook executor types:
 
 | Type       | Description                                                                                    |
 | :--------- | :--------------------------------------------------------------------------------------------- |
@@ -184,7 +184,7 @@ def review(tool_name, tool_input):
     body = json.dumps({
         "artifact": json.dumps({"tool_name": tool_name, "tool_input": tool_input}),
         "artifact_type": "shell_command" if tool_name in ("run_shell_command", "shell") else "general",
-        "context": f"qwen-code PreToolUse: {tool_name}",
+        "context": f"lailatul-coder PreToolUse: {tool_name}",
     }).encode()
     req = urllib.request.Request(
         JUDGMENT_URL, data=body,
@@ -245,7 +245,7 @@ Prompt hooks use an LLM to evaluate hook input and return a decision. This is us
 1. The hook input JSON is injected into your prompt using the `$ARGUMENTS` placeholder
 2. The prompt is sent to an LLM (default: your current model)
 3. The LLM returns a JSON response with the decision
-4. Qwen Code processes the decision and continues or blocks execution accordingly
+4. LailatulCoder Ai processes the decision and continues or blocks execution accordingly
 
 **Configuration:**
 
@@ -297,7 +297,7 @@ Prompt hooks can be used with most hook events, including:
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "You are evaluating whether Qwen Code should stop working. Context: $ARGUMENTS\n\nAnalyze the conversation and determine if:\n1. All user-requested tasks are complete\n2. Any errors need to be addressed\n3. Follow-up work is needed\n\nRespond with JSON: {\"ok\": true} to allow stopping, or {\"ok\": false, \"reason\": \"your explanation\"} to continue working.",
+            "prompt": "You are evaluating whether LailatulCoder Ai should stop working. Context: $ARGUMENTS\n\nAnalyze the conversation and determine if:\n1. All user-requested tasks are complete\n2. Any errors need to be addressed\n3. Follow-up work is needed\n\nRespond with JSON: {\"ok\": true} to allow stopping, or {\"ok\": false, \"reason\": \"your explanation\"} to continue working.",
             "timeout": 30
           }
         ]
@@ -307,7 +307,7 @@ Prompt hooks can be used with most hook events, including:
 }
 ```
 
-When `ok` is `false`, Qwen Code will continue working and use the `reason` as context for the next response.
+When `ok` is `false`, LailatulCoder Ai will continue working and use the `reason` as context for the next response.
 
 **Example: PreToolUse Hook**
 
@@ -334,7 +334,7 @@ When `ok` is `false`, Qwen Code will continue working and use the `reason` as co
 
 ## Hook Events
 
-Hooks fire at specific points during a Qwen Code session. Different events support different matchers to filter trigger conditions.
+Hooks fire at specific points during a LailatulCoder Ai session. Different events support different matchers to filter trigger conditions.
 
 | Event                | Triggered When                                  | Matcher Target                                                 |
 | :------------------- | :---------------------------------------------- | :------------------------------------------------------------- |
@@ -457,7 +457,7 @@ Qwen does not control whether a hook process, endpoint, callback, or model provi
 
 Event-specific fields are added based on the hook type. When running in a subagent, `agent_id` and `agent_type` are additionally included.
 
-Hook input is a forward-extensible JSON contract: new optional fields can be added to existing events. Consumers should ignore unknown fields. A strict decoder that rejects unknown properties must be updated to explicitly allow each new optional field before upgrading Qwen Code. For security-sensitive hooks, a decoder failure can change fail-open or fail-closed behavior, so administrators must validate the upgraded payload against the deployed hook before rollout.
+Hook input is a forward-extensible JSON contract: new optional fields can be added to existing events. Consumers should ignore unknown fields. A strict decoder that rejects unknown properties must be updated to explicitly allow each new optional field before upgrading LailatulCoder Ai. For security-sensitive hooks, a decoder failure can change fail-open or fail-closed behavior, so administrators must validate the upgraded payload against the deployed hook before rollout.
 
 ### Hook Output Structure
 
@@ -828,7 +828,7 @@ The `context_usage`, `context_limit`, and `input_tokens` fields allow hook scrip
 ```json
 {
   "decision": "block",
-  "reason": "Must be provided when Qwen Code is blocked from stopping"
+  "reason": "Must be provided when LailatulCoder Ai is blocked from stopping"
 }
 ```
 
@@ -942,7 +942,7 @@ The `context_usage`, `context_limit`, and `input_tokens` fields allow hook scrip
 ```json
 {
   "decision": "block",
-  "reason": "Must be provided when Qwen Code is blocked from stopping"
+  "reason": "Must be provided when LailatulCoder Ai is blocked from stopping"
 }
 ```
 
@@ -1300,7 +1300,7 @@ exit 0
 
 ## Hook Configuration
 
-Hooks are configured in Qwen Code settings, typically in `.qwen/settings.json` or user configuration files:
+Hooks are configured in LailatulCoder Ai settings, typically in `.qwen/settings.json` or user configuration files:
 
 ```json
 {

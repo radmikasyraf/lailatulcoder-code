@@ -109,39 +109,39 @@ describe('Daemon Metrics', () => {
       initializeDaemonMetrics();
 
       expect(mockCreateCounterFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.http.request.count',
+        'lailatul-coder.daemon.http.request.count',
         expect.objectContaining({ description: expect.any(String) }),
       );
       expect(mockCreateHistogramFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.http.request.duration',
+        'lailatul-coder.daemon.http.request.duration',
         expect.objectContaining({ unit: 'ms' }),
       );
       expect(mockCreateCounterFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.session.lifecycle',
+        'lailatul-coder.daemon.session.lifecycle',
         expect.any(Object),
       );
       expect(mockCreateCounterFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.channel.lifecycle',
+        'lailatul-coder.daemon.channel.lifecycle',
         expect.any(Object),
       );
       expect(mockCreateHistogramFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.prompt.queue_wait',
+        'lailatul-coder.daemon.prompt.queue_wait',
         expect.objectContaining({ unit: 'ms' }),
       );
       expect(mockCreateHistogramFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.prompt.duration',
+        'lailatul-coder.daemon.prompt.duration',
         expect.objectContaining({ unit: 'ms' }),
       );
       expect(mockCreateCounterFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.bridge.error.count',
+        'lailatul-coder.daemon.bridge.error.count',
         expect.any(Object),
       );
       expect(mockCreateCounterFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.cancel.count',
+        'lailatul-coder.daemon.cancel.count',
         expect.any(Object),
       );
       expect(mockCreateHistogramFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.pipe.message_bytes',
+        'lailatul-coder.daemon.pipe.message_bytes',
         expect.objectContaining({ unit: 'By' }),
       );
     });
@@ -333,15 +333,15 @@ describe('Daemon Metrics', () => {
 
       expect(mockCreateObservableGaugeFn).toHaveBeenCalledTimes(3);
       expect(mockCreateObservableGaugeFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.session.active',
+        'lailatul-coder.daemon.session.active',
         expect.any(Object),
       );
       expect(mockCreateObservableGaugeFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.sse.active',
+        'lailatul-coder.daemon.sse.active',
         expect.any(Object),
       );
       expect(mockCreateObservableGaugeFn).toHaveBeenCalledWith(
-        'qwen-code.daemon.process.heap_used',
+        'lailatul-coder.daemon.process.heap_used',
         expect.objectContaining({ unit: 'bytes' }),
       );
     });

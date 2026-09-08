@@ -109,7 +109,7 @@ function runReviewGhWrapper(
 
 describe('qwen resolve workflow', () => {
   const workflow = readFileSync(
-    path.join(repoRoot, '.github/workflows/qwen-code-pr-review.yml'),
+    path.join(repoRoot, '.github/workflows/lailatul-coder-pr-review.yml'),
     'utf8',
   );
 
@@ -165,12 +165,12 @@ describe('qwen resolve workflow', () => {
     expect(workflow).toContain('github.event.issue.pull_request');
     expect(workflow).toContain("github.event.issue.state == 'open'");
     expect(workflow).toContain(
-      "startsWith(github.event.comment.body, '@qwen-code /resolve')",
+      "startsWith(github.event.comment.body, '@lailatul-coder /resolve')",
     );
     expect(workflow).toContain('needs.authorize.outputs.should_review');
     expect(workflow).not.toContain('authorize-resolve:');
     expect(workflow).toContain(
-      "github.event.comment.body == '@qwen-code /resolve'",
+      "github.event.comment.body == '@lailatul-coder /resolve'",
     );
   });
 
@@ -202,19 +202,19 @@ describe('qwen resolve workflow', () => {
 
   it('listens for /resolve comments', () => {
     expect(workflow).toContain(
-      "github.event.comment.body == '@qwen-code /resolve'",
+      "github.event.comment.body == '@lailatul-coder /resolve'",
     );
     expect(workflow).toContain(
-      "startsWith(github.event.comment.body, '@qwen-code /resolve ')",
+      "startsWith(github.event.comment.body, '@lailatul-coder /resolve ')",
     );
-    expect(workflow).toContain("format('@qwen-code /resolve{0}',");
+    expect(workflow).toContain("format('@lailatul-coder /resolve{0}',");
     expect(workflow).not.toContain('/fix_conflicts');
   });
 
   it('reports failure paths instead of falling through silently', () => {
     expect(workflow).toContain("- name: 'Report result'");
     expect(workflow).toContain(
-      'Qwen Code attempted to resolve merge conflicts but the run did not complete successfully.',
+      'LailatulCoder Ai attempted to resolve merge conflicts but the run did not complete successfully.',
     );
     expect(workflow).toContain('push_failed=false');
     expect(workflow).toContain('push_failed=true');
@@ -485,7 +485,7 @@ describe('qwen resolve workflow', () => {
       fallbackStep.indexOf('else', belowMaxStart),
     );
     expect(belowMaxArm).toContain(
-      '@qwen-code /review --timeout=${MAX_TIMEOUT_MINUTES}',
+      '@lailatul-coder /review --timeout=${MAX_TIMEOUT_MINUTES}',
     );
     expect(belowMaxArm).not.toContain('This run already used the maximum');
     // Symmetric slice for the at-max arm: it is an adjacent body= assignment
@@ -513,7 +513,7 @@ describe('qwen resolve workflow', () => {
       fallbackStep.indexOf('else', quotaStart),
     );
     expect(quotaArm).toContain(
-      '**Qwen Code review paused — model quota exhausted.**',
+      '**LailatulCoder Ai review paused — model quota exhausted.**',
     );
     // The branch CONDITION, not just both branch bodies: with both bodies
     // pinned as substrings, any comparison flip (-ge/-gt/-le) keeps both
@@ -521,11 +521,11 @@ describe('qwen resolve workflow', () => {
     expect(fallbackStep).toContain(
       'if [ "$TIMEOUT_MINUTES" -lt "$MAX_TIMEOUT_MINUTES" ]; then',
     );
-    expect(fallbackStep).toContain('**Qwen Code review timed out.**');
+    expect(fallbackStep).toContain('**LailatulCoder Ai review timed out.**');
     // The comment must come AFTER all three arms: containment holds wherever
     // the line sits, so a move into one arm would silently drop the others.
     const genericBodyStart = fallbackStep.indexOf(
-      '**Qwen Code review did not complete successfully.**',
+      '**LailatulCoder Ai review did not complete successfully.**',
     );
     expect(genericBodyStart).toBeGreaterThan(-1);
     const commentStart = fallbackStep.indexOf('gh pr comment "$PR_NUMBER"');
@@ -534,7 +534,7 @@ describe('qwen resolve workflow', () => {
     // at a different variable posts text none of these assertions protect.
     expect(fallbackStep).toContain('--body "$body"');
     expect(fallbackStep).not.toContain(
-      '_Qwen Code review did not complete successfully:',
+      '_LailatulCoder Ai review did not complete successfully:',
     );
   });
 

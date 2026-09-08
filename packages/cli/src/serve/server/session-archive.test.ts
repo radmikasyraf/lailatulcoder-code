@@ -17,7 +17,7 @@ import {
   getCronFilePath,
   readCronTasks,
   updateCronTasks,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   SessionArchivedError,
   SessionArchivingError,

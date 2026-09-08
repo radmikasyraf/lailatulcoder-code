@@ -276,7 +276,7 @@ export class QwenLogger {
       },
       view: {
         id: this.sessionId || this.config?.getSessionId(),
-        name: 'qwen-code-cli',
+        name: 'lailatul-coder-cli',
       },
       os: osMetadata,
 
@@ -292,7 +292,7 @@ export class QwenLogger {
           ? { channel: this.config.getChannel() }
           : {}),
       },
-      _v: `qwen-code@${version}`,
+      _v: `lailatul-coder@${version}`,
     } as RumPayload;
   }
 

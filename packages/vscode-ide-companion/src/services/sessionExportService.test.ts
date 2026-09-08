@@ -31,7 +31,7 @@ const {
   mockShowSaveDialog: vi.fn(),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', () => {
+vi.mock('@lailatul-coder/lailatul-coder-core', () => {
   class SessionService {
     constructor(_cwd: string) {}
 
@@ -45,7 +45,7 @@ vi.mock('@qwen-code/qwen-code-core', () => {
   };
 });
 
-vi.mock('@qwen-code/qwen-code/export', () => ({
+vi.mock('@lailatul-coder/lailatul-coder/export', () => ({
   collectSessionData: mockCollectSessionData,
   normalizeSessionData: mockNormalizeSessionData,
   toHtml: mockToHtml,

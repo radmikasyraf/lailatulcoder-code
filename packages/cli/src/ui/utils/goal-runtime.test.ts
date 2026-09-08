@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest';
-import { GoalPersistenceUnavailableError } from '@qwen-code/qwen-code-core';
+import { GoalPersistenceUnavailableError } from '@lailatul-coder/lailatul-coder-core';
 import {
   shouldDisplayGoalStateCause,
   waitForGoalRuntime,

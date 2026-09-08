@@ -29,7 +29,7 @@ export const SKILL_MARKETPLACE_DEFINITIONS: readonly SkillMarketplaceDefinition[
       name: 'Bailian CLI',
       tagline: 'Use the Aliyun Model Studio CLI for AI generation tasks.',
       description:
-        'Use Bailian CLI when you want Qwen Code to run Aliyun Model Studio CLI workflows for text, multimodal input, image generation and editing, video generation and editing, speech, file upload, app calls, knowledge retrieval, web search, and model listing.',
+        'Use Bailian CLI when you want LailatulCoder Ai to run Aliyun Model Studio CLI workflows for text, multimodal input, image generation and editing, video generation and editing, speech, file upload, app calls, knowledge retrieval, web search, and model listing.',
       iconKey: 'bailian-cli',
       websiteUrl:
         'https://github.com/modelstudioai/skills/tree/main/skills/bailian-cli',
@@ -59,7 +59,7 @@ export const SKILL_MARKETPLACE_DEFINITIONS: readonly SkillMarketplaceDefinition[
       name: 'Bailian Docs LLM Wiki',
       tagline: 'Look up Aliyun Bailian model and API documentation.',
       description:
-        'Use Bailian Docs LLM Wiki when you want Qwen Code to answer Bailian platform questions from its model metadata, wiki pages, and raw documentation. It helps with model specs, API parameters, error codes, pricing, quotas, SDK usage, OpenAI-compatible interfaces, and multimodal capabilities.',
+        'Use Bailian Docs LLM Wiki when you want LailatulCoder Ai to answer Bailian platform questions from its model metadata, wiki pages, and raw documentation. It helps with model specs, API parameters, error codes, pricing, quotas, SDK usage, OpenAI-compatible interfaces, and multimodal capabilities.',
       iconKey: 'bailian-docs',
       websiteUrl:
         'https://github.com/modelstudioai/skills/tree/main/skills/bailian-docs-llm-wiki',
@@ -89,7 +89,7 @@ export const SKILL_MARKETPLACE_DEFINITIONS: readonly SkillMarketplaceDefinition[
       name: 'Spark Video Episode',
       tagline: 'Run the Spark Video episode production pipeline.',
       description:
-        'Use Spark Video Episode when you want Qwen Code to orchestrate the Spark Video pipeline end to end, from premise and script through storyboard, clip rendering, review, retries, and final stitching with user approval gates.',
+        'Use Spark Video Episode when you want LailatulCoder Ai to orchestrate the Spark Video pipeline end to end, from premise and script through storyboard, clip rendering, review, retries, and final stitching with user approval gates.',
       iconKey: 'spark-video',
       websiteUrl:
         'https://github.com/modelstudioai/skills/tree/main/skills/spark-video',

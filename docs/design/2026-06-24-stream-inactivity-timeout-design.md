@@ -13,7 +13,7 @@ A DataAgent incident ("一直运行不返回") root-caused to the model gateway
 a request (HTTP 200) but then **streaming nothing** — the SSE body stayed open
 and silent for ~595s with no `finish_reason`.
 
-qwen-code had no effective recovery:
+lailatul-coder had no effective recovery:
 
 - The OpenAI client `timeout` (`DEFAULT_TIMEOUT = 120_000`) is **request-level**
   (connect + getting the response object). Once

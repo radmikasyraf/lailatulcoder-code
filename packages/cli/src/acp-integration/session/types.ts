@@ -8,7 +8,7 @@ import type {
   Config,
   ToolArtifact,
   ToolResultBoundaryArtifact,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Part } from '@google/genai';
 import type {
   SessionUpdate,

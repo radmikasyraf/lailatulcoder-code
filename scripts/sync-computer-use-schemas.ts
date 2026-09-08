@@ -38,7 +38,7 @@ async function main(): Promise<void> {
     args: ['mcp'],
   });
   const client = new Client(
-    { name: 'qwen-code-schema-sync', version: '1.0.0' },
+    { name: 'lailatul-coder-schema-sync', version: '1.0.0' },
     { capabilities: {} },
   );
   await client.connect(transport);

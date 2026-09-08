@@ -12,7 +12,7 @@ import type {
 import {
   createDebugLogger,
   isVisionBridgeNoticeDisplay,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   ToolCallStatus,
   type HistoryItemToolGroup,

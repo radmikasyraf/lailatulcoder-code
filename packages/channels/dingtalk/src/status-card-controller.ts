@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type {
   ChannelOutputSegmentContext,
   ChannelTaskCancellationReason,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import {
   STATUS_CARD_TEMPLATE_ID,
   type DingtalkInteractiveCardClient,

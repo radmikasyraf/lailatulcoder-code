@@ -138,7 +138,7 @@ return {
 
 ## Reference: existing specialization
 
-`knowledge/qwen-code/scripts/issue-3664-mock-server.js` is a worked example —
+`knowledge/lailatul-coder/scripts/issue-3664-mock-server.js` is a worked example —
 the template specialized to reproduce subagent context overflow. It shows
 caller fingerprinting, error injection at a token threshold, and per-caller
 response branching. Read it side-by-side with the template if you need to see

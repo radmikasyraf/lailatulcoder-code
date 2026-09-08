@@ -1,5 +1,5 @@
 /**
- * QQ Bot channel adapter for Qwen Code.
+ * QQ Bot channel adapter for LailatulCoder Ai.
  *
  * Connects QQ Bot via official QQ Bot WebSocket API.
  * Extends ChannelBase for streaming, access control, and session routing.
@@ -20,13 +20,13 @@ import {
   sanitizePromptText,
   sanitizeLogText,
   truncateCodePoints,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type {
   ChannelConfig,
   ChannelBaseOptions,
   ChannelAgentBridge,
   ToolCallEvent,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import WebSocket from 'ws';
 import {
   readFileSync,

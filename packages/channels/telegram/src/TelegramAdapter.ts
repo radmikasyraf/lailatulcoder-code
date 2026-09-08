@@ -12,7 +12,7 @@ import {
 import {
   ChannelBase,
   isTerminalTaskLifecycleType,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type {
   ChannelAgentBridge,
   ChannelBaseOptions,
@@ -20,7 +20,7 @@ import type {
   ChannelTaskLifecycleEvent,
   Envelope,
   SessionTarget,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 const TELEGRAM_BOT_COMMANDS = [
   { command: 'start', description: 'Show quick-start help' },
@@ -31,9 +31,9 @@ const TELEGRAM_BOT_COMMANDS = [
 ] as const;
 
 const TELEGRAM_START_MESSAGE = [
-  'Qwen Code Telegram bot',
+  'LailatulCoder Ai Telegram bot',
   '',
-  'Send any message to chat with Qwen Code.',
+  'Send any message to chat with LailatulCoder Ai.',
   'Use /new to start a fresh conversation.',
   'Use /cancel to stop a running request.',
   'Use /help to see available commands.',

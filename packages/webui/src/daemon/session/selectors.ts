@@ -8,7 +8,7 @@ import type {
   DaemonTextTranscriptBlock,
   DaemonToolTranscriptBlock,
   DaemonTranscriptBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import type {
   DaemonPromptStatus,
   DaemonTodoItem,

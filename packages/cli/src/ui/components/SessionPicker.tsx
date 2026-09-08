@@ -8,7 +8,7 @@ import { Box, Text } from 'ink';
 import type {
   SessionListItem as SessionData,
   SessionService,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { theme } from '../semantic-colors.js';
 import { useSessionPicker } from '../hooks/useSessionPicker.js';
 import { formatRelativeTime } from '../utils/formatters.js';
@@ -475,3 +475,4 @@ export function SessionPicker(props: SessionPickerProps) {
     </Box>
   );
 }
+

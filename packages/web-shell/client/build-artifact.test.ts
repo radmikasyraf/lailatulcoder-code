@@ -29,9 +29,9 @@ function enclosingLayer(rule: Rule): string | undefined {
 }
 
 describe('build artifact — package boundary', () => {
-  it('externalizes @qwen-code/webui/daemon-react-sdk', () => {
+  it('externalizes @lailatul-coder/webui/daemon-react-sdk', () => {
     const bundle = readBundle();
-    expect(bundle).toContain('from "@qwen-code/webui/daemon-react-sdk"');
+    expect(bundle).toContain('from "@lailatul-coder/webui/daemon-react-sdk"');
   });
 
   it('does not inline DaemonSessionProvider source code', () => {
@@ -57,7 +57,7 @@ describe('build artifact — package boundary', () => {
     expect(bundle).not.toContain('fileName:');
   });
 
-  it('externalizes @qwen-code/sdk subpaths', () => {
+  it('externalizes @lailatul-coder/sdk subpaths', () => {
     const bundle = readBundle();
     // Should not contain raw SDK implementation
     expect(bundle).not.toMatch(/DaemonSessionClient\s*\{/);

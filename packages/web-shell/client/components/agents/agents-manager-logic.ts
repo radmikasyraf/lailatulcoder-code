@@ -1,4 +1,4 @@
-import type { DaemonWorkspaceAgentSummary } from '@qwen-code/webui/daemon-react-sdk';
+import type { DaemonWorkspaceAgentSummary } from '@lailatul-coder/webui/daemon-react-sdk';
 
 export type AgentLevelFilter = 'all' | DaemonWorkspaceAgentSummary['level'];
 

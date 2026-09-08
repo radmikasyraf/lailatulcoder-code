@@ -1,12 +1,12 @@
 # Telemetry: Custom Resource Attributes + Metric Cardinality Controls
 
-> 配套 issue: [#4365](https://github.com/QwenLM/qwen-code/issues/4365)
-> 父 issue: [#3731](https://github.com/QwenLM/qwen-code/issues/3731)
-> 基于 2026-05-21 对 qwen-code main 分支的代码复核
+> 配套 issue: [#4365](https://github.com/LailatulCoder/lailatul-coder/issues/4365)
+> 父 issue: [#3731](https://github.com/LailatulCoder/lailatul-coder/issues/3731)
+> 基于 2026-05-21 对 lailatul-coder main 分支的代码复核
 
 ## 1. 背景
 
-qwen-code 已经接入 OpenTelemetry SDK，但 Resource 构造方式让它在两个常见生产场景下不可用：
+lailatul-coder 已经接入 OpenTelemetry SDK，但 Resource 构造方式让它在两个常见生产场景下不可用：
 
 1. **无法附加自定义维度**：运维侧想给所有 telemetry 数据打 `team` / `env` / `cost_center` / `user_id` 标签，今天没有任何机制可以做到。即使设置标准的 `OTEL_RESOURCE_ATTRIBUTES` 环境变量也**完全不生效**。
 2. **指标基数（cardinality）失控**：`session.id` 被注入到了 Resource 层，会自动附着到每条 metric 数据点。每个 CLI session 产生一个新值，指标后端（Prometheus / 阿里云 ARMS Metric / VictoriaMetrics）会被无界 time-series 撑爆。
@@ -41,7 +41,7 @@ sdk = new NodeSDK({
 });
 ```
 
-`autoDetectResources: false` 关闭了标准 OTel 的 `envDetector`——也就是平时会读取 `OTEL_RESOURCE_ATTRIBUTES` 和 `OTEL_SERVICE_NAME` 的那一层。这是有原因的（detector 异步，会在 settle 前触发 `diag.error`），但副作用是这两个标准环境变量在 qwen-code 里**完全无效**。
+`autoDetectResources: false` 关闭了标准 OTel 的 `envDetector`——也就是平时会读取 `OTEL_RESOURCE_ATTRIBUTES` 和 `OTEL_SERVICE_NAME` 的那一层。这是有原因的（detector 异步，会在 settle 前触发 `diag.error`），但副作用是这两个标准环境变量在 lailatul-coder 里**完全无效**。
 
 ### 2.2 `session.id` 实际是三重注入
 
@@ -97,7 +97,7 @@ telemetry: {
 
 ### 2.5 不在本设计范围的代码路径
 
-`packages/core/src/telemetry/qwen-logger/qwen-logger.ts` 是 qwen-code 的**第一方使用上报通道**（基于阿里 RUM 内部协议 `RumResourceEvent`），与 OTel SDK 完全独立。它有自己的 endpoint、proxy 和数据模型，**不受本设计影响**。详见第 3 节。
+`packages/core/src/telemetry/qwen-logger/qwen-logger.ts` 是 lailatul-coder 的**第一方使用上报通道**（基于阿里 RUM 内部协议 `RumResourceEvent`），与 OTel SDK 完全独立。它有自己的 endpoint、proxy 和数据模型，**不受本设计影响**。详见第 3 节。
 
 ### 2.6 已支持 / 未支持的 `OTEL_*` 环境变量
 
@@ -128,7 +128,7 @@ telemetry: {
 - **`qwen-logger` 第一方上报**：完全独立的 RUM 通道，不在本设计范围。其上报字段（device id、user agent 等）由 RUM 协议决定，不应被用户 resource attribute 干扰。若未来要给 `qwen-logger` 增加自定义维度，是另一条独立的设计。
 - **Per-span 动态 attribute hook**：让用户写代码 / hook 给每个 span 计算 attribute。claude-code 也没解决这块，复杂度高、收益低。
 - **`service.version` cardinality 控制**：版本变化频率有限（月级），time series 增长可控。需要时走 v2，引入 OTel View API。
-- **Agent SDK 形态的 per-query resource attrs**：qwen-code 目前没有 SDK 调用场景。
+- **Agent SDK 形态的 per-query resource attrs**：lailatul-coder 目前没有 SDK 调用场景。
 - **OTLP 请求头（auth headers）配置**：是另一条 issue 线（#3731 P1），与本设计独立。
 - **CLI flag 形式的 resource attribute**：env var + settings.json 已覆盖临时与基线两种场景，CLI flag 会让命令行变得啰嗦，无明显增益。
 
@@ -140,7 +140,7 @@ telemetry: {
 ┌─ Resource（sdk.ts:156）────────────────────────────────────────┐
 │   service.name        ← OTEL_SERVICE_NAME                      │
 │                          > OTEL_RESOURCE_ATTRIBUTES.service.name│
-│                          > 'qwen-code'                         │
+│                          > 'lailatul-coder'                         │
 │   service.version     ← config.getCliVersion()  [reserved]     │
 │   ...user attrs       ← OTEL_RESOURCE_ATTRIBUTES               │
 │                          + settings.resourceAttributes         │
@@ -176,7 +176,7 @@ telemetry: {
 1. `OTEL_SERVICE_NAME`（最高，标准 OTel 规范规定）
 2. `settings.resourceAttributes.service.name`（settings 优先于 env，沿用本设计一般规则）
 3. `OTEL_RESOURCE_ATTRIBUTES.service.name`
-4. 内建默认 `'qwen-code'`
+4. 内建默认 `'lailatul-coder'`
 
 `service.name` 允许通过 settings 覆盖——它是 service 身份，企业 fleet 用统一 settings.json 配置 service.name 是常见且合理的做法，禁止反而会阻断 GitOps 分发场景。`OTEL_SERVICE_NAME` 作为标准 OTel 规范规定的"最高优先级"通道，仍然可以在 CI / 单机调试时临时覆盖 settings。
 
@@ -312,7 +312,7 @@ for (const k of RESERVED_RESOURCE_ATTRIBUTE_KEYS) {
 ### 4.7 生命周期与多进程
 
 - **SDK init 时机**：Resource 在 `initializeTelemetry()` 时一次性构造，**进程内不可变**。这与 OTel SDK 设计一致。
-- **Subagent fork**：qwen-code 的 subagent 是同进程内的 (`subagent-runtime.ts`)，共享 Resource。若未来引入跨进程 subagent，子进程会**重新 init SDK**，重新读 env var 和 settings——只要 env 透传过去，行为一致。
+- **Subagent fork**：lailatul-coder 的 subagent 是同进程内的 (`subagent-runtime.ts`)，共享 Resource。若未来引入跨进程 subagent，子进程会**重新 init SDK**，重新读 env var 和 settings——只要 env 透传过去，行为一致。
 - **Hot reload**：settings 修改后**不会重新构造 Resource**。需要操作员重启 CLI 才能生效。文档应明确说明。
 - **`refreshSessionContext()`** (`sdk.ts:306`)：仅刷新 session ALS context，**不重建 Resource**——因为 Resource 上已经没有 `session.id` 了（本设计的核心改动之一）。
 
@@ -495,7 +495,7 @@ const resource = resourceFromAttributes({
 
 > PR 2 可先以"opt-out"形式落地——默认仍把 `session.id` 注入 metric，但加 warn log "this default will flip in v0.X"。一个 release 后再翻转默认。
 
-不建议采用的原因：（1）当前 qwen-code 用户群不大，破坏面有限；（2）这是 cardinality bug，越早默认安全越好；（3）双段式发布会增加文档负担。如果父 issue owner 想要保守一些，可以采纳。
+不建议采用的原因：（1）当前 lailatul-coder 用户群不大，破坏面有限；（2）这是 cardinality bug，越早默认安全越好；（3）双段式发布会增加文档负担。如果父 issue owner 想要保守一些，可以采纳。
 
 ### PR 3 — Docs polish + samples（cleanup）
 
@@ -530,22 +530,22 @@ it.each([
 
 | 场景                                                                    | 期望 `service.name`                                   | 期望 user attr                       |
 | ----------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------ |
-| 全空                                                                    | `'qwen-code'`                                         | 不存在                               |
+| 全空                                                                    | `'lailatul-coder'`                                         | 不存在                               |
 | 仅 env `OTEL_SERVICE_NAME=A`                                            | `'A'`                                                 | —                                    |
 | 仅 env `OTEL_RESOURCE_ATTRIBUTES=service.name=B`                        | `'B'`                                                 | —                                    |
 | `OTEL_SERVICE_NAME=A` + `OTEL_RESOURCE_ATTRIBUTES=service.name=B`       | `'A'`（OTEL_SERVICE_NAME 优先）                       | —                                    |
 | `OTEL_SERVICE_NAME=A` + `settings={service.name:C}`                     | `'A'`（OTEL_SERVICE_NAME 优先）                       | —                                    |
 | `OTEL_RESOURCE_ATTRIBUTES=service.name=B` + `settings={service.name:C}` | `'C'`（settings 优先于 env，无 OTEL_SERVICE_NAME 时） | —                                    |
-| `OTEL_RESOURCE_ATTRIBUTES=team=x` + `settings={team:y}`                 | `'qwen-code'`                                         | `team='y'`（settings 优先）          |
-| `OTEL_RESOURCE_ATTRIBUTES=service.version=fake`                         | `'qwen-code'` + warn                                  | service.version 仍为真实 cli version |
-| `settings={service.version:fake}`                                       | `'qwen-code'` + warn                                  | service.version 仍为真实 cli version |
+| `OTEL_RESOURCE_ATTRIBUTES=team=x` + `settings={team:y}`                 | `'lailatul-coder'`                                         | `team='y'`（settings 优先）          |
+| `OTEL_RESOURCE_ATTRIBUTES=service.version=fake`                         | `'lailatul-coder'` + warn                                  | service.version 仍为真实 cli version |
+| `settings={service.version:fake}`                                       | `'lailatul-coder'` + warn                                  | service.version 仍为真实 cli version |
 
 ### 8.3 Resource 内容快照测试
 
 用 `InMemorySpanExporter` 拿一个 span，断言：
 
 ```ts
-expect(span.resource.attributes['service.name']).toBe('qwen-code');
+expect(span.resource.attributes['service.name']).toBe('lailatul-coder');
 expect(span.resource.attributes['service.version']).toBe(EXPECTED_VERSION);
 expect(span.resource.attributes['session.id']).toBeUndefined(); // 关键
 expect(span.resource.attributes['team']).toBe('platform'); // 用户加的
@@ -668,10 +668,10 @@ export OTEL_RESOURCE_ATTRIBUTES="team=platform,env=prod,cost_center=eng-123"
 ### 10.2 用 `OTEL_SERVICE_NAME` 在共享 collector 中路由
 
 ```bash
-export OTEL_SERVICE_NAME=qwen-code-ci
+export OTEL_SERVICE_NAME=lailatul-coder-ci
 ```
 
-效果：`service.name=qwen-code-ci`，多租户 OTel collector 可按 service.name 路由到不同后端。
+效果：`service.name=lailatul-coder-ci`，多租户 OTel collector 可按 service.name 路由到不同后端。
 
 ### 10.3 Fleet baseline + 单机 override
 
@@ -726,7 +726,7 @@ QWEN_TELEMETRY_METRICS_INCLUDE_SESSION_ID=true qwen "投资分析"
 
 ## 11. 与 claude-code 实现的对比
 
-| 维度                       | claude-code                                      | qwen-code 本设计                                 | 决策依据                                           |
+| 维度                       | claude-code                                      | lailatul-coder 本设计                                 | 决策依据                                           |
 | -------------------------- | ------------------------------------------------ | ------------------------------------------------ | -------------------------------------------------- |
 | 标准 OTel env var          | `OTEL_RESOURCE_ATTRIBUTES` / `OTEL_SERVICE_NAME` | ✅ 一致                                          | 标准契约                                           |
 | `OTEL_SERVICE_NAME` 优先级 | 遵守 OTel 规范                                   | ✅ 遵守                                          | spec 明确规定                                      |
@@ -736,8 +736,8 @@ QWEN_TELEMETRY_METRICS_INCLUDE_SESSION_ID=true qwen "投资分析"
 | Per-attribute granularity  | 每 attribute 一个 toggle                         | ✅ 一致                                          | 灵活，符合实际诊断需求                             |
 | settings.json 等价物       | ❌ 无                                            | ✅ 有 `telemetry.resourceAttributes` + `metrics` | 企业 fleet 部署 base config                        |
 | Per-span 动态 hook         | ❌ 无                                            | ❌ 无                                            | 复杂度高，claude-code 也没解，本期不做             |
-| 多租户 `account_uuid`      | 有                                               | ❌ 无                                            | qwen-code metric 里没有此 attr                     |
-| Agent SDK `options.env`    | 有                                               | ❌ 无                                            | qwen-code 没有等价模式                             |
+| 多租户 `account_uuid`      | 有                                               | ❌ 无                                            | lailatul-coder metric 里没有此 attr                     |
+| Agent SDK `options.env`    | 有                                               | ❌ 无                                            | lailatul-coder 没有等价模式                             |
 | 保留键策略                 | 不允许覆盖 built-in id                           | ✅ 一致                                          | 遥测可信度                                         |
 | 第一方上报通道             | claude-code 也有独立第一方通道（与 OTel 隔离）   | ✅ qwen-logger 同样隔离                          | 第一方与第三方通道职责分离                         |
 
@@ -746,7 +746,7 @@ QWEN_TELEMETRY_METRICS_INCLUDE_SESSION_ID=true qwen "投资分析"
 1. **命名约定**：`*_INCLUDE_*` 一眼能看出语义，比反义命名（`*_EXCLUDE_*` / `*_DROP_*`）清晰
 2. **范围克制**：只 gate metric，不 gate span/log——claude-code 显然踩过这个边界，我们直接受益
 
-**qwen-code 做得更好的点**：
+**lailatul-coder 做得更好的点**：
 
 - settings.json 支持：claude-code 完全靠 env var，对企业 fleet 场景不友好
 - 明确的保留键策略（`service.version` 不可覆盖）：减少遥测被污染的可能
@@ -756,7 +756,7 @@ QWEN_TELEMETRY_METRICS_INCLUDE_SESSION_ID=true qwen "投资分析"
 
 - **`service.version` cardinality 控制**：用 OTel View API 在 metric 层 drop attribute
 - **更多 cardinality toggle**：未来若 metric 上引入 `user.account_uuid` / `model` 等，按需补 toggle
-- **Per-span 动态 attribute hook**：可借鉴 qwen-code 自家 hooks 系统，加 `OnSpanStart(span, context) => attrs` 回调。需要独立设计。
+- **Per-span 动态 attribute hook**：可借鉴 lailatul-coder 自家 hooks 系统，加 `OnSpanStart(span, context) => attrs` 回调。需要独立设计。
 - **Resource attribute schema 校验**：限制 key 命名空间（如禁止覆盖 `service.*` 前缀以外的内建 attr），目前靠保留键列表硬编码够用。
 - **Hot reload Resource**：当 settings.json 在进程内被修改（设想 qwen-serve daemon 场景），目前不会重建 Resource。若 daemon 场景成熟，可以增加一条 reload 路径。
 - **跨进程 subagent context 传播**：subagent 跨进程时，把 parent 的 trace context（包括 resource）通过 OTel context propagation 标准 header 传过去。需要独立设计。

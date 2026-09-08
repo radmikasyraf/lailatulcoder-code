@@ -11,16 +11,16 @@ import {
   loadServerHierarchicalMemory,
   type Config,
   type WorkspaceContext,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { CommandContext, SlashCommandActionReturn } from './types.js';
 import { SettingScope } from '../../config/settings.js';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     loadServerHierarchicalMemory: vi.fn(),
@@ -625,3 +625,4 @@ describe('getDirPathCompletions', () => {
     });
   });
 });
+

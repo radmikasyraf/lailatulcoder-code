@@ -10,7 +10,7 @@ const packageDir = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
 );
-const runtimeRoot = path.join(packageDir, 'runtime', 'qwen-code');
+const runtimeRoot = path.join(packageDir, 'runtime', 'lailatul-coder');
 const nodePath =
   process.platform === 'win32'
     ? path.join(runtimeRoot, 'node', 'node.exe')

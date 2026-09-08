@@ -20,7 +20,7 @@ import {
   type Config,
   type ContentGeneratorConfig,
   type InputModalities,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { SettingScope } from '../../config/settings.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { theme } from '../semantic-colors.js';
@@ -1190,3 +1190,4 @@ export function ModelDialog({
     </Box>
   );
 }
+

@@ -14,7 +14,7 @@ import { describe, it, beforeAll, afterAll, expect } from 'vitest';
 import { TestRig, validateModelOutput } from '../test-helper.js';
 import { join, resolve } from 'node:path';
 import { writeFileSync } from 'node:fs';
-import { hashMcpServerConfig } from '@qwen-code/qwen-code-core';
+import { hashMcpServerConfig } from '@lailatul-coder/lailatul-coder-core';
 
 // Create a minimal MCP server that doesn't require external dependencies
 // This implements the MCP protocol directly using Node.js built-ins
@@ -177,7 +177,7 @@ describe('simple-mcp-server', () => {
     // MCP availability the spawned CLI's first non-interactive `--prompt`
     // request fires without the MCP `add` tool wired into the model's tool
     // surface, so the model answers `15` directly and `foundToolCall` stays
-    // false. Remove once QwenLM/qwen-code#4163 is fixed.
+    // false. Remove once LailatulCoder/lailatul-coder#4163 is fixed.
     previousLegacyMcpBlocking = process.env['QWEN_CODE_LEGACY_MCP_BLOCKING'];
     process.env['QWEN_CODE_LEGACY_MCP_BLOCKING'] = '1';
 

@@ -67,7 +67,7 @@ vi.mock('../../services/sessionExportService.js', () => ({
   exportSessionToFile: mockExportSessionToFile,
 }));
 
-vi.mock('@qwen-code/webui', () => ({
+vi.mock('@lailatul-coder/webui', () => ({
   stripZeroWidthSpaces: (text: string) => text.replace(/\u200B/g, ''),
 }));
 

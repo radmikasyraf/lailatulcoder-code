@@ -9,12 +9,12 @@ import type {
   GoalSnapshotV2,
   GoalStateCause,
   HistoryGap,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   parseGoalSnapshotV2,
   parseGoalStateCause,
   projectGoalStateToLegacy,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   createTranscriptReplayMachine,
   MISSING_TRANSCRIPT_TOOL_RESULT_MESSAGE,
@@ -22,7 +22,7 @@ import {
   type TranscriptReplayMachine,
   type TranscriptReplayPresentationAdapter,
   type TranscriptReplayStateV1,
-} from '@qwen-code/acp-bridge/transcriptReplay';
+} from '@lailatul-coder/acp-bridge/transcriptReplay';
 import type { SessionEmitterContext } from './types.js';
 import {
   buildToolResultContentPrefix,

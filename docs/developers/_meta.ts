@@ -1,20 +1,20 @@
 export default {
-  'Contribute to Qwen Code': {
-    title: 'Contribute to Qwen Code',
+  'Contribute to LailatulCoder Ai': {
+    title: 'Contribute to LailatulCoder Ai',
     type: 'separator',
   },
   architecture: 'Architecture',
   roadmap: 'Roadmap',
   contributing: 'Contributing Guide',
-  'Qwen Code SDK': {
+  'LailatulCoder Ai SDK': {
     title: 'Agent SDK',
     type: 'separator',
   },
   'sdk-typescript': 'TypeScript SDK',
   'sdk-python': 'Python SDK (alpha)',
   'sdk-java': 'Java SDK (alpha)',
-  'Dive Into Qwen Code': {
-    title: 'Dive Into Qwen Code',
+  'Dive Into LailatulCoder Ai': {
+    title: 'Dive Into LailatulCoder Ai',
     type: 'separator',
   },
 

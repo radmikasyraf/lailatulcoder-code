@@ -1,7 +1,7 @@
 {
-  "name": "@qwen-code/webui",
+  "name": "@lailatul-coder/webui",
   "version": "0.21.14",
-  "description": "Shared UI components for Qwen Code packages",
+  "description": "Shared UI components for LailatulCoder Ai packages",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -51,7 +51,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@qwen-code/sdk": "file:../sdk-typescript",
+    "@lailatul-coder/sdk": "file:../sdk-typescript",
     "markdown-it": "^14.1.0"
   },
   "devDependencies": {

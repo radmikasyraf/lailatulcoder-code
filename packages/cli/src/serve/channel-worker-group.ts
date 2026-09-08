@@ -13,12 +13,12 @@ import type {
   CreateChannelWorkerSupervisorOptions,
 } from './channel-worker-supervisor.js';
 import { ChannelWorkerStartupError } from './channel-worker-supervisor.js';
-import { CHANNEL_LOOP_MCP_SERVER_NAME } from '@qwen-code/channel-base';
+import { CHANNEL_LOOP_MCP_SERVER_NAME } from '@lailatul-coder/channel-base';
 import {
   CLIENT_MCP_OVER_WS_CONFIG_FLAG,
   type ClientMcpOverWsRuntimeConfig,
-} from '@qwen-code/acp-bridge/bridgeTypes';
-import { SessionNotFoundError } from '@qwen-code/acp-bridge/bridgeErrors';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
+import { SessionNotFoundError } from '@lailatul-coder/acp-bridge/bridgeErrors';
 import { ChannelDeliveryError } from '../runtime/channel-delivery-ipc.js';
 import { ChannelWebhookEnqueueError } from './channel-webhook-ipc.js';
 import type { ChannelWorkspaceGroup } from './channel-workspace-grouping.js';

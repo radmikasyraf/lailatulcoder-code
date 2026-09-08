@@ -6,7 +6,7 @@
 
 import type React from 'react';
 import { Box, Text } from 'ink';
-import type { SkillCallStats } from '@qwen-code/qwen-code-core';
+import type { SkillCallStats } from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../i18n/index.js';
 import { useSessionStats } from '../contexts/SessionContext.js';
 import { theme } from '../semantic-colors.js';
@@ -150,3 +150,4 @@ export const SkillStatsDisplay: React.FC<SkillStatsDisplayProps> = ({
     </Box>
   );
 };
+

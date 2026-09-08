@@ -11,7 +11,7 @@
 ## Decision
 
 Phase 1 remains the default tool-invoked, retrieval-only surface. It adds one
-private Qwen Code extension with one MCP tool: `context_search({ query })`.
+private LailatulCoder Ai extension with one MCP tool: `context_search({ query })`.
 The optional Phase 2 profile adds deterministic retrieval through an
 administrator-installed `UserPromptSubmit` Hook. Its detailed design is in
 [Direct External Context Auto Recall](./direct-external-context-auto-recall.md).
@@ -40,7 +40,7 @@ opt-in variant of on-demand v1, not another retrieval path.
 
 ## Problem
 
-Teams want Qwen Code to retrieve shared repository context from an existing
+Teams want LailatulCoder Ai to retrieve shared repository context from an existing
 memory or knowledge service without first deploying the governed memory
 gateway proposed in #7449. Directly exposing a general provider MCP server is
 not sufficient for a shared enterprise deployment: the model may be able to
@@ -59,7 +59,7 @@ client-provided metadata into authorization.
 - Support both Mem0 and a minimal, provider-neutral search contract.
 - Bound requests, responses, returned context, and timeouts.
 - Return stable MCP errors without exposing provider response details.
-- Keep the implementation private to the qwen-code monorepo until its
+- Keep the implementation private to the lailatul-coder monorepo until its
   deployment model is proven.
 - Optionally save exact repository-shared text through one narrowly scoped
   Mem0 Direct Import operation after visible user confirmation.
@@ -81,7 +81,7 @@ client-provided metadata into authorization.
 
 ```mermaid
 flowchart TD
-    A["Need external context in Qwen Code"] --> B{"Can one provider credential access exactly one intended corpus?"}
+    A["Need external context in LailatulCoder Ai"] --> B{"Can one provider credential access exactly one intended corpus?"}
     B -- "No" --> G["Use Governed Gateway / Orchestrator Profile"]
     B -- "Yes" --> C{"Need trusted users, personal scope, document ACLs, DLP, or compliance audit?"}
     C -- "Yes" --> G
@@ -107,7 +107,7 @@ implementation does not import or modify Qwen Core.
 
 ```mermaid
 flowchart LR
-    A["Managed launcher"] -->|"pins --mcp-config + provider env"| Q["Qwen Code"]
+    A["Managed launcher"] -->|"pins --mcp-config + provider env"| Q["LailatulCoder Ai"]
     U["User or model chooses query"] --> Q
     Q -->|"context_search(query)"| M["External Context MCP process"]
     M --> C["Immutable config + explicit adapter"]
@@ -391,7 +391,7 @@ must treat the tool as an outbound data channel.
 
 ## Deployment
 
-Phase 1 runs from a built qwen-code checkout, so runtime dependencies resolve
+Phase 1 runs from a built lailatul-coder checkout, so runtime dependencies resolve
 from the monorepo installation. A copied directory or npm tarball is not a
 supported standalone artifact unless an operator packages its dependencies.
 

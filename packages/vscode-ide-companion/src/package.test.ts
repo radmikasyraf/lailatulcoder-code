@@ -27,10 +27,10 @@ describe('package.json command metadata', () => {
     const manifest = readManifest();
 
     const command = manifest.contributes.commands.find(
-      (item) => item.command === 'qwen-code.focusChat',
+      (item) => item.command === 'lailatul-coder.focusChat',
     );
 
-    expect(command?.title).toBe('Qwen Code: Focus Chat View');
+    expect(command?.title).toBe('LailatulCoder Ai: Focus Chat View');
   });
 
   it('keeps the Activity Bar chat entry visible without runtime context', () => {
@@ -38,10 +38,10 @@ describe('package.json command metadata', () => {
 
     const sidebarContainer =
       manifest.contributes.viewsContainers.activitybar.find(
-        (item) => item.id === 'qwen-code-sidebar',
+        (item) => item.id === 'lailatul-coder-sidebar',
       );
-    const sidebarView = manifest.contributes.views['qwen-code-sidebar']?.find(
-      (item) => item.id === 'qwen-code.chatView.sidebar',
+    const sidebarView = manifest.contributes.views['lailatul-coder-sidebar']?.find(
+      (item) => item.id === 'lailatul-coder.chatView.sidebar',
     );
 
     expect(sidebarContainer?.when).toBeUndefined();

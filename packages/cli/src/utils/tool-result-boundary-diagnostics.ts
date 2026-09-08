@@ -5,12 +5,12 @@
  */
 
 import type { SessionUpdate } from '@agentclientprotocol/sdk';
-import { LOAD_REPLAY_META_KEY } from '@qwen-code/acp-bridge/bridgeTypes';
+import { LOAD_REPLAY_META_KEY } from '@lailatul-coder/acp-bridge/bridgeTypes';
 import {
   observeToolResultBoundary,
   type ToolResultBoundaryArtifact,
   type ToolResultBoundaryValue,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { CLIMessage, ToolResultBlock } from '../nonInteractive/types.js';
 
 interface ProjectedToolResult {

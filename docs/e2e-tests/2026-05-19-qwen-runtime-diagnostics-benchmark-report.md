@@ -1,11 +1,11 @@
-# Qwen Code Runtime Diagnostics Benchmark Report
+# LailatulCoder Ai Runtime Diagnostics Benchmark Report
 
 Date: 2026-05-19
 
 ## Scope
 
-This run repeats the previous Qwen Code benchmark shapes with the new opt-in
-runtime diagnostics enabled. It only tests Qwen Code, not Claude Code.
+This run repeats the previous LailatulCoder Ai benchmark shapes with the new opt-in
+runtime diagnostics enabled. It only tests LailatulCoder Ai, not Claude Code.
 
 Initial model matrix:
 
@@ -38,7 +38,7 @@ CLI RSS comparison.
 
 A follow-up sanity check used the same minimal prompt, model, and non-interactive
 mode across the installed CLI and the local diagnostics bundle. The only
-intentional variable was whether Qwen Code loaded a stripped temporary CLI home
+intentional variable was whether LailatulCoder Ai loaded a stripped temporary CLI home
 or the normal user config.
 
 | CLI                 | Config mode     | Total tokens | Tree RSS peak | Root RSS peak | Process count peak | Runtime diagnostics |
@@ -389,17 +389,17 @@ failure mode:
 
 | Source                                                                                                                 | Evidence summary                                                                                                                                      | Hypothesis to test                                                                                                               |
 | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| [`#4309`](https://github.com/QwenLM/qwen-code/issues/4309)                                                             | User reports 5.84 GiB memory usage / 7.02 GiB warning with YOLO mode and DeepSeek backend; increasing Node memory to 8 GiB did not remove the symptom | Long autonomous tool loops can retain enough state that simply raising old-space limit is not a root fix                         |
-| [`#4149`](https://github.com/QwenLM/qwen-code/issues/4149)                                                             | Multiple reports show `Ineffective mark-compacts near heap limit`, including 4 GiB and much larger heap-limit cases                                   | A large fraction of heap is reachable application state, not immediately collectible garbage                                     |
-| [`#4116`](https://github.com/QwenLM/qwen-code/issues/4116)                                                             | OOM occurred while context display was around 9.5%; analysis points to `structuredClone`, UI history, Ink static tree, and large context windows      | Token usage can be low while JS heap pressure is high; token threshold alone is not a reliable memory guard                      |
-| [`#4167`](https://github.com/QwenLM/qwen-code/issues/4167)                                                             | User says the crash happened while compressing; analysis identifies compression peak memory as a distinct shape                                       | Compression can itself create a peak when heap is already high, especially if history is cloned/stringified around the same time |
-| [`#2128`](https://github.com/QwenLM/qwen-code/issues/2128)                                                             | Report identifies unbounded UI history, retained file diffs / terminal output, string-width caches, and checkpoint serialization                      | Interactive TUI long sessions may retain memory outside model history and outside non-interactive benchmarks                     |
-| [`#2562`](https://github.com/QwenLM/qwen-code/issues/2562)                                                             | Report focuses on `GeminiChat.getHistory()` deep-cloning full history in long sessions                                                                | Full-history cloning can amplify memory peaks and should be measured separately from retained steady-state size                  |
-| [`#4185`](https://github.com/QwenLM/qwen-code/issues/4185)                                                             | Tracks V8 heap pressure exceeding limit before token-based compaction runs                                                                            | Heap-pressure guard is necessary, but it only mitigates symptoms if retained data remains large                                  |
-| [`#4184`](https://github.com/QwenLM/qwen-code/issues/4184)                                                             | Proposes diagnostics and offload/preview for large retained tool results                                                                              | Large tool output may be bounded for model requests while still retained in local hot memory                                     |
-| [`#4186`](https://github.com/QwenLM/qwen-code/pull/4186)                                                               | Merged heap-pressure auto-compaction safety net and O(1) last-history access for `nextSpeakerChecker`                                                 | Covers part of heap-pressure and clone amplification, but does not claim to solve all OOM classes                                |
-| [`#4127`](https://github.com/QwenLM/qwen-code/pull/4127), [`#4168`](https://github.com/QwenLM/qwen-code/pull/4168)     | Open compaction-threshold PRs; one uses fixed heap thresholds, the other redesigns token thresholds and compression behavior                          | Useful related work, but long-task testing must verify whether heap, token, and compression signals line up in real runs         |
-| [`#3000`](https://github.com/QwenLM/qwen-code/issues/3000), [`#4183`](https://github.com/QwenLM/qwen-code/issues/4183) | Diagnostic roadmap calls out `/doctor memory`, heap snapshot, and bounded memory timeline                                                             | Snapshot/timeline support is needed to move from RSS attribution to retained-object attribution                                  |
+| [`#4309`](https://github.com/LailatulCoder/lailatul-coder/issues/4309)                                                             | User reports 5.84 GiB memory usage / 7.02 GiB warning with YOLO mode and DeepSeek backend; increasing Node memory to 8 GiB did not remove the symptom | Long autonomous tool loops can retain enough state that simply raising old-space limit is not a root fix                         |
+| [`#4149`](https://github.com/LailatulCoder/lailatul-coder/issues/4149)                                                             | Multiple reports show `Ineffective mark-compacts near heap limit`, including 4 GiB and much larger heap-limit cases                                   | A large fraction of heap is reachable application state, not immediately collectible garbage                                     |
+| [`#4116`](https://github.com/LailatulCoder/lailatul-coder/issues/4116)                                                             | OOM occurred while context display was around 9.5%; analysis points to `structuredClone`, UI history, Ink static tree, and large context windows      | Token usage can be low while JS heap pressure is high; token threshold alone is not a reliable memory guard                      |
+| [`#4167`](https://github.com/LailatulCoder/lailatul-coder/issues/4167)                                                             | User says the crash happened while compressing; analysis identifies compression peak memory as a distinct shape                                       | Compression can itself create a peak when heap is already high, especially if history is cloned/stringified around the same time |
+| [`#2128`](https://github.com/LailatulCoder/lailatul-coder/issues/2128)                                                             | Report identifies unbounded UI history, retained file diffs / terminal output, string-width caches, and checkpoint serialization                      | Interactive TUI long sessions may retain memory outside model history and outside non-interactive benchmarks                     |
+| [`#2562`](https://github.com/LailatulCoder/lailatul-coder/issues/2562)                                                             | Report focuses on `GeminiChat.getHistory()` deep-cloning full history in long sessions                                                                | Full-history cloning can amplify memory peaks and should be measured separately from retained steady-state size                  |
+| [`#4185`](https://github.com/LailatulCoder/lailatul-coder/issues/4185)                                                             | Tracks V8 heap pressure exceeding limit before token-based compaction runs                                                                            | Heap-pressure guard is necessary, but it only mitigates symptoms if retained data remains large                                  |
+| [`#4184`](https://github.com/LailatulCoder/lailatul-coder/issues/4184)                                                             | Proposes diagnostics and offload/preview for large retained tool results                                                                              | Large tool output may be bounded for model requests while still retained in local hot memory                                     |
+| [`#4186`](https://github.com/LailatulCoder/lailatul-coder/pull/4186)                                                               | Merged heap-pressure auto-compaction safety net and O(1) last-history access for `nextSpeakerChecker`                                                 | Covers part of heap-pressure and clone amplification, but does not claim to solve all OOM classes                                |
+| [`#4127`](https://github.com/LailatulCoder/lailatul-coder/pull/4127), [`#4168`](https://github.com/LailatulCoder/lailatul-coder/pull/4168)     | Open compaction-threshold PRs; one uses fixed heap thresholds, the other redesigns token thresholds and compression behavior                          | Useful related work, but long-task testing must verify whether heap, token, and compression signals line up in real runs         |
+| [`#3000`](https://github.com/LailatulCoder/lailatul-coder/issues/3000), [`#4183`](https://github.com/LailatulCoder/lailatul-coder/issues/4183) | Diagnostic roadmap calls out `/doctor memory`, heap snapshot, and bounded memory timeline                                                             | Snapshot/timeline support is needed to move from RSS attribution to retained-object attribution                                  |
 
 Initial interpretation:
 
@@ -485,7 +485,7 @@ reproduction.
 
 Setup:
 
-- Installed Qwen Code `0.15.11`, model `qwen-latest-series-invite-beta-v28`.
+- Installed LailatulCoder Ai `0.15.11`, model `qwen-latest-series-invite-beta-v28`.
 - Temporary CLI home derived from the normal settings, with MCP and hook config
   removed. No global config was modified.
 - Interactive TUI mode with dual JSON event output and remote JSONL input.
@@ -652,7 +652,7 @@ Important attribution from this deterministic run:
 
 ## DeepSeek PR-Size Follow-Up
 
-After the initial model matrix, an additional Qwen Code-only run tested
+After the initial model matrix, an additional LailatulCoder Ai-only run tested
 `DeepSeek/deepseek-v4-pro` across three real PR sizes. This model is configured
 through the Anthropic-compatible protocol; OpenAI-compatible execution returned
 404 in a smoke check, so the successful benchmark uses `--auth-type anthropic`.
@@ -704,7 +704,7 @@ DeepSeek observations:
    tool-result handling and request assembly, even when RSS does not spike.
 5. The DeepSeek run reinforces the model-choice conclusion: provider/model
    choice strongly changes turns, latency, token volume, and wire payload shape,
-   but the local bundle RSS peak remains dominated by Qwen Code runtime shape
+   but the local bundle RSS peak remains dominated by LailatulCoder Ai runtime shape
    rather than scaling linearly with PR size.
 
 ## Long-Review JSONL Replay: History Clone Pressure
@@ -716,7 +716,7 @@ prompt and tool output text. The aggregate shape is:
 | Signal                  | Value                         |
 | ----------------------- | ----------------------------- |
 | Duration                | 87.0 min                      |
-| Qwen Code version       | 0.15.10                       |
+| LailatulCoder Ai version       | 0.15.10                       |
 | Model                   | qwen-latest-series beta model |
 | API responses           | 380                           |
 | Tool-call telemetry     | 507 events                    |

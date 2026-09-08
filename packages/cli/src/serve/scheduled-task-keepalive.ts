@@ -39,8 +39,8 @@ import {
   Storage,
   taskHasLegacyCondition,
   type DurableCronTask,
-} from '@qwen-code/qwen-code-core';
-import { MAX_SESSION_RESTORE_TIMEOUT_MS } from '@qwen-code/acp-bridge/sessionRestoreTimeout';
+} from '@lailatul-coder/lailatul-coder-core';
+import { MAX_SESSION_RESTORE_TIMEOUT_MS } from '@lailatul-coder/acp-bridge/sessionRestoreTimeout';
 import { scheduledTaskSessionName } from './routes/scheduled-tasks.js';
 
 const log = createDebugLogger('SCHED_KEEPALIVE');

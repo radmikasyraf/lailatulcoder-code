@@ -9,7 +9,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { getPackageJson } from '../../utils/package.js';
 import { getNpmCliPath } from '../../utils/installationInfo.js';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../i18n/index.js';
 
 const debugLogger = createDebugLogger('UPDATE_CHECK');
@@ -294,7 +294,7 @@ export async function checkForUpdatesDetailed(
           status: 'update',
           info: {
             message: t(
-              'A new version of Qwen Code is available! {{current}} → {{latest}}',
+              'A new version of LailatulCoder Ai is available! {{current}} → {{latest}}',
               { current: version, latest: bestUpdate.latest },
             ),
             update: { ...bestUpdate, current: version },
@@ -316,7 +316,7 @@ export async function checkForUpdatesDetailed(
         return {
           status: 'update',
           info: {
-            message: t('Qwen Code update available! {{current}} → {{latest}}', {
+            message: t('LailatulCoder Ai update available! {{current}} → {{latest}}', {
               current: version,
               latest: updateInfo.latest,
             }),

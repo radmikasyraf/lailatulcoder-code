@@ -15,9 +15,9 @@ import {
   SessionTranscriptTooLargeError,
   SessionWriterError,
   TrustGateError,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Response } from 'express';
-import { restoreRetryAfterSeconds } from '@qwen-code/acp-bridge/sessionRestoreTimeout';
+import { restoreRetryAfterSeconds } from '@lailatul-coder/acp-bridge/sessionRestoreTimeout';
 import { writeStderrLine } from '../../utils/stdioHelpers.js';
 import {
   BranchWhilePromptActiveError,

@@ -17,7 +17,7 @@ import {
   makeFakeConfig,
   RecordArtifactTool,
   type Config,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { createServeApp } from '../server.js';
 import { workspaceRelative } from './workspace-file-read.js';
 import {
@@ -25,7 +25,7 @@ import {
   createWorkspaceFileSystemFactory,
 } from '../fs/index.js';
 import type { Request } from 'express';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
 import type { ServeOptions } from '../types.js';
 
 const baseOpts: ServeOptions = {

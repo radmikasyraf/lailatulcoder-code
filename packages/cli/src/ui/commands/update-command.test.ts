@@ -33,7 +33,7 @@ const formatUpdateInstructions = vi.fn(
         `  ${resolveUpdateCommand(installationInfo.updateCommand, latestVersion)}`,
       ];
     }
-    return ['Manual update required. Please reinstall Qwen Code.'];
+    return ['Manual update required. Please reinstall LailatulCoder Ai.'];
   },
 );
 vi.mock('../utils/updateCheck.js', async (importOriginal) => ({
@@ -87,7 +87,7 @@ describe('updateCommand', () => {
     });
     getInstallationInfo.mockReturnValue({
       isStandalone: false,
-      updateCommand: 'npm install -g @qwen-code/qwen-code@latest',
+      updateCommand: 'npm install -g @lailatul-coder/lailatul-coder@latest',
     });
   });
 
@@ -111,7 +111,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nRun the following to update:\n  npm install -g @qwen-code/qwen-code@1.2.3',
+        'Update available: 1.2.3\nRun the following to update:\n  npm install -g @lailatul-coder/lailatul-coder@1.2.3',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
   });
@@ -125,7 +125,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nRun the following to update:\n  npm install -g @qwen-code/qwen-code@1.2.3',
+        'Update available: 1.2.3\nRun the following to update:\n  npm install -g @lailatul-coder/lailatul-coder@1.2.3',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
     expect(
@@ -136,7 +136,7 @@ describe('updateCommand', () => {
   it('does not update standalone installs in interactive mode when auto-update is disabled', async () => {
     getInstallationInfo.mockReturnValue({
       isStandalone: true,
-      standaloneDir: '/tmp/qwen-code',
+      standaloneDir: '/tmp/lailatul-coder',
     });
 
     const result = await updateCommand.action!(
@@ -148,7 +148,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nManual update required. Please reinstall Qwen Code.',
+        'Update available: 1.2.3\nManual update required. Please reinstall LailatulCoder Ai.',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
     expect(performStandaloneUpdate).not.toHaveBeenCalled();
@@ -157,7 +157,7 @@ describe('updateCommand', () => {
   it('hands standalone updates off to the parent process', async () => {
     getInstallationInfo.mockReturnValue({
       isStandalone: true,
-      standaloneDir: '/tmp/qwen-code',
+      standaloneDir: '/tmp/lailatul-coder',
     });
     const commandContext = context('interactive');
 
@@ -192,7 +192,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nManual update required. Please reinstall Qwen Code.',
+        'Update available: 1.2.3\nManual update required. Please reinstall LailatulCoder Ai.',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
   });
@@ -204,7 +204,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nRun the following to update:\n  npm install -g @qwen-code/qwen-code@1.2.3',
+        'Update available: 1.2.3\nRun the following to update:\n  npm install -g @lailatul-coder/lailatul-coder@1.2.3',
     });
   });
 
@@ -219,7 +219,7 @@ describe('updateCommand', () => {
         type: 'message',
         messageType: 'info',
         content:
-          'Update available: 1.2.3\nThis session uses the custom sandbox image example.com/custom-qwen:1.0.0. Update that image and restart Qwen Code.',
+          'Update available: 1.2.3\nThis session uses the custom sandbox image example.com/custom-qwen:1.0.0. Update that image and restart LailatulCoder Ai.',
       });
       expect(relaunchForUpdate).not.toHaveBeenCalled();
     } finally {
@@ -248,7 +248,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nUpdate Qwen Code on the host, then restart the sandbox.',
+        'Update available: 1.2.3\nUpdate LailatulCoder Ai on the host, then restart the sandbox.',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
   });
@@ -262,7 +262,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nUpdate Qwen Code on the host, then restart the sandbox.',
+        'Update available: 1.2.3\nUpdate LailatulCoder Ai on the host, then restart the sandbox.',
     });
     expect(relaunchForUpdate).not.toHaveBeenCalled();
   });
@@ -286,14 +286,14 @@ describe('updateCommand', () => {
   it('updates standalone installs in non-interactive mode', async () => {
     getInstallationInfo.mockReturnValue({
       isStandalone: true,
-      standaloneDir: '/tmp/qwen-code',
+      standaloneDir: '/tmp/lailatul-coder',
     });
     performStandaloneUpdate.mockResolvedValue('done');
 
     const result = await updateCommand.action!(context('non_interactive'), '');
 
     expect(performStandaloneUpdate).toHaveBeenCalledWith(
-      '/tmp/qwen-code',
+      '/tmp/lailatul-coder',
       '1.2.3',
     );
     expect(result).toEqual({
@@ -307,7 +307,7 @@ describe('updateCommand', () => {
   it('returns deferred message when standalone update is not yet active', async () => {
     getInstallationInfo.mockReturnValue({
       isStandalone: true,
-      standaloneDir: '/tmp/qwen-code',
+      standaloneDir: '/tmp/lailatul-coder',
     });
     performStandaloneUpdate.mockResolvedValue('deferred');
 
@@ -324,7 +324,7 @@ describe('updateCommand', () => {
   it('returns an error when standalone update fails in non-interactive mode', async () => {
     getInstallationInfo.mockReturnValue({
       isStandalone: true,
-      standaloneDir: '/tmp/qwen-code',
+      standaloneDir: '/tmp/lailatul-coder',
     });
     performStandaloneUpdate.mockRejectedValue(new Error('boom'));
 
@@ -348,7 +348,7 @@ describe('updateCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Update available: 1.2.3\nManual update required. Please reinstall Qwen Code.',
+        'Update available: 1.2.3\nManual update required. Please reinstall LailatulCoder Ai.',
     });
   });
 
@@ -363,7 +363,7 @@ describe('updateCommand', () => {
     expect(result).toEqual({
       type: 'message',
       messageType: 'info',
-      content: 'Qwen Code 1.0.0 is up to date!',
+      content: 'LailatulCoder Ai 1.0.0 is up to date!',
     });
   });
 

@@ -3,7 +3,7 @@ import type {
   ChannelConfigFieldKind,
   ChannelPlugin,
   SessionScope,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 export interface ChannelTypeDescriptor {
   type: string;
@@ -285,14 +285,14 @@ function ensureBuiltins(): Promise<void> {
   if (!builtinsPromise) {
     builtinsPromise = (async () => {
       const labelled = [
-        { name: 'telegram', promise: import('@qwen-code/channel-telegram') },
-        { name: 'weixin', promise: import('@qwen-code/channel-weixin') },
-        { name: 'dingtalk', promise: import('@qwen-code/channel-dingtalk') },
-        { name: 'wecom', promise: import('@qwen-code/channel-wecom') },
-        { name: 'feishu', promise: import('@qwen-code/channel-feishu') },
-        { name: 'qqbot', promise: import('@qwen-code/channel-qqbot') },
-        { name: 'github', promise: import('@qwen-code/channel-github') },
-        { name: 'gitlab', promise: import('@qwen-code/channel-gitlab') },
+        { name: 'telegram', promise: import('@lailatul-coder/channel-telegram') },
+        { name: 'weixin', promise: import('@lailatul-coder/channel-weixin') },
+        { name: 'dingtalk', promise: import('@lailatul-coder/channel-dingtalk') },
+        { name: 'wecom', promise: import('@lailatul-coder/channel-wecom') },
+        { name: 'feishu', promise: import('@lailatul-coder/channel-feishu') },
+        { name: 'qqbot', promise: import('@lailatul-coder/channel-qqbot') },
+        { name: 'github', promise: import('@lailatul-coder/channel-github') },
+        { name: 'gitlab', promise: import('@lailatul-coder/channel-gitlab') },
       ];
 
       const results = await Promise.allSettled(labelled.map((l) => l.promise));

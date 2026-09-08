@@ -14,9 +14,9 @@ import {
   type HistoryGap,
   type SessionTranscriptCursorState,
   type SessionTranscriptRecordPage,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { SessionUpdate } from '@agentclientprotocol/sdk';
-import type { TranscriptReplayStateV1 } from '@qwen-code/acp-bridge/transcriptReplay';
+import type { TranscriptReplayStateV1 } from '@lailatul-coder/acp-bridge/transcriptReplay';
 import { Buffer } from 'node:buffer';
 import { projectAcpToolResultUpdate } from './acp-tool-result-text-projection.js';
 import { observeAcpToolResultProjection } from '../../utils/tool-result-boundary-diagnostics.js';

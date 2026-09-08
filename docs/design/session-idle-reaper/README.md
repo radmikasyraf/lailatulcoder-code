@@ -405,7 +405,7 @@ generic terminal-frame handler (`isTerminalLifecycleEvent`) already handles
 - **stderr log**: `qwen serve: reaping idle session "<id>" (idle for Nms)` on
   each reap, matching existing `qwen serve:` prefix convention.
 - **Telemetry event**: `session.close` with operation
-  `qwen-code.daemon.bridge.operation: 'session.close'` (reuses existing
+  `lailatul-coder.daemon.bridge.operation: 'session.close'` (reuses existing
   `closeSession` telemetry path).
 - **Telemetry metric**: `sessionLifecycle('close')` (reuses existing counter).
 - **SSE event**: `session_closed` with `data.reason: 'idle_timeout'`.

@@ -2,7 +2,7 @@
 
 ## Context
 
-Qwen Code currently loads `qwen-extension.json` packages directly and converts
+LailatulCoder Ai currently loads `qwen-extension.json` packages directly and converts
 Gemini, Claude, and Qoder packages before loading them. Agent Plugins v1 is a
 portable format with a root `plugin.json`, direct-child skills under `skills/`,
 and an optional root `mcp.json`. Converting it would change the package format

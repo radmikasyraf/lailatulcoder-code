@@ -346,7 +346,7 @@ describe('Live Host protocol', () => {
         type: 'host.hello',
         protocolVersion: LIVE_PROTOCOL_VERSION,
         hostVersion: 'x'.repeat(MAX_CONTROL_FRAME_BYTES),
-        bundleId: 'com.alibaba.qwen-code.live-host',
+        bundleId: 'com.alibaba.lailatul-coder.live-host',
         instanceNonce: 'abcdefghijklmnop',
         permissions: {
           microphone: 'granted',

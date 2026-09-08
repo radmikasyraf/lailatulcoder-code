@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 import type { VSCodeAPI } from './useVSCode.js';
 import { getRandomLoadingMessage } from '../../constants/loadingMessages.js';
 import type { ImageAttachment } from './useImage.js';
-import { ZERO_WIDTH_SPACE, stripZeroWidthSpaces } from '@qwen-code/webui';
+import { ZERO_WIDTH_SPACE, stripZeroWidthSpaces } from '@lailatul-coder/webui';
 import { isDisplayableImagePath } from '../../utils/imageSupport.js';
 
 interface UseMessageSubmitProps {
@@ -159,7 +159,7 @@ export const useMessageSubmit = ({
           data: {},
         });
         try {
-          messageHandling.setWaitingForResponse('Authenticating Qwen Code...');
+          messageHandling.setWaitingForResponse('Authenticating LailatulCoder Ai...');
         } catch (_err) {
           // Best-effort UI hint; ignore if hook not available
         }

@@ -6,7 +6,7 @@
 
 import { createHash } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
-import type { ChannelConfigFieldDescriptor } from '@qwen-code/channel-base';
+import type { ChannelConfigFieldDescriptor } from '@lailatul-coder/channel-base';
 import {
   getPlugin,
   UNSAFE_OBJECT_KEYS,

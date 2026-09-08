@@ -96,7 +96,7 @@ Inside the existing `session.new` span, the bridge injects the active trace cont
 
 ### ACP child
 
-`QwenAgent.newSession()` extracts the daemon context from the request and starts a child `qwen-code.daemon.session_start` span under the parent bridge `session.new` span. If context is absent or invalid, normal OTel root-span behavior applies.
+`QwenAgent.newSession()` extracts the daemon context from the request and starts a child `lailatul-coder.daemon.session_start` span under the parent bridge `session.new` span. If context is absent or invalid, normal OTel root-span behavior applies.
 
 The child records fixed, non-overlapping durations using `performance.now()`:
 
@@ -115,13 +115,13 @@ The implementation E2E showed `config_setup` at about 200ms, with about 140ms re
 
 Only fixed attribute names and bounded values are emitted:
 
-- `qwen-code.daemon.channel.path` = `reused | joined | spawned_on_request`;
-- `qwen-code.daemon.runtime.path` = `started_on_request | joined` when the request crossed the deferred-runtime gate;
-- `qwen-code.daemon.runtime.wait_ms` = finite non-negative remaining runtime wait;
+- `lailatul-coder.daemon.channel.path` = `reused | joined | spawned_on_request`;
+- `lailatul-coder.daemon.runtime.path` = `started_on_request | joined` when the request crossed the deferred-runtime gate;
+- `lailatul-coder.daemon.runtime.wait_ms` = finite non-negative remaining runtime wait;
 - HTTP request duration histogram `runtime_path` = `started_on_request | joined` for requests that crossed the deferred-runtime gate, otherwise `none`;
-- `qwen-code.daemon.acp_channel.id` = daemon-generated UUID;
-- `qwen-code.daemon.session_start.<stage>_ms` = finite non-negative duration;
-- `qwen-code.daemon.session_start.failed_stage` = one fixed stage name;
+- `lailatul-coder.daemon.acp_channel.id` = daemon-generated UUID;
+- `lailatul-coder.daemon.session_start.<stage>_ms` = finite non-negative duration;
+- `lailatul-coder.daemon.session_start.failed_stage` = one fixed stage name;
 - `session.id` = ACP-generated Session ID.
 
 No workspace path, prompt, settings value, credential, model response, or file content is added.

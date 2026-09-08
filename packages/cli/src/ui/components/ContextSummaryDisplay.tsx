@@ -10,7 +10,7 @@ import { theme } from '../semantic-colors.js';
 import {
   type IdeContext,
   type MCPServerConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { isNarrowWidth } from '../utils/isNarrowWidth.js';
 import { t } from '../../i18n/index.js';
@@ -141,3 +141,4 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
     </Box>
   );
 };
+

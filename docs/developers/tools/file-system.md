@@ -1,6 +1,6 @@
-# Qwen Code file system tools
+# LailatulCoder Ai file system tools
 
-Qwen Code provides a comprehensive suite of tools for interacting with the local file system. These tools allow the model to read from, write to, list, search, and modify files and directories, all under your control and typically with confirmation for sensitive operations.
+LailatulCoder Ai provides a comprehensive suite of tools for interacting with the local file system. These tools allow the model to read from, write to, list, search, and modify files and directories, all under your control and typically with confirmation for sensitive operations.
 
 **Note:** All file system tools operate within a `rootDirectory` (usually the current working directory where you launched the CLI) for security. Paths that you provide to these tools are generally expected to be absolute or are resolved relative to this root directory.
 
@@ -241,7 +241,7 @@ grep_search(pattern="function", glob="*.js", limit=10)
 
 ### Encoding detection and preservation
 
-When reading files, Qwen Code detects the file's encoding using a multi-step strategy:
+When reading files, LailatulCoder Ai detects the file's encoding using a multi-step strategy:
 
 1. **UTF-8** — tried first (most modern tooling outputs UTF-8)
 2. **chardet** — statistical detection for non-UTF-8 content
@@ -296,4 +296,4 @@ If you explicitly set `defaultFileEncoding` to `"utf-8"`, the automatic BOM is d
 | `.ps1`         | Windows (non-UTF-8 code page) | UTF-8 BOM on new files      |
 | All others     | All                           | UTF-8 without BOM (default) |
 
-These file system tools provide a foundation for Qwen Code to understand and interact with your local project context.
+These file system tools provide a foundation for LailatulCoder Ai to understand and interact with your local project context.

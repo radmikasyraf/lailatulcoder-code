@@ -201,11 +201,11 @@ const mockSessionRouter = vi.hoisted(() =>
   ),
 );
 
-vi.mock('@qwen-code/acp-bridge/workspacePaths', () => ({
+vi.mock('@lailatul-coder/acp-bridge/workspacePaths', () => ({
   canonicalizeWorkspace: mockCanonicalizeWorkspace,
 }));
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   addChannelMemoryEntries: mockAddChannelMemoryEntries,
   clearChannelMemory: mockClearChannelMemory,
   getChannelMemoryRevision: mockGetChannelMemoryRevision,
@@ -254,7 +254,7 @@ vi.mock('./observed-contact-store.js', () => ({
   ObservedChannelContactStore: mockObservedContactStore,
 }));
 
-vi.mock('@qwen-code/channel-base', () => ({
+vi.mock('@lailatul-coder/channel-base', () => ({
   ChannelLoopScheduler: mockChannelLoopScheduler,
   ChannelLoopStore: mockChannelLoopStore,
   DaemonChannelBridge: mockDaemonChannelBridge,
@@ -263,7 +263,7 @@ vi.mock('@qwen-code/channel-base', () => ({
   SessionRouter: mockSessionRouter,
 }));
 
-vi.mock('@qwen-code/sdk/daemon', () => ({
+vi.mock('@lailatul-coder/sdk/daemon', () => ({
   DaemonClient: mockDefaultDaemonClient,
   DaemonSessionClient: mockDefaultDaemonSessionClient,
 }));

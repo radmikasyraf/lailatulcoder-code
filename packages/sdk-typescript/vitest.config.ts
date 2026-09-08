@@ -42,11 +42,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@qwen-code/qwen-code-core/transcriptRecords': path.resolve(
+      '@lailatul-coder/lailatul-coder-core/transcriptRecords': path.resolve(
         __dirname,
         '../core/src/utils/transcript-records.ts',
       ),
-      '@qwen-code/acp-bridge/transcriptReplay': path.resolve(
+      '@lailatul-coder/acp-bridge/transcriptReplay': path.resolve(
         __dirname,
         '../acp-bridge/src/transcript-replay.ts',
       ),

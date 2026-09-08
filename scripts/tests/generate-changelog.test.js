@@ -17,7 +17,7 @@ import {
   parseJsonl,
 } from '../generate-changelog.js';
 
-const PR = (n) => `https://github.com/QwenLM/qwen-code/pull/${n}`;
+const PR = (n) => `https://github.com/LailatulCoder/lailatul-coder/pull/${n}`;
 
 describe('categorize', () => {
   it('splits type, scope, and description', () => {
@@ -92,7 +92,7 @@ describe('parseReleaseEntries', () => {
       '## New Contributors',
       '* @newbie made their first contribution in ' + PR(99),
       '',
-      '**Full Changelog**: https://github.com/QwenLM/qwen-code/compare/v1...v2',
+      '**Full Changelog**: https://github.com/LailatulCoder/lailatul-coder/compare/v1...v2',
     ].join('\n');
 
     expect(parseReleaseEntries(body)).toEqual([

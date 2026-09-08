@@ -71,7 +71,7 @@ describe('acpRouteTable – matchRoute', () => {
     expect(params).toEqual({
       _meta: {
         existing: true,
-        'qwen-code/sessionId': '550E8400-E29B-41D4-A716-446655440000',
+        'lailatul-coder/sessionId': '550E8400-E29B-41D4-A716-446655440000',
       },
     });
   });

@@ -14,7 +14,7 @@ import {
 } from 'node:fs';
 import { randomBytes } from 'node:crypto';
 import { join } from 'node:path';
-import { getGlobalQwenDir } from '@qwen-code/channel-base';
+import { getGlobalQwenDir } from '@lailatul-coder/channel-base';
 
 export const DEFAULT_BASE_URL = 'https://ilinkai.weixin.qq.com';
 

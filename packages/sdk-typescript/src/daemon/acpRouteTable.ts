@@ -14,7 +14,7 @@
 
 import { isRecord } from './acpTransportUtils.js';
 
-const REQUESTED_SESSION_ID_META_KEY = 'qwen-code/sessionId';
+const REQUESTED_SESSION_ID_META_KEY = 'lailatul-coder/sessionId';
 
 export interface RouteMapping {
   method: string;

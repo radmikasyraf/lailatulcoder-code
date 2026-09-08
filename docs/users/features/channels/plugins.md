@@ -1,6 +1,6 @@
 # Custom Channel Plugins
 
-You can extend the channel system with custom platform adapters packaged as [extensions](../../extension/introduction). This lets you connect Qwen Code to any messaging platform, webhook, or custom transport.
+You can extend the channel system with custom platform adapters packaged as [extensions](../../extension/introduction). This lets you connect LailatulCoder Ai to any messaging platform, webhook, or custom transport.
 
 ## How It Works
 

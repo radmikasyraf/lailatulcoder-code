@@ -7,7 +7,7 @@
 import {
   ToolErrorType,
   type ToolExecutionStatus,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 export const REPEATED_TOOL_FAILURE_THRESHOLD = 8;
 export const REPEATED_TOOL_FAILURE_BATCH_THRESHOLD = 2;

@@ -10,7 +10,7 @@ import type {
   AnsiLine,
   AnsiOutput,
   AnsiToken,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { formatMemoryUsage } from '../utils/formatters.js';
 import { theme } from '../semantic-colors.js';
 import { MaxSizedBox } from './shared/MaxSizedBox.js';
@@ -88,3 +88,4 @@ export const ShellStatsBar: React.FC<ShellStatsBarProps> = ({
     </Box>
   );
 };
+

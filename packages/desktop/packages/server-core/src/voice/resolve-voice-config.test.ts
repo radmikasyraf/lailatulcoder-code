@@ -986,15 +986,15 @@ describe('resolveDesktopVoiceConfig', () => {
       {
         currentPlatform: 'win32',
         expectedPaths: [
-          'C:\\ProgramData\\qwen-code\\system-defaults.json',
-          'C:\\ProgramData\\qwen-code\\settings.json',
+          'C:\\ProgramData\\lailatul-coder\\system-defaults.json',
+          'C:\\ProgramData\\lailatul-coder\\settings.json',
         ],
       },
       {
         currentPlatform: 'linux',
         expectedPaths: [
-          '/etc/qwen-code/system-defaults.json',
-          '/etc/qwen-code/settings.json',
+          '/etc/lailatul-coder/system-defaults.json',
+          '/etc/lailatul-coder/settings.json',
         ],
       },
     ]
@@ -1204,8 +1204,8 @@ describe('resolveDesktopVoiceConfig', () => {
     expect(qwenFiles).toEqual(new Set(['oauth_creds.json', 'settings.json']))
     expect(systemFiles).toEqual(
       new Set([
-        '/etc/qwen-code/system-defaults.json',
-        '/etc/qwen-code/settings.json',
+        '/etc/lailatul-coder/system-defaults.json',
+        '/etc/lailatul-coder/settings.json',
       ]),
     )
   })

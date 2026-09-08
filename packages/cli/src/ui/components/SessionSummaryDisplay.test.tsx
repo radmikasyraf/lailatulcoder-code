@@ -13,7 +13,7 @@ import type {
   ModelMetricsCore,
   SessionMetrics,
 } from '../contexts/SessionContext.js';
-import { MAIN_SOURCE } from '@qwen-code/qwen-code-core';
+import { MAIN_SOURCE } from '@lailatul-coder/lailatul-coder-core';
 import { ConfigContext } from '../contexts/ConfigContext.js';
 
 const mainOnly = (core: ModelMetricsCore): ModelMetrics => ({
@@ -161,3 +161,4 @@ describe('<SessionSummaryDisplay />', () => {
     expect(output).not.toContain('qwen --resume');
   });
 });
+

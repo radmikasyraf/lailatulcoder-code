@@ -41,7 +41,7 @@ describe('workspace storage: config normalization', () => {
     expect(loaded?.defaults?.cyclablePermissionModes).toEqual(['allow-all', 'safe', 'ask', 'auto-edit']);
   });
 
-  it('migrates old two-mode cycle defaults to the full Qwen Code cycle', () => {
+  it('migrates old two-mode cycle defaults to the full LailatulCoder Ai cycle', () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'ws-mode-two-'));
     tempDirs.push(workspaceRoot);
 

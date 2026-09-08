@@ -14,7 +14,7 @@
 import type {
   ModelProvidersConfig,
   ProviderSettingsAdapter,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings, SettingScope } from './settings.js';
 import { getPersistScopeForModelSelection } from './modelProvidersScope.js';
 import {

@@ -5,7 +5,7 @@
  */
 
 /**
- * An index of the Qwen Code sessions that are running right now.
+ * An index of the LailatulCoder Ai sessions that are running right now.
  *
  * Each top-level session writes `<global dir>/sessions/<pid>.json` at
  * startup and unlinks it on exit. The directory is flat and keyed by PID
@@ -183,7 +183,7 @@ function thisProcessRecordPath(): string {
  * plus two hex characters derived from the session id.
  *
  * The suffix exists because two sessions in the same directory is the
- * common case, not the exception — bare `qwen-code` would collide
+ * common case, not the exception — bare `lailatul-coder` would collide
  * immediately. Two hex characters keep it typeable while making a
  * same-directory collision unlikely rather than certain; callers that
  * need a guaranteed-unique handle should use the session id.

@@ -9,7 +9,7 @@ the **only** location that works for E2E testing.
 
 Common mistakes that waste time:
 
-- `.mcp.json` — Claude Code convention, not Qwen Code
+- `.mcp.json` — Claude Code convention, not LailatulCoder Ai
 - `settings.local.json` — schema validation rejects `mcpServers` here
 - `--mcp-config` CLI flag — does not exist
 

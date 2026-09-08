@@ -9,7 +9,7 @@ import {
   type SlashCommand,
   CommandKind,
 } from './types.js';
-import { openBrowserSecurely } from '@qwen-code/qwen-code-core';
+import { openBrowserSecurely } from '@lailatul-coder/lailatul-coder-core';
 import { MessageType, type HistoryItem } from '../types.js';
 import { getExtendedSystemInfo } from '../../utils/systemInfo.js';
 import { getSystemInfoFields } from '../../utils/systemInfoFields.js';
@@ -35,7 +35,7 @@ export const bugCommand: SlashCommand = {
       .join('\n');
 
     let bugReportUrl =
-      'https://github.com/QwenLM/qwen-code/issues/new?template=bug_report.yml&title={title}&info={info}';
+      'https://github.com/LailatulCoder/lailatul-coder/issues/new?template=bug_report.yml&title={title}&info={info}';
 
     const bugCommandSettings = context.services.config?.getBugCommand();
     if (bugCommandSettings?.urlTemplate) {

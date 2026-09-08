@@ -9,7 +9,7 @@ import type {
   DaemonClient,
   DaemonSettingDescriptor,
   DaemonWorkspaceSettingsStatus,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   loadVoiceSettings,
   type VoiceWorkspaceTarget,

@@ -1,10 +1,10 @@
 {
-  "name": "@qwen-code/mobile-mcp",
+  "name": "@lailatul-coder/mobile-mcp",
   "version": "0.20.1",
   "description": "Mobile MCP with opt-in relative coordinate support",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git",
+    "url": "git+https://github.com/LailatulCoder/lailatul-coder.git",
     "directory": "packages/mobile-mcp"
   },
   "engines": {
@@ -62,7 +62,7 @@
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/QwenLM/qwen-code/issues"
+    "url": "https://github.com/LailatulCoder/lailatul-coder/issues"
   },
-  "homepage": "https://github.com/QwenLM/qwen-code/tree/main/packages/mobile-mcp#readme"
+  "homepage": "https://github.com/LailatulCoder/lailatul-coder/tree/main/packages/mobile-mcp#readme"
 }

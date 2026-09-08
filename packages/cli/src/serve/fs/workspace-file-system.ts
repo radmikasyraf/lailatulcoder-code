@@ -30,8 +30,8 @@ import {
   isWithinRoot,
   type Ignore,
   type WriteTextFileOptions,
-} from '@qwen-code/qwen-code-core';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
+} from '@lailatul-coder/lailatul-coder-core';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
 import type { WorkspaceGenerationGuard } from '../workspace-registry.js';
 import {
   type AuditContext,

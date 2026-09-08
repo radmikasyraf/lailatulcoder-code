@@ -11,8 +11,8 @@ import {
   captureDaemonTelemetryContext,
   emitDaemonLog,
   runWithDaemonTelemetryContext,
-} from '@qwen-code/qwen-code-core';
-import { mapDomainErrorToErrorKind } from '@qwen-code/acp-bridge';
+} from '@lailatul-coder/lailatul-coder-core';
+import { mapDomainErrorToErrorKind } from '@lailatul-coder/acp-bridge';
 import type { Application } from 'express';
 import { writeStderrLine } from '../../utils/stdioHelpers.js';
 import type { AcpSessionBridge } from '../acp-session-bridge.js';
@@ -21,7 +21,7 @@ import {
   SubscriberLimitExceededError,
   type BridgeEvent,
   type EventBusSubscriberDiagnostic,
-} from '@qwen-code/acp-bridge/eventBus';
+} from '@lailatul-coder/acp-bridge/eventBus';
 import {
   errorMessage,
   type SendBridgeError,
@@ -180,12 +180,12 @@ export function registerSseEventsRoutes(
     const telemetryContext = captureDaemonTelemetryContext();
     const telemetryBaseAttributes: Record<string, string | number | boolean> = {
       'session.id': sessionId,
-      'qwen-code.daemon.sse.stream_id': streamId,
-      'qwen-code.daemon.sse.client_reported_connect_reason': connectReason,
-      ...(clientId ? { 'qwen-code.client_id': clientId } : {}),
+      'lailatul-coder.daemon.sse.stream_id': streamId,
+      'lailatul-coder.daemon.sse.client_reported_connect_reason': connectReason,
+      ...(clientId ? { 'lailatul-coder.client_id': clientId } : {}),
       ...(previousStreamId
         ? {
-            'qwen-code.daemon.sse.client_reported_previous_stream_id':
+            'lailatul-coder.daemon.sse.client_reported_previous_stream_id':
               previousStreamId,
           }
         : {}),
@@ -220,12 +220,12 @@ export function registerSseEventsRoutes(
         triggerEventBytes: diagnostic.data.triggerEventBytes,
       };
       const telemetryCommon = {
-        'qwen-code.daemon.sse.queue_size': common.queueSize,
-        'qwen-code.daemon.sse.max_queued': common.maxQueued,
-        'qwen-code.daemon.sse.queued_bytes': common.queuedBytes,
-        'qwen-code.daemon.sse.max_queued_bytes': common.maxQueuedBytes,
-        'qwen-code.daemon.sse.trigger_event_type': common.triggerEventType,
-        'qwen-code.daemon.sse.trigger_event_bytes': common.triggerEventBytes,
+        'lailatul-coder.daemon.sse.queue_size': common.queueSize,
+        'lailatul-coder.daemon.sse.max_queued': common.maxQueued,
+        'lailatul-coder.daemon.sse.queued_bytes': common.queuedBytes,
+        'lailatul-coder.daemon.sse.max_queued_bytes': common.maxQueuedBytes,
+        'lailatul-coder.daemon.sse.trigger_event_type': common.triggerEventType,
+        'lailatul-coder.daemon.sse.trigger_event_bytes': common.triggerEventBytes,
       };
       let handled = false;
       if (diagnostic.type === 'slow_client_warning') {
@@ -253,12 +253,12 @@ export function registerSseEventsRoutes(
           handled = false;
         }
         emitLifecycleLog(
-          'qwen-code.daemon.sse.slow_client_warning',
+          'lailatul-coder.daemon.sse.slow_client_warning',
           'Daemon SSE slow client warning.',
           {
             ...telemetryCommon,
-            'qwen-code.daemon.sse.threshold': diagnostic.data.threshold,
-            'qwen-code.daemon.sse.last_event_id': diagnostic.data.lastEventId,
+            'lailatul-coder.daemon.sse.threshold': diagnostic.data.threshold,
+            'lailatul-coder.daemon.sse.last_event_id': diagnostic.data.lastEventId,
           },
         );
       } else {
@@ -296,18 +296,18 @@ export function registerSseEventsRoutes(
           handled = false;
         }
         emitLifecycleLog(
-          'qwen-code.daemon.sse.client_evicted',
+          'lailatul-coder.daemon.sse.client_evicted',
           'Daemon SSE client evicted.',
           {
             ...telemetryCommon,
-            'qwen-code.daemon.sse.threshold': threshold,
-            'qwen-code.daemon.sse.event_bus_eviction_reason':
+            'lailatul-coder.daemon.sse.threshold': threshold,
+            'lailatul-coder.daemon.sse.event_bus_eviction_reason':
               eventBusEvictionReason,
-            'qwen-code.daemon.sse.dropped_after_event_id':
+            'lailatul-coder.daemon.sse.dropped_after_event_id':
               diagnostic.data.droppedAfter,
             ...(diagnostic.data.eventBytes !== undefined
               ? {
-                  'qwen-code.daemon.sse.rejected_event_bytes':
+                  'lailatul-coder.daemon.sse.rejected_event_bytes':
                     diagnostic.data.eventBytes,
                 }
               : {}),
@@ -444,29 +444,29 @@ export function registerSseEventsRoutes(
       const resolvedCloseReason =
         closeReason ?? terminalCandidate ?? 'client_disconnect';
       const closeAttributes: Record<string, string | number | boolean> = {
-        'qwen-code.daemon.sse.duration_ms': durationMs,
-        'qwen-code.daemon.sse.event_frames_write_settled':
+        'lailatul-coder.daemon.sse.duration_ms': durationMs,
+        'lailatul-coder.daemon.sse.event_frames_write_settled':
           eventFramesWriteSettled,
-        'qwen-code.daemon.sse.backpressure_count': backpressureCount,
-        'qwen-code.daemon.sse.max_drain_wait_ms': maxDrainWaitMs,
-        'qwen-code.daemon.sse.max_live_publish_to_write_settled_ms':
+        'lailatul-coder.daemon.sse.backpressure_count': backpressureCount,
+        'lailatul-coder.daemon.sse.max_drain_wait_ms': maxDrainWaitMs,
+        'lailatul-coder.daemon.sse.max_live_publish_to_write_settled_ms':
           maxLivePublishToWriteSettledMs,
-        'qwen-code.daemon.sse.slow_warning_count': slowWarningCount,
-        'qwen-code.daemon.sse.close_reason': resolvedCloseReason,
+        'lailatul-coder.daemon.sse.slow_warning_count': slowWarningCount,
+        'lailatul-coder.daemon.sse.close_reason': resolvedCloseReason,
         ...(lastEventIdWritten !== undefined
           ? {
-              'qwen-code.daemon.sse.last_event_id_written': lastEventIdWritten,
+              'lailatul-coder.daemon.sse.last_event_id_written': lastEventIdWritten,
             }
           : {}),
         ...(eventBusEvictionReason
           ? {
-              'qwen-code.daemon.sse.event_bus_eviction_reason':
+              'lailatul-coder.daemon.sse.event_bus_eviction_reason':
                 eventBusEvictionReason,
             }
           : {}),
         ...(terminalEventType
           ? {
-              'qwen-code.daemon.sse.terminal_event_type': terminalEventType,
+              'lailatul-coder.daemon.sse.terminal_event_type': terminalEventType,
             }
           : {}),
       };
@@ -477,7 +477,7 @@ export function registerSseEventsRoutes(
         emitDaemonLog(
           'Daemon SSE stream closed.',
           { ...telemetryBaseAttributes, ...closeAttributes },
-          { eventName: 'qwen-code.daemon.sse.closed' },
+          { eventName: 'lailatul-coder.daemon.sse.closed' },
         );
       }).catch(() => {});
       try {
@@ -541,11 +541,11 @@ export function registerSseEventsRoutes(
       // Diagnostics must not interfere with the stream handshake.
     }
     emitLifecycleLog(
-      'qwen-code.daemon.sse.opened',
+      'lailatul-coder.daemon.sse.opened',
       'Daemon SSE stream opened.',
       {
         ...(lastEventId !== undefined
-          ? { 'qwen-code.daemon.sse.resume_from_event_id': lastEventId }
+          ? { 'lailatul-coder.daemon.sse.resume_from_event_id': lastEventId }
           : {}),
       },
     );
@@ -796,13 +796,13 @@ export function registerSseEventsRoutes(
           /* stderr pipe closed; eviction is still happening. */
         }
         emitLifecycleLog(
-          'qwen-code.daemon.sse.client_evicted',
+          'lailatul-coder.daemon.sse.client_evicted',
           'Daemon SSE client evicted by writer idle timeout.',
           {
-            'qwen-code.daemon.sse.writer_idle_for_ms': idleForMs,
-            'qwen-code.daemon.sse.writer_idle_timeout_ms':
+            'lailatul-coder.daemon.sse.writer_idle_for_ms': idleForMs,
+            'lailatul-coder.daemon.sse.writer_idle_timeout_ms':
               writerIdleTimeoutMsValue,
-            'qwen-code.daemon.sse.eviction_reason': 'writer_idle_timeout',
+            'lailatul-coder.daemon.sse.eviction_reason': 'writer_idle_timeout',
           },
         );
         cleanup();
@@ -931,27 +931,27 @@ export function registerSseEventsRoutes(
               // The recovery frame must still reach the client.
             }
             emitLifecycleLog(
-              'qwen-code.daemon.sse.state_resync_required',
+              'lailatul-coder.daemon.sse.state_resync_required',
               'Daemon SSE state resync required.',
               {
-                'qwen-code.daemon.sse.resync_reason': reason,
+                'lailatul-coder.daemon.sse.resync_reason': reason,
                 ...(detail
-                  ? { 'qwen-code.daemon.sse.resync_detail': detail }
+                  ? { 'lailatul-coder.daemon.sse.resync_detail': detail }
                   : {}),
                 ...(typeof data.lastDeliveredId === 'number'
                   ? {
-                      'qwen-code.daemon.sse.resync_last_delivered_id':
+                      'lailatul-coder.daemon.sse.resync_last_delivered_id':
                         data.lastDeliveredId,
                     }
                   : {}),
                 ...(typeof data.earliestAvailableId === 'number'
                   ? {
-                      'qwen-code.daemon.sse.resync_earliest_available_id':
+                      'lailatul-coder.daemon.sse.resync_earliest_available_id':
                         data.earliestAvailableId,
                     }
                   : {}),
                 ...(gap !== undefined
-                  ? { 'qwen-code.daemon.sse.resync_gap_events': gap }
+                  ? { 'lailatul-coder.daemon.sse.resync_gap_events': gap }
                   : {}),
               },
             );

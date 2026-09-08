@@ -45,7 +45,7 @@ qwen-serve-mcp
     "qwen-serve-bridge": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "-p", "@qwen-code/sdk", "qwen-serve-mcp"],
+      "args": ["-y", "-p", "@lailatul-coder/sdk", "qwen-serve-mcp"],
       "env": {
         "QWEN_DAEMON_URL": "http://127.0.0.1:4170",
         "QWEN_DAEMON_TOKEN": "<your-token>"
@@ -58,7 +58,7 @@ qwen-serve-mcp
 ### 方式二：全局安装后使用
 
 ```bash
-npm install -g @qwen-code/sdk
+npm install -g @lailatul-coder/sdk
 ```
 
 ```json
@@ -78,7 +78,7 @@ npm install -g @qwen-code/sdk
 
 ### 方式三：指定本地路径（开发调试用）
 
-适用于本地开发 qwen-code 源码时：
+适用于本地开发 lailatul-coder 源码时：
 
 ```json
 {
@@ -87,7 +87,7 @@ npm install -g @qwen-code/sdk
       "type": "stdio",
       "command": "node",
       "args": [
-        "/path/to/qwen-code/packages/sdk-typescript/dist/daemon-mcp/serve-bridge/bin.js"
+        "/path/to/lailatul-coder/packages/sdk-typescript/dist/daemon-mcp/serve-bridge/bin.js"
       ],
       "env": {
         "QWEN_DAEMON_URL": "http://127.0.0.1:4170",
@@ -105,7 +105,7 @@ npm install -g @qwen-code/sdk
 ### 编程式使用
 
 ```typescript
-import { createServeBridgeMcpServer } from '@qwen-code/sdk';
+import { createServeBridgeMcpServer } from '@lailatul-coder/sdk';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
 const server = createServeBridgeMcpServer({

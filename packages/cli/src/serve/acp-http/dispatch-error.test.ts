@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { SessionIdCaseConflictError } from '@qwen-code/qwen-code-core';
+import { SessionIdCaseConflictError } from '@lailatul-coder/lailatul-coder-core';
 import { DaemonDrainingError } from '../server/session-archive.js';
 import {
   BridgeChannelQuarantinedError,

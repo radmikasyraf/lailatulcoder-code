@@ -9,7 +9,7 @@ WebShell editor only offers a preset select. Users cannot align named groups
 with an existing project palette or visually distinguish a larger group
 catalog.
 
-Tracked by [#6744](https://github.com/QwenLM/qwen-code/issues/6744).
+Tracked by [#6744](https://github.com/LailatulCoder/lailatul-coder/issues/6744).
 
 ## Proposed changes
 

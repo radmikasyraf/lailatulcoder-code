@@ -8,7 +8,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../../config/settings.js';
 
 const mocks = vi.hoisted(() => ({

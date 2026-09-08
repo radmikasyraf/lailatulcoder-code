@@ -9,7 +9,7 @@ import type {
   BridgePendingPermissionInteraction,
   BridgePendingUserQuestion,
   BridgePendingUserQuestionInteraction,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 import type {
   DaemonPendingInteractionOption,
   DaemonPendingPermissionInteraction,

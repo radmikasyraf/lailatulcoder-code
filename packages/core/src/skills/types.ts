@@ -11,7 +11,7 @@ import type { HookDefinition, HookEventName } from '../hooks/types.js';
  * - 'project': Stored in `.qwen/skills/` within the project directory
  * - 'user': Stored in `~/.qwen/skills/` in the user's home directory
  * - 'extension': Provided by an installed extension
- * - 'bundled': Built-in skills shipped with qwen-code
+ * - 'bundled': Built-in skills shipped with lailatul-coder
  */
 export type SkillLevel = 'project' | 'user' | 'extension' | 'bundled';
 
@@ -58,7 +58,7 @@ export interface SkillConfig {
   /**
    * Optional model override for this skill's execution.
    * Uses the same selector syntax as subagent model selectors:
-   * `fast`, bare model ID (e.g., `qwen-coder-plus`),
+   * `fast`, bare model ID (e.g., `lailatul-coderr-plus`),
    * `authType:modelId` for cross-provider, or omitted/`inherit`
    * to use the session model.
    */

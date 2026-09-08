@@ -1,7 +1,7 @@
 {
-  "name": "@qwen-code/live-host",
+  "name": "@lailatul-coder/live-host",
   "version": "0.0.5",
-  "description": "Native macOS audio and global-shortcut host for Qwen Code Live Voice",
+  "description": "Native macOS audio and global-shortcut host for LailatulCoder Ai Live Voice",
   "main": "dist/main.cjs",
   "private": true,
   "type": "module",

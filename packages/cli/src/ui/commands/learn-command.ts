@@ -11,7 +11,7 @@ import {
   expandHomeDir,
   parseLearnVideoInput,
   readPathFromWorkspace,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Part } from '@google/genai';
 import { t } from '../../i18n/index.js';
 import type {

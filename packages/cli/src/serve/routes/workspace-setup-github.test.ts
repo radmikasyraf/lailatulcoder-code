@@ -16,7 +16,7 @@ import {
   createWorkspaceFileSystemFactory,
 } from '../fs/index.js';
 import type { AcpSessionBridge } from '../acp-session-bridge.js';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
 import type { ServeOptions } from '../types.js';
 import {
   resetHomeEnvBootstrapForTesting,
@@ -184,7 +184,7 @@ function setupResult() {
     gitRepoRoot: '/work',
     releaseTag: 'v1.2.3',
     readmeUrl:
-      'https://github.com/QwenLM/qwen-code-action/blob/v1.2.3/README.md#quick-start',
+      'https://github.com/LailatulCoder/lailatul-coder-action/blob/v1.2.3/README.md#quick-start',
     secretsUrl: 'https://github.com/owner/repo/settings/secrets/actions',
     workflows: [
       {

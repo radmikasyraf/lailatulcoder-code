@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -11,9 +11,9 @@ import { createMockCommandContext } from '../../test-utils/mockCommandContext.js
 
 const tryGenerateSessionTitleMock = vi.fn();
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original =
-    (await importOriginal()) as typeof import('@qwen-code/qwen-code-core');
+    (await importOriginal()) as typeof import('@lailatul-coder/lailatul-coder-core');
   return {
     ...original,
     tryGenerateSessionTitle: (...args: unknown[]) =>

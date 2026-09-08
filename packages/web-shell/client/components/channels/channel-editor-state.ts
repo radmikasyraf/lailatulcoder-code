@@ -10,7 +10,7 @@ import type {
   DaemonChannelSecretUpdate,
   DaemonChannelTypeDescriptor,
   DaemonChannelUpsertRequest,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 export type ChannelSenderPolicy = 'pairing' | 'open' | '';
 

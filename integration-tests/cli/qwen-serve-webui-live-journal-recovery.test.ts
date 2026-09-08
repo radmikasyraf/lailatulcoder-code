@@ -11,7 +11,7 @@ import { act, createElement } from 'react';
 import type { Root } from 'react-dom/client';
 import { JSDOM } from 'jsdom';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
-import type { DaemonEvent, DaemonTranscriptBlock } from '@qwen-code/sdk/daemon';
+import type { DaemonEvent, DaemonTranscriptBlock } from '@lailatul-coder/sdk/daemon';
 import {
   makeTempWorkspace,
   spawnDaemon,
@@ -28,8 +28,8 @@ let activeDaemon: SpawnedDaemon | undefined;
 let root: Root | undefined;
 let dom: JSDOM;
 let createRoot: typeof import('react-dom/client').createRoot;
-let DaemonSessionProvider: typeof import('@qwen-code/webui/daemon-react-sdk').DaemonSessionProvider;
-let useTranscriptBlocks: typeof import('@qwen-code/webui/daemon-react-sdk').useTranscriptBlocks;
+let DaemonSessionProvider: typeof import('@lailatul-coder/webui/daemon-react-sdk').DaemonSessionProvider;
+let useTranscriptBlocks: typeof import('@lailatul-coder/webui/daemon-react-sdk').useTranscriptBlocks;
 const originalGlobalDescriptors = new Map(
   ['window', 'document', 'navigator', 'IS_REACT_ACT_ENVIRONMENT'].map(
     (key) => [key, Object.getOwnPropertyDescriptor(globalThis, key)] as const,
@@ -58,7 +58,7 @@ beforeAll(async () => {
   });
   ({ createRoot } = await import('react-dom/client'));
   ({ DaemonSessionProvider, useTranscriptBlocks } = await import(
-    '@qwen-code/webui/daemon-react-sdk'
+    '@lailatul-coder/webui/daemon-react-sdk'
   ));
 });
 

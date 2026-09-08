@@ -9,7 +9,7 @@ import type {
   DaemonCapabilities,
   DaemonSessionSummary,
   DaemonWorkspaceCapability,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   hasMultipleWorkspaces,
   isNonPrimaryWorkspaceSession,

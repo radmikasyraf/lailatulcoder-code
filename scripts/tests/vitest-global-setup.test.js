@@ -262,16 +262,16 @@ describe('subpath exports entries are probed', () => {
     writeFileSync(
       configPath,
       [
-        "alias: { '@qwen-code/acp-bridge/status': 'x', '@qwen-code/sdk/daemon': 'y' }",
-        "// '@qwen-code/acp-bridge/commented': 'x'",
-        "/* '@qwen-code/acp-bridge/blocked': 'x' */",
+        "alias: { '@lailatul-coder/acp-bridge/status': 'x', '@lailatul-coder/sdk/daemon': 'y' }",
+        "// '@lailatul-coder/acp-bridge/commented': 'x'",
+        "/* '@lailatul-coder/acp-bridge/blocked': 'x' */",
       ].join('\n'),
     );
     const aliases = aliasedSpecifiers(configPath);
-    expect(aliases.has('@qwen-code/acp-bridge/status')).toBe(true);
-    expect(aliases.has('@qwen-code/sdk/daemon')).toBe(true);
-    expect(aliases.has('@qwen-code/acp-bridge/commented')).toBe(false);
-    expect(aliases.has('@qwen-code/acp-bridge/blocked')).toBe(false);
+    expect(aliases.has('@lailatul-coder/acp-bridge/status')).toBe(true);
+    expect(aliases.has('@lailatul-coder/sdk/daemon')).toBe(true);
+    expect(aliases.has('@lailatul-coder/acp-bridge/commented')).toBe(false);
+    expect(aliases.has('@lailatul-coder/acp-bridge/blocked')).toBe(false);
     // A missing config yields an empty set rather than throwing.
     expect(aliasedSpecifiers(path.join(root, 'nope.ts'))).toEqual(new Set());
   });
@@ -327,7 +327,7 @@ function registryChannelEntries() {
   // must tolerate them or a future builtin channel silently escapes this
   // drift check.
   const specifiers = [
-    ...source.matchAll(/import\('@qwen-code\/(channel-[a-z0-9._-]+)'\)/g),
+    ...source.matchAll(/import\('@lailatul-coder\/(channel-[a-z0-9._-]+)'\)/g),
   ].map((match) => match[1]);
   return specifiers.map(
     (name) => `packages/channels/${name.replace('channel-', '')}`,

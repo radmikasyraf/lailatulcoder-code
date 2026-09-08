@@ -4,7 +4,7 @@ import type {
   DaemonSessionCatalogVersion,
   DaemonSessionGroupCatalog,
   DaemonWorkspaceSessionLiveState,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   getSessionCatalogStore,
   type StagedWorkspaceSessionCatalog,

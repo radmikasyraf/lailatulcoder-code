@@ -9,7 +9,7 @@ import {
   AuthType,
   zaiProvider,
   buildInstallPlan,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 describe('zaiProvider', () => {
   it('offers standard API key and Coding Plan endpoints', () => {

@@ -61,7 +61,7 @@ focus. Arbitrary webpages are not treated as videos.
 Local files use the existing workspace boundary, ignore rules, MIME detection,
 and 10 MB encoded-data limit. `.mp4` uses `video/mp4`; other direct-file
 extensions use their corresponding video MIME type. Direct remote URLs are
-passed to the active model provider without a Qwen Code download.
+passed to the active model provider without a LailatulCoder Ai download.
 
 YouTube watch pages are not video files. They are detected and rejected with
 guidance to download the video and pass the local file. This is deliberate:

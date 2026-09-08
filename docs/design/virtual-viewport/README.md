@@ -8,7 +8,7 @@ Tracking branch: `feat/virtual-viewport-on-ink7` (base: `main`)
 
 ## 1. Problem
 
-Several user-reported flicker / lag issues all bottom-out in the same architectural fact: ink's `<Static>` is **append-only** and qwen-code's `MainContent.tsx` feeds the _entire_ `mergedHistory` through it on every render. For a 1000-turn conversation, that is 1000 `HistoryItemDisplay` React renders + ink layout passes per state change.
+Several user-reported flicker / lag issues all bottom-out in the same architectural fact: ink's `<Static>` is **append-only** and lailatul-coder's `MainContent.tsx` feeds the _entire_ `mergedHistory` through it on every render. For a 1000-turn conversation, that is 1000 `HistoryItemDisplay` React renders + ink layout passes per state change.
 
 The current symptoms this enables:
 
@@ -44,7 +44,7 @@ Maintains its **own forked ink** at `src/ink/`:
   - `Markdown.tsx` `StreamingMarkdown` splits content at last top-level block boundary, memoizes stable prefix, only re-parses unstable suffix
 - `Markdown.tsx` token cache (LRU-500) — survives unmount→remount, so virtual-scroll re-mounts hit cache without re-lexing
 
-**Why we don't replicate this approach**: forking ink wholesale is unsustainable maintenance (1722 LoC `ink.tsx` alone, plus a custom reconciler). Every upstream ink fix has to be hand-merged. That cost is justified for claude-code's scale; not for qwen-code.
+**Why we don't replicate this approach**: forking ink wholesale is unsustainable maintenance (1722 LoC `ink.tsx` alone, plus a custom reconciler). Every upstream ink fix has to be hand-merged. That cost is justified for claude-code's scale; not for lailatul-coder.
 
 ### 2.2 gemini-cli (`/Users/gawain/Documents/codebase/opensource/gemini-cli`)
 
@@ -74,7 +74,7 @@ return <Static items={[<AppHeader />, ...staticHistoryItems, ...lastResponseHist
 
 ## 3. ink 7 capability check
 
-qwen-code is on the in-flight `chore/upgrade-ink-7` branch. Inspected `node_modules/ink/build/index.d.ts` exports:
+lailatul-coder is on the in-flight `chore/upgrade-ink-7` branch. Inspected `node_modules/ink/build/index.d.ts` exports:
 
 - ✅ `useBoxMetrics(ref): {width, height, left, top, hasMeasured}` — auto-updates on layout change. **Functional equivalent of `ResizeObserver`.**
 - ✅ `measureElement(node)` — single-shot imperative measure
@@ -88,7 +88,7 @@ qwen-code is on the in-flight `chore/upgrade-ink-7` branch. Inspected `node_modu
 
 ## 4. Strategic decision
 
-**Port gemini-cli's `ScrollableList` + `VirtualizedList` + supporting hooks/contexts to qwen-code, adapting `ResizeObserver` → `useBoxMetrics` and rolling a custom `StaticRender`.**
+**Port gemini-cli's `ScrollableList` + `VirtualizedList` + supporting hooks/contexts to lailatul-coder, adapting `ResizeObserver` → `useBoxMetrics` and rolling a custom `StaticRender`.**
 
 Rejected alternatives:
 
@@ -323,7 +323,7 @@ gemini-cli does:
 const MemoizedHistoryItemDisplay = memo(HistoryItemDisplay);
 ```
 
-Same pattern in qwen-code. Required for virtualization to actually skip re-renders.
+Same pattern in lailatul-coder. Required for virtualization to actually skip re-renders.
 
 ## 7. PR sequence
 
@@ -342,8 +342,8 @@ V.3 (integration tests) remains desirable for long-session regression coverage b
 
 Per-PR (mandatory before any "ready for review"):
 
-- `npm run typecheck --workspace=@qwen-code/qwen-code` — clean
-- `npm run lint --workspace=@qwen-code/qwen-code` — clean
+- `npm run typecheck --workspace=@lailatul-coder/lailatul-coder` — clean
+- `npm run lint --workspace=@lailatul-coder/lailatul-coder` — clean
 - `cd packages/cli && npx vitest run` — all green
 - Multi-round directionless audit per project workflow
 

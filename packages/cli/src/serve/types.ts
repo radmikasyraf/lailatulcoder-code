@@ -12,18 +12,18 @@ import {
 // Import the canonical `PermissionPolicy` union from acp-bridge
 // instead of inlining the string literals, so upstream changes
 // are compiler-flagged here.
-import type { PermissionPolicy } from '@qwen-code/acp-bridge';
-import type { DaemonMemoryBudget } from '@qwen-code/acp-bridge/daemonMemoryBudget';
+import type { PermissionPolicy } from '@lailatul-coder/acp-bridge';
+import type { DaemonMemoryBudget } from '@lailatul-coder/acp-bridge/daemonMemoryBudget';
 // Type-only, so it is erased before the serve fast-path bundle closure check
 // ever sees it. Reused only for the child-heap knob: `memoryPressureMode`
 // happens to share the same two values today but is an independent switch, and
 // aliasing them would couple whichever one gains `enforce` first to the other.
-import type { ChildHeapMode } from '@qwen-code/acp-bridge/childHeapPolicy';
+import type { ChildHeapMode } from '@lailatul-coder/acp-bridge/childHeapPolicy';
 import type {
   AuthType,
   InputModalities,
   MemoryProjectScope,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 /**
  * Stage 1 daemon mode shape.
@@ -397,7 +397,7 @@ export interface CapabilitiesEnvelope {
    */
   protocolVersions?: ServeProtocolVersions;
   /**
-   * Qwen Code CLI/SDK version served by this daemon. Optional because this is
+   * LailatulCoder Ai CLI/SDK version served by this daemon. Optional because this is
    * additive to v=1; older v=1 daemons omit it.
    */
   qwenCodeVersion?: string;

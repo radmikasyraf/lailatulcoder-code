@@ -4,11 +4,11 @@ import {
   useMemo,
   useSyncExternalStore,
 } from 'react';
-import type { DaemonTranscriptBlock } from '@qwen-code/sdk/daemon';
+import type { DaemonTranscriptBlock } from '@lailatul-coder/sdk/daemon';
 import {
   useConnection,
   useTranscriptStore,
-} from '@qwen-code/webui/daemon-react-sdk';
+} from '@lailatul-coder/webui/daemon-react-sdk';
 
 // Cap transcript re-renders at ~20fps. During streaming every network chunk
 // notifies the store; each render then runs the O(transcript) normalization

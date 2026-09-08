@@ -5,7 +5,7 @@
  */
 
 /**
- * Loading messages from Qwen Code CLI
+ * Loading messages from LailatulCoder Ai CLI
  * Source: packages/cli/src/ui/hooks/usePhraseCycler.ts
  */
 export const WITTY_LOADING_PHRASES = [

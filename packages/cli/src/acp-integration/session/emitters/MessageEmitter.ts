@@ -9,7 +9,7 @@ import { hasFullSessionContext, type SubagentMeta } from '../types.js';
 import {
   createTranscriptMessageUpdate,
   createTranscriptUsageUpdate,
-} from '@qwen-code/acp-bridge/transcriptReplay';
+} from '@lailatul-coder/acp-bridge/transcriptReplay';
 import {
   apiActivityTracker,
   getActiveGoal,
@@ -17,7 +17,7 @@ import {
   type GoalRecord,
   type GoalSnapshotV2,
   type GoalStateCause,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { BaseEmitter } from './base-emitter.js';
 import type { SessionUpdate } from '@agentclientprotocol/sdk';
 import type { HistoryItemGoalStatus } from '../../../ui/types.js';

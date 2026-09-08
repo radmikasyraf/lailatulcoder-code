@@ -18,7 +18,7 @@ import type {
   ChannelUserInputRequestContext,
   Envelope,
   SessionTarget,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type {
   DingtalkCardCallback,
   DingtalkCardCallbackResult,
@@ -110,13 +110,13 @@ vi.mock('dingtalk-stream-sdk-nodejs', () => ({
   EventAck: { SUCCESS: 'success' },
 }));
 
-vi.mock('@qwen-code/channel-base', async () => {
+vi.mock('@lailatul-coder/channel-base', async () => {
   // Use the REAL sanitizeSenderName so the adapter's log-sanitization path is
   // exercised against the shared helper, not a stub that could mask drift. The
-  // vitest config aliases @qwen-code/channel-base to its SOURCE, so this resolves
+  // vitest config aliases @lailatul-coder/channel-base to its SOURCE, so this resolves
   // with no prior channel-base build (dist may be absent/stale package-locally).
-  const real = await vi.importActual<typeof import('@qwen-code/channel-base')>(
-    '@qwen-code/channel-base',
+  const real = await vi.importActual<typeof import('@lailatul-coder/channel-base')>(
+    '@lailatul-coder/channel-base',
   );
   return {
     ChannelBase: class {
@@ -1690,7 +1690,7 @@ describe('DingtalkChannel status cards', () => {
         senderId: 'owner-1',
         isInAtList: true,
         atUsers: [{ dingtalkId: 'bot-user' }, { dingtalkId: 'other-user' }],
-        text: { content: '@qwen-code What changed?' },
+        text: { content: '@lailatul-coder What changed?' },
       }),
       headers: { messageId: 'message-quote' },
     } as unknown as DWClientDownStream;
@@ -1729,7 +1729,7 @@ describe('DingtalkChannel status cards', () => {
         senderId: 'owner-1',
         isInAtList: true,
         atUsers: [{ dingtalkId: 'bot-user' }, { dingtalkId: 'other-user' }],
-        text: { content: '@qwen-code What changed?' },
+        text: { content: '@lailatul-coder What changed?' },
       }),
       headers: { messageId: 'message-quote' },
     } as unknown as DWClientDownStream;
@@ -2248,7 +2248,7 @@ describe('DingtalkChannel parsed-message logging', () => {
         senderStaffId: 'staff-1',
         senderId: 'sender-1',
         isInAtList: true,
-        text: { content: '@qwen-code hello' },
+        text: { content: '@lailatul-coder hello' },
       }),
       headers: { messageId: 'group-name-m1' },
     } as unknown as DWClientDownStream;
@@ -2279,7 +2279,7 @@ describe('DingtalkChannel parsed-message logging', () => {
         senderStaffId: 'staff-1',
         senderId: 'sender-1',
         isInAtList: true,
-        text: { content: '@qwen-code hello' },
+        text: { content: '@lailatul-coder hello' },
       }),
       headers: { messageId: 'thread-fallback-m1' },
     } as unknown as DWClientDownStream;
@@ -2314,7 +2314,7 @@ describe('DingtalkChannel parsed-message logging', () => {
         atUsers: [
           { dingtalkId: 'private-dingtalk-id', staffId: 'private-staff-id' },
         ],
-        text: { content: '@qwen-code hello' },
+        text: { content: '@lailatul-coder hello' },
       }),
       headers: { messageId: 'debug-m1' },
     } as unknown as DWClientDownStream;
@@ -2360,7 +2360,7 @@ describe('DingtalkChannel parsed-message logging', () => {
         senderStaffId: 'staff-1',
         senderId: 'sender-1',
         isInAtList: true,
-        text: { content: '@qwen-code hello' },
+        text: { content: '@lailatul-coder hello' },
       }),
       headers: { messageId: 'm1' },
     } as unknown as DWClientDownStream;
@@ -3217,7 +3217,7 @@ describe('DingtalkChannel sender attribution', () => {
         senderStaffId: 'staff-1',
         senderId: 'sender-1',
         isInAtList: true,
-        text: { content: '@qwen-code hello' },
+        text: { content: '@lailatul-coder hello' },
       }),
       headers: { messageId: 'm1' },
     } as unknown as DWClientDownStream;
@@ -3257,7 +3257,7 @@ describe('DingtalkChannel sender attribution', () => {
         senderStaffId: 'staff-1',
         senderId: 'sender-1',
         isInAtList: true,
-        text: { content: '@qwen-code 查看记忆\u200b' },
+        text: { content: '@lailatul-coder 查看记忆\u200b' },
       }),
       headers: { messageId: 'm1' },
     } as unknown as DWClientDownStream;
@@ -3298,7 +3298,7 @@ describe('DingtalkChannel sender attribution', () => {
         senderStaffId: 'staff-1',
         senderId: 'sender-1',
         isInAtList: true,
-        text: { content: '@qwen-code\u200b查看记忆' },
+        text: { content: '@lailatul-coder\u200b查看记忆' },
       }),
       headers: { messageId: 'm1' },
     } as unknown as DWClientDownStream;
@@ -3340,7 +3340,7 @@ describe('DingtalkChannel sender attribution', () => {
         senderId: 'sender-1',
         isInAtList: true,
         text: {
-          content: '@qwen-code 重复： git@example.com:group/repo.git',
+          content: '@lailatul-coder 重复： git@example.com:group/repo.git',
         },
       }),
       headers: { messageId: 'm1' },
@@ -3625,7 +3625,7 @@ describe('DingtalkChannel sender attribution', () => {
         senderStaffId: ['staff-1'],
         senderId: 123,
         isInAtList: true,
-        text: { content: '@qwen-code hello' },
+        text: { content: '@lailatul-coder hello' },
       }),
       headers: { messageId: 'header-m1' },
     } as unknown as DWClientDownStream;
@@ -4042,7 +4042,7 @@ describe('DingtalkChannel reply mentions', () => {
 
 describe('DingtalkChannel mention target lifecycle', () => {
   it('does not retain a preflight-rejected group candidate', async () => {
-    vi.doUnmock('@qwen-code/channel-base');
+    vi.doUnmock('@lailatul-coder/channel-base');
     vi.resetModules();
     const { DingtalkChannel: RealDingtalkChannel } = await import(
       './DingtalkAdapter.js'
@@ -4118,7 +4118,7 @@ describe('DingtalkChannel mention target lifecycle', () => {
   });
 
   it('does not retain a local-command candidate', async () => {
-    vi.doUnmock('@qwen-code/channel-base');
+    vi.doUnmock('@lailatul-coder/channel-base');
     vi.resetModules();
     const { DingtalkChannel: RealDingtalkChannel } = await import(
       './DingtalkAdapter.js'
@@ -4184,7 +4184,7 @@ describe('DingtalkChannel mention target lifecycle', () => {
   });
 
   it('clears the final buffered command target after synthetic collect re-entry', async () => {
-    vi.doUnmock('@qwen-code/channel-base');
+    vi.doUnmock('@lailatul-coder/channel-base');
     vi.resetModules();
     const { DingtalkChannel: RealDingtalkChannel } = await import(
       './DingtalkAdapter.js'
@@ -4258,7 +4258,7 @@ describe('DingtalkChannel mention target lifecycle', () => {
   });
 
   it('clears buffered mention targets for a dead session only', async () => {
-    vi.doUnmock('@qwen-code/channel-base');
+    vi.doUnmock('@lailatul-coder/channel-base');
     vi.resetModules();
     const { DingtalkChannel: RealDingtalkChannel } = await import(
       './DingtalkAdapter.js'

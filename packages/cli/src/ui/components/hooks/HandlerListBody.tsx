@@ -7,7 +7,7 @@
 import { Box, Text } from 'ink';
 import { theme } from '../../semantic-colors.js';
 import { useTerminalSize } from '../../hooks/useTerminalSize.js';
-import { HookType } from '@qwen-code/qwen-code-core';
+import { HookType } from '@lailatul-coder/lailatul-coder-core';
 import type { HookConfigDisplayInfo } from './types.js';
 import { getConfigSourceDisplay } from './sourceLabels.js';
 import { t } from '../../../i18n/index.js';
@@ -104,3 +104,4 @@ function formatTypeDisplay(info: HookConfigDisplayInfo): string {
   const isAsync = config.type === HookType.Command && config.async === true;
   return isAsync ? `${config.type} async` : String(config.type);
 }
+

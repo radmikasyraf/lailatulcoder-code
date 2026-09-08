@@ -1,4 +1,4 @@
-# Round seeding — `@qwen-code /takeover from N`
+# Round seeding — `@lailatul-coder /takeover from N`
 
 Operator guide for the one parameterized takeover command. For the
 implementation rationale behind each gate, see the design record:
@@ -25,7 +25,7 @@ already been through.
 ## Usage
 
 ```
-@qwen-code /takeover from 4
+@lailatul-coder /takeover from 4
 ```
 
 Engages takeover **and** starts this counting window's round counter at 4. With
@@ -81,11 +81,11 @@ next `N+2`, and the seed stops mattering. It cannot double-count.
 ack whose timestamp _is_ the window key, so a superseded window's seed can never
 leak forward. Consequently:
 
-- `@qwen-code /retry` opens a new window with **no** seed — the counter returns
+- `@lailatul-coder /retry` opens a new window with **no** seed — the counter returns
   to 0 and the suggestion valve reopens. That is what re-arming means.
-- A bare `@qwen-code /takeover` on an already-managed PR does the same.
+- A bare `@lailatul-coder /takeover` on an already-managed PR does the same.
 - To re-arm a late-stage PR _without_ reopening the valve, re-issue the command
-  **with its number**: `@qwen-code /takeover from 7`. On an already-managed PR
+  **with its number**: `@lailatul-coder /takeover from 7`. On an already-managed PR
   this takes the re-arm path and says so ("the round counter restarts at 7 —
   rounds already spent on this PR").
 
@@ -114,7 +114,7 @@ cap is 100, so a seed of 4 leaves 96.
 
 ## Accepted and rejected forms
 
-The literal prefix must match `@qwen-code /takeover` byte-for-byte and the tail
+The literal prefix must match `@lailatul-coder /takeover` byte-for-byte and the tail
 must be a bare 1–2 digit integer. The command has to be the very first thing in
 the comment: **no leading whitespace of any kind** — space, tab, or blank line.
 The router prefilters on the _raw_ comment body with `startsWith`, so a body
@@ -126,18 +126,18 @@ never started, not even a log line.
 
 | Body                                 | Result                                      |
 | ------------------------------------ | ------------------------------------------- |
-| `@qwen-code /takeover from 4`        | engage, seed 4                              |
-| `@qwen-code /takeover from 04`       | engage, seed 4 (read as decimal, not octal) |
-| `@qwen-code /takeover from 0`        | engage, no seed — the explicit spelling     |
-| `@qwen-code /takeover`               | engage, no seed                             |
-| `@qwen-code /takeover stop`          | release                                     |
-| `@qwen-code /takeover stop from 4`   | **nothing** — neither releases nor engages  |
-| `@qwen-code /takeover from 100`      | **nothing** — 3 digits rejected             |
-| `@qwen-code /takeover  from 4`       | **nothing** — double space                  |
-| `please @qwen-code /takeover from 4` | **nothing** — must start the comment        |
-| `  @qwen-code /takeover from 4`      | **nothing** — leading spaces                |
+| `@lailatul-coder /takeover from 4`        | engage, seed 4                              |
+| `@lailatul-coder /takeover from 04`       | engage, seed 4 (read as decimal, not octal) |
+| `@lailatul-coder /takeover from 0`        | engage, no seed — the explicit spelling     |
+| `@lailatul-coder /takeover`               | engage, no seed                             |
+| `@lailatul-coder /takeover stop`          | release                                     |
+| `@lailatul-coder /takeover stop from 4`   | **nothing** — neither releases nor engages  |
+| `@lailatul-coder /takeover from 100`      | **nothing** — 3 digits rejected             |
+| `@lailatul-coder /takeover  from 4`       | **nothing** — double space                  |
+| `please @lailatul-coder /takeover from 4` | **nothing** — must start the comment        |
+| `  @lailatul-coder /takeover from 4`      | **nothing** — leading spaces                |
 | blank line, then the command         | **nothing** — leading newline               |
-| `@qwen-code /takeover from 4 please` | **nothing** — must end the comment          |
+| `@lailatul-coder /takeover from 4 please` | **nothing** — must end the comment          |
 
 ## Reading the result
 
@@ -145,7 +145,7 @@ Once the brake engages, the round report carries a `Deferred non-Critical
 feedback` section whose preamble names the seed explicitly, for example:
 
 > the round counter reached 5 (this window was seeded at round 4 by
-> `@qwen-code /takeover from 4`, plus 1 change-producing round(s) since)
+> `@lailatul-coder /takeover from 4`, plus 1 change-producing round(s) since)
 
 That wording exists so a maintainer seeing Critical-only fire on a PR the loop
 has only run once can tell it from a misfire. The agent is told the same thing

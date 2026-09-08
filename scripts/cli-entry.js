@@ -2,7 +2,7 @@
 
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -186,14 +186,14 @@ function getManagedNpmInstallation() {
       'versions',
       version,
       'node_modules',
-      '@qwen-code',
-      'qwen-code',
+      '@lailatul-coder',
+      'lailatul-coder',
     );
     const packageJsonPath = join(packageRoot, 'package.json');
     const pkg = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
     const cliPath = join(packageRoot, 'cli.js');
     if (
-      pkg.name !== '@qwen-code/qwen-code' ||
+      pkg.name !== '@lailatul-coder/lailatul-coder' ||
       pkg.version !== version ||
       !existsSync(cliPath)
     ) {

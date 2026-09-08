@@ -2,7 +2,7 @@ export { DingtalkChannel } from './DingtalkAdapter.js';
 export { downloadMedia } from './media.js';
 
 import { DingtalkChannel } from './DingtalkAdapter.js';
-import type { ChannelPlugin } from '@qwen-code/channel-base';
+import type { ChannelPlugin } from '@lailatul-coder/channel-base';
 import { DINGTALK_INTERACTIVE_CARD_TIMEOUT_EXCLUSIVE_MINIMUM } from './interactive-card-types.js';
 
 export const plugin: ChannelPlugin = {

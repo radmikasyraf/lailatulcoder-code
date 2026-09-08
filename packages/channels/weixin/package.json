@@ -1,10 +1,10 @@
 {
-  "name": "@qwen-code/channel-weixin",
+  "name": "@lailatul-coder/channel-weixin",
   "version": "0.21.14",
-  "description": "WeChat (Weixin) channel adapter for Qwen Code",
+  "description": "WeChat (Weixin) channel adapter for LailatulCoder Ai",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git",
+    "url": "git+https://github.com/LailatulCoder/lailatul-coder.git",
     "directory": "packages/channels/weixin"
   },
   "type": "module",
@@ -33,7 +33,7 @@
     "test:ci": "vitest run"
   },
   "dependencies": {
-    "@qwen-code/channel-base": "0.21.14"
+    "@lailatul-coder/channel-base": "0.21.14"
   },
   "devDependencies": {
     "typescript": "^5.0.0"

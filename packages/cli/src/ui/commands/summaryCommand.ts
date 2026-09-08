@@ -16,7 +16,7 @@ import {
   isSubpath,
   resolvePath,
   runSideQuery,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { HistoryItemSummary } from '../types.js';
 import { t } from '../../i18n/index.js';
 

@@ -6,7 +6,7 @@
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type * as vscode from 'vscode';
-import { redactLogCredentials } from '@qwen-code/acp-bridge/logRedaction';
+import { redactLogCredentials } from '@lailatul-coder/acp-bridge/logRedaction';
 import { createLogger, isLogLevel, logger, resetLoggerSink } from './logger.js';
 
 function createOutputChannel() {

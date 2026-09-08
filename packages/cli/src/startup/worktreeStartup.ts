@@ -31,8 +31,8 @@ import {
   worktreeBranchForSlug,
   writeWorktreeSession,
   writeWorktreeSessionMarker,
-} from '@qwen-code/qwen-code-core';
-import type { Config, WorktreeSession } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import type { Config, WorktreeSession } from '@lailatul-coder/lailatul-coder-core';
 
 const debugLogger = createDebugLogger('WORKTREE_STARTUP');
 

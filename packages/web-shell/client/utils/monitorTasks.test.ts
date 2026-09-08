@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type {
   DaemonSessionMonitorTaskStatus,
   DaemonSessionTaskStatus,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import type { ACPToolCall } from '../adapters/types';
 import { findMonitorTaskForTool } from './monitorTasks';
 

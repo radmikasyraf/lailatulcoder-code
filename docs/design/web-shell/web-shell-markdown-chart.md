@@ -2,7 +2,7 @@
 
 ## Problem
 
-Qwen Code Web Shell currently owns a standalone `echarts-fulldata` parser,
+LailatulCoder Ai Web Shell currently owns a standalone `echarts-fulldata` parser,
 sanitizer, data-ref resolver, chart lifecycle, styling, and Chart/Data view in
 `EchartsFullDataBlock.tsx`. The same behavior is now maintained and published
 by `@datafe-open/markdown-chart*`.

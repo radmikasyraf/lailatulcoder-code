@@ -5,9 +5,9 @@
  */
 
 /**
- * `@qwen-code/webui/daemon-react-sdk`
+ * `@lailatul-coder/webui/daemon-react-sdk`
  *
- * React bindings for the Qwen Code daemon process.
+ * React bindings for the LailatulCoder Ai daemon process.
  * Provides context Providers, hooks, types, and constants
  * for building UIs that connect to and interact with the daemon.
  *
@@ -18,7 +18,7 @@
  *   DaemonWorkspaceProvider,
  *   useConnection,
  *   useStreamingState,
- * } from '@qwen-code/webui/daemon-react-sdk';
+ * } from '@lailatul-coder/webui/daemon-react-sdk';
  * ```
  */
 
@@ -443,4 +443,4 @@ export type {
   DaemonTranscriptState,
   /** External store interface: getSnapshot, subscribe, dispatch, reset. */
   DaemonTranscriptStore,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';

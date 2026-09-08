@@ -7,7 +7,7 @@
 import {
   ToolErrorType,
   type ToolExecutionStatus,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { describe, expect, it } from 'vitest';
 import {
   createRepeatedToolFailureGuardState,

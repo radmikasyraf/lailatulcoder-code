@@ -1,4 +1,4 @@
-import { DaemonHttpError } from '@qwen-code/sdk/daemon';
+import { DaemonHttpError } from '@lailatul-coder/sdk/daemon';
 
 export function isDefinitelyRejectedPromptAdmission(error: unknown): boolean {
   return (

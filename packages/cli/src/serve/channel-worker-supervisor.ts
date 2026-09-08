@@ -11,14 +11,14 @@ import {
   QWEN_DAEMON_WORKSPACE_ENV,
   QWEN_SERVER_TOKEN_ENV,
 } from './channel-worker-env.js';
-import { sanitizeLogText } from '@qwen-code/channel-base';
-import type { ChannelWebhookTask } from '@qwen-code/channel-base';
+import { sanitizeLogText } from '@lailatul-coder/channel-base';
+import type { ChannelWebhookTask } from '@lailatul-coder/channel-base';
 import {
   CHANNEL_WORKER_KILL_GRACE_MS,
   CHANNEL_WORKER_STARTUP_TIMEOUT_MS,
   CHANNEL_WORKER_STOP_GRACE_MS,
-} from '@qwen-code/acp-bridge/channelControlTimeouts';
-import { EXTERNAL_TOOL_GUARD_TOKEN_ENV } from '@qwen-code/acp-bridge/externalToolGuard';
+} from '@lailatul-coder/acp-bridge/channelControlTimeouts';
+import { EXTERNAL_TOOL_GUARD_TOKEN_ENV } from '@lailatul-coder/acp-bridge/externalToolGuard';
 import {
   CHANNEL_WEBHOOK_TASK_IPC_TIMEOUT_MS,
   ChannelWebhookEnqueueError,

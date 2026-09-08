@@ -35,7 +35,7 @@ import { join } from 'node:path';
 export interface WorkspacePackage {
   /** Repo-relative directory, e.g. `packages/cli`. */
   dir: string;
-  /** The npm package name, e.g. `@qwen-code/cli`. */
+  /** The npm package name, e.g. `@lailatul-coder/cli`. */
   name: string;
   /** Script names it defines (`build`, `test`, …). */
   scripts: string[];

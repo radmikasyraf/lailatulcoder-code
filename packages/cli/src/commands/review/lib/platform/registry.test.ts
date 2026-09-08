@@ -67,7 +67,7 @@ describe('detectPlatformKind', () => {
     );
     expect(detectPlatformKind({ host: 'github.com' })).toBe('github');
     expect(
-      detectPlatformKind({ remoteUrl: 'git@github.com:QwenLM/qwen-code.git' }),
+      detectPlatformKind({ remoteUrl: 'git@github.com:LailatulCoder/lailatul-coder.git' }),
     ).toBe('github');
   });
 
@@ -76,7 +76,7 @@ describe('detectPlatformKind', () => {
       'git@gitlab.alibaba-inc.com:maxcompute/odps_src.git',
     );
     expect(detectPlatformKind({})).toBe('aone');
-    execFileSyncMock.mockReturnValue('git@github.com:QwenLM/qwen-code.git');
+    execFileSyncMock.mockReturnValue('git@github.com:LailatulCoder/lailatul-coder.git');
     expect(detectPlatformKind({})).toBe('github');
   });
 
@@ -128,7 +128,7 @@ describe('detectPlatformKind', () => {
     expect(
       detectPlatformKind({
         host: 'gitlab.alibaba-inc.com',
-        remoteUrl: 'git@github.com:QwenLM/qwen-code.git',
+        remoteUrl: 'git@github.com:LailatulCoder/lailatul-coder.git',
       }),
     ).toBe('aone');
   });

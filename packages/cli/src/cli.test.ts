@@ -23,7 +23,7 @@ import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { FatalError } from '@qwen-code/qwen-code-core';
+import { FatalError } from '@lailatul-coder/lailatul-coder-core';
 import { AlreadyReportedError } from './utils/errors.js';
 import {
   MCP_COMMANDS,
@@ -237,9 +237,9 @@ describe('runCliEntry', () => {
 
     const helpText = stdout.join('');
     expect(helpText).toContain('Usage: qwen [options] [command]');
-    expect(helpText).toContain('Manage Qwen Code hooks');
+    expect(helpText).toContain('Manage LailatulCoder Ai hooks');
     expect(helpText).toContain('Manage MCP servers');
-    expect(helpText).toContain('Run Qwen Code as a local HTTP daemon');
+    expect(helpText).toContain('Run LailatulCoder Ai as a local HTTP daemon');
     expect(helpText).toContain('--model');
     expect(helpText).toContain('-p, --prompt');
     expect(helpText).toContain('--safe-mode');
@@ -512,7 +512,7 @@ describe('bootstrap import boundaries', () => {
     const source = readFileSync('src/cli.ts', 'utf8');
 
     expect(source).not.toContain("import yargs from 'yargs'");
-    expect(source).not.toContain("from '@qwen-code/qwen-code-core'");
+    expect(source).not.toContain("from '@lailatul-coder/lailatul-coder-core'");
     expect(source).not.toContain("import './gemini.js'");
     expect(source).not.toContain("import { main } from './gemini.js'");
     expect(source).not.toContain("from './utils/acp-startup-profiler.js'");
@@ -787,8 +787,8 @@ describe('bootstrap import boundaries', () => {
         'versions',
         '2.0.0',
         'node_modules',
-        '@qwen-code',
-        'qwen-code',
+        '@lailatul-coder',
+        'lailatul-coder',
       );
       mkdirSync(packageRoot, { recursive: true });
       writeFileSync(
@@ -798,14 +798,14 @@ describe('bootstrap import boundaries', () => {
       writeFileSync(
         path.join(entryDir, 'package.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           version: '1.0.0',
         }),
       );
       writeFileSync(
         path.join(packageRoot, 'package.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           version: '2.0.0',
         }),
       );
@@ -997,7 +997,7 @@ describe('bootstrap import boundaries', () => {
       writeFileSync(
         path.join(entryDir, 'package.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           version: '3.0.0',
         }),
       );

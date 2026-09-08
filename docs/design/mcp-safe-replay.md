@@ -6,7 +6,7 @@ An MCP tool can complete a side effect before its response connection fails. Rec
 
 ## Replay policy
 
-Qwen Code automatically replays a failed invocation only when all of the following are true:
+LailatulCoder Ai automatically replays a failed invocation only when all of the following are true:
 
 - The failure is classified as a connection loss by the existing MCP connection checks.
 - The MCP server has `trust: true`.
@@ -17,7 +17,7 @@ Conflicting annotations are not treated as safe. In particular, a tool that decl
 
 The same decision is applied to both execution paths: the direct MCP client used for progress-aware calls and the callable fallback. Abort errors, non-connection errors, and MCP `isError: true` protocol results retain their existing behavior.
 
-After reconnecting, Qwen Code applies the same trust and annotation checks to the newly discovered tool before sending the replay. It does not carry a previous server process's trust or annotations into the new invocation.
+After reconnecting, LailatulCoder Ai applies the same trust and annotation checks to the newly discovered tool before sending the replay. It does not carry a previous server process's trust or annotations into the new invocation.
 
 ## Failure behavior
 
@@ -27,9 +27,9 @@ Connection recovery for later, independent calls remains the responsibility of t
 
 ## Compatibility
 
-This is an intentional conservative change. Tools without annotations no longer receive transparent connection-loss replay, even when an older Qwen Code release retried them. Servers that want replay must provide accurate annotations, and administrators must opt into server trust in a trusted workspace.
+This is an intentional conservative change. Tools without annotations no longer receive transparent connection-loss replay, even when an older LailatulCoder Ai release retried them. Servers that want replay must provide accurate annotations, and administrators must opt into server trust in a trusted workspace.
 
-MCP annotations are behavior hints supplied by the server, not an authorization boundary. Qwen Code uses them for replay only after both server and workspace trust gates pass.
+MCP annotations are behavior hints supplied by the server, not an authorization boundary. LailatulCoder Ai uses them for replay only after both server and workspace trust gates pass.
 
 ## Verification
 

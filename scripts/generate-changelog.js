@@ -230,7 +230,7 @@ export function formatRelease(release) {
 
 const HEADER = `# Changelog
 
-All notable changes to [Qwen Code](https://github.com/QwenLM/qwen-code) are
+All notable changes to [LailatulCoder Ai](https://github.com/LailatulCoder/lailatul-coder) are
 documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
@@ -239,7 +239,7 @@ and the project follows
 are listed; nightly and preview pre-releases are intentionally omitted.
 
 > **This file is generated automatically** from
-> [GitHub Releases](https://github.com/QwenLM/qwen-code/releases). Do not edit it
+> [GitHub Releases](https://github.com/LailatulCoder/lailatul-coder/releases). Do not edit it
 > by hand — run \`npm run changelog\` to regenerate.
 `;
 
@@ -314,7 +314,7 @@ function getDefaultRepo() {
   }
   const url = readJson(path.join(REPO_ROOT, 'package.json'))?.repository?.url;
   const match = /github\.com[/:]([^/]+\/[^/.]+)/.exec(url || '');
-  return match ? match[1] : 'QwenLM/qwen-code';
+  return match ? match[1] : 'LailatulCoder/lailatul-coder';
 }
 
 const HELP = `Generate CHANGELOG.md from GitHub Releases.

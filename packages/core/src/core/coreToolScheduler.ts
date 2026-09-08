@@ -2449,7 +2449,7 @@ export class CoreToolScheduler {
             const ruleInfo = matchingRule
               ? ` Matching deny rule: "${matchingRule}".`
               : '';
-            const permissionErrorMessage = `Qwen Code requires permission to use "${reqInfo.name}", but that permission was declined.${ruleInfo}`;
+            const permissionErrorMessage = `LailatulCoder Ai requires permission to use "${reqInfo.name}", but that permission was declined.${ruleInfo}`;
             newToolCalls.push({
               status: 'error',
               request: reqInfo,
@@ -2475,7 +2475,7 @@ export class CoreToolScheduler {
                   excludedTool.toLowerCase().trim() === normalizedToolName,
               );
               if (excludedMatch) {
-                const permissionErrorMessage = `Qwen Code requires permission to use ${excludedMatch}, but that permission was declined.`;
+                const permissionErrorMessage = `LailatulCoder Ai requires permission to use ${excludedMatch}, but that permission was declined.`;
                 newToolCalls.push({
                   status: 'error',
                   request: reqInfo,
@@ -3224,7 +3224,7 @@ export class CoreToolScheduler {
               const errorMessage =
                 planShellDecision.classification === 'unknown'
                   ? planShellDecision.noApprovalMessage
-                  : `Qwen Code requires permission to use "${reqInfo.name}", but that permission was declined (non-interactive mode cannot prompt for confirmation).`;
+                  : `LailatulCoder Ai requires permission to use "${reqInfo.name}", but that permission was declined (non-interactive mode cannot prompt for confirmation).`;
               if (planShellDecision.classification === 'unknown') {
                 rejectPlanShell(errorMessage);
                 continue;
@@ -3609,7 +3609,7 @@ export class CoreToolScheduler {
             if (hooksEnabled && messageBus) {
               fireNotificationHook(
                 messageBus,
-                `Qwen Code needs your permission to use ${reqInfo.name}`,
+                `LailatulCoder Ai needs your permission to use ${reqInfo.name}`,
                 NotificationType.PermissionPrompt,
                 'Permission needed',
               ).catch((error) => {
@@ -3910,7 +3910,7 @@ export class CoreToolScheduler {
           if (toolSpan) {
             try {
               toolSpan.setAttributes({
-                'qwen-code.tool.modify_with_editor_unavailable': true,
+                'lailatul-coder.tool.modify_with_editor_unavailable': true,
               });
             } catch {
               // OTel errors must not block API behavior.
@@ -4410,7 +4410,7 @@ export class CoreToolScheduler {
     if (!this.config.getDisableAllHooks() && messageBus) {
       fireNotificationHook(
         messageBus,
-        `Qwen Code needs your permission to use ${toolName}`,
+        `LailatulCoder Ai needs your permission to use ${toolName}`,
         NotificationType.PermissionPrompt,
         'Permission needed',
       ).catch((error) => {
@@ -4707,7 +4707,7 @@ export class CoreToolScheduler {
     //
     const sleepInhibitorHandle = acquireSleepInhibitor(
       this.config,
-      `Qwen Code is executing tool ${canonicalName}`,
+      `LailatulCoder Ai is executing tool ${canonicalName}`,
     );
     let removeParentAbortForward: (() => void) | undefined;
     let executionStatus: ToolExecutionStatus = 'not_started';

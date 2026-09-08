@@ -45,7 +45,7 @@ export const COLOR_VALUES = [
 export type ColorValue = (typeof COLOR_VALUES)[number];
 
 /**
- * Mapping from Claude Code permissionMode → qwen-code approvalMode.
+ * Mapping from Claude Code permissionMode → lailatul-coder approvalMode.
  *
  * Note: Claude's `dontAsk` denies any tool call that would prompt the user,
  * making it restrictive. We map it to `default` (which also requires approval)
@@ -66,7 +66,7 @@ const PERMISSION_MODE_TO_APPROVAL_MODE = new Map<string, string>([
 ]);
 
 /**
- * Map a Claude Code `permissionMode` frontmatter value to a qwen-code
+ * Map a Claude Code `permissionMode` frontmatter value to a lailatul-coder
  * `approvalMode` value. Returns `undefined` for unknown / falsy input.
  *
  * Disambiguated from `packages/core/src/tools/agent/agent.ts`'s internal
@@ -120,10 +120,10 @@ export function isColor(value: unknown): value is ColorValue {
 
 /**
  * Parse a frontmatter `mcpServers` value into the record-of-specs shape
- * qwen-code's MCP layer expects. Matches CC `gS8`'s shallow validation:
+ * lailatul-coder's MCP layer expects. Matches CC `gS8`'s shallow validation:
  *
  *   - non-object / array / null → undefined (whole field dropped)
- *   - string (CC's server-name reference form) → undefined; qwen-code does
+ *   - string (CC's server-name reference form) → undefined; lailatul-coder does
  *     not support the reference form yet, so it is rejected at this layer
  *     rather than silently passed through and later confusing the MCP loader
  *   - record-of-records → keep entries whose value is a plain object,
@@ -158,7 +158,7 @@ export function parseAgentMcpServers(
 
 /**
  * Parse a frontmatter `hooks` value into the record-of-event-matchers shape
- * qwen-code's hook layer expects. Matches CC `TKO` / `_u`'s shallow
+ * lailatul-coder's hook layer expects. Matches CC `TKO` / `_u`'s shallow
  * validation:
  *
  *   - non-object / array / null → undefined (whole field dropped)

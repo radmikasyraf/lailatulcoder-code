@@ -160,7 +160,7 @@ function verifyNativeAudioCapturePackage(rootDir, distDir, { required } = {}) {
   const addonDest = path.join(
     distDir,
     'node_modules',
-    '@qwen-code',
+    '@lailatul-coder',
     'audio-capture',
   );
   const requiredPaths = [
@@ -302,7 +302,7 @@ function writeDistPackageJson(rootDir, distDir) {
     name: rootPackageJson.name,
     version: rootPackageJson.version,
     description:
-      rootPackageJson.description || 'Qwen Code - AI-powered coding assistant',
+      rootPackageJson.description || 'LailatulCoder Ai - AI-powered coding assistant',
     repository: rootPackageJson.repository,
     type: 'module',
     main: 'cli.js',
@@ -330,7 +330,7 @@ function writeDistPackageJson(rootDir, distDir) {
     config: rootPackageJson.config,
     dependencies: {},
     optionalDependencies: {
-      '@qwen-code/audio-capture': rootPackageJson.version,
+      '@lailatul-coder/audio-capture': rootPackageJson.version,
       '@lydell/node-pty': '1.2.0-beta.10',
       '@lydell/node-pty-darwin-arm64': '1.2.0-beta.10',
       '@lydell/node-pty-darwin-x64': '1.2.0-beta.10',

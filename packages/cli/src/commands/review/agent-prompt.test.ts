@@ -1357,7 +1357,7 @@ describe('--round — the CLI bakes the round into the identity line and the key
           ...PLAN,
           worktreePath: dir,
           prNumber: '9207',
-          ownerRepo: 'QwenLM/qwen-code',
+          ownerRepo: 'LailatulCoder/lailatul-coder',
         }),
       );
       const findings = join(dir, 'f.md');
@@ -1509,7 +1509,7 @@ describe('--roster — every prompt the plan requires, in one call', () => {
           ...PLAN,
           worktreePath: wt,
           prNumber: '9207',
-          ownerRepo: 'QwenLM/qwen-code',
+          ownerRepo: 'LailatulCoder/lailatul-coder',
         }),
       );
       (agentPromptCommand.handler as (a: unknown) => void)({
@@ -1659,7 +1659,7 @@ describe('--roster — every prompt the plan requires, in one call', () => {
           diffLines: 5000,
           worktreePath: dir,
           prNumber: '6771',
-          ownerRepo: 'QwenLM/qwen-code',
+          ownerRepo: 'LailatulCoder/lailatul-coder',
           files: [
             {
               path: 'src/big.ts',
@@ -2434,7 +2434,7 @@ describe('buildRoleBrief — every agent, not just the territory ones', () => {
   const PR_PLAN = {
     ...PLAN,
     prNumber: '6766',
-    ownerRepo: 'QwenLM/qwen-code',
+    ownerRepo: 'LailatulCoder/lailatul-coder',
     worktreePath: '.qwen/tmp/review-pr-6766',
     // A real merge base is `git merge-base` output: a full sha. The old
     // 6-char fixture sat below git's own abbreviation floor, so it
@@ -3138,13 +3138,13 @@ describe('buildRoleBrief — every agent, not just the territory ones', () => {
     const planPath = join(resolve('/x'), 'qwen-review-pr-6766-fetch.json');
     const p = buildRoleBrief(PR_PLAN, '0', { planPath });
     expect(p).toContain('#6766');
-    expect(p).toContain('QwenLM/qwen-code');
+    expect(p).toContain('LailatulCoder/lailatul-coder');
     expect(p).toContain(join(resolve('/x'), 'qwen-review-pr-6766-context.md'));
     // The evidence fetch is the welded issue-context command, not a gh prose line.
     // The full wrapper is pinned: without `"${QWEN_CODE_CLI:-qwen}" review`
     // the emitted text is an unrunnable bare subcommand name.
     expect(p).toContain(
-      '"${QWEN_CODE_CLI:-qwen}" review issue-context 6766 --repo QwenLM/qwen-code',
+      '"${QWEN_CODE_CLI:-qwen}" review issue-context 6766 --repo LailatulCoder/lailatul-coder',
     );
     expect(p).toContain(
       join(resolve('/x'), 'qwen-review-pr-6766-issue-context.md'),
@@ -3162,7 +3162,7 @@ describe('buildRoleBrief — every agent, not just the territory ones', () => {
       planPath,
     });
     expect(p).toContain(
-      '"${QWEN_CODE_CLI:-qwen}" review issue-context 6766 --repo QwenLM/qwen-code --host ghe.example.com',
+      '"${QWEN_CODE_CLI:-qwen}" review issue-context 6766 --repo LailatulCoder/lailatul-coder --host ghe.example.com',
     );
   });
 
@@ -5767,7 +5767,7 @@ describe('the tool budget in the briefs', () => {
     ...PLAN,
     // Role 0 refuses to build without a PR to check issues against.
     prNumber: '6771',
-    ownerRepo: 'QwenLM/qwen-code',
+    ownerRepo: 'LailatulCoder/lailatul-coder',
     files: [
       {
         path: 'big.ts',

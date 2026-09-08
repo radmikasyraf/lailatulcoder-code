@@ -61,7 +61,7 @@ describe('collectDependencies', () => {
   it('resolves workspace dependencies from the linked package location', () => {
     const packageLock = {
       packages: {
-        'packages/companion/node_modules/@qwen-code/core': {
+        'packages/companion/node_modules/@lailatul-coder/core': {
           link: true,
           resolved: 'packages/core',
         },
@@ -72,7 +72,7 @@ describe('collectDependencies', () => {
     const dependencies = new Map();
 
     collectDependencies(
-      '@qwen-code/core',
+      '@lailatul-coder/core',
       packageLock,
       dependencies,
       'packages/companion',

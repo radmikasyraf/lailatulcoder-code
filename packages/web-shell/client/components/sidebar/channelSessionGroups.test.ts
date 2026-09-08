@@ -3,7 +3,7 @@ import type {
   DaemonChannelInstanceSnapshot,
   DaemonChannelTypeCatalog,
   DaemonSessionSummary,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import { groupSessionsByChannelType } from './channelSessionGroups';
 
 function session(sessionId: string, sourceId?: string): DaemonSessionSummary {

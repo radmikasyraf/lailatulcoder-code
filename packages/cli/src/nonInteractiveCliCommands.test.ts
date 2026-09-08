@@ -17,15 +17,15 @@ import {
   type GoalJournal,
   type GoalStateRecordPayloadV2,
   uiTelemetryService,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from './config/settings.js';
 import { CommandKind, type ExecutionMode } from './ui/commands/types.js';
 import { filterCommandsForMode } from './services/commandUtils.js';
 import { goalCommand } from './ui/commands/goalCommand.js';
 
 const recordAutoSkillUsageMock = vi.hoisted(() => vi.fn());
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@qwen-code/qwen-code-core')>()),
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
   recordAutoSkillUsage: recordAutoSkillUsageMock,
 }));
 

@@ -19,7 +19,7 @@ type OpenAIContentPartWithBreakpoint = OpenAI.Chat.ChatCompletionContentPart & {
   prompt_cache_breakpoint?: { mode: 'explicit' };
 };
 
-const CACHE_KEY_PREFIX = 'qwen-code:';
+const CACHE_KEY_PREFIX = 'lailatul-coder:';
 const EXPLICIT_BREAKPOINT_COUNT = 2;
 
 export function supportsOpenAIPrefixCaching(

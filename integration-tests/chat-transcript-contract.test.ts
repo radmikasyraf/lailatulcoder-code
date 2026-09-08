@@ -10,8 +10,8 @@ import {
   reduceDaemonTranscriptEvents,
   type DaemonEvent,
   type DaemonTranscriptBlock,
-} from '@qwen-code/sdk/daemon';
-import { projectChatRecordsToDaemonTranscript } from '@qwen-code/sdk/daemon/transcript';
+} from '@lailatul-coder/sdk/daemon';
+import { projectChatRecordsToDaemonTranscript } from '@lailatul-coder/sdk/daemon/transcript';
 import { transcriptBlocksToDaemonMessages } from '../packages/web-shell/client/adapters/transcriptToMessages.js';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');

@@ -1,6 +1,6 @@
 # Qwen CUA Driver
 
-Qwen Code's vendored distribution of the cross-platform Cua Driver runtime.
+LailatulCoder Ai's vendored distribution of the cross-platform Cua Driver runtime.
 It provides native desktop and browser automation over MCP, a one-shot CLI,
 and in-process Python and TypeScript SDKs.
 
@@ -15,14 +15,14 @@ macOS and Linux:
 
 ```bash
 CUA_DRIVER_RS_VERSION=0.17.0 \
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/QwenLM/qwen-code/main/packages/cua-driver/scripts/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/main/packages/cua-driver/scripts/install.sh)"
 ```
 
 Windows PowerShell:
 
 ```powershell
 $env:CUA_DRIVER_RS_VERSION = "0.17.0"
-irm https://raw.githubusercontent.com/QwenLM/qwen-code/main/packages/cua-driver/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/main/packages/cua-driver/scripts/install.ps1 | iex
 ```
 
 Expected: qwen-cua-driver 0.17.0.
@@ -50,7 +50,7 @@ Run the MCP server directly:
 qwen-cua-driver mcp
 ```
 
-Register it with Qwen Code:
+Register it with LailatulCoder Ai:
 
 ```bash
 qwen mcp add cua-driver qwen-cua-driver mcp

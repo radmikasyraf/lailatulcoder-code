@@ -1,6 +1,6 @@
 # Daemon Workspace Memory Tasks — Sessionless Managed Memory
 
-> **Status**: Proposed — implementation in [PR #5884](https://github.com/QwenLM/qwen-code/pull/5884) (branch `codex/sessionless-daemon-remember`), not yet merged.
+> **Status**: Proposed — implementation in [PR #5884](https://github.com/LailatulCoder/lailatul-coder/pull/5884) (branch `codex/sessionless-daemon-remember`), not yet merged.
 
 ---
 
@@ -442,7 +442,7 @@ rather than a transport-level timeout.
 
 ## 8. SDK Integration
 
-### TypeScript SDK (`@qwen-code/sdk-typescript`)
+### TypeScript SDK (`@lailatul-coder/sdk-typescript`)
 
 Workspace memory methods on `DaemonClient`:
 

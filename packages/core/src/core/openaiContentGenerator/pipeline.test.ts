@@ -4723,7 +4723,7 @@ describe('ContentGenerationPipeline', () => {
 
       expect(mockClient.chat.completions.create).toHaveBeenCalledWith(
         expect.objectContaining({
-          prompt_cache_key: 'qwen-code:session-123',
+          prompt_cache_key: 'lailatul-coder:session-123',
           messages,
         }),
         expect.anything(),
@@ -4763,7 +4763,7 @@ describe('ContentGenerationPipeline', () => {
 
       expect(mockClient.chat.completions.create).toHaveBeenCalledWith(
         expect.objectContaining({
-          prompt_cache_key: 'qwen-code:session-123:Explore-a1b2c3d4',
+          prompt_cache_key: 'lailatul-coder:session-123:Explore-a1b2c3d4',
         }),
         expect.anything(),
       );
@@ -4804,7 +4804,7 @@ describe('ContentGenerationPipeline', () => {
 
       expect(mockClient.chat.completions.create).toHaveBeenCalledWith(
         expect.objectContaining({
-          prompt_cache_key: 'qwen-code:session-123',
+          prompt_cache_key: 'lailatul-coder:session-123',
         }),
         expect.anything(),
       );
@@ -4847,7 +4847,7 @@ describe('ContentGenerationPipeline', () => {
         .calls[0]?.[0] as OpenAI.Chat.ChatCompletionCreateParams & {
         prompt_cache_options?: unknown;
       };
-      expect(sent.prompt_cache_key).toBe('qwen-code:session-123');
+      expect(sent.prompt_cache_key).toBe('lailatul-coder:session-123');
       expect(sent.prompt_cache_options).toBeUndefined();
       expect(sent.messages).toEqual(messages);
     });
@@ -4968,7 +4968,7 @@ describe('ContentGenerationPipeline', () => {
         .calls[0]?.[0] as OpenAI.Chat.ChatCompletionCreateParams & {
         prompt_cache_options?: { mode?: string };
       };
-      expect(sent.prompt_cache_key).toBe('qwen-code:session-123');
+      expect(sent.prompt_cache_key).toBe('lailatul-coder:session-123');
       expect(sent.prompt_cache_options).toEqual({ mode: 'explicit' });
       expect(sent.messages[1]?.content).toEqual([
         {

@@ -3193,7 +3193,7 @@ describe('AgentTool', () => {
       expect(description).toBe('Search files');
     });
 
-    describe('qwen-code.subagent span outcome (#4410 wenshao)', () => {
+    describe('lailatul-coder.subagent span outcome (#4410 wenshao)', () => {
       beforeEach(() => {
         mockStartSubagentSpan.mockClear();
         mockEndSubagentSpan.mockClear();

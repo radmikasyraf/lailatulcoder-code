@@ -67,7 +67,7 @@ function dateDerivedBuildNumber(packageVersion) {
 
 export function resolveNightlyBuildNumber(packageVersion) {
   if (!packageVersion.includes('-nightly.')) return undefined;
-  const configured = process.env.QWEN_CHROME_EXTENSION_BUILD_NUMBER?.trim();
+  const configured = process.env.lailatulcoder_CHROME_EXTENSION_BUILD_NUMBER?.trim();
   if (configured) {
     const parsed = Number(configured);
     if (

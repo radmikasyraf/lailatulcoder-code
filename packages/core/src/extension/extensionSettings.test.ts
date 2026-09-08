@@ -151,7 +151,7 @@ describe('extensionSettings', () => {
         ],
       };
       const keychain = new KeychainTokenStorage(
-        'Qwen Code Extensions test-ext 12345',
+        'LailatulCoder Ai Extensions test-ext 12345',
       );
 
       const commit = await maybePromptForSettings(
@@ -232,7 +232,7 @@ describe('extensionSettings', () => {
         ),
       ) as { bundleKey: string };
       expect(firstSelector.bundleKey).not.toBe(secondSelector.bundleKey);
-      const storage = mockKeychainData['Qwen Code Extensions test-ext 12345'];
+      const storage = mockKeychainData['LailatulCoder Ai Extensions test-ext 12345'];
       expect(JSON.parse(storage![firstSelector.bundleKey]!)).toEqual({
         API_KEY: 'first-secret',
       });
@@ -271,7 +271,7 @@ describe('extensionSettings', () => {
           'utf8',
         ),
       ) as { bundleKey: string };
-      const storage = mockKeychainData['Qwen Code Extensions test-ext 12345']!;
+      const storage = mockKeychainData['LailatulCoder Ai Extensions test-ext 12345']!;
       expect(storage[selector.bundleKey]).toBeDefined();
 
       await prepared?.discard();
@@ -307,7 +307,7 @@ describe('extensionSettings', () => {
           'utf8',
         ),
       ) as { bundleKey: string };
-      const storage = mockKeychainData['Qwen Code Extensions test-ext 12345']!;
+      const storage = mockKeychainData['LailatulCoder Ai Extensions test-ext 12345']!;
       storage[`${oldSelector.bundleKey}:override:API_KEY`] = 'old-override';
 
       const stagingDir = path.join(tempWorkspaceDir, 'replacement');
@@ -374,7 +374,7 @@ describe('extensionSettings', () => {
           'utf8',
         ),
       ) as { bundleKey: string };
-      const storage = mockKeychainData['Qwen Code Extensions test-ext 12345']!;
+      const storage = mockKeychainData['LailatulCoder Ai Extensions test-ext 12345']!;
       storage['API_KEY'] = 'stale-secret';
       delete storage[selector.bundleKey];
 
@@ -397,7 +397,7 @@ describe('extensionSettings', () => {
         ],
       };
       const keychain = new KeychainTokenStorage(
-        'Qwen Code Extensions test-ext 12345',
+        'LailatulCoder Ai Extensions test-ext 12345',
       );
       await keychain.setSecret('API_KEY', 'old-secret');
 
@@ -568,7 +568,7 @@ describe('extensionSettings', () => {
         SENSITIVE_VAR: 'secret',
       };
       const userKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext 12345`,
+        `LailatulCoder Ai Extensions test-ext 12345`,
       );
       await userKeychain.setSecret('SENSITIVE_VAR', 'secret');
       const envPath = path.join(extensionDir, '.env');
@@ -614,7 +614,7 @@ describe('extensionSettings', () => {
       };
       const previousSettings = { SENSITIVE_VAR: 'secret' };
       const userKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext 12345`,
+        `LailatulCoder Ai Extensions test-ext 12345`,
       );
       await userKeychain.setSecret('SENSITIVE_VAR', 'secret');
 
@@ -879,7 +879,7 @@ describe('extensionSettings', () => {
       const userEnvPath = path.join(extensionDir, EXTENSION_SETTINGS_FILENAME);
       await fsPromises.writeFile(userEnvPath, 'VAR1=user-value1');
       const userKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext 12345`,
+        `LailatulCoder Ai Extensions test-ext 12345`,
       );
       await userKeychain.setSecret('SENSITIVE_VAR', 'user-secret');
 
@@ -902,7 +902,7 @@ describe('extensionSettings', () => {
       );
       await fsPromises.writeFile(workspaceEnvPath, 'VAR1=workspace-value1');
       const workspaceKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext 12345 ${tempWorkspaceDir}`,
+        `LailatulCoder Ai Extensions test-ext 12345 ${tempWorkspaceDir}`,
       );
       await workspaceKeychain.setSecret('SENSITIVE_VAR', 'workspace-secret');
 
@@ -939,7 +939,7 @@ describe('extensionSettings', () => {
         'VAR1=user-value1\nVAR3=user-value3',
       );
       const userKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext ${extensionId}`,
+        `LailatulCoder Ai Extensions test-ext ${extensionId}`,
       );
       await userKeychain.setSecret('VAR2', 'user-secret2');
 
@@ -950,7 +950,7 @@ describe('extensionSettings', () => {
       );
       await fsPromises.writeFile(workspaceEnvPath, 'VAR1=workspace-value1');
       const workspaceKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext ${extensionId} ${tempWorkspaceDir}`,
+        `LailatulCoder Ai Extensions test-ext ${extensionId} ${tempWorkspaceDir}`,
       );
       await workspaceKeychain.setSecret('VAR2', 'workspace-secret2');
 
@@ -979,7 +979,7 @@ describe('extensionSettings', () => {
       const userEnvPath = path.join(extensionDir, '.env');
       await fsPromises.writeFile(userEnvPath, 'VAR1=value1\n');
       const userKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext 12345`,
+        `LailatulCoder Ai Extensions test-ext 12345`,
       );
       await userKeychain.setSecret('VAR2', 'value2');
       mockRequestSetting.mockClear();
@@ -1037,7 +1037,7 @@ describe('extensionSettings', () => {
       );
 
       const userKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext 12345`,
+        `LailatulCoder Ai Extensions test-ext 12345`,
       );
       expect(await userKeychain.getSecret('VAR2')).toBe('new-value2');
     });
@@ -1094,7 +1094,7 @@ describe('extensionSettings', () => {
       );
 
       const workspaceKeychain = new KeychainTokenStorage(
-        `Qwen Code Extensions test-ext 12345 ${tempWorkspaceDir}`,
+        `LailatulCoder Ai Extensions test-ext 12345 ${tempWorkspaceDir}`,
       );
       expect(await workspaceKeychain.getSecret('VAR2')).toBe(
         'new-workspace-secret',

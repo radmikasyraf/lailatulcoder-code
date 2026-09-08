@@ -32,22 +32,22 @@ import { loadEnvironment } from '../config/environment.js';
 import { RUNTIME_STARTUP_CANCELLED_MESSAGE } from './runtime-startup-errors.js';
 import { isLoopbackBind } from './loopback-binds.js';
 import { ChannelDeliveryAuthorizationStore } from './channel-delivery-authorization.js';
-import * as acpBridge from '@qwen-code/acp-bridge/bridge';
+import * as acpBridge from '@lailatul-coder/acp-bridge/bridge';
 import {
   journalGrowthPoolMb,
   resolveDaemonMemoryBudget,
-} from '@qwen-code/acp-bridge/daemonMemoryBudget';
-import { canonicalizeWorkspace } from '@qwen-code/acp-bridge/workspacePaths';
+} from '@lailatul-coder/acp-bridge/daemonMemoryBudget';
+import { canonicalizeWorkspace } from '@lailatul-coder/acp-bridge/workspacePaths';
 import {
   DEFAULT_MAX_JOURNAL_BYTES,
   DEFAULT_MAX_JOURNAL_EVENTS,
   JOURNAL_GROWTH_HARD_CAP_BYTES,
-} from '@qwen-code/acp-bridge/replayWindowLimits';
+} from '@lailatul-coder/acp-bridge/replayWindowLimits';
 import type {
   BridgeDaemonStatusSnapshot,
   HttpAcpBridge,
-} from '@qwen-code/acp-bridge/bridgeTypes';
-import * as qwenCore from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
+import * as qwenCore from '@lailatul-coder/lailatul-coder-core';
 import * as serverModule from './server.js';
 import * as webShellResolver from './web-shell-resolver.js';
 import * as webShellStatic from './web-shell-static.js';
@@ -569,9 +569,9 @@ async function getFreeLoopbackPort(): Promise<number> {
   return port;
 }
 
-vi.mock('@qwen-code/acp-bridge/spawnChannel', async (importOriginal) => {
+vi.mock('@lailatul-coder/acp-bridge/spawnChannel', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/acp-bridge/spawnChannel')>();
+    await importOriginal<typeof import('@lailatul-coder/acp-bridge/spawnChannel')>();
   return {
     ...actual,
     createSpawnChannelFactory: vi.fn(
@@ -1478,7 +1478,7 @@ describe('runQwenServe telemetry validation', () => {
           content: `runtime-${index}`,
           sessionId: `session-static-${index}`,
           _meta: {
-            'qwen-code/tool-write-origin': {
+            'lailatul-coder/tool-write-origin': {
               version: 1,
               source: 'write_file',
             },
@@ -1559,7 +1559,7 @@ describe('runQwenServe telemetry validation', () => {
           content: 'must-not-write',
           sessionId: 'session-injected-primary',
           _meta: {
-            'qwen-code/tool-write-origin': {
+            'lailatul-coder/tool-write-origin': {
               version: 1,
               source: 'write_file',
             },
@@ -1797,7 +1797,7 @@ describe('runQwenServe telemetry validation', () => {
         content: 'first-generation',
         sessionId: 'session-dynamic-first',
         _meta: {
-          'qwen-code/tool-write-origin': {
+          'lailatul-coder/tool-write-origin': {
             version: 1,
             source: 'write_file',
           },
@@ -1852,7 +1852,7 @@ describe('runQwenServe telemetry validation', () => {
           content: 'must-not-write',
           sessionId: 'session-dynamic-closed',
           _meta: {
-            'qwen-code/tool-write-origin': {
+            'lailatul-coder/tool-write-origin': {
               version: 1,
               source: 'write_file',
             },
@@ -1889,7 +1889,7 @@ describe('runQwenServe telemetry validation', () => {
         content: 'second-generation',
         sessionId: 'session-dynamic-second',
         _meta: {
-          'qwen-code/tool-write-origin': {
+          'lailatul-coder/tool-write-origin': {
             version: 1,
             source: 'write_file',
           },

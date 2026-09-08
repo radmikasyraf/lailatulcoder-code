@@ -125,13 +125,13 @@ describe('buildThreadStatuses — thread grouping', () => {
       [
         comment({
           id: 1,
-          user: { login: 'qwen-code-ci-bot' },
+          user: { login: 'lailatul-coder-ci-bot' },
           body: 'the guard checks the wrong variable\n\n<!-- qwen-review critical -->',
         }),
       ],
       'author',
       noChange,
-      'qwen-code-ci-bot',
+      'lailatul-coder-ci-bot',
     );
     expect(own.isBlocker).toBe(true);
 
@@ -145,7 +145,7 @@ describe('buildThreadStatuses — thread grouping', () => {
       ],
       'author',
       noChange,
-      'qwen-code-ci-bot',
+      'lailatul-coder-ci-bot',
     );
     expect(planted.isBlocker).toBe(false);
   });
@@ -159,7 +159,7 @@ describe('buildThreadStatuses — thread grouping', () => {
       [
         comment({
           id: 1,
-          user: { login: 'qwen-code-ci-bot' },
+          user: { login: 'lailatul-coder-ci-bot' },
           body: 'the guard checks the wrong variable\n\n<!-- qwen-review critical -->',
         }),
       ],

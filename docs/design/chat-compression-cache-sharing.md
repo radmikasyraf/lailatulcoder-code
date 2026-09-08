@@ -44,7 +44,7 @@ main session's cache.
 
 OpenAI-compatible endpoints use the same prefix-preserving request shape even
 when their cache controls are unknown, allowing server-side automatic prefix
-caches such as vLLM to match it. Qwen Code does not send provider-specific cache
+caches such as vLLM to match it. LailatulCoder Ai does not send provider-specific cache
 fields to these endpoints. For the official OpenAI API, requests share a stable
 session cache key; each concurrently running non-fork subagent appends its
 stable agent identity so unrelated prefixes do not compete under the parent's

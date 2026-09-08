@@ -36,10 +36,10 @@ import {
   normalizeMaxJournalBytes,
   normalizeMaxJournalEvents,
   type JournalGrowthSessionLimit,
-} from '@qwen-code/acp-bridge/replayWindowLimits';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
-import { resolveSessionRestoreTimeoutMs } from '@qwen-code/acp-bridge/sessionRestoreTimeout';
-import type { NdJsonMessageObservation } from '@qwen-code/acp-bridge/ndJsonStream';
+} from '@lailatul-coder/acp-bridge/replayWindowLimits';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
+import { resolveSessionRestoreTimeoutMs } from '@lailatul-coder/acp-bridge/sessionRestoreTimeout';
+import type { NdJsonMessageObservation } from '@lailatul-coder/acp-bridge/ndJsonStream';
 import { getDeviceFlowRegistry } from './auth/device-flow.js';
 import {
   consumeServeFastPathRejectedLoaderKeys,
@@ -51,27 +51,27 @@ import {
   MAX_REGISTERED_WORKSPACES,
   resolveWorkspaceInputs,
 } from './workspace-inputs.js';
-import type { AcpSessionBridge } from '@qwen-code/acp-bridge/bridgeTypes';
+import type { AcpSessionBridge } from '@lailatul-coder/acp-bridge/bridgeTypes';
 import {
   formatMemoryBudgetStderr,
   resolveDaemonMemoryBudget,
   serveJournalGrowthPoolMb,
-} from '@qwen-code/acp-bridge/daemonMemoryBudget';
+} from '@lailatul-coder/acp-bridge/daemonMemoryBudget';
 import {
   createChildHeapPolicy,
   type ChildHeapPolicy,
-} from '@qwen-code/acp-bridge/childHeapPolicy';
+} from '@lailatul-coder/acp-bridge/childHeapPolicy';
 import {
   canonicalizeWorkspace,
   translateAndCheckAbsoluteWorkspacePath,
-} from '@qwen-code/acp-bridge/workspacePaths';
+} from '@lailatul-coder/acp-bridge/workspacePaths';
 import type {
   AuthType,
   ProviderSetupInputs,
   TelemetryRuntimeConfig,
   TelemetrySettings,
-} from '@qwen-code/qwen-code-core';
-import { MEMORY_PROJECT_SCOPES } from '@qwen-code/qwen-code-core/memoryScopes';
+} from '@lailatul-coder/lailatul-coder-core';
+import { MEMORY_PROJECT_SCOPES } from '@lailatul-coder/lailatul-coder-core/memoryScopes';
 import { createBridgeFileSystemAdapter } from './bridge-file-system-adapter.js';
 // Dynamic-imported below (not at module scope) so the serve fast-path bundle
 // closure check doesn't trace create-sub-session's transitive deps through
@@ -110,7 +110,7 @@ import {
   EXTERNAL_TOOL_GUARD_TOKEN_ENV,
   PRIVATE_EXTERNAL_TOOL_GUARD_ENV,
   PRIVATE_EXTERNAL_TOOL_GUARD_PROVIDER_ENV,
-} from '@qwen-code/acp-bridge/externalToolGuard';
+} from '@lailatul-coder/acp-bridge/externalToolGuard';
 import {
   CAPABILITIES_SCHEMA_VERSION,
   type CapabilitiesEnvelope,
@@ -144,12 +144,12 @@ import {
   workspaceRegistrationId,
   type WorkspaceRegistrationStore,
 } from './workspace-registration-store.js';
-import type { PermissionPolicy } from '@qwen-code/acp-bridge';
+import type { PermissionPolicy } from '@lailatul-coder/acp-bridge';
 import type {
   ChannelDeliveryHandler,
   ChannelDeliveryHostResult,
   ExternalToolGuardHandler,
-} from '@qwen-code/acp-bridge/bridgeOptions';
+} from '@lailatul-coder/acp-bridge/bridgeOptions';
 import { getCliVersion } from '../utils/version.js';
 import { getRateLimiter } from './rate-limit.js';
 import type { AcpHttpHandle } from './acp-http/index.js';
@@ -208,7 +208,7 @@ import type {
   ServiceInfo,
   ServiceInfoWorker,
 } from '../commands/channel/pidfile.js';
-import { sanitizeLogText } from '@qwen-code/channel-base';
+import { sanitizeLogText } from '@lailatul-coder/channel-base';
 import { isBrowserAutomationMcpAvailable } from './cdp-mcp-command.js';
 import { WorkspaceVoiceCoordinator } from './voice/workspace-voice-coordinator.js';
 import {
@@ -1181,9 +1181,9 @@ async function loadServeRuntimeModules() {
     promptLedgerModule,
   ] = await Promise.all([
     import('./server.js'),
-    import('@qwen-code/acp-bridge/bridge'),
-    import('@qwen-code/acp-bridge/spawnChannel'),
-    import('@qwen-code/acp-bridge/processRegistry'),
+    import('@lailatul-coder/acp-bridge/bridge'),
+    import('@lailatul-coder/acp-bridge/spawnChannel'),
+    import('@lailatul-coder/acp-bridge/processRegistry'),
     import('./workspace-service/index.js'),
     import('./workspace-service/types.js'),
     import('./daemon-status-provider.js'),
@@ -3826,10 +3826,10 @@ async function runQwenServeImpl(
           core.emitDaemonLog(
             `Session ${action}.`,
             {
-              'qwen-code.workspace.hash': workspaceHash,
+              'lailatul-coder.workspace.hash': workspaceHash,
             },
             {
-              eventName: `qwen-code.daemon.session.${action}`,
+              eventName: `lailatul-coder.daemon.session.${action}`,
             },
           );
         },
@@ -3841,11 +3841,11 @@ async function runQwenServeImpl(
               : `ACP channel exited (expected=${expected ?? true}).`,
             {
               ...(action === 'exit'
-                ? { 'qwen-code.daemon.channel.expected': expected ?? true }
+                ? { 'lailatul-coder.daemon.channel.expected': expected ?? true }
                 : {}),
             },
             {
-              eventName: `qwen-code.daemon.channel.${action}`,
+              eventName: `lailatul-coder.daemon.channel.${action}`,
               ...(expected === false && action === 'exit'
                 ? { severityNumber: 13 }
                 : {}),
@@ -6089,8 +6089,8 @@ async function runQwenServeImpl(
             });
             assertGenerationOpen?.();
             core.emitDaemonLog('Auth provider installed.', {
-              'qwen-code.daemon.auth.provider_id': provider.id,
-              'qwen-code.daemon.auth.auth_type': plan.authType,
+              'lailatul-coder.daemon.auth.provider_id': provider.id,
+              'lailatul-coder.daemon.auth.auth_type': plan.authType,
             });
             const effectiveModelId =
               (adapter.getValue('model.name') as string | undefined) ??

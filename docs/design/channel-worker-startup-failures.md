@@ -2,7 +2,7 @@
 
 ## Context
 
-[Issue #6909](https://github.com/QwenLM/qwen-code/issues/6909) identifies a diagnostic gap in daemon-managed channels. An adapter's `connect()` rejection is logged by the worker, but the worker then reports only ready or exits with `No channels connected.` The supervisor, dynamic control API, SDK, and CLI therefore lose the actionable provider error.
+[Issue #6909](https://github.com/LailatulCoder/lailatul-coder/issues/6909) identifies a diagnostic gap in daemon-managed channels. An adapter's `connect()` rejection is logged by the worker, but the worker then reports only ready or exits with `No channels connected.` The supervisor, dynamic control API, SDK, and CLI therefore lose the actionable provider error.
 
 This change carries bounded, sanitized `connect()` failures through the worker startup boundary. It does not change configuration parsing, extension loading, adapter construction, daemon boot fail-fast behavior, or post-start failure history.
 

@@ -104,7 +104,7 @@ describe('ci failure patrol workflow', () => {
 
   it('keeps classifier credentials isolated and PAT writes explicit', () => {
     const classifier = yml.jobs.classify.steps.find((step) =>
-      step.uses?.includes('qwen-code-action'),
+      step.uses?.includes('lailatul-coder-action'),
     );
     expect(classifier.env).toEqual({ GH_TOKEN: '', GITHUB_TOKEN: '' });
     expect(JSON.stringify(classifier)).not.toContain('CI_BOT_PAT');
@@ -121,7 +121,7 @@ describe('ci failure patrol workflow', () => {
     // action without error, which would silently strip the patrol agent's
     // sandbox and two-tool allowlist.
     const classifier = yml.jobs.classify.steps.find((step) =>
-      step.uses?.includes('qwen-code-action'),
+      step.uses?.includes('lailatul-coder-action'),
     );
     expect(typeof classifier.with.settings).toBe('string');
     expect(classifier.with.settings_json).toBeUndefined();

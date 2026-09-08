@@ -10,7 +10,7 @@ import {
   watchRepoBranch,
   type GitOperation,
   type GitWorkingTreeStatus,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { AcpSessionBridge } from './acp-session-bridge.js';
 import { writeStderrLineSafe } from '../utils/stdioHelpers.js';
 

@@ -69,7 +69,7 @@ often that happens but not the cost of each parse.
   session switching, stable projection identity, streamed-tail rendering and
   invalidation, stable tool normalization, timer reuse, and the
   streaming-text-to-settled-Markdown transition.
-- `npm run test:e2e:perf --workspace=@qwen-code/web-shell` deterministically
+- `npm run test:e2e:perf --workspace=@lailatul-coder/web-shell` deterministically
   replays 5,000 historical turns, streams 400 Markdown-heavy chunks while
   typing, verifies the final output and composer contents, and records input
   latency and browser long-task metrics in the Playwright report.

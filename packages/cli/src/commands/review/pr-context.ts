@@ -23,7 +23,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { DEFAULT_TRUNCATE_TOOL_OUTPUT_THRESHOLD } from '@qwen-code/qwen-code-core';
+import { DEFAULT_TRUNCATE_TOOL_OUTPUT_THRESHOLD } from '@lailatul-coder/lailatul-coder-core';
 import { writeStdoutLine } from '../../utils/stdioHelpers.js';
 import {
   currentUser,
@@ -466,7 +466,7 @@ export function findRootId<
  * file, letting the re-check approve past the blocker.
  */
 export const CANONICAL_LGTM_RE =
-  /^No issues found\.?\s*LGTM!?\s*(?:✅\s*)?(?:_— [^\n]{0,200} via Qwen Code \/review(?: \(v[^\n]{1,100}\))?_\s*)?$/i;
+  /^No issues found\.?\s*LGTM!?\s*(?:✅\s*)?(?:_— [^\n]{0,200} via LailatulCoder Ai \/review(?: \(v[^\n]{1,100}\))?_\s*)?$/i;
 
 /**
  * Should this review-level summary be shown to agents?

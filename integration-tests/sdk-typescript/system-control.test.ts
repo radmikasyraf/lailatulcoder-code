@@ -9,7 +9,7 @@ import {
   isSDKSystemMessage,
   isSDKResultMessage,
   type SDKUserMessage,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 import { startFakeOpenAIServer } from '../fake-openai-server.js';
 import {
   IS_CONTAINER_SANDBOX,

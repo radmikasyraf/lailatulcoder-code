@@ -2380,7 +2380,7 @@ describe('HookEventHandler', () => {
       );
 
       await hookEventHandler.fireNotificationEvent(
-        'Qwen Code needs your permission to use Bash',
+        'LailatulCoder Ai needs your permission to use Bash',
         NotificationType.PermissionPrompt,
         'Permission needed',
       );
@@ -2393,7 +2393,7 @@ describe('HookEventHandler', () => {
         title?: string;
       };
 
-      expect(input.message).toBe('Qwen Code needs your permission to use Bash');
+      expect(input.message).toBe('LailatulCoder Ai needs your permission to use Bash');
       expect(input.notification_type).toBe('permission_prompt');
       expect(input.title).toBe('Permission needed');
     });
@@ -2409,7 +2409,7 @@ describe('HookEventHandler', () => {
       );
 
       await hookEventHandler.fireNotificationEvent(
-        'Qwen Code is waiting for your input',
+        'LailatulCoder Ai is waiting for your input',
         NotificationType.IdlePrompt,
         'Waiting for input',
       );

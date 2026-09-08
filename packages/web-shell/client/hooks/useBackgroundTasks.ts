@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import type { DaemonSessionTaskStatus } from '@qwen-code/sdk/daemon';
+import type { DaemonSessionTaskStatus } from '@lailatul-coder/sdk/daemon';
 import {
   useActions,
   useDaemonSessionOwnerGuard,
-} from '@qwen-code/webui/daemon-react-sdk';
+} from '@lailatul-coder/webui/daemon-react-sdk';
 import { TASKS_STATUS_ACTIVE_EVENT } from '../components/messages/TasksStatusMessage';
 import { isSessionDisconnectedError } from '../utils/sessionErrors';
 

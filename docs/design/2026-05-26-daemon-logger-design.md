@@ -1,6 +1,6 @@
 # `qwen serve` Daemon File Logger — Design
 
-- **Issue**: [QwenLM/qwen-code#4548](https://github.com/QwenLM/qwen-code/issues/4548)
+- **Issue**: [LailatulCoder/lailatul-coder#4548](https://github.com/LailatulCoder/lailatul-coder/issues/4548)
 - **Branch**: `feat/support_daemon_logger`
 - **Status**: design approved, awaiting implementation plan
 - **Date**: 2026-05-26

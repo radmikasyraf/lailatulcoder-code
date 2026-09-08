@@ -178,7 +178,7 @@ async function main(): Promise<void> {
     rows: ROWS,
     cwd: repoRoot,
     outputDir,
-    title: `qwen-code — subagent observability (${label})`,
+    title: `lailatul-coder — subagent observability (${label})`,
     theme: 'github-dark',
     chrome: true,
     fontSize: 14,

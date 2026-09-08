@@ -16,7 +16,7 @@ export function agentTools(state: BridgeState): any[] {
   return [
     tool(
       'prompt',
-      'Send a prompt to the qwen-code agent and wait for the full response. This tool blocks until the agent completes processing, which may take minutes for complex tasks. After the HTTP response returns, a 30s collection timeout guards against missing completion signals — if the SSE completion event is not received within 30s, partial text is returned with an error. Do not set a short client-side timeout.',
+      'Send a prompt to the lailatul-coder agent and wait for the full response. This tool blocks until the agent completes processing, which may take minutes for complex tasks. After the HTTP response returns, a 30s collection timeout guards against missing completion signals — if the SSE completion event is not received within 30s, partial text is returned with an error. Do not set a short client-side timeout.',
       {
         prompt: z.string().describe('The prompt text to send to the agent.'),
         session_id: z

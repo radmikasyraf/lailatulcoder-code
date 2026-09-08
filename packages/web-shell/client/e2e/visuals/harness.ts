@@ -27,7 +27,7 @@ export type VisualTheme = 'dark' | 'light';
 export { VISUAL_VIEWPORT };
 
 /** localStorage key the web-shell reads for its persisted theme (see index.html). */
-const THEME_STORAGE_KEY = 'qwen-code-web-shell-theme';
+const THEME_STORAGE_KEY = 'lailatul-coder-web-shell-theme';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 

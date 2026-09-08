@@ -4,7 +4,7 @@
 
 **Goal:** Add channel identity/memory-scope metadata and a base task lifecycle hook for channel-resident agents.
 
-**Architecture:** Keep the behavior inside `@qwen-code/channel-base`. Add typed metadata to `types.ts`, derive defaults in `ChannelBase`, inject a first-session boundary note alongside existing instructions, and emit lifecycle events through a protected no-op hook that adapters can override.
+**Architecture:** Keep the behavior inside `@lailatul-coder/channel-base`. Add typed metadata to `types.ts`, derive defaults in `ChannelBase`, inject a first-session boundary note alongside existing instructions, and emit lifecycle events through a protected no-op hook that adapters can override.
 
 **Tech Stack:** TypeScript, Vitest, existing `ChannelBase` / `ChannelConfig` / `ChannelAgentBridge` infrastructure.
 

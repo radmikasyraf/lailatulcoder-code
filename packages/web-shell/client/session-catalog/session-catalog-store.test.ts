@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type {
   DaemonClient,
   DaemonSessionListPage,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   SESSION_CATALOG_RETENTION_MS,
   SessionCatalogStore,

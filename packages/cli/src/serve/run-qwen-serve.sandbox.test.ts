@@ -5,7 +5,7 @@
  */
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { _setSandboxMountExistsForTest } from '@qwen-code/acp-bridge/workspacePaths';
+import { _setSandboxMountExistsForTest } from '@lailatul-coder/acp-bridge/workspacePaths';
 import { validateAndCanonicalizeWorkspaceInput } from './run-qwen-serve.js';
 
 // #7139 wiring for the PRIMARY reproduction path: `qwen serve --workspace
@@ -37,7 +37,7 @@ describe('validateAndCanonicalizeWorkspaceInput inside a POSIX container sandbox
   it.skipIf(process.platform === 'win32')(
     'boots a Windows-shaped --workspace via its bind-mount location',
     () => {
-      vi.stubEnv('SANDBOX', 'qwen-code-sandbox-0');
+      vi.stubEnv('SANDBOX', 'lailatul-coder-sandbox-0');
       _setSandboxMountExistsForTest((p) => p === '/c/qwen-repro');
       expect(validateAndCanonicalizeWorkspaceInput('C:\\qwen-repro')).toBe(
         '/c/qwen-repro',

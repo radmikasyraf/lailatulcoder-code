@@ -16,7 +16,7 @@ export type ProviderIconKey = keyof typeof providerIcons
 
 /** Human-readable provider names */
 const providerDisplayNames: Record<string, string> = {
-  qwen: 'Qwen Code',
+  qwen: 'LailatulCoder Ai',
 }
 
 /** Get a human-readable provider name from provider type and optional base URL */

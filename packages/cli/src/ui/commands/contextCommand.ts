@@ -29,7 +29,7 @@ import {
   computeThresholds,
   formatContextFileDisplayPath,
   type CompactionThresholds,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../i18n/index.js';
 import * as path from 'node:path';
 
@@ -113,7 +113,7 @@ function parseMemoryFiles(
 }
 
 export async function collectContextData(
-  config: import('@qwen-code/qwen-code-core').Config,
+  config: import('@lailatul-coder/lailatul-coder-core').Config,
   showDetails: boolean,
 ): Promise<HistoryItemContextUsage> {
   const modelName = config.getModel() || 'unknown';

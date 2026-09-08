@@ -22,7 +22,7 @@ degrade quality, accuracy, and cost:
    at most a few thousand tokens. The estimator should treat binary
    parts as a small constant.
 
-claude-code addresses (1) with `stripImagesFromMessages`. qwen-code has
+claude-code addresses (1) with `stripImagesFromMessages`. lailatul-coder has
 neither this strip nor the corresponding char-counting fix.
 
 This change adds both, scoped to the **compaction side-query input
@@ -47,7 +47,7 @@ payload built inside `chatCompressionService`.
 
 ## Current State vs Target
 
-| Concern                          | qwen-code today                                      | claude-code reference                                            | Target after this change                                            |
+| Concern                          | lailatul-coder today                                      | claude-code reference                                            | Target after this change                                            |
 | -------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------- |
 | Image/document in compact prompt | Sent verbatim                                        | `stripImagesFromMessages` replaces with `[image]` / `[document]` | Sent as `[image: mime]` / `[document: mime]` placeholder            |
 | Binary part token estimation     | `JSON.stringify().length` (wildly off)               | Treated as fixed budget                                          | Configurable constant (default 1,600 tokens / ~6,400 chars)         |
@@ -62,7 +62,7 @@ A new pure module that takes `Content[]` and returns a slimmed
 If the part has `inlineData` or `fileData` replace it with a `text`
 part of form `[image: image/png]` (or `[document: application/pdf]`).
 
-qwen-code attaches tool-returned media on `functionResponse.parts`
+lailatul-coder attaches tool-returned media on `functionResponse.parts`
 (an extension over the standard `@google/genai` `FunctionResponse`
 schema; see `coreToolScheduler.createFunctionResponsePart`). The
 slimmer recurses into that nested array so a base64 image returned by
@@ -140,7 +140,7 @@ Qwen-VL family caps at 1,280 visual tokens per image without
 `vl_high_resolution_images`; with that flag, up to 16,384. 1,600 is a
 conservative middle ground biased slightly high — overestimating leads
 to earlier compaction (safe), underestimating leads to late compaction
-(unsafe). For non-VL models (Qwen3-Coder, the qwen-code default) the
+(unsafe). For non-VL models (Qwen3-Coder, the lailatul-coder default) the
 constant only matters for token-estimation correctness, since images
 do not reach the model anyway.
 

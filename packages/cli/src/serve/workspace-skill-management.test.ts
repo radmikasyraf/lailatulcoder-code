@@ -4,7 +4,7 @@ import * as path from 'node:path';
 import { PassThrough } from 'node:stream';
 
 import archiver from 'archiver';
-import { Storage } from '@qwen-code/qwen-code-core';
+import { Storage } from '@lailatul-coder/lailatul-coder-core';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   deleteWorkspaceSkill,

@@ -11,7 +11,7 @@ import * as path from 'path';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import type { ContentBlock } from '@agentclientprotocol/sdk';
-import { Storage } from '@qwen-code/qwen-code-core';
+import { Storage } from '@lailatul-coder/lailatul-coder-core';
 import type {
   ImageAttachment,
   SavedImageAttachment,

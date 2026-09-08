@@ -40,7 +40,7 @@ import {
   type DiscoveredMCPPrompt,
   createDebugLogger,
   matchesAnyServerPattern,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { loadSettings, SettingScope } from '../../../config/settings.js';
 import { loadMcpApprovals } from '../../../config/mcpApprovals.js';
 import { isToolValid, getToolInvalidReasons } from './utils.js';
@@ -949,3 +949,4 @@ export const MCPManagementDialog: React.FC<MCPManagementDialogProps> = ({
     </Box>
   );
 };
+

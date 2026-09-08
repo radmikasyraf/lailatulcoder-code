@@ -130,7 +130,7 @@ describe('convertClaudeAgentConfig', () => {
   });
 
   it('should map Claude WebSearch to Qwen WebSearch', () => {
-    // WebSearch used to map to 'None' before qwen-code shipped a built-in
+    // WebSearch used to map to 'None' before lailatul-coder shipped a built-in
     // web_search; reverting the mapping would silently strip search from
     // converted Claude extensions.
     const result = convertClaudeAgentConfig({
@@ -666,7 +666,7 @@ describe('convertClaudePluginPackage', () => {
   });
 
   it('should populate commands/skills/agents when marketplace references the whole folder (deep-wiki shape)', async () => {
-    // Regression test for https://github.com/QwenLM/qwen-code/issues/4452.
+    // Regression test for https://github.com/LailatulCoder/lailatul-coder/issues/4452.
     //
     // microsoft/skills/.../deep-wiki declares its resources as
     //   commands: ["./commands/"]

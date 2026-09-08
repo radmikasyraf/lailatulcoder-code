@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { redactLogCredentials } from '@qwen-code/acp-bridge/logRedaction';
-import { canonicalizeWorkspace } from '@qwen-code/acp-bridge/workspacePaths';
+import { redactLogCredentials } from '@lailatul-coder/acp-bridge/logRedaction';
+import { canonicalizeWorkspace } from '@lailatul-coder/acp-bridge/workspacePaths';
 import {
   PairingStore,
   sanitizeLogText,
   type PairingRequest,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { resolveChannelCwd } from '../commands/channel/channel-cwd.js';
 import { getPlugin } from '../commands/channel/channel-registry.js';
 import type {

@@ -11,7 +11,7 @@ import {
   createGitHubPullRequest,
   fetchGitHubPullRequests,
   getDefaultBranch,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { AcpSessionBridge } from '../acp-session-bridge.js';
 import { sendBridgeError } from '../server/error-response.js';
 import {
@@ -22,8 +22,8 @@ import {
 } from '../workspace-registry.js';
 import { registerWorkspaceQualifiedGitHubPrsRoutes } from './workspace-github-prs.js';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@qwen-code/qwen-code-core')>()),
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
   createGitHubPullRequest: vi.fn(),
   fetchGitHubPullRequests: vi.fn(),
   getDefaultBranch: vi.fn(),

@@ -516,19 +516,19 @@ describe('fetchWithPolicy same-host redirects', () => {
   it('follows same-host redirects to completion', async () => {
     globalThis.fetch = vi.fn(async (input: RequestInfo | URL) => {
       const url = input.toString();
-      if (url.endsWith('/QwenLM/old')) {
+      if (url.endsWith('/LailatulCoder/old')) {
         return new Response(null, {
           status: 302,
-          headers: { location: '/QwenLM/new' },
+          headers: { location: '/LailatulCoder/new' },
         });
       }
       return new Response('landed', { status: 200 });
     }) as typeof fetch;
 
-    const result = await fetchWithPolicy('https://github.com/QwenLM/old', opts);
+    const result = await fetchWithPolicy('https://github.com/LailatulCoder/old', opts);
     expect(result.kind).toBe('response');
     if (result.kind === 'response') {
-      expect(result.finalUrl).toBe('https://github.com/QwenLM/new');
+      expect(result.finalUrl).toBe('https://github.com/LailatulCoder/new');
       expect(result.body.toString()).toBe('landed');
     }
   });

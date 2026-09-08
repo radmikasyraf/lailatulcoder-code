@@ -1,6 +1,6 @@
 ---
 name: desktop-pet
-description: Create pixel-art desktop pet companions for OpenWork/Qwen Code. Generates a customized chibi spritesheet (1536×1872, 8×9 grid) for any character the user names — F1 drivers, anime characters, celebrities, fictional characters, animals, etc. Use when the user says "桌面宠物", "desktop pet", "想要XXX当桌宠", "换个宠物" or similar.
+description: Create pixel-art desktop pet companions for OpenWork/LailatulCoder Ai. Generates a customized chibi spritesheet (1536×1872, 8×9 grid) for any character the user names — F1 drivers, anime characters, celebrities, fictional characters, animals, etc. Use when the user says "桌面宠物", "desktop pet", "想要XXX当桌宠", "换个宠物" or similar.
 version: 1.0.0
 ---
 

@@ -293,7 +293,7 @@ git add packages/cli/src/serve/rate-limit.ts packages/cli/src/serve/rate-limit.t
 git commit -m "fix(cli): align workspace-qualified ACP routing"
 ```
 
-Include `Co-authored-by: Qwen-Coder <qwen-coder@alibabacloud.com>` in the commit body.
+Include `Co-authored-by: lailatul-coderr <lailatul-coderr@alibabacloud.com>` in the commit body.
 
 ### Task 2: Normalize malformed selectors and rejection logs
 

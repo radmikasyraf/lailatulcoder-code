@@ -9,7 +9,7 @@ import {
   recordChannelMemoryRecallMetrics,
   removeChannelMemoryEntries,
   updateChannelMemoryEntry,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { loadSettings } from '../../config/settings.js';
 import { writeStderrLine, writeStdoutLine } from '../../utils/stdioHelpers.js';
 import {
@@ -17,12 +17,12 @@ import {
   ChannelLoopScheduler,
   ChannelLoopStore,
   SessionRouter,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type {
   AcpBridgeOptions,
   ChannelBase,
   ChannelBaseOptions,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { findCliEntryPath, parseChannelConfig } from './config-utils.js';
 import { resolveProxy } from './proxy.js';
 import {

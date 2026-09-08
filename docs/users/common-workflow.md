@@ -1,8 +1,8 @@
 # Common workflows
 
-> Learn about common workflows with Qwen Code.
+> Learn about common workflows with LailatulCoder Ai.
 
-Each task in this document includes clear instructions, example commands, and best practices to help you get the most from Qwen Code.
+Each task in this document includes clear instructions, example commands, and best practices to help you get the most from LailatulCoder Ai.
 
 ## Understand new codebases
 
@@ -16,7 +16,7 @@ Suppose you've just joined a new project and need to understand its structure qu
 cd /path/to/project
 ```
 
-**2. Start Qwen Code**
+**2. Start LailatulCoder Ai**
 
 ```bash
 qwen
@@ -52,7 +52,7 @@ how is authentication handled?
 
 Suppose you need to locate code related to a specific feature or functionality.
 
-**1. Ask Qwen Code to find relevant files**
+**1. Ask LailatulCoder Ai to find relevant files**
 
 ```
 find the files that handle user authentication
@@ -79,7 +79,7 @@ trace the login process from front-end to database
 
 Suppose you've encountered an error message and need to find and fix its source.
 
-**1. Share the error with Qwen Code**
+**1. Share the error with LailatulCoder Ai**
 
 ```
 I'm seeing an error when I run npm test
@@ -99,9 +99,9 @@ update user.tsto add the null check you suggested
 
 > [!tip]
 >
-> - Tell Qwen Code the command to reproduce the issue and get a stack trace
+> - Tell LailatulCoder Ai the command to reproduce the issue and get a stack trace
 > - Mention any steps to reproduce the error
-> - Let Qwen Code know if the error is intermittent or consistent
+> - Let LailatulCoder Ai know if the error is intermittent or consistent
 
 ## Refactor code
 
@@ -133,7 +133,7 @@ run tests for the refactored code
 
 > [!tip]
 >
-> - Ask Qwen Code to explain the benefits of the modern approach
+> - Ask LailatulCoder Ai to explain the benefits of the modern approach
 > - Request that changes maintain backward compatibility when needed
 > - Do refactoring in small, testable increments
 
@@ -151,7 +151,7 @@ This shows all available subagents and lets you create new ones.
 
 **2. Use subagents automatically**
 
-Qwen Code automatically delegates appropriate tasks to specialized subagents:
+LailatulCoder Ai automatically delegates appropriate tasks to specialized subagents:
 
 ```
 review my recent code changes for security issues
@@ -180,7 +180,7 @@ have the debugger subagent investigate why users can't log in
 Then select "create" and follow the prompts to define:
 
 - A unique identifier that describes the subagent's purpose (for example, `code-reviewer`, `api-designer`).
-- When Qwen Code should use this agent
+- When LailatulCoder Ai should use this agent
 - Which tools it can access
 - A system prompt describing the agent's role and behavior
 
@@ -220,9 +220,9 @@ add test cases for edge conditions in the notification service
 run the new tests and fix any failures
 ```
 
-Qwen Code can generate tests that follow your project's existing patterns and conventions. When asking for tests, be specific about what behavior you want to verify. Qwen Code examines your existing test files to match the style, frameworks, and assertion patterns already in use.
+LailatulCoder Ai can generate tests that follow your project's existing patterns and conventions. When asking for tests, be specific about what behavior you want to verify. LailatulCoder Ai examines your existing test files to match the style, frameworks, and assertion patterns already in use.
 
-For comprehensive coverage, ask Qwen Code to identify edge cases you might have missed. Qwen Code can analyze your code paths and suggest tests for error conditions, boundary values, and unexpected inputs that are easy to overlook.
+For comprehensive coverage, ask LailatulCoder Ai to identify edge cases you might have missed. LailatulCoder Ai can analyze your code paths and suggest tests for error conditions, boundary values, and unexpected inputs that are easy to overlook.
 
 ## Create pull requests
 
@@ -234,7 +234,7 @@ Suppose you need to create a well-documented pull request for your changes.
 summarize the changes I've made to the authentication module
 ```
 
-**2. Generate a pull request with Qwen Code**
+**2. Generate a pull request with LailatulCoder Ai**
 
 ```
 create a pr
@@ -254,9 +254,9 @@ add information about how these changes were tested
 
 > [!tip]
 >
-> - Ask Qwen Code directly to make a PR for you
-> - Review Qwen Code's generated PR before submitting
-> - Ask Qwen Code to highlight potential risks or considerations
+> - Ask LailatulCoder Ai directly to make a PR for you
+> - Review LailatulCoder Ai's generated PR before submitting
+> - Ask LailatulCoder Ai to highlight potential risks or considerations
 
 ## Handle documentation
 
@@ -294,7 +294,7 @@ check if the documentation follows our project standards
 
 ## Reference files and directories
 
-Use `@` to quickly include files or directories without waiting for Qwen Code to read them.
+Use `@` to quickly include files or directories without waiting for LailatulCoder Ai to read them.
 
 **1. Reference a single file**
 
@@ -329,9 +329,9 @@ This fetches data from connected MCP servers using the format @server: resource.
 
 ## Resume previous conversations
 
-Suppose you've been working on a task with Qwen Code and need to continue where you left off in a later session.
+Suppose you've been working on a task with LailatulCoder Ai and need to continue where you left off in a later session.
 
-Qwen Code provides two options for resuming previous conversations:
+LailatulCoder Ai provides two options for resuming previous conversations:
 
 - `--continue` to automatically continue the most recent conversation
 - `--resume` to display a conversation picker
@@ -396,9 +396,9 @@ Use arrow keys to navigate and press Enter to select a conversation. Press Esc t
 > qwen --continue -p "Run the tests again"
 > ```
 
-## Run parallel Qwen Code sessions with Git worktrees
+## Run parallel LailatulCoder Ai sessions with Git worktrees
 
-Suppose you need to work on multiple tasks simultaneously with complete code isolation between Qwen Code instances.
+Suppose you need to work on multiple tasks simultaneously with complete code isolation between LailatulCoder Ai instances.
 
 **1. Understand Git worktrees**
 
@@ -416,17 +416,17 @@ git worktree add ../project-bugfix bugfix-123
 
 This creates a new directory with a separate working copy of your repository.
 
-**3. Run Qwen Code in each worktree**
+**3. Run LailatulCoder Ai in each worktree**
 
 ```bash
 # Navigate to your worktree
 cd ../project-feature-a
 
-# Run Qwen Code in this isolated environment
+# Run LailatulCoder Ai in this isolated environment
 qwen
 ```
 
-**4. Run Qwen Code in another worktree**
+**4. Run LailatulCoder Ai in another worktree**
 
 ```bash
 cd ../project-bugfix
@@ -445,23 +445,23 @@ git worktree remove ../project-feature-a
 
 > [!tip]
 >
-> - Each worktree has its own independent file state, making it perfect for parallel Qwen Code sessions
-> - Changes made in one worktree won't affect others, preventing Qwen Code instances from interfering with each other
+> - Each worktree has its own independent file state, making it perfect for parallel LailatulCoder Ai sessions
+> - Changes made in one worktree won't affect others, preventing LailatulCoder Ai instances from interfering with each other
 > - All worktrees share the same Git history and remote connections
-> - For long-running tasks, you can have Qwen Code working in one worktree while you continue development in another
+> - For long-running tasks, you can have LailatulCoder Ai working in one worktree while you continue development in another
 > - Use descriptive directory names to easily identify which task each worktree is for
 > - Remember to initialize your development environment in each new worktree according to your project's setup. Depending on your stack, this might include:
 >   - JavaScript projects: Running dependency installation (`npm install`, `yarn`)
 >   - Python projects: Setting up virtual environments or installing with package managers
 >   - Other languages: Following your project's standard setup process
 
-## Use Qwen Code as a unix-style utility
+## Use LailatulCoder Ai as a unix-style utility
 
-### Add Qwen Code to your verification process
+### Add LailatulCoder Ai to your verification process
 
-Suppose you want to use Qwen Code as a linter or code reviewer.
+Suppose you want to use LailatulCoder Ai as a linter or code reviewer.
 
-**Add Qwen Code to your build script:**
+**Add LailatulCoder Ai to your build script:**
 
 ```json
 // package.json
@@ -469,22 +469,22 @@ Suppose you want to use Qwen Code as a linter or code reviewer.
     ...
     "scripts": {
         ...
-        "lint:Qwen Code": "qwen -p 'you are a linter. please look at the changes vs. main and report any issues related to typos. report the filename and line number on one line, and a description of the issue on the second line. do not return any other text.'"
+        "lint:LailatulCoder Ai": "qwen -p 'you are a linter. please look at the changes vs. main and report any issues related to typos. report the filename and line number on one line, and a description of the issue on the second line. do not return any other text.'"
     }
 }
 ```
 
 > [!tip]
 >
-> - Use Qwen Code for automated code review in your CI/CD pipeline
+> - Use LailatulCoder Ai for automated code review in your CI/CD pipeline
 > - Customize the prompt to check for specific issues relevant to your project
 > - Consider creating multiple scripts for different types of verification
 
 ### Pipe in, pipe out
 
-Suppose you want to pipe data into Qwen Code, and get back data in a structured format.
+Suppose you want to pipe data into LailatulCoder Ai, and get back data in a structured format.
 
-**Pipe data through Qwen Code:**
+**Pipe data through LailatulCoder Ai:**
 
 ```bash
 cat build-error.txt | qwen -p 'concisely explain the root cause of this build error' > output.txt
@@ -492,13 +492,13 @@ cat build-error.txt | qwen -p 'concisely explain the root cause of this build er
 
 > [!tip]
 >
-> - Use pipes to integrate Qwen-Code into existing shell scripts
+> - Use pipes to integrate lailatul-coder into existing shell scripts
 > - Combine with other Unix tools for powerful workflows
 > - Consider using --output-format for structured output
 
 ### Control output format
 
-Suppose you need Qwen Code's output in a specific format, especially when integrating Qwen Code into scripts or other tools.
+Suppose you need LailatulCoder Ai's output in a specific format, especially when integrating LailatulCoder Ai into scripts or other tools.
 
 **1. Use text format (default)**
 
@@ -506,7 +506,7 @@ Suppose you need Qwen Code's output in a specific format, especially when integr
 cat data.txt | qwen -p 'summarize this data' --output-format text > summary.txt
 ```
 
-This outputs just Qwen Code's plain text response (default behavior).
+This outputs just LailatulCoder Ai's plain text response (default behavior).
 
 **2. Use JSON format**
 
@@ -522,26 +522,26 @@ This outputs a JSON array of messages with metadata including cost and duration.
 cat log.txt | qwen -p 'parse this log file for errors' --output-format stream-json
 ```
 
-This outputs a series of JSON objects in real-time as Qwen Code processes the request. Each message is a valid JSON object, but the entire output is not valid JSON if concatenated.
+This outputs a series of JSON objects in real-time as LailatulCoder Ai processes the request. Each message is a valid JSON object, but the entire output is not valid JSON if concatenated.
 
 > [!tip]
 >
-> - Use `--output-format text` for simple integrations where you just need Qwen Code's response
+> - Use `--output-format text` for simple integrations where you just need LailatulCoder Ai's response
 > - Use `--output-format json` when you need the full conversation log
 > - Use `--output-format stream-json` for real-time output of each conversation turn
 
-## Ask Qwen Code about its capabilities
+## Ask LailatulCoder Ai about its capabilities
 
-Qwen Code has built-in access to its documentation and can answer questions about its own features and limitations.
+LailatulCoder Ai has built-in access to its documentation and can answer questions about its own features and limitations.
 
 ### Example questions
 
 ```
-can Qwen Code create pull requests?
+can LailatulCoder Ai create pull requests?
 ```
 
 ```
-how does Qwen Code handle permissions?
+how does LailatulCoder Ai handle permissions?
 ```
 
 ```
@@ -549,23 +549,23 @@ what slash commands are available?
 ```
 
 ```
-how do I use MCP with Qwen Code?
+how do I use MCP with LailatulCoder Ai?
 ```
 
 ```
-how do I configure Qwen Code for Amazon Bedrock?
+how do I configure LailatulCoder Ai for Amazon Bedrock?
 ```
 
 ```
-what are the limitations of Qwen Code?
+what are the limitations of LailatulCoder Ai?
 ```
 
 > [!note]
 >
-> Qwen Code provides documentation-based answers to these questions. For executable examples and hands-on demonstrations, refer to the specific workflow sections above.
+> LailatulCoder Ai provides documentation-based answers to these questions. For executable examples and hands-on demonstrations, refer to the specific workflow sections above.
 
 > [!tip]
 >
-> - Qwen Code always has access to the latest Qwen Code documentation, regardless of the version you're using
+> - LailatulCoder Ai always has access to the latest LailatulCoder Ai documentation, regardless of the version you're using
 > - Ask specific questions to get detailed answers
-> - Qwen Code can explain complex features like MCP integration, enterprise configurations, and advanced workflows
+> - LailatulCoder Ai can explain complex features like MCP integration, enterprise configurations, and advanced workflows

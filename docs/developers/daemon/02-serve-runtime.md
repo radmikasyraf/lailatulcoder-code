@@ -2,7 +2,7 @@
 
 ## Overview
 
-`packages/cli/src/serve/` is the boot layer for `qwen serve`. It translates CLI flags into `ServeOptions`, validates startup configuration, builds the Express app, wires middleware, registers routes, exposes daemon-host preflight/status providers, maintains the permission audit ring, and owns the two-phase graceful shutdown sequence. HTTP-facing work lives in this layer; ACP-facing work lives one layer below in `@qwen-code/acp-bridge` (see [`03-acp-bridge.md`](./03-acp-bridge.md)).
+`packages/cli/src/serve/` is the boot layer for `qwen serve`. It translates CLI flags into `ServeOptions`, validates startup configuration, builds the Express app, wires middleware, registers routes, exposes daemon-host preflight/status providers, maintains the permission audit ring, and owns the two-phase graceful shutdown sequence. HTTP-facing work lives in this layer; ACP-facing work lives one layer below in `@lailatul-coder/acp-bridge` (see [`03-acp-bridge.md`](./03-acp-bridge.md)).
 
 ## Responsibilities
 
@@ -53,8 +53,8 @@
 
 **ACP bridge package imports**:
 
-- Event-bus primitives are imported from `@qwen-code/acp-bridge/eventBus`.
-- Status primitives are imported from `@qwen-code/acp-bridge/status`.
+- Event-bus primitives are imported from `@lailatul-coder/acp-bridge/eventBus`.
+- Status primitives are imported from `@lailatul-coder/acp-bridge/status`.
 - `serve/acp-session-bridge.ts` remains as the CLI-local compatibility facade for the broader bridge surface.
 
 ## Flow
@@ -107,7 +107,7 @@ Calling `createServeApp` directly still returns only an `Application`. An embedd
 
 | Upstream used by `serve/`                                                                       | Downstream using `serve/`                 |
 | ----------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| `@qwen-code/acp-bridge`: bridge, event bus, status types                                        | The `qwen` CLI `serve` subcommand handler |
+| `@lailatul-coder/acp-bridge`: bridge, event bus, status types                                        | The `qwen` CLI `serve` subcommand handler |
 | `packages/core`: `loadSettings`, `getCurrentGeminiMdFilename`, `Config`, `WorkspaceContext`     | Direct embedders, tests                   |
 | ACP SDK (`@agentclientprotocol/sdk`): `PROTOCOL_VERSION`, `ClientSideConnection` through bridge |                                           |
 | Express + body-parser, `node:crypto`, `node:fs`, `node:path`                                    |                                           |
@@ -154,4 +154,4 @@ See [`17-configuration.md`](./17-configuration.md) for the merged reference.
 - `packages/cli/src/serve/types.ts` (`ServeOptions`, `CapabilitiesEnvelope`)
 - `packages/cli/src/serve/daemon-status-provider.ts`
 - `packages/cli/src/serve/permission-audit.ts`
-- Issues: [#3803](https://github.com/QwenLM/qwen-code/issues/3803), [#4175](https://github.com/QwenLM/qwen-code/issues/4175)
+- Issues: [#3803](https://github.com/LailatulCoder/lailatul-coder/issues/3803), [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175)

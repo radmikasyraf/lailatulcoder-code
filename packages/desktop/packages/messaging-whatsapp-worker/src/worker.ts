@@ -256,7 +256,7 @@ async function startSession(
     const sock = makeWASocket({
       auth: state,
       printQRInTerminal: false,
-      browser: baileys.Browsers.macOS('Qwen Code'),
+      browser: baileys.Browsers.macOS('LailatulCoder Ai'),
       version,
       logger: silentLogger,
     }) as BaileysSock

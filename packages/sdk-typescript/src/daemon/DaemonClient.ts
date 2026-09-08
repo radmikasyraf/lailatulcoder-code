@@ -7,8 +7,8 @@
 import {
   MCP_RESTART_SERVER_DEADLINE_MS,
   MCP_RESTART_CLIENT_HEADROOM_MS,
-} from '@qwen-code/acp-bridge/mcpTimeouts';
-import { CHANNEL_CONTROL_DEFAULT_TIMEOUT_MS } from '@qwen-code/acp-bridge/channelControlTimeouts';
+} from '@lailatul-coder/acp-bridge/mcpTimeouts';
+import { CHANNEL_CONTROL_DEFAULT_TIMEOUT_MS } from '@lailatul-coder/acp-bridge/channelControlTimeouts';
 import { DaemonAuthFlow } from './DaemonAuthFlow.js';
 import { DaemonHttpError } from './DaemonHttpError.js';
 import type {
@@ -423,7 +423,7 @@ function stripTrailingSlashes(url: string): string {
  *
  * Defensive on three axes:
  *   1. **Browser-safe**: `globalThis.process` indirection. The SDK is
- *      imported by `@qwen-code/webui`; a literal
+ *      imported by `@lailatul-coder/webui`; a literal
  *      `process.env[...]` would explode at module load on browser
  *      bundles. Browser globals don't expose `process` so this returns
  *      `undefined` cleanly there.
@@ -1982,7 +1982,7 @@ export class DaemonClient {
       {
         method: 'POST',
         headers,
-        body: req.data,
+        body: req.data as unknown as BodyInit,
         ...(req.signal ? { signal: req.signal } : {}),
       },
       async (res) => {
@@ -6760,3 +6760,4 @@ export function isNonBlockingAccepted(
 ): result is NonBlockingPromptAccepted {
   return 'promptId' in result && 'lastEventId' in result;
 }
+

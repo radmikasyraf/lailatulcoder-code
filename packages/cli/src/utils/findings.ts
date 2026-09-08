@@ -589,7 +589,7 @@ const WORKSPACE_IN_COMMAND_RE = /--workspace="([^"]+)"/;
  * One `test-delta` path as a finding would write it: repo-relative, unkeyed.
  *
  * Two things are stripped away. `failingFilesOf` keys a file by its vitest
- * project when the runner prints one (`@qwen-code/qwen-code::src/x.test.ts`) —
+ * project when the runner prints one (`@lailatul-coder/lailatul-coder::src/x.test.ts`) —
  * a finding never writes that prefix, so a keyed entry could never match and the
  * guard no-opped silently on the one shape a real projects run emits. And a
  * per-workspace command prints paths relative to that workspace, so

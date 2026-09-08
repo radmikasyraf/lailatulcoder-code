@@ -2,7 +2,7 @@
 
 ## Context
 
-Qwen Code currently emits a tool call only after the provider has finished
+LailatulCoder Ai currently emits a tool call only after the provider has finished
 streaming its arguments. For tools with large or complex inputs, generating
 those arguments can take much longer than executing the tool itself. ACP
 clients therefore show no activity during the expensive part and users can
@@ -16,7 +16,7 @@ are complete:
 - OpenAI-compatible providers normally send `id` and `function.name` in the
   first `choice.delta.tool_calls` item, then append argument fragments.
 
-Qwen Code deliberately waits for `content_block_stop` or `finish_reason`
+LailatulCoder Ai deliberately waits for `content_block_stop` or `finish_reason`
 before constructing a Gemini-compatible `functionCall`. That execution safety
 property must remain unchanged.
 

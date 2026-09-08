@@ -20,7 +20,7 @@ The four built-in consumers attach a core-only `toolWriteOrigin` field when
 they call `FileSystemService.writeTextFile`. It is not part of any model tool
 schema. `AcpFileSystemService` removes any caller-supplied marker and, only for
 that core field, emits the versioned ACP metadata value
-`qwen-code/tool-write-origin`.
+`lailatul-coder/tool-write-origin`.
 
 The marker is created only by the final service call inside tool `execute()`.
 Normal confirmation, allow rules, AUTO/AUTO_EDIT and YOLO therefore keep their

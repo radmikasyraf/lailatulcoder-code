@@ -758,7 +758,7 @@ describe('DeviceFlowRegistry — authoritative timeouts (fold-in 7)', () => {
       expect(provider.lastPollSignal?.aborted).toBe(true);
       const reason = provider.lastPollSignal?.reason as unknown;
       expect(reason).toBeInstanceOf(DeviceFlowPollTimeoutError);
-      // PR #4291 follow-up review (Qwen Code review summary):
+      // PR #4291 follow-up review (LailatulCoder Ai review summary):
       // poll-tick must NOT reschedule itself after a timeout-driven
       // upstream_error (the entry has already transitioned to error
       // state; another poll would be a `entry.status !== 'pending'`

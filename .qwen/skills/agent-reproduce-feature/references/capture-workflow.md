@@ -6,7 +6,7 @@ This skill follows the nested-agent pattern described in "解决问题的原始�
 
 - Outer harness: the current agent session.
 - Reference program: a nested `codex`, `claude`, or `claude-code` command that demonstrates the feature.
-- Target program: Qwen Code in the current working directory unless the user explicitly provides another path.
+- Target program: LailatulCoder Ai in the current working directory unless the user explicitly provides another path.
 - Capture layer: local state snapshots, `mitmdump`, and terminal transcript
   capture.
 

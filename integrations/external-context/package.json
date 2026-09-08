@@ -1,8 +1,8 @@
 {
-  "name": "@qwen-code/external-context",
+  "name": "@lailatul-coder/external-context",
   "version": "0.21.14",
   "private": true,
-  "description": "Provider-bound external context for Qwen Code",
+  "description": "Provider-bound external context for LailatulCoder Ai",
   "type": "module",
   "engines": {
     "node": ">=22.0.0"

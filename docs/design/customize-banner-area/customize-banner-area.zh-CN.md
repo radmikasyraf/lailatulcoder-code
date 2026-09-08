@@ -6,11 +6,11 @@
 
 ## 概述
 
-Qwen Code CLI 启动时会在终端顶部打印一个 Banner，包含 QWEN ASCII
+LailatulCoder Ai CLI 启动时会在终端顶部打印一个 Banner，包含 QWEN ASCII
 Logo 和一个带边框的信息面板。多种真实场景需要对这一区域进行控制：
 
-- **白标 / 第三方品牌集成**：将 Qwen Code 嵌入企业或团队自有产品时，
-  需要展示自家品牌而非默认的 "Qwen Code"。
+- **白标 / 第三方品牌集成**：将 LailatulCoder Ai 嵌入企业或团队自有产品时，
+  需要展示自家品牌而非默认的 "LailatulCoder Ai"。
 - **个性化**：个人用户希望让终端 Banner 与团队规范或个人审美一致。
 - **多租户 / 多实例区分**：在共享环境下，不同团队希望快速辨认自己
   正在使用哪个实例。
@@ -19,7 +19,7 @@ Logo 和一个带边框的信息面板。多种真实场景需要对这一区域
 自定义只允许用户把自己的品牌叠在上面，**不允许**屏蔽用于排障的关键
 信息。本文档后续每一处「可改 / 不可改」的判定都来自这一立场。
 
-对应 issue：[#3005](https://github.com/QwenLM/qwen-code/issues/3005)。
+对应 issue：[#3005](https://github.com/LailatulCoder/lailatul-coder/issues/3005)。
 
 ## Banner 区域划分
 
@@ -33,7 +33,7 @@ Logo 和一个带边框的信息面板。多种真实场景需要对这一区域
 │                                                                             │
 │   ┌──── Logo 列 ─────────┐  gap=2  ┌──── 信息面板 (带边框) ──────────────┐  │
 │   │                      │         │                                     │  │
-│   │  ███ QWEN ASCII ███  │         │  ① 标题：    >_ Qwen Code (vX.Y.Z)  │  │
+│   │  ███ QWEN ASCII ███  │         │  ① 标题：    >_ LailatulCoder Ai (vX.Y.Z)  │  │
 │   │  ███   ART ART  ███  │         │  ② 副标题：  «空白行 / 自定义覆盖» │  │
 │   │  ███ QWEN ASCII ███  │         │  ③ 状态：    Qwen OAuth | qwen-…    │  │
 │   │                      │         │  ④ 路径：    ~/projects/example     │  │
@@ -51,7 +51,7 @@ Logo 和一个带边框的信息面板。多种真实场景需要对这一区域
   `shortAsciiLogo`。
 - **B. 信息面板** —— 带边框的信息盒，共四行。第二行默认是空白视觉
   spacer，可选地切换为调用方提供的副标题：
-  - **B①** 标题：`>_ Qwen Code (vX.Y.Z)` —— 品牌文字 + 版本号后缀。
+  - **B①** 标题：`>_ LailatulCoder Ai (vX.Y.Z)` —— 品牌文字 + 版本号后缀。
   - **B②** 副标题 / spacer：默认是单空格行，设置 `ui.customBannerSubtitle`
     后渲染清洗后的单行副标题字符串（例如某个 fork 用
     `Built-in DataWorks Official Skills`）。
@@ -66,7 +66,7 @@ Logo 和一个带边框的信息面板。多种真实场景需要对这一区域
 | 区域                               | 当前来源                             | 自定义类别              | 锁定/开放原因                                                                                                                                            |
 | ---------------------------------- | ------------------------------------ | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **A. Logo 列**                     | `shortAsciiLogo` (`AsciiArt.ts`)     | **可替换 + 可自动隐藏** | 纯品牌区域。白标场景需要完全控制视觉。窄终端下「自动隐藏 Logo」的现有行为保持不变。                                                                      |
-| **B①. 标题文字**（`>_ Qwen Code`） | `Header.tsx` 硬编码                  | **可替换**              | 品牌区域。开头的 `>_` 字符是现有品牌的一部分；如不需要，用户在 `customBannerTitle` 中省略即可。                                                          |
+| **B①. 标题文字**（`>_ LailatulCoder Ai`） | `Header.tsx` 硬编码                  | **可替换**              | 品牌区域。开头的 `>_` 字符是现有品牌的一部分；如不需要，用户在 `customBannerTitle` 中省略即可。                                                          |
 | **B①. 版本号后缀**（`(vX.Y.Z)`）   | `version` prop                       | **锁定**                | 排障与支持必备。隐藏后只能通过 `--version` 才能回答「你用的什么版本？」，对支持流程是真实成本。我们以小幅白标体验损失换取支持可达性。                    |
 | **B②. 副标题 / spacer 行**         | 默认空白                             | **可替换**              | 纯品牌 / 上下文区域。白标 fork 用它给构建版本打 tag（如 "Built-in DataWorks Official Skills"）。清洗规则与标题一致；只允许单行，不接受会破坏布局的换行。 |
 | **B③. 状态行**（鉴权 + 模型）      | `formattedAuthType`、`model` prop    | **锁定**                | 运营与安全信号。用户必须看到当前使用的凭据以及实际消耗 token 的模型。任何隐藏/替换都是 footgun，即便在白标场景下也不应允许。                             |
@@ -177,7 +177,7 @@ Tips 仍会显示。
 ┌─────────────────────────────────────────────────────────┐
 │ DataWorks DataAgent (vX.Y.Z)                            │  ← B① 标题
 │ Built-in DataWorks Official Skills                      │  ← B② 副标题
-│ Qwen OAuth | qwen-coder ( /model 切换)                  │  ← B③ 状态
+│ Qwen OAuth | lailatul-coderr ( /model 切换)                  │  ← B③ 状态
 │ ~/projects/example                                      │  ← B④ 路径
 └─────────────────────────────────────────────────────────┘
 ```
@@ -359,7 +359,7 @@ JSON 字符串中用 `\n` 表示换行。该 ASCII art 会与默认 Logo 一样�
    │      ≤ 64 KB            │         渲染 Logo 列
    │ 3. 清洗 art：            │         渲染信息面板：
    │    stripControlSeqs     │           Title    = customBannerTitle
-   │    ≤ 200 行 × 200 列    │                   ?? '>_ Qwen Code'
+   │    ≤ 200 行 × 200 列    │                   ?? '>_ LailatulCoder Ai'
    │ 4. 清洗 title +          │           Subtitle = customBannerSubtitle
    │    subtitle（单行，      │                   ?? 空白 spacer 行
    │    ≤ 80 / 160 字符）     │           Status   = 锁定
@@ -440,7 +440,7 @@ customBannerTitle: {
   requiresRestart: false,
   default: '' as string,
   description:
-    'Replace the default ">_ Qwen Code" title shown in the banner info panel. The version suffix is always appended.',
+    'Replace the default ">_ LailatulCoder Ai" title shown in the banner info panel. The version suffix is always appended.',
   showInDialog: false,
 },
 customBannerSubtitle: {
@@ -534,7 +534,7 @@ const displayLogo = tier ?? shortAsciiLogo;
 
 ```tsx
 <Text bold color={theme.text.accent}>
-  {customBannerTitle ? customBannerTitle : '>_ Qwen Code'}
+  {customBannerTitle ? customBannerTitle : '>_ LailatulCoder Ai'}
 </Text>
 …
 {customBannerSubtitle ? (
@@ -682,7 +682,7 @@ export function resolveCustomBanner(settings: LoadedSettings): ResolvedBanner;
 
 | 项目                                              | 不做的理由                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 文案转 ASCII art（`{ text: "xxxCode" }` 形态）    | v1 评估后**拒绝**。要么引入 `figlet` 运行时依赖（含一套可用字体后约 2–3 MB unpacked），要么自己 vendor 一份单字体渲染器（~200 行代码 + 一份 `.flf` 字体我们自己维护）。两条路都带来长期的维护面：字体选型、字体 license 审计、「我的字体在 X 终端渲染不对」类 issue、CJK / 全角字符处理。本特性的驱动用例（白标 / 多租户）几乎一定有设计师交付成品 ASCII art，不会依赖 figlet 默认字体。希望一行命令生成的用户今天就能 `npx figlet "xxxCode" > brand.txt` + `customAsciiArt: { "path": "./brand.txt" }` —— 等价效果、零新增依赖、零 Qwen Code 内部支持负担。如果未来诉求增多，这一形态是纯叠加：把 `AsciiArtSource` 扩展为 `string \| {path} \| {text, font?}`，不会破坏任何已有配置。 |
+| 文案转 ASCII art（`{ text: "xxxCode" }` 形态）    | v1 评估后**拒绝**。要么引入 `figlet` 运行时依赖（含一套可用字体后约 2–3 MB unpacked），要么自己 vendor 一份单字体渲染器（~200 行代码 + 一份 `.flf` 字体我们自己维护）。两条路都带来长期的维护面：字体选型、字体 license 审计、「我的字体在 X 终端渲染不对」类 issue、CJK / 全角字符处理。本特性的驱动用例（白标 / 多租户）几乎一定有设计师交付成品 ASCII art，不会依赖 figlet 默认字体。希望一行命令生成的用户今天就能 `npx figlet "xxxCode" > brand.txt` + `customAsciiArt: { "path": "./brand.txt" }` —— 等价效果、零新增依赖、零 LailatulCoder Ai 内部支持负担。如果未来诉求增多，这一形态是纯叠加：把 `AsciiArtSource` 扩展为 `string \| {path} \| {text, font?}`，不会破坏任何已有配置。 |
 | `/banner` slash 命令在线编辑                      | 设置 UI 是规范化的编辑入口；多行 ASCII 在线编辑器是另一个项目。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | 自定义渐变色 / 单行颜色                           | 颜色由 theme 拥有。如需扩展应另立提案，Banner 自定义不重复造该面。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | URL 加载 ASCII art                                | 启动期网络请求自带一堆问题：失败模式、缓存、安全评审。`{path}` 文件加载是低风险等价物。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |

@@ -331,7 +331,7 @@ describe('parseChannelConfig', () => {
       instructions: 'Be helpful',
       identity: { id: 'ops-agent', displayName: 'Ops Agent' },
       memoryScope: { namespace: 'qwen-tag:ops', mode: 'metadata-only' },
-      model: 'qwen-coder',
+      model: 'lailatul-coderr',
       groupPolicy: 'open',
       dmPolicy: 'disabled',
       groups: { g1: { mentionKeywords: ['@bot'] } },
@@ -352,7 +352,7 @@ describe('parseChannelConfig', () => {
       namespace: 'qwen-tag:ops',
       mode: 'metadata-only',
     });
-    expect(result.model).toBe('qwen-coder');
+    expect(result.model).toBe('lailatul-coderr');
     expect(result.groupPolicy).toBe('open');
     expect(result.dmPolicy).toBe('disabled');
     expect(result.groups).toEqual({ g1: { mentionKeywords: ['@bot'] } });

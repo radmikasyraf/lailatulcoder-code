@@ -1,19 +1,19 @@
 ---
 name: stuck
-description: Diagnose frozen, stuck, or slow Qwen Code sessions on this machine. Scans for problematic processes, high CPU/memory usage, hung subprocesses, and debug logs. Use /stuck or /stuck <PID> to focus on a specific process.
+description: Diagnose frozen, stuck, or slow LailatulCoder Ai sessions on this machine. Scans for problematic processes, high CPU/memory usage, hung subprocesses, and debug logs. Use /stuck or /stuck <PID> to focus on a specific process.
 argument-hint: '[PID or symptom]'
 allowedTools:
   - run_shell_command
   - read_file
 ---
 
-# /stuck — diagnose frozen/slow Qwen Code sessions
+# /stuck — diagnose frozen/slow LailatulCoder Ai sessions
 
-The user thinks another Qwen Code session on this machine is frozen, stuck, or very slow. Investigate and present a diagnostic report.
+The user thinks another LailatulCoder Ai session on this machine is frozen, stuck, or very slow. Investigate and present a diagnostic report.
 
 ## What to look for
 
-Scan for other Qwen Code processes (excluding the current one — exclude the PID you see running this prompt). Since Qwen Code is a Node.js CLI (`#!/usr/bin/env node`), the process name (`comm` column) is always `node` (or `bun` if run with Bun). Identify Qwen Code sessions by looking at the `command` column for a script path inside a directory whose name starts with `qwen-code` (matches `qwen-code/`, `qwen-code-dev/`, worktree clones, etc.) — anchored to the start of the path or after `/` so unrelated names like `analyze-qwen-code/` don't false-match — or a bin invocation ending in `/qwen` (the global symlink). Avoid loose `qwen-code` substring matching: it false-positives on plugin brokers that merely pass a qwen-code path as `--cwd`.
+Scan for other LailatulCoder Ai processes (excluding the current one — exclude the PID you see running this prompt). Since LailatulCoder Ai is a Node.js CLI (`#!/usr/bin/env node`), the process name (`comm` column) is always `node` (or `bun` if run with Bun). Identify LailatulCoder Ai sessions by looking at the `command` column for a script path inside a directory whose name starts with `lailatul-coder` (matches `lailatul-coder/`, `lailatul-coder-dev/`, worktree clones, etc.) — anchored to the start of the path or after `/` so unrelated names like `analyze-lailatul-coder/` don't false-match — or a bin invocation ending in `/qwen` (the global symlink). Avoid loose `lailatul-coder` substring matching: it false-positives on plugin brokers that merely pass a lailatul-coder path as `--cwd`.
 
 Signs of a stuck session:
 
@@ -44,11 +44,11 @@ RUNTIME_DIR="${RUNTIME_DIR:-${QWEN_HOME:-$HOME/.qwen}}"
 
 (If `jq` isn't installed, the settings layer is silently skipped — the env-var / default fallback covers the common case.)
 
-**Fast path for targeted diagnosis** — if a digit-only PID argument was given, skip step 1 enumeration. Validate that the PID is a live current-user Qwen Code process before dumping any details:
+**Fast path for targeted diagnosis** — if a digit-only PID argument was given, skip step 1 enumeration. Validate that the PID is a live current-user LailatulCoder Ai process before dumping any details:
 
 ```
 kill -0 <pid> 2>/dev/null || { echo "PID <pid> is dead, or owned by another user"; exit 0; }
-ps -p <pid> -o command= -ww 2>/dev/null | grep -qE '((^|/)qwen-code[^ /]*/[^ ]*\.(js|ts|mjs|cjs)( |$)|/qwen( |$))' || { echo "PID <pid> is yours but is not a Qwen Code process — refusing to dump details"; exit 0; }
+ps -p <pid> -o command= -ww 2>/dev/null | grep -qE '((^|/)lailatul-coder[^ /]*/[^ ]*\.(js|ts|mjs|cjs)( |$)|/qwen( |$))' || { echo "PID <pid> is yours but is not a LailatulCoder Ai process — refusing to dump details"; exit 0; }
 ```
 
 If either guard prints, stop the diagnostic and surface the message verbatim. Otherwise, gather stats and the sidecar mapping, then jump to step 3:
@@ -66,25 +66,25 @@ Otherwise (no arg, or symptom-only arg), run the general path below:
 
 1. **Enumerate live sessions via the runtime sidecar** (preferred, reliable):
 
-   Qwen Code writes a `runtime.json` sidecar for each interactive session at `"$RUNTIME_DIR"/projects/<sanitized-cwd>/chats/<sessionId>.runtime.json`. Each file contains `{schema_version, pid, session_id, work_dir, hostname, started_at, qwen_version}` — the authoritative source of `(pid, session_id, work_dir)` mappings.
+   LailatulCoder Ai writes a `runtime.json` sidecar for each interactive session at `"$RUNTIME_DIR"/projects/<sanitized-cwd>/chats/<sessionId>.runtime.json`. Each file contains `{schema_version, pid, session_id, work_dir, hostname, started_at, qwen_version}` — the authoritative source of `(pid, session_id, work_dir)` mappings.
 
-   Filter to live `(pid, sidecar-path)` pairs in one shot. Use Node (guaranteed available — qwen-code requires it) instead of `jq` (often missing on default macOS / minimal Linux) so this path doesn't silently degrade:
+   Filter to live `(pid, sidecar-path)` pairs in one shot. Use Node (guaranteed available — lailatul-coder requires it) instead of `jq` (often missing on default macOS / minimal Linux) so this path doesn't silently degrade:
 
    ```
    node -e 'const fs=require("fs"); for (const f of process.argv.slice(1)) { try { const p=JSON.parse(fs.readFileSync(f,"utf8")).pid; if (p) { try { process.kill(p,0); console.log(p+" "+f); } catch {} } } catch {} }' "$RUNTIME_DIR"/projects/*/chats/*.runtime.json 2>/dev/null
    ```
 
-   PID reuse is rare but possible — when you cross-reference with `ps` in step 2, skip pairs whose live PID's command line no longer looks like a Qwen Code process.
+   PID reuse is rare but possible — when you cross-reference with `ps` in step 2, skip pairs whose live PID's command line no longer looks like a LailatulCoder Ai process.
 
    **If the command emits nothing** (no sidecars, or no live PIDs), fall through to step 2 — `ps` is the working fallback.
 
-2. **List Qwen Code processes via `ps`** (macOS/Linux) — used to enrich each live session with CPU/RSS/state/uptime, and to catch sessions that may have started before the sidecar feature existed:
+2. **List LailatulCoder Ai processes via `ps`** (macOS/Linux) — used to enrich each live session with CPU/RSS/state/uptime, and to catch sessions that may have started before the sidecar feature existed:
 
    ```
-   ps -xo pid=,pcpu=,rss=,etime=,state=,comm=,command= -u "$(id -u)" -ww | grep -E '((^|/)qwen-code[^ /]*/[^ ]*\.(js|ts|mjs|cjs)( |$)|/qwen( |$))' | grep -v grep
+   ps -xo pid=,pcpu=,rss=,etime=,state=,comm=,command= -u "$(id -u)" -ww | grep -E '((^|/)lailatul-coder[^ /]*/[^ ]*\.(js|ts|mjs|cjs)( |$)|/qwen( |$))' | grep -v grep
    ```
 
-   `-u "$(id -u)"` restricts the scan to the current user — on shared hosts this avoids exposing other users' Qwen process paths/arguments into the chat. `-ww` disables column truncation so long "qwen" paths aren't cut off. The `comm` column will be `node` or `bun`, not `qwen`; filter to rows where the `command` column contains a qwen path (e.g., `qwen-code/dist/cli.js`, or a bin symlink ending in `/qwen`). Cross-reference with the PIDs from step 1.
+   `-u "$(id -u)"` restricts the scan to the current user — on shared hosts this avoids exposing other users' Qwen process paths/arguments into the chat. `-ww` disables column truncation so long "qwen" paths aren't cut off. The `comm` column will be `node` or `bun`, not `qwen`; filter to rows where the `command` column contains a qwen path (e.g., `lailatul-coder/dist/cli.js`, or a bin symlink ending in `/qwen`). Cross-reference with the PIDs from step 1.
 
    Note: `ps` reports `rss` in **kilobytes** on both macOS and Linux. To report in MB, divide by 1024; to report in GB, divide by 1048576. The 4GB threshold is `4194304` KB — compare the raw `rss` value against that, or compare the GB value against 4. Do not divide once and then compare against 4; that would flag every process >4MB as "very high RSS".
 

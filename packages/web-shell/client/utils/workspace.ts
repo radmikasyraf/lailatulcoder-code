@@ -8,7 +8,7 @@ import type {
   DaemonCapabilities,
   DaemonSessionSummary,
   DaemonWorkspaceCapability,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 /**
  * Last path segment of an absolute workspace cwd, for a compact per-workspace

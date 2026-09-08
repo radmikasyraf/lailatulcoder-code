@@ -11,7 +11,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as pty from '@lydell/node-pty';
 import xtermHeadless from '@xterm/headless';
-import { hashMcpServerConfig } from '@qwen-code/qwen-code-core';
+import { hashMcpServerConfig } from '@lailatul-coder/lailatul-coder-core';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   fakeToolCall,

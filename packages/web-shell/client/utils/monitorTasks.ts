@@ -1,7 +1,7 @@
 import type {
   DaemonSessionMonitorTaskStatus,
   DaemonSessionTaskStatus,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import type { ACPToolCall } from '../adapters/types';
 
 function monitorIdFromTool(tool: ACPToolCall): string | undefined {

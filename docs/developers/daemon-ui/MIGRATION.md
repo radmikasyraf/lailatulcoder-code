@@ -1,4 +1,4 @@
-# Migrating to `@qwen-code/sdk/daemon` v2
+# Migrating to `@lailatul-coder/sdk/daemon` v2
 
 PR #4328 shipped the v1 daemon UI layer. PR #4353 (this PR) ships v2 with
 seven additive feature commits. This guide walks through the changes for web
@@ -34,7 +34,7 @@ const ordered = [...state.blocks].sort((a, b) => a.createdAt - b.createdAt);
 **After:**
 
 ```ts
-import { selectTranscriptBlocksOrderedByEventId } from '@qwen-code/sdk/daemon';
+import { selectTranscriptBlocksOrderedByEventId } from '@lailatul-coder/sdk/daemon';
 const ordered = selectTranscriptBlocksOrderedByEventId(state);
 ```
 
@@ -52,7 +52,7 @@ const ordered = selectTranscriptBlocksOrderedByEventId(state);
 **After:**
 
 ```tsx
-import { formatBlockTimestamp } from '@qwen-code/sdk/daemon';
+import { formatBlockTimestamp } from '@lailatul-coder/sdk/daemon';
 <TimeLabel text={formatBlockTimestamp(block, { locale })} />;
 ```
 
@@ -103,7 +103,7 @@ for (const event of uiEvents) {
 Or use selectors for state-mirrored sidechannels:
 
 ```ts
-import { selectApprovalMode, selectCurrentTool } from '@qwen-code/sdk/daemon';
+import { selectApprovalMode, selectCurrentTool } from '@lailatul-coder/sdk/daemon';
 
 const mode = selectApprovalMode(state); // mirrored from approval_mode.changed
 const currentTool = selectCurrentTool(state); // current in-flight tool
@@ -130,7 +130,7 @@ function blockToString(block: DaemonTranscriptBlock): string {
 **After** (delegate to SDK):
 
 ```ts
-import { daemonBlockToMarkdown } from '@qwen-code/sdk/daemon';
+import { daemonBlockToMarkdown } from '@lailatul-coder/sdk/daemon';
 const md = daemonBlockToMarkdown(block);
 ```
 
@@ -145,7 +145,7 @@ const html = DOMPurify.sanitize(md.render(daemonBlockToMarkdown(block)));
 For plain text:
 
 ```ts
-import { daemonBlockToPlainText } from '@qwen-code/sdk/daemon';
+import { daemonBlockToPlainText } from '@lailatul-coder/sdk/daemon';
 const plain = daemonBlockToPlainText(block);
 ```
 
@@ -154,7 +154,7 @@ const plain = daemonBlockToPlainText(block);
 Add to your adapter's test suite:
 
 ```ts
-import { runAdapterConformanceSuite } from '@qwen-code/sdk/daemon';
+import { runAdapterConformanceSuite } from '@lailatul-coder/sdk/daemon';
 
 it('adapter projects daemon UI corpus correctly', () => {
   const result = runAdapterConformanceSuite({
@@ -180,7 +180,7 @@ const isBuiltin = ['Bash', 'Edit', 'Read'].includes(toolName);
 **After** (typed provenance from PR-A):
 
 ```tsx
-import type { DaemonUiToolUpdateEvent } from '@qwen-code/sdk/daemon';
+import type { DaemonUiToolUpdateEvent } from '@lailatul-coder/sdk/daemon';
 
 function toolIcon(event: DaemonUiToolUpdateEvent): React.ReactNode {
   switch (event.provenance) {
@@ -212,7 +212,7 @@ else if (error.text.includes('file not found')) showFilePicker();
 **After** (closed enum from PR-A):
 
 ```ts
-import type { DaemonErrorKind } from '@qwen-code/sdk/daemon';
+import type { DaemonErrorKind } from '@lailatul-coder/sdk/daemon';
 
 function errorAction(errorKind?: DaemonErrorKind): React.ReactNode {
   switch (errorKind) {
@@ -256,7 +256,7 @@ state.blocks.map((b) => <ToolBlock block={b} />);
 import {
   selectSubagentChildBlocks,
   isSubagentChildBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 function renderTool(block) {
   const children = selectSubagentChildBlocks(state, block.toolCallId);
@@ -332,6 +332,6 @@ SDK's `daemonToolPreviewToMarkdown` for any unhandled kind.
 
 ## Cross-references
 
-- [PR #4353 SUMMARY](https://github.com/QwenLM/qwen-code/pull/4353)
+- [PR #4353 SUMMARY](https://github.com/LailatulCoder/lailatul-coder/pull/4353)
 - [Daemon UI README](./README.md) — full API reference
-- [PR #4328](https://github.com/QwenLM/qwen-code/pull/4328) — base PR with shared UI transcript layer
+- [PR #4328](https://github.com/LailatulCoder/lailatul-coder/pull/4328) — base PR with shared UI transcript layer

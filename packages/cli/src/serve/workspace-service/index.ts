@@ -33,7 +33,7 @@ import {
   type ServeWorkspacePreflightStatus,
   type ServeWorkspaceSkillsRefreshResult,
   type ServeWorkspaceSkillsStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 
 import {
   WorkspaceInitPathEscapeError,
@@ -43,9 +43,9 @@ import {
   McpServerNotFoundError,
   McpServerRestartFailedError,
   SessionNotFoundError,
-} from '@qwen-code/acp-bridge/bridgeErrors';
+} from '@lailatul-coder/acp-bridge/bridgeErrors';
 
-import { MCP_RESTART_SERVER_DEADLINE_MS } from '@qwen-code/acp-bridge/mcpTimeouts';
+import { MCP_RESTART_SERVER_DEADLINE_MS } from '@lailatul-coder/acp-bridge/mcpTimeouts';
 
 import { loadSettings } from '../../config/settings.js';
 import { resolveSkillSettings } from '../../config/skill-settings.js';

@@ -1,5 +1,5 @@
 {
-  "name": "@qwen-code/web-shell",
+  "name": "@lailatul-coder/web-shell",
   "version": "0.21.14",
   "type": "module",
   "main": "./dist/index.js",
@@ -61,15 +61,15 @@
     "vaul": "^1.1.2"
   },
   "peerDependencies": {
-    "@qwen-code/sdk": ">=0.1.8",
-    "@qwen-code/webui": ">=0.0.1",
+    "@lailatul-coder/sdk": ">=0.1.8",
+    "@lailatul-coder/webui": ">=0.0.1",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@qwen-code/sdk": "file:../sdk-typescript",
-    "@qwen-code/webui": "file:../webui",
+    "@lailatul-coder/sdk": "file:../sdk-typescript",
+    "@lailatul-coder/webui": "file:../webui",
     "@tailwindcss/vite": "^4.3.2",
     "@types/node": "^22.0.0",
     "@types/react": "^19.2.0",

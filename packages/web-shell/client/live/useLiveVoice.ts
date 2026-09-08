@@ -5,8 +5,8 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { DaemonLiveMuteUpdate, DaemonLiveStatus } from '@qwen-code/sdk';
-import { useWorkspace } from '@qwen-code/webui/daemon-react-sdk';
+import type { DaemonLiveMuteUpdate, DaemonLiveStatus } from '@lailatul-coder/sdk';
+import { useWorkspace } from '@lailatul-coder/webui/daemon-react-sdk';
 
 const LIVE_FEATURE = 'realtime_voice';
 const POLL_INTERVAL_MS = 1_000;

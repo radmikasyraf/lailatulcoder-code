@@ -1,7 +1,7 @@
 {
-  "name": "@qwen-code/sdk",
+  "name": "@lailatul-coder/sdk",
   "version": "0.1.8",
-  "description": "TypeScript SDK for programmatic access to qwen-code CLI",
+  "description": "TypeScript SDK for programmatic access to lailatul-coder CLI",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -53,7 +53,7 @@
   },
   "keywords": [
     "qwen",
-    "qwen-code",
+    "lailatul-coder",
     "ai",
     "code-assistant",
     "sdk",
@@ -69,8 +69,8 @@
     "zod": "^3.25.0"
   },
   "devDependencies": {
-    "@qwen-code/acp-bridge": "file:../acp-bridge",
-    "@qwen-code/qwen-code-core": "file:../core",
+    "@lailatul-coder/acp-bridge": "file:../acp-bridge",
+    "@lailatul-coder/lailatul-coder-core": "file:../core",
     "@types/node": "^22.0.0",
     "@typescript-eslint/eslint-plugin": "^7.13.0",
     "@typescript-eslint/parser": "^7.13.0",
@@ -86,11 +86,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/QwenLM/qwen-code.git",
+    "url": "https://github.com/LailatulCoder/lailatul-coder.git",
     "directory": "packages/sdk-typescript"
   },
   "bugs": {
-    "url": "https://github.com/QwenLM/qwen-code/issues"
+    "url": "https://github.com/LailatulCoder/lailatul-coder/issues"
   },
-  "homepage": "https://qwenlm.github.io/qwen-code-docs/"
+  "homepage": "https://LailatulCoder.github.io/lailatul-coder-docs/"
 }

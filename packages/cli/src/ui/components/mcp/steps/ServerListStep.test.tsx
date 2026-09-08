@@ -7,7 +7,7 @@
 import { act } from '@testing-library/react';
 import { render } from 'ink-testing-library';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { MCPServerStatus } from '@qwen-code/qwen-code-core';
+import { MCPServerStatus } from '@lailatul-coder/lailatul-coder-core';
 import type {
   KeypressHandler,
   Key,
@@ -143,3 +143,4 @@ describe('ServerListStep', () => {
     });
   });
 });
+

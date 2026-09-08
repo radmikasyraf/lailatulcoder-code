@@ -23,7 +23,7 @@ function makeStoredSession(workspaceRoot: string): StoredSession {
     lastUsedAt: 2,
     name: 'Provider Managed',
     model: 'qwen3-coder',
-    llmConnection: 'qwen-code',
+    llmConnection: 'lailatul-coder',
     messages: [],
     tokenUsage: {
       inputTokens: 0,

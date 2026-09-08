@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { ChatRecord } from '@qwen-code/qwen-code-core';
+import type { ChatRecord } from '@lailatul-coder/lailatul-coder-core';
 
 export function getToolResultCallId(record: ChatRecord): string {
   return getExplicitToolResultCallId(record) ?? record.uuid;

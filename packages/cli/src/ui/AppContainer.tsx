@@ -72,7 +72,7 @@ import {
   readWorktreeSessionMarker,
   isSessionRuntimeActive,
   type GoalTurnHost,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   applyCollapsePolicyAndSummary,
   buildResumedHistoryItems,
@@ -4978,3 +4978,4 @@ export const AppContainer = (props: AppContainerProps) => {
     </VirtualViewportContext.Provider>
   );
 };
+

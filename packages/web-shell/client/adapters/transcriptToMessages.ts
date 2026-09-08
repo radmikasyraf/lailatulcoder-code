@@ -12,7 +12,7 @@ import type {
   DaemonShellTranscriptBlock,
   DaemonStatusTranscriptBlock,
   DaemonUserShellTranscriptBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import type {
   DaemonMessage,
   DaemonMessageToolCall,

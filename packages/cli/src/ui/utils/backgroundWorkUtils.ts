@@ -1,15 +1,15 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { buildBackgroundEntryLabel } from '@qwen-code/qwen-code-core';
+import { buildBackgroundEntryLabel } from '@lailatul-coder/lailatul-coder-core';
 import type {
   Config,
   TaskStatus,
   WorkflowStatus,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { formatDuration } from './formatters.js';
 import { stripUnsafeCharacters, truncateToWidth } from './textUtils.js';
 

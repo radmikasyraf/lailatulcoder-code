@@ -74,8 +74,8 @@ This section guides contributors on how to build, modify, and understand the dev
 To clone the repository:
 
 ```bash
-git clone https://github.com/QwenLM/qwen-code.git # Or your fork's URL
-cd qwen-code
+git clone https://github.com/LailatulCoder/lailatul-coder.git # Or your fork's URL
+cd lailatul-coder
 ```
 
 To install dependencies defined in `package.json` as well as root dependencies:
@@ -106,13 +106,13 @@ To skip building the sandbox container, you can use `npm run build` instead.
 
 ### Running
 
-To start the Qwen Code application from the source code (after building), run the following command from the root directory:
+To start the LailatulCoder Ai application from the source code (after building), run the following command from the root directory:
 
 ```bash
 npm start
 ```
 
-If you'd like to run the source build outside of the qwen-code folder, you can utilize `npm link path/to/qwen-code/packages/cli` (see: [docs](https://docs.npmjs.com/cli/v9/commands/npm-link)) to run with `qwen`
+If you'd like to run the source build outside of the lailatul-coder folder, you can utilize `npm link path/to/lailatul-coder/packages/cli` (see: [docs](https://docs.npmjs.com/cli/v9/commands/npm-link)) to run with `qwen`
 
 ### Running Tests
 
@@ -130,7 +130,7 @@ This will run tests located in the `packages/core` and `packages/cli` directorie
 
 #### Integration Tests
 
-The integration tests are designed to validate the end-to-end functionality of Qwen Code. They are not run as part of the default `npm run test` command.
+The integration tests are designed to validate the end-to-end functionality of LailatulCoder Ai. They are not run as part of the default `npm run test` command.
 
 To run the integration tests, use the following command:
 
@@ -191,7 +191,7 @@ npm run lint
 
 - `packages/`: Contains the individual sub-packages of the project.
   - `cli/`: The command-line interface.
-  - `core/`: The core backend logic for Qwen Code.
+  - `core/`: The core backend logic for LailatulCoder Ai.
 - `docs/`: Contains all project documentation.
 - `scripts/`: Utility scripts for building, testing, and development tasks.
 
@@ -266,7 +266,7 @@ DEBUG=1 qwen
 
 To debug the CLI's React-based UI, you can use React DevTools. Ink, the library used for the CLI's interface, is compatible with React DevTools version 4.x.
 
-1.  **Start the Qwen Code application in development mode:**
+1.  **Start the LailatulCoder Ai application in development mode:**
 
     ```bash
     DEV=true npm start

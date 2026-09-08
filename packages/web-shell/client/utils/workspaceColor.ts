@@ -7,7 +7,7 @@
 import type {
   DaemonCapabilities,
   DaemonSessionGroupPresetColor,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import accentStyles from '../components/WorkspaceAccent.module.css';
 
 // Reuse the sidebar session-group palette so a workspace's accent speaks the

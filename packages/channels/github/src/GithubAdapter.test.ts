@@ -25,7 +25,7 @@ import {
   type ChannelAgentBridge,
   type ChannelConfig,
   type Envelope,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 const mockExecFile = vi.hoisted(() => vi.fn());
 
@@ -65,9 +65,9 @@ vi.mock('@octokit/rest', () => {
   };
 });
 
-vi.mock('@qwen-code/channel-base', async (importOriginal) => {
+vi.mock('@lailatul-coder/channel-base', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/channel-base')>();
+    await importOriginal<typeof import('@lailatul-coder/channel-base')>();
   return {
     ...actual,
   };

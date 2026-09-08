@@ -49,7 +49,7 @@ function describeMicError(err: unknown): string {
   switch (name) {
     case 'NotAllowedError':
     case 'SecurityError':
-      return 'Microphone blocked. Allow microphone access for Qwen Code in your system privacy settings, then retry.';
+      return 'Microphone blocked. Allow microphone access for LailatulCoder Ai in your system privacy settings, then retry.';
     case 'NotFoundError':
     case 'DevicesNotFoundError':
     case 'OverconstrainedError':

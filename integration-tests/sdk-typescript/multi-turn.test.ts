@@ -21,7 +21,7 @@ import {
   type SDKMessage,
   type ControlMessage,
   type ToolUseBlock,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 import {
   SDKTestHelper,
   createSharedTestOptions,

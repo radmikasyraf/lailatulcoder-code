@@ -14,7 +14,7 @@ WebShell already has a complete daemon transcript rendering path, but it can cur
 
 The new use case already holds a `DaemonTranscriptBlock[]` directly and needs only WebShell's message styling and rendering capabilities to display historical content. It does not need to establish a daemon session connection and must not perform session mutations. Interactions explicitly outside the target include tool approval, `AskUserQuestion`, retry, branch, prompt submission, and opening panels that modify session state.
 
-If the host directly consumes the result of `transcriptBlocksToDaemonMessages` and assembles internal components, it exposes WebShell's private `DaemonMessage` model, contexts, and CSS constraints. It would also drift from the supported rendering when `MessageList` gains features. `@qwen-code/web-shell` therefore needs to provide a stable public entry point.
+If the host directly consumes the result of `transcriptBlocksToDaemonMessages` and assembles internal components, it exposes WebShell's private `DaemonMessage` model, contexts, and CSS constraints. It would also drift from the supported rendering when `MessageList` gains features. `@lailatul-coder/web-shell` therefore needs to provide a stable public entry point.
 
 ## 2. Goals
 
@@ -91,7 +91,7 @@ In the main WebShell editor, `/tasks` and `/mcp` are intercepted inside `App`. T
 
 ## 6. Public API
 
-Add a component named `WebShellTranscript`, exported from the `@qwen-code/web-shell` package root.
+Add a component named `WebShellTranscript`, exported from the `@lailatul-coder/web-shell` package root.
 
 ```ts
 export interface WebShellTranscriptProps {
@@ -137,8 +137,8 @@ Notes:
 Example:
 
 ```tsx
-import { WebShellTranscript } from '@qwen-code/web-shell';
-import type { DaemonTranscriptBlock } from '@qwen-code/sdk/daemon';
+import { WebShellTranscript } from '@lailatul-coder/web-shell';
+import type { DaemonTranscriptBlock } from '@lailatul-coder/sdk/daemon';
 
 export function HistoryView({
   blocks,
@@ -415,5 +415,5 @@ Rejected. Disabled forms still create interactive semantics and additional state
 - The read-only view dispatches no global session/goal semantic events.
 - The new component retains `MessageList`'s local reading interactions and long-list capabilities.
 - Existing `WebShell`/`WebShellWithProviders` APIs, defaults, tests, and runtime behavior remain unchanged.
-- Both the runtime and `.d.ts` for `@qwen-code/web-shell` export the new component and props.
+- Both the runtime and `.d.ts` for `@lailatul-coder/web-shell` export the new component and props.
 - New unit tests, the existing complete WebShell suite, and root build/typecheck all pass.

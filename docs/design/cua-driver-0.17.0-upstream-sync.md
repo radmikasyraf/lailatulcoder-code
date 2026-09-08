@@ -16,7 +16,7 @@ The upstream import is limited to `trycua/cua:libs/cua-driver`, mapped to
 `packages/cua-driver`. Upstream monorepo workflows, root scripts, documentation,
 and unrelated libraries are not imported automatically. Any new dependency on
 those files must either be made package-local or explicitly mapped to an
-existing Qwen Code facility.
+existing LailatulCoder Ai facility.
 
 The Qwen-owned release workflow remains `.github/workflows/cd-cua-driver.yml`.
 It may receive the minimum changes required by the new driver build and release

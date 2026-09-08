@@ -50,9 +50,9 @@ Normalization occurs once before all sinks:
 - success and cancellation omit call-level error fields;
 - missing execution status becomes `unknown`.
 
-The terminal `status` dimension on `qwen-code.tool.call.count`, established by
+The terminal `status` dimension on `lailatul-coder.tool.call.count`, established by
 the terminal telemetry contract, is unchanged by this design. A new
-`qwen-code.tool.execution.count` counter uses only `execution_status` and
+`lailatul-coder.tool.execution.count` counter uses only `execution_status` and
 `tool_type` event-specific dimensions. Globally configured common metric
 attributes, such as the opt-in `session.id`, may also be present. The execution
 failure rate is:

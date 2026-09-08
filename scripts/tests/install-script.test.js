@@ -85,8 +85,8 @@ describe('installation scripts', () => {
     );
     expect(script).toContain('Node.js 22 or newer is required');
     expect(script).toContain('npm_package_spec()');
-    expect(script).toContain('@qwen-code/qwen-code@latest');
-    expect(script).toContain('Installing Qwen Code version:');
+    expect(script).toContain('@lailatul-coder/lailatul-coder@latest');
+    expect(script).toContain('Installing LailatulCoder Ai version:');
     expect(script).toContain('print_logo');
     expect(script).toContain('supports_truecolor()');
     expect(script).toContain('COLORTERM');
@@ -118,7 +118,7 @@ describe('installation scripts', () => {
     );
     expect(script).toContain('validate_archive_contents()');
     expect(script).toContain('Archive contains unsafe path');
-    expect(script).toContain('qwen-code-${target}');
+    expect(script).toContain('lailatul-coder-${target}');
     expect(script).toContain('*.tar.xz)');
     expect(script).toContain('METHOD="${METHOD:-detect}"');
     expect(script).toContain('must start with https://');
@@ -140,11 +140,11 @@ describe('installation scripts', () => {
     expect(script).toContain('validate_version()');
     expect(script).toContain('validate_install_path');
     expect(script).toContain('validate_https_url "${NPM_REGISTRY}"');
-    expect(script).toContain('qwen-code/node/bin/node');
+    expect(script).toContain('lailatul-coder/node/bin/node');
     expect(script).toContain(
       'Archive contains symlinks or hardlinks; refusing to install',
     );
-    expect(script).toContain('not a Qwen Code standalone install');
+    expect(script).toContain('not a LailatulCoder Ai standalone install');
     expect(script).toContain(
       'Return 2 only when a standalone archive is unavailable',
     );
@@ -194,8 +194,8 @@ describe('installation scripts', () => {
     expect(script).toContain('set -gx PATH ${quoted_install_bin_dir} \\$PATH');
     expect(script).toContain('export PATH=${quoted_install_bin_dir}:\\$PATH');
     expect(script).toContain('Unsupported shell for automatic PATH update');
-    expect(script).toContain('# Qwen Code PATH block begin');
-    expect(script).toContain('# Qwen Code PATH block end');
+    expect(script).toContain('# LailatulCoder Ai PATH block begin');
+    expect(script).toContain('# LailatulCoder Ai PATH block end');
     expect(script).toContain('probe_url_available()');
     expect(script).toContain('/latest/VERSION');
     expect(script).toContain('resolve_aliyun_version_path()');
@@ -246,11 +246,11 @@ describe('installation scripts', () => {
     expect(script).toContain('Node.js 22 or newer is required');
     expect(script).toContain('Please install Node.js');
     expect(script).toContain(':NpmPackageSpec');
-    expect(script).toContain('@qwen-code/qwen-code@latest');
-    expect(script).toContain('Installing Qwen Code version:');
-    expect(script).toContain('QWEN CODE');
+    expect(script).toContain('@lailatul-coder/lailatul-coder@latest');
+    expect(script).toContain('Installing LailatulCoder Ai version:');
+    expect(script).toContain('LailatulCoder Ai');
     expect(script).toContain(
-      'Qwen Code !INSTALLED_VERSION! installed successfully, to start:',
+      'LailatulCoder Ai !INSTALLED_VERSION! installed successfully, to start:',
     );
     expect(script).toContain('cd ^<project^>');
     expect(script).toContain('uninstall-qwen-standalone.ps1');
@@ -297,7 +297,7 @@ describe('installation scripts', () => {
     expect(script).toContain('if "!CHECKSUM_NAME!"=="!ARCHIVE_NAME!"');
     expect(script).not.toContain('findstr /C:"!ARCHIVE_NAME!"');
     expect(script).not.toContain('certutil -hashfile');
-    expect(script).toContain('qwen-code-!TARGET!.zip');
+    expect(script).toContain('lailatul-coder-!TARGET!.zip');
     expect(script).toContain(
       'if /i "!PROCESSOR_ARCHITECTURE!"=="AMD64" set "TARGET=win-x64"',
     );
@@ -380,7 +380,7 @@ describe('installation scripts', () => {
     expect(script).toContain(
       'Standalone install failed. Retry with --method npm',
     );
-    expect(script).toContain('qwen-code\\node\\node.exe');
+    expect(script).toContain('lailatul-coder\\node\\node.exe');
     expect(script).toContain('Archive contains symlinks or reparse points');
     expect(script).toContain('unsafe path with control character');
     expect(script).toContain('Failed to update !PATH_SCOPE! PATH');
@@ -413,7 +413,7 @@ describe('installation scripts', () => {
     expect(script.indexOf('$rawNames = @(')).toBeLessThan(
       script.indexOf('set "QWEN_VALIDATE_VERSION=!VERSION!"'),
     );
-    expect(script).toContain('set "ARCHIVE_NAME=qwen-code-!TARGET!.zip"');
+    expect(script).toContain('set "ARCHIVE_NAME=lailatul-coder-!TARGET!.zip"');
     expect(script).toContain('Keep :DetectTarget in sync with RELEASE_TARGETS');
     // ARM64 is intentionally not detected: RELEASE_TARGETS has no win-arm64
     // entry, so we want :DetectTarget to fall through to the unsupported-arch
@@ -467,7 +467,7 @@ describe('installation scripts', () => {
       expect(fakeCurl).toBe(path.join(tmpDir, 'curl.cmd'));
       expect(readScript(fakeCurl)).toContain('QWEN_FAKE_CURL_LOG');
       expect(readScript(fakeCurl)).toContain(
-        '/releases/qwen-code/latest/VERSION',
+        '/releases/lailatul-coder/latest/VERSION',
       );
       expect(readScript(fakeCurl)).toContain('set "destination=%~2"');
       expect(readScript(fakeCurl)).not.toContain('set "destination=%~1"');
@@ -698,7 +698,7 @@ describe('standalone release packaging', () => {
     expect(releaseScript).toContain('nodeArchiveExtension');
     expect(releaseScript).toContain('fs.createReadStream');
     expect(releaseScript).toContain('expectedArchiveNames');
-    expect(releaseScript).toContain('qwen-code-${qwenTarget}');
+    expect(releaseScript).toContain('lailatul-coder-${qwenTarget}');
     expect(releaseScript).toContain('scripts/create-standalone-package.js');
     expect(releaseScript).toContain('--skip-checksums');
     expect(releaseScript).toContain('writeSha256Sums(outDir)');
@@ -732,7 +732,7 @@ describe('standalone release packaging', () => {
     expect(releaseVerifyScript).toContain(
       'standaloneArchiveNamesFromReleaseTargets',
     );
-    expect(releaseVerifyScript).not.toContain("'qwen-code-win-x64.zip'");
+    expect(releaseVerifyScript).not.toContain("'lailatul-coder-win-x64.zip'");
     expect(releaseVerifyScript).not.toContain('INSTALLATION_ASSET_NAMES');
     expect(releaseVerifyScript).not.toContain('assertInstallAliasMatches');
   });
@@ -874,7 +874,7 @@ describe('standalone release packaging', () => {
     try {
       const lines = RELEASE_TARGETS.map(({ qwenTarget }) => {
         const extension = qwenTarget === 'win-x64' ? 'zip' : 'tar.gz';
-        return `${'a'.repeat(64)}  qwen-code-${qwenTarget}.${extension}`;
+        return `${'a'.repeat(64)}  lailatul-coder-${qwenTarget}.${extension}`;
       });
       writeFileSync(path.join(tmpDir, 'SHA256SUMS'), `${lines.join('\n')}\n`);
 
@@ -882,7 +882,7 @@ describe('standalone release packaging', () => {
 
       writeFileSync(
         path.join(tmpDir, 'SHA256SUMS'),
-        `${lines.join('\n')}\n${'b'.repeat(64)}  qwen-code-extra.tar.gz\n`,
+        `${lines.join('\n')}\n${'b'.repeat(64)}  lailatul-coder-extra.tar.gz\n`,
       );
       expect(() => assertStandaloneOutput(tmpDir)).toThrow(/Extra/);
     } finally {
@@ -944,7 +944,7 @@ describe('standalone release packaging', () => {
     expect(installPowerShellSource).toContain('Save-CurrentCmdPathShim');
     expect(installPowerShellSource).toContain('current-cmd-shim.txt');
     expect(installPowerShellSource).toContain('Test-WritableDirectory');
-    expect(installPowerShellSource).toContain('Qwen Code current-session shim');
+    expect(installPowerShellSource).toContain('LailatulCoder Ai current-session shim');
     expect(installPowerShellSource).toContain(
       'TEMP environment variable is not set',
     );
@@ -1282,16 +1282,16 @@ describe('standalone release packaging', () => {
       writeStandaloneReleaseAssets(tmpDir, EXPECTED_STANDALONE_ARCHIVE_NAMES);
       rmSync(path.join(tmpDir, EXPECTED_STANDALONE_ARCHIVE_NAMES[0]));
       await expect(verifyReleaseDirectory(tmpDir)).rejects.toThrow(
-        /Missing release asset: qwen-code-/,
+        /Missing release asset: lailatul-coder-/,
       );
 
       writeStandaloneReleaseAssets(tmpDir, EXPECTED_STANDALONE_ARCHIVE_NAMES);
       writeStandaloneReleaseChecksums(tmpDir, [
         ...EXPECTED_STANDALONE_ARCHIVE_NAMES,
-        'qwen-code-extra.tar.gz',
+        'lailatul-coder-extra.tar.gz',
       ]);
       await expect(verifyReleaseDirectory(tmpDir)).rejects.toThrow(
-        /Unexpected release asset checksum: qwen-code-extra\.tar\.gz/,
+        /Unexpected release asset checksum: lailatul-coder-extra\.tar\.gz/,
       );
     } finally {
       rmSync(tmpDir, { recursive: true, force: true });
@@ -1314,7 +1314,7 @@ describe('standalone release packaging', () => {
       rmSync(path.join(tmpDir, EXPECTED_STANDALONE_ARCHIVE_NAMES[0]));
       mkdirSync(path.join(tmpDir, EXPECTED_STANDALONE_ARCHIVE_NAMES[0]));
       await expect(verifyReleaseDirectory(tmpDir)).rejects.toThrow(
-        /Release asset is not a regular file: qwen-code-/,
+        /Release asset is not a regular file: lailatul-coder-/,
       );
     } finally {
       rmSync(tmpDir, { recursive: true, force: true });
@@ -1338,7 +1338,7 @@ describe('standalone release packaging', () => {
       symlinkSync(linkedAsset, assetPath);
 
       await expect(verifyReleaseDirectory(tmpDir)).rejects.toThrow(
-        /Release asset is not a regular file: qwen-code-/,
+        /Release asset is not a regular file: lailatul-coder-/,
       );
 
       rmSync(assetPath);
@@ -1370,7 +1370,7 @@ describe('standalone release packaging', () => {
 
     try {
       await expect(
-        verifyReleaseBaseUrl('https://example.com/qwen-code/v0.0.0', {
+        verifyReleaseBaseUrl('https://example.com/lailatul-coder/v0.0.0', {
           fetchImpl: async (url, options = {}) => {
             fetchedUrls.push([url, options.method || 'GET', !!options.signal]);
             if (url.endsWith('/SHA256SUMS')) {
@@ -1388,13 +1388,13 @@ describe('standalone release packaging', () => {
     }
 
     expect(fetchedUrls).toContainEqual([
-      'https://example.com/qwen-code/v0.0.0/SHA256SUMS',
+      'https://example.com/lailatul-coder/v0.0.0/SHA256SUMS',
       'GET',
       true,
     ]);
     for (const assetName of EXPECTED_STANDALONE_ARCHIVE_NAMES) {
       expect(fetchedUrls).toContainEqual([
-        `https://example.com/qwen-code/v0.0.0/${assetName}`,
+        `https://example.com/lailatul-coder/v0.0.0/${assetName}`,
         'GET',
         true,
       ]);
@@ -1414,7 +1414,7 @@ describe('standalone release packaging', () => {
     );
 
     await expect(
-      verifyReleaseBaseUrl('https://example.com/qwen-code/v0.0.0', {
+      verifyReleaseBaseUrl('https://example.com/lailatul-coder/v0.0.0', {
         fetchImpl: async (url) => {
           if (url.endsWith('/SHA256SUMS')) {
             return new Response(checksumContent);
@@ -1428,7 +1428,7 @@ describe('standalone release packaging', () => {
           return new Response(`${assetName}\n`);
         },
       }),
-    ).rejects.toThrow(/Checksum mismatch for qwen-code-/);
+    ).rejects.toThrow(/Checksum mismatch for lailatul-coder-/);
   });
 
   it('rejects a release base URL that is not https', async () => {
@@ -1451,7 +1451,7 @@ describe('standalone release packaging', () => {
     const fetchedOptions = [];
 
     await expect(
-      verifyReleaseBaseUrl('https://example.com/qwen-code/v0.0.0', {
+      verifyReleaseBaseUrl('https://example.com/lailatul-coder/v0.0.0', {
         fetchImpl: async (_url, options = {}) => {
           fetchedOptions.push(options);
           return new Response(null, {
@@ -1475,7 +1475,7 @@ describe('standalone release packaging', () => {
     const redirectedAsset = EXPECTED_STANDALONE_ARCHIVE_NAMES[0];
 
     await expect(
-      verifyReleaseBaseUrl('https://example.com/qwen-code/v0.0.0', {
+      verifyReleaseBaseUrl('https://example.com/lailatul-coder/v0.0.0', {
         fetchImpl: async (url) => {
           if (url.endsWith('/SHA256SUMS')) {
             return new Response(checksumContent);
@@ -1532,7 +1532,7 @@ describe('standalone release packaging', () => {
 
     try {
       await expect(
-        verifyReleaseBaseUrl('https://example.com/qwen-code/v0.0.0', {
+        verifyReleaseBaseUrl('https://example.com/lailatul-coder/v0.0.0', {
           fetchImpl: async (url, options = {}) => {
             const method = options.method || 'GET';
             const range = options.headers?.Range || '';
@@ -1555,7 +1555,7 @@ describe('standalone release packaging', () => {
     }
 
     for (const assetName of EXPECTED_STANDALONE_ARCHIVE_NAMES) {
-      const assetUrl = `https://example.com/qwen-code/v0.0.0/${assetName}`;
+      const assetUrl = `https://example.com/lailatul-coder/v0.0.0/${assetName}`;
       expect(fetchedUrls).toContainEqual([assetUrl, 'GET', '']);
       expect(fetchedUrls).not.toContainEqual([assetUrl, 'HEAD', '']);
     }
@@ -1572,7 +1572,7 @@ describe('standalone release packaging', () => {
 
     try {
       await expect(
-        verifyReleaseBaseUrl('https://example.com/qwen-code/v0.0.0', {
+        verifyReleaseBaseUrl('https://example.com/lailatul-coder/v0.0.0', {
           fetchImpl: async (url) => {
             if (url.endsWith('/SHA256SUMS')) {
               return new Response(checksumContent);
@@ -1608,7 +1608,7 @@ describe('standalone release packaging', () => {
 
     try {
       await expect(
-        verifyReleaseBaseUrl('https://example.com/qwen-code/v0.0.0', {
+        verifyReleaseBaseUrl('https://example.com/lailatul-coder/v0.0.0', {
           fetchImpl: async (url) => {
             if (url.endsWith('/SHA256SUMS')) {
               return new Response(checksumContent);
@@ -1618,7 +1618,7 @@ describe('standalone release packaging', () => {
         }),
       ).rejects.toThrow(
         new RegExp(
-          `All ${EXPECTED_STANDALONE_ARCHIVE_NAMES.length} release asset URLs are unavailable; check --base-url: https://example\\.com/qwen-code/v0\\.0\\.0/`,
+          `All ${EXPECTED_STANDALONE_ARCHIVE_NAMES.length} release asset URLs are unavailable; check --base-url: https://example\\.com/lailatul-coder/v0\\.0\\.0/`,
         ),
       );
     } finally {
@@ -1635,7 +1635,7 @@ describe('standalone release packaging', () => {
 
     try {
       await expect(
-        verifyReleaseBaseUrl('https://example.com/qwen-code/v0.0.0', {
+        verifyReleaseBaseUrl('https://example.com/lailatul-coder/v0.0.0', {
           fetchImpl: async (url) => {
             if (url.endsWith('/SHA256SUMS')) {
               return new Response(checksumContent);
@@ -1769,23 +1769,23 @@ describe('standalone release packaging', () => {
           { stdio: 'pipe' },
         );
 
-        const archive = path.join(outDir, 'qwen-code-win-x64.zip');
+        const archive = path.join(outDir, 'lailatul-coder-win-x64.zip');
         const extractDir = path.join(tmpDir, 'extract');
         mkdirSync(extractDir, { recursive: true });
         extractZipForTest(archive, extractDir);
 
-        expect(existsSync(path.join(extractDir, 'qwen-code'))).toBe(true);
+        expect(existsSync(path.join(extractDir, 'lailatul-coder'))).toBe(true);
         expect(
-          existsSync(path.join(extractDir, 'qwen-code', 'bin', 'qwen.cmd')),
+          existsSync(path.join(extractDir, 'lailatul-coder', 'bin', 'qwen.cmd')),
         ).toBe(true);
         expect(
-          existsSync(path.join(extractDir, 'qwen-code', 'lib', 'cli-entry.js')),
+          existsSync(path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js')),
         ).toBe(true);
         expect(
-          existsSync(path.join(extractDir, 'qwen-code', 'node', 'node.exe')),
+          existsSync(path.join(extractDir, 'lailatul-coder', 'node', 'node.exe')),
         ).toBe(true);
         const shim = readScript(
-          path.join(extractDir, 'qwen-code', 'bin', 'qwen.cmd'),
+          path.join(extractDir, 'lailatul-coder', 'bin', 'qwen.cmd'),
         );
         expect(shim).toContain(
           'set "QWEN_CODE_LAUNCHER_PATH=%ROOT%\\bin\\qwen.cmd"',
@@ -1795,7 +1795,7 @@ describe('standalone release packaging', () => {
         );
         expect((shim.match(/exit \/b %ERRORLEVEL%/g) || []).length).toBe(1);
         expect(readScript(path.join(outDir, 'SHA256SUMS'))).toContain(
-          'qwen-code-win-x64.zip',
+          'lailatul-coder-win-x64.zip',
         );
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -1834,20 +1834,20 @@ describe('standalone release packaging', () => {
         const extractDir = path.join(tmpDir, 'extract');
         mkdirSync(extractDir, { recursive: true });
         extractZipForTest(
-          path.join(outDir, 'qwen-code-win-x64.zip'),
+          path.join(outDir, 'lailatul-coder-win-x64.zip'),
           extractDir,
         );
 
         expect(
-          existsSync(path.join(extractDir, 'qwen-code', 'lib', 'cli-entry.js')),
+          existsSync(path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js')),
         ).toBe(true);
         expect(
           existsSync(
-            path.join(extractDir, 'qwen-code', 'lib', 'postinstall.js'),
+            path.join(extractDir, 'lailatul-coder', 'lib', 'postinstall.js'),
           ),
         ).toBe(false);
         expect(
-          existsSync(path.join(extractDir, 'qwen-code', 'lib', 'patches')),
+          existsSync(path.join(extractDir, 'lailatul-coder', 'lib', 'patches')),
         ).toBe(false);
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -1966,10 +1966,10 @@ describe('standalone release packaging', () => {
         });
 
         expect(
-          existsSync(path.join(extractDir, 'qwen-code', 'lib', 'cli-entry.js')),
+          existsSync(path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js')),
         ).toBe(true);
         const shim = readScript(
-          path.join(extractDir, 'qwen-code', 'bin', 'qwen'),
+          path.join(extractDir, 'lailatul-coder', 'bin', 'qwen'),
         );
         expect(shim).toContain(
           'QWEN_CODE_LAUNCHER_PATH="$ROOT/bin/qwen" exec "$ROOT/node/bin/node" "$ROOT/lib/cli-entry.js" "$@"',
@@ -1992,7 +1992,7 @@ describe('standalone release packaging', () => {
     );
     const prebuildFile = path.join(
       prebuildDir,
-      '@qwen-code+audio-capture.node',
+      '@lailatul-coder+audio-capture.node',
     );
     const createdPrebuildDir = !existsSync(prebuildDir);
     const createdPrebuild = !existsSync(prebuildFile);
@@ -2012,10 +2012,10 @@ describe('standalone release packaging', () => {
 
       const addonDist = path.join(
         extractDir,
-        'qwen-code',
+        'lailatul-coder',
         'lib',
         'node_modules',
-        '@qwen-code',
+        '@lailatul-coder',
         'audio-capture',
         'dist',
       );
@@ -2057,7 +2057,7 @@ describe('standalone release packaging', () => {
 
       const clipboardScope = path.join(
         extractDir,
-        'qwen-code',
+        'lailatul-coder',
         'lib',
         'node_modules',
         '@teddyzhu',
@@ -2112,7 +2112,7 @@ describe('standalone release packaging', () => {
       const npmShim = path.join(
         installRoot,
         'lib',
-        'qwen-code',
+        'lailatul-coder',
         'node',
         'bin',
         'npm',
@@ -2235,7 +2235,7 @@ describe('standalone release packaging', () => {
     );
     expect(createReleaseStepIndex).toBeGreaterThanOrEqual(0);
     const createReleaseStep = releaseWorkflow.slice(createReleaseStepIndex);
-    expect(createReleaseStep).toContain('dist/standalone/qwen-code-*');
+    expect(createReleaseStep).toContain('dist/standalone/lailatul-coder-*');
     expect(createReleaseStep).toContain('dist/standalone/SHA256SUMS');
     // OSS upload logic must not remain in release.yml
     expect(releaseWorkflow).not.toContain('secrets.ALIYUN_OSS_ACCESS_KEY_ID');
@@ -2264,10 +2264,10 @@ describe('standalone release packaging', () => {
     expect(existsSync('scripts/upload-aliyun-oss-assets.js')).toBe(true);
     expect(ossWorkflow).toContain('node scripts/upload-aliyun-oss-assets.js');
     expect(ossWorkflow.match(/upload_asset\(\)/g) || []).toHaveLength(0);
-    expect(ossWorkflow).toContain('releases/qwen-code/${RELEASE_TAG}');
-    expect(ossWorkflow).toContain('releases/qwen-code/latest');
+    expect(ossWorkflow).toContain('releases/lailatul-coder/${RELEASE_TAG}');
+    expect(ossWorkflow).toContain('releases/lailatul-coder/latest');
     expect(ossWorkflow).not.toContain(
-      'upload_release_assets "releases/qwen-code/latest"',
+      'upload_release_assets "releases/lailatul-coder/latest"',
     );
 
     const syncStepIndex = ossWorkflow.indexOf(
@@ -2297,10 +2297,10 @@ describe('standalone release packaging', () => {
     // hosted installer object is uploaded and verified.
     expect(publishLatestStepIndex).toBeGreaterThan(verifyHostedStepIndex);
     expect(ossWorkflow.slice(syncStepIndex, verifyStepIndex)).not.toContain(
-      'releases/qwen-code/latest/VERSION',
+      'releases/lailatul-coder/latest/VERSION',
     );
     expect(ossWorkflow.slice(publishLatestStepIndex)).toContain(
-      'releases/qwen-code/latest/VERSION',
+      'releases/lailatul-coder/latest/VERSION',
     );
     const syncStep = ossWorkflow.slice(syncStepIndex, verifyStepIndex);
     expect(syncStep).not.toContain('dist/installation/');
@@ -2336,13 +2336,13 @@ describe('standalone release packaging', () => {
       'curl -fsSL --connect-timeout 15 --max-time 300 "${OSSUTIL_URL}"',
     );
     expect(ossWorkflow).toContain(
-      'npm run verify:installation-release -- --base-url "${ALIYUN_OSS_PUBLIC_BASE_URL}/releases/qwen-code/${RELEASE_TAG}"',
+      'npm run verify:installation-release -- --base-url "${ALIYUN_OSS_PUBLIC_BASE_URL}/releases/lailatul-coder/${RELEASE_TAG}"',
     );
     expect(ossWorkflow).toContain(
-      'latest_version="$(curl -fsSL --connect-timeout 15 --max-time 300 "${ALIYUN_OSS_PUBLIC_BASE_URL}/releases/qwen-code/latest/VERSION" | tr -d',
+      'latest_version="$(curl -fsSL --connect-timeout 15 --max-time 300 "${ALIYUN_OSS_PUBLIC_BASE_URL}/releases/lailatul-coder/latest/VERSION" | tr -d',
     );
     expect(ossWorkflow).not.toContain(
-      'npm run verify:installation-release -- --base-url "${ALIYUN_OSS_PUBLIC_BASE_URL}/releases/qwen-code/latest"',
+      'npm run verify:installation-release -- --base-url "${ALIYUN_OSS_PUBLIC_BASE_URL}/releases/lailatul-coder/latest"',
     );
     const verifyStep = ossWorkflow.slice(verifyStepIndex, syncHostedStepIndex);
     expect(verifyStep).not.toContain('hosted_tmp_dir');
@@ -2447,7 +2447,7 @@ describe('standalone release packaging', () => {
     );
     expect(uninstallPowerShellSource).toContain('current-cmd-shim.txt');
     expect(uninstallPowerShellSource).toContain(
-      'Qwen Code current-session shim',
+      'LailatulCoder Ai current-session shim',
     );
     expect(uninstallPowerShellSource).toContain('QWEN_UNINSTALL_PURGE');
     expect(uninstallPowerShellSource).toContain('Preserving');
@@ -2641,7 +2641,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         expect(existsSync(path.join(installRoot, 'bin', 'qwen'))).toBe(true);
         expect(
           existsSync(
-            path.join(installRoot, 'lib', 'qwen-code', 'node', 'bin', 'node'),
+            path.join(installRoot, 'lib', 'lailatul-coder', 'node', 'bin', 'node'),
           ),
         ).toBe(true);
         expect(readScript(path.join(home, '.qwen', 'source.json'))).toContain(
@@ -2654,11 +2654,11 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
           .toString()
           .trim();
         expect(version).toBe('0.0.0-smoke');
-        expect(output).toContain('Installing Qwen Code version: latest');
+        expect(output).toContain('Installing LailatulCoder Ai version: latest');
         expect(output).toContain('installed successfully, to start:');
         expect(output).toContain('0.0.0-smoke');
         expect(output).toContain('cd <project>');
-        expect(output).toContain('github.com/QwenLM/qwen-code');
+        expect(output).toContain('github.com/LailatulCoder/lailatul-coder');
         expect(output).not.toContain('rm -rf');
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -2709,15 +2709,15 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
             'done',
             'printf "%s\\n" "$url" >> "$QWEN_FAKE_CURL_LOG"',
             'case "$url" in',
-            '  */releases/qwen-code/latest/VERSION)',
+            '  */releases/lailatul-coder/latest/VERSION)',
             '    if [ -n "$dest" ]; then',
             '      printf "v0.0.0-smoke\\n" > "$dest"',
             '    else',
             '      printf "v0.0.0-smoke\\n"',
             '    fi ;;',
-            '  */releases/qwen-code/v0.0.0-smoke/qwen-code-linux-x64.tar.gz)',
+            '  */releases/lailatul-coder/v0.0.0-smoke/lailatul-coder-linux-x64.tar.gz)',
             '    cp "$QWEN_FAKE_ARCHIVE" "$dest" ;;',
-            '  */releases/qwen-code/v0.0.0-smoke/SHA256SUMS)',
+            '  */releases/lailatul-coder/v0.0.0-smoke/SHA256SUMS)',
             '    cp "$QWEN_FAKE_SHA256SUMS" "$dest" ;;',
             '  *)',
             '    echo "unexpected url: $url" >&2',
@@ -2755,17 +2755,17 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         ).toString();
 
         const curlUrls = readScript(curlLog);
-        expect(curlUrls).toContain('/releases/qwen-code/latest/VERSION');
+        expect(curlUrls).toContain('/releases/lailatul-coder/latest/VERSION');
         expect(curlUrls).toContain(
-          '/releases/qwen-code/v0.0.0-smoke/qwen-code-linux-x64.tar.gz',
+          '/releases/lailatul-coder/v0.0.0-smoke/lailatul-coder-linux-x64.tar.gz',
         );
         expect(curlUrls).toContain(
-          '/releases/qwen-code/v0.0.0-smoke/SHA256SUMS',
+          '/releases/lailatul-coder/v0.0.0-smoke/SHA256SUMS',
         );
         expect(curlUrls).not.toContain(
-          '/releases/qwen-code/latest/qwen-code-linux-x64.tar.gz',
+          '/releases/lailatul-coder/latest/lailatul-coder-linux-x64.tar.gz',
         );
-        expect(output).toContain('Downloading qwen-code-linux-x64.tar.gz');
+        expect(output).toContain('Downloading lailatul-coder-linux-x64.tar.gz');
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
         restoreMinimalDist(createdDist);
@@ -2819,13 +2819,13 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
             'printf "%s\\n" "$url" >> "$QWEN_FAKE_CURL_LOG"',
             'if [ "$is_head" = "1" ]; then',
             '  case "$url" in',
-            '    */releases/qwen-code/latest/VERSION)',
+            '    */releases/lailatul-coder/latest/VERSION)',
             '      exit 0 ;;',
             '    */releases/latest/download/SHA256SUMS)',
             '      exit 22 ;;',
-            '    */releases/qwen-code/v0.0.0-smoke/qwen-code-linux-x64.tar.gz)',
+            '    */releases/lailatul-coder/v0.0.0-smoke/lailatul-coder-linux-x64.tar.gz)',
             '      exit 22 ;;',
-            '    */releases/download/v0.0.0-smoke/qwen-code-linux-x64.tar.gz)',
+            '    */releases/download/v0.0.0-smoke/lailatul-coder-linux-x64.tar.gz)',
             '      exit 0 ;;',
             '    *)',
             '      echo "unexpected HEAD url: $url" >&2',
@@ -2833,9 +2833,9 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
             '  esac',
             'fi',
             'case "$url" in',
-            '  */releases/qwen-code/latest/VERSION)',
+            '  */releases/lailatul-coder/latest/VERSION)',
             '    printf "v0.0.0-smoke\\n" ;;',
-            '  */releases/download/v0.0.0-smoke/qwen-code-linux-x64.tar.gz)',
+            '  */releases/download/v0.0.0-smoke/lailatul-coder-linux-x64.tar.gz)',
             '    cp "$QWEN_FAKE_ARCHIVE" "$dest" ;;',
             '  */releases/download/v0.0.0-smoke/SHA256SUMS)',
             '    cp "$QWEN_FAKE_SHA256SUMS" "$dest" ;;',
@@ -2875,12 +2875,12 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         ).toString();
 
         const curlUrls = readScript(curlLog);
-        expect(curlUrls).toContain('/releases/qwen-code/latest/VERSION');
+        expect(curlUrls).toContain('/releases/lailatul-coder/latest/VERSION');
         expect(curlUrls).toContain(
-          '/releases/qwen-code/v0.0.0-smoke/qwen-code-linux-x64.tar.gz',
+          '/releases/lailatul-coder/v0.0.0-smoke/lailatul-coder-linux-x64.tar.gz',
         );
         expect(curlUrls).toContain(
-          '/releases/download/v0.0.0-smoke/qwen-code-linux-x64.tar.gz',
+          '/releases/download/v0.0.0-smoke/lailatul-coder-linux-x64.tar.gz',
         );
         expect(curlUrls).toContain(
           '/releases/download/v0.0.0-smoke/SHA256SUMS',
@@ -2888,7 +2888,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         expect(output).toContain(
           'Aliyun standalone archive not found; retrying GitHub mirror.',
         );
-        expect(output).toContain('Downloading qwen-code-linux-x64.tar.gz');
+        expect(output).toContain('Downloading lailatul-coder-linux-x64.tar.gz');
         expect(output).not.toContain('Falling back to npm installation');
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -2913,9 +2913,9 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         rcFile,
         [
           'before',
-          '# Qwen Code PATH block begin',
+          '# LailatulCoder Ai PATH block begin',
           `export PATH='${installRoot}/bin':$PATH`,
-          '# Qwen Code PATH block end',
+          '# LailatulCoder Ai PATH block end',
           'after',
         ].join('\n') + '\n',
       );
@@ -2926,7 +2926,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
 
       runUnixUninstaller(installRoot, home);
 
-      expect(existsSync(path.join(installRoot, 'lib', 'qwen-code'))).toBe(
+      expect(existsSync(path.join(installRoot, 'lib', 'lailatul-coder'))).toBe(
         false,
       );
       expect(existsSync(path.join(installRoot, 'bin', 'qwen'))).toBe(false);
@@ -2961,10 +2961,10 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
           rcFile,
           [
             'before',
-            '# Added by qwen-code installer (multi-qwen shadow fix)   ',
+            '# Added by lailatul-coder installer (multi-qwen shadow fix)   ',
             `export PATH='${installRoot}/bin':$PATH`,
             'middle',
-            '# Added by qwen-code installer (multi-qwen shadow fix)',
+            '# Added by lailatul-coder installer (multi-qwen shadow fix)',
             'echo keep-me',
             'after',
           ].join('\n') + '\n',
@@ -3019,7 +3019,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         );
         expect(output).toContain(existingQwen);
         expect(output).toContain('source ~/.bashrc');
-        expect(bashrc).toContain('# Qwen Code PATH block begin');
+        expect(bashrc).toContain('# LailatulCoder Ai PATH block begin');
         expect(bashrc).toContain(
           `export PATH='${path.join(installRoot, 'bin')}':$PATH`,
         );
@@ -3105,7 +3105,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         ).toString();
 
         expect(readFileSync(bashProfile, 'utf8')).toContain(
-          '# Qwen Code PATH block begin',
+          '# LailatulCoder Ai PATH block begin',
         );
         // An ANSI reset sits between "in" and the rc name, so match the
         // success message and the reload hint on the rc name alone.
@@ -3152,13 +3152,13 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         });
 
         const bashrcContents = readScript(bashrc);
-        expect(bashrcContents).toContain('# Qwen Code PATH block begin');
+        expect(bashrcContents).toContain('# LailatulCoder Ai PATH block begin');
         expect(
           bashrcContents.endsWith(
             [
-              '# Qwen Code PATH block begin',
+              '# LailatulCoder Ai PATH block begin',
               `export PATH='${installBinDir}':$PATH`,
-              '# Qwen Code PATH block end',
+              '# LailatulCoder Ai PATH block end',
               '',
             ].join('\n'),
           ),
@@ -3203,10 +3203,10 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
           rcFile,
           [
             'before',
-            '# Qwen Code PATH block begin',
+            '# LailatulCoder Ai PATH block begin',
             '# inserted by another tool',
             `export PATH='${installRoot}/bin':$PATH`,
-            '# Qwen Code PATH block end',
+            '# LailatulCoder Ai PATH block end',
             'after',
           ].join('\n') + '\n',
         );
@@ -3238,7 +3238,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
           rcFile,
           [
             'before',
-            '# Qwen Code PATH block begin',
+            '# LailatulCoder Ai PATH block begin',
             `export PATH='${installRoot}/bin':$PATH`,
             'user content that must stay',
             'after',
@@ -3250,7 +3250,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         expect(readScript(rcFile)).toBe(
           [
             'before',
-            '# Qwen Code PATH block begin',
+            '# LailatulCoder Ai PATH block begin',
             `export PATH='${installRoot}/bin':$PATH`,
             'user content that must stay',
             'after',
@@ -3274,7 +3274,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
       const installLibDir = path.join(
         installRoot,
         'lib',
-        'qwen-code$(touch qwen-pwned)',
+        'lailatul-coder$(touch qwen-pwned)',
       );
 
       runUnixInstaller(archive, installRoot, home, 'standalone', {
@@ -3427,7 +3427,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
             'done',
             'printf "%s %s %s\\n" "$url" "$is_head" "$is_range" >> "$QWEN_FAKE_CURL_LOG"',
             'case "$url" in',
-            '  */qwen-code-linux-x64.tar.gz)',
+            '  */lailatul-coder-linux-x64.tar.gz)',
             '    if [ "$is_head" = "1" ]; then exit 22; fi',
             '    if [ "$is_range" = "1" ]; then : > "${dest:-/dev/null}"; exit 0; fi',
             '    cp "$QWEN_FAKE_ARCHIVE" "$dest"; exit 0 ;;',
@@ -3464,7 +3464,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
             '--method',
             'detect',
             '--base-url',
-            'https://example.com/qwen-code',
+            'https://example.com/lailatul-coder',
             '--source',
             'smoke',
           ],
@@ -3483,9 +3483,9 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         ).toString();
 
         const curlUrls = readScript(curlLog);
-        expect(curlUrls).toContain('qwen-code-linux-x64.tar.gz 1 0');
-        expect(curlUrls).toContain('qwen-code-linux-x64.tar.gz 0 1');
-        expect(output).toContain('Downloading qwen-code-linux-x64.tar.gz');
+        expect(curlUrls).toContain('lailatul-coder-linux-x64.tar.gz 1 0');
+        expect(curlUrls).toContain('lailatul-coder-linux-x64.tar.gz 0 1');
+        expect(output).toContain('Downloading lailatul-coder-linux-x64.tar.gz');
         expect(output).not.toContain('Falling back to npm installation');
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -3593,7 +3593,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
     const tmpDir = mkdtempSync(path.join(tmpdir(), 'qwen-install-test-'));
 
     try {
-      const archive = path.join(tmpDir, 'qwen-code-linux-x64.tar.gz');
+      const archive = path.join(tmpDir, 'lailatul-coder-linux-x64.tar.gz');
       execFileSync('tar', ['-czf', archive, '-T', '/dev/null'], {
         stdio: 'ignore',
       });
@@ -3640,7 +3640,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
     try {
       const archive = packageFakeStandalone(tmpDir);
       const installRoot = path.join(tmpDir, 'install');
-      const installDir = path.join(installRoot, 'lib', 'qwen-code');
+      const installDir = path.join(installRoot, 'lib', 'lailatul-coder');
       mkdirSync(installDir, { recursive: true });
       writeFileSync(path.join(installDir, 'important.txt'), 'keep me\n');
 
@@ -3650,12 +3650,12 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         path.join(tmpDir, 'home'),
       ).toString();
 
-      expect(output).toContain('not a Qwen Code standalone install');
+      expect(output).toContain('not a LailatulCoder Ai standalone install');
       expect(output).toContain('Backing up to');
 
       // Original directory should be backed up, not destroyed
       const backups = readdirSync(path.join(installRoot, 'lib')).filter((e) =>
-        e.startsWith('qwen-code.backup.'),
+        e.startsWith('lailatul-coder.backup.'),
       );
       expect(backups.length).toBe(1);
       expect(
@@ -3758,7 +3758,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
             '--method',
             'detect',
             '--base-url',
-            'https://example.invalid/qwen-code',
+            'https://example.invalid/lailatul-coder',
             '--source',
             'smoke',
           ],
@@ -3776,7 +3776,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
 
         expect(output).toContain('Falling back to npm installation');
         expect(readScript(npmLog)).toContain(
-          'install -g @qwen-code/qwen-code@latest --registry',
+          'install -g @lailatul-coder/lailatul-coder@latest --registry',
         );
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -3834,7 +3834,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
           '--method',
           'detect',
           '--base-url',
-          'https://example.invalid/qwen-code',
+          'https://example.invalid/lailatul-coder',
           '--version',
           'v0.15.10',
         ],
@@ -3851,7 +3851,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
       );
 
       expect(readScript(npmLog)).toContain(
-        'install -g @qwen-code/qwen-code@0.15.10 --registry',
+        'install -g @lailatul-coder/lailatul-coder@0.15.10 --registry',
       );
     } finally {
       rmSync(tmpDir, { recursive: true, force: true });
@@ -3882,7 +3882,7 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
             '--method',
             'detect',
             '--base-url',
-            'https://example.invalid/qwen-code',
+            'https://example.invalid/lailatul-coder',
             '--source',
             'smoke',
           ],
@@ -3931,7 +3931,7 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
           true,
         );
         expect(
-          existsSync(path.join(installRoot, 'qwen-code', 'node', 'node.exe')),
+          existsSync(path.join(installRoot, 'lailatul-coder', 'node', 'node.exe')),
         ).toBe(true);
         expect(readScript(path.join(home, '.qwen', 'source.json'))).toContain(
           '"source": "smoke"',
@@ -4019,7 +4019,7 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
           true,
         );
         expect(
-          existsSync(path.join(installRoot, 'qwen-code', 'node', 'node.exe')),
+          existsSync(path.join(installRoot, 'lailatul-coder', 'node', 'node.exe')),
         ).toBe(true);
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -4049,7 +4049,7 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
     const tmpDir = mkdtempSync(path.join(tmpdir(), 'qwen-install-test-'));
 
     try {
-      const archive = path.join(tmpDir, 'qwen-code-win-x64.zip');
+      const archive = path.join(tmpDir, 'lailatul-coder-win-x64.zip');
       const installRoot = path.join(tmpDir, 'install');
       const home = path.join(tmpDir, 'home');
       mkdirSync(archive);
@@ -4139,15 +4139,15 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
         ).toString();
 
         const curlUrls = readScript(curlLog);
-        expect(curlUrls).toContain('/releases/qwen-code/latest/VERSION');
+        expect(curlUrls).toContain('/releases/lailatul-coder/latest/VERSION');
         expect(curlUrls).toContain(
-          '/releases/qwen-code/v0.0.0/qwen-code-win-x64.zip',
+          '/releases/lailatul-coder/v0.0.0/lailatul-coder-win-x64.zip',
         );
-        expect(curlUrls).toContain('/releases/qwen-code/v0.0.0/SHA256SUMS');
+        expect(curlUrls).toContain('/releases/lailatul-coder/v0.0.0/SHA256SUMS');
         expect(curlUrls).not.toContain(
-          '/releases/qwen-code/latest/qwen-code-win-x64.zip',
+          '/releases/lailatul-coder/latest/lailatul-coder-win-x64.zip',
         );
-        expect(output).toContain('Downloading qwen-code-win-x64.zip');
+        expect(output).toContain('Downloading lailatul-coder-win-x64.zip');
         expect(existsSync(path.join(installRoot, 'bin', 'qwen.cmd'))).toBe(
           true,
         );
@@ -4188,7 +4188,7 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
 
         expect(output).toContain('Falling back to npm installation');
         expect(readScript(npmLog)).toContain(
-          'install -g @qwen-code/qwen-code@latest --registry',
+          'install -g @lailatul-coder/lailatul-coder@latest --registry',
         );
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -4226,7 +4226,7 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
       );
 
       expect(readScript(npmLog)).toContain(
-        'install -g @qwen-code/qwen-code@0.15.10 --registry',
+        'install -g @lailatul-coder/lailatul-coder@0.15.10 --registry',
       );
     } finally {
       rmSync(tmpDir, { recursive: true, force: true });
@@ -4285,7 +4285,7 @@ describe('Windows PowerShell uninstaller end-to-end', () => {
 
     try {
       const installRoot = path.join(tmpDir, 'install');
-      const installDir = path.join(installRoot, 'qwen-code');
+      const installDir = path.join(installRoot, 'lailatul-coder');
       const home = path.join(tmpDir, 'home');
       createFakeWindowsStandaloneInstall(installRoot);
 
@@ -4311,7 +4311,7 @@ describe('Windows PowerShell uninstaller end-to-end', () => {
 
     try {
       const installRoot = path.join(tmpDir, 'install');
-      const installDir = path.join(installRoot, 'qwen-code');
+      const installDir = path.join(installRoot, 'lailatul-coder');
       const installBinDir = path.join(installRoot, 'bin');
       const home = path.join(tmpDir, 'home');
       const qwenConfigDir = path.join(home, '.qwen');
@@ -4383,7 +4383,7 @@ function ensureMinimalDist({
   writeFileSync(path.join(distPath, 'chunks/index.js'), 'export {};\n');
   writeFileSync(
     path.join(distPath, 'package.json'),
-    JSON.stringify({ name: '@qwen-code/qwen-code', version: '0.0.0' }),
+    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version: '0.0.0' }),
   );
   return { backupPath, distPath };
 }
@@ -4469,7 +4469,7 @@ function createFakeWindowsNodeArchive(tmpDir) {
 }
 
 function createFakeWindowsStandaloneArchive(tmpDir) {
-  const packageRoot = path.join(tmpDir, 'qwen-code');
+  const packageRoot = path.join(tmpDir, 'lailatul-coder');
   const outDir = path.join(tmpDir, 'out');
   mkdirSync(path.join(packageRoot, 'bin'), { recursive: true });
   mkdirSync(path.join(packageRoot, 'node'), { recursive: true });
@@ -4482,17 +4482,17 @@ function createFakeWindowsStandaloneArchive(tmpDir) {
   writeFileSync(path.join(packageRoot, 'node', 'node.exe'), 'fake node.exe\n');
   writeFileSync(
     path.join(packageRoot, 'manifest.json'),
-    JSON.stringify({ name: '@qwen-code/qwen-code', target: 'win-x64' }),
+    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', target: 'win-x64' }),
   );
 
-  const archive = path.join(outDir, 'qwen-code-win-x64.zip');
+  const archive = path.join(outDir, 'lailatul-coder-win-x64.zip');
   createZipForTest(archive, tmpDir, path.basename(packageRoot));
   writeChecksumFile(outDir, path.basename(archive));
   return archive;
 }
 
 function createFakeWindowsStandaloneInstall(installRoot) {
-  const installDir = path.join(installRoot, 'qwen-code');
+  const installDir = path.join(installRoot, 'lailatul-coder');
   const installBinDir = path.join(installRoot, 'bin');
   mkdirSync(path.join(installDir, 'bin'), { recursive: true });
   mkdirSync(path.join(installDir, 'node'), { recursive: true });
@@ -4500,7 +4500,7 @@ function createFakeWindowsStandaloneInstall(installRoot) {
 
   writeFileSync(
     path.join(installDir, 'manifest.json'),
-    JSON.stringify({ name: '@qwen-code/qwen-code', target: 'win-x64' }),
+    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', target: 'win-x64' }),
   );
   writeFileSync(
     path.join(installDir, 'bin', 'qwen.cmd'),
@@ -4580,15 +4580,15 @@ function createFakeWindowsCurlCommand(fakeBin) {
       '>>"%QWEN_FAKE_CURL_LOG%" echo(!url!',
       'if "!url!"=="" echo missing url or destination 1>&2 & exit /b 2',
       'if "!destination!"=="" echo missing url or destination 1>&2 & exit /b 2',
-      'echo(!url! | findstr /I /C:"/releases/qwen-code/latest/VERSION" >nul && (',
+      'echo(!url! | findstr /I /C:"/releases/lailatul-coder/latest/VERSION" >nul && (',
       '  > "!destination!" echo 0.0.0',
       '  exit /b 0',
       ')',
-      'echo(!url! | findstr /I /C:"/releases/qwen-code/v0.0.0/qwen-code-win-x64.zip" >nul && (',
+      'echo(!url! | findstr /I /C:"/releases/lailatul-coder/v0.0.0/lailatul-coder-win-x64.zip" >nul && (',
       '  copy /Y "%QWEN_FAKE_ARCHIVE%" "!destination!" >nul',
       '  exit /b 0',
       ')',
-      'echo(!url! | findstr /I /C:"/releases/qwen-code/v0.0.0/SHA256SUMS" >nul && (',
+      'echo(!url! | findstr /I /C:"/releases/lailatul-coder/v0.0.0/SHA256SUMS" >nul && (',
       '  copy /Y "%QWEN_FAKE_SHA256SUMS%" "!destination!" >nul',
       '  exit /b 0',
       ')',
@@ -4691,7 +4691,7 @@ function packageFakeStandalone(
     args.push('--native-modules-dir', nativeModulesDir);
   }
   execFileSync('node', args, { stdio: 'pipe' });
-  return path.join(outDir, 'qwen-code-linux-x64.tar.gz');
+  return path.join(outDir, 'lailatul-coder-linux-x64.tar.gz');
 }
 
 function createFakeClipboardModules(tmpDir, nativePackages) {
@@ -4926,7 +4926,7 @@ function captureFailure(action) {
 }
 
 function expectNoStandaloneInstallSideEffects(installRoot, home) {
-  const installDir = path.join(installRoot, 'qwen-code');
+  const installDir = path.join(installRoot, 'lailatul-coder');
   const wrapper = path.join(installRoot, 'bin', 'qwen.cmd');
   const unexpectedPaths = [
     installDir,
@@ -4956,7 +4956,7 @@ function readBatchRoutine(script, label) {
 }
 
 function createSymlinkStandaloneArchive(tmpDir) {
-  const packageRoot = path.join(tmpDir, 'malicious', 'qwen-code');
+  const packageRoot = path.join(tmpDir, 'malicious', 'lailatul-coder');
   mkdirSync(path.join(packageRoot, 'bin'), { recursive: true });
   mkdirSync(path.join(packageRoot, 'node', 'bin'), { recursive: true });
   symlinkSync('/usr/bin/env', path.join(packageRoot, 'bin', 'qwen'));
@@ -4967,15 +4967,15 @@ function createSymlinkStandaloneArchive(tmpDir) {
   chmodSync(path.join(packageRoot, 'node', 'bin', 'node'), 0o755);
   writeFileSync(
     path.join(packageRoot, 'manifest.json'),
-    JSON.stringify({ name: '@qwen-code/qwen-code', target: 'linux-x64' }),
+    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', target: 'linux-x64' }),
   );
 
   const outDir = path.join(tmpDir, 'out');
   mkdirSync(outDir, { recursive: true });
-  const archive = path.join(outDir, 'qwen-code-linux-x64.tar.gz');
+  const archive = path.join(outDir, 'lailatul-coder-linux-x64.tar.gz');
   execFileSync(
     'tar',
-    ['-czf', archive, '-C', path.dirname(packageRoot), 'qwen-code'],
+    ['-czf', archive, '-C', path.dirname(packageRoot), 'lailatul-coder'],
     {
       env: { ...process.env, LC_ALL: 'C' },
       stdio: 'ignore',
@@ -4987,7 +4987,7 @@ function createSymlinkStandaloneArchive(tmpDir) {
 
 function createTraversalStandaloneArchive(tmpDir) {
   const maliciousRoot = path.join(tmpDir, 'malicious');
-  const packageRoot = path.join(maliciousRoot, 'qwen-code');
+  const packageRoot = path.join(maliciousRoot, 'lailatul-coder');
   mkdirSync(path.join(packageRoot, 'bin'), { recursive: true });
   mkdirSync(path.join(packageRoot, 'node', 'bin'), { recursive: true });
   writeFileSync(
@@ -5002,14 +5002,14 @@ function createTraversalStandaloneArchive(tmpDir) {
   chmodSync(path.join(packageRoot, 'node', 'bin', 'node'), 0o755);
   writeFileSync(
     path.join(packageRoot, 'manifest.json'),
-    JSON.stringify({ name: '@qwen-code/qwen-code', target: 'linux-x64' }),
+    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', target: 'linux-x64' }),
   );
   writeFileSync(path.join(tmpDir, 'qwen-slip'), 'path traversal\n');
 
   const outDir = path.join(tmpDir, 'out');
   mkdirSync(outDir, { recursive: true });
-  const archive = path.join(outDir, 'qwen-code-linux-x64.zip');
-  execFileSync('zip', ['-qr', archive, 'qwen-code', '../qwen-slip'], {
+  const archive = path.join(outDir, 'lailatul-coder-linux-x64.zip');
+  execFileSync('zip', ['-qr', archive, 'lailatul-coder', '../qwen-slip'], {
     cwd: maliciousRoot,
     stdio: 'ignore',
   });

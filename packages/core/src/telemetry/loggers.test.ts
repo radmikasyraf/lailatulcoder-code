@@ -2704,7 +2704,7 @@ describe('loggers', () => {
       expect(logRecord.body).toContain('API retry attempt 2');
       expect(logRecord.body).toContain('qwen3');
       expect(logRecord.body).toContain('status 429');
-      expect(logRecord.attributes['event.name']).toBe('qwen-code.api_retry');
+      expect(logRecord.attributes['event.name']).toBe('lailatul-coder.api_retry');
       expect(logRecord.attributes['attempt_number']).toBe(2);
       expect(logRecord.attributes['retry_delay_ms']).toBe(1500);
       expect(logRecord.attributes['status_code']).toBe(429);

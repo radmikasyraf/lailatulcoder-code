@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { SkillError, TrustGateError } from '@qwen-code/qwen-code-core';
+import { SkillError, TrustGateError } from '@lailatul-coder/lailatul-coder-core';
 import { describe, expect, it } from 'vitest';
 import {
   BridgeChannelClosedError,

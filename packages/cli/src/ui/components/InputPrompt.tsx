@@ -32,7 +32,7 @@ import {
   type Config,
   Storage,
   createDebugLogger,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   parseInputForHighlighting,
   buildSegmentsForVisualSlice,
@@ -2337,3 +2337,4 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
     </>
   );
 };
+

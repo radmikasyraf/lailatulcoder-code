@@ -10,7 +10,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 const mockResolve = vi.fn();
 const mockFindSessionsByTitle = vi.fn();
 
-vi.mock('@qwen-code/qwen-code-core', async (orig) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (orig) => {
   const actual = (await orig()) as Record<string, unknown>;
   return {
     ...actual,
@@ -25,12 +25,12 @@ vi.mock('@qwen-code/qwen-code-core', async (orig) => {
 
 import { handleAtCommand } from './atCommandProcessor.js';
 import { ToolCallStatus } from '../types.js';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import {
   FileDiscoveryService,
   StandardFileSystemService,
   COMMON_IGNORE_PATTERNS,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import * as os from 'node:os';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 import * as fsPromises from 'node:fs/promises';

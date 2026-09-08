@@ -72,10 +72,10 @@ describe('runCommentBody', () => {
     const { body } = runCommentBody({
       id: 3773970278,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
     expect(ghApiMock).toHaveBeenCalledWith(
-      'repos/QwenLM/qwen-code/pulls/comments/3773970278',
+      'repos/LailatulCoder/lailatul-coder/pulls/comments/3773970278',
     );
     expect(body).toBe('**[Suggestion]** the inline body');
   });
@@ -87,7 +87,7 @@ describe('runCommentBody', () => {
     const { body } = runCommentBody({
       id: 1,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
     expect(body).toBe('    indented first line\nrest');
   });
@@ -95,7 +95,7 @@ describe('runCommentBody', () => {
   it('returns an empty string for a null body', () => {
     ghApiMock.mockReturnValue({ body: null });
     expect(
-      runCommentBody({ id: 1, kind: 'inline', repo: 'QwenLM/qwen-code' }).body,
+      runCommentBody({ id: 1, kind: 'inline', repo: 'LailatulCoder/lailatul-coder' }).body,
     ).toBe('');
   });
 
@@ -104,26 +104,26 @@ describe('runCommentBody', () => {
     runCommentBody({
       id: 5277891862,
       kind: 'issue',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
     expect(ghApiMock).toHaveBeenCalledWith(
-      'repos/QwenLM/qwen-code/issues/comments/5277891862',
+      'repos/LailatulCoder/lailatul-coder/issues/comments/5277891862',
     );
   });
 
   it('addresses review bodies per-PR and refuses without one', () => {
     expect(() =>
-      runCommentBody({ id: 1, kind: 'review', repo: 'QwenLM/qwen-code' }),
+      runCommentBody({ id: 1, kind: 'review', repo: 'LailatulCoder/lailatul-coder' }),
     ).toThrow(TypeError);
     ghApiMock.mockReturnValue({ body: 'review body' });
     runCommentBody({
       id: 99,
       kind: 'review',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       prNumber: 9073,
     });
     expect(ghApiMock).toHaveBeenCalledWith(
-      'repos/QwenLM/qwen-code/pulls/9073/reviews/99',
+      'repos/LailatulCoder/lailatul-coder/pulls/9073/reviews/99',
     );
   });
 
@@ -132,7 +132,7 @@ describe('runCommentBody', () => {
     const result = runCommentBody({
       id: 1,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/body.md',
     });
     // resolve()d on both sides: a literal '/tmp/...' fails on Windows.
@@ -167,7 +167,7 @@ describe('commentBodyCommand handler', () => {
         $0: 'qwen',
         id: 5,
         kind: 'inline',
-        repo: 'QwenLM/qwen-code',
+        repo: 'LailatulCoder/lailatul-coder',
       });
       expect(stdoutSpy).toHaveBeenCalledWith('the body');
       expect(setGhHostMock).toHaveBeenCalledWith(undefined);
@@ -186,7 +186,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       host: 'ghe.example.com',
     });
     expect(setGhHostMock).toHaveBeenCalledWith('ghe.example.com');
@@ -209,7 +209,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'review',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
     expect(process.exitCode).toBe(2);
     expect(ghApiMock).not.toHaveBeenCalled();
@@ -225,11 +225,11 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 99,
       kind: 'review',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       pr: 9073,
     });
     expect(ghApiMock).toHaveBeenCalledWith(
-      'repos/QwenLM/qwen-code/pulls/9073/reviews/99',
+      'repos/LailatulCoder/lailatul-coder/pulls/9073/reviews/99',
     );
     expect(process.exitCode).toBeUndefined();
   });
@@ -240,7 +240,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 0,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
     expect(process.exitCode).toBe(2);
     // Reset so the second assertion verifies the guard assigns the code,
@@ -251,7 +251,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'review',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       pr: -3,
     });
     expect(process.exitCode).toBe(2);
@@ -268,7 +268,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 1.5,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
     expect(process.exitCode).toBe(2);
     process.exitCode = undefined;
@@ -277,7 +277,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'review',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       pr: 9073.25,
     });
     expect(process.exitCode).toBe(2);
@@ -291,7 +291,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '',
     });
     expect(process.exitCode).toBe(2);
@@ -305,7 +305,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: ' ',
     });
     expect(process.exitCode).toBe(2);
@@ -322,7 +322,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       host: 'bad host; rm -rf /',
     });
     expect(process.exitCode).toBe(2);
@@ -352,7 +352,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '/tmp/body.md',
     });
     expect(writeStdoutLineMock).toHaveBeenCalledWith(
@@ -374,7 +374,7 @@ describe('commentBodyCommand handler', () => {
       $0: 'qwen',
       id: 5,
       kind: 'inline',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
     expect(process.exitCode).toBe(1);
     expect(writeStderrLineSafeMock).toHaveBeenCalled();

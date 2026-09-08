@@ -12,7 +12,7 @@ import type {
   DaemonWorkspaceProvidersStatus,
   DaemonWorkspaceSettingsStatus,
   DaemonWorkspaceVoiceStatus,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 const PRIMARY_VOICE_FEATURE = 'voice_transcribe';
 const QUALIFIED_VOICE_FEATURE = 'workspace_qualified_voice';

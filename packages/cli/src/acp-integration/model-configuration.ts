@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { ReasoningEffort } from '@qwen-code/qwen-code-core';
+import type { ReasoningEffort } from '@lailatul-coder/lailatul-coder-core';
 
 export type ModelReasoningConfiguration =
   | {

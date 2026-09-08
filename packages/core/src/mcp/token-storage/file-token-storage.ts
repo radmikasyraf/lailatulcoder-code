@@ -34,8 +34,8 @@ export class FileTokenStorage
   }
 
   private deriveEncryptionKey(): Buffer {
-    const salt = `${os.hostname()}-${os.userInfo().username}-qwen-code`;
-    return crypto.scryptSync('qwen-code-oauth', salt, 32);
+    const salt = `${os.hostname()}-${os.userInfo().username}-lailatul-coder`;
+    return crypto.scryptSync('lailatul-coder-oauth', salt, 32);
   }
 
   private encrypt(text: string): string {

@@ -6,7 +6,7 @@
 
 import { render } from 'ink-testing-library';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { AgentStatus, ApprovalMode } from '@qwen-code/qwen-code-core';
+import { AgentStatus, ApprovalMode } from '@lailatul-coder/lailatul-coder-core';
 import {
   useAgentViewActions,
   useAgentViewState,
@@ -133,3 +133,4 @@ describe('AgentComposer', () => {
     expect(setAgentApprovalMode).not.toHaveBeenCalled();
   });
 });
+

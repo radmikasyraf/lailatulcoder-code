@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { DaemonSessionArtifact } from '@qwen-code/sdk/daemon';
+import type { DaemonSessionArtifact } from '@lailatul-coder/sdk/daemon';
 import {
   canOpenWorkspaceArtifact,
   getArtifactFormatIcon,

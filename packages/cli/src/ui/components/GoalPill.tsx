@@ -7,12 +7,12 @@
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { Text } from 'ink';
-import { elapsedActiveTime } from '@qwen-code/qwen-code-core';
+import { elapsedActiveTime } from '@lailatul-coder/lailatul-coder-core';
 import type {
   Config,
   GoalRuntime,
   GoalSnapshotV2,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { useConfig } from '../contexts/ConfigContext.js';
 import { theme } from '../semantic-colors.js';
 import { ICON } from '../constants.js';
@@ -140,3 +140,4 @@ export const GoalPill: React.FC<GoalPillProps> = ({ snapshot }) => {
     </Text>
   );
 };
+

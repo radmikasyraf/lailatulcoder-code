@@ -24,7 +24,7 @@ import {
   type RecentSlashCommands,
   useSlashCompletion,
 } from './useSlashCompletion.js';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import { useCompletion } from './useCompletion.js';
 import {
   isStackedSkillCompletableCommand,
@@ -448,3 +448,4 @@ export function useCommandCompletion(
     switchCategory,
   };
 }
+

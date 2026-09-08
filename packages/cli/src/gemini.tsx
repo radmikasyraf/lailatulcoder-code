@@ -20,14 +20,14 @@ import {
   persistSessionUsage,
   PRIVATE_ACP_CAPABILITY_ENV,
   uiTelemetryService,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   EXTERNAL_TOOL_GUARD_PROVIDER_ATTACHED_VALUE,
   EXTERNAL_TOOL_GUARD_REQUIRED_VALUE,
   EXTERNAL_TOOL_GUARD_TOKEN_ENV,
   PRIVATE_EXTERNAL_TOOL_GUARD_ENV,
   PRIVATE_EXTERNAL_TOOL_GUARD_PROVIDER_ENV,
-} from '@qwen-code/acp-bridge/externalToolGuard';
+} from '@lailatul-coder/acp-bridge/externalToolGuard';
 import dns from 'node:dns';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -1488,3 +1488,4 @@ function getRuntimeReloadFailedNames(reconcile: {
 }): readonly string[] {
   return reconcile.failed ?? [];
 }
+

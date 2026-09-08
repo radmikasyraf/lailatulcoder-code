@@ -29,7 +29,7 @@ import {
 } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import type { CommandModule } from 'yargs';
-import { atomicWriteFileSync } from '@qwen-code/qwen-code-core';
+import { atomicWriteFileSync } from '@lailatul-coder/lailatul-coder-core';
 import { writeStdoutLine, writeStderrLine } from '../../utils/stdioHelpers.js';
 import {
   readRunTranscripts,

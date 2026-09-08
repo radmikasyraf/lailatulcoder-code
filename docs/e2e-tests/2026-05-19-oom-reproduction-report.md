@@ -10,7 +10,7 @@
 
 ## 一、背景
 
-多个 issue（#4309, #4276, #4185, #4315, #4322, #2868）报告 qwen-code 在长会话中出现 V8 heap OOM crash：
+多个 issue（#4309, #4276, #4185, #4315, #4322, #2868）报告 lailatul-coder 在长会话中出现 V8 heap OOM crash：
 
 ```
 FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
@@ -50,7 +50,7 @@ history 足够大时会产生峰值放大，需要再用默认 heap 长任务验
 | Heap limit               | `--max-old-space-size=512`                                   |
 | Heap-pressure safety net | **禁用** (HEAP_PRESSURE_COMPRESSION_RATIO 设为 99.0)         |
 | 操作模式                 | YOLO + 自动化多轮 Read 文件任务                              |
-| 工作目录                 | qwen-code monorepo (3538 .ts files, 1.26M lines)             |
+| 工作目录                 | lailatul-coder monorepo (3538 .ts files, 1.26M lines)             |
 
 ### 关键配置修改
 

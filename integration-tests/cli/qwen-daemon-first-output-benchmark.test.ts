@@ -33,7 +33,7 @@ import {
   DaemonClient,
   type DaemonEvent,
   type DaemonSession,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 import {
   DEFAULT_BOOTSTRAP_ITERATIONS,
   DEFAULT_FIRST_OUTPUT_EVENT_BUFFER_LIMIT,

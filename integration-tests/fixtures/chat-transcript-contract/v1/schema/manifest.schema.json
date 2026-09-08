@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://qwen-code.invalid/chat-transcript-contract/manifest-v1.schema.json",
+  "$id": "https://lailatul-coder.invalid/chat-transcript-contract/manifest-v1.schema.json",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -3642,7 +3642,7 @@ describe('daemon UI normalizer — Wave 3/4 event coverage (PR-A)', () => {
       envelopeOf('github_setup_completed', {
         releaseTag: 'v1.2.3',
         readmeUrl:
-          'https://github.com/QwenLM/qwen-code-action/blob/v1.2.3/README.md#quick-start',
+          'https://github.com/LailatulCoder/lailatul-coder-action/blob/v1.2.3/README.md#quick-start',
         workflows: [
           {
             path: '.github/workflows/qwen-dispatch.yml',
@@ -4164,7 +4164,7 @@ describe('daemon UI time schema (PR-B)', () => {
       v: 1,
       type: 'model_switched',
       serverTimestamp: 1_777_777_777_777,
-      data: { sessionId: 's', modelId: 'qwen-coder-flash' },
+      data: { sessionId: 's', modelId: 'lailatul-coderr-flash' },
     } as never);
     expect(events[0]).toMatchObject({
       type: 'model.changed',

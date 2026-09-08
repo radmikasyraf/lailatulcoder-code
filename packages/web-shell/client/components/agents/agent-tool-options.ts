@@ -1,7 +1,7 @@
 import type {
   DaemonWorkspaceMcpToolStatus,
   DaemonWorkspaceToolStatus,
-} from '@qwen-code/webui/daemon-react-sdk';
+} from '@lailatul-coder/webui/daemon-react-sdk';
 
 export function canAddSelection(
   selection: ReadonlySet<string>,

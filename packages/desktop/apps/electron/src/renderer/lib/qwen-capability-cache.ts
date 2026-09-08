@@ -75,7 +75,7 @@ function providerSkillFromDetail(detail: AvailableSkillDetail): LoadedSkill {
     slug: detail.name,
     metadata: {
       name: detail.name,
-      description: detail.description ?? 'Qwen Code skill',
+      description: detail.description ?? 'LailatulCoder Ai skill',
     },
     content: detail.body ?? '',
     path: detail.filePath ? dirnameLike(detail.filePath) : '',

@@ -5,9 +5,9 @@
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { SessionNotFoundError } from '@qwen-code/acp-bridge/bridgeErrors';
-import type { AcpSessionBridge } from '@qwen-code/acp-bridge/bridgeTypes';
-import { SessionService } from '@qwen-code/qwen-code-core';
+import { SessionNotFoundError } from '@lailatul-coder/acp-bridge/bridgeErrors';
+import type { AcpSessionBridge } from '@lailatul-coder/acp-bridge/bridgeTypes';
+import { SessionService } from '@lailatul-coder/lailatul-coder-core';
 
 /** Captures the launcher's operator-facing stderr output. */
 const { stderrLines } = vi.hoisted(() => ({ stderrLines: [] as string[] }));

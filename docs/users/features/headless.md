@@ -1,12 +1,12 @@
 # Headless Mode
 
-Headless mode allows you to run Qwen Code programmatically from command line
+Headless mode allows you to run LailatulCoder Ai programmatically from command line
 scripts and automation tools without any interactive UI. This is ideal for
 scripting, automation, CI/CD pipelines, and building AI-powered tools.
 
 ## Overview
 
-The headless mode provides a headless interface to Qwen Code that:
+The headless mode provides a headless interface to LailatulCoder Ai that:
 
 - Accepts prompts via command line arguments or stdin
 - Returns structured output (text or JSON)
@@ -27,7 +27,7 @@ qwen --prompt "What is machine learning?"
 
 ### Stdin Input
 
-Pipe input to Qwen Code from your terminal:
+Pipe input to LailatulCoder Ai from your terminal:
 
 ```bash
 echo "Explain this code" | qwen
@@ -35,7 +35,7 @@ echo "Explain this code" | qwen
 
 ### Combining with File Input
 
-Read from files and process with Qwen Code:
+Read from files and process with LailatulCoder Ai:
 
 ```bash
 cat README.md | qwen --prompt "Summarize this documentation"
@@ -95,7 +95,7 @@ You can change the main session system prompt for a single CLI run without editi
 
 ### Override the Built-in System Prompt
 
-Use `--system-prompt` to replace Qwen Code's built-in main-session prompt for the current run:
+Use `--system-prompt` to replace LailatulCoder Ai's built-in main-session prompt for the current run:
 
 ```bash
 qwen -p "Review this patch" --system-prompt "You are a terse release reviewer. Report only blocking issues."
@@ -125,7 +125,7 @@ qwen -p "Summarize this repository" \
 
 ## Output Formats
 
-Qwen Code supports multiple output formats for different use cases:
+LailatulCoder Ai supports multiple output formats for different use cases:
 
 ### Text Output (Default)
 
@@ -229,7 +229,7 @@ qwen -p "Write a Python script" --output-format stream-json --include-partial-me
 
 ### Input Format
 
-The `--input-format` parameter controls how Qwen Code consumes input from standard input:
+The `--input-format` parameter controls how LailatulCoder Ai consumes input from standard input:
 
 - **`text`** (default): Standard text input from stdin or command-line arguments
 - **`stream-json`**: JSON message protocol via stdin for bidirectional communication
@@ -286,11 +286,11 @@ For complete details on all available configuration options, settings files, and
 
 ## Safety in unattended runs
 
-Headless / CI runs combined with `--yolo` (or `--approval-mode=yolo`) auto-approve every tool call, including `shell`, `write`, and `edit`. **`--yolo` does not enable a sandbox** — those tools run at the host process's privilege level. When Qwen Code detects this combination with no sandbox configured, it prints a one-line warning to stderr at startup. Suppress the warning with `QWEN_CODE_SUPPRESS_YOLO_WARNING=1` once you've reviewed the trade-off.
+Headless / CI runs combined with `--yolo` (or `--approval-mode=yolo`) auto-approve every tool call, including `shell`, `write`, and `edit`. **`--yolo` does not enable a sandbox** — those tools run at the host process's privilege level. When LailatulCoder Ai detects this combination with no sandbox configured, it prints a one-line warning to stderr at startup. Suppress the warning with `QWEN_CODE_SUPPRESS_YOLO_WARNING=1` once you've reviewed the trade-off.
 
 ### Run-level budgets
 
-Qwen Code can abort an unattended run when it crosses one of the following thresholds. Each is `-1` (unlimited) by default; setting any one is enough to bound runaway behavior. They are enforced cooperatively against the same `AbortController` that already carries SIGINT, so a budget abort emits a structured `FatalBudgetExceededError` (exit code **55**) — distinct from the turn-cap exit code 53 and SIGINT's 130 so CI scripts can branch on the reason.
+LailatulCoder Ai can abort an unattended run when it crosses one of the following thresholds. Each is `-1` (unlimited) by default; setting any one is enough to bound runaway behavior. They are enforced cooperatively against the same `AbortController` that already carries SIGINT, so a budget abort emits a structured `FatalBudgetExceededError` (exit code **55**) — distinct from the turn-cap exit code 53 and SIGINT's 130 so CI scripts can branch on the reason.
 
 | Flag                  | Settings key               | What it bounds                                                                                                                                                                                                |
 | --------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -384,7 +384,7 @@ tail -5 usage.log
 
 ## Persistent Retry Mode
 
-When Qwen Code runs in CI/CD pipelines or as a background daemon, a brief API outage (rate limiting or overload) should not kill a multi-hour task. **Persistent retry mode** makes Qwen Code retry transient API errors indefinitely until the service recovers.
+When LailatulCoder Ai runs in CI/CD pipelines or as a background daemon, a brief API outage (rate limiting or overload) should not kill a multi-hour task. **Persistent retry mode** makes LailatulCoder Ai retry transient API errors indefinitely until the service recovers.
 
 ### How it works
 
@@ -437,8 +437,8 @@ QWEN_CODE_UNATTENDED_RETRY=1 nohup qwen -p "Audit all dependencies for known CVE
 During persistent retry, heartbeat messages are printed to **stderr**:
 
 ```
-[qwen-code] Waiting for API capacity... attempt 3, retry in 45s
-[qwen-code] Waiting for API capacity... attempt 3, retry in 15s
+[lailatul-coder] Waiting for API capacity... attempt 3, retry in 45s
+[lailatul-coder] Waiting for API capacity... attempt 3, retry in 15s
 ```
 
 These messages keep CI runners alive and let you monitor progress. They do not appear in stdout, so JSON output piped to other tools remains clean.

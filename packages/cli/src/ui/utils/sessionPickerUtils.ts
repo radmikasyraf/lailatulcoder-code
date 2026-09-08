@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { SessionListItem } from '@qwen-code/qwen-code-core';
+import type { SessionListItem } from '@lailatul-coder/lailatul-coder-core';
 import { getCachedStringWidth } from './textUtils.js';
 
 const graphemeSegmenter = new Intl.Segmenter(undefined, {

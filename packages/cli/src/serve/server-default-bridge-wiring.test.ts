@@ -15,7 +15,7 @@ import {
 } from './acp-session-bridge.js';
 import type { WorkspaceRegistry } from './workspace-registry.js';
 import type { WorkspaceFileSystemFactory } from './fs/workspace-file-system.js';
-import { MAX_SESSION_RESTORE_TIMEOUT_MS } from '@qwen-code/acp-bridge/sessionRestoreTimeout';
+import { MAX_SESSION_RESTORE_TIMEOUT_MS } from '@lailatul-coder/acp-bridge/sessionRestoreTimeout';
 
 const WS_BOUND = path.resolve('/work/bound');
 
@@ -93,7 +93,7 @@ describe('createServeApp default bridge wiring', () => {
         content: 'must-not-write',
         sessionId: 'session-default-embed',
         _meta: {
-          'qwen-code/tool-write-origin': {
+          'lailatul-coder/tool-write-origin': {
             version: 1,
             source: 'write_file',
           },
@@ -174,7 +174,7 @@ describe('createServeApp default bridge wiring', () => {
         content: 'must-not-write',
         sessionId: 'session-injected-factory',
         _meta: {
-          'qwen-code/tool-write-origin': {
+          'lailatul-coder/tool-write-origin': {
             version: 1,
             source: 'write_file',
           },

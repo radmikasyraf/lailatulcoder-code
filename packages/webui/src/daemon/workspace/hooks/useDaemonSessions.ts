@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 import type {
   DaemonSessionArchiveState,
   DaemonSessionExportFormat,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import { useOptionalDaemonActions } from '../../session/DaemonSessionProvider.js';
 import { useDaemonWorkspace } from '../DaemonWorkspaceProvider.js';
 import type { DaemonResourceOptions } from '../types.js';

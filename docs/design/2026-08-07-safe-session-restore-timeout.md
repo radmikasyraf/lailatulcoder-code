@@ -74,7 +74,7 @@ A channel closed to fresh work rejects it with HTTP/ACP status 503 and code and 
 
 The bridge creates a restore span and always injects its trace context into ACP load/resume metadata. It records action, channel id, session id, configured budget, public result, late result, and cleanup or quarantine result without transcript content.
 
-The child continues that context in `qwen-code.daemon.session_restore` and records durations for settings load, live restore or persistence existence check, config setup, authentication, filesystem setup, session registration/replay, and response construction. The first failing stage is recorded as `failed_stage`.
+The child continues that context in `lailatul-coder.daemon.session_restore` and records durations for settings load, live restore or persistence existence check, config setup, authentication, filesystem setup, session registration/replay, and response construction. The first failing stage is recorded as `failed_stage`.
 
 ## Verification
 

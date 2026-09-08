@@ -31,7 +31,7 @@ describe('electron run-as-node env', () => {
     setElectronVersion('39.2.7');
 
     const env = withElectronRunAsNodeEnv({}, process.execPath, [
-      '/app/vendor/qwen-code/cli.js',
+      '/app/vendor/lailatul-coder/cli.js',
       '--acp',
     ]);
 
@@ -43,7 +43,7 @@ describe('electron run-as-node env', () => {
 
     expect(
       shouldRunElectronAsNode(process.execPath, [
-        '/app/vendor/qwen-code/cli.js',
+        '/app/vendor/lailatul-coder/cli.js',
         '--acp',
       ]),
     ).toBe(false);

@@ -17,7 +17,7 @@ import {
   shouldShowStep,
   providerMatchesCredentials,
   type ProviderConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   TOKEN_PLAN_CHINA_BASE_URL,
   TOKEN_PLAN_ENV_KEY,
@@ -810,8 +810,8 @@ describe('customHeaders in ProviderConfig', () => {
   it('merges customHeaders into generationConfig for fixed models', () => {
     const config = makeConfig({
       customHeaders: {
-        'HTTP-Referer': 'https://github.com/QwenLM/qwen-code.git',
-        'X-Title': 'Qwen Code',
+        'HTTP-Referer': 'https://github.com/LailatulCoder/lailatul-coder.git',
+        'X-Title': 'LailatulCoder Ai',
       },
     });
     const plan = buildInstallPlan(config, {
@@ -822,8 +822,8 @@ describe('customHeaders in ProviderConfig', () => {
 
     const gc = plan.modelProviders?.[0]?.models[0]?.generationConfig;
     expect(gc?.customHeaders).toEqual({
-      'HTTP-Referer': 'https://github.com/QwenLM/qwen-code.git',
-      'X-Title': 'Qwen Code',
+      'HTTP-Referer': 'https://github.com/LailatulCoder/lailatul-coder.git',
+      'X-Title': 'LailatulCoder Ai',
     });
     // existing fields preserved
     expect(gc?.extra_body).toEqual({ enable_thinking: true });

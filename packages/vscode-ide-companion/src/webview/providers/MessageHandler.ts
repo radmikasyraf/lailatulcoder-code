@@ -79,8 +79,8 @@ export class MessageHandler {
    */
   setAuthInteractiveHandler(
     handler: (
-      config: import('@qwen-code/qwen-code-core').ProviderConfig,
-      inputs: import('@qwen-code/qwen-code-core').ProviderSetupInputs,
+      config: import('@lailatul-coder/lailatul-coder-core').ProviderConfig,
+      inputs: import('@lailatul-coder/lailatul-coder-core').ProviderSetupInputs,
     ) => Promise<void>,
   ): void {
     this.router.setAuthInteractiveHandler(handler);

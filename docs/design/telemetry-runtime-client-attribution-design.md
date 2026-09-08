@@ -1,7 +1,7 @@
 # Telemetry: Daemon 会话的 channel 归因
 
-> 配套 issue: [#8660](https://github.com/QwenLM/qwen-code/issues/8660)
-> 基于 2026-08-07 对 qwen-code main 分支的代码复核
+> 配套 issue: [#8660](https://github.com/LailatulCoder/lailatul-coder/issues/8660)
+> 基于 2026-08-07 对 lailatul-coder main 分支的代码复核
 
 ## 1. 背景
 

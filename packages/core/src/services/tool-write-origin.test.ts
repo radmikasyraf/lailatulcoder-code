@@ -27,7 +27,7 @@ describe('tool write origin metadata', () => {
   it('replaces caller-supplied provenance', () => {
     const meta = buildToolWriteOriginMeta(
       {
-        'qwen-code/tool-write-origin': {
+        'lailatul-coder/tool-write-origin': {
           version: 1,
           source: 'write_file',
         },
@@ -35,7 +35,7 @@ describe('tool write origin metadata', () => {
       'edit',
     );
 
-    expect(meta?.['qwen-code/tool-write-origin']).toEqual({
+    expect(meta?.['lailatul-coder/tool-write-origin']).toEqual({
       version: 1,
       source: 'edit',
     });
@@ -52,7 +52,7 @@ describe('tool write origin metadata', () => {
   ])('rejects malformed marker %j', (marker) => {
     expect(
       parseToolWriteOriginMeta({
-        'qwen-code/tool-write-origin': marker,
+        'lailatul-coder/tool-write-origin': marker,
       }),
     ).toBeUndefined();
   });

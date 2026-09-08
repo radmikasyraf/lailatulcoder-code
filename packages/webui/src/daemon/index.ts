@@ -132,8 +132,8 @@ export {
 
 // ── Re-exported SDK types/constants for UI consumers ──────────────
 // These allow web-shell and other UI packages to depend only on
-// @qwen-code/webui without importing @qwen-code/sdk/daemon directly.
-export { DAEMON_APPROVAL_MODES } from '@qwen-code/sdk/daemon';
+// @lailatul-coder/webui without importing @lailatul-coder/sdk/daemon directly.
+export { DAEMON_APPROVAL_MODES } from '@lailatul-coder/sdk/daemon';
 export type {
   DaemonApprovalMode,
   DaemonAuthProviderBaseUrlOption,
@@ -214,4 +214,4 @@ export type {
   DaemonChannelPairingRevocationResult,
   DaemonModelDeleteRequest,
   DaemonModelDeleteResult,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';

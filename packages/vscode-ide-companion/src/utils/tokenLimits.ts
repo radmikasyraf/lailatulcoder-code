@@ -5,7 +5,7 @@
  */
 
 /**
- * Browser-safe subset of @qwen-code/qwen-code-core tokenLimits.
+ * Browser-safe subset of @lailatul-coder/lailatul-coder-core tokenLimits.
  *
  * The webview bundle (IIFE, platform: browser) cannot `require` Node.js
  * packages. This module replicates the constants and logic the webview
@@ -14,7 +14,7 @@
  *
  * NOTE: the companion's LIVE context-limit path does NOT go through this
  * module — acpModelInfo.ts runs in the extension host (Node) and imports
- * `knownTokenLimit` from @qwen-code/qwen-code-core directly, so companion
+ * `knownTokenLimit` from @lailatul-coder/lailatul-coder-core directly, so companion
  * limits already track core. This mirror exists only as a browser-safe
  * fallback for a future webview consumer; nothing imports it today. Keep it
  * in sync with packages/core/src/core/tokenLimits.ts so that consumer, when
@@ -198,7 +198,7 @@ const OUTPUT_PATTERNS: Array<[RegExp, TokenCount]> = [
  * Return the token limit for a given model name.
  *
  * This is a browser-safe mirror of `tokenLimit()` in
- * `@qwen-code/qwen-code-core`. The webview only calls this as a fallback
+ * `@lailatul-coder/lailatul-coder-core`. The webview only calls this as a fallback
  * when `modelInfo._meta.contextLimit` is unavailable.
  *
  * @param model - The model identifier string

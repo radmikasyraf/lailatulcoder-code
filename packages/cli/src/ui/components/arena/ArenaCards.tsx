@@ -10,7 +10,7 @@ import { theme } from '../../semantic-colors.js';
 import { formatDuration } from '../../utils/formatters.js';
 import { getArenaStatusLabel } from '../../utils/displayUtils.js';
 import type { ArenaAgentCardData } from '../../types.js';
-import type { ArenaDiffSummary } from '@qwen-code/qwen-code-core';
+import type { ArenaDiffSummary } from '@lailatul-coder/lailatul-coder-core';
 
 // ─── Helpers ────────────────────────────────────────────────
 
@@ -328,3 +328,4 @@ export const ArenaSessionCard: React.FC<ArenaSessionCardProps> = ({
     </Box>
   );
 };
+

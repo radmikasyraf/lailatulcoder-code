@@ -48,7 +48,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { join } from 'node:path';
-import { parsePositiveIntegerEnv } from '@qwen-code/qwen-code-core';
+import { parsePositiveIntegerEnv } from '@lailatul-coder/lailatul-coder-core';
 import { promptRecordDir, runEpochMs } from './prompt-record.js';
 
 /** Unix seconds at which the review process will be killed. Set by CI. */
@@ -94,7 +94,7 @@ export const RESERVE_ENV = 'QWEN_REVIEW_DEADLINE_RESERVE_SECONDS';
  * `/review --timeout=N` comment), so the review workflow passes a reserve
  * scaled to the budget it resolved rather than trusting this constant to fit
  * an arbitrary one. The workflow caps that scaled reserve at this same
- * number (`.github/workflows/qwen-code-pr-review.yml`) — keep the two in
+ * number (`.github/workflows/lailatul-coder-pr-review.yml`) — keep the two in
  * sync. A local run has no deadline and no reserve at all.
  */
 export const DEFAULT_RESERVE_SECONDS = 4800;

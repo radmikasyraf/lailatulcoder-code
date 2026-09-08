@@ -101,7 +101,7 @@ import {
   ToolNames,
   TURN_RESULT_CODE_TEXT_TRUNCATED,
   TURN_RESULT_TEXT_MAX_CHARS,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   FakeAgent,
   type ChannelHandle,
@@ -2267,9 +2267,9 @@ describe('createAcpSessionBridge', () => {
     });
     expect(activeSpanAttributes).toContainEqual(
       expect.objectContaining({
-        'qwen-code.daemon.acp_startup.profile.version': 1,
-        'qwen-code.daemon.acp_startup.profile.complete': false,
-        'qwen-code.daemon.acp_startup.child.process_to_response_ms': 10,
+        'lailatul-coder.daemon.acp_startup.profile.version': 1,
+        'lailatul-coder.daemon.acp_startup.profile.complete': false,
+        'lailatul-coder.daemon.acp_startup.child.process_to_response_ms': 10,
       }),
     );
     expect(events.slice(-4)).toEqual([
@@ -2293,26 +2293,26 @@ describe('createAcpSessionBridge', () => {
     );
     expect(session.clientId).toBeDefined();
     expect(spanAttributes.get('prompt.dispatch')).toMatchObject({
-      'qwen-code.client_id': session.clientId,
+      'lailatul-coder.client_id': session.clientId,
     });
     const channelId =
-      spanAttributes.get('channel.spawn')?.['qwen-code.daemon.acp_channel.id'];
+      spanAttributes.get('channel.spawn')?.['lailatul-coder.daemon.acp_channel.id'];
     expect(channelId).toMatch(
       /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
     );
     expect(spanAttributes.get('channel.initialize')).toMatchObject({
-      'qwen-code.daemon.acp_channel.id': channelId,
+      'lailatul-coder.daemon.acp_channel.id': channelId,
     });
     expect(spanAttributes.get('channel.wait')).toMatchObject({
-      'qwen-code.daemon.channel.path': 'spawned_on_request',
+      'lailatul-coder.daemon.channel.path': 'spawned_on_request',
     });
     expect(spanAttributes.get('session.new')).toMatchObject({
-      'qwen-code.daemon.acp_channel.id': channelId,
-      'qwen-code.daemon.channel.path': 'spawned_on_request',
+      'lailatul-coder.daemon.acp_channel.id': channelId,
+      'lailatul-coder.daemon.channel.path': 'spawned_on_request',
     });
     expect(eventAttributes.get('session.new.completed')).toMatchObject({
       'session.id': session.sessionId,
-      'qwen-code.daemon.acp_channel.id': channelId,
+      'lailatul-coder.daemon.acp_channel.id': channelId,
     });
   });
 
@@ -2410,7 +2410,7 @@ describe('createAcpSessionBridge', () => {
     expect(
       spans
         .filter(({ operation }) => operation === 'channel.wait')
-        .map(({ attributes }) => attributes['qwen-code.daemon.channel.path']),
+        .map(({ attributes }) => attributes['lailatul-coder.daemon.channel.path']),
     ).toEqual(['joined', 'reused']);
     expect(spans.some(({ operation }) => operation === 'channel.preheat')).toBe(
       true,
@@ -2516,12 +2516,12 @@ describe('createAcpSessionBridge', () => {
     expect(capabilities[1]).not.toBe(capabilities[0]);
     expect(
       handles[0]?.agent.initializeCalls[0]?._meta?.[
-        'qwen-code/private-parent-capability'
+        'lailatul-coder/private-parent-capability'
       ],
     ).toBe(capabilities[0]);
     expect(
       handles[1]?.agent.initializeCalls[0]?._meta?.[
-        'qwen-code/private-parent-capability'
+        'lailatul-coder/private-parent-capability'
       ],
     ).toBe(capabilities[1]);
     await bridge1.shutdown();
@@ -9694,10 +9694,10 @@ describe('createAcpSessionBridge', () => {
       // through.
       expect(restoreEvents.named('public_result')).toEqual([
         expect.objectContaining({
-          'qwen-code.daemon.session_restore.action': 'load',
-          'qwen-code.daemon.session_restore.result': 'timeout',
-          'qwen-code.daemon.session_restore.timeout_ms': 20,
-          'qwen-code.daemon.session_restore.channel_was_empty': true,
+          'lailatul-coder.daemon.session_restore.action': 'load',
+          'lailatul-coder.daemon.session_restore.result': 'timeout',
+          'lailatul-coder.daemon.session_restore.timeout_ms': 20,
+          'lailatul-coder.daemon.session_restore.channel_was_empty': true,
           'session.id': 'restore-timeout-empty',
         }),
       ]);
@@ -9739,7 +9739,7 @@ describe('createAcpSessionBridge', () => {
         event: (name, attributes) => {
           if (name === 'session.restore.public_result') {
             timeline.push(
-              `public:${String(attributes['qwen-code.daemon.session_restore.result'])}`,
+              `public:${String(attributes['lailatul-coder.daemon.session_restore.result'])}`,
             );
           }
         },
@@ -9773,9 +9773,9 @@ describe('createAcpSessionBridge', () => {
         expect(spans).toContainEqual({
           operation: 'session.restore',
           attributes: expect.objectContaining({
-            'qwen-code.daemon.bridge.operation': `session.${action}`,
-            'qwen-code.daemon.session_restore.action': action,
-            'qwen-code.daemon.session_restore.timeout_ms': 60_000,
+            'lailatul-coder.daemon.bridge.operation': `session.${action}`,
+            'lailatul-coder.daemon.session_restore.action': action,
+            'lailatul-coder.daemon.session_restore.timeout_ms': 60_000,
             'session.id': `restore-trace-${action}`,
           }),
         });
@@ -9946,20 +9946,20 @@ describe('createAcpSessionBridge', () => {
       // are the trail an operator follows after a timeout; assert all three.
       expect(restoreEvents.named('public_result')).toEqual([
         expect.objectContaining({
-          'qwen-code.daemon.session_restore.result': 'timeout',
-          'qwen-code.daemon.session_restore.channel_was_empty': false,
+          'lailatul-coder.daemon.session_restore.result': 'timeout',
+          'lailatul-coder.daemon.session_restore.channel_was_empty': false,
           'session.id': 'restore-timeout-shared',
         }),
       ]);
       expect(restoreEvents.named('late_result')).toEqual([
         expect.objectContaining({
-          'qwen-code.daemon.session_restore.result': 'success',
+          'lailatul-coder.daemon.session_restore.result': 'success',
           'session.id': 'restore-timeout-shared',
         }),
       ]);
       expect(restoreEvents.named('cleanup')).toEqual([
         expect.objectContaining({
-          'qwen-code.daemon.session_restore.cleanup_result': 'closed',
+          'lailatul-coder.daemon.session_restore.cleanup_result': 'closed',
           'session.id': 'restore-timeout-shared',
         }),
       ]);
@@ -10718,7 +10718,7 @@ describe('createAcpSessionBridge', () => {
       expect(restored.sessionId).toBe('restore-succeeds');
       expect(restoreEvents.named('public_result')).toEqual([
         expect.objectContaining({
-          'qwen-code.daemon.session_restore.result': 'success',
+          'lailatul-coder.daemon.session_restore.result': 'success',
         }),
       ]);
 
@@ -10901,7 +10901,7 @@ describe('createAcpSessionBridge', () => {
       // because it is what turns fresh work away on this channel.
       expect(restoreEvents.named('cleanup')).toEqual([
         expect.objectContaining({
-          'qwen-code.daemon.session_restore.cleanup_result': 'quarantined',
+          'lailatul-coder.daemon.session_restore.cleanup_result': 'quarantined',
           'session.id': 'restore-cleanup-fails',
         }),
       ]);
@@ -11892,9 +11892,9 @@ describe('createAcpSessionBridge', () => {
       expect(event).toHaveBeenCalledWith(
         'channel.exited',
         expect.objectContaining({
-          'qwen-code.daemon.channel.transport_failed': true,
-          'qwen-code.daemon.channel.transport_failure_initiated_teardown': true,
-          'qwen-code.daemon.channel.transport_error_code':
+          'lailatul-coder.daemon.channel.transport_failed': true,
+          'lailatul-coder.daemon.channel.transport_failure_initiated_teardown': true,
+          'lailatul-coder.daemon.channel.transport_error_code':
             'ndjson_frame_too_large',
         }),
       );
@@ -11980,8 +11980,8 @@ describe('createAcpSessionBridge', () => {
       expect(event).toHaveBeenCalledWith(
         'channel.exited',
         expect.objectContaining({
-          'qwen-code.daemon.channel.transport_failed': true,
-          'qwen-code.daemon.channel.transport_failure_initiated_teardown': false,
+          'lailatul-coder.daemon.channel.transport_failed': true,
+          'lailatul-coder.daemon.channel.transport_failure_initiated_teardown': false,
         }),
       );
     });
@@ -12244,7 +12244,7 @@ describe('createAcpSessionBridge', () => {
           {
             sessionId: session.sessionId,
             prompt: [{ type: 'text', text: 'rejected' }],
-            _meta: { 'qwen-code/invocation': forgedInvocation },
+            _meta: { 'lailatul-coder/invocation': forgedInvocation },
           },
           undefined,
           { clientId: 'invalid-client', promptId: 'rejected-prompt' },
@@ -12272,8 +12272,8 @@ describe('createAcpSessionBridge', () => {
           prompt: [{ type: 'text', text: 'accepted' }],
           _meta: {
             keep: true,
-            'qwen-code/invocation': forgedInvocation,
-            'qwen-code/private-parent-capability': 'forged-capability',
+            'lailatul-coder/invocation': forgedInvocation,
+            'lailatul-coder/private-parent-capability': 'forged-capability',
             [DAEMON_MODEL_PROMPT_META_KEY]: forgedModelPrompt,
           },
         },
@@ -12287,7 +12287,7 @@ describe('createAcpSessionBridge', () => {
 
       expect(handle.agent.promptCalls[0]?._meta).toMatchObject({
         keep: true,
-        'qwen-code/invocation': {
+        'lailatul-coder/invocation': {
           version: 1,
           sessionId: session.sessionId,
           promptId: 'server-prompt',
@@ -12300,7 +12300,7 @@ describe('createAcpSessionBridge', () => {
       ]);
       expect(
         handle.agent.promptCalls[0]?._meta?.[
-          'qwen-code/private-parent-capability'
+          'lailatul-coder/private-parent-capability'
         ],
       ).toBeUndefined();
 

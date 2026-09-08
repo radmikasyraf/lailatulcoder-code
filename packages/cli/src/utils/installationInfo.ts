@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { createDebugLogger, isGitRepository } from '@qwen-code/qwen-code-core';
+import { createDebugLogger, isGitRepository } from '@lailatul-coder/lailatul-coder-core';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as childProcess from 'node:child_process';
@@ -72,9 +72,9 @@ export function getNpmCliPath(
 
 const debugLogger = createDebugLogger('INSTALLATION_INFO');
 const STANDALONE_UNIX_INSTALLER =
-  'https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.sh';
+  'https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.sh';
 const STANDALONE_WINDOWS_INSTALLER =
-  'https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.ps1';
+  'https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.ps1';
 
 function getStandaloneInstallerUrl(): string {
   return process.platform === 'win32'
@@ -112,7 +112,7 @@ export function formatUpdateInstructions(
     );
     lines.push('Run the following to update:', `  ${updateCmd}`);
   } else if (!installationInfo.updateMessage) {
-    lines.push('Manual update required. Please reinstall Qwen Code.');
+    lines.push('Manual update required. Please reinstall LailatulCoder Ai.');
   }
 
   return lines;
@@ -162,7 +162,7 @@ const HOMEBREW_INFO_TIMEOUT_MS = 5000;
  * that case rather than silently hiding a real update.
  */
 export async function getHomebrewLatestVersion(
-  formula = 'qwen-code',
+  formula = 'lailatul-coder',
   run: typeof execFileAsync = execFileAsync,
 ): Promise<string | null> {
   try {
@@ -240,7 +240,7 @@ export function getInstallationInfo(
     if (process.platform === 'darwin') {
       try {
         // We do not support homebrew for now, keep forward compatibility for future use
-        childProcess.execSync('brew list -1 | grep -q "^qwen-code$"', {
+        childProcess.execSync('brew list -1 | grep -q "^lailatul-coder$"', {
           stdio: 'ignore',
         });
         return {
@@ -256,7 +256,7 @@ export function getInstallationInfo(
 
     // Check for pnpm
     if (realPath.includes('/.pnpm/global')) {
-      const updateCommand = 'pnpm add -g @qwen-code/qwen-code@latest';
+      const updateCommand = 'pnpm add -g @lailatul-coder/lailatul-coder@latest';
       return {
         packageManager: PackageManager.PNPM,
         isGlobal: true,
@@ -269,7 +269,7 @@ export function getInstallationInfo(
 
     // Check for yarn
     if (realPath.includes('/.yarn/global')) {
-      const updateCommand = 'yarn global add @qwen-code/qwen-code@latest';
+      const updateCommand = 'yarn global add @lailatul-coder/lailatul-coder@latest';
       return {
         packageManager: PackageManager.YARN,
         isGlobal: true,
@@ -289,7 +289,7 @@ export function getInstallationInfo(
       };
     }
     if (realPath.includes('/.bun/bin')) {
-      const updateCommand = 'bun add -g @qwen-code/qwen-code@latest';
+      const updateCommand = 'bun add -g @lailatul-coder/lailatul-coder@latest';
       return {
         packageManager: PackageManager.BUN,
         isGlobal: true,
@@ -343,11 +343,11 @@ export function getInstallationInfo(
         packageManager: PackageManager.NPM,
         isGlobal: true,
         updateMessage:
-          'Update requires sudo. Please run: sudo npm install -g @qwen-code/qwen-code@latest',
+          'Update requires sudo. Please run: sudo npm install -g @lailatul-coder/lailatul-coder@latest',
       };
     }
 
-    const updateCommand = 'npm install -g @qwen-code/qwen-code@latest';
+    const updateCommand = 'npm install -g @lailatul-coder/lailatul-coder@latest';
     return {
       packageManager: PackageManager.NPM,
       isGlobal: true,
@@ -426,7 +426,7 @@ function isStandaloneInstallDir(installDir: string): boolean {
     };
     // Manifest format is produced by writeManifest in create-standalone-package.js.
     if (
-      manifest.name !== '@qwen-code/qwen-code' ||
+      manifest.name !== '@lailatul-coder/lailatul-coder' ||
       typeof manifest.target !== 'string' ||
       !isStandaloneTargetForCurrentPlatform(manifest.target)
     ) {

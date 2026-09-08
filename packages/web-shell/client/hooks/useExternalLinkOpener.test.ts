@@ -73,22 +73,22 @@ describe('useExternalLinkOpener', () => {
   it('opens external links through the desktop opener', () => {
     const invoke = vi.fn().mockResolvedValue(undefined);
     (window as TauriWindow).__TAURI__ = { core: { invoke } };
-    const anchor = render('https://github.com/QwenLM/qwen-code/issues/9108');
+    const anchor = render('https://github.com/LailatulCoder/lailatul-coder/issues/9108');
     const event = click(anchor);
     expect(event.defaultPrevented).toBe(true);
     expect(invoke).toHaveBeenCalledWith('plugin:opener|open_url', {
-      url: 'https://github.com/QwenLM/qwen-code/issues/9108',
+      url: 'https://github.com/LailatulCoder/lailatul-coder/issues/9108',
     });
   });
 
   it('normalizes mixed-case schemes before invoking the opener', () => {
     const invoke = vi.fn().mockResolvedValue(undefined);
     (window as TauriWindow).__TAURI__ = { core: { invoke } };
-    const anchor = render('HTTPS://github.com/QwenLM/qwen-code');
+    const anchor = render('HTTPS://github.com/LailatulCoder/lailatul-coder');
     const event = click(anchor);
     expect(event.defaultPrevented).toBe(true);
     expect(invoke).toHaveBeenCalledWith('plugin:opener|open_url', {
-      url: 'https://github.com/QwenLM/qwen-code',
+      url: 'https://github.com/LailatulCoder/lailatul-coder',
     });
   });
 
@@ -102,7 +102,7 @@ describe('useExternalLinkOpener', () => {
   });
 
   it('keeps native anchor behavior in plain browsers', () => {
-    const anchor = render('https://github.com/QwenLM/qwen-code');
+    const anchor = render('https://github.com/LailatulCoder/lailatul-coder');
     const event = click(anchor);
     expect(event.defaultPrevented).toBe(false);
   });
@@ -116,7 +116,7 @@ describe('useExternalLinkOpener', () => {
     };
     window.addEventListener(TOAST_REQUEST_EVENT, listener);
     try {
-      const anchor = render('https://github.com/QwenLM/qwen-code');
+      const anchor = render('https://github.com/LailatulCoder/lailatul-coder');
       click(anchor);
       await act(async () => {
         await Promise.resolve();

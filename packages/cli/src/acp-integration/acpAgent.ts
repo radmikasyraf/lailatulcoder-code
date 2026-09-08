@@ -134,7 +134,7 @@ import {
   type ChatRecord,
   type ToolInvocationGuard,
   type TurnResultRecordPayload,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { randomUUID, timingSafeEqual } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
 import type { JSONRPCMessage } from '@modelcontextprotocol/sdk/types.js';
@@ -143,7 +143,7 @@ import {
   RequestError,
   PROTOCOL_VERSION,
 } from '@agentclientprotocol/sdk';
-import { isNotCurrentlyGeneratingCancelError } from '@qwen-code/acp-bridge/bridgeErrors';
+import { isNotCurrentlyGeneratingCancelError } from '@lailatul-coder/acp-bridge/bridgeErrors';
 import type { Content } from '@google/genai';
 import type {
   Agent,
@@ -182,11 +182,11 @@ import {
   pickAuthMethodsForAuthRequired,
 } from './authMethods.js';
 import { AcpFileSystemService } from './service/filesystem.js';
-import { ndJsonStream } from '@qwen-code/acp-bridge/ndJsonStream';
+import { ndJsonStream } from '@lailatul-coder/acp-bridge/ndJsonStream';
 import {
   ACP_EVENT_LOOP_STALL_RESTART_MS,
   CHANNEL_PROMPT_META_KEY,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { observeAcpToolResultWire } from '../utils/tool-result-boundary-diagnostics.js';
 import { Readable, Writable } from 'node:stream';
 import { normalizeDisabledToolList } from '../config/normalizeDisabledTools.js';
@@ -338,7 +338,7 @@ import {
   type ServeExtensionCapabilities,
   type ServeWorkspaceExtensionsStatus,
   IDLE_HOOK_EVENTS,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 import {
   EXTERNAL_TOOL_GUARD_READY_META_KEY,
   EXTERNAL_TOOL_GUARD_REQUIRED_VALUE,
@@ -347,11 +347,11 @@ import {
   PRIVATE_EXTERNAL_TOOL_GUARD_ENV,
   PRIVATE_EXTERNAL_TOOL_GUARD_PROVIDER_ENV,
   SHELL_EXECUTING_TOOL_NAMES,
-} from '@qwen-code/acp-bridge/externalToolGuard';
+} from '@lailatul-coder/acp-bridge/externalToolGuard';
 import {
   parseSessionSource,
   SESSION_SOURCE_META_KEY,
-} from '@qwen-code/acp-bridge';
+} from '@lailatul-coder/acp-bridge';
 import {
   ACTIVE_WORK_CLOSE_IF_UNHELD_PARAM,
   ACTIVE_WORK_HEARTBEAT_META_KEY,
@@ -381,7 +381,7 @@ import {
   WORKTREE_MCP_DEFER_META_KEY,
   type ClientMcpOverWsRuntimeConfig,
   type BridgeLoadReplayEnvelope,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 import {
   beginAcpBootstrapConfigProfiling,
   buildAndFreezeAcpStartupProfile,
@@ -568,7 +568,7 @@ function createAcpSessionProfiler(
     const durationMs = Math.round((performance.now() - start) * 100) / 100;
     if (Number.isFinite(durationMs) && durationMs >= 0) {
       setAttribute(
-        `qwen-code.daemon.${attributePrefix}.${stage}_ms`,
+        `lailatul-coder.daemon.${attributePrefix}.${stage}_ms`,
         durationMs,
       );
     }
@@ -576,7 +576,7 @@ function createAcpSessionProfiler(
   const recordFailure = (stage: AcpSessionProfileStage): void => {
     if (failedStage !== undefined) return;
     failedStage = stage;
-    setAttribute(`qwen-code.daemon.${attributePrefix}.failed_stage`, stage);
+    setAttribute(`lailatul-coder.daemon.${attributePrefix}.failed_stage`, stage);
   };
 
   return {
@@ -892,7 +892,7 @@ function mapSessionRestoreRequestError(
   }
   if (error instanceof SessionTranscriptPageTooLargeError) {
     addDaemonRequestAttribute(
-      'qwen-code.daemon.session_restore.envelope_limit_reason',
+      'lailatul-coder.daemon.session_restore.envelope_limit_reason',
       'bytes',
     );
     return new RequestError(-32012, error.message, {
@@ -904,7 +904,7 @@ function mapSessionRestoreRequestError(
   }
   if (error instanceof HistoryReplayLimitError) {
     addDaemonRequestAttribute(
-      'qwen-code.daemon.session_restore.envelope_limit_reason',
+      'lailatul-coder.daemon.session_restore.envelope_limit_reason',
       error.reason,
     );
     return new RequestError(-32012, error.message, {
@@ -1988,7 +1988,7 @@ async function downloadGitHubSkillDirectoryFromArchive(
   )}`;
   const response = await fetchAllowedGitHub(archiveUrl, {
     headers: {
-      'User-Agent': 'qwen-code',
+      'User-Agent': 'lailatul-coder',
     },
   });
   if (!response.ok) {
@@ -2029,7 +2029,7 @@ async function fetchGitHubDirectoryItems(
   const response = await fetchAllowedGitHub(apiUrl, {
     headers: {
       Accept: 'application/vnd.github+json',
-      'User-Agent': 'qwen-code',
+      'User-Agent': 'lailatul-coder',
     },
   });
   if (!response.ok) {
@@ -5037,8 +5037,8 @@ class QwenAgent implements Agent {
     const response: InitializeResponse = {
       protocolVersion: PROTOCOL_VERSION,
       agentInfo: {
-        name: 'qwen-code',
-        title: 'Qwen Code',
+        name: 'lailatul-coder',
+        title: 'LailatulCoder Ai',
         version,
       },
       authMethods,
@@ -5209,8 +5209,8 @@ class QwenAgent implements Agent {
       const sessionSource = getSessionSource(params);
       const parentContext = extractDaemonTraceContext(params);
       return await withDaemonSpan(
-        'qwen-code.daemon.session_start',
-        { 'qwen-code.daemon.operation': 'acp_session_new' },
+        'lailatul-coder.daemon.session_start',
+        { 'lailatul-coder.daemon.operation': 'acp_session_new' },
         async (span) => {
           const profiler = createAcpSessionStartProfiler(span);
           // Per-request settings: session handlers run concurrently, and
@@ -5275,10 +5275,10 @@ class QwenAgent implements Agent {
     const sessionId = normalizeSessionIdForLookup(params.sessionId);
     const parentContext = extractDaemonTraceContext(params);
     return await withDaemonSpan(
-      'qwen-code.daemon.session_restore',
+      'lailatul-coder.daemon.session_restore',
       {
-        'qwen-code.daemon.operation': 'acp_session_load',
-        'qwen-code.daemon.session_restore.action': 'load',
+        'lailatul-coder.daemon.operation': 'acp_session_load',
+        'lailatul-coder.daemon.session_restore.action': 'load',
         'session.id': sessionId,
       },
       async (span) =>
@@ -5349,7 +5349,7 @@ class QwenAgent implements Agent {
               }),
             );
             addDaemonRequestAttribute(
-              'qwen-code.daemon.session_restore.partial_replay',
+              'lailatul-coder.daemon.session_restore.partial_replay',
               replay.replayError !== undefined,
             );
             if (!bulkReplay) {
@@ -5518,7 +5518,7 @@ class QwenAgent implements Agent {
                   }),
                 );
                 addDaemonRequestAttribute(
-                  'qwen-code.daemon.session_restore.partial_replay',
+                  'lailatul-coder.daemon.session_restore.partial_replay',
                   replay.replayError !== undefined,
                 );
                 replayEnvelope = {
@@ -5680,10 +5680,10 @@ class QwenAgent implements Agent {
     const sessionId = normalizeSessionIdForLookup(params.sessionId);
     const parentContext = extractDaemonTraceContext(params);
     return await withDaemonSpan(
-      'qwen-code.daemon.session_restore',
+      'lailatul-coder.daemon.session_restore',
       {
-        'qwen-code.daemon.operation': 'acp_session_resume',
-        'qwen-code.daemon.session_restore.action': 'resume',
+        'lailatul-coder.daemon.operation': 'acp_session_resume',
+        'lailatul-coder.daemon.session_restore.action': 'resume',
         'session.id': sessionId,
       },
       async (span) =>
@@ -7328,7 +7328,7 @@ class QwenAgent implements Agent {
   ): Promise<{ cells: ServePreflightCell[]; errors?: ServeStatusCell[] }> {
     // Drive emission order from the shared `ACP_PREFLIGHT_KINDS` constant
     // (also consumed by `createIdleAcpPreflightCells` from
-    // `@qwen-code/acp-bridge/status`)
+    // `@lailatul-coder/acp-bridge/status`)
     // so the idle-placeholder list and the live builder cannot drift —
     // adding a new ACP kind in the constant flags any builder dispatch
     // gap as a TS exhaustiveness error in the switch below, instead of
@@ -12935,7 +12935,7 @@ class QwenAgent implements Agent {
     if (!selectedType) {
       throw RequestError.authRequired(
         { authMethods: pickAuthMethodsForAuthRequired() },
-        'Use Qwen Code CLI to authenticate first.',
+        'Use LailatulCoder Ai CLI to authenticate first.',
       );
     }
 

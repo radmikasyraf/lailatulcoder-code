@@ -6,7 +6,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import type { GoalTurnHost, GoalTurnPermit } from '@qwen-code/qwen-code-core';
+import type { GoalTurnHost, GoalTurnPermit } from '@lailatul-coder/lailatul-coder-core';
 import { useMessageQueue } from './useMessageQueue.js';
 
 describe('useMessageQueue', () => {

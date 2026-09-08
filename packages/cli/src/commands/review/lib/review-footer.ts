@@ -19,7 +19,7 @@ import { stripSeverityPrefix } from './inline-counts.js';
 // this directory already shares between the same two commands.
 
 /** The attribution marker the strip regex anchors on. */
-export const FOOTER_MARKER = 'via Qwen Code /review';
+export const FOOTER_MARKER = 'via LailatulCoder Ai /review';
 
 /**
  * The invisible marker every attribution-OFF inline comment carries instead
@@ -116,7 +116,7 @@ export function stripCommentMarkerLines(body: string): string {
  * after it. In both, the middle cannot cross another span's `_— ` opener.
  */
 const FOOTER_SPAN_RE =
-  /_— (?:(?:(?!_— )[^\n]){0,400}? via Qwen Code \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_|(?:(?! via Qwen Code \/review)[^\n]){0,400}? via Qwen Code \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_?)[ \t]*/g;
+  /_— (?:(?:(?!_— )[^\n]){0,400}? via LailatulCoder Ai \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_|(?:(?! via LailatulCoder Ai \/review)[^\n]){0,400}? via LailatulCoder Ai \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_?)[ \t]*/g;
 
 /**
  * The named HTML5 entities decoding to characters the footer's literal
@@ -401,7 +401,7 @@ export function reviewFooter(modelId: string, cliVersion: string): string {
  * admitted — the canonical capped footer must strip like any forged one.
  */
 export const REVIEW_FOOTER_RE =
-  /\s*(?:_— (?:(?! via Qwen Code \/review)[^\n])* via Qwen Code \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_?\s*)+$/;
+  /\s*(?:_— (?:(?! via LailatulCoder Ai \/review)[^\n])* via LailatulCoder Ai \/review(?: \(v[A-Za-z0-9._+-]{0,200}…?\)?)?_?\s*)+$/;
 
 /** The widest slice `stripReviewFooter` runs the strip regex over. */
 const STRIP_TAIL_LIMIT = 8192;
@@ -787,7 +787,7 @@ export function rendersAsNothing(text: string): boolean {
  * footer-shaped line is returned byte-identical — no whitespace rewriting.
  */
 const FORGED_FOOTER_LINE_RE =
-  /^[ \t]{0,3}(?:>[ \t]*)?_— [^\n]{0,400} via Qwen Code \/review(?: \(v[^\n)]{0,200}\)?)?_?[ \t]*\r?$/;
+  /^[ \t]{0,3}(?:>[ \t]*)?_— [^\n]{0,400} via LailatulCoder Ai \/review(?: \(v[^\n)]{0,200}\)?)?_?[ \t]*\r?$/;
 
 export function stripForgedFooterLines(body: string): string {
   if (!body.includes('/review') && !body.includes('&')) return body;

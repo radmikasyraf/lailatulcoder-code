@@ -67,7 +67,7 @@ const child = spawn(executable, [], {
           QWEN_DESKTOP_RUNTIME_DIR: path.join(
             packageDir,
             'runtime',
-            'qwen-code',
+            'lailatul-coder',
           ),
         }),
     ...(process.platform === 'win32'
@@ -215,18 +215,18 @@ function verifyMacRuntimeCommit() {
   if (process.platform !== 'darwin') return;
   const manifestPath = path.resolve(
     path.dirname(executable),
-    '../Resources/runtime/qwen-code/manifest.json',
+    '../Resources/runtime/lailatul-coder/manifest.json',
   );
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   const expected =
-    process.env.QWEN_CODE_COMMIT ||
+    process.env.lailatulcoder_CODE_COMMIT ||
     execFileSync('git', ['rev-parse', 'HEAD'], {
-      cwd: process.env.QWEN_CODE_ROOT || repoRoot,
+      cwd: process.env.lailatulcoder_CODE_ROOT || repoRoot,
       encoding: 'utf8',
     }).trim();
-  if (manifest.qwenCodeCommit !== expected) {
+  if (manifest.lailatulcoderCodeCommit !== expected) {
     throw new Error(
-      `Packaged runtime commit mismatch: expected ${expected}, found ${manifest.qwenCodeCommit || 'missing'}`,
+      `Packaged runtime commit mismatch: expected ${expected}, found ${manifest.lailatulcoderCodeCommit || 'missing'}`,
     );
   }
 }

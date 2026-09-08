@@ -12,8 +12,8 @@ import type { AddressInfo } from 'node:net';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import WebSocket from 'ws';
-import type { HttpAcpBridge } from '@qwen-code/acp-bridge/bridgeTypes';
-import { Storage } from '@qwen-code/qwen-code-core';
+import type { HttpAcpBridge } from '@lailatul-coder/acp-bridge/bridgeTypes';
+import { Storage } from '@lailatul-coder/lailatul-coder-core';
 import { type AcpHttpHandle, mountAcpHttp } from './index.js';
 import { DeviceFlowRegistry } from '../auth/device-flow.js';
 import { CdpTunnelRegistry } from '../cdp-tunnel/cdp-tunnel-registry.js';
@@ -664,7 +664,7 @@ describe('workspace-qualified ACP (/workspaces/:workspace/acp)', () => {
       method: 'session/new',
       params: {
         workspaceCwd: '/ws',
-        _meta: { 'qwen-code/sessionId': sessionId },
+        _meta: { 'lailatul-coder/sessionId': sessionId },
       },
     });
     await vi.waitFor(() =>
@@ -677,7 +677,7 @@ describe('workspace-qualified ACP (/workspaces/:workspace/acp)', () => {
       method: 'session/new',
       params: {
         workspaceCwd: '/ws-b',
-        _meta: { 'qwen-code/sessionId': sessionId },
+        _meta: { 'lailatul-coder/sessionId': sessionId },
       },
     });
     expect(secondary['error']).toMatchObject({
@@ -798,7 +798,7 @@ describe('workspace-qualified ACP (/workspaces/:workspace/acp)', () => {
       method: 'session/new',
       params: {
         workspaceCwd: '/ws',
-        _meta: { 'qwen-code/sessionId': sessionId },
+        _meta: { 'lailatul-coder/sessionId': sessionId },
       },
     });
     await vi.waitFor(() =>
@@ -921,7 +921,7 @@ describe('workspace-qualified ACP (/workspaces/:workspace/acp)', () => {
       method: 'session/new',
       params: {
         workspaceCwd: '/ws-b',
-        _meta: { 'qwen-code/sessionId': sessionId },
+        _meta: { 'lailatul-coder/sessionId': sessionId },
       },
     });
     await vi.waitFor(() =>

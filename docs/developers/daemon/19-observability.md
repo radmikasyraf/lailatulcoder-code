@@ -120,7 +120,7 @@ A **second** SIGTERM/SIGINT intentionally triggers `bridge.killAllSync()` + `pro
 }
 ```
 
-The status payload is daemon-only. `promptQueueWait` summarizes prompt FIFO queue wait samples observed in the daemon process. ACP child event loop lag is intentionally not aggregated into `/daemon/status`; it is visible through OTel gauge `qwen-code.acp.event_loop.lag` and through stderr stall lines forwarded into daemon logs.
+The status payload is daemon-only. `promptQueueWait` summarizes prompt FIFO queue wait samples observed in the daemon process. ACP child event loop lag is intentionally not aggregated into `/daemon/status`; it is visible through OTel gauge `lailatul-coder.acp.event_loop.lag` and through stderr stall lines forwarded into daemon logs.
 
 ### 10. Did file logging degrade or lose records?
 
@@ -140,10 +140,10 @@ stable file.
 
 New OTel metric names:
 
-- `qwen-code.daemon.event_loop.lag`, gauge in milliseconds with `stat=mean|p50|p99|max`.
-- `qwen-code.acp.event_loop.lag`, gauge in milliseconds with `stat=mean|p50|p99|max`.
-- `qwen-code.daemon.prompt.queue_wait`, histogram in milliseconds.
-- `qwen-code.daemon.pipe.message_bytes`, histogram in bytes with `direction=inbound|outbound`.
+- `lailatul-coder.daemon.event_loop.lag`, gauge in milliseconds with `stat=mean|p50|p99|max`.
+- `lailatul-coder.acp.event_loop.lag`, gauge in milliseconds with `stat=mean|p50|p99|max`.
+- `lailatul-coder.daemon.prompt.queue_wait`, histogram in milliseconds.
+- `lailatul-coder.daemon.pipe.message_bytes`, histogram in bytes with `direction=inbound|outbound`.
 
 ### 11. Is the daemon under memory pressure?
 
@@ -233,7 +233,7 @@ flowchart TD
 - **DaemonLogger retention is size based, not age based.** The active file and four archives are bounded per family; live fallback owners are never deleted.
 - **Access summaries are intentional loss accounting.** A WARN `access logs suppressed` represents individual access records omitted from both stderr and file; it does not indicate dropped HTTP requests.
 - **External logrotate must not mutate the active family.** Use a shipper that reads/copies and reopens the stable pathname after replacement.
-- **OpenTelemetry spans include per-request correlation.** Classified daemon API requests that pass bearer authentication, rate limiting, and body parsing carry canonical route, sessionId, clientId, and (when uniquely resolved) `qwen-code.workspace.hash` attributes. Requests rejected by an earlier middleware gate do not have these request spans.
+- **OpenTelemetry spans include per-request correlation.** Classified daemon API requests that pass bearer authentication, rate limiting, and body parsing carry canonical route, sessionId, clientId, and (when uniquely resolved) `lailatul-coder.workspace.hash` attributes. Requests rejected by an earlier middleware gate do not have these request spans.
 - **HTTP metrics are daemon-global.** OpenTelemetry HTTP request metrics and the Web Shell status metrics ring do not include a workspace dimension. A successful session SSE connection has a request span but is excluded from ordinary request count/duration metrics because its lifetime is not request latency; failed SSE handshakes are counted normally.
 - **`runtime.perf` is daemon-only.** Child event loop lag is not reported there by design; use OTel or forwarded stderr stall warnings for ACP child stalls.
 - **ACP-level `/workspace/preflight` cells require a live session.** On an idle daemon, auth / MCP / skills / providers may show `status: 'not_started'`; this is expected.

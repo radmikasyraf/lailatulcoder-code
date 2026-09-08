@@ -6,8 +6,8 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { SessionUpdate } from '@agentclientprotocol/sdk';
-import { LOAD_REPLAY_META_KEY } from '@qwen-code/acp-bridge/bridgeTypes';
-import type { ToolResultBoundaryObservation } from '@qwen-code/qwen-code-core';
+import { LOAD_REPLAY_META_KEY } from '@lailatul-coder/acp-bridge/bridgeTypes';
+import type { ToolResultBoundaryObservation } from '@lailatul-coder/lailatul-coder-core';
 import type { CLIUserMessage } from '../nonInteractive/types.js';
 
 const { mockObserveBoundary } = vi.hoisted(() => ({
@@ -16,8 +16,8 @@ const { mockObserveBoundary } = vi.hoisted(() => ({
   ),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@qwen-code/qwen-code-core')>()),
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
   observeToolResultBoundary: mockObserveBoundary,
 }));
 

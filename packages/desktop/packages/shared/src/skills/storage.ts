@@ -34,13 +34,13 @@ import {
 /** Global agent skills directory: ~/.agents/skills/ */
 export const GLOBAL_AGENT_SKILLS_DIR = join(homedir(), '.agents', 'skills')
 
-/** Global Qwen Code skills directory: ~/.qwen/skills/ */
+/** Global LailatulCoder Ai skills directory: ~/.qwen/skills/ */
 export const GLOBAL_QWEN_SKILLS_DIR = join(homedir(), '.qwen', 'skills')
 
 /** Project-level agent skills relative directory name */
 export const PROJECT_AGENT_SKILLS_DIR = '.agents/skills'
 
-/** Project-level Qwen Code skills relative directory name */
+/** Project-level LailatulCoder Ai skills relative directory name */
 export const PROJECT_QWEN_SKILLS_DIR = '.qwen/skills'
 
 /**

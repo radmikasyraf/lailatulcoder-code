@@ -1,6 +1,6 @@
 # Web Search
 
-Qwen Code provides web search two ways:
+LailatulCoder Ai provides web search two ways:
 
 1. **Built-in `web_search` tool** (opt-in) — backed by the DashScope Responses API server-side search. Works with a standard Bailian (DashScope) API key; no extra provider or MCP setup.
 2. **MCP (Model Context Protocol) integrations** — connect any external search service (Tavily, GLM, and others). Use this when you don't have a DashScope key.
@@ -172,7 +172,7 @@ qwen mcp add WebSearch \
 }
 ```
 
-Replace `${DASHSCOPE_API_KEY}` with your actual API key, or set it as an environment variable so Qwen Code picks it up automatically.
+Replace `${DASHSCOPE_API_KEY}` with your actual API key, or set it as an environment variable so LailatulCoder Ai picks it up automatically.
 
 ---
 

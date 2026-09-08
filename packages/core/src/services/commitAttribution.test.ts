@@ -416,7 +416,7 @@ describe('CommitAttributionService', () => {
       const note = service.generateNotePayload(
         staged,
         '/project',
-        'Qwen-Coder',
+        'lailatul-coderr',
       );
 
       expect(note.files['src/main.ts']!.percent).toBe(50);
@@ -463,7 +463,7 @@ describe('CommitAttributionService', () => {
 
       expect(
         service.generateNotePayload(staged, '/project', 'qwen-72b').generator,
-      ).toBe('Qwen-Coder');
+      ).toBe('lailatul-coderr');
       expect(
         service.generateNotePayload(staged, '/project', 'CustomAgent')
           .generator,

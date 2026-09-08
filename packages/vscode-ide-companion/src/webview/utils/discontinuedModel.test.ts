@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { RUNTIME_SNAPSHOT_PREFIX } from '@qwen-code/qwen-code-core';
+import { RUNTIME_SNAPSHOT_PREFIX } from '@lailatul-coder/lailatul-coder-core';
 import {
   DISCONTINUED_MESSAGES,
   isDiscontinuedModel,

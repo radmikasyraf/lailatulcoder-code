@@ -2,7 +2,7 @@
 
 ## Context
 
-The production `cli-entry.js` wrapper already enables Node's module compile cache for the in-process `serve` fast path. The daemon later spawns an ACP child through `createSpawnChannelFactory()`, but `module.enableCompileCache()` affects only the current process and does not populate `NODE_COMPILE_CACHE`. The ACP child therefore starts without the cache unless the operator set that environment variable before launching Qwen Code.
+The production `cli-entry.js` wrapper already enables Node's module compile cache for the in-process `serve` fast path. The daemon later spawns an ACP child through `createSpawnChannelFactory()`, but `module.enableCompileCache()` affects only the current process and does not populate `NODE_COMPILE_CACHE`. The ACP child therefore starts without the cache unless the operator set that environment variable before launching LailatulCoder Ai.
 
 This is the orthogonal compile-cache candidate recorded on #7264. It does not shrink the eager module graph; it reuses V8 code cache for the graph that remains after the lazy-loading work.
 
@@ -61,7 +61,7 @@ Rejected. When the cache was enabled from an existing environment variable, the 
 - Node without `enableCompileCache()`: no environment mutation and no behavior change.
 - `NODE_DISABLE_COMPILE_CACHE=1`: Node reports disabled; no directory is propagated.
 - Operator-provided `NODE_COMPILE_CACHE`: preserved verbatim and inherited normally.
-- Unwritable or otherwise invalid cache directory: Node reports failure without throwing; Qwen Code continues without a cache.
+- Unwritable or otherwise invalid cache directory: Node reports failure without throwing; LailatulCoder Ai continues without a cache.
 - Node or Qwen upgrade: Node isolates incompatible runtime versions and source-content changes produce different cache entries.
 - Coverage: the production fast path is the only mutation point. Unit-test runners are not globally opted into compile caching.
 - Shutdown: Node writes accumulated code cache during normal process exit. Forced termination can lose newly generated entries but cannot affect correctness.

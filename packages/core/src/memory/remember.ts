@@ -89,7 +89,7 @@ async function buildCleanMemorySystemPrompt(
 
 function buildRememberSystemPrompt(memoryPrompt: string): string {
   return [
-    'You are saving one explicit durable memory for Qwen Code.',
+    'You are saving one explicit durable memory for LailatulCoder Ai.',
     '',
     'Rules:',
     '- Save only information provided in the task prompt.',

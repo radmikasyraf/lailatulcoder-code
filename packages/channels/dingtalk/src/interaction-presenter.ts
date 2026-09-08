@@ -1,12 +1,12 @@
 import { randomUUID } from 'node:crypto';
-import { sanitizeSenderName } from '@qwen-code/channel-base';
+import { sanitizeSenderName } from '@lailatul-coder/channel-base';
 import type {
   ChannelOutputSegmentContext,
   ChannelOutputSegmentEndReason,
   ChannelUserInputRequestContext,
   SessionTarget,
   UserInputPresentationResult,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { stripPartialImageMarker } from './outbound-image.js';
 import type { QuestionCardController } from './question-card-controller.js';
 import {

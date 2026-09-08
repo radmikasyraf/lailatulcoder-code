@@ -10,8 +10,8 @@ import type {
   Config,
   GoalSnapshotV2,
   ServerGeminiStreamEvent,
-} from '@qwen-code/qwen-code-core';
-import { GeminiEventType } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import { GeminiEventType } from '@lailatul-coder/lailatul-coder-core';
 import type { Part } from '@google/genai';
 import { StreamJsonOutputAdapter } from './StreamJsonOutputAdapter.js';
 import {

@@ -9,7 +9,7 @@ import type {
   DaemonChannelStartupRequest,
   DaemonChannelUpsertRequest,
   DaemonRevisionRequest,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import { useDaemonWorkspace } from '../DaemonWorkspaceProvider.js';
 import type {
   DaemonChannelPairingActions,

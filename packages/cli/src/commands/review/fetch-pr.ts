@@ -818,7 +818,7 @@ async function runFetchPr(args: FetchPrArgs): Promise<void> {
     throw new Error(
       `fetch-pr: QWEN_CODE_SESSION_ID and QWEN_CODE_PROMPT_ID must both ` +
         `be set to register the review worktree lease. Run fetch-pr from ` +
-        `a Qwen Code session (the /review skill sets both); without the ` +
+        `a LailatulCoder Ai session (the /review skill sets both); without the ` +
         `lease nothing locks the shared worktree path against a ` +
         `concurrent session.`,
     );

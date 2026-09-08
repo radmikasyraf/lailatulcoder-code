@@ -1,6 +1,6 @@
 # Daemon Developer Documentation
 
-This is the developer-facing technical documentation for **qwen-code daemon mode**: the `qwen serve` HTTP daemon, the `@qwen-code/acp-bridge` package, the workspace-scoped MCP transport pool, multi-client permission mediation, typed daemon event schema v1, the TypeScript SDK daemon client, and the adapters that connect to the daemon.
+This is the developer-facing technical documentation for **lailatul-coder daemon mode**: the `qwen serve` HTTP daemon, the `@lailatul-coder/acp-bridge` package, the workspace-scoped MCP transport pool, multi-client permission mediation, typed daemon event schema v1, the TypeScript SDK daemon client, and the adapters that connect to the daemon.
 
 It complements, rather than replaces, these existing docs:
 
@@ -35,7 +35,7 @@ Pick the path that matches your goal:
 ### Server core
 
 - [`02-serve-runtime.md`](./02-serve-runtime.md) - `runQwenServe` bootstrap, Express app, middleware chain, graceful shutdown.
-- [`03-acp-bridge.md`](./03-acp-bridge.md) - `@qwen-code/acp-bridge` package internals, session multiplexing, channel factory, ACP child spawn.
+- [`03-acp-bridge.md`](./03-acp-bridge.md) - `@lailatul-coder/acp-bridge` package internals, session multiplexing, channel factory, ACP child spawn.
 - [`04-permission-mediation.md`](./04-permission-mediation.md) - `MultiClientPermissionMediator`, four policies, N1 timeout invariant, cancel sentinel.
 - [`05-mcp-transport-pool.md`](./05-mcp-transport-pool.md) - `McpTransportPool` (F2), pool entries, reverse index, restart, drain.
 - [`06-mcp-budget-guardrails.md`](./06-mcp-budget-guardrails.md) - `WorkspaceMcpBudget`, modes (`off`/`warn`/`enforce`), hysteresis, refused-batch coalescing.
@@ -64,13 +64,13 @@ Pick the path that matches your goal:
 
 - **ACP** - Agent Client Protocol. JSON-RPC over stdio spoken between the daemon bridge and the ACP child process. This is not the HTTP protocol that clients use against the daemon.
 - **ACP child** - the `qwen --acp` child that hosts one workspace's agent runtime. Production attempts to preheat the primary bridge and retries on first use after failure; a trusted secondary starts its child on demand, while an untrusted secondary does not. The owning bridge multiplexes sessions and clients onto that child.
-- **acp-bridge** - the `@qwen-code/acp-bridge` package (`packages/acp-bridge/`). Owns session multiplexing, the permission mediator, the event bus, and the channel factory.
+- **acp-bridge** - the `@lailatul-coder/acp-bridge` package (`packages/acp-bridge/`). Owns session multiplexing, the permission mediator, the event bus, and the channel factory.
 - **BridgeClient** - `packages/acp-bridge/src/bridgeClient.ts`. Wraps one ACP `ClientSideConnection`, and handles `requestPermission`, `sendPrompt`, and `cancelSession`.
 - **Channel factory** - pluggable strategy for spawning or attaching to an ACP child. The default `spawnChannel` runs `qwen --acp` as a subprocess; `inMemoryChannel` runs it in-process for tests.
 - **DaemonClient** - `packages/sdk-typescript/src/daemon/DaemonClient.ts`. The TypeScript SDK HTTP-level facade over the daemon.
 - **DaemonSessionClient** - `packages/sdk-typescript/src/daemon/DaemonSessionClient.ts`. Session-scoped wrapper that tracks `lastSeenEventId` for SSE replay.
 - **EventBus** - `packages/acp-bridge/src/eventBus.ts`. Per-session in-memory pub/sub with monotonic IDs, a bounded ring, and per-subscriber backpressure.
-- **F1 / F2 / F3 / F4** - internal milestones tracked in [#4175](https://github.com/QwenLM/qwen-code/issues/4175). F1: bridge extraction and `BridgeFileSystem`. F2: workspace-scoped MCP transport pool. F3: multi-client permission mediation. F4: protocol completion and daemon client surfaces.
+- **F1 / F2 / F3 / F4** - internal milestones tracked in [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175). F1: bridge extraction and `BridgeFileSystem`. F2: workspace-scoped MCP transport pool. F3: multi-client permission mediation. F4: protocol completion and daemon client surfaces.
 - **MCP** - Model Context Protocol. Servers expose tools, resources, and prompts; the daemon ACP child connects to them.
 - **McpTransportPool** - `packages/core/src/tools/mcp-transport-pool.ts`. F2 workspace-scoped pool sharing one MCP transport per server name and config fingerprint.
 - **Mediator policy** - one of `first-responder`, `designated`, `consensus`, or `local-only`. Decides how multi-client permission votes resolve.
@@ -87,7 +87,7 @@ Use these anchors when moving from the docs into the latest `main` code:
 | Surface                             | Implementation anchors                                                                                                                                                                                                                                                 | Primary docs                                                                                                           |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | Bootstrap and HTTP assembly         | `packages/cli/src/serve/run-qwen-serve.ts`, `packages/cli/src/serve/server.ts`, `packages/cli/src/serve/routes/health.ts`, `packages/cli/src/serve/web-shell-static.ts`                                                                                                | [`02`](./02-serve-runtime.md), [`20`](./20-quickstart-operations.md)                                                   |
-| ACP bridge and session multiplexing | `packages/acp-bridge/src/bridge.ts`, `packages/acp-bridge/src/bridgeTypes.ts`, `@qwen-code/acp-bridge`                                                                                                                                                                 | [`03`](./03-acp-bridge.md), [`08`](./08-session-lifecycle.md)                                                          |
+| ACP bridge and session multiplexing | `packages/acp-bridge/src/bridge.ts`, `packages/acp-bridge/src/bridgeTypes.ts`, `@lailatul-coder/acp-bridge`                                                                                                                                                                 | [`03`](./03-acp-bridge.md), [`08`](./08-session-lifecycle.md)                                                          |
 | Permission mediation                | `packages/acp-bridge/src/permissionMediator.ts`, `fromLoopback: boolean`, `policy.*`                                                                                                                                                                                   | [`04`](./04-permission-mediation.md), [`12`](./12-auth-security.md)                                                    |
 | MCP transport pool                  | `packages/core/src/tools/mcp-transport-pool.ts`, `mcp-pool-key.ts`, `pid-descendants.ts`, `session-mcp-view.ts`, `/mcp refresh`, `MCPCallInterruptedError`                                                                                                             | [`05`](./05-mcp-transport-pool.md), [`06`](./06-mcp-budget-guardrails.md)                                              |
 | MCP budget guardrails               | `packages/core/src/tools/mcp-workspace-budget.ts`, `ServeMcpBudgetStatusCell.scope`, `budgets[]`                                                                                                                                                                       | [`06`](./06-mcp-budget-guardrails.md)                                                                                  |
@@ -165,4 +165,4 @@ Use these anchors when moving from the docs into the latest `main` code:
 
 ## Version provenance
 
-This doc set reflects the daemon mode surface currently merged into `main`, including the follow-up work from [#4412](https://github.com/QwenLM/qwen-code/pull/4412). It intentionally describes current behavior instead of earlier F-series planning snapshots.
+This doc set reflects the daemon mode surface currently merged into `main`, including the follow-up work from [#4412](https://github.com/LailatulCoder/lailatul-coder/pull/4412). It intentionally describes current behavior instead of earlier F-series planning snapshots.

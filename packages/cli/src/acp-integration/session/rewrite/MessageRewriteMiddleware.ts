@@ -5,8 +5,8 @@
  */
 
 import type { SessionUpdate } from '@agentclientprotocol/sdk';
-import type { Config } from '@qwen-code/qwen-code-core';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import type { MessageRewriteConfig } from './types.js';
 import { TurnBuffer } from './TurnBuffer.js';
 import { LlmRewriter } from './LlmRewriter.js';

@@ -28,7 +28,7 @@ import {
   type AgentInteractive,
   type ApprovalMode,
   type Config,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { useArenaInProcess } from '../hooks/useArenaInProcess.js';
 import { useTeamInProcess } from '../hooks/useTeamInProcess.js';
 
@@ -320,3 +320,4 @@ export function AgentViewProvider({
     </AgentViewStateContext.Provider>
   );
 }
+

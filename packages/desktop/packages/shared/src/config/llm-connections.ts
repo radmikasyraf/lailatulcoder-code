@@ -5,7 +5,7 @@ import {
 } from './models';
 
 export type LlmProviderType = 'qwen';
-export const QWEN_CODE_CONNECTION_SLUG = 'qwen-code';
+export const QWEN_CODE_CONNECTION_SLUG = 'lailatul-coder';
 
 export type LlmAuthType = 'none';
 export type ModelSelectionMode = 'automaticallySyncedFromProvider' | 'userDefined3Tier';

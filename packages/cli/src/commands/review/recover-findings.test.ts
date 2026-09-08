@@ -952,7 +952,7 @@ describe('recover-findings — the guarantees, made falsifiable', () => {
     // what makes this a real probe of the `TranscriptsUnavailableError` exit
     // path rather than of the suite's own `ENV` object. Stubbed explicitly
     // rather than relied upon: a developer running the suite from inside a
-    // qwen-code session inherits both variables, and the test would then
+    // lailatul-coder session inherits both variables, and the test would then
     // silently exercise the success path instead.
     vi.stubEnv('QWEN_CODE_PROJECT_DIR', '');
     vi.stubEnv('QWEN_CODE_SESSION_ID', '');

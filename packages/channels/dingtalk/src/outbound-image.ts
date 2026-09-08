@@ -243,7 +243,7 @@ export async function uploadDingTalkImage(
   const form = new FormData();
   form.append(
     'media',
-    new Blob([image.data], { type: image.mimeType }),
+    new Blob([image.data as unknown as ArrayBuffer], { type: image.mimeType }),
     image.fileName,
   );
 
@@ -305,3 +305,4 @@ export async function uploadDingTalkImage(
   }
   return mediaId;
 }
+

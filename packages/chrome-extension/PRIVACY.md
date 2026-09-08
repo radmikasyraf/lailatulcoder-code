@@ -1,10 +1,10 @@
-# Privacy Policy — Qwen Code Chrome Extension
+# Privacy Policy — LailatulCoder Ai Chrome Extension
 
 Last updated: 2026-07-30
 
 ## Summary
 
-The Qwen Code Chrome Extension ("the Extension") bridges the Chrome browser with a locally running Qwen Code daemon process on your machine. The Extension itself does **not** collect, transmit, or share your personal data with any external server — all of its own communication stays on `localhost` / `127.0.0.1`. However, the local daemon it talks to may send page content to the AI model provider you configure; see [What the daemon does with page content](#what-the-daemon-does-with-page-content).
+The LailatulCoder Ai Chrome Extension ("the Extension") bridges the Chrome browser with a locally running LailatulCoder Ai daemon process on your machine. The Extension itself does **not** collect, transmit, or share your personal data with any external server — all of its own communication stays on `localhost` / `127.0.0.1`. However, the local daemon it talks to may send page content to the AI model provider you configure; see [What the daemon does with page content](#what-the-daemon-does-with-page-content).
 
 ## What data the Extension accesses
 
@@ -27,7 +27,7 @@ The Qwen Code Chrome Extension ("the Extension") bridges the Chrome browser with
 The Extension only ever talks to localhost, but understand the wider system before you enable browser automation:
 
 - Through the `debugger` permission the local daemon can read the attached tab's **page DOM/text, console output, network activity, and cookies**, and can drive actions on the page.
-- The daemon forwards that page content to the **AI model provider you have configured** in Qwen Code (for example an OpenAI-, Anthropic-, or Alibaba-hosted endpoint) so the model can act on it. Page content therefore **leaves your machine** as part of ordinary model requests.
+- The daemon forwards that page content to the **AI model provider you have configured** in LailatulCoder Ai (for example an OpenAI-, Anthropic-, or Alibaba-hosted endpoint) so the model can act on it. Page content therefore **leaves your machine** as part of ordinary model requests.
 - "Stays on localhost" describes the Extension's own network boundary; it does **not** describe the daemon-to-model-provider path. Only enable browser automation with a model provider you trust to receive the content of the pages you automate.
 
 ## Data storage
@@ -48,4 +48,4 @@ The Extension only ever talks to localhost, but understand the wider system befo
 
 ## Contact
 
-For questions about this policy, open an issue at the [project repository](https://github.com/QwenLM/qwen-code).
+For questions about this policy, open an issue at the [project repository](https://github.com/LailatulCoder/lailatul-coder).

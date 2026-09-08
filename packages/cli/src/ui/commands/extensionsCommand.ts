@@ -21,7 +21,7 @@ import {
   getExtensionDisplayName,
   getExtensionDescription,
   isExtensionCommittedWithWarningsError,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 const debugLogger = createDebugLogger('EXTENSIONS_COMMAND');
 const EXTENSION_EXPLORE_URL = {

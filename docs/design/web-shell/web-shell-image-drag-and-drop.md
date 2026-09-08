@@ -2,7 +2,7 @@
 
 ## 状态
 
-针对 [#8321](https://github.com/QwenLM/qwen-code/issues/8321) 的实现方案。初始实现由
+针对 [#8321](https://github.com/LailatulCoder/lailatul-coder/issues/8321) 的实现方案。初始实现由
 `48d1e1d69` 落地，review 修正由 `afb55ebae` 补齐 admission、恢复和资源边界。
 其中队列展示和 admission 失败语义已由
 [Web Shell backend-authoritative queue display](../web-shell-backend-authoritative-queue-display.md)

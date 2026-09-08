@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// Portuguese translations for Qwen Code CLI (pt-BR)
+// Portuguese translations for LailatulCoder Ai CLI (pt-BR)
 
 export default {
   // ============================================================================
@@ -80,13 +80,13 @@ export default {
   'For a full list of shortcuts, see {{docPath}}':
     'Para uma lista completa de atalhos, consulte {{docPath}}',
   'docs/keyboard-shortcuts.md': 'docs/keyboard-shortcuts.md',
-  'for help on Qwen Code': 'para ajuda sobre o Qwen Code',
+  'for help on LailatulCoder Ai': 'para ajuda sobre o LailatulCoder Ai',
   'show version info': 'mostrar informações de versão',
   'submit a bug report': 'enviar um relatório de erro',
   // ============================================================================
   // System Information Fields
   // ============================================================================
-  'Qwen Code': 'Qwen Code',
+  'LailatulCoder Ai': 'LailatulCoder Ai',
   OS: 'SO',
   Auth: 'Autenticação',
   Model: 'Modelo',
@@ -103,24 +103,24 @@ export default {
   // ============================================================================
   'Analyzes the project and creates a tailored QWEN.md file.':
     'Analisa o projeto e cria um arquivo QWEN.md personalizado.',
-  'List available Qwen Code tools. Usage: /tools [desc]':
-    'Listar ferramentas Qwen Code disponíveis. Uso: /tools [desc]',
+  'List available LailatulCoder Ai tools. Usage: /tools [desc]':
+    'Listar ferramentas LailatulCoder Ai disponíveis. Uso: /tools [desc]',
   'Open the skills panel (browse, search, toggle, pick).':
     'Abrir o painel de habilidades (explorar, pesquisar, ativar, selecionar).',
   'Manage Skills': 'Gerenciar Habilidades',
   'Skills configuration saved.': 'Configuração de habilidades salva.',
   'Skills configuration saved, but refresh failed: {{error}}. Restart to ensure the new state is applied.':
     'Configuração de habilidades salva, mas a atualização falhou: {{error}}. Reinicie para garantir que o novo estado seja aplicado.',
-  'Workspace is untrusted; workspace settings are ignored by the merged config. Run /trust first to persist skills changes here, or edit ~/.qwen/settings.json directly to manage skills at user scope.':
-    'O espaço de trabalho não é confiável; as configurações do espaço de trabalho são ignoradas pela configuração combinada. Execute /trust primeiro, ou edite ~/.qwen/settings.json diretamente para gerenciar habilidades no escopo do usuário.',
+  'Workspace is untrusted; workspace settings are ignored by the merged config. Run /trust first to persist skills changes here, or edit ~/.lailatulcoder/settings.json directly to manage skills at user scope.':
+    'O espaço de trabalho não é confiável; as configurações do espaço de trabalho são ignoradas pela configuração combinada. Execute /trust primeiro, ou edite ~/.lailatulcoder/settings.json diretamente para gerenciar habilidades no escopo do usuário.',
   'SkillManager not available.': 'SkillManager indisponível.',
   'Loading skills…': 'Carregando habilidades…',
   'Failed to load skills: {{error}}':
     'Falha ao carregar habilidades: {{error}}',
   'Failed to save skills configuration: {{error}}':
     'Falha ao salvar a configuração de habilidades: {{error}}',
-  'All available skills are disabled. Edit ~/.qwen/settings.json or .qwen/settings.json (skills.disabled) to re-enable.':
-    'Todas as habilidades disponíveis estão desativadas. Edite ~/.qwen/settings.json ou .qwen/settings.json (skills.disabled) para reativá-las.',
+  'All available skills are disabled. Edit ~/.lailatulcoder/settings.json or .lailatulcoder/settings.json (skills.disabled) to re-enable.':
+    'Todas as habilidades disponíveis estão desativadas. Edite ~/.lailatulcoder/settings.json ou .lailatulcoder/settings.json (skills.disabled) para reativá-las.',
   'Press esc to close.': 'Pressione Esc para fechar.',
   '{{count}} skills · ': '{{count}} habilidades · ',
   '{{matched}} / {{total}} skills · ': '{{matched}} / {{total}} habilidades · ',
@@ -141,7 +141,7 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ navegar · Backspace edita a pesquisa',
   Bundled: 'Integrada',
-  'Available Qwen Code CLI tools:': 'Ferramentas CLI do Qwen Code disponíveis:',
+  'Available LailatulCoder Ai CLI tools:': 'Ferramentas CLI do LailatulCoder Ai disponíveis:',
   'No tools available': 'Nenhuma ferramenta disponível',
   'View or change the approval mode for tool usage':
     'Ver ou alterar o modo de aprovação para uso de ferramentas',
@@ -219,8 +219,8 @@ export default {
     'Limpar histórico de conversa e liberar contexto',
   'Compresses the context by replacing it with a summary.':
     'Comprime o contexto substituindo-o por um resumo.',
-  'open full Qwen Code documentation in your browser':
-    'abrir documentação completa do Qwen Code no seu navegador',
+  'open full LailatulCoder Ai documentation in your browser':
+    'abrir documentação completa do LailatulCoder Ai no seu navegador',
   'Configuration not available.': 'Configuração não disponível.',
   'Connect an LLM provider': 'Conectar a um provedor LLM',
   'Copy the last AI response to clipboard (/copy N for Nth-latest)':
@@ -319,8 +319,8 @@ export default {
   // ============================================================================
   // Agents - Creation Wizard
   // ============================================================================
-  'Project Level (.qwen/agents/)': 'Nível de Projeto (.qwen/agents/)',
-  'User Level (~/.qwen/agents/)': 'Nível de Usuário (~/.qwen/agents/)',
+  'Project Level (.lailatulcoder/agents/)': 'Nível de Projeto (.lailatulcoder/agents/)',
+  'User Level (~/.lailatulcoder/agents/)': 'Nível de Usuário (~/.lailatulcoder/agents/)',
   '✓ Subagent Created Successfully!': '✓ Subagente criado com sucesso!',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     'O subagente "{{name}}" foi salvo no nível {{level}}.',
@@ -345,7 +345,7 @@ export default {
   'Step {{n}}: Choose Location': 'Etapa {{n}}: Escolher Localização',
   'Step {{n}}: Choose Generation Method':
     'Etapa {{n}}: Escolher Método de Geração',
-  'Generate with Qwen Code (Recommended)': 'Gerar com Qwen Code (Recomendado)',
+  'Generate with LailatulCoder Ai (Recommended)': 'Gerar com LailatulCoder Ai (Recomendado)',
   'Manual Creation': 'Criação Manual',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     'Descreva o que este subagente deve fazer e quando deve ser usado. (Seja abrangente para melhores resultados)',
@@ -410,10 +410,10 @@ export default {
   // ============================================================================
   // Commands - General (continued)
   // ============================================================================
-  'View and edit Qwen Code settings': 'Ver e editar configurações do Qwen Code',
+  'View and edit LailatulCoder Ai settings': 'Ver e editar configurações do LailatulCoder Ai',
   Settings: 'Configurações',
-  'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.':
-    'Para ver as alterações, o Qwen Code deve ser reiniciado. Pressione r para sair e aplicar as alterações agora.',
+  'To see changes, LailatulCoder Ai must be restarted. Press r to exit and apply changes now.':
+    'Para ver as alterações, o LailatulCoder Ai deve ser reiniciado. Pressione r para sair e aplicar as alterações agora.',
   // ============================================================================
   // Settings Labels
   // ============================================================================
@@ -454,7 +454,7 @@ export default {
   'Load Memory From Include Directories':
     'Carregar Memória de Diretórios Incluídos',
   'Respect .gitignore': 'Respeitar .gitignore',
-  'Respect .qwenignore': 'Respeitar .qwenignore',
+  'Respect .lailatulcoderignore': 'Respeitar .lailatulcoderignore',
   'Enable Recursive File Search': 'Ativar Pesquisa Recursiva de Arquivos',
   'Interactive Shell (PTY)': 'Shell Interativo (PTY)',
   'Show Color': 'Mostrar Cores',
@@ -579,8 +579,8 @@ export default {
     'Esta extensão instalará os seguintes subagentes:',
   'Installation cancelled for "{{name}}".':
     'Instalação cancelada para "{{name}}".',
-  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Qwen Code.':
-    'Você está instalando uma extensão de {{originSource}}. Alguns recursos podem não funcionar perfeitamente com o Qwen Code.',
+  'You are installing an extension from {{originSource}}. Some features may not work perfectly with LailatulCoder Ai.':
+    'Você está instalando uma extensão de {{originSource}}. Alguns recursos podem não funcionar perfeitamente com o LailatulCoder Ai.',
   '--ref and --auto-update are not applicable for marketplace extensions.':
     '--ref e --auto-update não são aplicáveis para extensões de marketplace.',
   'Extension "{{name}}" installed successfully and enabled.':
@@ -676,8 +676,8 @@ export default {
     'instalar companion IDE necessário para {{ideName}}',
   'enable IDE integration': 'ativar integração com IDE',
   'disable IDE integration': 'desativar integração com IDE',
-  'IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks.':
-    'A integração com IDE não é suportada no seu ambiente atual. Para usar este recurso, execute o Qwen Code em um destes IDEs suportados: VS Code ou forks do VS Code.',
+  'IDE integration is not supported in your current environment. To use this feature, run LailatulCoder Ai in one of these supported IDEs: VS Code or VS Code forks.':
+    'A integração com IDE não é suportada no seu ambiente atual. Para usar este recurso, execute o LailatulCoder Ai em um destes IDEs suportados: VS Code ou forks do VS Code.',
   'Set up GitHub Actions': 'Configurar GitHub Actions',
   'Configure terminal keybindings for multiline input (VS Code, Cursor, Windsurf, Trae)':
     'Configurar atalhos de terminal para entrada multilinhas (VS Code, Cursor, Windsurf, Trae)',
@@ -711,7 +711,7 @@ export default {
   // ============================================================================
   // Commands - Hooks
   // ============================================================================
-  'Manage Qwen Code hooks': 'Gerenciar hooks do Qwen Code',
+  'Manage LailatulCoder Ai hooks': 'Gerenciar hooks do LailatulCoder Ai',
   'List all configured hooks': 'Listar todos os hooks configurados',
   // Hooks - Dialog
   Hooks: 'Hooks',
@@ -727,8 +727,8 @@ export default {
   'No hook events found.': 'Nenhum evento de hook encontrado.',
   '{{count}} hook configured': '{{count}} hook configurado',
   '{{count}} hooks configured': '{{count}} hooks configurados',
-  'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Qwen Code.':
-    'Este menu é somente leitura. Para adicionar ou modificar hooks, edite settings.json diretamente ou pergunte ao Qwen Code.',
+  'This menu is read-only. To add or modify hooks, edit settings.json directly or ask LailatulCoder Ai.':
+    'Este menu é somente leitura. Para adicionar ou modificar hooks, edite settings.json diretamente ou pergunte ao LailatulCoder Ai.',
   'Enter to select · Esc to cancel':
     'Enter para selecionar · Esc para cancelar',
   // Hooks - Detail Step
@@ -758,8 +758,8 @@ export default {
   'StatusLine will not be displayed': 'StatusLine não será exibido',
   'Tool operations will proceed without hook validation':
     'As operações de ferramentas prosseguirão sem validação de hook',
-  'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Qwen Code.':
-    'Para reativar os hooks, remova "disableAllHooks" do settings.json ou pergunte ao Qwen Code.',
+  'To re-enable hooks, remove "disableAllHooks" from settings.json or ask LailatulCoder Ai.':
+    'Para reativar os hooks, remova "disableAllHooks" do settings.json ou pergunte ao LailatulCoder Ai.',
   // Hooks - Source
   Project: 'Projeto',
   User: 'Usuário',
@@ -780,8 +780,8 @@ export default {
   'When a slash command expands into a prompt':
     'Quando um comando slash se expande em um prompt',
   'When a new session is started': 'Quando uma nova sessão é iniciada',
-  'Right before Qwen Code concludes its response':
-    'Logo antes do Qwen Code concluir sua resposta',
+  'Right before LailatulCoder Ai concludes its response':
+    'Logo antes do LailatulCoder Ai concluir sua resposta',
   'When a subagent (Agent tool call) is started':
     'Quando um subagente (chamada de ferramenta Agent) é iniciado',
   'Right before a subagent concludes its response':
@@ -989,8 +989,8 @@ export default {
   // =========================================================
   // Commands - Summary
   // ============================================================================
-  'Generate a project summary and save it to .qwen/PROJECT_SUMMARY.md':
-    'Gerar um resumo do projeto e salvá-lo em .qwen/PROJECT_SUMMARY.md',
+  'Generate a project summary and save it to .lailatulcoder/PROJECT_SUMMARY.md':
+    'Gerar um resumo do projeto e salvá-lo em .lailatulcoder/PROJECT_SUMMARY.md',
   'No chat client available to generate summary.':
     'Nenhum cliente de chat disponível para gerar o resumo.',
   'Already generating summary, wait for previous request to complete':
@@ -1314,12 +1314,12 @@ export default {
   Ask: 'Perguntar',
   Deny: 'Negar',
   Workspace: 'Área de trabalho',
-  "Qwen Code won't ask before using allowed tools.":
-    'O Qwen Code não perguntará antes de usar ferramentas permitidas.',
-  'Qwen Code will ask before using these tools.':
-    'O Qwen Code perguntará antes de usar essas ferramentas.',
-  'Qwen Code is not allowed to use denied tools.':
-    'O Qwen Code não tem permissão para usar ferramentas negadas.',
+  "LailatulCoder Ai won't ask before using allowed tools.":
+    'O LailatulCoder Ai não perguntará antes de usar ferramentas permitidas.',
+  'LailatulCoder Ai will ask before using these tools.':
+    'O LailatulCoder Ai perguntará antes de usar essas ferramentas.',
+  'LailatulCoder Ai is not allowed to use denied tools.':
+    'O LailatulCoder Ai não tem permissão para usar ferramentas negadas.',
   'Manage trusted directories for this workspace.':
     'Gerenciar diretórios confiáveis para esta área de trabalho.',
   'Any use of the {{tool}} tool': 'Qualquer uso da ferramenta {{tool}}',
@@ -1329,9 +1329,9 @@ export default {
   'From project settings': 'Das configurações do projeto',
   'From session': 'Da sessão',
   'Project settings': 'Configurações do projeto',
-  'Checked in at .qwen/settings.json': 'Registrado em .qwen/settings.json',
+  'Checked in at .lailatulcoder/settings.json': 'Registrado em .lailatulcoder/settings.json',
   'User settings': 'Configurações do usuário',
-  'Saved in at ~/.qwen/settings.json': 'Salvo em ~/.qwen/settings.json',
+  'Saved in at ~/.lailatulcoder/settings.json': 'Salvo em ~/.lailatulcoder/settings.json',
   'Add a new rule…': 'Adicionar nova regra…',
   'Add {{type}} permission rule': 'Adicionar {{type}} permission rule',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':
@@ -1354,10 +1354,10 @@ export default {
   // Workspace directory management
   'Add directory…': 'Adicionar diretório…',
   'Add directory to workspace': 'Adicionar diretório à área de trabalho',
-  'Qwen Code can read files in the workspace, and make edits when auto-accept edits is on.':
-    'O Qwen Code pode ler arquivos na área de trabalho e fazer edições quando a aceitação automática está ativada.',
-  'Qwen Code will be able to read files in this directory and make edits when auto-accept edits is on.':
-    'O Qwen Code poderá ler arquivos neste diretório e fazer edições quando a aceitação automática está ativada.',
+  'LailatulCoder Ai can read files in the workspace, and make edits when auto-accept edits is on.':
+    'O LailatulCoder Ai pode ler arquivos na área de trabalho e fazer edições quando a aceitação automática está ativada.',
+  'LailatulCoder Ai will be able to read files in this directory and make edits when auto-accept edits is on.':
+    'O LailatulCoder Ai poderá ler arquivos neste diretório e fazer edições quando a aceitação automática está ativada.',
   'Enter the path to the directory:': 'Insira o caminho do diretório:',
   'Enter directory path…': 'Insira o caminho do diretório…',
   'Tab to complete · Enter to add · Esc to cancel':
@@ -1447,8 +1447,8 @@ export default {
     'Use /bug para enviar problemas aos mantenedores quando algo der errado.',
   'Switch auth type quickly with /auth.':
     'Troque o tipo de autenticação rapidamente com /auth.',
-  'You can run any shell commands from Qwen Code using ! (e.g. !ls).':
-    'Você pode executar quaisquer comandos shell do Qwen Code usando ! (ex: !ls).',
+  'You can run any shell commands from LailatulCoder Ai using ! (e.g. !ls).':
+    'Você pode executar quaisquer comandos shell do LailatulCoder Ai usando ! (ex: !ls).',
   'Type / to open the command popup; Tab autocompletes slash commands and saved prompts.':
     'Digite / para abrir o popup de comandos; Tab autocompleta comandos de barra e prompts salvos.',
   'You can resume a previous conversation by running qwen --continue or qwen --resume.':
@@ -1457,8 +1457,8 @@ export default {
     'Você pode alternar o modo de permissão rapidamente com Shift+Tab ou /approval-mode.',
   'Try /insight to generate personalized insights from your chat history.':
     'Experimente /insight para gerar insights personalizados do seu histórico de conversas.',
-  'Add a QWEN.md file to give Qwen Code persistent project context.':
-    'Adicione um arquivo QWEN.md para dar ao Qwen Code um contexto persistente do projeto.',
+  'Add a QWEN.md file to give LailatulCoder Ai persistent project context.':
+    'Adicione um arquivo QWEN.md para dar ao LailatulCoder Ai um contexto persistente do projeto.',
   'Use /btw to ask a quick side question without disrupting the conversation.':
     'Use /btw para fazer uma pergunta lateral rápida sem interromper a conversa.',
   'Context is almost full! Run /compress now or start /new to continue.':
@@ -1934,8 +1934,8 @@ export default {
     'Já está no modo de planejamento. Use "/plan exit" para sair do modo de planejamento.',
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     'Não está no modo de planejamento. Use "/plan" para entrar primeiro no modo de planejamento.',
-  "Set up Qwen Code's status line UI":
-    'Configurar a interface da barra de status do Qwen Code',
+  "Set up LailatulCoder Ai's status line UI":
+    'Configurar a interface da barra de status do LailatulCoder Ai',
 
   // === Core: added from PR #3328 ===
   'Open the memory manager.': 'Abrir o gerenciador de memória.',
@@ -2157,14 +2157,14 @@ export default {
   out: 'saída',
   'In/Out': 'Ent/Saída',
   // Update command
-  'Check for Qwen Code updates and install if available':
-    'Verificar atualizações do Qwen Code e instalar se disponível',
-  'Qwen Code update available! {{current}} → {{latest}}':
-    'Atualização do Qwen Code disponível! {{current}} → {{latest}}',
-  'A new version of Qwen Code is available! {{current}} → {{latest}}':
-    'Uma nova versão do Qwen Code está disponível! {{current}} → {{latest}}',
-  'Qwen Code {{version}} is up to date!':
-    'Qwen Code {{version}} está atualizado!',
+  'Check for LailatulCoder Ai updates and install if available':
+    'Verificar atualizações do LailatulCoder Ai e instalar se disponível',
+  'LailatulCoder Ai update available! {{current}} → {{latest}}':
+    'Atualização do LailatulCoder Ai disponível! {{current}} → {{latest}}',
+  'A new version of LailatulCoder Ai is available! {{current}} → {{latest}}':
+    'Uma nova versão do LailatulCoder Ai está disponível! {{current}} → {{latest}}',
+  'LailatulCoder Ai {{version}} is up to date!':
+    'LailatulCoder Ai {{version}} está atualizado!',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     'Falha ao verificar atualizações ({{reason}}). Verifique sua rede ou configuração do registro.',
   'Update check skipped ({{reason}}) — run /update to retry.':
@@ -2181,8 +2181,8 @@ export default {
     'Atualização baixada. Será aplicada após você sair desta sessão.',
   'Update failed: {{error}}': 'Falha na atualização: {{error}}',
   'Downloading update...': 'Baixando atualização...',
-  'Update successful! Please restart Qwen Code to use the new version. Switching model providers before restarting may not work correctly.':
-    'Atualização bem-sucedida! Reinicie o Qwen Code para usar a nova versão. Alternar provedores de modelo antes de reiniciar pode não funcionar corretamente.',
+  'Update successful! Please restart LailatulCoder Ai to use the new version. Switching model providers before restarting may not work correctly.':
+    'Atualização bem-sucedida! Reinicie o LailatulCoder Ai para usar a nova versão. Alternar provedores de modelo antes de reiniciar pode não funcionar corretamente.',
   'Automatic update failed. Please try updating manually.':
     'Falha na atualização automática. Tente atualizar manualmente.',
   'Automatic update failed: {{error}}. Re-run the installer to update manually.':
@@ -2207,12 +2207,12 @@ export default {
   'Run the following to update:': 'Execute o seguinte para atualizar:',
   'Unable to auto-update this standalone installation. Please reinstall from:':
     'Não foi possível atualizar automaticamente esta instalação independente. Reinstale de:',
-  'Manual update required. Please reinstall Qwen Code.':
-    'Atualização manual necessária. Reinstale o Qwen Code.',
-  'This session uses the custom sandbox image {{image}}. Update that image and restart Qwen Code.':
-    'Esta sessão usa a imagem de sandbox personalizada {{image}}. Atualize a imagem e reinicie o Qwen Code.',
-  'Update Qwen Code on the host, then restart the sandbox.':
-    'Atualize o Qwen Code no host e reinicie o sandbox.',
+  'Manual update required. Please reinstall LailatulCoder Ai.':
+    'Atualização manual necessária. Reinstale o LailatulCoder Ai.',
+  'This session uses the custom sandbox image {{image}}. Update that image and restart LailatulCoder Ai.':
+    'Esta sessão usa a imagem de sandbox personalizada {{image}}. Atualize a imagem e reinicie o LailatulCoder Ai.',
+  'Update LailatulCoder Ai on the host, then restart the sandbox.':
+    'Atualize o LailatulCoder Ai no host e reinicie o sandbox.',
   'The update will be installed after you exit this session.':
     'A atualização será instalada após você sair desta sessão.',
   'Run /update to install the update on the host.':

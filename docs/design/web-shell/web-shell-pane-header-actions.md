@@ -2,7 +2,7 @@
 
 ## Goal
 
-Let a host embedding `@qwen-code/web-shell` contribute per-session actions to
+Let a host embedding `@lailatul-coder/web-shell` contribute per-session actions to
 each split-view pane header, next to the built-in close control, and collapse
 those actions into a `…` overflow menu when the pane is too narrow to show them
 inline without crushing the title.

@@ -228,9 +228,9 @@ flowchart LR
 
 ## Dependencies
 
-- `@qwen-code/qwen-code-core` — `Ignore`, `isBinaryFile`, `Config.isTrustedFolder()`.
+- `@lailatul-coder/lailatul-coder-core` — `Ignore`, `isBinaryFile`, `Config.isTrustedFolder()`.
 - `node:fs`, `node:path`, `node:crypto`.
-- `@qwen-code/acp-bridge` — `BridgeFileSystem` contract on the ACP side.
+- `@lailatul-coder/acp-bridge` — `BridgeFileSystem` contract on the ACP side.
 - HTTP routes: `packages/cli/src/serve/routes/workspace-file-read.ts`, `workspace-file-write.ts`.
 
 ## Configuration

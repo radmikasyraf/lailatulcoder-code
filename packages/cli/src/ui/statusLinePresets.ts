@@ -5,7 +5,7 @@
  */
 
 import nodePath from 'node:path';
-import type { ReasoningEffort } from '@qwen-code/qwen-code-core';
+import type { ReasoningEffort } from '@lailatul-coder/lailatul-coder-core';
 import { StreamingState } from './types.js';
 
 export const STATUS_LINE_PRESET_ITEM_IDS = [
@@ -151,7 +151,7 @@ export const STATUS_LINE_PRESET_ITEMS: readonly StatusLinePresetItem[] = [
   {
     id: 'qwen-version',
     label: 'qwen-version',
-    description: 'Qwen Code application version',
+    description: 'LailatulCoder Ai application version',
   },
   {
     id: 'context-window-size',

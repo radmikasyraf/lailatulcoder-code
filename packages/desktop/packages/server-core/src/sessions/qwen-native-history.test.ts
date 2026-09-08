@@ -70,8 +70,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: Date.now(),
     };
@@ -125,8 +125,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: Date.now(),
     };
@@ -139,7 +139,7 @@ describe('Qwen native history loading', () => {
       {
         id: unresolvedSdkSessionId,
         sdkSessionId: unresolvedSdkSessionId,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
       },
       workspace,
     );
@@ -149,7 +149,7 @@ describe('Qwen native history loading', () => {
         sdkSessionId: placeholderSdkSessionId,
         name: '新聊天',
         messageCount: 0,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
       },
       workspace,
     );
@@ -157,9 +157,9 @@ describe('Qwen native history loading', () => {
       {
         id: resolvedSdkSessionId,
         sdkSessionId: resolvedSdkSessionId,
-        name: 'Qwen code 现在有心跳机制吗',
+        name: 'LailatulCoder Ai 现在有心跳机制吗',
         lastMessageAt: Date.parse('2026-05-08T09:30:02.013Z'),
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
       },
       workspace,
     );
@@ -183,7 +183,7 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = 'fd2803fd-1070-41da-b7c0-10d978f7128c';
@@ -191,10 +191,10 @@ describe('Qwen native history loading', () => {
     const timestamp = Date.parse('2026-04-26T10:12:13.000Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         permissionMode: 'allow-all',
         workingDirectory: projectRoot,
       },
@@ -238,8 +238,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -319,17 +319,17 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = 'fd2803fd-1070-41da-b7c0-10d978f7128c';
     const timestamp = Date.parse('2026-04-26T10:12:13.000Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -357,8 +357,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -372,7 +372,7 @@ describe('Qwen native history loading', () => {
         createdAt: timestamp,
         lastUsedAt: timestamp,
         lastMessageAt: timestamp,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         thinkingLevel: 'medium',
       },
       workspace,
@@ -411,13 +411,13 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: Date.now(),
     };
@@ -429,7 +429,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: projectRoot,
         workingDirectory: projectRoot,
         name: 'Qwen generated summary',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: Date.now(),
       },
       workspace,
@@ -452,7 +452,7 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const craftSessionId = '260429-dynamic-crystal';
@@ -462,10 +462,10 @@ describe('Qwen native history loading', () => {
 
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -484,7 +484,7 @@ describe('Qwen native history loading', () => {
       lastUsedAt: newerTimestamp,
       lastMessageAt: newerTimestamp,
       permissionMode: 'allow-all',
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
       connectionLocked: true,
       model: 'qwen3-coder-flash',
       thinkingLevel: 'medium',
@@ -522,7 +522,7 @@ describe('Qwen native history loading', () => {
       lastUsedAt: olderTimestamp,
       lastMessageAt: olderTimestamp,
       permissionMode: 'ask',
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
       connectionLocked: true,
       model: 'qwen3-coder-flash',
       thinkingLevel: 'medium',
@@ -569,8 +569,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: olderTimestamp,
     };
@@ -585,7 +585,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: newerTimestamp,
         lastMessageAt: newerTimestamp,
         messageCount: 2,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         connectionLocked: true,
         model: 'qwen3-coder-flash',
         thinkingLevel: 'medium',
@@ -603,7 +603,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: olderTimestamp,
         lastMessageAt: olderTimestamp,
         messageCount: 2,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         connectionLocked: true,
         model: 'qwen3-coder-flash',
         thinkingLevel: 'medium',
@@ -641,16 +641,16 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const timestamp = Date.parse('2026-04-26T10:12:13.000Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -681,8 +681,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -693,7 +693,7 @@ describe('Qwen native history loading', () => {
         sdkSessionId: 'fd2803fd-1070-41da-b7c0-10d978f7128c',
         sdkCwd: projectRoot,
         workingDirectory: projectRoot,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
       },
       workspace,
     );
@@ -720,17 +720,17 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = '4b0597de-374c-42c2-a032-58351d825115';
     const timestamp = Date.parse('2026-04-24T05:41:59.862Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -768,8 +768,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -795,17 +795,17 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = 'fce51ed2-6768-4f67-ac22-c168d0b234de';
     const timestamp = Date.parse('2026-05-08T09:30:02.013Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -849,8 +849,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -887,7 +887,7 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = '260602-qwen-token-usage';
@@ -895,10 +895,10 @@ describe('Qwen native history loading', () => {
     const timestamp = Date.parse('2026-06-02T09:30:02.013Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -941,8 +941,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -955,7 +955,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: timestamp,
         lastMessageAt: timestamp,
         messageCount: 0,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         thinkingLevel: 'medium',
       },
       workspace,
@@ -977,7 +977,7 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = '260510-empty-qwen-native';
@@ -985,10 +985,10 @@ describe('Qwen native history loading', () => {
     const timestamp = Date.parse('2026-05-09T17:03:17.731Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -1007,7 +1007,7 @@ describe('Qwen native history loading', () => {
       lastUsedAt: timestamp,
       lastMessageAt: timestamp,
       permissionMode: 'allow-all',
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
       connectionLocked: true,
       thinkingLevel: 'medium',
       messages: [],
@@ -1040,8 +1040,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1056,7 +1056,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: timestamp,
         lastMessageAt: timestamp,
         messageCount: 0,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         connectionLocked: true,
         thinkingLevel: 'medium',
       },
@@ -1076,7 +1076,7 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = '260508-你好-2';
@@ -1084,10 +1084,10 @@ describe('Qwen native history loading', () => {
     const timestamp = Date.parse('2026-05-08T09:30:02.013Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -1121,8 +1121,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1135,7 +1135,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: timestamp,
         lastMessageAt: timestamp,
         messageCount: 0,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         thinkingLevel: 'medium',
       },
       workspace,
@@ -1178,8 +1178,8 @@ describe('Qwen native history loading', () => {
     };
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1187,7 +1187,7 @@ describe('Qwen native history loading', () => {
       {
         id: sessionId,
         sdkSessionId: sessionId,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp + 2_000,
         thinkingLevel: 'medium',
       },
@@ -1272,8 +1272,8 @@ describe('Qwen native history loading', () => {
     };
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1284,7 +1284,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1357,8 +1357,8 @@ describe('Qwen native history loading', () => {
     };
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1369,7 +1369,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1423,8 +1423,8 @@ describe('Qwen native history loading', () => {
     };
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1435,7 +1435,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1512,8 +1512,8 @@ describe('Qwen native history loading', () => {
     };
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1524,7 +1524,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1588,8 +1588,8 @@ describe('Qwen native history loading', () => {
     const timestamp = Date.now();
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1600,7 +1600,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1643,8 +1643,8 @@ describe('Qwen native history loading', () => {
     const timestamp = Date.now();
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1655,7 +1655,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1696,8 +1696,8 @@ describe('Qwen native history loading', () => {
     const timestamp = Date.now();
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1708,7 +1708,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1757,8 +1757,8 @@ describe('Qwen native history loading', () => {
     const timestamp = Date.now();
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1769,7 +1769,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1843,8 +1843,8 @@ describe('Qwen native history loading', () => {
     };
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1855,7 +1855,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1923,8 +1923,8 @@ describe('Qwen native history loading', () => {
     };
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -1935,7 +1935,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -1989,8 +1989,8 @@ describe('Qwen native history loading', () => {
     };
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -2001,7 +2001,7 @@ describe('Qwen native history loading', () => {
         sdkCwd: workspaceRoot,
         workingDirectory: workspaceRoot,
         name: 'existing qwen title',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         lastMessageAt: timestamp,
       },
       workspace,
@@ -2032,17 +2032,17 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = '260602-qwen-visual-restore';
     const timestamp = Date.parse('2026-06-02T06:06:21.236Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -2127,8 +2127,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -2137,7 +2137,7 @@ describe('Qwen native history loading', () => {
         id: sessionId,
         sdkSessionId: sessionId,
         lastMessageAt: timestamp + 1_000,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         thinkingLevel: 'medium',
       },
       workspace,
@@ -2160,17 +2160,17 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = '260602-qwen-legacy-orphaned-image';
     const timestamp = Date.now();
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -2242,8 +2242,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -2252,7 +2252,7 @@ describe('Qwen native history loading', () => {
         id: sessionId,
         sdkSessionId: sessionId,
         lastMessageAt: timestamp + 1_000,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         thinkingLevel: 'medium',
       },
       workspace,
@@ -2295,17 +2295,17 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = '5ed6265d-321d-4dc4-b186-8c69de6e20ba';
     const timestamp = Date.parse('2026-04-24T05:41:59.862Z');
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -2324,7 +2324,7 @@ describe('Qwen native history loading', () => {
       lastUsedAt: timestamp,
       lastMessageAt: timestamp,
       permissionMode: 'ask',
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
       connectionLocked: true,
       model: 'qwen3-coder-flash',
       thinkingLevel: 'medium',
@@ -2359,8 +2359,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -2375,7 +2375,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: timestamp,
         lastMessageAt: timestamp,
         messageCount: 0,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         connectionLocked: true,
         model: 'qwen3-coder-flash',
         thinkingLevel: 'medium',
@@ -2406,7 +2406,7 @@ describe('Qwen native history loading', () => {
     const workspaceRoot = mkdtempSync(
       join(tmpdir(), 'craft-managed-workspace-'),
     );
-    const projectRoot = mkdtempSync(join(tmpdir(), 'qwen-code-project-'));
+    const projectRoot = mkdtempSync(join(tmpdir(), 'lailatul-coder-project-'));
     tempRoots.push(workspaceRoot, projectRoot);
 
     const sessionId = 'b1e2b1a0-8ea5-4af5-85ba-dff6232c9c02';
@@ -2416,10 +2416,10 @@ describe('Qwen native history loading', () => {
       'This may take a couple minutes. Sit tight!Insight report generated successfully!';
     saveWorkspaceConfig(workspaceRoot, {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       defaults: {
-        defaultLlmConnection: 'qwen-code',
+        defaultLlmConnection: 'lailatul-coder',
         workingDirectory: projectRoot,
       },
       localMcpServers: { enabled: true },
@@ -2438,7 +2438,7 @@ describe('Qwen native history loading', () => {
       lastUsedAt: resultTimestamp,
       lastMessageAt: resultTimestamp,
       permissionMode: 'ask',
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
       connectionLocked: true,
       model: 'qwen3-coder-flash',
       thinkingLevel: 'medium',
@@ -2503,8 +2503,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: invocationTimestamp,
     };
@@ -2520,7 +2520,7 @@ describe('Qwen native history loading', () => {
         lastMessageAt: resultTimestamp,
         messageCount: 1,
         lastMessageRole: 'assistant',
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         connectionLocked: true,
         model: 'qwen3-coder-flash',
         thinkingLevel: 'medium',
@@ -2597,7 +2597,7 @@ describe('Qwen native history loading', () => {
       lastUsedAt: timestamp,
       lastMessageAt: timestamp,
       permissionMode: 'ask',
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
       connectionLocked: true,
       model: 'qwen3-coder-flash',
       thinkingLevel: 'medium',
@@ -2664,8 +2664,8 @@ describe('Qwen native history loading', () => {
 
     const workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -2680,7 +2680,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: timestamp,
         lastMessageAt: timestamp,
         messageCount: 0,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         connectionLocked: true,
         model: 'qwen3-coder-flash',
         thinkingLevel: 'medium',
@@ -2732,7 +2732,7 @@ describe('Qwen native history loading', () => {
       lastUsedAt: timestamp,
       lastMessageAt: timestamp,
       permissionMode: 'ask',
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
       connectionLocked: true,
       model: 'qwen3-coder-flash',
       thinkingLevel: 'medium',
@@ -2767,7 +2767,7 @@ describe('Qwen native history loading', () => {
       {
         id: 'qwen-4',
         role: 'assistant',
-        content: 'PR 已创建：https://github.com/QwenLM/qwen-code/pull/3593',
+        content: 'PR 已创建：https://github.com/LailatulCoder/lailatul-coder/pull/3593',
         timestamp: timestamp + 3,
       },
     ];
@@ -2802,8 +2802,8 @@ describe('Qwen native history loading', () => {
 
     const workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -2818,7 +2818,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: timestamp,
         lastMessageAt: timestamp,
         messageCount: 0,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         connectionLocked: true,
         model: 'qwen3-coder-flash',
         thinkingLevel: 'medium',
@@ -2844,7 +2844,7 @@ describe('Qwen native history loading', () => {
       ['tool', 'Running Bash...', 'Bash'],
       [
         'assistant',
-        'PR 已创建：https://github.com/QwenLM/qwen-code/pull/3593',
+        'PR 已创建：https://github.com/LailatulCoder/lailatul-coder/pull/3593',
         '',
       ],
     ]);
@@ -2890,7 +2890,7 @@ describe('Qwen native history loading', () => {
       lastUsedAt: timestamp,
       lastMessageAt: timestamp,
       permissionMode: 'ask',
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
       connectionLocked: true,
       messages: [],
       tokenUsage: {
@@ -2938,8 +2938,8 @@ describe('Qwen native history loading', () => {
 
     const workspace: Workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -2954,7 +2954,7 @@ describe('Qwen native history loading', () => {
         lastUsedAt: timestamp,
         lastMessageAt: timestamp,
         messageCount: 0,
-        llmConnection: 'qwen-code',
+        llmConnection: 'lailatul-coder',
         connectionLocked: true,
       },
       workspace,
@@ -3021,7 +3021,7 @@ describe('Qwen native history loading', () => {
     ]);
   });
 
-  it('uses the built-in Qwen Code connection for provider-native sessions missing llmConnection', async () => {
+  it('uses the built-in LailatulCoder Ai connection for provider-native sessions missing llmConnection', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'craft-qwen-history-'));
     tempRoots.push(workspaceRoot);
 
@@ -3055,7 +3055,7 @@ describe('Qwen native history loading', () => {
       {
         id: 'qwen-2',
         role: 'assistant',
-        content: 'loaded through built-in qwen-code',
+        content: 'loaded through built-in lailatul-coder',
         timestamp: timestamp + 1,
       },
     ];
@@ -3074,8 +3074,8 @@ describe('Qwen native history loading', () => {
 
     const workspace = {
       id: 'workspace-qwen',
-      name: 'qwen-code',
-      slug: 'qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
       rootPath: workspaceRoot,
       createdAt: timestamp,
     };
@@ -3101,7 +3101,7 @@ describe('Qwen native history loading', () => {
 
     const session = await manager.getSession(sessionId);
 
-    expect(resolvedConnectionSlug).toBe('qwen-code');
+    expect(resolvedConnectionSlug).toBe('lailatul-coder');
     expect(session?.messages).toHaveLength(2);
     expect(loadSession(workspaceRoot, sessionId)?.messages).toHaveLength(0);
   });

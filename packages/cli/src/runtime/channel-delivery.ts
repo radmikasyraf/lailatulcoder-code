@@ -7,7 +7,7 @@
 import {
   MAX_CHANNEL_DELIVERY_NAME_LENGTH,
   MAX_CHANNEL_DELIVERY_TARGET_ID_LENGTH,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   ChannelDeliveryError,
   MAX_CHANNEL_DELIVERY_TEXT_LENGTH,

@@ -18,7 +18,7 @@
  * When disabled, no notification is sent.
  */
 
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import type { TerminalNotification } from '../ui/hooks/useTerminalNotification.js';
 import { detectTerminal, generateKittyId } from '../utils/osc.js';
 
@@ -29,7 +29,7 @@ export interface NotificationOptions {
   title?: string;
 }
 
-const DEFAULT_TITLE = 'Qwen Code';
+const DEFAULT_TITLE = 'LailatulCoder Ai';
 
 /**
  * Send a notification through the auto-detected channel.

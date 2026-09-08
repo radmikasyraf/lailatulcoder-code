@@ -58,7 +58,7 @@ describe('fleet shepherd workflow', () => {
   });
 
   it('is scoped, killable, and never self-cancels mid-action', () => {
-    expect(workflow).toContain("github.repository == 'QwenLM/qwen-code'");
+    expect(workflow).toContain("github.repository == 'LailatulCoder/lailatul-coder'");
     // Global kill switch: flipping one repository variable stops all writes.
     expect(workflow).toContain("vars.FLEET_SHEPHERD_DISABLED != 'true'");
     // A tick performs real writes; a newer tick must queue, not cancel it.
@@ -73,7 +73,7 @@ describe('fleet shepherd workflow', () => {
 
   it('walks only in-repo main-targeting bot PRs', () => {
     expect(workflow).toContain(
-      'AUTOFIX_BOT: "${{ vars.AUTOFIX_BOT_LOGIN || \'qwen-code-dev-bot\' }}"',
+      'AUTOFIX_BOT: "${{ vars.AUTOFIX_BOT_LOGIN || \'lailatul-coder-dev-bot\' }}"',
     );
     expect(workflow).toContain('--author "${AUTOFIX_BOT}" --base main');
     // Fail CLOSED on the fork field, matching the autofix workflow's
@@ -365,7 +365,7 @@ printf '%s' "${'$'}{LIVENESS_RUN_OUT:-}"`,
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
               ACTIONS_TOKEN: 'x',
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               DISPATCH_T0: '2026-08-07T08:00:00Z',
               DRY_RUN: 'false',
             },
@@ -478,7 +478,7 @@ exit 1`;
               PATH: `${dir}:${process.env.PATH}`,
               SCAN_RUNS_OK: 'true',
               ACTIONS_TOKEN: 'x',
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
             },
             encoding: 'utf8',
           },
@@ -1088,12 +1088,12 @@ exit 1`;
     expect(resumeJq).toBeTruthy();
     expect(reasonJq).toBeTruthy();
     const run = (program, comments) =>
-      execFileSync('jq', ['-r', '--arg', 'ab', 'qwen-code-dev-bot', program], {
+      execFileSync('jq', ['-r', '--arg', 'ab', 'lailatul-coder-dev-bot', program], {
         encoding: 'utf8',
         input: JSON.stringify(comments),
       }).trim();
     const bot = (created_at, body) => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at,
       body,
     });
@@ -1174,11 +1174,11 @@ exit 1`;
             env: {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
-              REPO: 'QwenLM/qwen-code',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
+              REPO: 'LailatulCoder/lailatul-coder',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
               TAKEOVER_LABEL: 'autofix/takeover',
-              TAKEOVER_COMMAND: '@qwen-code /takeover',
-              RETRY_COMMAND: '@qwen-code /retry',
+              TAKEOVER_COMMAND: '@lailatul-coder /takeover',
+              RETRY_COMMAND: '@lailatul-coder /retry',
               RESUME_COMMAND_GRACE_SEC: '7200',
               NOW_EPOCH: String(Date.parse(now) / 1000),
             },
@@ -1192,7 +1192,7 @@ exit 1`;
         rmSync(dir, { recursive: true, force: true });
       }
     };
-    const cmd = (ts, login, body = '@qwen-code /takeover') => ({
+    const cmd = (ts, login, body = '@lailatul-coder /takeover') => ({
       user: { login },
       created_at: ts,
       body,
@@ -1303,7 +1303,7 @@ exit 1`;
       comments: [cmd('2026-08-06T00:00:00Z', 'maintainer4041')],
       permFail: true,
       permError:
-        'Get https://api.github.com/repos/QwenLM/qwen-code/collaborators/maintainer4041/permission: connection refused',
+        'Get https://api.github.com/repos/LailatulCoder/lailatul-coder/collaborators/maintainer4041/permission: connection refused',
     });
     expect(transportErr.ts).toBe('');
     expect(transportErr.flag).toBe('true');
@@ -1507,7 +1507,7 @@ exit 1`;
           '-r',
           '--arg',
           'ab',
-          'qwen-code-dev-bot',
+          'lailatul-coder-dev-bot',
           '--arg',
           'term',
           term,
@@ -1639,7 +1639,7 @@ exit 1`;
           'autofix/takeover',
           '--arg',
           'ab',
-          'qwen-code-dev-bot',
+          'lailatul-coder-dev-bot',
           '--arg',
           'll',
           ll,
@@ -1674,7 +1674,7 @@ exit 1`;
         {
           event: 'unlabeled',
           label: { name: 'autofix/takeover' },
-          actor: { login: 'qwen-code-dev-bot' },
+          actor: { login: 'lailatul-coder-dev-bot' },
           created_at: '2026-08-02T00:00:00Z',
         },
       ]),
@@ -1699,7 +1699,7 @@ exit 1`;
         {
           event: 'unlabeled',
           label: { name: 'autofix/takeover' },
-          actor: { login: 'qwen-code-dev-bot' },
+          actor: { login: 'lailatul-coder-dev-bot' },
           created_at: '2026-08-05T00:00:00Z',
         },
       ]),
@@ -1855,15 +1855,15 @@ exit 1`;
     //    the autofix side desyncs here, not silently in production. The
     //    refusal-ack variants that supersede a refused command are exactly
     //    the ones the producer can emit.
-    expect(autofix).toContain("TAKEOVER_COMMAND: '@qwen-code /takeover'");
-    expect(autofix).toContain("RETRY_COMMAND: '@qwen-code /retry'");
-    expect(workflow).toContain("TAKEOVER_COMMAND: '@qwen-code /takeover'");
-    expect(workflow).toContain("RETRY_COMMAND: '@qwen-code /retry'");
+    expect(autofix).toContain("TAKEOVER_COMMAND: '@lailatul-coder /takeover'");
+    expect(autofix).toContain("RETRY_COMMAND: '@lailatul-coder /retry'");
+    expect(workflow).toContain("TAKEOVER_COMMAND: '@lailatul-coder /takeover'");
+    expect(workflow).toContain("RETRY_COMMAND: '@lailatul-coder /retry'");
     // R8-6: the env constant is the ONLY literal command text in this file
     // — the auto-release summary interpolates TAKEOVER_COMMAND like every
     // ack body on the producer side, so a command-syntax rename can never
     // strand a hardcoded instruction.
-    expect(workflow.match(/@qwen-code \/takeover/g)).toHaveLength(1);
+    expect(workflow.match(/@lailatul-coder \/takeover/g)).toHaveLength(1);
     expect(workflow).toContain(
       'comment `%s` to re-engage with a fresh round window',
     );
@@ -2228,8 +2228,8 @@ exit 1`;
             env: {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
-              REPO: 'QwenLM/qwen-code',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
+              REPO: 'LailatulCoder/lailatul-coder',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
             },
             encoding: 'utf8',
           },
@@ -2240,7 +2240,7 @@ exit 1`;
       }
     };
     const bot = (ts, body) => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at: ts,
       body,
     });

@@ -2,7 +2,7 @@
 
 ## Status
 
-Final implementation contract for [#6443](https://github.com/QwenLM/qwen-code/issues/6443). This document fixes the implementation boundary, payload contract, state ownership, degradation behavior, and acceptance criteria followed by the accompanying runtime implementation.
+Final implementation contract for [#6443](https://github.com/LailatulCoder/lailatul-coder/issues/6443). This document fixes the implementation boundary, payload contract, state ownership, degradation behavior, and acceptance criteria followed by the accompanying runtime implementation.
 
 ## Motivation
 
@@ -327,7 +327,7 @@ The existing daemon bridge consumes the request-to-session mapping when `respond
 
 An instance update is a UI projection, not the permission transaction. If the responder succeeds but the subsequent card update fails, the permission remains resolved, the local record remains terminal, duplicate callbacks remain rejected, and the adapter logs the failed UI projection.
 
-Unlike the OpenClaw reference implementation, Qwen Code does not inject a synthetic inbound message. It responds directly to the original permission request. A second request in the same live run uses the text fallback and leaves the first native card answerable.
+Unlike the OpenClaw reference implementation, LailatulCoder Ai does not inject a synthetic inbound message. It responds directly to the original permission request. A second request in the same live run uses the text fallback and leaves the first native card answerable.
 
 ## Configuration and built-in templates — DingTalk-only change
 
@@ -363,7 +363,7 @@ Evidence for the built-in asset contract and callback flow:
 - [soimy/openclaw-channel-dingtalk#585](https://github.com/soimy/openclaw-channel-dingtalk/pull/585) is merged, ships the final question-card template asset, and was approved by the maintainer.
 - [OpenClaw main at `a8fb6f80e7`](https://github.com/soimy/openclaw-channel-dingtalk/commit/a8fb6f80e7360ce0ffee2d4a8007951bd85b23a4) supplies the current reserve/activate/claim/terminal delivery-race reference.
 
-These sources provide Card OpenAPI, template, and concurrency evidence. Qwen Code does not copy their separate tool, `AsyncLocalStorage`, persistent lifecycle store, synthetic-message reinjection, question supersession, fail-open owner check, or callback-after-await ACK timing.
+These sources provide Card OpenAPI, template, and concurrency evidence. LailatulCoder Ai does not copy their separate tool, `AsyncLocalStorage`, persistent lifecycle store, synthetic-message reinjection, question supersession, fail-open owner check, or callback-after-await ACK timing.
 
 ## Degradation behavior — DingTalk-only change
 

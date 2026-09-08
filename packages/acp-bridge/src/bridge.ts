@@ -28,7 +28,7 @@ import type {
   ApprovalMode,
   RebuiltSessionArtifactSnapshot,
   TurnResultRecordPayload,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   DAEMON_TRACEPARENT_META_KEY,
   DAEMON_TRACESTATE_META_KEY,
@@ -45,7 +45,7 @@ import {
   ShellExecutionService,
   type InvocationContextV1,
   type ShellOutputEvent,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { ShellCommandResult } from './bridgeTypes.js';
 import type { AcpChannel, AcpChannelTransportGuard } from './channel.js';
 import {
@@ -3390,11 +3390,11 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
           `${restoreSettlementGraceMs}ms after its deadline; refusing fresh sessions on channel ${ci.id} until it drains`,
       );
       telemetry.event('session.restore.settlement_overdue', {
-        'qwen-code.daemon.session_restore.action': action,
-        'qwen-code.daemon.session_restore.timeout_ms': sessionRestoreTimeoutMs,
-        'qwen-code.daemon.session_restore.settlement_grace_ms':
+        'lailatul-coder.daemon.session_restore.action': action,
+        'lailatul-coder.daemon.session_restore.timeout_ms': sessionRestoreTimeoutMs,
+        'lailatul-coder.daemon.session_restore.settlement_grace_ms':
           restoreSettlementGraceMs,
-        'qwen-code.daemon.acp_channel.id': ci.id,
+        'lailatul-coder.daemon.acp_channel.id': ci.id,
         'session.id': sessionId,
       });
       void reapPendingEmptyChannel(ci);
@@ -3892,9 +3892,9 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
       const channel = await telemetry.withSpan(
         'channel.spawn',
         {
-          'qwen-code.daemon.bridge.operation': 'channel.spawn',
-          'qwen-code.daemon.channel.reused': false,
-          'qwen-code.daemon.acp_channel.id': acpChannelId,
+          'lailatul-coder.daemon.bridge.operation': 'channel.spawn',
+          'lailatul-coder.daemon.channel.reused': false,
+          'lailatul-coder.daemon.acp_channel.id': acpChannelId,
         },
         async () =>
           await channelFactory(boundWorkspace, {
@@ -4193,19 +4193,19 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
         }
         if (!shuttingDown) {
           telemetry.event('channel.exited', {
-            'qwen-code.daemon.channel.exit_code': exitInfo?.exitCode ?? -1,
-            'qwen-code.daemon.channel.session_count': sessions.length,
-            'qwen-code.daemon.channel.transport_failed': info.transportFailed,
-            'qwen-code.daemon.channel.transport_failure_initiated_teardown':
+            'lailatul-coder.daemon.channel.exit_code': exitInfo?.exitCode ?? -1,
+            'lailatul-coder.daemon.channel.session_count': sessions.length,
+            'lailatul-coder.daemon.channel.transport_failed': info.transportFailed,
+            'lailatul-coder.daemon.channel.transport_failure_initiated_teardown':
               info.transportFailureInitiatedTeardown,
             ...(info.transportFailureCode
               ? {
-                  'qwen-code.daemon.channel.transport_error_code':
+                  'lailatul-coder.daemon.channel.transport_error_code':
                     info.transportFailureCode,
                 }
               : {}),
             ...(exitInfo?.signalCode
-              ? { 'qwen-code.daemon.channel.signal': exitInfo.signalCode }
+              ? { 'lailatul-coder.daemon.channel.signal': exitInfo.signalCode }
               : {}),
           });
           writeStderrLine(
@@ -4273,8 +4273,8 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
         await telemetry.withSpan(
           'channel.initialize',
           {
-            'qwen-code.daemon.bridge.operation': 'channel.initialize',
-            'qwen-code.daemon.acp_channel.id': acpChannelId,
+            'lailatul-coder.daemon.bridge.operation': 'channel.initialize',
+            'lailatul-coder.daemon.acp_channel.id': acpChannelId,
           },
           async () => {
             const response = await withTimeout(
@@ -4442,8 +4442,8 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
     const ci = await telemetry.withSpan(
       'channel.wait',
       {
-        'qwen-code.daemon.bridge.operation': 'channel.wait',
-        'qwen-code.daemon.channel.path': channelPath,
+        'lailatul-coder.daemon.bridge.operation': 'channel.wait',
+        'lailatul-coder.daemon.channel.path': channelPath,
       },
       ensureChannel,
     );
@@ -4471,10 +4471,10 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
         newSessionResp = await telemetry.withSpan(
           'session.new',
           {
-            'qwen-code.daemon.bridge.operation': 'session.new',
-            'qwen-code.daemon.session_scope': effectiveScope,
-            'qwen-code.daemon.channel.path': channelPath,
-            'qwen-code.daemon.acp_channel.id': ci.id,
+            'lailatul-coder.daemon.bridge.operation': 'session.new',
+            'lailatul-coder.daemon.session_scope': effectiveScope,
+            'lailatul-coder.daemon.channel.path': channelPath,
+            'lailatul-coder.daemon.acp_channel.id': ci.id,
           },
           async () => {
             // This legacy-named helper sanitizes and injects trace metadata
@@ -4515,7 +4515,7 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
             );
             telemetry.event('session.new.completed', {
               'session.id': response.sessionId,
-              'qwen-code.daemon.acp_channel.id': ci.id,
+              'lailatul-coder.daemon.acp_channel.id': ci.id,
             });
             return response;
           },
@@ -6825,10 +6825,10 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
       lateResult: 'success' | 'failure',
     ) => {
       telemetry.event('session.restore.late_result', {
-        'qwen-code.daemon.session_restore.action': action,
-        'qwen-code.daemon.session_restore.result': lateResult,
-        'qwen-code.daemon.session_restore.timeout_ms': sessionRestoreTimeoutMs,
-        'qwen-code.daemon.acp_channel.id': channel.id,
+        'lailatul-coder.daemon.session_restore.action': action,
+        'lailatul-coder.daemon.session_restore.result': lateResult,
+        'lailatul-coder.daemon.session_restore.timeout_ms': sessionRestoreTimeoutMs,
+        'lailatul-coder.daemon.acp_channel.id': channel.id,
         'session.id': req.sessionId,
       });
       // Defense in depth behind the same-id spawn rejection above. An
@@ -6843,11 +6843,11 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
           `qwen serve: skipping abandoned session/${action} cleanup for ${JSON.stringify(req.sessionId)}: the id is now owned by a live session`,
         );
         telemetry.event('session.restore.cleanup', {
-          'qwen-code.daemon.session_restore.action': action,
-          'qwen-code.daemon.session_restore.cleanup_result': 'id_reclaimed',
-          'qwen-code.daemon.session_restore.timeout_ms':
+          'lailatul-coder.daemon.session_restore.action': action,
+          'lailatul-coder.daemon.session_restore.cleanup_result': 'id_reclaimed',
+          'lailatul-coder.daemon.session_restore.timeout_ms':
             sessionRestoreTimeoutMs,
-          'qwen-code.daemon.acp_channel.id': channel.id,
+          'lailatul-coder.daemon.acp_channel.id': channel.id,
           'session.id': req.sessionId,
         });
         channel.unsettledAbandonedRestores.delete(req.sessionId);
@@ -6869,12 +6869,12 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
         if (channel.isDying || !aliveChannels.has(channel)) {
           await channel.channel.exited;
           telemetry.event('session.restore.cleanup', {
-            'qwen-code.daemon.session_restore.action': action,
-            'qwen-code.daemon.session_restore.cleanup_result':
+            'lailatul-coder.daemon.session_restore.action': action,
+            'lailatul-coder.daemon.session_restore.cleanup_result':
               'transport_closed',
-            'qwen-code.daemon.session_restore.timeout_ms':
+            'lailatul-coder.daemon.session_restore.timeout_ms':
               sessionRestoreTimeoutMs,
-            'qwen-code.daemon.acp_channel.id': channel.id,
+            'lailatul-coder.daemon.acp_channel.id': channel.id,
             'session.id': req.sessionId,
           });
           return;
@@ -6895,21 +6895,21 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
             getChannelClosedReject(channel),
           ]);
           telemetry.event('session.restore.cleanup', {
-            'qwen-code.daemon.session_restore.action': action,
-            'qwen-code.daemon.session_restore.cleanup_result': 'closed',
-            'qwen-code.daemon.session_restore.timeout_ms':
+            'lailatul-coder.daemon.session_restore.action': action,
+            'lailatul-coder.daemon.session_restore.cleanup_result': 'closed',
+            'lailatul-coder.daemon.session_restore.timeout_ms':
               sessionRestoreTimeoutMs,
-            'qwen-code.daemon.acp_channel.id': channel.id,
+            'lailatul-coder.daemon.acp_channel.id': channel.id,
             'session.id': req.sessionId,
           });
         } catch (error) {
           if (isAcpSessionResourceNotFound(error, req.sessionId)) {
             telemetry.event('session.restore.cleanup', {
-              'qwen-code.daemon.session_restore.action': action,
-              'qwen-code.daemon.session_restore.cleanup_result': 'not_found',
-              'qwen-code.daemon.session_restore.timeout_ms':
+              'lailatul-coder.daemon.session_restore.action': action,
+              'lailatul-coder.daemon.session_restore.cleanup_result': 'not_found',
+              'lailatul-coder.daemon.session_restore.timeout_ms':
                 sessionRestoreTimeoutMs,
-              'qwen-code.daemon.acp_channel.id': channel.id,
+              'lailatul-coder.daemon.acp_channel.id': channel.id,
               'session.id': req.sessionId,
             });
             return;
@@ -6917,12 +6917,12 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
           if (channel.isDying || !aliveChannels.has(channel)) {
             await channel.channel.exited;
             telemetry.event('session.restore.cleanup', {
-              'qwen-code.daemon.session_restore.action': action,
-              'qwen-code.daemon.session_restore.cleanup_result':
+              'lailatul-coder.daemon.session_restore.action': action,
+              'lailatul-coder.daemon.session_restore.cleanup_result':
                 'transport_closed',
-              'qwen-code.daemon.session_restore.timeout_ms':
+              'lailatul-coder.daemon.session_restore.timeout_ms':
                 sessionRestoreTimeoutMs,
-              'qwen-code.daemon.acp_channel.id': channel.id,
+              'lailatul-coder.daemon.acp_channel.id': channel.id,
               'session.id': req.sessionId,
             });
             return;
@@ -6934,11 +6934,11 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
             `qwen serve: quarantining ACP channel after timed-out session/${action} cleanup failed for ${JSON.stringify(req.sessionId)}: ${extractErrorMessage(error)}`,
           );
           telemetry.event('session.restore.cleanup', {
-            'qwen-code.daemon.session_restore.action': action,
-            'qwen-code.daemon.session_restore.cleanup_result': 'quarantined',
-            'qwen-code.daemon.session_restore.timeout_ms':
+            'lailatul-coder.daemon.session_restore.action': action,
+            'lailatul-coder.daemon.session_restore.cleanup_result': 'quarantined',
+            'lailatul-coder.daemon.session_restore.timeout_ms':
               sessionRestoreTimeoutMs,
-            'qwen-code.daemon.acp_channel.id': channel.id,
+            'lailatul-coder.daemon.acp_channel.id': channel.id,
             'session.id': req.sessionId,
           });
           if (hasNoChannelWork(channel)) {
@@ -7017,10 +7017,10 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
         const rawRestore = telemetry.withSpan(
           'session.restore',
           {
-            'qwen-code.daemon.bridge.operation': `session.${action}`,
-            'qwen-code.daemon.session_restore.action': action,
-            'qwen-code.daemon.acp_channel.id': restoreChannel.id,
-            'qwen-code.daemon.session_restore.timeout_ms':
+            'lailatul-coder.daemon.bridge.operation': `session.${action}`,
+            'lailatul-coder.daemon.session_restore.action': action,
+            'lailatul-coder.daemon.acp_channel.id': restoreChannel.id,
+            'lailatul-coder.daemon.session_restore.timeout_ms':
               sessionRestoreTimeoutMs,
             'session.id': req.sessionId,
           },
@@ -7082,12 +7082,12 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
             restoreChannel.unsettledAbandonedRestores.add(req.sessionId);
             const channelWasEmpty = hasNoChannelWork(restoreChannel);
             telemetry.event('session.restore.public_result', {
-              'qwen-code.daemon.session_restore.action': action,
-              'qwen-code.daemon.session_restore.result': 'timeout',
-              'qwen-code.daemon.session_restore.timeout_ms':
+              'lailatul-coder.daemon.session_restore.action': action,
+              'lailatul-coder.daemon.session_restore.result': 'timeout',
+              'lailatul-coder.daemon.session_restore.timeout_ms':
                 sessionRestoreTimeoutMs,
-              'qwen-code.daemon.acp_channel.id': restoreChannel.id,
-              'qwen-code.daemon.session_restore.channel_was_empty':
+              'lailatul-coder.daemon.acp_channel.id': restoreChannel.id,
+              'lailatul-coder.daemon.session_restore.channel_was_empty':
                 channelWasEmpty,
               'session.id': req.sessionId,
             });
@@ -7378,11 +7378,11 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
       () => {
         if (restoreLifecycle.phase === 'active') {
           telemetry.event('session.restore.public_result', {
-            'qwen-code.daemon.session_restore.action': action,
-            'qwen-code.daemon.session_restore.result': 'success',
-            'qwen-code.daemon.session_restore.timeout_ms':
+            'lailatul-coder.daemon.session_restore.action': action,
+            'lailatul-coder.daemon.session_restore.result': 'success',
+            'lailatul-coder.daemon.session_restore.timeout_ms':
               sessionRestoreTimeoutMs,
-            ...(ci ? { 'qwen-code.daemon.acp_channel.id': ci.id } : {}),
+            ...(ci ? { 'lailatul-coder.daemon.acp_channel.id': ci.id } : {}),
             'session.id': req.sessionId,
           });
           resolveSettlement();
@@ -7391,11 +7391,11 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
       () => {
         if (restoreLifecycle.phase === 'active') {
           telemetry.event('session.restore.public_result', {
-            'qwen-code.daemon.session_restore.action': action,
-            'qwen-code.daemon.session_restore.result': 'failure',
-            'qwen-code.daemon.session_restore.timeout_ms':
+            'lailatul-coder.daemon.session_restore.action': action,
+            'lailatul-coder.daemon.session_restore.result': 'failure',
+            'lailatul-coder.daemon.session_restore.timeout_ms':
               sessionRestoreTimeoutMs,
-            ...(ci ? { 'qwen-code.daemon.acp_channel.id': ci.id } : {}),
+            ...(ci ? { 'lailatul-coder.daemon.acp_channel.id': ci.id } : {}),
             'session.id': req.sessionId,
           });
           resolveSettlement();
@@ -7451,7 +7451,7 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
           : ''),
     );
     telemetry.event('session.close', {
-      'qwen-code.daemon.bridge.operation': 'session.close',
+      'lailatul-coder.daemon.bridge.operation': 'session.close',
       'session.id': sessionId,
       'session.close.reason': reason,
     });
@@ -7572,7 +7572,7 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
         await telemetry.withSpan(
           'session.close.cancel_active_prompt',
           {
-            'qwen-code.daemon.bridge.operation':
+            'lailatul-coder.daemon.bridge.operation':
               'session.close.cancel_active_prompt',
             'session.id': sessionId,
           },
@@ -8544,11 +8544,11 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
             return await telemetry.withSpan(
               'prompt.dispatch',
               {
-                'qwen-code.daemon.bridge.operation': 'prompt.dispatch',
+                'lailatul-coder.daemon.bridge.operation': 'prompt.dispatch',
                 'session.id': sessionId,
-                'qwen-code.daemon.prompt.queue_wait_ms': queueWaitMs,
+                'lailatul-coder.daemon.prompt.queue_wait_ms': queueWaitMs,
                 ...(context?.clientId
-                  ? { 'qwen-code.client_id': context.clientId }
+                  ? { 'lailatul-coder.client_id': context.clientId }
                   : {}),
               },
               async () => {
@@ -9022,7 +9022,7 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
       await telemetry.withSpan(
         'session.cancel',
         {
-          'qwen-code.daemon.bridge.operation': 'session.cancel',
+          'lailatul-coder.daemon.bridge.operation': 'session.cancel',
           'session.id': sessionId,
         },
         async () => {
@@ -12486,7 +12486,7 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
       if (shuttingDown) return;
       await telemetry.withSpan(
         'channel.preheat',
-        { 'qwen-code.daemon.bridge.operation': 'channel.preheat' },
+        { 'lailatul-coder.daemon.bridge.operation': 'channel.preheat' },
         async () => {
           const ci = await ensureChannel();
           const idleMs = resolvedChannelIdleTimeoutMs();

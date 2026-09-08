@@ -472,7 +472,7 @@ describe('WorkspaceRegistrationStore', () => {
         }),
       },
     }));
-    vi.doMock('@qwen-code/qwen-code-core', () => ({
+    vi.doMock('@lailatul-coder/lailatul-coder-core', () => ({
       atomicWriteFile: vi.fn().mockRejectedValue(writeError),
     }));
     try {
@@ -499,7 +499,7 @@ describe('WorkspaceRegistrationStore', () => {
       expect(writeError.cause).toBe(releaseError);
     } finally {
       vi.doUnmock('proper-lockfile');
-      vi.doUnmock('@qwen-code/qwen-code-core');
+      vi.doUnmock('@lailatul-coder/lailatul-coder-core');
       vi.resetModules();
     }
   });

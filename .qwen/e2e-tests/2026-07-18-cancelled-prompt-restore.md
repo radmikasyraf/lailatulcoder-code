@@ -2,7 +2,7 @@
 
 ## Scenario
 
-1. Start Qwen Code in interactive mode.
+1. Start LailatulCoder Ai in interactive mode.
 2. Submit `Explain how a hash table handles collisions in detail.`
 3. Wait until response text is visible, then press Ctrl+C.
 4. Confirm the partial response remains in the transcript.

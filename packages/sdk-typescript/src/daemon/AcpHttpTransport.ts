@@ -706,7 +706,7 @@ export class AcpHttpTransport implements DaemonTransport {
       id: this.nextId++,
       method: 'initialize',
       params: {
-        clientInfo: { name: 'qwen-code-sdk', version: '1.0.0' },
+        clientInfo: { name: 'lailatul-coder-sdk', version: '1.0.0' },
       },
     };
 

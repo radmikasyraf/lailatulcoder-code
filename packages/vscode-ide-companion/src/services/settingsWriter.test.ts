@@ -13,9 +13,9 @@ const { mockGetGlobalSettingsPath } = vi.hoisted(() => ({
   mockGetGlobalSettingsPath: vi.fn(),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     Storage: {
@@ -29,7 +29,7 @@ import {
   AuthType,
   CODING_PLAN_GLOBAL_BASE_URL,
   type ProviderInstallPlan,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { CODING_PLAN_ENV_KEY } from './subscriptionPlanDefinitions.js';
 import {
   applyProviderInstallPlanToFile,

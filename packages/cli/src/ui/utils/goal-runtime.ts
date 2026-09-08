@@ -8,7 +8,7 @@ import {
   GoalPersistenceUnavailableError,
   type Config,
   type GoalStateCause,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 export function shouldDisplayGoalStateCause(cause: GoalStateCause): boolean {
   switch (cause) {

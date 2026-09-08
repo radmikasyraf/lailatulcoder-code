@@ -2,7 +2,7 @@
 
 ## Background and Goals
 
-The parent issue #3011 breaks down qwen-code startup optimization into multiple subtasks. The current repository has already landed several foundational capabilities:
+The parent issue #3011 breaks down lailatul-coder startup optimization into multiple subtasks. The current repository has already landed several foundational capabilities:
 
 - #3219: Startup performance profiler is integrated, supporting `QWEN_CODE_PROFILE_STARTUP=1` to output startup phase JSON.
 - #3221: Tool registration has been converted to lazy factory; `Config.initialize()` no longer statically instantiates all tools.

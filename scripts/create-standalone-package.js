@@ -136,12 +136,12 @@ async function main() {
   fs.mkdirSync(outDir, { recursive: true });
 
   const targetConfig = TARGETS.get(target);
-  const outputName = `qwen-code-${target}.${targetConfig.outputExtension}`;
+  const outputName = `lailatul-coder-${target}.${targetConfig.outputExtension}`;
   const outputPath = path.join(outDir, outputName);
   const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'qwen-standalone-'));
 
   try {
-    const packageRoot = path.join(tempRoot, 'qwen-code');
+    const packageRoot = path.join(tempRoot, 'lailatul-coder');
     const runtimeExtractDir = path.join(tempRoot, 'runtime');
     fs.mkdirSync(packageRoot, { recursive: true });
     fs.mkdirSync(runtimeExtractDir, { recursive: true });
@@ -241,7 +241,7 @@ function readOptionValue(argv, index, optionName) {
 }
 
 function printUsage() {
-  console.log(`Qwen Code standalone package builder
+  console.log(`LailatulCoder Ai standalone package builder
 
 Usage:
   npm run package:standalone -- --target TARGET --node-archive PATH [OPTIONS]
@@ -253,7 +253,7 @@ Options:
                           Staged native node_modules directory. Missing
                           clipboard packages are fatal when this is supplied.
   --out-dir DIR           Output directory. Defaults to dist/standalone.
-  --version VERSION       Qwen Code version. Defaults to package.json version.
+  --version VERSION       LailatulCoder Ai version. Defaults to package.json version.
   --skip-checksums        Do not update SHA256SUMS. Used by release packaging.
   -h, --help              Show this help message.`);
 }
@@ -329,10 +329,10 @@ function copyRuntimeAssets(packageRoot, outDir) {
   );
 }
 
-// Bundle the @qwen-code/audio-capture native addon (compiled JS + only this
+// Bundle the @lailatul-coder/audio-capture native addon (compiled JS + only this
 // target's prebuild + its runtime dep node-gyp-build) into lib/node_modules so
 // streaming voice works in standalone installs. The addon is esbuild-external
-// and resolved at runtime via import('@qwen-code/audio-capture') from
+// and resolved at runtime via import('@lailatul-coder/audio-capture') from
 // lib/cli.js, so lib/node_modules is where Node looks. Without it, standalone
 // users fall back to SoX/arecord (batch only) — #5502 follow-up #5590.
 function copyNativeAddon(packageRoot, target) {
@@ -363,7 +363,7 @@ function copyNativeAddon(packageRoot, target) {
   );
 
   const modulesDir = path.join(packageRoot, 'lib', 'node_modules');
-  const addonDest = path.join(modulesDir, '@qwen-code', 'audio-capture');
+  const addonDest = path.join(modulesDir, '@lailatul-coder', 'audio-capture');
   fs.mkdirSync(addonDest, { recursive: true });
 
   // Trimmed manifest: keep type/exports so ESM resolution works; drop the
@@ -698,7 +698,7 @@ function writeManifest(packageRoot, manifest) {
     manifestPath,
     JSON.stringify(
       {
-        name: '@qwen-code/qwen-code',
+        name: '@lailatul-coder/lailatul-coder',
         version: manifest.version,
         target: manifest.target,
         nodeArchive: manifest.nodeArchive,
@@ -716,7 +716,7 @@ function createArchive(outputExtension, outputPath, cwd) {
     return;
   }
 
-  run('tar', ['-czf', outputPath, '-C', cwd, 'qwen-code']);
+  run('tar', ['-czf', outputPath, '-C', cwd, 'lailatul-coder']);
 }
 
 function createZipArchive(outputPath, cwd) {
@@ -733,7 +733,7 @@ function createZipArchive(outputPath, cwd) {
       {
         env: {
           ...process.env,
-          QWEN_PACKAGE_ROOT: path.join(cwd, 'qwen-code'),
+          QWEN_PACKAGE_ROOT: path.join(cwd, 'lailatul-coder'),
           QWEN_OUTPUT_PATH: outputPath,
         },
       },
@@ -741,7 +741,7 @@ function createZipArchive(outputPath, cwd) {
     return;
   }
 
-  run('zip', ['-qr', outputPath, 'qwen-code'], { cwd });
+  run('zip', ['-qr', outputPath, 'lailatul-coder'], { cwd });
 }
 
 async function writeSha256Sums(outDir) {
@@ -749,14 +749,14 @@ async function writeSha256Sums(outDir) {
     .readdirSync(outDir)
     .filter(
       (entry) =>
-        entry.startsWith('qwen-code-') &&
+        entry.startsWith('lailatul-coder-') &&
         (entry.endsWith('.tar.gz') || entry.endsWith('.zip')),
     )
     .sort();
 
   if (entries.length === 0) {
     fail(
-      `No qwen-code archives found in ${outDir}; refusing to write empty SHA256SUMS.`,
+      `No lailatul-coder archives found in ${outDir}; refusing to write empty SHA256SUMS.`,
     );
   }
 

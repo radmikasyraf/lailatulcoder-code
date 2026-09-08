@@ -88,7 +88,7 @@ describe('setupGithubCommand', async () => {
 
     const expectedSubstrings = [
       `set -eEuo pipefail`,
-      `fakeOpenCommand "https://github.com/QwenLM/qwen-code-action`,
+      `fakeOpenCommand "https://github.com/LailatulCoder/lailatul-coder-action`,
     ];
 
     for (const substring of expectedSubstrings) {

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { TOOL_DISPLAY_NAMES } from './toolFormatting';
 
 // The web-shell is a browser bundle and deliberately does not depend on
-// `@qwen-code/qwen-code-core` (see the note in toolFormatting.ts), so we
+// `@lailatul-coder/lailatul-coder-core` (see the note in toolFormatting.ts), so we
 // can't import core's `ToolNames` at runtime to compare against. Instead,
 // read the wire names straight from core's source and assert this map
 // covers each one — a build-time drift guard equivalent to the CLI's

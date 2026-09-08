@@ -21,7 +21,7 @@ interface ExampleToolCall {
   arguments: Record<string, unknown>;
 }
 
-function examplesFor(style: 'qwen-coder' | 'qwen-vl'): string {
+function examplesFor(style: 'lailatul-coderr' | 'qwen-vl'): string {
   vi.stubEnv('QWEN_CODE_TOOL_CALL_STYLE', style);
   const prompt = getCoreSystemPrompt();
   return prompt.slice(prompt.lastIndexOf('# Examples (Illustrating Tone'));
@@ -65,7 +65,7 @@ describe('prompt tool call examples', () => {
   });
 
   it.each([
-    ['qwen-coder', parseCoderCalls],
+    ['lailatul-coderr', parseCoderCalls],
     ['qwen-vl', parseVlCalls],
   ] as const)(
     'keeps %s examples valid against current tool schemas',

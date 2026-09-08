@@ -33,7 +33,7 @@ import {
   loadUsageDashboard,
   type MCPOAuthConfig,
   type ReasoningEffortOverride,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 const debugLogger = createDebugLogger('SYSTEM_CONTROLLER');
 

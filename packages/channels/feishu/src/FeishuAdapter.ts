@@ -11,7 +11,7 @@ import {
   isChannelProactiveDeliveryError,
   isTerminalTaskLifecycleType,
   sanitizeSenderName,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { buildCardContent, extractTitle, splitChunks } from './markdown.js';
 import { downloadMedia } from './media.js';
 import { FeishuQuestionCardController } from './question-card-controller.js';
@@ -26,7 +26,7 @@ import type {
   UserInputPresentationResult,
   ChannelTaskLifecycleEvent,
   SessionTarget,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 /** Feishu message event data shape. */
 interface FeishuMessageEvent {

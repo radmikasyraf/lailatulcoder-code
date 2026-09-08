@@ -41,7 +41,7 @@ import {
   type ToolCallConfirmationDetails,
   type WorkflowApproval,
   type WorkflowTask,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { ToolConfirmationMessage } from '../messages/ToolConfirmationMessage.js';
 import { WorkflowSaveOverlay } from './workflow-save-overlay.js';
 import { formatDuration, formatTokenCount } from '../../utils/formatters.js';
@@ -999,7 +999,7 @@ const AgentDetailBody: React.FC<{
 };
 
 const ShellDetailBody: React.FC<{
-  entry: import('@qwen-code/qwen-code-core').ShellTask;
+  entry: import('@lailatul-coder/lailatul-coder-core').ShellTask;
   maxHeight: number;
   maxWidth: number;
 }> = ({ entry, maxHeight, maxWidth }) => {
@@ -1985,3 +1985,4 @@ export const BackgroundTasksDialog: React.FC<BackgroundTasksDialogProps> = ({
     </Box>
   );
 };
+

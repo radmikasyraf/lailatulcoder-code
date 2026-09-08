@@ -361,7 +361,7 @@ describe('presubmitCommand', () => {
     $0: 'qwen',
     pr_number: '6387',
     commit_sha: 'abc123',
-    owner_repo: 'QwenLM/qwen-code',
+    owner_repo: 'LailatulCoder/lailatul-coder',
     out_path: '/tmp/presubmit.json',
   };
 
@@ -373,7 +373,7 @@ describe('presubmitCommand', () => {
     // overrides this per test.
     detectPlatformKindMock.mockReturnValue('github');
     ensureAuthenticatedMock.mockReturnValue(undefined);
-    currentUserMock.mockReturnValue('qwen-code-ci-bot');
+    currentUserMock.mockReturnValue('lailatul-coder-ci-bot');
     // The pulls fetch returns author + live head in one jq projection; a live
     // head equal to baseArgs' commit_sha means "no drift" for tests that are
     // not about drift.
@@ -693,7 +693,7 @@ describe('presubmitCommand', () => {
               status: 'in_progress',
               conclusion: null,
               details_url:
-                'https://github.com/QwenLM/qwen-code/actions/runs/28788268483/job/85362025778',
+                'https://github.com/LailatulCoder/lailatul-coder/actions/runs/28788268483/job/85362025778',
             },
           ]
         : [],
@@ -766,7 +766,7 @@ describe('presubmitCommand', () => {
         [
           {
             id: 1,
-            body: '**[Critical]** x _— model via Qwen Code /review (v0.21.2)_',
+            body: '**[Critical]** x _— model via LailatulCoder Ai /review (v0.21.2)_',
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
@@ -785,11 +785,11 @@ describe('presubmitCommand', () => {
         [
           {
             id: 1,
-            body: 'looks good overall _— model via Qwen Code /review (v0.21.2)_',
+            body: 'looks good overall _— model via LailatulCoder Ai /review (v0.21.2)_',
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
           },
         ],
         FINDINGS,
@@ -811,7 +811,7 @@ describe('presubmitCommand', () => {
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
-            user: { login: 'QWEN-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
           },
         ],
         FINDINGS,
@@ -833,7 +833,7 @@ describe('presubmitCommand', () => {
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
           },
         ],
         FINDINGS,
@@ -877,7 +877,7 @@ describe('presubmitCommand', () => {
             line: 12,
             commit_id: 'abc123',
             in_reply_to_id: 1,
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
           },
         ],
         FINDINGS,
@@ -920,7 +920,7 @@ describe('presubmitCommand', () => {
             line: 12,
             commit_id: 'abc123',
             in_reply_to_id: 1,
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
           },
         ],
         FINDINGS,
@@ -943,7 +943,7 @@ describe('presubmitCommand', () => {
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
           },
         ],
         FINDINGS,
@@ -965,7 +965,7 @@ describe('presubmitCommand', () => {
             path: 'a.ts',
             line: 12,
             commit_id: 'abc123',
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
           },
         ],
         FINDINGS,
@@ -987,11 +987,11 @@ describe('presubmitCommand', () => {
 
     const CARRIED_COMMENT = {
       id: 7,
-      body: '**[Critical]** R3-2: eq-form rescue asymmetry _— model via Qwen Code /review (v0.21.3)_',
+      body: '**[Critical]** R3-2: eq-form rescue asymmetry _— model via LailatulCoder Ai /review (v0.21.3)_',
       path: 'src/parse-args.ts',
       line: 44,
       commit_id: 'abc123',
-      user: { login: 'qwen-code-ci-bot' },
+      user: { login: 'lailatul-coder-ci-bot' },
     };
 
     it('marks an id-matched overlap comment as a re-post target', async () => {
@@ -1046,7 +1046,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: `**[Critical]** R3-2: ${longClaim} _— model via Qwen Code /review_`,
+            body: `**[Critical]** R3-2: ${longClaim} _— model via LailatulCoder Ai /review_`,
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1065,7 +1065,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: `**[Critical]** ${longClaim} (see R3-2 for context) _— model via Qwen Code /review_`,
+            body: `**[Critical]** ${longClaim} (see R3-2 for context) _— model via LailatulCoder Ai /review_`,
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1082,7 +1082,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Suggestion]** R3-2: eq-form rescue asymmetry _— model via Qwen Code /review_',
+            body: '**[Suggestion]** R3-2: eq-form rescue asymmetry _— model via LailatulCoder Ai /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1102,7 +1102,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Critical]**: R3-2: eq-form rescue asymmetry _— model via Qwen Code /review_',
+            body: '**[Critical]**: R3-2: eq-form rescue asymmetry _— model via LailatulCoder Ai /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1167,7 +1167,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: 'R3-2: discussed offline, keeping this thread _— model via Qwen Code /review_',
+            body: 'R3-2: discussed offline, keeping this thread _— model via LailatulCoder Ai /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1185,7 +1185,7 @@ describe('presubmitCommand', () => {
       // fire if it keyed on the prefix extractor's [] alone.
       const referenced = {
         ...CARRIED_COMMENT,
-        body: '**[Critical]** unrelated claim (see R3-2 for context) _— model via Qwen Code /review_',
+        body: '**[Critical]** unrelated claim (see R3-2 for context) _— model via LailatulCoder Ai /review_',
       };
       const result = await presubmitWithComments(
         [referenced],
@@ -1201,7 +1201,7 @@ describe('presubmitCommand', () => {
       // hyphen-run token keeps the id-less fallback off too.
       const extended = {
         ...CARRIED_COMMENT,
-        body: '**[Critical]** R3-2-1: extended claim _— model via Qwen Code /review_',
+        body: '**[Critical]** R3-2-1: extended claim _— model via LailatulCoder Ai /review_',
       };
       const result = await presubmitWithComments(
         [extended],
@@ -1217,7 +1217,7 @@ describe('presubmitCommand', () => {
       // mention still marks the comment as belonging to a specific finding.
       const emphasised = {
         ...CARRIED_COMMENT,
-        body: '**[Critical]** unrelated claim (see _R3-2_ for context) _— model via Qwen Code /review_',
+        body: '**[Critical]** unrelated claim (see _R3-2_ for context) _— model via LailatulCoder Ai /review_',
       };
       const result = await presubmitWithComments(
         [emphasised],
@@ -1301,13 +1301,13 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: '**[Critical]** some claim without an id _— model via Qwen Code /review_',
+            body: '**[Critical]** some claim without an id _— model via LailatulCoder Ai /review_',
           },
           {
             ...CARRIED_COMMENT,
             id: 8,
             user: undefined,
-            body: '**[Critical]** author-less claim without an id _— model via Qwen Code /review_',
+            body: '**[Critical]** author-less claim without an id _— model via LailatulCoder Ai /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1331,7 +1331,7 @@ describe('presubmitCommand', () => {
           {
             ...CARRIED_COMMENT,
             user: undefined,
-            body: '**[Critical]** R3-2: eq-form rescue asymmetry _— model via Qwen Code /review_',
+            body: '**[Critical]** R3-2: eq-form rescue asymmetry _— model via LailatulCoder Ai /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1352,7 +1352,7 @@ describe('presubmitCommand', () => {
           {
             ...CARRIED_COMMENT,
             user: undefined,
-            body: '**[Critical]** author-less claim without an id _— model via Qwen Code /review_',
+            body: '**[Critical]** author-less claim without an id _— model via LailatulCoder Ai /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1404,7 +1404,7 @@ describe('presubmitCommand', () => {
             ...CARRIED_COMMENT,
             id: 11,
             user: { login: 'qwen-other-bot' },
-            body: '**[Critical]** other-account claim without an id _— model via Qwen Code /review_',
+            body: '**[Critical]** other-account claim without an id _— model via LailatulCoder Ai /review_',
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1426,7 +1426,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            user: { login: 'Qwen-Code-CI-Bot' },
+            user: { login: 'lailatul-coder-CI-Bot' },
             body: '**[Critical]** case-variant claim without an id',
           },
         ],
@@ -1448,7 +1448,7 @@ describe('presubmitCommand', () => {
         [
           {
             ...CARRIED_COMMENT,
-            body: `**[Critical]**${padding}R3-2: eq-form rescue asymmetry _— model via Qwen Code /review_`,
+            body: `**[Critical]**${padding}R3-2: eq-form rescue asymmetry _— model via LailatulCoder Ai /review_`,
           },
         ],
         [{ path: 'src/parse-args.ts', line: 44, id: 'R3-2' }],
@@ -1493,7 +1493,7 @@ describe('presubmitCommand', () => {
       const priorRepost = {
         ...CARRIED_COMMENT,
         id: 11,
-        body: '**[Critical]** R1-2: the same claim, re-reported _— model via Qwen Code /review_',
+        body: '**[Critical]** R1-2: the same claim, re-reported _— model via LailatulCoder Ai /review_',
       };
       const result = await presubmitWithComments(
         [original, priorRepost],

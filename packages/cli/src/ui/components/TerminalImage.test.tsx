@@ -7,7 +7,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render } from 'ink-testing-library';
 import { Static, useIsScreenReaderEnabled } from 'ink';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import { TerminalOutputProvider } from '../contexts/TerminalOutputContext.js';
 import {
   prepareInlineTerminalImage,
@@ -261,3 +261,4 @@ describe('TerminalImage', () => {
     );
   });
 });
+

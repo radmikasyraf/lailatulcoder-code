@@ -132,7 +132,7 @@ template at all — no new plumbing anywhere.
   `<details>中文说明</details>` fold — humans type the first two, and the
   fold is language policy.
 - ` ```suggestion ` blocks.
-- qwen-code's own autofix: `qwen-autofix.yml` keys off prefix + footer, and
+- lailatul-coder's own autofix: `qwen-autofix.yml` keys off prefix + footer, and
   this repository's CI reviews run with attribution on, so every string the
   workflow greps for still appears in its posts.
 - The `parse-args` verdict shape: prose style is not conditional, so the

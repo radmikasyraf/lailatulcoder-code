@@ -184,7 +184,7 @@ describe('public SDK entry — typed daemon event surface (#4217)', () => {
 
   it('round-trips a raw DaemonEvent through the public narrow helper', () => {
     // Pin the user-facing contract: `import { asKnownDaemonEvent }
-    // from '@qwen-code/sdk'` must work end-to-end via the published
+    // from '@lailatul-coder/sdk'` must work end-to-end via the published
     // entry, not just exist as a re-export inside src/daemon/index.ts.
     const evt: DaemonEvent = {
       id: 1,
@@ -645,7 +645,7 @@ describe('runtime MCP add/remove SDK types', () => {
 });
 
 describe('daemon UI debug-reason public surface', () => {
-  it('pins the union shipped by @qwen-code/sdk/daemon', () => {
+  it('pins the union shipped by @lailatul-coder/sdk/daemon', () => {
     // A type-only guard would not hold here: vitest transpiles through
     // esbuild, which erases `export type` without checking it, and this
     // package's tsconfig excludes `test/`, so nothing type-checks this file.
@@ -695,7 +695,7 @@ describe('unrecognized-diagnostic sidechannel public surface (#8823)', () => {
   });
 
   it('reaches the selector and the cap through the daemon entry', () => {
-    // The PR's Risk & Scope points adapters at `@qwen-code/sdk/daemon`; an
+    // The PR's Risk & Scope points adapters at `@lailatul-coder/sdk/daemon`; an
     // export missing from the barrel is a compile error for every consumer,
     // so pin reachability the way DAEMON_UI_DEBUG_REASONS is pinned.
     expect(typeof selectUnrecognizedDiagnostics).toBe('function');

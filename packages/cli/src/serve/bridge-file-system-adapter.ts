@@ -5,7 +5,7 @@
  */
 
 /**
- * Serve-side adapter that satisfies `@qwen-code/acp-bridge`'s
+ * Serve-side adapter that satisfies `@lailatul-coder/acp-bridge`'s
  * `BridgeFileSystem` interface by routing delegated ACP `writeTextFile` /
  * `readTextFile` requests through the `WorkspaceFileSystem`. Production
  * `qwen serve` keeps text reads in the same-host child and delegates final ACP
@@ -34,7 +34,7 @@
  *     etc.) is thrown unchanged through `BridgeClient`'s ACP
  *     `writeTextFile` / `readTextFile` handlers and serialized to the
  *     agent via the existing ACP error envelope. The classifier in
- *     `@qwen-code/acp-bridge`'s `mapDomainErrorToErrorKind` does NOT
+ *     `@lailatul-coder/acp-bridge`'s `mapDomainErrorToErrorKind` does NOT
  *     translate `FsError.kind` to `ServeErrorKind` — it only checks
  *     `instanceof` / `.name` / `.code`. The `.kind` field rides
  *     through on the error object itself; downstream consumers
@@ -60,8 +60,8 @@ import type {
   WriteTextFileRequest,
   WriteTextFileResponse,
 } from '@agentclientprotocol/sdk';
-import type { BridgeFileSystem } from '@qwen-code/acp-bridge';
-import { parseToolWriteOriginMeta } from '@qwen-code/qwen-code-core/toolWriteOrigin';
+import type { BridgeFileSystem } from '@lailatul-coder/acp-bridge';
+import { parseToolWriteOriginMeta } from '@lailatul-coder/lailatul-coder-core/toolWriteOrigin';
 import type {
   WorkspaceFileSystemFactory,
   RequestContext,

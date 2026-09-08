@@ -11,7 +11,7 @@ import {
   isSDKSystemMessage,
   type SDKMessage,
   type SubagentConfig,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 import {
   SDKTestHelper,
   createSharedTestOptions,

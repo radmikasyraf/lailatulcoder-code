@@ -10,22 +10,22 @@ import {
   stripTerminalControlSequences,
   type ChatRecord,
   type SessionService,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   SessionArchivedError,
   SessionNotFoundError,
-} from '@qwen-code/acp-bridge/bridgeErrors';
+} from '@lailatul-coder/acp-bridge/bridgeErrors';
 import type {
   AcpSessionBridge,
   BridgeSession,
   BridgeSessionSummary,
-} from '@qwen-code/acp-bridge/bridgeTypes';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
 import {
   LIVE_TASK_TOOL_NAMES,
   type LiveTaskToolName,
   type LiveTaskToolRequestInfo,
-} from '@qwen-code/acp-bridge/bridgeOptions';
+} from '@lailatul-coder/acp-bridge/bridgeOptions';
 import type {
   WorkspaceRegistry,
   WorkspaceRuntime,

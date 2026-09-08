@@ -12,20 +12,20 @@
  *   VP4: second Session.prompt() does NOT inject the notice again.
  *   VP4b: no notice set — first prompt is sent without any worktree reminder.
  *
- * This file does NOT mock @qwen-code/qwen-code-core at the module level so
+ * This file does NOT mock @lailatul-coder/lailatul-coder-core at the module level so
  * the real Session class and its dependencies resolve correctly.
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { Session } from './Session.js';
-import type { Config, GeminiChat } from '@qwen-code/qwen-code-core';
+import type { Config, GeminiChat } from '@lailatul-coder/lailatul-coder-core';
 import {
   ApprovalMode,
   AuthType,
   GoalPersistenceUnavailableError,
   Storage,
-} from '@qwen-code/qwen-code-core';
-import * as core from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import * as core from '@lailatul-coder/lailatul-coder-core';
 import type {
   AgentSideConnection,
   PromptRequest,

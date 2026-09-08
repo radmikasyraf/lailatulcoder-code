@@ -16,7 +16,7 @@ import {
   DaemonSessionClient,
   createDaemonTranscriptStore,
   normalizeDaemonEvent,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 ```
 
 The split is:
@@ -26,7 +26,7 @@ The split is:
 - `normalizeDaemonEvent()` converts daemon wire events into UI events.
 - `createDaemonTranscriptStore()` reduces UI events into transcript blocks.
 
-React clients can use the optional `@qwen-code/webui` binding:
+React clients can use the optional `@lailatul-coder/webui` binding:
 
 ```tsx
 import {
@@ -35,7 +35,7 @@ import {
   useDaemonConnection,
   useDaemonPendingPermissions,
   useDaemonTranscriptBlocks,
-} from '@qwen-code/webui';
+} from '@lailatul-coder/webui';
 ```
 
 Minimal React shape:
@@ -114,5 +114,5 @@ Ink rendering.
 - Build first-class chat and terminal renderers on top of transcript blocks.
 - Add richer typed events only where existing daemon events are too low-level
   for stable browser UI behavior.
-- Consider a dedicated `@qwen-code/daemon-ui-core` package if non-SDK consumers
+- Consider a dedicated `@lailatul-coder/daemon-ui-core` package if non-SDK consumers
   need the UI core as an independent dependency.

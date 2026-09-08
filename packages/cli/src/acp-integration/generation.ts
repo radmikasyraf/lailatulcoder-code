@@ -9,7 +9,7 @@
  * It deliberately bypasses GeminiChat so neither history nor recording is
  * read or mutated.
  */
-import { getResponseText, type Config } from '@qwen-code/qwen-code-core';
+import { getResponseText, type Config } from '@lailatul-coder/lailatul-coder-core';
 import type { GenerateContentResponseUsageMetadata } from '@google/genai';
 
 export const GENERATION_MAX_PROMPT_BYTES = 32 * 1024;

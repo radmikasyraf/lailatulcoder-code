@@ -257,7 +257,7 @@ description = "false"`;
       expect(prompt).toContain('Found 2 command file(s)');
       expect(prompt).toContain('cmd1.toml');
       expect(prompt).toContain('cmd2.toml');
-      expect(prompt).toContain('qwen-code migrate-commands');
+      expect(prompt).toContain('lailatul-coder migrate-commands');
     });
 
     it('should truncate file list for many files', () => {

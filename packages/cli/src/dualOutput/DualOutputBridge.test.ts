@@ -10,7 +10,7 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { execSync } from 'node:child_process';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import {
   HEADLESS_TOOL_RESULT_TEXT_JSON_BYTE_BUDGET,
   HEADLESS_TOOL_RESULT_TEXT_TRUNCATION_MARKER,

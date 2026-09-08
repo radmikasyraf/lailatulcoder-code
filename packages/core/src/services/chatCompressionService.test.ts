@@ -843,7 +843,7 @@ describe('ChatCompressionService', () => {
   it('passes getCompactionModel to runSideQuery for compression', async () => {
     // Compression passes config.getCompactionModel?.() to runSideQuery so it uses
     // the compaction model (falls back to the main model) instead of
-    // the expensive main model, reducing cost. See https://github.com/QwenLM/qwen-code/issues/5956
+    // the expensive main model, reducing cost. See https://github.com/LailatulCoder/lailatul-coder/issues/5956
     const history: Content[] = [
       { role: 'user', parts: [{ text: 'msg1' }] },
       { role: 'model', parts: [{ text: 'msg2' }] },
@@ -4426,7 +4426,7 @@ describe('ChatCompressionService.compress — plan-mode + subagent attachment wi
   });
 });
 
-// Regression tests for https://github.com/QwenLM/qwen-code/issues/7960
+// Regression tests for https://github.com/LailatulCoder/lailatul-coder/issues/7960
 // The compression side-query used to always request a fixed
 // maxOutputTokens=COMPACT_MAX_OUTPUT_TOKENS (20K). On a small-window
 // deployment (e.g. vLLM --max-model-len 65536) whose prompt is already near

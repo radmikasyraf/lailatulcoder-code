@@ -153,10 +153,10 @@ describe('daemon-tracing', () => {
     expect(trace.getSpanContext(extracted!)?.traceId).toBe(traceId);
     expect(trace.getSpanContext(extracted!)?.spanId).toBe('2222222222222222');
     expect(startActiveSpan).toHaveBeenCalledWith(
-      'qwen-code.daemon.bridge',
+      'lailatul-coder.daemon.bridge',
       expect.objectContaining({
         attributes: expect.objectContaining({
-          'qwen-code.daemon.operation': 'prompt.dispatch',
+          'lailatul-coder.daemon.operation': 'prompt.dispatch',
           'session.id': 'session-A',
         }),
       }),
@@ -474,7 +474,7 @@ describe('daemon-tracing', () => {
     ).resolves.toBe('ok');
 
     expect(startActiveSpan).toHaveBeenCalledWith(
-      'qwen-code.daemon.request',
+      'lailatul-coder.daemon.request',
       expect.objectContaining({
         attributes: expect.objectContaining({
           'http.request.method': 'GET',
@@ -553,21 +553,21 @@ describe('daemon-tracing', () => {
     } as unknown as Tracer);
 
     createDaemonBridgeTelemetry().event('channel.exited', {
-      'qwen-code.daemon.channel.session_count': 2,
+      'lailatul-coder.daemon.channel.session_count': 2,
     });
 
     expect(startSpan).toHaveBeenCalledWith(
-      'qwen-code.daemon.bridge',
+      'lailatul-coder.daemon.bridge',
       expect.objectContaining({
         attributes: expect.objectContaining({
           'event.name': 'channel.exited',
-          'qwen-code.daemon.operation': 'event.channel.exited',
-          'qwen-code.daemon.channel.session_count': 2,
+          'lailatul-coder.daemon.operation': 'event.channel.exited',
+          'lailatul-coder.daemon.channel.session_count': 2,
         }),
       }),
     );
     expect(addEvent).toHaveBeenCalledWith('channel.exited', {
-      'qwen-code.daemon.channel.session_count': 2,
+      'lailatul-coder.daemon.channel.session_count': 2,
     });
     expect(setStatus).toHaveBeenCalledWith({ code: SpanStatusCode.OK });
     expect(end).toHaveBeenCalled();
@@ -610,16 +610,16 @@ describe('daemon-tracing', () => {
     );
 
     expect(startActiveSpan).toHaveBeenCalledWith(
-      'qwen-code.daemon.request',
+      'lailatul-coder.daemon.request',
       expect.objectContaining({
         attributes: expect.objectContaining({
           'http.request.method': 'POST',
           'http.route': 'POST /session/:id/permission/:requestId',
           'session.id': 'sess-1',
-          'qwen-code.client_id': 'client-42',
-          'qwen-code.daemon.permission.request_id': 'perm-99',
-          'qwen-code.daemon.runtime.wait_ms': 42.5,
-          'qwen-code.daemon.runtime.path': 'joined',
+          'lailatul-coder.client_id': 'client-42',
+          'lailatul-coder.daemon.permission.request_id': 'perm-99',
+          'lailatul-coder.daemon.runtime.wait_ms': 42.5,
+          'lailatul-coder.daemon.runtime.path': 'joined',
         }),
         startTime,
       }),
@@ -640,10 +640,10 @@ describe('daemon-tracing', () => {
         attributes: Record<string, unknown>;
       }
     ).attributes;
-    expect(attrs).not.toHaveProperty('qwen-code.client_id');
-    expect(attrs).not.toHaveProperty('qwen-code.daemon.permission.request_id');
-    expect(attrs).not.toHaveProperty('qwen-code.daemon.runtime.wait_ms');
-    expect(attrs).not.toHaveProperty('qwen-code.daemon.runtime.path');
+    expect(attrs).not.toHaveProperty('lailatul-coder.client_id');
+    expect(attrs).not.toHaveProperty('lailatul-coder.daemon.permission.request_id');
+    expect(attrs).not.toHaveProperty('lailatul-coder.daemon.runtime.wait_ms');
+    expect(attrs).not.toHaveProperty('lailatul-coder.daemon.runtime.path');
   });
 
   it('addDaemonRequestAttribute sets attribute on the active span', () => {
@@ -652,10 +652,10 @@ describe('daemon-tracing', () => {
       setAttribute,
     } as unknown as Span);
 
-    addDaemonRequestAttribute('qwen-code.prompt_id', 'test-prompt-id');
+    addDaemonRequestAttribute('lailatul-coder.prompt_id', 'test-prompt-id');
 
     expect(setAttribute).toHaveBeenCalledWith(
-      'qwen-code.prompt_id',
+      'lailatul-coder.prompt_id',
       'test-prompt-id',
     );
   });
@@ -663,7 +663,7 @@ describe('daemon-tracing', () => {
   it('addDaemonRequestAttribute is a no-op without an active span', () => {
     vi.spyOn(trace, 'getSpan').mockReturnValue(undefined);
     expect(() =>
-      addDaemonRequestAttribute('qwen-code.prompt_id', 'orphan'),
+      addDaemonRequestAttribute('lailatul-coder.prompt_id', 'orphan'),
     ).not.toThrow();
   });
 
@@ -694,11 +694,11 @@ describe('daemon-tracing', () => {
     } as unknown as Span);
 
     createDaemonBridgeTelemetry().setActiveSpanAttributes?.({
-      'qwen-code.daemon.acp_startup.profile.version': 1,
+      'lailatul-coder.daemon.acp_startup.profile.version': 1,
     });
 
     expect(setAttributes).toHaveBeenCalledWith({
-      'qwen-code.daemon.acp_startup.profile.version': 1,
+      'lailatul-coder.daemon.acp_startup.profile.version': 1,
     });
   });
 });

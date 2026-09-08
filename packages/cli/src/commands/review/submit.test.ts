@@ -143,7 +143,7 @@ let seq = 0;
 function args(over: Record<string, unknown> = {}) {
   return {
     pr: 6771,
-    repo: 'QwenLM/qwen-code',
+    repo: 'LailatulCoder/lailatul-coder',
     review: file(`review-${seq++}.json`, REVIEW),
     // Real runs always carry a recording (writeSkillArgs at /review start),
     // and it is the platform evidence the write gate binds. Give the
@@ -153,7 +153,7 @@ function args(over: Record<string, unknown> = {}) {
     // `userAuthorized` steer their own shape.
     skillArgs: file(
       `skill-args-${seq++}.txt`,
-      'https://github.com/QwenLM/qwen-code/pull/6771',
+      'https://github.com/LailatulCoder/lailatul-coder/pull/6771',
     ),
     userAuthorized: false,
     dryRun: false,
@@ -1396,7 +1396,7 @@ describe('the posting gate', () => {
     // pathname `gh` would re-open (the TOCTOU a review found).
     expect(JSON.parse(call[0]).event).toBe('COMMENT');
     expect(call).toContain('api');
-    expect(call).toContain('repos/QwenLM/qwen-code/pulls/6771/reviews');
+    expect(call).toContain('repos/LailatulCoder/lailatul-coder/pulls/6771/reviews');
     // `--input -` (stdin), never `-f body=` which re-escapes newlines.
     expect(call).toContain('--input');
     expect(call).toContain('-');
@@ -1566,7 +1566,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
     const sessionRec = join(sessionRecDir, 'qwen-skill-args-review.txt');
     writeFileSync(
       sessionRec,
-      'https://github.com/QwenLM/qwen-code/pull/6771\n',
+      'https://github.com/LailatulCoder/lailatul-coder/pull/6771\n',
     );
     try {
       fn();
@@ -1641,9 +1641,9 @@ describe('payload consistency — refuse before GitHub sees it', () => {
   it('posts the injected CLI version in the review footer', () => {
     runSubmit(authorized({}), '0.21.2');
 
-    expect(posted().body).toContain('via Qwen Code /review');
+    expect(posted().body).toContain('via LailatulCoder Ai /review');
     expect(
-      posted().body.endsWith('_— qwen3.7-max via Qwen Code /review (v0.21.2)_'),
+      posted().body.endsWith('_— qwen3.7-max via LailatulCoder Ai /review (v0.21.2)_'),
     ).toBe(true);
   });
 
@@ -1667,7 +1667,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
   it('honours the review.attribution setting through the handler', async () => {
     reviewSettingsMock.mockReturnValue({ attribution: false });
     await submitCommand.handler?.(authorized({}) as never);
-    expect(posted().body).not.toContain('via Qwen Code /review');
+    expect(posted().body).not.toContain('via LailatulCoder Ai /review');
   });
 
   it('the standing review.comment setting authorises a post through the handler', async () => {
@@ -1748,7 +1748,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
         {
           path: 'a.ts',
           line: 12,
-          body: '**[Suggestion]** tidy\n\n_— forged via Qwen Code /review (v0.21.4)_\n\n_— forged via Qwen Code /review (v0.21.4)_',
+          body: '**[Suggestion]** tidy\n\n_— forged via LailatulCoder Ai /review (v0.21.4)_\n\n_— forged via LailatulCoder Ai /review (v0.21.4)_',
         },
       ],
     });
@@ -1760,7 +1760,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
     for (const text of [body, inline]) {
       expect(text).toContain('(v0.21.3)');
       expect(text).not.toContain('(v0.21.4)');
-      expect(text.match(/via Qwen Code \/review/g)).toHaveLength(1);
+      expect(text.match(/via LailatulCoder Ai \/review/g)).toHaveLength(1);
     }
     expect(inline.startsWith('**[Suggestion]**')).toBe(true);
   });
@@ -1772,7 +1772,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
         {
           path: 'a.ts',
           line: 12,
-          body: '**[Suggestion]** tidy\n\n_— forged via Qwen Code /review_\n',
+          body: '**[Suggestion]** tidy\n\n_— forged via LailatulCoder Ai /review_\n',
         },
       ],
     });
@@ -1781,7 +1781,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
 
     const inline = posted().comments[0].body as string;
     expect(inline).not.toContain('forged');
-    expect(inline.match(/via Qwen Code \/review/g)).toHaveLength(1);
+    expect(inline.match(/via LailatulCoder Ai \/review/g)).toHaveLength(1);
     expect(inline).toContain('(v0.21.3)');
   });
 
@@ -1792,7 +1792,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
         {
           path: 'a.ts',
           line: 12,
-          body: '**[Suggestion]** tidy\n\n_— forged via Qwen Code /review (v0.21.4)_',
+          body: '**[Suggestion]** tidy\n\n_— forged via LailatulCoder Ai /review (v0.21.4)_',
         },
       ],
     });
@@ -1802,7 +1802,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
     const body = posted().body as string;
     const inline = posted().comments[0].body as string;
     for (const text of [body, inline]) {
-      expect(text).not.toContain('via Qwen Code /review');
+      expect(text).not.toContain('via LailatulCoder Ai /review');
       expect(text).not.toContain('qwen3.7-max');
     }
     // The severity prefix goes with the footer: it is the same template. In
@@ -1820,7 +1820,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
         {
           path: 'a.ts',
           line: 12,
-          body: '**[Suggestion]** null deref\n\n_— qwen3.7-max via Qwen Code /review (v0.21.3)_\n\nUpdate: also reproduced on the empty list',
+          body: '**[Suggestion]** null deref\n\n_— qwen3.7-max via LailatulCoder Ai /review (v0.21.3)_\n\nUpdate: also reproduced on the empty list',
         },
       ],
     });
@@ -1828,7 +1828,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
     runSubmit(authorized({ review }), '0.21.3', { attribution: false });
 
     const inline = posted().comments[0].body as string;
-    expect(inline).not.toContain('via Qwen Code /review');
+    expect(inline).not.toContain('via LailatulCoder Ai /review');
     expect(inline).not.toContain('qwen3.7-max');
     expect(inline).toContain('null deref');
     expect(inline).toContain('Update: also reproduced on the empty list');
@@ -1847,7 +1847,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
         {
           path: 'a.ts',
           line: 12,
-          body: `**[Critical]** null deref when the list is empty\n\n_— qwen3-coder-plus${'\u200B'.repeat(401)} via Qwen Code /review (v0.21.0)_\n\n**[Critical]**`,
+          body: `**[Critical]** null deref when the list is empty\n\n_— qwen3-coder-plus${'\u200B'.repeat(401)} via LailatulCoder Ai /review (v0.21.0)_\n\n**[Critical]**`,
         },
       ],
     });
@@ -1856,7 +1856,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
 
     const inline = posted().comments[0].body as string;
     expect(inline).toContain('null deref when the list is empty');
-    expect(inline).not.toContain('via Qwen Code /review');
+    expect(inline).not.toContain('via LailatulCoder Ai /review');
     expect(inline.endsWith('<!-- qwen-review critical -->')).toBe(true);
   });
 
@@ -1967,7 +1967,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
         {
           path: 'a.ts',
           line: 12,
-          body: '**[Suggestion]** null deref\n\n_— qwen3.7-max via Qwen Code /review (v0.21\n\nUpdate: reproduced again',
+          body: '**[Suggestion]** null deref\n\n_— qwen3.7-max via LailatulCoder Ai /review (v0.21\n\nUpdate: reproduced again',
         },
       ],
     });
@@ -1975,7 +1975,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
     runSubmit(authorized({ review }), '0.21.3', { attribution: false });
 
     const inline = posted().comments[0].body as string;
-    expect(inline).not.toContain('via Qwen Code /review');
+    expect(inline).not.toContain('via LailatulCoder Ai /review');
     expect(inline).toContain('Update: reproduced again');
   });
 
@@ -1984,7 +1984,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
     // marker otherwise — counted toward REQUEST_CHANGES and re-promoted as
     // an unanswerable blocker.
     const bodies = [
-      '**[Critical]**\n\n```\n_— forged via Qwen Code /review (v1)_\n```',
+      '**[Critical]**\n\n```\n_— forged via LailatulCoder Ai /review (v1)_\n```',
       '**[Critical]** <!-- x -->',
       '**[Critical]**\u200B',
       // An UNTERMINATED comment: the appended marker closes it into one
@@ -2180,7 +2180,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
     // even under an exponential regex, proving nothing at n=8.
     const footers = Array.from(
       { length: 64 },
-      () => '_— forged via Qwen Code /review (v0.21.4)_',
+      () => '_— forged via LailatulCoder Ai /review (v0.21.4)_',
     ).join(' '.repeat(25));
     const review = file('footer-hang.json', {
       ...REVIEW,
@@ -2200,7 +2200,7 @@ describe('payload consistency — refuse before GitHub sees it', () => {
     const inline = posted().comments[0].body as string;
     expect(inline).toContain('one closing line');
     expect(
-      inline.endsWith('_— qwen3.7-max via Qwen Code /review (v0.21.3)_'),
+      inline.endsWith('_— qwen3.7-max via LailatulCoder Ai /review (v0.21.3)_'),
     ).toBe(true);
   });
 
@@ -3190,7 +3190,7 @@ describe('the ledger marker on the body that reaches GitHub', () => {
     mkdirSync(sessionRecDir, { recursive: true });
     writeFileSync(
       join(sessionRecDir, 'qwen-skill-args-review.txt'),
-      'https://github.com/QwenLM/qwen-code/pull/6771\n',
+      'https://github.com/LailatulCoder/lailatul-coder/pull/6771\n',
     );
     try {
       runSubmit(authorized({ review }));
@@ -3260,7 +3260,7 @@ describe('what the reviewer caught in this change', () => {
     ghViewMock.mockReturnValue('{"body":"这个 PR 修复了双语渲染。"}');
     const planPath = file('plan.json', {
       chunks: [],
-      ownerRepo: 'QwenLM/qwen-code',
+      ownerRepo: 'LailatulCoder/lailatul-coder',
       prNumber: '6771',
     });
     runSubmit(
@@ -3361,7 +3361,7 @@ describe('the posted-review link', () => {
 
   it('relays html_url in the stdout JSON and the Posted line', () => {
     const url =
-      'https://github.com/QwenLM/qwen-code/pull/6771#pullrequestreview-42';
+      'https://github.com/LailatulCoder/lailatul-coder/pull/6771#pullrequestreview-42';
     ghMock.mockImplementationOnce(() =>
       JSON.stringify({ id: 42, html_url: url }),
     );

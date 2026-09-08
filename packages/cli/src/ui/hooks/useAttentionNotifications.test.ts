@@ -114,7 +114,7 @@ describe('useAttentionNotifications', () => {
 
     expect(mockedSendNotification).toHaveBeenCalledTimes(1);
     expect(mockedSendNotification).toHaveBeenCalledWith(
-      expect.objectContaining({ title: 'Qwen Code' }),
+      expect.objectContaining({ title: 'LailatulCoder Ai' }),
       mockTerminal,
       true,
     );
@@ -236,7 +236,7 @@ describe('useAttentionNotifications', () => {
     expect(mockedSendNotification).toHaveBeenCalledTimes(1);
     expect(mockedSendNotification).toHaveBeenCalledWith(
       expect.objectContaining({
-        message: 'Qwen Code needs your permission to use Bash',
+        message: 'LailatulCoder Ai needs your permission to use Bash',
       }),
       mockTerminal,
       true,
@@ -259,7 +259,7 @@ describe('useAttentionNotifications', () => {
 
     expect(mockedSendNotification).toHaveBeenCalledWith(
       expect.objectContaining({
-        message: 'Qwen Code is waiting for your input',
+        message: 'LailatulCoder Ai is waiting for your input',
       }),
       mockTerminal,
       true,
@@ -291,7 +291,7 @@ describe('useAttentionNotifications', () => {
 
     expect(mockedSendNotification).toHaveBeenCalledWith(
       expect.objectContaining({
-        message: 'Qwen Code is waiting for your input',
+        message: 'LailatulCoder Ai is waiting for your input',
       }),
       mockTerminal,
       true,
@@ -365,8 +365,8 @@ describe('useAttentionNotifications', () => {
       expect(mockedSendNotification).toHaveBeenCalledTimes(1);
       expect(mockedSendNotification).toHaveBeenCalledWith(
         {
-          message: 'Qwen Code is waiting for your input',
-          title: 'Qwen Code',
+          message: 'LailatulCoder Ai is waiting for your input',
+          title: 'LailatulCoder Ai',
         },
         mockTerminal,
         true,

@@ -10,7 +10,7 @@ import { getPillLabel, hasPendingApproval } from './BackgroundTasksPill.js';
 import type {
   BackgroundApproval,
   WorkflowApproval,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 function approval(callId: string): BackgroundApproval {
   return {
@@ -291,3 +291,4 @@ describe('hasPendingApproval', () => {
     ).toBe(false);
   });
 });
+

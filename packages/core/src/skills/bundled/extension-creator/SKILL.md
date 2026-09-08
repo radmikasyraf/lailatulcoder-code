@@ -1,6 +1,6 @@
 ---
 name: extension-creator
-description: Create, scaffold, customize, validate, and locally test Qwen Code extensions. Use when the user wants a new Qwen Code extension, needs help choosing an extension template, wants to add QWEN.md context, commands, skills, agents, MCP servers, settings, hooks, channels, or LSP servers, or asks how to link and test an extension locally. Invoke with `/extension-creator` followed by an extension path and optional template name.
+description: Create, scaffold, customize, validate, and locally test LailatulCoder Ai extensions. Use when the user wants a new LailatulCoder Ai extension, needs help choosing an extension template, wants to add QWEN.md context, commands, skills, agents, MCP servers, settings, hooks, channels, or LSP servers, or asks how to link and test an extension locally. Invoke with `/extension-creator` followed by an extension path and optional template name.
 argument-hint: '<extension-path> [template]'
 allowedTools:
   - run_shell_command
@@ -14,7 +14,7 @@ allowedTools:
 
 # Extension Creator
 
-Use this skill to create Qwen Code extensions with the existing extension
+Use this skill to create LailatulCoder Ai extensions with the existing extension
 scaffold command and bundled templates.
 
 ## Workflow
@@ -161,7 +161,7 @@ Code extension fields include:
   relative JSON path under the extension root; do not use absolute paths or `..`
   traversal.
 
-Qwen Code hydrates path variables in manifest string fields before
+LailatulCoder Ai hydrates path variables in manifest string fields before
 feature-specific loaders apply their own path resolution. Use
 `${extensionPath}` for the extension root, `${workspacePath}` for the active
 workspace root, and `${/}` or `${pathSeparator}` for the platform path
@@ -188,7 +188,7 @@ Use these resource locations when needed:
 - `skills/<skill-name>/SKILL.md` for skills.
 - `agents/<name>.md` for subagents.
 
-Qwen Code discovers command resources recursively from `commands/**/*.md` and
+LailatulCoder Ai discovers command resources recursively from `commands/**/*.md` and
 `commands/**/*.toml`, including dot-prefixed files and subdirectories. It
 discovers skills from directory entries under `skills/` without a dotfile
 filter, and each skill directory must contain `SKILL.md`. It discovers agents
@@ -272,7 +272,7 @@ For context, commands, skills, or agent-only extensions, no build command is
 required. Do not link from this Local Test Flow section. Run the Before Handoff
 checklist first, then use the main workflow's linking step.
 
-After linking, tell the user to restart Qwen Code if the new extension is not
+After linking, tell the user to restart LailatulCoder Ai if the new extension is not
 visible in the current session.
 
 ## After Linking
@@ -283,7 +283,7 @@ visible in the current session.
   duplicate, and re-check referenced files from the Before Handoff checklist.
   Also inspect debug logging for `Warning: Skipping extension in <path>`, which
   contains the specific load failure reason. To capture that output, start or
-  restart Qwen Code with `QWEN_DEBUG_LOG_FILE` set to a writable log path, then
+  restart LailatulCoder Ai with `QWEN_DEBUG_LOG_FILE` set to a writable log path, then
   inspect that file.
 
 ## Iterating on a Linked Extension
@@ -295,7 +295,7 @@ visible in the current session.
    or re-linking until the user confirms how to proceed.
 4. Re-run the Before Handoff checklist. For compiled templates, perform channel
    `entry` checks after the build step.
-5. Restart Qwen Code if the updated extension behavior is not visible in the
+5. Restart LailatulCoder Ai if the updated extension behavior is not visible in the
    current session.
 6. If the update is still not picked up after restart, run
    `qwen extensions uninstall <name>`, where `<name>` is the `name` field from

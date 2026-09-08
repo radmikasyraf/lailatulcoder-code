@@ -13,7 +13,7 @@ import {
   isSignalTermination,
   flatMapTextParts,
   checkArgumentSafety,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 import type { CommandContext } from '../../ui/commands/types.js';
 import type { IPromptProcessor, PromptPipelineContent } from './types.js';

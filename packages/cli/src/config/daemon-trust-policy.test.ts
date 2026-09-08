@@ -6,7 +6,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as fs from 'node:fs/promises';
-import { ideContextStore } from '@qwen-code/qwen-code-core';
+import { ideContextStore } from '@lailatul-coder/lailatul-coder-core';
 import {
   evaluateDaemonWorkspaceTrust,
   readDaemonTrustPolicySnapshot,

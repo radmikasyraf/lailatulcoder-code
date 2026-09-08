@@ -10,7 +10,7 @@ import {
   type Config,
   type MonitorTask,
   type ShellTask,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   STATUS_SCHEMA_VERSION,
   type ServeSessionAgentTaskStatus,
@@ -18,7 +18,7 @@ import {
   type ServeSessionShellTaskStatus,
   type ServeSessionTaskStatus,
   type ServeSessionTasksStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 
 function runtimeMs(
   entry: { startTime: number; endTime?: number },

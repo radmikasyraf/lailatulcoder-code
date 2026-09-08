@@ -248,13 +248,13 @@ describe('settings default thinking RPC handlers', () => {
   it('uses the workspace working directory as the Qwen memory project root', async () => {
     mockedWorkspace = {
       id: 'ws-1',
-      name: 'qwen-code',
-      slug: 'qwen-code',
-      rootPath: '/Users/dragon/.craft-agent/workspaces/qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
+      rootPath: '/Users/dragon/.craft-agent/workspaces/lailatul-coder',
     };
     mockedWorkspaceConfig = {
       defaults: {
-        workingDirectory: '/Users/dragon/Documents/qwen-code',
+        workingDirectory: '/Users/dragon/Documents/lailatul-coder',
       },
     };
 
@@ -265,22 +265,22 @@ describe('settings default thinking RPC handlers', () => {
 
     expect(getQwenMemoryPathsViaAcpMock).toHaveBeenCalledTimes(1);
     expect(getQwenMemoryPathsViaAcpMock.mock.calls[0]?.[0]).toMatchObject({
-      cwd: '/Users/dragon/Documents/qwen-code',
-      processCwd: '/Users/dragon/.craft-agent/workspaces/qwen-code',
-      projectRoot: '/Users/dragon/Documents/qwen-code',
+      cwd: '/Users/dragon/Documents/lailatul-coder',
+      processCwd: '/Users/dragon/.craft-agent/workspaces/lailatul-coder',
+      projectRoot: '/Users/dragon/Documents/lailatul-coder',
     });
   });
 
   it('loads memory settings through the workspace Qwen ACP process', async () => {
     mockedWorkspace = {
       id: 'ws-1',
-      name: 'qwen-code',
-      slug: 'qwen-code',
-      rootPath: '/Users/dragon/.craft-agent/workspaces/qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
+      rootPath: '/Users/dragon/.craft-agent/workspaces/lailatul-coder',
     };
     mockedWorkspaceConfig = {
       defaults: {
-        workingDirectory: '/Users/dragon/Documents/qwen-code',
+        workingDirectory: '/Users/dragon/Documents/lailatul-coder',
       },
     };
 
@@ -291,22 +291,22 @@ describe('settings default thinking RPC handlers', () => {
 
     expect(getQwenMemorySettingsViaAcpMock).toHaveBeenCalledTimes(1);
     expect(getQwenMemorySettingsViaAcpMock.mock.calls[0]?.[0]).toMatchObject({
-      cwd: '/Users/dragon/Documents/qwen-code',
-      processCwd: '/Users/dragon/.craft-agent/workspaces/qwen-code',
-      projectRoot: '/Users/dragon/Documents/qwen-code',
+      cwd: '/Users/dragon/Documents/lailatul-coder',
+      processCwd: '/Users/dragon/.craft-agent/workspaces/lailatul-coder',
+      projectRoot: '/Users/dragon/Documents/lailatul-coder',
     });
   });
 
   it('saves memory settings through the workspace Qwen ACP process', async () => {
     mockedWorkspace = {
       id: 'ws-1',
-      name: 'qwen-code',
-      slug: 'qwen-code',
-      rootPath: '/Users/dragon/.craft-agent/workspaces/qwen-code',
+      name: 'lailatul-coder',
+      slug: 'lailatul-coder',
+      rootPath: '/Users/dragon/.craft-agent/workspaces/lailatul-coder',
     };
     mockedWorkspaceConfig = {
       defaults: {
-        workingDirectory: '/Users/dragon/Documents/qwen-code',
+        workingDirectory: '/Users/dragon/Documents/lailatul-coder',
       },
     };
 
@@ -318,9 +318,9 @@ describe('settings default thinking RPC handlers', () => {
 
     expect(setQwenMemorySettingsViaAcpMock).toHaveBeenCalledTimes(1);
     expect(setQwenMemorySettingsViaAcpMock.mock.calls[0]?.[0]).toMatchObject({
-      cwd: '/Users/dragon/Documents/qwen-code',
-      processCwd: '/Users/dragon/.craft-agent/workspaces/qwen-code',
-      projectRoot: '/Users/dragon/Documents/qwen-code',
+      cwd: '/Users/dragon/Documents/lailatul-coder',
+      processCwd: '/Users/dragon/.craft-agent/workspaces/lailatul-coder',
+      projectRoot: '/Users/dragon/Documents/lailatul-coder',
     });
     expect(setQwenMemorySettingsViaAcpMock.mock.calls[0]?.[1]).toBe(updates);
   });

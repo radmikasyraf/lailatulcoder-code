@@ -6,14 +6,14 @@
 
 import type { Response } from 'express';
 import { describe, expect, it, vi } from 'vitest';
-import { SessionNotFoundError } from '@qwen-code/acp-bridge/bridgeErrors';
+import { SessionNotFoundError } from '@lailatul-coder/acp-bridge/bridgeErrors';
 import {
   SessionIdCaseConflictError,
   SessionTranscriptChangedError,
   SessionWriterConflictError,
   SessionWriterLostError,
   SessionWriterUnavailableError,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { sendBridgeError } from './error-response.js';
 import { DaemonDrainingError } from './session-archive.js';
 

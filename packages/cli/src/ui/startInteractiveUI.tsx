@@ -14,7 +14,7 @@ import {
   registerSession,
   type Config,
   writeRuntimeStatus,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../config/settings.js';
 import { isValidSessionId } from '../config/config.js';
 import type { InitializationResult } from '../core/initializer.js';
@@ -409,3 +409,4 @@ function setWindowTitle(settings: LoadedSettings, folderName?: string) {
     }
   });
 }
+

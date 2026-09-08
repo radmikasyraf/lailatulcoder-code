@@ -10,7 +10,7 @@ import type {
   AuthType,
   ApprovalMode,
   ReasoningEffort,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { ArenaDialogType } from './useArenaCommand.js';
 
 export interface DialogCloseOptions {

@@ -1,13 +1,13 @@
 ---
 name: agent-reproduce-align
-description: Use after a Codex or Claude Code feature has been implemented in Qwen Code to run the selected reference agent and Qwen Code under the same scenario, capture HTTP and terminal traces, compare request bodies, tool/function schemas, outputs, and iterate until the reproduced behavior is close enough.
+description: Use after a Codex or Claude Code feature has been implemented in LailatulCoder Ai to run the selected reference agent and LailatulCoder Ai under the same scenario, capture HTTP and terminal traces, compare request bodies, tool/function schemas, outputs, and iterate until the reproduced behavior is close enough.
 ---
 
 # Agent Reproduce Align
 
 ## Purpose
 
-Use this skill when Qwen Code already has a candidate implementation and needs evidence-based parity with a selected reference agent: `codex` or `claude-code`. The goal is not byte-for-byte equality; it is matching the observable contract that matters for the feature.
+Use this skill when LailatulCoder Ai already has a candidate implementation and needs evidence-based parity with a selected reference agent: `codex` or `claude-code`. The goal is not byte-for-byte equality; it is matching the observable contract that matters for the feature.
 
 Default target repo: the current working directory. Use a user-specified path only when the user explicitly provides one.
 
@@ -23,7 +23,7 @@ Use the same reference agent selected during `$agent-reproduce-feature`. If the 
    - one baseline prompt or interaction script
    - acceptable differences
    - must-match fields
-2. Run the reference agent and Qwen Code in separate capture directories with the same scenario.
+2. Run the reference agent and LailatulCoder Ai in separate capture directories with the same scenario.
 3. Capture the selected reference agent's local state before and after the
    reference run when state may affect parity.
 4. Normalize traces with `scripts/normalize_trace.py`.
@@ -35,7 +35,7 @@ Use the same reference agent selected during `$agent-reproduce-feature`. If the 
    - model settings and response mode
    - prompt role/order differences that affect behavior
    - terminal-visible output and exit status
-7. Patch Qwen Code, rerun the smallest failing scenario, and repeat.
+7. Patch LailatulCoder Ai, rerun the smallest failing scenario, and repeat.
 8. Preserve only redacted minimal fixtures in the repo.
 
 Read `references/alignment-workflow.md` before the first comparison pass.
@@ -86,13 +86,13 @@ directories.
 - Do not chase every local state write. Treat state diffs as explanatory
   evidence unless the feature contract requires a particular config, memory, or
   permission side effect.
-- Stop when Qwen Code passes the user-visible scenario and the remaining trace differences are documented as intentional.
+- Stop when LailatulCoder Ai passes the user-visible scenario and the remaining trace differences are documented as intentional.
 
 ## Done Criteria
 
-- Reference-agent and Qwen Code traces for the same scenario exist locally.
+- Reference-agent and LailatulCoder Ai traces for the same scenario exist locally.
 - Reference-agent state diff exists or state capture is documented as
   irrelevant for the scenario.
 - The normalized comparison has no unexplained must-match differences.
-- Qwen Code tests or smoke commands cover the fixed behavior.
-- Any remaining mismatch is written down in the task notes or Qwen Code docs when it affects users.
+- LailatulCoder Ai tests or smoke commands cover the fixed behavior.
+- Any remaining mismatch is written down in the task notes or LailatulCoder Ai docs when it affects users.

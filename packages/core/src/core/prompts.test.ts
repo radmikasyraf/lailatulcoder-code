@@ -54,7 +54,7 @@ describe('Core System Prompt (prompts.ts)', () => {
     vi.stubEnv('SANDBOX', undefined);
     const prompt = getCoreSystemPrompt();
     expect(prompt).not.toContain('---\n\n'); // Separator should not be present
-    expect(prompt).toContain('You are Qwen Code, an interactive CLI agent'); // Check for core content
+    expect(prompt).toContain('You are LailatulCoder Ai, an interactive CLI agent'); // Check for core content
     expect(prompt).toContain('# Executing actions with care');
     expect(prompt).toMatchSnapshot(); // Use snapshot for base prompt structure
   });
@@ -105,7 +105,7 @@ describe('Core System Prompt (prompts.ts)', () => {
       vi.stubEnv('SANDBOX', undefined);
       const prompt = getCoreSystemPrompt(undefined, undefined, undefined, mode);
 
-      expect(prompt).toContain(`You are Qwen Code, ${role}`);
+      expect(prompt).toContain(`You are LailatulCoder Ai, ${role}`);
       expect(prompt).toContain(questionGuidance);
     },
   );
@@ -210,7 +210,7 @@ describe('Core System Prompt (prompts.ts)', () => {
     vi.stubEnv('SANDBOX', undefined);
     const prompt = getCoreSystemPrompt('');
     expect(prompt).not.toContain('---\n\n');
-    expect(prompt).toContain('You are Qwen Code, an interactive CLI agent');
+    expect(prompt).toContain('You are LailatulCoder Ai, an interactive CLI agent');
     expect(prompt).toMatchSnapshot();
   });
 
@@ -218,7 +218,7 @@ describe('Core System Prompt (prompts.ts)', () => {
     vi.stubEnv('SANDBOX', undefined);
     const prompt = getCoreSystemPrompt('   \n  \t ');
     expect(prompt).not.toContain('---\n\n');
-    expect(prompt).toContain('You are Qwen Code, an interactive CLI agent');
+    expect(prompt).toContain('You are LailatulCoder Ai, an interactive CLI agent');
     expect(prompt).toMatchSnapshot();
   });
 
@@ -229,7 +229,7 @@ describe('Core System Prompt (prompts.ts)', () => {
     const prompt = getCoreSystemPrompt(memory);
 
     expect(prompt.endsWith(expectedSuffix)).toBe(true);
-    expect(prompt).toContain('You are Qwen Code, an interactive CLI agent'); // Ensure base prompt follows
+    expect(prompt).toContain('You are LailatulCoder Ai, an interactive CLI agent'); // Ensure base prompt follows
     expect(prompt).toMatchSnapshot(); // Snapshot the combined prompt
   });
 
@@ -417,7 +417,7 @@ describe('Core System Prompt (prompts.ts)', () => {
       const baseline = getCoreSystemPrompt();
 
       expect(withOverride.startsWith(customIdentity)).toBe(true);
-      expect(withOverride).not.toContain('You are Qwen Code');
+      expect(withOverride).not.toContain('You are LailatulCoder Ai');
       // trimEnd() strips trailing spaces/newlines from the identity file.
       expect(withOverride.slice(customIdentity.length)).toBe(
         baseline.slice(defaultIdentity.length),
@@ -459,7 +459,7 @@ describe('Core System Prompt (prompts.ts)', () => {
       const prompt = getCoreSystemPrompt();
       expect(prompt).toBe('');
       expect(prompt).not.toContain(customIdentity);
-      expect(prompt).not.toContain('You are Qwen Code');
+      expect(prompt).not.toContain('You are LailatulCoder Ai');
     });
 
     it('should throw when identity env points to a missing file', () => {
@@ -585,7 +585,7 @@ describe('Model-specific tool call formats', () => {
 
   it.each([
     ['generic', 'gpt-4'],
-    ['qwen-coder', 'qwen3-coder-7b'],
+    ['lailatul-coderr', 'qwen3-coder-7b'],
     ['qwen-vl', 'qwen-vl-max'],
     ['gemma4', 'gemma-4'],
   ])(

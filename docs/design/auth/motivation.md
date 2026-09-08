@@ -94,7 +94,7 @@ the same provider install path:
 
 Static built-in providers can persist provider metadata under
 `providerMetadata.<providerId>`, including the model list version and base URL.
-This lets Qwen Code detect when a provider's built-in model list changes and
+This lets LailatulCoder Ai detect when a provider's built-in model list changes and
 prompt the user to update owned models without overwriting unrelated custom
 models.
 

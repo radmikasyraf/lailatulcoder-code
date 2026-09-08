@@ -21,9 +21,9 @@ cross-restart exactly-once execution.
 
 Two telemetry changes are prerequisites:
 
-- [PR #8176](https://github.com/QwenLM/qwen-code/pull/8176) makes terminal
+- [PR #8176](https://github.com/LailatulCoder/lailatul-coder/pull/8176) makes terminal
   `status` authoritative and normalizes cancellation and error fields.
-- [PR #8180](https://github.com/QwenLM/qwen-code/pull/8180) adds the independent
+- [PR #8180](https://github.com/LailatulCoder/lailatul-coder/pull/8180) adds the independent
   `executionStatus` axis and fixes ACP permission-cancellation classification.
 
 Enforcement must remain disabled when either contract is unavailable or

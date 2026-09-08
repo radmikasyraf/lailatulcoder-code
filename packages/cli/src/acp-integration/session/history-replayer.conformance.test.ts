@@ -8,15 +8,15 @@ import type { SessionUpdate } from '@agentclientprotocol/sdk';
 import {
   prepareTranscriptRecords,
   type ChatRecord,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   createDaemonTranscriptState,
   normalizeDaemonEvent,
   reduceDaemonTranscriptEvents,
-} from '@qwen-code/sdk/daemon';
-import { projectChatRecordsToDaemonTranscript } from '@qwen-code/sdk/daemon/transcript';
-import { finalizeOfflineDaemonTranscriptState } from '@qwen-code/sdk/daemon/ui/transcript';
-import type { DaemonEvent } from '@qwen-code/sdk/daemon/types';
+} from '@lailatul-coder/sdk/daemon';
+import { projectChatRecordsToDaemonTranscript } from '@lailatul-coder/sdk/daemon/transcript';
+import { finalizeOfflineDaemonTranscriptState } from '@lailatul-coder/sdk/daemon/ui/transcript';
+import type { DaemonEvent } from '@lailatul-coder/sdk/daemon/types';
 import { describe, expect, it } from 'vitest';
 import { HistoryReplayer } from './history-replayer.js';
 import type { SessionEmitterContext } from './types.js';

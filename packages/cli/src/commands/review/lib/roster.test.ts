@@ -28,7 +28,7 @@ import {
 const PR = {
   diffPathAbsolute: '/d.txt',
   prNumber: '6766',
-  ownerRepo: 'QwenLM/qwen-code',
+  ownerRepo: 'LailatulCoder/lailatul-coder',
   worktreePath: '.qwen/tmp/review-pr-6766',
   files: [{ path: 'a.ts', kind: 'source', removedLines: 0, heavy: false }],
   chunks: [{ id: 1, startLine: 1, endLine: 100 }],

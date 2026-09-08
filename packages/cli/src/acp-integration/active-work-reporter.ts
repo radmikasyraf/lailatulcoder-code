@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import {
   ACTIVE_WORK_HEARTBEAT_VERSION,
   ACTIVE_WORK_NOTIFICATION_METHOD,
   type ActiveWorkHoldCategory,
   type ActiveWorkHoldV1,
   type ActiveWorkSnapshotV1,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 
 const debugLogger = createDebugLogger('ACTIVE_WORK');
 

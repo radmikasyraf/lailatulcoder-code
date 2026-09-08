@@ -5,7 +5,7 @@
  */
 
 import path from 'node:path';
-import type { SessionArchiveState } from '@qwen-code/qwen-code-core';
+import type { SessionArchiveState } from '@lailatul-coder/lailatul-coder-core';
 import type { BridgeSessionSummary } from '../acp-session-bridge.js';
 
 export interface PersistedSessionListScope {

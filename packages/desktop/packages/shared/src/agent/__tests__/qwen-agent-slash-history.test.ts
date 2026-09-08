@@ -2349,7 +2349,7 @@ describe('QwenAgent slash command history', () => {
         subtype: 'ui_telemetry',
         systemPayload: {
           uiEvent: {
-            'event.name': 'qwen-code.api_error',
+            'event.name': 'lailatul-coder.api_error',
             error_message: 'Request was aborted.',
             error_type: 'APIUserAbortError',
           },
@@ -2425,7 +2425,7 @@ describe('QwenAgent slash command history', () => {
         subtype: 'ui_telemetry',
         systemPayload: {
           uiEvent: {
-            'event.name': 'qwen-code.tool_call',
+            'event.name': 'lailatul-coder.tool_call',
             function_name: 'run_shell_command',
             function_args: commandArgs,
             status: 'success',
@@ -2540,7 +2540,7 @@ describe('QwenAgent slash command history', () => {
         subtype: 'ui_telemetry',
         systemPayload: {
           uiEvent: {
-            'event.name': 'qwen-code.tool_call',
+            'event.name': 'lailatul-coder.tool_call',
             function_name: 'run_shell_command',
             function_args: commandArgs,
             status: 'cancelled',
@@ -2708,7 +2708,7 @@ describe('QwenAgent slash command history', () => {
         subtype: 'ui_telemetry',
         systemPayload: {
           uiEvent: {
-            'event.name': 'qwen-code.tool_call',
+            'event.name': 'lailatul-coder.tool_call',
             function_name: 'read_file',
             function_args: { file_path: `${cwd}/package.json` },
             status: 'success',

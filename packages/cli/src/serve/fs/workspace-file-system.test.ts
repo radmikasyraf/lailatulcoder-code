@@ -9,7 +9,7 @@ import { promises as fsp, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { createHash, randomBytes } from 'node:crypto';
-import { Ignore, StandardFileSystemService } from '@qwen-code/qwen-code-core';
+import { Ignore, StandardFileSystemService } from '@lailatul-coder/lailatul-coder-core';
 import { encodeTextCursor } from './text-cursor.js';
 import {
   FS_ACCESS_EVENT_TYPE,
@@ -21,7 +21,7 @@ import {
   type WorkspaceFileSystem,
   type WorkspaceFileSystemFactory,
 } from './index.js';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
 import { canonicalizeWorkspace } from './paths.js';
 import { isFsError } from './errors.js';
 

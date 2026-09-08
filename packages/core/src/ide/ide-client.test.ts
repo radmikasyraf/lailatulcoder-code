@@ -414,10 +414,10 @@ describe('IdeClient', () => {
           if (file === path.join('/home/test', '.qwen', 'ide', '1234.lock')) {
             return JSON.stringify(envConfig);
           }
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             throw new Error('not found');
           }
-          if (file === path.join('/tmp', 'qwen-code-ide-server-1234.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-1234.json')) {
             throw new Error('not found');
           }
           throw new Error(`unexpected path: ${file}`);
@@ -459,7 +459,7 @@ describe('IdeClient', () => {
       vi.mocked(fs.promises.readFile).mockImplementation(
         async (filePath: fs.PathLike | FileHandle) => {
           const file = String(filePath);
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             return JSON.stringify(primaryConfig);
           }
           if (file === path.join('/home/test', '.qwen', 'ide', '2222.lock')) {
@@ -589,7 +589,7 @@ describe('IdeClient', () => {
       vi.mocked(fs.promises.readFile).mockImplementation(
         async (filePath: fs.PathLike | FileHandle) => {
           const file = String(filePath);
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             throw new Error('not found');
           }
           if (file === path.join('/home/test', '.qwen', 'ide', '2222.lock')) {
@@ -758,10 +758,10 @@ describe('IdeClient', () => {
           if (file === path.join('/home/test', '.qwen', 'ide', '1234.lock')) {
             return JSON.stringify(envConfig);
           }
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             throw new Error('not found');
           }
-          if (file === path.join('/tmp', 'qwen-code-ide-server-1234.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-1234.json')) {
             throw new Error('not found');
           }
           if (file === path.join('/home/test', '.qwen', 'ide', '5678.lock')) {
@@ -842,7 +842,7 @@ describe('IdeClient', () => {
 
       expect(result).toEqual(config);
       expect(fs.promises.readFile).toHaveBeenCalledWith(
-        path.join('/tmp', 'qwen-code-ide-server-12345.json'),
+        path.join('/tmp', 'lailatul-coder-ide-server-12345.json'),
         'utf8',
       );
       expect(fs.promises.readdir).not.toHaveBeenCalled();
@@ -865,7 +865,7 @@ describe('IdeClient', () => {
           if (file === path.join('/home/test', '.qwen', 'ide', '1234.lock')) {
             return JSON.stringify(envConfig);
           }
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             return JSON.stringify(legacyConfig);
           }
           throw new Error(`unexpected path: ${file}`);
@@ -900,10 +900,10 @@ describe('IdeClient', () => {
           if (file === path.join('/home/test', '.qwen', 'ide', '1234.lock')) {
             throw new Error('not found');
           }
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             throw new Error('not found');
           }
-          if (file === path.join('/tmp', 'qwen-code-ide-server-1234.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-1234.json')) {
             return JSON.stringify(legacyConfig);
           }
           throw new Error(`unexpected path: ${file}`);
@@ -948,7 +948,7 @@ describe('IdeClient', () => {
         vi.mocked(fs.promises.readFile).mockImplementation(
           async (filePath: fs.PathLike | FileHandle) => {
             const file = String(filePath);
-            if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+            if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
               throw new Error('not found');
             }
             if (file === path.join(ideDir, '2345.lock')) {
@@ -982,7 +982,7 @@ describe('IdeClient', () => {
           'utf8',
         );
         expect(fs.promises.readFile).not.toHaveBeenCalledWith(
-          path.join('/tmp', `qwen-code-ide-server-${port}.json`),
+          path.join('/tmp', `lailatul-coder-ide-server-${port}.json`),
           'utf8',
         );
         expect(fs.promises.readdir).toHaveBeenCalledWith(ideDir);
@@ -1021,7 +1021,7 @@ describe('IdeClient', () => {
 
       expect(result).toEqual(config);
       expect(fs.promises.readFile).toHaveBeenCalledWith(
-        path.join('/tmp', 'qwen-code-ide-server-12345.json'),
+        path.join('/tmp', 'lailatul-coder-ide-server-12345.json'),
         'utf8',
       );
     });
@@ -1039,7 +1039,7 @@ describe('IdeClient', () => {
       vi.mocked(fs.promises.readFile).mockImplementation(
         async (filePath: fs.PathLike | FileHandle) => {
           const file = String(filePath);
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             return JSON.stringify(legacyConfig);
           }
           if (file === path.join('/home/test', '.qwen', 'ide', '5678.lock')) {
@@ -1094,11 +1094,11 @@ describe('IdeClient', () => {
 
       expect(result).toEqual(config2);
       expect(fs.promises.readFile).toHaveBeenCalledWith(
-        path.join('/tmp', 'qwen-code-ide-server-12345.json'),
+        path.join('/tmp', 'lailatul-coder-ide-server-12345.json'),
         'utf8',
       );
       expect(fs.promises.readFile).toHaveBeenCalledWith(
-        path.join('/tmp', 'qwen-code-ide-server-2222.json'),
+        path.join('/tmp', 'lailatul-coder-ide-server-2222.json'),
         'utf8',
       );
       delete process.env['QWEN_CODE_IDE_SERVER_PORT'];
@@ -1133,7 +1133,7 @@ describe('IdeClient', () => {
       vi.mocked(fs.promises.readFile).mockImplementation(
         async (filePath: fs.PathLike | FileHandle) => {
           const file = String(filePath);
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             throw new Error('not found');
           }
           if (file === path.join('/home/test', '.qwen', 'ide', '1000.lock')) {
@@ -1176,7 +1176,7 @@ describe('IdeClient', () => {
       vi.mocked(fs.promises.readFile).mockImplementation(
         async (filePath: fs.PathLike | FileHandle) => {
           const file = String(filePath);
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             throw new Error('not found');
           }
           if (file === path.join('/home/test', '.qwen', 'ide', '1000.lock')) {
@@ -1227,7 +1227,7 @@ describe('IdeClient', () => {
       vi.mocked(fs.promises.readFile).mockImplementation(
         async (filePath: fs.PathLike | FileHandle) => {
           const file = String(filePath);
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             throw new Error('not found');
           }
           if (file === path.join('/home/test', '.qwen', 'ide', '1000.lock')) {
@@ -1276,7 +1276,7 @@ describe('IdeClient', () => {
       vi.mocked(fs.promises.readFile).mockImplementation(
         async (filePath: fs.PathLike | FileHandle) => {
           const file = String(filePath);
-          if (file === path.join('/tmp', 'qwen-code-ide-server-12345.json')) {
+          if (file === path.join('/tmp', 'lailatul-coder-ide-server-12345.json')) {
             throw new Error('not found');
           }
           if (file === path.join('/home/test', '.qwen', 'ide', '1000.lock')) {

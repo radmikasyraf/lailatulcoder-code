@@ -222,7 +222,7 @@ export function getShellContextEnvVars(): Record<string, string> {
   env['QWEN_CODE_MODEL_IDENTITY'] = modelIdentity ?? '';
 
   // For agent/prompt IDs: explicitly set empty string when no ALS context
-  // exists, so that stale values inherited from a parent qwen-code process
+  // exists, so that stale values inherited from a parent lailatul-coder process
   // (via process.env spread) are overwritten rather than leaked.
   const agentId = getCurrentAgentId();
   env['QWEN_CODE_AGENT_ID'] = agentId ?? '';

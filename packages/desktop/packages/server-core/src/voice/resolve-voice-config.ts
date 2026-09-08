@@ -37,7 +37,7 @@ import type { VoiceConfig } from './transcribe';
 const DEFAULT_DASHSCOPE_BASE_URL =
   'https://dashscope.aliyuncs.com/compatible-mode/v1';
 const NO_CREDENTIALS_ERROR =
-  'Voice dictation needs Qwen credentials. Sign in to Qwen Code (or set a DashScope API key), then try again.';
+  'Voice dictation needs Qwen credentials. Sign in to LailatulCoder Ai (or set a DashScope API key), then try again.';
 const LOOPBACK_SPELLINGS = 'http://localhost, http://127.0.0.1, or http://[::1]';
 const voiceConfigLogger = createScopedLogger(CONSOLE_LOGGER, 'VOICE_CONFIG');
 
@@ -227,9 +227,9 @@ function getSystemSettingsPath(
     return '/Library/Application Support/QwenCode/settings.json';
   }
   if (currentPlatform === 'win32') {
-    return 'C:\\ProgramData\\qwen-code\\settings.json';
+    return 'C:\\ProgramData\\lailatul-coder\\settings.json';
   }
-  return '/etc/qwen-code/settings.json';
+  return '/etc/lailatul-coder/settings.json';
 }
 
 function getSystemDefaultsPath(

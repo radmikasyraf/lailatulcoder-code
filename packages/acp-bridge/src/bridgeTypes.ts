@@ -12,7 +12,7 @@ import type {
   SessionGroupPresetColor,
   TurnResultCode,
   TurnResultErrorPayload,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   CancelNotification,
   ContentBlock,
@@ -247,7 +247,7 @@ export const LOAD_REPLAY_VERSION = 1 as const;
 export const LOAD_REPLAY_MAX_BYTES = 32 * 1024 * 1024;
 export const LOAD_REPLAY_MAX_UPDATES = 10_000;
 
-export const REQUESTED_SESSION_ID_META_KEY = 'qwen-code/sessionId';
+export const REQUESTED_SESSION_ID_META_KEY = 'lailatul-coder/sessionId';
 
 export const CHANNEL_STARTUP_PROFILE_META_KEY =
   'qwen.daemon.channelStartupProfile';

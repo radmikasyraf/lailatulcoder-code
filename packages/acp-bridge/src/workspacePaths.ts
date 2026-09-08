@@ -103,7 +103,7 @@ export function translateWindowsWorkspaceForPosixSandbox(
  * path; fall back to `path.resolve` only when the path doesn't exist
  * yet.
  *
- * Lifted to `@qwen-code/acp-bridge` in #4175 PR 22b so the bridge
+ * Lifted to `@lailatul-coder/acp-bridge` in #4175 PR 22b so the bridge
  * package owns the cross-module primitive directly.
  * `cli/src/serve/fs/paths.ts` re-exports for callers still pointing
  * at the original location.

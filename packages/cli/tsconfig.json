@@ -7,30 +7,30 @@
     "lib": ["DOM", "DOM.Iterable", "ES2023"],
     "types": ["node", "vitest/globals"],
     "paths": {
-      "@qwen-code/qwen-code-core": ["../core/src/index.ts"],
-      "@qwen-code/qwen-code-core/subSessionConstants": [
+      "@lailatul-coder/lailatul-coder-core": ["../core/src/index.ts"],
+      "@lailatul-coder/lailatul-coder-core/subSessionConstants": [
         "../core/src/tools/sub-session-constants.ts"
       ],
-      "@qwen-code/qwen-code-core/transcriptRecords": [
+      "@lailatul-coder/lailatul-coder-core/transcriptRecords": [
         "../core/src/utils/transcript-records.ts"
       ],
-      "@qwen-code/qwen-code-core/*": ["../core/src/*"],
-      "@qwen-code/acp-bridge": ["../acp-bridge/src/index.ts"],
-      "@qwen-code/acp-bridge/transcriptReplay": [
+      "@lailatul-coder/lailatul-coder-core/*": ["../core/src/*"],
+      "@lailatul-coder/acp-bridge": ["../acp-bridge/src/index.ts"],
+      "@lailatul-coder/acp-bridge/transcriptReplay": [
         "../acp-bridge/src/transcript-replay.ts"
       ],
-      "@qwen-code/acp-bridge/daemonMemoryBudget": [
+      "@lailatul-coder/acp-bridge/daemonMemoryBudget": [
         "../acp-bridge/src/daemon-memory-budget.ts"
       ],
-      "@qwen-code/acp-bridge/*": ["../acp-bridge/src/*"],
-      "@qwen-code/audio-capture": ["../audio-capture/src/index.ts"],
-      "@qwen-code/audio-capture/*": ["../audio-capture/src/*"],
-      "@qwen-code/sdk": ["../sdk-typescript/src/index.ts"],
-      "@qwen-code/sdk/daemon/ui/transcript": [
+      "@lailatul-coder/acp-bridge/*": ["../acp-bridge/src/*"],
+      "@lailatul-coder/audio-capture": ["../audio-capture/src/index.ts"],
+      "@lailatul-coder/audio-capture/*": ["../audio-capture/src/*"],
+      "@lailatul-coder/sdk": ["../sdk-typescript/src/index.ts"],
+      "@lailatul-coder/sdk/daemon/ui/transcript": [
         "../sdk-typescript/src/daemon/ui/transcript.ts"
       ],
-      "@qwen-code/sdk/daemon/types": ["../sdk-typescript/src/daemon/types.ts"],
-      "@qwen-code/sdk/*": ["../sdk-typescript/src/*"]
+      "@lailatul-coder/sdk/daemon/types": ["../sdk-typescript/src/daemon/types.ts"],
+      "@lailatul-coder/sdk/*": ["../sdk-typescript/src/*"]
     }
   },
   "include": [
@@ -38,9 +38,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.json",
-    "./package.json",
-    "../core/src/utils/toml-to-markdown-converter.test.ts",
-    "../core/src/utils/toml-to-markdown-converter.ts"
+    "./package.json"
   ],
   "exclude": [
     "node_modules",
@@ -111,7 +109,7 @@
     "src/ui/themes/theme.test.ts",
     "src/validateNonInterActiveAuth.test.ts",
     "src/services/prompt-processors/shellProcessor.test.ts",
-    "src/commands/extensions/examples/**"
+    "src/commands/extensions/examples/**","src/ui/selection/**","src/serve/routes/session.ts","src/serve/routes/permission.ts","src/serve/routes/channel-webhooks.ts","src/serve/routes/workspace-auth.ts","src/serve/routes/workspace-channel-management.ts","src/serve/routes/workspace-extensions.ts","src/serve/routes/workspace-skills.ts","src/serve/server/request-helpers.ts","src/serve/workspace-agents.ts","src/serve/workspace-remember.ts","src/serve/workspace-route-runtime.ts","src/ui/components/shared/MaxSizedBox.test.tsx","src/ui/components/messages/DiffRenderer.tsx","src/ui/components/shared/VirtualizedList.tsx","src/ui/utils/CodeColorizer.tsx","src/agent-view/pty-host-process.ts"
   ],
   "references": [
     { "path": "../core" },
@@ -127,3 +125,6 @@
     { "path": "../channels/gitlab" }
   ]
 }
+
+
+

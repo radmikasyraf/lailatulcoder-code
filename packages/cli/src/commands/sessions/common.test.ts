@@ -14,7 +14,7 @@ vi.mock('../../config/settings.js', () => ({
   loadSettings: mockLoadSettings,
 }));
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   Storage: {
     setRuntimeBaseDir: mockSetRuntimeBaseDir,
   },

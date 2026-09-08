@@ -1,10 +1,10 @@
 # Contextual Tips
 
-Qwen Code includes a contextual tips system that helps you discover features and stay aware of session state.
+LailatulCoder Ai includes a contextual tips system that helps you discover features and stay aware of session state.
 
 ## Startup Tips
 
-Each time you launch Qwen Code, a tip is shown in the header area. Tips are selected by priority first, then rotated across sessions using LRU (least-recently-used) scheduling among tips of the same priority, so you see a different tip each time.
+Each time you launch LailatulCoder Ai, a tip is shown in the header area. Tips are selected by priority first, then rotated across sessions using LRU (least-recently-used) scheduling among tips of the same priority, so you see a different tip each time.
 
 New users see onboarding-focused tips during their first sessions:
 
@@ -18,7 +18,7 @@ After that, tips rotate through general features like `/compress`, `/approval-mo
 
 ## Post-Response Tips
 
-During a conversation, Qwen Code monitors your context window usage and shows tips when action may be needed:
+During a conversation, LailatulCoder Ai monitors your context window usage and shows tips when action may be needed:
 
 | Context usage | Condition                      | Tip                                               |
 | ------------- | ------------------------------ | ------------------------------------------------- |

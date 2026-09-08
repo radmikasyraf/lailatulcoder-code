@@ -5,7 +5,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import type { DaemonChannelLoopMcpHost } from '@qwen-code/channel-base';
+import type { DaemonChannelLoopMcpHost } from '@lailatul-coder/channel-base';
 
 export const CHANNEL_LOOP_MCP_IPC_TIMEOUT_MS = 30_000;
 export const MAX_CHANNEL_LOOP_MCP_IN_FLIGHT = 64;

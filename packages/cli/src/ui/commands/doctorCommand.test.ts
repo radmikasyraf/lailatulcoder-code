@@ -11,15 +11,15 @@ import { createMockCommandContext } from '../../test-utils/mockCommandContext.js
 import * as doctorChecksModule from '../../utils/doctorChecks.js';
 import * as memoryDiagnosticsModule from '../../utils/memoryDiagnostics.js';
 import * as cpuProfilerModule from '../../utils/cpuProfiler.js';
-import { collectMemoryDiagnostics } from '@qwen-code/qwen-code-core';
+import { collectMemoryDiagnostics } from '@lailatul-coder/lailatul-coder-core';
 import type { Content } from '@google/genai';
 import type { DoctorCheckResult } from '../types.js';
 
 vi.mock('../../utils/doctorChecks.js');
 vi.mock('../../utils/memoryDiagnostics.js');
 vi.mock('../../utils/cpuProfiler.js');
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@qwen-code/qwen-code-core')>()),
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
   collectMemoryDiagnostics: vi.fn(),
 }));
 
@@ -78,7 +78,7 @@ describe('doctorCommand', () => {
       'Memory diagnostics\nRSS: 100.0 MiB\nActive handles: 3',
     );
     vi.mocked(memoryDiagnosticsModule.writeMemoryHeapSnapshot).mockReturnValue(
-      '/tmp/qwen-code-heap.heapsnapshot',
+      '/tmp/lailatul-coder-heap.heapsnapshot',
     );
     vi.mocked(
       memoryDiagnosticsModule.collectMemoryPressureSamples,
@@ -118,7 +118,7 @@ describe('doctorCommand', () => {
     });
     vi.mocked(cpuProfilerModule.stopCpuProfile).mockResolvedValue({
       ok: true,
-      filePath: '/tmp/qwen-code.cpuprofile',
+      filePath: '/tmp/lailatul-coder.cpuprofile',
     });
     vi.mocked(collectMemoryDiagnostics).mockResolvedValue({
       timestamp: '2026-05-01T10:00:00.000Z',
@@ -323,7 +323,7 @@ describe('doctorCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Memory diagnostics\nRSS: 100.0 MiB\nActive handles: 3\n\nHeap snapshot written: /tmp/qwen-code-heap.heapsnapshot\nHeap snapshot may contain prompts, file contents, tool results, and other sensitive data. Do not share it publicly without reviewing it first.',
+        'Memory diagnostics\nRSS: 100.0 MiB\nActive handles: 3\n\nHeap snapshot written: /tmp/lailatul-coder-heap.heapsnapshot\nHeap snapshot may contain prompts, file contents, tool results, and other sensitive data. Do not share it publicly without reviewing it first.',
     });
   });
 
@@ -1200,7 +1200,7 @@ describe('doctorCommand', () => {
       type: 'message',
       messageType: 'info',
       content:
-        'Memory diagnostics\nRSS: 100.0 MiB\nActive handles: 3\n\nHeap snapshot written: /tmp/qwen-code-heap.heapsnapshot\nHeap snapshot may contain prompts, file contents, tool results, and other sensitive data. Do not share it publicly without reviewing it first.',
+        'Memory diagnostics\nRSS: 100.0 MiB\nActive handles: 3\n\nHeap snapshot written: /tmp/lailatul-coder-heap.heapsnapshot\nHeap snapshot may contain prompts, file contents, tool results, and other sensitive data. Do not share it publicly without reviewing it first.',
     });
   });
 

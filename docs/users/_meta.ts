@@ -16,9 +16,9 @@ export default {
   'integration-github-action': 'GitHub Actions',
   'qwen-serve': 'Daemon mode (qwen serve)',
   'qwen-serve-deploy-local': 'Daemon mode — local launch templates',
-  'Code with Qwen Code': {
+  'Code with LailatulCoder Ai': {
     type: 'separator',
-    title: 'Code with Qwen Code', // Title is optional
+    title: 'Code with LailatulCoder Ai', // Title is optional
   },
   features: 'Features',
   configuration: 'Configuration',

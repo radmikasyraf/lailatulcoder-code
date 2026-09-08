@@ -1,7 +1,7 @@
 {
   "name": "Default",
   "description": "Clean purple-tinted neutral theme",
-  "author": "Qwen Code",
+  "author": "LailatulCoder Ai",
   "license": "MIT",
   "supportedModes": ["light", "dark"],
   "shikiTheme": {

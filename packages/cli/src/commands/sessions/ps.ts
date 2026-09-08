@@ -5,7 +5,7 @@
  */
 
 /**
- * `qwen sessions ps` — list the interactive Qwen Code sessions running
+ * `qwen sessions ps` — list the interactive LailatulCoder Ai sessions running
  * right now.
  *
  * The sibling `qwen sessions list` walks saved transcripts; this walks the
@@ -21,7 +21,7 @@ import type { CommandModule, Argv } from 'yargs';
 import {
   listLiveSessions,
   type SessionRegistryRecord,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import stringWidth from 'string-width';
 import {
   sanitizeTerminalText,
@@ -114,7 +114,7 @@ async function handlePs(argv: PsArgs): Promise<void> {
   }
 
   if (records.length === 0) {
-    writeStdoutLine('No other interactive Qwen Code sessions are running.');
+    writeStdoutLine('No other interactive LailatulCoder Ai sessions are running.');
     return;
   }
 
@@ -123,7 +123,7 @@ async function handlePs(argv: PsArgs): Promise<void> {
 
 export const psCommand: CommandModule<unknown, PsArgs> = {
   command: 'ps',
-  describe: 'List interactive Qwen Code sessions running right now',
+  describe: 'List interactive LailatulCoder Ai sessions running right now',
   builder: (yargs: Argv) =>
     yargs.option('json', {
       type: 'boolean',

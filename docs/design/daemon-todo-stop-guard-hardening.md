@@ -140,4 +140,4 @@ The notification queue case where all bounded entries are related remains
 deferred. Replacing one unique related result with another would still be silent
 data loss. A follow-up design must provide a recoverable result or a durable,
 model- and user-visible gap notice for every omitted related result. Track that
-work in [#7805](https://github.com/QwenLM/qwen-code/issues/7805).
+work in [#7805](https://github.com/LailatulCoder/lailatul-coder/issues/7805).

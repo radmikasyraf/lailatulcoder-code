@@ -19,7 +19,7 @@ import { useBatchedScroll } from '../../hooks/useBatchedScroll.js';
 import { useAnimatedScrollbar } from '../../hooks/useAnimatedScrollbar.js';
 import { StaticRender } from './StaticRender.js';
 import { type DOMElement, Box, Text, useBoxMetrics } from 'ink';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import { measureElementPosition } from '../../utils/measure-element-position.js';
 
 const debugLogger = createDebugLogger('VIRTUALIZED_LIST');
@@ -990,3 +990,4 @@ const VirtualizedListWithForwardRef = forwardRef(VirtualizedList) as <T>(
 export { VirtualizedListWithForwardRef as VirtualizedList };
 
 VirtualizedList.displayName = 'VirtualizedList';
+

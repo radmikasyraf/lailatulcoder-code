@@ -120,7 +120,7 @@ const showRunArtifactsStep =
   )?.[0] ?? '';
 const prepareQwenCliSteps =
   workflow.match(
-    /- name: 'Prepare Qwen Code CLI'[\s\S]*?(?=\n[ ]{6}- name: ')/g,
+    /- name: 'Prepare LailatulCoder Ai CLI'[\s\S]*?(?=\n[ ]{6}- name: ')/g,
   ) ?? [];
 const assessCandidatesStep =
   workflow.match(
@@ -425,7 +425,7 @@ describe('qwen-autofix workflow', () => {
       "pull_request_review:\n    types:\n      - 'submitted'",
     );
     expect(workflow).toContain(
-      'AUTOFIX_BOT: "${{ vars.AUTOFIX_BOT_LOGIN || \'qwen-code-dev-bot\' }}"',
+      'AUTOFIX_BOT: "${{ vars.AUTOFIX_BOT_LOGIN || \'lailatul-coder-dev-bot\' }}"',
     );
     // The round budgets are tuning knobs; what must hold is their ORDERING.
     // Asserting the literal numbers only detected edits — it would not catch
@@ -584,7 +584,7 @@ describe('qwen-autofix workflow', () => {
     expect(reviewScanJob).toContain('.startedAt // $cut) > $cut');
     // Round is the max across markers so a terminal handoff marker is honored
     // regardless of its timestamp; the fallback is the window's SEED (0 unless
-    // '@qwen-code /takeover from N' anchored this window at N), never a
+    // '@lailatul-coder /takeover from N' anchored this window at N), never a
     // hardcoded 0.
     expect(reviewScanJob).toContain('map(.round) | max // $start');
     // Never fall back to the mutable head commit date for the pre-first-eval
@@ -611,7 +611,7 @@ describe('qwen-autofix workflow', () => {
     // the review workflow. A rename there would silently restore the wait,
     // with nothing failing — the same trap as the shared concurrency group.
     const reviewWorkflow = readFileSync(
-      '.github/workflows/qwen-code-pr-review.yml',
+      '.github/workflows/lailatul-coder-pr-review.yml',
       'utf8',
     );
     expect(reviewWorkflow.split('\n')[0]).toBe(
@@ -669,7 +669,7 @@ describe('qwen-autofix workflow', () => {
   it('holds a round while review-pr is in flight on the head (#8888)', () => {
     // Every head mutation the scan can make (a stale-base update-branch, an
     // address push) is a synchronize event that cancels the in-flight review
-    // via qwen-code-pr-review.yml's cancel-in-progress, discarding up to ~3h
+    // via lailatul-coder-pr-review.yml's cancel-in-progress, discarding up to ~3h
     // of review work — the self-reinforcing cancellation loop of PR #8830.
     // The gate skips the PR entirely while review-pr is live on its head; the
     // watermark is not advanced on the skip, so the feedback stays visible.
@@ -1744,12 +1744,12 @@ describe('qwen-autofix workflow', () => {
           join(dir, 'ic.json'),
           JSON.stringify([
             ...marks.map((m) => ({
-              user: { login: 'qwen-code-dev-bot' },
+              user: { login: 'lailatul-coder-dev-bot' },
               created_at: m.at ?? '2026-07-18T09:00:00Z',
               body: `eval <!-- autofix-eval ts=${m.ts} acted=${m.acted ?? 'true'} round=${m.round}${m.win ? ` win=${m.win}` : ''} -->${m.head ? `\n<!-- autofix-redcheck head=${m.head} -->` : ''}`,
             })),
             ...acks.map((at) => ({
-              user: { login: 'qwen-code-dev-bot' },
+              user: { login: 'lailatul-coder-dev-bot' },
               created_at: at,
               body: '🤝 … <!-- takeover-ack engaged -->',
             })),
@@ -1757,7 +1757,7 @@ describe('qwen-autofix workflow', () => {
               user: { login: 'wenshao' },
               author_association: 'OWNER',
               created_at: at,
-              body: '@qwen-code /takeover',
+              body: '@lailatul-coder /takeover',
             })),
           ]),
         );
@@ -1783,8 +1783,8 @@ describe('qwen-autofix workflow', () => {
               MAX_ROUNDS: '5',
               WINDOW: effWindow,
               CHECKED_OUT_HEAD: head,
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
-              REVIEW_BOT: 'qwen-code-ci-bot',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
+              REVIEW_BOT: 'lailatul-coder-ci-bot',
               TRUSTED_ASSOC: '["OWNER","MEMBER","COLLABORATOR"]',
             },
             encoding: 'utf8',
@@ -1945,7 +1945,7 @@ describe('qwen-autofix workflow', () => {
         window: 'none',
       }).stale,
     ).toBe(false);
-    // A trusted command comment (@qwen-code /…) newer than the live
+    // A trusted command comment (@lailatul-coder /…) newer than the live
     // watermark is an INSTRUCTION, not feedback: without the command filter
     // it would count in LIVE_NEW and rescue this duplicate into a full
     // agent round about the command itself.
@@ -2046,12 +2046,12 @@ describe('qwen-autofix workflow', () => {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
               PR: '7163',
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               BRANCH: 'ci/some-branch',
-              HEAD_REPO: 'maint-fork/qwen-code',
+              HEAD_REPO: 'maint-fork/lailatul-coder',
               WATERMARK: '2026-07-18T08:00:00Z',
               ROUND: '2',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
               TAKEOVER_LABEL: 'autofix/takeover',
               SKIP_LABEL: 'autofix/skip',
               GITHUB_OUTPUT: out,
@@ -2071,7 +2071,7 @@ describe('qwen-autofix workflow', () => {
     };
     const pr = (over = {}) => ({
       state: 'OPEN',
-      author: { login: 'qwen-code-dev-bot' },
+      author: { login: 'lailatul-coder-dev-bot' },
       isCrossRepository: false,
       baseRefName: 'main',
       headRefName: 'ci/some-branch',
@@ -2116,7 +2116,7 @@ describe('qwen-autofix workflow', () => {
       isCrossRepository: true,
       maintainerCanModify: true,
       headRepositoryOwner: { login: 'maint-fork' },
-      headRepository: { name: 'qwen-code' },
+      headRepository: { name: 'lailatul-coder' },
     });
     expect(runRecheck(botFork).passed).toBe(true);
     // Remove allow-edits and the same bot fork discards (cannot push).
@@ -2129,7 +2129,7 @@ describe('qwen-autofix workflow', () => {
       author: { login: 'maint-fork' },
       labels: [{ name: 'autofix/takeover' }],
       headRepositoryOwner: { login: 'maint-fork' },
-      headRepository: { name: 'qwen-code' },
+      headRepository: { name: 'lailatul-coder' },
     });
     expect(runRecheck(forkPr).passed).toBe(true);
     expect(runRecheck({ ...forkPr, maintainerCanModify: false }).passed).toBe(
@@ -2208,12 +2208,12 @@ describe('qwen-autofix workflow', () => {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
               PR: '7163',
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               BRANCH: 'ci/some-branch',
-              HEAD_REPO: 'QwenLM/qwen-code',
+              HEAD_REPO: 'LailatulCoder/lailatul-coder',
               WATERMARK: '2026-07-18T08:00:00Z',
               ROUND: '2',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
               TAKEOVER_LABEL: 'autofix/takeover',
               SKIP_LABEL: 'autofix/skip',
               DISPATCH_STATUS_CONTEXT: 'qwen-autofix/dispatch-pending',
@@ -2235,7 +2235,7 @@ describe('qwen-autofix workflow', () => {
     };
     const pr = (over = {}) => ({
       state: 'OPEN',
-      author: { login: 'qwen-code-dev-bot' },
+      author: { login: 'lailatul-coder-dev-bot' },
       isCrossRepository: false,
       baseRefName: 'main',
       headRefName: 'ci/some-branch',
@@ -2248,7 +2248,7 @@ describe('qwen-autofix workflow', () => {
     expect(closed.passed).toBe(false);
     expect(closed.out).toContain('stale=true');
     expect(closed.writes).toContain(
-      'API api repos/QwenLM/qwen-code/statuses/deadbeefcafe -X POST',
+      'API api repos/LailatulCoder/lailatul-coder/statuses/deadbeefcafe -X POST',
     );
     expect(closed.writes).toContain('state=success');
     expect(closed.writes).toContain('context=qwen-autofix/dispatch-pending');
@@ -2375,7 +2375,7 @@ describe('qwen-autofix workflow', () => {
       'contains(fromJSON(\'["OWNER", "MEMBER", "COLLABORATOR"]\'), github.event.review.author_association)',
     );
     expect(routeJob).toContain(
-      "github.event.review.user.login == 'qwen-code-ci-bot'",
+      "github.event.review.user.login == 'lailatul-coder-ci-bot'",
     );
     // The load-bearing STRUCTURE, not just substrings: the trust || is
     // parenthesized and the whole clause gates the per-PR format. Without
@@ -2383,12 +2383,12 @@ describe('qwen-autofix workflow', () => {
     // OWNER/MEMBER/COLLABORATOR review the run-unique group and the
     // review-bot the per-PR group unconditionally.
     expect(routeJob).toContain(
-      "(github.event_name == 'pull_request_review' && (contains(fromJSON('[\"OWNER\", \"MEMBER\", \"COLLABORATOR\"]'), github.event.review.author_association) || github.event.review.user.login == 'qwen-code-ci-bot') && format('qwen-autofix-route-pr-{0}', github.event.pull_request.number))",
+      "(github.event_name == 'pull_request_review' && (contains(fromJSON('[\"OWNER\", \"MEMBER\", \"COLLABORATOR\"]'), github.event.review.author_association) || github.event.review.user.login == 'lailatul-coder-ci-bot') && format('qwen-autofix-route-pr-{0}', github.event.pull_request.number))",
     );
     expect(workflow).toContain(
       'TRUSTED_ASSOC: \'["OWNER", "MEMBER", "COLLABORATOR"]\'',
     );
-    expect(workflow).toContain("REVIEW_BOT: 'qwen-code-ci-bot'");
+    expect(workflow).toContain("REVIEW_BOT: 'lailatul-coder-ci-bot'");
     expect(workflow).toContain(
       'gh api "repos/${REPO}/collaborators/${SENDER_LOGIN}/permission"',
     );
@@ -2754,28 +2754,28 @@ describe('qwen-autofix workflow', () => {
       {
         encoding: 'utf8',
         input:
-          // bot-prs.json (all --author qwen-code-dev-bot)
+          // bot-prs.json (all --author lailatul-coder-dev-bot)
           JSON.stringify([
             {
               number: 20,
               isCrossRepository: true,
               maintainerCanModify: true,
               labels: [], // no label — admitted anyway, it's the bot's own fork
-              author: { login: 'qwen-code-dev-bot' },
+              author: { login: 'lailatul-coder-dev-bot' },
             },
             {
               number: 19,
               isCrossRepository: true,
               maintainerCanModify: false, // no allow-edits — the bot cannot push
               labels: [],
-              author: { login: 'qwen-code-dev-bot' },
+              author: { login: 'lailatul-coder-dev-bot' },
             },
             {
               number: 18,
               isCrossRepository: false, // in-repo bot PR — not a fork candidate
               maintainerCanModify: true,
               labels: [],
-              author: { login: 'qwen-code-dev-bot' },
+              author: { login: 'lailatul-coder-dev-bot' },
             },
           ]) +
           // takeover-prs.json (--label autofix/takeover)
@@ -2802,7 +2802,7 @@ describe('qwen-autofix workflow', () => {
     // unique_by(.number) sorts ascending: the labeled human fork (#9) and the
     // bot's own unlabeled fork (#20); #19 (no allow-edits), #18 (in-repo), and
     // #7 (skip) are dropped.
-    expect(forkRows).toEqual(['9\tmaint-a', '20\tqwen-code-dev-bot']);
+    expect(forkRows).toEqual(['9\tmaint-a', '20\tlailatul-coder-dev-bot']);
     expect(reviewScanJob).toContain('fork takeover candidate #${FPR} admitted');
     // Fork plumbing: the target carries its head repo; prepare fetches the
     // fork branch (origin has no copy) and the report pushes back via
@@ -3026,19 +3026,19 @@ describe('qwen-autofix workflow', () => {
             {
               event: 'unlabeled',
               label: { name: 'autofix/takeover' },
-              actor: { login: 'qwen-code-dev-bot' },
+              actor: { login: 'lailatul-coder-dev-bot' },
               created_at: '2026-07-08T00:00:00Z',
             },
             {
               event: 'labeled',
               label: { name: 'autofix/takeover' },
-              actor: { login: 'qwen-code-dev-bot' },
+              actor: { login: 'lailatul-coder-dev-bot' },
               created_at: '2026-07-06T00:00:00Z',
             },
           ]),
       },
     ).trim();
-    expect(labeledBy).toBe('qwen-code-dev-bot');
+    expect(labeledBy).toBe('lailatul-coder-dev-bot');
     expect(reviewScanJob).toContain('command-applied label <45s ago');
     expect(reviewScanJob).toContain(`date -u -d '45 seconds ago'`);
     // A fork fetch failure (force-push/rename race) discards gracefully
@@ -3062,14 +3062,14 @@ describe('qwen-autofix workflow', () => {
     // Critical-only deferral rendering, and the renderer inline) so /triage-,
     // /review-, and /takeover-style
     // invocations never burn an agent cycle on a no-action report.
-    expect(reviewScanJob).toContain("COMMAND_FILTER='^\\s*@qwen-code /'");
+    expect(reviewScanJob).toContain("COMMAND_FILTER='^\\s*@lailatul-coder /'");
     expect(reviewScanJob).toContain('test($cf) | not');
     // Seven sites now: the four feedback/deferral exclusions, the
     // over-budget census (command comments are not feedback batches), the
     // conflict handoff wake filter, and its scan-side mirror for the
     // stale-base park gate (a /command comment is not a trusted-human
     // response and must not unpark a conflict verdict in either).
-    expect(workflow.split('test("^\\\\s*@qwen-code /") | not').length - 1).toBe(
+    expect(workflow.split('test("^\\\\s*@lailatul-coder /") | not').length - 1).toBe(
       7,
     );
   });
@@ -3243,7 +3243,7 @@ describe('qwen-autofix workflow', () => {
         '',
         '--arg',
         'rb',
-        'qwen-code-ci-bot',
+        'lailatul-coder-ci-bot',
         '--arg',
         'ab',
         'bot',
@@ -3485,12 +3485,12 @@ describe('qwen-autofix workflow', () => {
     const noticed = (noticeAt, rt) =>
       execFileSync(
         'jq',
-        ['-r', '--arg', 'ab', 'qwen-code-dev-bot', '--arg', 'rt', rt, dedup],
+        ['-r', '--arg', 'ab', 'lailatul-coder-dev-bot', '--arg', 'rt', rt, dedup],
         {
           encoding: 'utf8',
           input: JSON.stringify([
             {
-              user: { login: 'qwen-code-dev-bot' },
+              user: { login: 'lailatul-coder-dev-bot' },
               created_at: noticeAt,
               body: '⏸️ … <!-- takeover-cap-reached -->',
             },
@@ -3651,13 +3651,13 @@ describe('qwen-autofix workflow', () => {
     const runBotAuthor = (login) =>
       execFileSync(
         'jq',
-        ['-r', '--arg', 'ab', 'qwen-code-dev-bot', botAuthorJq],
+        ['-r', '--arg', 'ab', 'lailatul-coder-dev-bot', botAuthorJq],
         {
           encoding: 'utf8',
           input: JSON.stringify({ author: { login } }),
         },
       ).trim();
-    expect(runBotAuthor('qwen-code-dev-bot')).toBe('true');
+    expect(runBotAuthor('lailatul-coder-dev-bot')).toBe('true');
     expect(runBotAuthor('wenshao')).toBe('false');
     expect(runBotAuthor('')).toBe('false');
     // R4-15: the RELEASE_ACKED jq body (event marker + time direction) is
@@ -4008,7 +4008,7 @@ describe('qwen-autofix workflow', () => {
               PATH: `${dir}:${process.env.PATH}`,
               FORCED_PR: forcedPr,
               EVENT_NAME: eventName,
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               GITHUB_OUTPUT: outFile,
               ENUM_LIST_ANSWER: listAnswer,
               ENUM_LIST_ERROR: listError,
@@ -4307,12 +4307,12 @@ describe('qwen-autofix workflow', () => {
               PATH: `${dir}:${process.env.PATH}`,
               CMD: cmd,
               PR: '7165',
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               TAKEOVER_LABEL: 'autofix/takeover',
               SKIP_LABEL: 'autofix/skip',
               NEEDS_HUMAN_LABEL: 'autofix/needs-human',
-              TAKEOVER_COMMAND: '@qwen-code /takeover',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
+              TAKEOVER_COMMAND: '@lailatul-coder /takeover',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
               GITHUB_TOKEN: 'x',
               TOGGLE_POST_FAILS: postFails,
               TOGGLE_DELETE_FAILS: deleteFails,
@@ -4348,7 +4348,7 @@ describe('qwen-autofix workflow', () => {
     // round-trip. In-repo PRs get no fork note.
     const addAbsent = runToggle({ cmd: 'add' });
     expect(addAbsent.writes).toContain(
-      'API api -X POST repos/QwenLM/qwen-code/issues/7165/labels',
+      'API api -X POST repos/LailatulCoder/lailatul-coder/issues/7165/labels',
     );
     // Idempotent create precedes the POST: the REST add would otherwise
     // silently create a missing label with a random color.
@@ -4380,7 +4380,7 @@ describe('qwen-autofix workflow', () => {
     expect(rearm.writes).not.toContain('labels[]=autofix/takeover');
     expect(rearm.writes).not.toContain('labels/autofix%2Ftakeover');
     expect(rearm.writes).toContain(
-      'API api -X DELETE repos/QwenLM/qwen-code/issues/7165/labels/autofix%2Fneeds-human',
+      'API api -X DELETE repos/LailatulCoder/lailatul-coder/issues/7165/labels/autofix%2Fneeds-human',
     );
     expect(rearm.writes.match(/^API /gm) ?? []).toHaveLength(1);
     expect(rearm.log).toContain('re-armed');
@@ -4443,7 +4443,7 @@ describe('qwen-autofix workflow', () => {
       labels: ['autofix/takeover'],
     });
     expect(removePresent.writes).toContain(
-      'API api -X DELETE repos/QwenLM/qwen-code/issues/7165/labels/autofix%2Ftakeover',
+      'API api -X DELETE repos/LailatulCoder/lailatul-coder/issues/7165/labels/autofix%2Ftakeover',
     );
     // …and the stop arm clears the escalation label in the same breath
     // (R2-27): a stop on a paused PR must not leave needs-human behind.
@@ -4459,13 +4459,13 @@ describe('qwen-autofix workflow', () => {
     const botRelease = runToggle({
       cmd: 'remove',
       labels: ['autofix/takeover'],
-      author: 'qwen-code-dev-bot',
+      author: 'lailatul-coder-dev-bot',
     });
     expect(botRelease.writes).toContain('STANDARD bot management continues');
     const botSkipRelease = runToggle({
       cmd: 'remove',
       labels: ['autofix/takeover', 'autofix/skip'],
-      author: 'qwen-code-dev-bot',
+      author: 'lailatul-coder-dev-bot',
     });
     expect(botSkipRelease.writes).toContain(
       'opts it out of standard bot management entirely',
@@ -4520,7 +4520,7 @@ describe('qwen-autofix workflow', () => {
       labels: ['autofix/takeover'],
     });
     expect(forkStop.writes).toContain(
-      'API api -X DELETE repos/QwenLM/qwen-code/issues/7165/labels/autofix%2Ftakeover',
+      'API api -X DELETE repos/LailatulCoder/lailatul-coder/issues/7165/labels/autofix%2Ftakeover',
     );
     // Fork unlabeled events carry no secrets, so this is the ONLY possible
     // release ack for a fork — it must post here.
@@ -4540,7 +4540,7 @@ describe('qwen-autofix workflow', () => {
       labels: ['autofix/takeover'],
     });
     expect(stackedStop.writes).toContain(
-      'API api -X DELETE repos/QwenLM/qwen-code/issues/7165/labels/autofix%2Ftakeover',
+      'API api -X DELETE repos/LailatulCoder/lailatul-coder/issues/7165/labels/autofix%2Ftakeover',
     );
     // A non-main release never reaches the ack job (route ignores it), so
     // the command's own ack is the only voice here too.
@@ -4639,7 +4639,7 @@ describe('qwen-autofix workflow', () => {
       deleteFails: 'HTTP 404: Not Found',
     });
     expect(releaseRace.writes).toContain(
-      'API api -X DELETE repos/QwenLM/qwen-code/issues/7165/labels/autofix%2Ftakeover',
+      'API api -X DELETE repos/LailatulCoder/lailatul-coder/issues/7165/labels/autofix%2Ftakeover',
     );
     expect(releaseRace.writes).toContain('takeover-ack released');
     expect(releaseRace.log).not.toContain('::warning::');
@@ -4702,7 +4702,7 @@ describe('qwen-autofix workflow', () => {
       cmd: 'remove',
       labels: ['autofix/takeover'],
       deleteFails:
-        'gh: Delete "https://api.github.com/repos/QwenLM/qwen-code/issues/4041/labels/autofix%2Ftakeover": dial tcp 140.82.121.4:443: connect: connection refused',
+        'gh: Delete "https://api.github.com/repos/LailatulCoder/lailatul-coder/issues/4041/labels/autofix%2Ftakeover": dial tcp 140.82.121.4:443: connect: connection refused',
     });
     expect(releaseUrlFourOhFour.writes).toContain(
       'takeover-ack release-failed',
@@ -4748,7 +4748,7 @@ describe('qwen-autofix workflow', () => {
             `WORKDIR='${dir}'\n${trio.replace(/\n {12}/g, '\n')}\nprintf '\\n%s %s' "$ROUND" "$EVAL_WM"`,
           ],
           {
-            env: { ...process.env, AUTOFIX_BOT: 'qwen-code-dev-bot' },
+            env: { ...process.env, AUTOFIX_BOT: 'lailatul-coder-dev-bot' },
             encoding: 'utf8',
           },
         );
@@ -4759,12 +4759,12 @@ describe('qwen-autofix workflow', () => {
       }
     };
     const marker = (round, ts, win) => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at: '2026-07-18T09:00:00Z',
       body: `<!-- autofix-eval ts=${ts} acted=true round=${round}${win ? ` win=${win}` : ''} -->`,
     });
     const engageAck = (at) => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at: at,
       body: '🤝 … <!-- takeover-ack engaged -->',
     });
@@ -4814,7 +4814,7 @@ describe('qwen-autofix workflow', () => {
   });
 
   it('behaviorally seeds the round counter from the window anchor and only from it', () => {
-    // '@qwen-code /takeover from N' rides as its OWN marker on the engage
+    // '@lailatul-coder /takeover from N' rides as its OWN marker on the engage
     // ack, never as a field inside '<!-- takeover-ack engaged -->' — that
     // literal is matched with jq contains(), closing '-->' included, at four
     // sites here and three in qwen-fleet-shepherd.yml, and a field would
@@ -4825,7 +4825,7 @@ describe('qwen-autofix workflow', () => {
       /(MARKERS="\$\(jq -c[\s\S]*?ROUND="\$\(jq -r --arg key "\$\{REARM_KEY\}"[^\n]*)/,
     )?.[1];
     expect(trio).toBeTruthy();
-    const BOT = 'qwen-code-dev-bot';
+    const BOT = 'lailatul-coder-dev-bot';
     const roundOf = (comments) => {
       const dir = mkdtempSync(join(tmpdir(), 'autofix-seed-'));
       try {
@@ -4966,7 +4966,7 @@ describe('qwen-autofix workflow', () => {
           input: JSON.stringify(meta),
           env: {
             ...process.env,
-            AUTOFIX_BOT: 'qwen-code-dev-bot',
+            AUTOFIX_BOT: 'lailatul-coder-dev-bot',
             TAKEOVER_LABEL: 'autofix/takeover',
             SKIP_LABEL: 'autofix/skip',
           },
@@ -4980,13 +4980,13 @@ describe('qwen-autofix workflow', () => {
       labels: labels.map((name) => ({ name })),
       ...extra,
     });
-    expect(reason(meta('qwen-code-dev-bot'))).toBe('eligible');
+    expect(reason(meta('lailatul-coder-dev-bot'))).toBe('eligible');
     expect(reason(meta('human', ['autofix/takeover']))).toBe('eligible');
     expect(reason(meta('human'))).toBe('unmanaged_author');
     expect(reason(meta('human', ['autofix/takeover', 'autofix/skip']))).toBe(
       'skip_label',
     );
-    expect(reason(meta('qwen-code-dev-bot', ['autofix/skip']))).toBe(
+    expect(reason(meta('lailatul-coder-dev-bot', ['autofix/skip']))).toBe(
       'skip_label',
     );
     expect(
@@ -5009,7 +5009,7 @@ describe('qwen-autofix workflow', () => {
     ).toBe('eligible');
     expect(
       reason(
-        meta('qwen-code-dev-bot', [], {
+        meta('lailatul-coder-dev-bot', [], {
           isCrossRepository: true,
           maintainerCanModify: true,
         }),
@@ -5022,7 +5022,7 @@ describe('qwen-autofix workflow', () => {
     // predicate reads `.isCrossRepository == false`: jq's // treats false as
     // empty, so the previous `(.isCrossRepository // true) | not` was false
     // for EVERY input and silently green-no-op'd all forced dispatches.
-    const missing = meta('qwen-code-dev-bot');
+    const missing = meta('lailatul-coder-dev-bot');
     delete missing.isCrossRepository;
     expect(reason(missing)).toBe('cross_repo_state_missing');
     expect(reviewScanJob).toContain('.isCrossRepository == false');
@@ -5080,7 +5080,7 @@ describe('qwen-autofix workflow', () => {
             env: {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               FORCED_PR: '8320',
             },
             encoding: 'utf8',
@@ -5132,7 +5132,7 @@ describe('qwen-autofix workflow', () => {
           env: {
             ...process.env,
             PATH: `${failingDir}:${process.env.PATH}`,
-            REPO: 'QwenLM/qwen-code',
+            REPO: 'LailatulCoder/lailatul-coder',
           },
           encoding: 'utf8',
         },
@@ -5155,7 +5155,7 @@ describe('qwen-autofix workflow', () => {
           env: {
             ...process.env,
             PATH: `${failingDir}:${process.env.PATH}`,
-            REPO: 'QwenLM/qwen-code',
+            REPO: 'LailatulCoder/lailatul-coder',
             FORCED_PR: '8320',
           },
           encoding: 'utf8',
@@ -5180,10 +5180,10 @@ if [[ "$1 $2" == 'api user' ]]; then
     printf '1' > '${reporterDir}/actor-failed'
     exit 1
   fi
-  printf '%s' "\${STUB_ACTOR:-qwen-code-dev-bot}"
+  printf '%s' "\${STUB_ACTOR:-lailatul-coder-dev-bot}"
   exit 0
 fi
-if [[ "$1 $2" == 'api repos/QwenLM/qwen-code/issues/8320/comments' ]]; then
+if [[ "$1 $2" == 'api repos/LailatulCoder/lailatul-coder/issues/8320/comments' ]]; then
   # CONNECTION-level failure: nothing on stdout at all. This is the shape that
   # needs pipefail — a downstream \`jq -rs\` reads empty input, prints nothing
   # and exits 0, so without it the caller cannot tell this from success.
@@ -5226,11 +5226,11 @@ exit 1
       // One page carrying a null-bodied comment alongside the real status
       // comment: the shape the production filter must survive.
       const statusPage = JSON.stringify([
-        { id: 1, user: { login: 'qwen-code-dev-bot' }, body: null },
+        { id: 1, user: { login: 'lailatul-coder-dev-bot' }, body: null },
         { id: 2, user: { login: 'wenshao' }, body: 'looks good' },
         {
           id: 123,
-          user: { login: 'qwen-code-dev-bot' },
+          user: { login: 'lailatul-coder-dev-bot' },
           body: '<!-- autofix-status -->\n\n🔄 working',
         },
       ]);
@@ -5261,10 +5261,10 @@ exit 1
             env: {
               ...process.env,
               PATH: `${reporterDir}:${process.env.PATH}`,
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               FORCED_PR: '8320',
               DRY_RUN: 'false',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
               TAKEOVER_LABEL: 'autofix/takeover',
               GITHUB_RUN_ID: '30778039590',
               GITHUB_SERVER_URL: 'https://ghes.example.com',
@@ -5285,7 +5285,7 @@ exit 1
       // the whole point: without the `// ""` guard jq aborts the program
       // (rc=5), gh exits non-zero, all three attempts fail, and the run reds
       // out without ever posting the blocked status it exists to post.
-      expect(calls).toContain('repos/QwenLM/qwen-code/issues/comments/123');
+      expect(calls).toContain('repos/LailatulCoder/lailatul-coder/issues/comments/123');
       expect(calls).toContain('autofix-status');
       expect(calls).toContain('AutoFix blocked');
       expect(calls).toContain('permission_lookup_failed');
@@ -5293,9 +5293,9 @@ exit 1
       // The run link resolves from GITHUB_SERVER_URL like every other status
       // writer; a hardcoded github.com is the one broken link on GHES.
       expect(calls).toContain(
-        'https://ghes.example.com/QwenLM/qwen-code/actions/runs/30778039590',
+        'https://ghes.example.com/LailatulCoder/lailatul-coder/actions/runs/30778039590',
       );
-      expect(calls).not.toContain('https://github.com/QwenLM');
+      expect(calls).not.toContain('https://github.com/LailatulCoder');
 
       writeFileSync(callsFile, '');
       const transientActorReporter = runReporter({ FAIL_ACTOR_ONCE: 'true' });
@@ -5355,7 +5355,7 @@ exit 1
       writeFileSync(callsFile, '');
       const botManagedMeta = JSON.stringify({
         ...JSON.parse(meta),
-        author: { login: 'qwen-code-dev-bot' },
+        author: { login: 'lailatul-coder-dev-bot' },
         labels: [],
       });
       const botManagedReporter = runReporter(
@@ -5514,7 +5514,7 @@ exit 1
             env: {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
             },
             encoding: 'utf8',
           },
@@ -5615,7 +5615,7 @@ exit 1
     const statusPage = JSON.stringify([
       {
         id: 123,
-        user: { login: 'qwen-code-dev-bot' },
+        user: { login: 'lailatul-coder-dev-bot' },
         body: '<!-- autofix-status -->\n\n🔄 working',
       },
     ]);
@@ -5635,7 +5635,7 @@ printf '%q ' "$@" >> '${callsFile}'
 printf '\\n' >> '${callsFile}'
 case "$1 $2" in
   'pr view') printf '%s' '${metaJson}'; exit 0 ;;
-  'api user') printf '%s' 'qwen-code-dev-bot'; exit 0 ;;
+  'api user') printf '%s' 'lailatul-coder-dev-bot'; exit 0 ;;
 esac
 case "$2" in
   *collaborators/*/permission)
@@ -5673,10 +5673,10 @@ exit 1
             env: {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               FORCED_PR: '8320',
               DRY_RUN: 'false',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
               TAKEOVER_LABEL: 'autofix/takeover',
               SKIP_LABEL: 'autofix/skip',
               GITHUB_RUN_ID: '30778039590',
@@ -5738,7 +5738,7 @@ exit 1
     expect(lookupFailed.calls).toContain('permission_lookup_failed');
     expect(lookupFailed.calls).toContain('A later scheduled scan will retry');
     expect(lookupFailed.calls).toContain(
-      'repos/QwenLM/qwen-code/issues/comments/123',
+      'repos/LailatulCoder/lailatul-coder/issues/comments/123',
     );
   });
 
@@ -5799,11 +5799,11 @@ exit 1
     // points. Allowed senders: the PR author (who may lack label access) or
     // a write+ collaborator.
     expect(workflow).toContain("issue_comment:\n    types:\n      - 'created'");
-    expect(workflow).toContain("TAKEOVER_COMMAND: '@qwen-code /takeover'");
+    expect(workflow).toContain("TAKEOVER_COMMAND: '@lailatul-coder /takeover'");
     // Cheap expression-level prefilter: comments that cannot be the command
     // never even start the route job.
     expect(workflow).toContain(
-      "startsWith(github.event.comment.body, '@qwen-code /takeover')",
+      "startsWith(github.event.comment.body, '@lailatul-coder /takeover')",
     );
     // Exact trimmed-body match only — no user-input parsing, no arguments.
     expect(routeStep).toContain('== "${TAKEOVER_COMMAND}" ]]');
@@ -5825,9 +5825,9 @@ exit 1
     );
     // No other command surface exists.
     expect(workflow).not.toContain('pull_request_review_comment');
-    expect(workflow).not.toContain('@qwen-code /autofix');
+    expect(workflow).not.toContain('@lailatul-coder /autofix');
     expect(workflow).not.toContain('/autofix run');
-    expect(workflow).not.toContain('@qwen-code /address-review');
+    expect(workflow).not.toContain('@lailatul-coder /address-review');
     expect(routeStep).not.toContain('ROUTE_PR="${ISSUE_NUMBER}"');
   });
 
@@ -5851,7 +5851,7 @@ exit 1
       ghPermission = 'read',
       hasPr = 'url',
       state = 'open',
-      headRepo = 'QwenLM/qwen-code',
+      headRepo = 'LailatulCoder/lailatul-coder',
     }) => {
       const dir = mkdtempSync(join(tmpdir(), 'autofix-cmd-'));
       try {
@@ -5878,10 +5878,10 @@ exit 1
               HAS_PR_URL: hasPr,
               ISSUE_STATE: state,
               ISSUE_NUMBER: '7165',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
-              TAKEOVER_COMMAND: '@qwen-code /takeover',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
+              TAKEOVER_COMMAND: '@lailatul-coder /takeover',
               TAKEOVER_LABEL: 'autofix/takeover',
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               GITHUB_TOKEN: 'x',
             },
             encoding: 'utf8',
@@ -5897,21 +5897,21 @@ exit 1
     // ex-member's durable authorship no longer summons the bot).
     expect(
       runCmd({
-        body: '@qwen-code /takeover',
+        body: '@lailatul-coder /takeover',
         sender: 'human-a',
         ghPermission: 'triage',
       }),
     ).toBe('add|7165');
     expect(
       runCmd({
-        body: '  @qwen-code /takeover stop  ',
+        body: '  @lailatul-coder /takeover stop  ',
         sender: 'human-a',
         ghPermission: 'triage',
       }),
     ).toBe('remove|7165');
     expect(
       runCmd({
-        body: '@qwen-code /takeover',
+        body: '@lailatul-coder /takeover',
         sender: 'human-a',
         ghPermission: 'read',
       }),
@@ -5919,7 +5919,7 @@ exit 1
     // A write+ collaborator may command someone else's PR.
     expect(
       runCmd({
-        body: '@qwen-code /takeover',
+        body: '@lailatul-coder /takeover',
         sender: 'maintainer-b',
         ghPermission: 'write',
       }),
@@ -5927,56 +5927,56 @@ exit 1
     // Read-permission strangers are ignored.
     expect(
       runCmd({
-        body: '@qwen-code /takeover',
+        body: '@lailatul-coder /takeover',
         sender: 'stranger-c',
         ghPermission: 'read',
       }),
     ).toBe('|');
     // Extra text is NOT a command (exact match only).
     expect(
-      runCmd({ body: '@qwen-code /takeover please', sender: 'human-a' }),
+      runCmd({ body: '@lailatul-coder /takeover please', sender: 'human-a' }),
     ).toBe('|');
     // Non-PR comments and closed PRs are ignored; so is the bot itself.
     expect(
-      runCmd({ body: '@qwen-code /takeover', sender: 'human-a', hasPr: '' }),
+      runCmd({ body: '@lailatul-coder /takeover', sender: 'human-a', hasPr: '' }),
     ).toBe('|');
     expect(
       runCmd({
-        body: '@qwen-code /takeover',
+        body: '@lailatul-coder /takeover',
         sender: 'human-a',
         state: 'closed',
       }),
     ).toBe('|');
     expect(
       runCmd({
-        body: '@qwen-code /takeover',
-        sender: 'qwen-code-dev-bot',
-        author: 'qwen-code-dev-bot',
+        body: '@lailatul-coder /takeover',
+        sender: 'lailatul-coder-dev-bot',
+        author: 'lailatul-coder-dev-bot',
       }),
     ).toBe('|');
     // Author privilege is IN-REPO only: a fork-PR author cannot summon
     // PAT-authored writes onto their own PR (silent drop)…
     expect(
       runCmd({
-        body: '@qwen-code /takeover',
+        body: '@lailatul-coder /takeover',
         sender: 'human-a',
-        headRepo: 'human-a/qwen-code',
+        headRepo: 'human-a/lailatul-coder',
       }),
     ).toBe('|');
     // …while a write+ maintainer still reaches the command job (which then
     // posts the explanatory fork refusal).
     expect(
       runCmd({
-        body: '@qwen-code /takeover',
+        body: '@lailatul-coder /takeover',
         sender: 'maintainer-b',
         ghPermission: 'write',
-        headRepo: 'human-a/qwen-code',
+        headRepo: 'human-a/lailatul-coder',
       }),
     ).toBe('add|7165');
   });
 
   it('behaviorally parses the takeover round seed and keeps every other body closed', () => {
-    // '@qwen-code /takeover from N' is the ONE parameterized command form, so
+    // '@lailatul-coder /takeover from N' is the ONE parameterized command form, so
     // it is also the one place a value is read out of a comment body. Replay
     // the issue_comment branch VERBATIM (drift fails) and pin both halves:
     // the literal prefix must still match TAKEOVER_COMMAND byte-for-byte, and
@@ -5997,7 +5997,7 @@ exit 1
       try {
         writeFileSync(
           join(dir, 'gh'),
-          `#!/bin/bash\nif [[ "$*" == *"/pulls/"* ]]; then printf '%s' 'QwenLM/qwen-code'; else printf '%s' 'write'; fi\n`,
+          `#!/bin/bash\nif [[ "$*" == *"/pulls/"* ]]; then printf '%s' 'LailatulCoder/lailatul-coder'; else printf '%s' 'write'; fi\n`,
         );
         chmodSync(join(dir, 'gh'), 0o755);
         // TAKEOVER_FROM is echoed through sanitize_number exactly as the
@@ -6019,10 +6019,10 @@ exit 1
               HAS_PR_URL: 'url',
               ISSUE_STATE: 'open',
               ISSUE_NUMBER: '7165',
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
-              TAKEOVER_COMMAND: '@qwen-code /takeover',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
+              TAKEOVER_COMMAND: '@lailatul-coder /takeover',
               TAKEOVER_LABEL: 'autofix/takeover',
-              REPO: 'QwenLM/qwen-code',
+              REPO: 'LailatulCoder/lailatul-coder',
               GITHUB_TOKEN: 'x',
             },
             encoding: 'utf8',
@@ -6035,39 +6035,39 @@ exit 1
     };
     // Seeded engagement, including surrounding whitespace (the body is
     // trimmed before matching) and the two-digit upper end.
-    expect(seedOf('@qwen-code /takeover from 3')).toBe('add|3');
-    expect(seedOf('  @qwen-code /takeover from 12  ')).toBe('add|12');
-    expect(seedOf('@qwen-code /takeover from 99')).toBe('add|99');
+    expect(seedOf('@lailatul-coder /takeover from 3')).toBe('add|3');
+    expect(seedOf('  @lailatul-coder /takeover from 12  ')).toBe('add|12');
+    expect(seedOf('@lailatul-coder /takeover from 99')).toBe('add|99');
     // 'from 0' is the explicit no-seed spelling: it must engage exactly like
     // the bare command rather than being rejected, so a maintainer who types
     // it gets management, not silence.
-    expect(seedOf('@qwen-code /takeover from 0')).toBe('add|0');
+    expect(seedOf('@lailatul-coder /takeover from 0')).toBe('add|0');
     // Zero-padded spellings canonicalize to decimal at capture: the seed
     // reaches bare-context bash arithmetic downstream, where a leading zero
     // means octal — '08'/'09' error outright and silently drop the seed
     // note — and '00' lands on the explicit no-seed spelling '0'.
-    expect(seedOf('@qwen-code /takeover from 08')).toBe('add|8');
-    expect(seedOf('@qwen-code /takeover from 01')).toBe('add|1');
-    expect(seedOf('@qwen-code /takeover from 00')).toBe('add|0');
+    expect(seedOf('@lailatul-coder /takeover from 08')).toBe('add|8');
+    expect(seedOf('@lailatul-coder /takeover from 01')).toBe('add|1');
+    expect(seedOf('@lailatul-coder /takeover from 00')).toBe('add|0');
     // The unparameterized forms are untouched.
-    expect(seedOf('@qwen-code /takeover')).toBe('add|');
-    expect(seedOf('@qwen-code /takeover stop')).toBe('remove|');
+    expect(seedOf('@lailatul-coder /takeover')).toBe('add|');
+    expect(seedOf('@lailatul-coder /takeover stop')).toBe('remove|');
     // Fail-closed set. 'stop from 3' is the interesting one: it must NOT
     // release (the exact-'stop' match misses) and must NOT engage (the
     // prefix is not TAKEOVER_COMMAND) — an ambiguous body does nothing.
     for (const body of [
-      '@qwen-code /takeover stop from 3',
-      '@qwen-code /takeover from 100',
-      '@qwen-code /takeover from 3x',
-      '@qwen-code /takeover from -1',
-      '@qwen-code /takeover from',
-      '@qwen-code /takeover  from 3',
-      '@qwen-code /takeoverfrom 3',
-      'please @qwen-code /takeover from 3',
-      '@qwen-code /takeover from 3 please',
-      '@qwen-code /takeover from 3; rm -rf /',
-      '@qwen-code /takeover from $(id)',
-      '@qwen-code /takeover from `id`',
+      '@lailatul-coder /takeover stop from 3',
+      '@lailatul-coder /takeover from 100',
+      '@lailatul-coder /takeover from 3x',
+      '@lailatul-coder /takeover from -1',
+      '@lailatul-coder /takeover from',
+      '@lailatul-coder /takeover  from 3',
+      '@lailatul-coder /takeoverfrom 3',
+      'please @lailatul-coder /takeover from 3',
+      '@lailatul-coder /takeover from 3 please',
+      '@lailatul-coder /takeover from 3; rm -rf /',
+      '@lailatul-coder /takeover from $(id)',
+      '@lailatul-coder /takeover from `id`',
     ]) {
       expect(seedOf(body)).toBe('|');
     }
@@ -6185,9 +6185,9 @@ exit 1
             ...process.env,
             PATH: `${bin}:${process.env.PATH}`,
             EVENT_NAME: 'pull_request_review',
-            REPO: 'QwenLM/qwen-code',
-            AUTOFIX_BOT: 'qwen-code-dev-bot',
-            REVIEW_BOT: 'qwen-code-ci-bot',
+            REPO: 'LailatulCoder/lailatul-coder',
+            AUTOFIX_BOT: 'lailatul-coder-dev-bot',
+            REVIEW_BOT: 'lailatul-coder-ci-bot',
             TAKEOVER_LABEL: 'autofix/takeover',
             PR_NUMBER_EVENT: '7259',
             PR_HEAD_REPO: headRepo,
@@ -6202,10 +6202,10 @@ exit 1
       return out;
     };
 
-    const IN_REPO = 'QwenLM/qwen-code';
-    const FORK = 'wenshao/qwen-code';
+    const IN_REPO = 'LailatulCoder/lailatul-coder';
+    const FORK = 'wenshao/lailatul-coder';
     // Unchanged: an in-repo bot PR is admitted, a human in-repo PR is not.
-    expect(run({ headRepo: IN_REPO, author: 'qwen-code-dev-bot' })).toContain(
+    expect(run({ headRepo: IN_REPO, author: 'lailatul-coder-dev-bot' })).toContain(
       'DO_REVIEW=true',
     );
     expect(run({ headRepo: IN_REPO, author: 'someone' })).toContain(
@@ -6216,10 +6216,10 @@ exit 1
     // whole point of the removed branch, so they are the cases that prove it
     // is gone rather than merely narrowed.
     for (const forkCase of [
-      { headRepo: FORK, author: 'qwen-code-dev-bot' },
+      { headRepo: FORK, author: 'lailatul-coder-dev-bot' },
       { headRepo: FORK, author: 'wenshao', labels: ['autofix/takeover'] },
       { headRepo: FORK, author: 'wenshao' },
-      { headRepo: FORK, author: 'qwen-code-dev-bot', allowEdits: false },
+      { headRepo: FORK, author: 'lailatul-coder-dev-bot', allowEdits: false },
     ]) {
       const out = run(forkCase);
       expect(out).toContain('DO_REVIEW=false');
@@ -6235,10 +6235,10 @@ exit 1
     // In-repo routing is untouched: a non-main base and an untrusted sender
     // are still refused, so this change narrowed the fork case alone.
     expect(
-      run({ headRepo: IN_REPO, author: 'qwen-code-dev-bot', base: 'release' }),
+      run({ headRepo: IN_REPO, author: 'lailatul-coder-dev-bot', base: 'release' }),
     ).toContain('DO_REVIEW=false');
     expect(
-      run({ headRepo: IN_REPO, author: 'qwen-code-dev-bot', perm: 'read' }),
+      run({ headRepo: IN_REPO, author: 'lailatul-coder-dev-bot', perm: 'read' }),
     ).toContain('DO_REVIEW=false');
   });
 
@@ -6301,7 +6301,7 @@ exit 1
       base = 'main',
       state = 'open',
       action = 'labeled',
-      headRepo = 'QwenLM/qwen-code',
+      headRepo = 'LailatulCoder/lailatul-coder',
       label = 'autofix/takeover',
       sender = 'wenshao',
     }) =>
@@ -6324,7 +6324,7 @@ exit 1
             ...process.env,
             EVENT_NAME: 'pull_request',
             EVENT_ACTION: action,
-            REPO: 'QwenLM/qwen-code',
+            REPO: 'LailatulCoder/lailatul-coder',
             TAKEOVER_LABEL: 'autofix/takeover',
             ISSUE_LABEL: label,
             PR_HEAD_REPO: headRepo,
@@ -6332,7 +6332,7 @@ exit 1
             PR_BASE_REF: base,
             PR_NUMBER_EVENT: '7368',
             SENDER_LOGIN: sender,
-            AUTOFIX_BOT: 'qwen-code-dev-bot',
+            AUTOFIX_BOT: 'lailatul-coder-dev-bot',
           },
           encoding: 'utf8',
         },
@@ -6353,19 +6353,19 @@ exit 1
     // engage ack itself (the labeled event has been observed to not fire —
     // #7999, #8002 — so the ack cannot depend on this round-trip). Only the
     // ack is suppressed; the immediate scan still routes.
-    expect(run({ sender: 'qwen-code-dev-bot' })).toBe('ack= base= review=true');
+    expect(run({ sender: 'lailatul-coder-dev-bot' })).toBe('ack= base= review=true');
     // Still deliberately silent — these were never engaged and a comment on
     // them would be noise, not information: a closed PR, a fork (whose label
     // event carries no secrets to comment with), a non-takeover label, and
     // releasing a PR that never engaged.
     expect(run({ state: 'closed' })).toBe('ack= base= review=false');
-    expect(run({ headRepo: 'wenshao/qwen-code' })).toBe(
+    expect(run({ headRepo: 'wenshao/lailatul-coder' })).toBe(
       'ack= base= review=false',
     );
     expect(run({ label: 'kind/bug' })).toBe('ack= base= review=false');
     // A label REMOVED by the bot came from a /takeover stop — the command
     // posts the release ack itself, mirroring the engage-side suppression.
-    expect(run({ action: 'unlabeled', sender: 'qwen-code-dev-bot' })).toBe(
+    expect(run({ action: 'unlabeled', sender: 'lailatul-coder-dev-bot' })).toBe(
       'ack= base= review=false',
     );
     // …while a human removing the label still gets the ack-job release ack.
@@ -6405,7 +6405,7 @@ exit 1
         [
           '#!/usr/bin/env bash',
           `echo "$@" >> ${JSON.stringify(join(dir, 'calls.log'))}`,
-          `if [[ "$1" == 'api' && "$2" == 'user' ]]; then printf 'qwen-code-dev-bot'; exit 0; fi`,
+          `if [[ "$1" == 'api' && "$2" == 'user' ]]; then printf 'lailatul-coder-dev-bot'; exit 0; fi`,
           // R11-2: the engaged-stale dedup reads — served per knob
           // (empty by default, so a legacy vector sees no history).
           `if [[ "$1" == 'api' && "$2" == *'/comments' ]]; then ${historyFails ? 'exit 1' : `printf '%s' '${JSON.stringify(comments)}'`}; fi`,
@@ -6437,11 +6437,11 @@ exit 1
           ...process.env,
           PATH: `${bin}:${process.env.PATH}`,
           GITHUB_TOKEN: 'pat',
-          AUTOFIX_BOT: 'qwen-code-dev-bot',
-          REPO: 'QwenLM/qwen-code',
+          AUTOFIX_BOT: 'lailatul-coder-dev-bot',
+          REPO: 'LailatulCoder/lailatul-coder',
           SKIP_LABEL: 'autofix/skip',
           TAKEOVER_LABEL: 'autofix/takeover',
-          TAKEOVER_COMMAND: '@qwen-code /takeover',
+          TAKEOVER_COMMAND: '@lailatul-coder /takeover',
           NEEDS_HUMAN_LABEL: 'autofix/needs-human',
           ACK: ack,
           PR: '7368',
@@ -6503,7 +6503,7 @@ exit 1
     // engaged (no skip) and released perform exactly one DELETE of the
     // encoded label; base-refused / engaged-with-skip perform none.
     const nhDelete =
-      'api -X DELETE repos/QwenLM/qwen-code/issues/7368/labels/autofix%2Fneeds-human';
+      'api -X DELETE repos/LailatulCoder/lailatul-coder/issues/7368/labels/autofix%2Fneeds-human';
     expect(
       runAck({
         ack: 'engaged',
@@ -6582,7 +6582,7 @@ exit 1
     // event is superseded — it must not DELETE the fresh cycle's
     // needs-human nor post a marker that would reset the round window.
     const engagedMarker = (created_at) => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at,
       body: '🤝 … <!-- takeover-ack engaged -->',
     });
@@ -6707,7 +6707,7 @@ exit 1
       '🤖 Addressed the latest review feedback (round 2/100). What changed…';
     const NOOP_HEADLINE =
       '🤖 Reviewed the latest feedback — no changes needed. Why, point by point:…';
-    const mk = (headline, win, at, login = 'qwen-code-dev-bot') => ({
+    const mk = (headline, win, at, login = 'lailatul-coder-dev-bot') => ({
       user: { login },
       created_at: at,
       body: `${headline}\n<!-- autofix-eval ts=x acted=false round=1${win ? ` win=${win}` : ''} -->`,
@@ -6723,7 +6723,7 @@ exit 1
             [
               'set -uo pipefail',
               `WORKDIR='${dir}'`,
-              "AUTOFIX_BOT='qwen-code-dev-bot'",
+              "AUTOFIX_BOT='lailatul-coder-dev-bot'",
               `LIVE_REARM_KEY='${key}'`,
               censusSrc,
               'printf %s "${PRIOR_TIMEOUTS}"',
@@ -6747,7 +6747,7 @@ exit 1
         [
           mk(TIMEOUT_HEADLINE, K, '2026-07-29T04:00:00Z'),
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-07-29T05:00:00Z',
             body: `${PUSH_HEADLINE}\nstray: <!-- autofix-eval ts=x acted=true round=9 win=${K} -->\n<!-- autofix-eval ts=x acted=true round=9 win=OTHER -->`,
           },
@@ -6887,21 +6887,21 @@ exit 1
       {
         id: 10,
         created_at: '2025-12-31T00:00:00Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: '**[Critical]** stale owner routes writes to the wrong runtime',
       },
       {
         id: 11,
         created_at: '2026-01-02T00:00:00Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: '**[Critical]** wrong workspace is mutated',
       },
       {
         id: 12,
         created_at: '2026-01-02T00:00:01Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: '**[Suggestion]** add an aria-label',
       },
@@ -6946,10 +6946,10 @@ exit 1
             '2026-01-01T00:00:00Z',
             '--arg',
             'rb',
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             '--arg',
             'ab',
-            'qwen-code-dev-bot',
+            'lailatul-coder-dev-bot',
             '--argjson',
             'critical_only',
             String(criticalOnly),
@@ -7004,7 +7004,7 @@ exit 1
         id: 21,
         state: 'COMMENTED',
         submitted_at: '2026-01-02T00:00:01Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: 'Looks good overall',
       },
@@ -7012,7 +7012,7 @@ exit 1
         id: 22,
         state: 'COMMENTED',
         submitted_at: '2026-01-02T00:00:02Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: '**[Critical]** memory leak in the owner route',
       },
@@ -7035,10 +7035,10 @@ exit 1
             '2026-01-01T00:00:00Z',
             '--arg',
             'rb',
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             '--arg',
             'ab',
-            'qwen-code-dev-bot',
+            'lailatul-coder-dev-bot',
             '--argjson',
             'critical_only',
             String(criticalOnly),
@@ -7077,7 +7077,7 @@ exit 1
       {
         id: 31,
         created_at: '2026-01-02T00:00:01Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: '**[Critical]** data loss on concurrent writes',
       },
@@ -7086,7 +7086,7 @@ exit 1
         created_at: '2026-01-02T00:00:02Z',
         user: { login: 'maintainer' },
         author_association: 'MEMBER',
-        body: '@qwen-code /review',
+        body: '@lailatul-coder /review',
       },
     ];
     const countActionableIssue = (criticalOnly, over = []) =>
@@ -7099,10 +7099,10 @@ exit 1
             '2026-01-01T00:00:00Z',
             '--arg',
             'rb',
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             '--arg',
             'ab',
-            'qwen-code-dev-bot',
+            'lailatul-coder-dev-bot',
             '--argjson',
             'critical_only',
             String(criticalOnly),
@@ -7139,7 +7139,7 @@ exit 1
         id: 21,
         state: 'COMMENTED',
         submitted_at: '2026-01-02T00:00:00Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: 'Looks good overall',
         html_url: 'https://github.com/test/pull/1#review-21',
@@ -7148,7 +7148,7 @@ exit 1
         id: 22,
         state: 'COMMENTED',
         submitted_at: '2026-01-02T00:00:01Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: '**[Critical]** memory leak in the owner route',
         html_url: 'https://github.com/test/pull/1#review-22',
@@ -7173,10 +7173,10 @@ exit 1
             '2026-01-01T00:00:00Z',
             '--arg',
             'rb',
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             '--arg',
             'ab',
-            'qwen-code-dev-bot',
+            'lailatul-coder-dev-bot',
             '--arg',
             'pr_url',
             'https://github.com/test/pull/1',
@@ -7209,10 +7209,10 @@ exit 1
             '2026-01-01T00:00:00Z',
             '--arg',
             'rb',
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             '--arg',
             'ab',
-            'qwen-code-dev-bot',
+            'lailatul-coder-dev-bot',
             '--arg',
             'pr_url',
             'https://github.com/test/pull/1',
@@ -7252,7 +7252,7 @@ exit 1
       {
         id: 31,
         created_at: '2026-01-02T00:00:01Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: '**[Critical]** data loss on concurrent writes',
         html_url: 'https://github.com/test/pull/1#issuecomment-31',
@@ -7262,13 +7262,13 @@ exit 1
         created_at: '2026-01-02T00:00:02Z',
         user: { login: 'maintainer' },
         author_association: 'MEMBER',
-        body: '@qwen-code /review',
+        body: '@lailatul-coder /review',
         html_url: 'https://github.com/test/pull/1#issuecomment-32',
       },
       {
         id: 33,
         created_at: '2026-01-02T00:00:03Z',
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         author_association: 'NONE',
         body: '**[Suggestion]** consider caching this lookup',
         html_url: 'https://github.com/test/pull/1#issuecomment-33',
@@ -7284,10 +7284,10 @@ exit 1
             '2026-01-01T00:00:00Z',
             '--arg',
             'rb',
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             '--arg',
             'ab',
-            'qwen-code-dev-bot',
+            'lailatul-coder-dev-bot',
             '--arg',
             'pr_url',
             'https://github.com/test/pull/1',
@@ -7343,7 +7343,7 @@ exit 1
     expect(censusBlock).toBeTruthy();
     const WKEY = '2026-07-01T00:00:00Z';
     const markerC = (ts, acted, round, at, win = WKEY) => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at: at,
       body: `head\n<!-- autofix-eval ts=${ts} acted=${acted} round=${round} win=${win} -->`,
     });
@@ -7385,7 +7385,7 @@ exit 1
             'looper',
             '2026-07-02T13:00:00Z',
             'MEMBER',
-            '@qwen-code /review',
+            '@lailatul-coder /review',
           ),
           // Command-only author: both items are /commands, so with the
           // command-exclusion filter they count 0 consumed spans and stay
@@ -7395,13 +7395,13 @@ exit 1
             'commander',
             '2026-07-02T14:00:00Z',
             'MEMBER',
-            '@qwen-code /review',
+            '@lailatul-coder /review',
           ),
           humanC(
             'commander',
             '2026-07-03T14:00:00Z',
             'MEMBER',
-            '@qwen-code /retry',
+            '@lailatul-coder /retry',
           ),
           // Critical-only author: both batches are **[Critical]**-tagged, so
           // they are never deferrable and must not count (absent). Dropping the
@@ -7421,13 +7421,13 @@ exit 1
           // Review bot, even carrying a trusted association, is excluded by
           // login (its budget is zero). Dropping `.login != $rb` surfaces it.
           humanC(
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             '2026-07-02T18:00:00Z',
             'MEMBER',
             'bot suggestion',
           ),
           humanC(
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             '2026-07-03T18:00:00Z',
             'MEMBER',
             'bot suggestion 2',
@@ -7555,8 +7555,8 @@ exit 1
             'set -uo pipefail',
             `WORKDIR='${budgetDir}'`,
             `LIVE_REARM_KEY='${WKEY}'`,
-            "AUTOFIX_BOT='qwen-code-dev-bot'",
-            "REVIEW_BOT='qwen-code-ci-bot'",
+            "AUTOFIX_BOT='lailatul-coder-dev-bot'",
+            "REVIEW_BOT='lailatul-coder-ci-bot'",
             `TRUSTED_ASSOC='["OWNER","MEMBER","COLLABORATOR"]'`,
             'CRITICAL_ONLY_AFTER_ROUND=5',
             'CRITICAL_ONLY_HUMAN_BATCHES=2',
@@ -7567,7 +7567,7 @@ exit 1
         { encoding: 'utf8' },
       );
       // Only the two looped authors land here; every protected author above
-      // (crit/cr/appr/replyguy/crinline/qwen-code-ci-bot/sentinelvictim) has
+      // (crit/cr/appr/replyguy/crinline/lailatul-coder-ci-bot/sentinelvictim) has
       // two consumed-span batches yet stays absent — dropping any one of the
       // census's deferral-mirroring exclusions surfaces one of them and fails.
       expect(JSON.parse(overOut)).toEqual(['looper', 'reviewer2']);
@@ -7664,7 +7664,7 @@ exit 1
       round,
       key = 'W1',
       {
-        login = 'qwen-code-dev-bot',
+        login = 'lailatul-coder-dev-bot',
         // measured= (the prepare-time measurement instant) is the dedup/order
         // key; default advances with the round so sort_by/max_by are
         // deterministic. A re-run's distinct attempts override it explicitly.
@@ -7700,7 +7700,7 @@ exit 1
         'bash',
         [
           '-c',
-          `set -e\nAUTOFIX_BOT=qwen-code-dev-bot\nLIVE_REARM_KEY=W1\nWORKDIR=${dir}\n` +
+          `set -e\nAUTOFIX_BOT=lailatul-coder-dev-bot\nLIVE_REARM_KEY=W1\nWORKDIR=${dir}\n` +
             `NET_MEASURED=${netMeasured}\nCRITICAL_ONLY_GROWTH=${criticalOnlyGrowth}\n` +
             `GROWTH_NOW_CUTOFF='${cutoff}'\nGITHUB_RUN_ID=${currentRun}\n` +
             `GITHUB_OUTPUT=${outFile}\n` +
@@ -7915,12 +7915,12 @@ exit 1
       census({
         history: [
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T02:00:00Z',
             body: '<!-- autofix-growth-now src=500 test=300 over=true round=1 run=1001 measured=2026-01-01T00:01:00Z key=W1 -->',
           },
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T03:00:00Z',
             body: '<!-- autofix-growth-now src=0 test=0 over=false round=1 run=1001 key=W1 -->',
           },
@@ -7934,17 +7934,17 @@ exit 1
       census({
         history: [
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T01:30:00Z',
             body: '<!-- autofix-growth-now src=300 test=200 over=true round=1 run=1001 measured=2026-01-01T00:00:30Z key=W1 -->',
           },
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T02:00:00Z',
             body: '<!-- autofix-growth-now src=400 test=250 over=true round=2 run=1002 measured=2026-01-01T00:01:00Z key=W1 -->',
           },
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T03:00:00Z',
             body: '<!-- autofix-growth-now src=0 test=0 over=false round=2 run=1002 key=W1 -->',
           },
@@ -7958,12 +7958,12 @@ exit 1
       census({
         history: [
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T02:00:00Z',
             body: '<!-- autofix-growth-now src=300 test=150 over=true round=1 run=1001 key=W1 -->',
           },
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T03:00:00Z',
             body: '<!-- autofix-growth-now src=80 test=40 over=false round=1 run=1001 key=W1 -->',
           },
@@ -7977,7 +7977,7 @@ exit 1
       census({
         history: [
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T00:01:00Z',
             body: '<!-- autofix-growth-now src=500 test=300 over=true round=1 run=1001 key=W1 -->',
           },
@@ -7990,7 +7990,7 @@ exit 1
         cutoff: '2026-01-01T12:00:00Z',
         history: [
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T00:01:00Z',
             body: '<!-- autofix-growth-now src=500 test=300 over=true round=1 run=1001 key=W1 -->',
           },
@@ -8006,7 +8006,7 @@ exit 1
         cutoff: '2026-01-01T12:00:00Z',
         history: [
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T18:00:00Z',
             body: '<!-- autofix-growth-now src=500 test=300 over=true round=1 run=1001 key=W1 -->',
           },
@@ -8059,7 +8059,7 @@ exit 1
       return census({
         history: [
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T00:00:00Z',
             body: produced,
           },
@@ -8188,7 +8188,7 @@ exit 1
     const renderEnv =
       'GROWTH_SRC=7\nGROWTH_TEST=9\nGROWTH_BUDGET_SRC_LINES=1\n' +
       'GROWTH_BUDGET_TEST_LINES=1\nOVER_ROUNDS_PRIOR=2\n' +
-      `AUTOFIX_BOT=qwen-code-dev-bot\nLIVE_REARM_KEY=W1\nWORKDIR=${dir}\n`;
+      `AUTOFIX_BOT=lailatul-coder-dev-bot\nLIVE_REARM_KEY=W1\nWORKDIR=${dir}\n`;
     const runGuard = (block, vars) =>
       execFileSync('bash', ['-c', `${vars}${block}`], { encoding: 'utf8' });
     const trajOn = runGuard(trajGuard, `NET_MEASURED=true\n${renderEnv}`);
@@ -8203,13 +8203,13 @@ exit 1
       join(dir, 'ic.json'),
       JSON.stringify([
         {
-          user: { login: 'qwen-code-dev-bot' },
+          user: { login: 'lailatul-coder-dev-bot' },
           created_at: '2026-01-02T00:00:00Z',
           body: '<!-- autofix-growth-audit verdict=sound win=W1 -->',
         },
         // A trail marker under a DEAD window key is not this window's trail.
         {
-          user: { login: 'qwen-code-dev-bot' },
+          user: { login: 'lailatul-coder-dev-bot' },
           created_at: '2026-01-02T00:00:00Z',
           body: '<!-- autofix-growth-audit verdict=conflict win=W0 -->',
         },
@@ -8244,7 +8244,7 @@ exit 1
     )?.[0];
     expect(conflictBlock).toBeTruthy();
     const conflictMarker = (createdAt, win = 'W1') => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at: createdAt,
       body: `<!-- autofix-growth-audit verdict=conflict win=${win} -->`,
     });
@@ -8273,7 +8273,7 @@ exit 1
         'bash',
         [
           '-c',
-          `set -e\nAUTOFIX_BOT=qwen-code-dev-bot\nREVIEW_BOT=qwen-code-ci-bot\n` +
+          `set -e\nAUTOFIX_BOT=lailatul-coder-dev-bot\nREVIEW_BOT=lailatul-coder-ci-bot\n` +
             `LIVE_REARM_KEY=W1\nWORKDIR=${dir}\nSTALE=${stale}\n` +
             `BASE_UPD_AT='${baseUpdAt}'\n` +
             `TRUSTED_ASSOC='["OWNER", "MEMBER", "COLLABORATOR"]'\n` +
@@ -8322,7 +8322,7 @@ exit 1
       park({
         rv: [
           {
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
             author_association: 'NONE',
             state: 'CHANGES_REQUESTED',
             submitted_at: '2026-01-02T00:00:00Z',
@@ -8397,7 +8397,7 @@ exit 1
             user: { login: 'alice' },
             author_association: 'MEMBER',
             created_at: '2026-01-02T00:00:00Z',
-            body: '  @qwen-code /retry',
+            body: '  @lailatul-coder /retry',
           },
         ],
       }),
@@ -8973,17 +8973,17 @@ exit 1
         body: '<!-- autofix-growth-base src=1 test=1 key=WIN1 -->',
       },
       {
-        user: { login: 'qwen-code-dev-bot' },
+        user: { login: 'lailatul-coder-dev-bot' },
         created_at: '2026-01-01T01:00:00Z',
         body: 'report\n\n<!-- autofix-eval ts=2026-01-01T00:59:00Z acted=true round=1 win=WIN0 -->\n<!-- autofix-growth-base src=7 test=8 key=WIN0 -->',
       },
       {
-        user: { login: 'qwen-code-dev-bot' },
+        user: { login: 'lailatul-coder-dev-bot' },
         created_at: '2026-01-01T02:00:00Z',
         body: 'report\n\n<!-- autofix-growth-base src=50 test=-60 key=WIN1 -->',
       },
       {
-        user: { login: 'qwen-code-dev-bot' },
+        user: { login: 'lailatul-coder-dev-bot' },
         created_at: '2026-01-01T03:00:00Z',
         body: 'report\n\n<!-- autofix-growth-base src=100 test=200 key=WIN1 -->',
       },
@@ -8995,7 +8995,7 @@ exit 1
           '-r',
           '--arg',
           'ab',
-          'qwen-code-dev-bot',
+          'lailatul-coder-dev-bot',
           '--arg',
           'key',
           key,
@@ -9080,7 +9080,7 @@ exit 1
         'bash',
         [
           '-c',
-          `CRITICAL_ONLY_ROUNDS=${rounds}\nCRITICAL_ONLY_GROWTH=${growth}\nGROWTH_SRC=${growthSrc}\nGROWTH_TEST=${growthTest}\nGROWTH_BUDGET_SRC_LINES=400\nGROWTH_BUDGET_TEST_LINES=400\nCRITICAL_ONLY_AFTER_ROUND=5\nTAKEOVER_COMMAND='@qwen-code /takeover'\n${seed}\n${causeBlock}\nprintf '%s\\n%s' "$CAUSE_EN" "$CAUSE_ZH"`,
+          `CRITICAL_ONLY_ROUNDS=${rounds}\nCRITICAL_ONLY_GROWTH=${growth}\nGROWTH_SRC=${growthSrc}\nGROWTH_TEST=${growthTest}\nGROWTH_BUDGET_SRC_LINES=400\nGROWTH_BUDGET_TEST_LINES=400\nCRITICAL_ONLY_AFTER_ROUND=5\nTAKEOVER_COMMAND='@lailatul-coder /takeover'\n${seed}\n${causeBlock}\nprintf '%s\\n%s' "$CAUSE_EN" "$CAUSE_ZH"`,
         ],
         { encoding: 'utf8' },
       ).split('\n');
@@ -9099,7 +9099,7 @@ exit 1
     expect(both[0]).toContain('src 900 / test 20');
     expect(both[1]).toContain('轮次，且');
     // A SEEDED window must not claim five completed rounds: this PR reached
-    // the threshold from `@qwen-code /takeover from 3` plus two managed
+    // the threshold from `@lailatul-coder /takeover from 3` plus two managed
     // rounds, and the audit record has to say so or a maintainer reading
     // "5 change-producing rounds are complete" on a twice-run PR cannot tell
     // the brake from a misfire. An UNSET seed (every ordinary PR, and the
@@ -9113,7 +9113,7 @@ exit 1
       'LIVE_ROUND_START=3\nROUND=5',
     );
     expect(seeded[0]).toContain('seeded at round 3');
-    expect(seeded[0]).toContain('@qwen-code /takeover from 3');
+    expect(seeded[0]).toContain('@lailatul-coder /takeover from 3');
     expect(seeded[0]).toContain('plus 2 change-producing round(s) since');
     expect(seeded[0]).not.toBe('5 change-producing rounds are complete');
     expect(seeded[1]).toContain('从第 3 轮起算');
@@ -9131,7 +9131,7 @@ exit 1
       'LIVE_ROUND_START_RAW=12\nLIVE_ROUND_START=9\nROUND=14\nMAX_ROUNDS=10',
     );
     expect(clampedSeed[0]).toContain('seeded at round 12');
-    expect(clampedSeed[0]).toContain('@qwen-code /takeover from 12');
+    expect(clampedSeed[0]).toContain('@lailatul-coder /takeover from 12');
     expect(clampedSeed[0]).toContain('clamped to 9 under the effective cap 10');
     expect(clampedSeed[0]).toContain('plus 5 change-producing round(s) since');
     expect(clampedSeed[0]).not.toContain('from 9');
@@ -9218,7 +9218,7 @@ exit 1
         '-r',
         '--arg',
         'ab',
-        'qwen-code-dev-bot',
+        'lailatul-coder-dev-bot',
         '--arg',
         'key',
         'WINX',
@@ -9231,7 +9231,7 @@ exit 1
         encoding: 'utf8',
         input: JSON.stringify([
           {
-            user: { login: 'qwen-code-dev-bot' },
+            user: { login: 'lailatul-coder-dev-bot' },
             created_at: '2026-01-01T00:00:00Z',
             body: `report\n\n${rendered}`,
           },
@@ -9670,11 +9670,11 @@ exit 1
   it('surfaces the running model in every autofix report for diagnosis and attribution', () => {
     // The model is a repo variable (already the agent's OPENAI_MODEL), not a
     // secret, so it is safe to echo into a public comment. Each reporting
-    // step must plumb it in and render a footer that names Qwen Code and the
+    // step must plumb it in and render a footer that names LailatulCoder Ai and the
     // model, with an empty-variable fallback so the footer never renders a
     // bare backtick pair.
     const footer =
-      'echo "🧠 Handled by **Qwen Code** · model/模型 \\`${MODEL_DISPLAY}\\`"';
+      'echo "🧠 Handled by **LailatulCoder Ai** · model/模型 \\`${MODEL_DISPLAY}\\`"';
     for (const step of [
       pushAndReportStep,
       reviewAddressReportStep,
@@ -9714,7 +9714,7 @@ exit 1
     // Pin the exact expression so neither the repository guard nor the
     // hosted fallback can be dropped silently.
     const ecsRunsOn =
-      "runs-on: '${{ (github.repository == ''QwenLM/qwen-code'' && vars.MAINTAINER_ECS_RUNNER_DISABLED != ''true'' && (github.event_name != ''pull_request'' && github.event_name != ''pull_request_review'' || github.event.pull_request.head.repo.full_name == github.repository || contains(fromJSON(''[\"OWNER\",\"MEMBER\",\"COLLABORATOR\"]''), github.event.pull_request.author_association))) && fromJSON(''[\"self-hosted\", \"linux\", \"x64\", \"ecs-qwen\"]'') || fromJSON(''[\"ubuntu-latest\"]'') }}'";
+      "runs-on: '${{ (github.repository == ''LailatulCoder/lailatul-coder'' && vars.MAINTAINER_ECS_RUNNER_DISABLED != ''true'' && (github.event_name != ''pull_request'' && github.event_name != ''pull_request_review'' || github.event.pull_request.head.repo.full_name == github.repository || contains(fromJSON(''[\"OWNER\",\"MEMBER\",\"COLLABORATOR\"]''), github.event.pull_request.author_association))) && fromJSON(''[\"self-hosted\", \"linux\", \"x64\", \"ecs-qwen\"]'') || fromJSON(''[\"ubuntu-latest\"]'') }}'";
     const heavyJobRunsOn = {
       'issue-autofix': issueAutofixJob,
       'build-cli': buildCliJob,
@@ -9803,7 +9803,7 @@ exit 1
       expect(step).toContain('echo "${qwen_bin}" >> "${GITHUB_PATH}"');
       expect(step).toContain('qwen --version');
       expect(step).not.toContain('current_version="$(qwen --version');
-      expect(step).not.toContain('Using pre-installed Qwen Code');
+      expect(step).not.toContain('Using pre-installed LailatulCoder Ai');
       expect(step).not.toContain('npm install -g');
     }
     expect(workflow).not.toContain('run_shell_command(node dist/cli.js)');
@@ -9840,7 +9840,7 @@ exit 1
     expect(workflow).toContain('"sandbox": "docker"');
     expect(workflow).not.toContain('"sandbox": false');
     expect(workflow).not.toContain('"sandbox": true');
-    expect(workflow).not.toContain('QwenLM/qwen-code-action@');
+    expect(workflow).not.toContain('LailatulCoder/lailatul-coder-action@');
     expect(resolveSandboxImageSteps).toHaveLength(2);
     for (const step of resolveSandboxImageSteps) {
       expect(step).toContain('node .github/scripts/resolve-sandbox-image.mjs');
@@ -9850,10 +9850,10 @@ exit 1
     }
     expect(sandboxImageResolverScript).toContain('QWEN_SANDBOX_IMAGE');
     expect(sandboxImageResolverScript).toContain(
-      "const GHCR_REPOSITORY = 'qwenlm/qwen-code';",
+      "const GHCR_REPOSITORY = 'LailatulCoder/lailatul-coder';",
     );
     expect(sandboxImageResolverScript).toContain('ghcr.io/${GHCR_REPOSITORY}');
-    expect(workflow).not.toContain('npm view @qwen-code/qwen-code@latest');
+    expect(workflow).not.toContain('npm view @lailatul-coder/lailatul-coder@latest');
     expect(workflow).not.toContain('KNOWN_BOTS');
   });
 
@@ -9960,7 +9960,7 @@ exit 1
     // is the exception: the settings-schema check runs BEFORE any build
     // (on every path, including no-action) and its generator — tsx run
     // from the repo root, whose tsconfig has NO `paths` — imports cli
-    // sources that resolve '@qwen-code/qwen-code-core' through the
+    // sources that resolve '@lailatul-coder/lailatul-coder-core' through the
     // workspace symlink to core's dist entry point (the i18n check
     // instead resolves core to sources via the packages/cli `paths` map).
     // The regex anchors the line end, so appending another path to the
@@ -10823,7 +10823,7 @@ exit 1
       expect(step).not.toContain('qwen_status=$?');
       expect(step).not.toMatch(/PROMPT: \|-\n\s+\/autofix /);
       expect(step).not.toContain('for attempt in 1 2; do');
-      expect(step).not.toContain('Qwen Code failed on attempt');
+      expect(step).not.toContain('LailatulCoder Ai failed on attempt');
     }
     // Full-line pins: the zh sibling must sit in the SAME rm -f. Substring
     // pins that stop at failure.md stay green when the zh argument is
@@ -11471,18 +11471,18 @@ exit 1
         "🤖 AutoFix rejected this round — the agent wrote a handoff but the round HAS a commit, violating the brake's commit-nothing stop (round 7/100). The commit was NOT pushed.",
     };
     const K = '2026-07-01T00:00:00Z';
-    const evalC = (head, win, at, login = 'qwen-code-dev-bot') => ({
+    const evalC = (head, win, at, login = 'lailatul-coder-dev-bot') => ({
       user: { login },
       created_at: at,
       body: `${head}\n<!-- autofix-eval ts=x acted=false round=1${win ? ` win=${win}` : ''} -->`,
     });
     const baseC = (at) => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at: at,
       body: '🔀 Base updated: …\n<!-- autofix-base-updated -->',
     });
     const msC = (round, win, at) => ({
-      user: { login: 'qwen-code-dev-bot' },
+      user: { login: 'lailatul-coder-dev-bot' },
       created_at: at,
       body: `📊 …\n<!-- autofix-milestone round=${round} win=${win} -->`,
     });
@@ -11524,11 +11524,11 @@ exit 1
               MAX_ROUNDS: maxRounds,
               TAKEOVER_MAX_ROUNDS: '100',
               WINDOW: window,
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
               REPO: 'o/r',
               PR: '1',
               TAKEOVER_LABEL: 'autofix/takeover',
-              TAKEOVER_COMMAND: '@qwen-code /takeover',
+              TAKEOVER_COMMAND: '@lailatul-coder /takeover',
               ROUND_START: roundStart,
             },
             encoding: 'utf8',
@@ -15755,7 +15755,7 @@ exit 1
             API_ERROR_KIND: '',
             API_AUTH_MAX_ROUNDS: '3',
             PREPARE_OUTCOME: 'skipped',
-            RETRY_COMMAND: '@qwen-code /retry',
+            RETRY_COMMAND: '@lailatul-coder /retry',
             ...env,
           },
           encoding: 'utf8',
@@ -15865,7 +15865,7 @@ exit 1
             const headline = typeof h === 'string' ? h : h.headline;
             const win = typeof h === 'string' ? undefined : h.win;
             return {
-              user: { login: 'qwen-code-dev-bot' },
+              user: { login: 'lailatul-coder-dev-bot' },
               created_at: `2026-01-01T00:${String(i).padStart(2, '0')}:00Z`,
               body: `${headline}\n<!-- autofix-eval ts=x acted=y round=1${win ? ` win=${win}` : ''} -->`,
             };
@@ -15881,7 +15881,7 @@ exit 1
         'bash',
         [
           '-c',
-          `set -uo pipefail\nWORKDIR='${dir}'\nMARK_ROUND=${markRound}\nMAX_ROUNDS=100\nCONSECUTIVE_FAILURE_CAP=${cap}\nTIMEOUT_WINDOW_CAP=${timeoutCap}\nAGENT_TIMEOUT='${agentTimeout}'\nCONSEC_FAIL=0\nREPO=o/r\nPR=1\nAUTOFIX_BOT=qwen-code-dev-bot\nRETRY_COMMAND='@qwen-code /retry'\nAPI_ERROR_DETAIL='${apiErrorDetail}'\nAPI_ERROR_KIND='${apiErrorKind}'\nPREPARE_OUTCOME='${prepareOutcome}'\nSTALE_BASE_RETRY='${staleBaseRetry}'\n${window !== undefined ? `WINDOW='${window}'\n` : ''}HEADLINE=orig\n${script}\nprintf '%s|%s|%s' "$MARK_ROUND" "${'${CONSEC_FAIL}'}" "$HEADLINE"`,
+          `set -uo pipefail\nWORKDIR='${dir}'\nMARK_ROUND=${markRound}\nMAX_ROUNDS=100\nCONSECUTIVE_FAILURE_CAP=${cap}\nTIMEOUT_WINDOW_CAP=${timeoutCap}\nAGENT_TIMEOUT='${agentTimeout}'\nCONSEC_FAIL=0\nREPO=o/r\nPR=1\nAUTOFIX_BOT=lailatul-coder-dev-bot\nRETRY_COMMAND='@lailatul-coder /retry'\nAPI_ERROR_DETAIL='${apiErrorDetail}'\nAPI_ERROR_KIND='${apiErrorKind}'\nPREPARE_OUTCOME='${prepareOutcome}'\nSTALE_BASE_RETRY='${staleBaseRetry}'\n${window !== undefined ? `WINDOW='${window}'\n` : ''}HEADLINE=orig\n${script}\nprintf '%s|%s|%s' "$MARK_ROUND" "${'${CONSEC_FAIL}'}" "$HEADLINE"`,
         ],
         {
           env: { ...process.env, PATH: `${bin}:${process.env.PATH}` },
@@ -16266,7 +16266,7 @@ exit 1
 
   it('re-arms a stranded PR from a marker instead of a deleted comment', () => {
     // Recovery used to mean `gh api -X DELETE` on the bot's own eval marker:
-    // raw API access, an erased audit trail, undiscoverable. `@qwen-code
+    // raw API access, an erased audit trail, undiscoverable. `@lailatul-coder
     // /retry` posts an autofix-rearm marker instead, which must do BOTH halves
     // of what the deletion did - release the watermark those older markers
     // held, and reset the round counter - or the PR stays stuck.
@@ -16279,7 +16279,7 @@ exit 1
     )?.[1];
     expect(block).toBeTruthy();
 
-    const BOT = 'qwen-code-dev-bot';
+    const BOT = 'lailatul-coder-dev-bot';
     const evalMarker = (at, ts, round) => ({
       user: { login: BOT },
       created_at: at,
@@ -16366,7 +16366,7 @@ exit 1
     )?.[1];
     expect(block).toBeTruthy();
 
-    const BOT = 'qwen-code-dev-bot';
+    const BOT = 'lailatul-coder-dev-bot';
     const evalMarker = (at, ts, round) => ({
       user: { login: BOT },
       created_at: at,
@@ -16452,13 +16452,13 @@ exit 1
     expect(run([seededAck(SEEDED_AT, 9)], { maxRounds: '10' })[2]).toBe('9');
   });
 
-  it('routes @qwen-code /retry through the takeover command authorization', () => {
+  it('routes @lailatul-coder /retry through the takeover command authorization', () => {
     // Prefilter must let the command reach route at all, and the marker must
     // be a CONTROL comment so the agent never sees it as feedback to address.
     expect(workflow).toContain(
-      "startsWith(github.event.comment.body, '@qwen-code /retry')",
+      "startsWith(github.event.comment.body, '@lailatul-coder /retry')",
     );
-    expect(workflow).toContain("RETRY_COMMAND: '@qwen-code /retry'");
+    expect(workflow).toContain("RETRY_COMMAND: '@lailatul-coder /retry'");
     expect(workflow).toContain('<!-- autofix-rearm -->');
     expect(workflow).toContain(
       '<!-- (autofix-eval|autofix-rearm|autofix-base-updated|autofix-milestone|qwen-triage|',
@@ -16496,7 +16496,7 @@ exit 1
     // would post a marker the scanners ignore while still printing "re-armed",
     // and the structural toContain('<!-- autofix-rearm -->') check matches the
     // marker at several workflow sites so it would not catch a typo in the body.
-    const BOT = 'qwen-code-dev-bot';
+    const BOT = 'lailatul-coder-dev-bot';
     const rearmStep = workflow.match(
       /- name: 'Post re-arm marker'\n {8}run: \|-\n {10}([\s\S]*?)\n\n {2}takeover-ack:/,
     )?.[1];
@@ -16553,7 +16553,7 @@ exit 1
             PATH: `${dir}:${process.env.PATH}`,
             GITHUB_TOKEN: 'x',
             PR: '7354',
-            REPO: 'QwenLM/qwen-code',
+            REPO: 'LailatulCoder/lailatul-coder',
             AUTOFIX_BOT: BOT,
             NEEDS_HUMAN_LABEL: 'autofix/needs-human',
             SKIP_LABEL: 'autofix/skip',
@@ -16589,7 +16589,7 @@ exit 1
     // encoded label (broken @uri / renamed variable / swallowed failure all
     // fail here), and it is the only label write the re-arm performs.
     expect(ok.calls).toContain(
-      'api -X DELETE repos/QwenLM/qwen-code/issues/7354/labels/autofix%2Fneeds-human',
+      'api -X DELETE repos/LailatulCoder/lailatul-coder/issues/7354/labels/autofix%2Fneeds-human',
     );
     expect(ok.calls.match(/^api -X DELETE/gm) ?? []).toHaveLength(1);
     // R4-23: …and it is the only label WRITE of any verb — the full api-call
@@ -16671,7 +16671,7 @@ exit 1
     });
     expect(humanTakeover.status).toBe(0);
     expect(humanTakeover.calls).toContain(
-      'api -X DELETE repos/QwenLM/qwen-code/issues/7354/labels/autofix%2Fneeds-human',
+      'api -X DELETE repos/LailatulCoder/lailatul-coder/issues/7354/labels/autofix%2Fneeds-human',
     );
 
     // Actor mismatch: the PAT authenticates as someone else -> the guard exits
@@ -16779,7 +16779,7 @@ exit 1
           [
             'set -uo pipefail',
             `WORKDIR=${JSON.stringify(d)}`,
-            'AUTOFIX_BOT=qwen-code-dev-bot',
+            'AUTOFIX_BOT=lailatul-coder-dev-bot',
             extract,
             'printf "%s" "${LAST_REJECTION}"',
           ].join('\n'),
@@ -16791,12 +16791,12 @@ exit 1
     };
     const withRejection = [
       {
-        user: { login: 'qwen-code-dev-bot' },
+        user: { login: 'lailatul-coder-dev-bot' },
         created_at: '2026-07-20T10:00:00Z',
         body: 'old <!-- autofix-eval ts=1 acted=true round=1 -->',
       },
       {
-        user: { login: 'qwen-code-dev-bot' },
+        user: { login: 'lailatul-coder-dev-bot' },
         created_at: '2026-07-20T19:32:00Z',
         body: [
           'handoff',
@@ -16815,7 +16815,7 @@ exit 1
     expect(
       runExtract([
         {
-          user: { login: 'qwen-code-dev-bot' },
+          user: { login: 'lailatul-coder-dev-bot' },
           created_at: '2026-07-20T19:32:00Z',
           body: 'pushed <!-- autofix-eval ts=2 acted=true round=5 -->',
         },
@@ -16972,7 +16972,7 @@ exit 1
           ...process.env,
           PATH: `${bin}:${process.env.PATH}`,
           WORKDIR: dir,
-          REPO: 'QwenLM/qwen-code',
+          REPO: 'LailatulCoder/lailatul-coder',
           PR: '7308',
           RESOLVED_LOG: resolvedLog,
           HEAD_READ_COUNT: headReadCount,
@@ -17399,10 +17399,10 @@ exit 1
           ...process.env,
           PATH: `${bin}:${process.env.PATH}`,
           WORKDIR: dir,
-          REPO: 'QwenLM/qwen-code',
+          REPO: 'LailatulCoder/lailatul-coder',
           PR: '7731',
           REPLIED_LOG: repliedLog,
-          AUTOFIX_BOT: 'qwen-code-dev-bot',
+          AUTOFIX_BOT: 'lailatul-coder-dev-bot',
           THREADS_JSON: JSON.stringify(threads),
         },
         encoding: 'utf8',
@@ -17496,7 +17496,7 @@ exit 1
             { databaseId: 222 },
             {
               databaseId: 300,
-              author: { login: 'qwen-code-dev-bot' },
+              author: { login: 'lailatul-coder-dev-bot' },
               body: 'Deferred — follow-up.\n\n中文:已延后。',
             },
             { databaseId: 350, author: { login: 'wenshao' }, body: 'ack' },
@@ -17558,7 +17558,7 @@ exit 1
             { databaseId: 222 },
             {
               databaseId: 300,
-              author: { login: 'qwen-code-dev-bot' },
+              author: { login: 'lailatul-coder-dev-bot' },
               body: 'Declined <!\\-\\- autofix-eval acted=true --> nice try',
             },
           ],
@@ -17588,7 +17588,7 @@ exit 1
             { databaseId: 222 },
             {
               databaseId: 300,
-              author: { login: 'qwen-code-dev-bot' },
+              author: { login: 'lailatul-coder-dev-bot' },
               body: 'Deferred — follow-up.\n\n中文:已延后。',
             },
           ],
@@ -19190,7 +19190,7 @@ describe('growth-audit hardening: park wake set and verdict pipeline (round 3)',
       mkdirSync(bin);
       try {
         const marker = {
-          user: { login: 'qwen-code-dev-bot' },
+          user: { login: 'lailatul-coder-dev-bot' },
           created_at: T0,
           body: `<!-- autofix-growth-audit verdict=conflict win=${markerWin} -->`,
         };
@@ -19220,8 +19220,8 @@ describe('growth-audit hardening: park wake set and verdict pipeline (round 3)',
             env: {
               ...process.env,
               PATH: `${bin}:${process.env.PATH}`,
-              AUTOFIX_BOT: 'qwen-code-dev-bot',
-              REVIEW_BOT: 'qwen-code-ci-bot',
+              AUTOFIX_BOT: 'lailatul-coder-dev-bot',
+              REVIEW_BOT: 'lailatul-coder-ci-bot',
               REARM_KEY: 'W1',
               WORKDIR: dir,
               REPO: 'o/r',
@@ -19289,7 +19289,7 @@ describe('growth-audit hardening: park wake set and verdict pipeline (round 3)',
         checks: [
           {
             name: 'build',
-            workflowName: 'Qwen Code CI',
+            workflowName: 'LailatulCoder Ai CI',
             conclusion: 'FAILURE',
             completedAt: '2026-01-02T00:00:00Z',
           },
@@ -20777,19 +20777,19 @@ describe('stale sandbox container cleanup', () => {
   // is why the startup reap below may not touch running containers. The
   // startup reap: a JOB timeout still reaps only the host-side docker
   // client, so both sandboxed jobs reap before the sandbox picks a name
-  // (observed: a later leg's name counter found qwen-code-0.21.8-0
+  // (observed: a later leg's name counter found lailatul-coder-0.21.8-0
   // occupied) — but the docker daemon is per HOST and this pool runs
   // several registrations on one OS, so a RUNNING container can belong to
   // a concurrent job on another registration: the reap is restricted to
   // provably-dead states.
-  it('both agent jobs remove stale qwen-code containers at start', () => {
+  it('both agent jobs remove stale lailatul-coder containers at start', () => {
     const step = "- name: 'Remove stale sandbox containers'";
     expect(workflow.split(step).length - 1).toBe(2);
     for (const jobId of ['issue-autofix', 'review-address']) {
       const j = getWorkflowJob(workflow, jobId);
       expect(j, jobId).toContain(step);
       expect(j, jobId).toContain(
-        "timeout 30 docker ps -aq --filter 'name=qwen-code-' --filter 'status=exited' --filter 'status=dead'",
+        "timeout 30 docker ps -aq --filter 'name=lailatul-coder-' --filter 'status=exited' --filter 'status=dead'",
       );
       // Best-effort hygiene under bash -eo pipefail: a daemon blip, a
       // racing reap on another registration, or a container that refuses
@@ -20797,7 +20797,7 @@ describe('stale sandbox container cleanup', () => {
       // daemon must not block the step until the job timeout, so every
       // docker call runs under `timeout`.
       expect(j, jobId).toContain(
-        "STALE=\"$(timeout 30 docker ps -aq --filter 'name=qwen-code-' --filter 'status=exited' --filter 'status=dead' 2>/dev/null)\" || STALE=''",
+        "STALE=\"$(timeout 30 docker ps -aq --filter 'name=lailatul-coder-' --filter 'status=exited' --filter 'status=dead' 2>/dev/null)\" || STALE=''",
       );
       expect(j, jobId).toContain(
         'xargs -r -I{} timeout 30 docker rm -f {} > /dev/null 2>&1 || true',
@@ -20831,7 +20831,7 @@ describe('stale sandbox container cleanup', () => {
       const stub = join(dir, 'qwen');
       writeFileSync(
         stub,
-        '#!/bin/bash\necho "ContainerName (regular): qwen-code-9.9.9-9" >&2\nsleep 600\n',
+        '#!/bin/bash\necho "ContainerName (regular): lailatul-coder-9.9.9-9" >&2\nsleep 600\n',
       );
       chmodSync(stub, 0o755);
       const res = spawnSync(
@@ -20885,7 +20885,7 @@ describe('stale sandbox container cleanup', () => {
     expect(r.status).not.toBe(0);
     expect(r.failure).toContain('idle-timeout (no output for 1200ms');
     // The ONLY docker call is the owned container's removal.
-    expect(r.calls.split('\n')).toEqual(['rm -f -- qwen-code-9.9.9-9']);
+    expect(r.calls.split('\n')).toEqual(['rm -f -- lailatul-coder-9.9.9-9']);
   });
 
   it('a budget kill removes only the running sandbox its own agent launched', () => {
@@ -20896,6 +20896,6 @@ describe('stale sandbox container cleanup', () => {
     expect(r.status).not.toBe(0);
     expect(r.failure).toContain('timeout (1200ms)');
     expect(r.failure).not.toContain('idle-timeout');
-    expect(r.calls.split('\n')).toEqual(['rm -f -- qwen-code-9.9.9-9']);
+    expect(r.calls.split('\n')).toEqual(['rm -f -- lailatul-coder-9.9.9-9']);
   });
 });

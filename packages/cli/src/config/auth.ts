@@ -10,7 +10,7 @@ import {
   type ModelProvidersConfig,
   type ProviderModelConfig,
   type ProviderProtocolConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { loadEnvironment, loadSettings, type Settings } from './settings.js';
 import { collectProviderModelsForProtocol } from '../utils/modelConfigUtils.js';
 import { t } from '../i18n/index.js';

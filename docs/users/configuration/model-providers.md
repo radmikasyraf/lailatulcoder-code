@@ -1,6 +1,6 @@
 # Model Providers
 
-Qwen Code allows you to configure multiple model providers through the `modelProviders` setting in your `settings.json`. This enables you to switch between different AI models and providers using the `/model` command.
+LailatulCoder Ai allows you to configure multiple model providers through the `modelProviders` setting in your `settings.json`. This enables you to switch between different AI models and providers using the `/model` command.
 
 ## Overview
 
@@ -62,7 +62,7 @@ Without a matching `providerProtocol` entry, a custom provider id is skipped (se
 
 ### SDKs Used for API Requests
 
-Qwen Code uses the following official SDKs to send requests to each provider:
+LailatulCoder Ai uses the following official SDKs to send requests to each provider:
 
 | Auth Type    | SDK Package                                                                                     |
 | ------------ | ----------------------------------------------------------------------------------------------- |
@@ -239,7 +239,7 @@ This auth type supports not only OpenAI's official API but also any OpenAI-compa
 }
 ```
 
-For a vision model that can also follow the normal Qwen Code agent policy and use tools, opt in to full-turn image routing with both capabilities:
+For a vision model that can also follow the normal LailatulCoder Ai agent policy and use tools, opt in to full-turn image routing with both capabilities:
 
 ```json
 "capabilities": {
@@ -352,7 +352,7 @@ Alibaba Cloud Coding Plan provides a pre-configured set of Qwen models optimized
 
 ### Overview
 
-When you authenticate with an Alibaba Cloud Coding Plan API key using the `/auth` command, Qwen Code automatically configures the following models:
+When you authenticate with an Alibaba Cloud Coding Plan API key using the `/auth` command, LailatulCoder Ai automatically configures the following models:
 
 | Model ID               | Name                 | Description                                               |
 | ---------------------- | -------------------- | --------------------------------------------------------- |
@@ -372,7 +372,7 @@ When you authenticate with an Alibaba Cloud Coding Plan API key using the `/auth
 1. Obtain an Alibaba Cloud Coding Plan API key:
    - **China**: <https://bailian.console.aliyun.com/?tab=model#/efm/coding_plan>
    - **International**: <https://modelstudio.console.alibabacloud.com/?tab=dashboard#/efm/coding_plan>
-2. Run the `/auth` command in Qwen Code
+2. Run the `/auth` command in LailatulCoder Ai
 3. Select **Alibaba ModelStudio**, then choose **Coding Plan** from the sub-menu
 4. Select your region
 5. Enter your API key when prompted
@@ -407,7 +407,7 @@ When you configure Coding Plan through the `/auth` command, the API key is store
 
 ### Automatic Updates
 
-Coding Plan model configurations are versioned. When Qwen Code detects a newer version of the model template, you will be prompted to update. Accepting the update will:
+Coding Plan model configurations are versioned. When LailatulCoder Ai detects a newer version of the model template, you will be prompted to update. Accepting the update will:
 
 - Replace the existing Coding Plan model configurations with the latest versions
 - Preserve any custom model configurations you've added manually
@@ -622,7 +622,7 @@ For Anthropic this becomes `thinking.budget_tokens`. For OpenAI/DeepSeek the fie
 
 ## Provider Models vs Runtime Models
 
-Qwen Code distinguishes between two types of model configurations:
+LailatulCoder Ai distinguishes between two types of model configurations:
 
 ### Provider Model
 
@@ -642,7 +642,7 @@ Qwen Code distinguishes between two types of model configurations:
 
 ### RuntimeModelSnapshot lifecycle
 
-When you configure a model without using `modelProviders`, Qwen Code automatically creates a RuntimeModelSnapshot to preserve your configuration:
+When you configure a model without using `modelProviders`, LailatulCoder Ai automatically creates a RuntimeModelSnapshot to preserve your configuration:
 
 ```bash
 # This creates a RuntimeModelSnapshot with ID: $runtime|openai|my-custom-model

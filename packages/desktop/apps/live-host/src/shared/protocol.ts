@@ -1,5 +1,5 @@
 export const LIVE_PROTOCOL_VERSION = 6;
-export const LIVE_HOST_BUNDLE_ID = 'com.alibaba.qwen-code.live-host';
+export const LIVE_HOST_BUNDLE_ID = 'com.alibaba.lailatul-coder.live-host';
 export const MAX_CONTROL_FRAME_BYTES = 64 * 1024;
 export const MAX_INPUT_AUDIO_FRAME_BYTES = 64 * 1024;
 export const INPUT_AUDIO_EPOCH_BYTES = 8;

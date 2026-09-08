@@ -12,16 +12,16 @@ import {
   isWithinRoot,
   realpathNearestExistingAsync,
   splitCommands,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   EXTERNAL_TOOL_GUARD_MAX_DENIAL_REASON_CHARS,
   SHELL_EXECUTING_TOOL_NAMES as SHELL_EXECUTING_TOOLS,
-} from '@qwen-code/acp-bridge/externalToolGuard';
+} from '@lailatul-coder/acp-bridge/externalToolGuard';
 import type {
   ExternalToolGuardHandler,
   ExternalToolGuardPrepareRequest,
   ExternalToolGuardPrepareResult,
-} from '@qwen-code/acp-bridge/bridgeOptions';
+} from '@lailatul-coder/acp-bridge/bridgeOptions';
 
 // Git subcommands allowed even when relocated outside the session working
 // directory. Limited to subcommands verified to neither write files nor
@@ -227,7 +227,7 @@ const PROGRAMS_WITH_OWN_C_FLAG = new Set([
 ]);
 
 // Pinned to ToolNames.AGENT/WORKFLOW/CREATE_SUB_SESSION/SEND_MESSAGE in
-// @qwen-code/qwen-code-core. The literals keep this module free of a core
+// @lailatul-coder/lailatul-coder-core. The literals keep this module free of a core
 // barrel import for this one set; daemon-git-worktree-guard.test.ts asserts
 // the values match so a rename cannot silently desync this set.
 const EXTERNAL_GUARD_UNSUPPORTED_TOOLS = new Set([

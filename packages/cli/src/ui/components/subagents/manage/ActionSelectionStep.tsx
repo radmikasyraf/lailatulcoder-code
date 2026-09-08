@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { Box } from 'ink';
 import { RadioButtonSelect } from '../../shared/RadioButtonSelect.js';
 import { MANAGEMENT_STEPS } from '../types.js';
-import { type SubagentConfig } from '@qwen-code/qwen-code-core';
+import { type SubagentConfig } from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../../../i18n/index.js';
 
 interface ActionSelectionStepProps {
@@ -101,3 +101,4 @@ export const ActionSelectionStep = ({
     </Box>
   );
 };
+

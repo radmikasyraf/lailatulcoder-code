@@ -381,7 +381,7 @@ function planPr(): string {
       srcDiffLines: 200,
       diffLines: 300,
       prNumber: '6766',
-      ownerRepo: 'QwenLM/qwen-code',
+      ownerRepo: 'LailatulCoder/lailatul-coder',
       worktreePath: '.qwen/tmp/review-pr-6766',
       files: [{ path: 'a.ts', kind: 'source', removedLines: 0, heavy: false }],
       chunks: [
@@ -1155,7 +1155,7 @@ describe('the roster — who should have been here', () => {
       srcDiffLines: 200,
       diffLines: 300,
       prNumber: '6766',
-      ownerRepo: 'QwenLM/qwen-code',
+      ownerRepo: 'LailatulCoder/lailatul-coder',
       worktreePath: '.qwen/tmp/review-pr-6766',
       files: [{ path: 'a.ts', kind: 'source', removedLines: 0, heavy: false }],
       chunks: [
@@ -1388,7 +1388,7 @@ describe('the roster — who should have been here', () => {
       files: [{ path: 'a.ts', kind: 'source', removedLines: 0 }],
       chunks: [{ id: 1 }],
       prNumber: '6998',
-      ownerRepo: 'QwenLM/qwen-code',
+      ownerRepo: 'LailatulCoder/lailatul-coder',
     } as RosterPlan);
     expect(withPr.map((r) => r.key)).toContain('0');
 

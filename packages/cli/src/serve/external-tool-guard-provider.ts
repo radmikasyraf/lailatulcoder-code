@@ -11,12 +11,12 @@ import type {
   ExternalToolGuardHandler,
   ExternalToolGuardPrepareRequest,
   ExternalToolGuardPrepareResult,
-} from '@qwen-code/acp-bridge/bridgeOptions';
+} from '@lailatul-coder/acp-bridge/bridgeOptions';
 import {
   containsUnsafeExternalToolGuardControlCharacter,
   EXTERNAL_TOOL_GUARD_TOKEN_ENV,
   isValidExternalToolGuardDenialReason,
-} from '@qwen-code/acp-bridge/externalToolGuard';
+} from '@lailatul-coder/acp-bridge/externalToolGuard';
 
 export const EXTERNAL_TOOL_GUARD_PROTOCOL_VERSION = 1 as const;
 export const DEFAULT_EXTERNAL_TOOL_GUARD_TIMEOUT_MS = 3000;
@@ -186,7 +186,7 @@ export class RequiredExternalToolGuard {
     const response = await this.request('/v1/handshake', {
       protocolVersion: EXTERNAL_TOOL_GUARD_PROTOCOL_VERSION,
       nonce,
-      client: 'qwen-code',
+      client: 'lailatul-coder',
     });
     validateHandshakeResponse(response, nonce);
     this.initialized = true;

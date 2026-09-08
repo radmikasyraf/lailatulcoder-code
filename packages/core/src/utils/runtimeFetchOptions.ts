@@ -62,7 +62,7 @@ export type Runtime = 'node' | 'bun' | 'unknown';
  * outbound API connections.
  *
  * This is an opt-in escape hatch for self-hosted / lab environments that use
- * self-signed certificates. Because Qwen Code installs its own undici
+ * self-signed certificates. Because LailatulCoder Ai installs its own undici
  * dispatcher (to control timeouts), Node's global `NODE_TLS_REJECT_UNAUTHORIZED`
  * is not automatically honored by that dispatcher — this helper feeds the
  * setting back into the dispatcher's TLS connect options.

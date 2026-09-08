@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { DaemonUiEvent } from '@qwen-code/sdk/daemon';
+import type { DaemonUiEvent } from '@lailatul-coder/sdk/daemon';
 import { projectMainTranscriptEventsForTesting } from './DaemonSessionProvider.js';
 
 describe('on-demand subagent transcript projection', () => {

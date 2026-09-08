@@ -20,7 +20,7 @@ import type {
   ChannelConfig,
   ChannelTaskLifecycleEvent,
   Envelope,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import {
   getGlobalQwenDir,
   getWorkspaceScopeDirName,
@@ -29,7 +29,7 @@ import {
   sanitizeLogText,
   sanitizePromptText,
   truncateCodePoints,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { testBotMention, stripBotMention } from './mention.js';
 
 interface GithubConfig extends ChannelConfig {

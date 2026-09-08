@@ -11,7 +11,7 @@ import {
   getExtensionDisplayName,
   getExtensionDescription,
   type Extension,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { t, getCurrentLanguage } from '../../../../i18n/index.js';
 
 interface ExtensionDetailStepProps {
@@ -143,3 +143,4 @@ export const ExtensionDetailStep = ({
     </Box>
   );
 };
+

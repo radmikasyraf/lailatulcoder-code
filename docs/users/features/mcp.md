@@ -1,10 +1,10 @@
-# Connect Qwen Code to tools via MCP
+# Connect LailatulCoder Ai to tools via MCP
 
-Qwen Code can connect to external tools and data sources through the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction). MCP servers give Qwen Code access to your tools, databases, and APIs.
+LailatulCoder Ai can connect to external tools and data sources through the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction). MCP servers give LailatulCoder Ai access to your tools, databases, and APIs.
 
 ## What you can do with MCP
 
-With MCP servers connected, you can ask Qwen Code to:
+With MCP servers connected, you can ask LailatulCoder Ai to:
 
 - Work with files and repos (read/search/write, depending on the tools you enable)
 - Query databases (schema inspection, queries, reporting)
@@ -17,7 +17,7 @@ With MCP servers connected, you can ask Qwen Code to:
 
 ## Quick start
 
-Qwen Code loads MCP servers from `mcpServers` in your `settings.json`. You can configure servers either:
+LailatulCoder Ai loads MCP servers from `mcpServers` in your `settings.json`. You can configure servers either:
 
 - By editing `settings.json` directly
 - By using `qwen mcp` commands (see [CLI reference](#manage-mcp-servers-with-qwen-mcp))
@@ -30,7 +30,7 @@ Qwen Code loads MCP servers from `mcpServers` in your `settings.json`. You can c
 qwen mcp add --transport http my-server http://localhost:3000/mcp
 ```
 
-2. Start Qwen Code and open the MCP management dialog to view and manage
+2. Start LailatulCoder Ai and open the MCP management dialog to view and manage
    servers:
 
 ```bash
@@ -43,7 +43,7 @@ Then enter:
 /mcp
 ```
 
-3. If Qwen Code was already running before you added the server, restart it in
+3. If LailatulCoder Ai was already running before you added the server, restart it in
    the same project. Then ask the model to use tools from that server.
 
 ## Where configuration is stored (scopes)
@@ -157,7 +157,7 @@ qwen mcp add --transport sse sseServer http://localhost:8080/sse --timeout 30000
 
 ## Using MCP prompts and resources
 
-Besides tools, Qwen Code discovers and surfaces two other MCP primitives.
+Besides tools, LailatulCoder Ai discovers and surfaces two other MCP primitives.
 
 ### Prompts (slash commands)
 
@@ -177,7 +177,7 @@ The prompt's messages are sent to the model, which then acts on them.
 
 > Discovery is lenient about the declared `prompts` capability: some
 > servers implement `prompts/list` but omit `prompts` from their
-> `initialize` capabilities. Qwen Code attempts `prompts/list` anyway, so
+> `initialize` capabilities. LailatulCoder Ai attempts `prompts/list` anyway, so
 > those prompts still appear. A server that genuinely has no prompts simply
 > answers `Method not found`, which is ignored.
 
@@ -213,7 +213,7 @@ untrusted folders.
 
 ## Progressive availability and discovery timeouts
 
-Qwen Code discovers MCP servers in the background after the UI is already
+LailatulCoder Ai discovers MCP servers in the background after the UI is already
 interactive. You see the cli's first prompt within a few hundred
 milliseconds even when one of your MCP servers takes several seconds
 (or never responds), and the model's tool list updates within roughly
@@ -275,19 +275,19 @@ environment. This is kept as an escape hatch for at least one release.
 
 ### Connection-loss replay
 
-Qwen Code only reconnects and replays the current MCP tool call when the server has `trust: true`, the workspace is trusted, and the tool explicitly declares either `idempotentHint: true` or a consistent read-only annotation. Read-only annotations conflict with `destructiveHint: true` or `idempotentHint: false` and are not replayed.
+LailatulCoder Ai only reconnects and replays the current MCP tool call when the server has `trust: true`, the workspace is trusted, and the tool explicitly declares either `idempotentHint: true` or a consistent read-only annotation. Read-only annotations conflict with `destructiveHint: true` or `idempotentHint: false` and are not replayed.
 
-Calls with missing annotations, conflicting annotations, an untrusted server, or an untrusted workspace are not replayed after a connection failure. Qwen Code reports that the result may be unknown because the server could have completed the operation before the response was lost. Verify the outcome before trying again. This conservative behavior can differ from earlier releases that transparently retried unannotated tools.
+Calls with missing annotations, conflicting annotations, an untrusted server, or an untrusted workspace are not replayed after a connection failure. LailatulCoder Ai reports that the result may be unknown because the server could have completed the operation before the response was lost. Verify the outcome before trying again. This conservative behavior can differ from earlier releases that transparently retried unannotated tools.
 
 Annotations are server-provided behavior hints, not permissions or an authorization boundary. Only configure `trust: true` for servers you control and whose annotations you have verified.
 
 ### OAuth authentication
 
-Qwen Code supports OAuth 2.0 authentication for MCP servers. This is useful when accessing remote servers that require authentication.
+LailatulCoder Ai supports OAuth 2.0 authentication for MCP servers. This is useful when accessing remote servers that require authentication.
 
 #### Basic usage
 
-When you add an MCP server with OAuth credentials, Qwen Code will automatically handle the authentication flow:
+When you add an MCP server with OAuth credentials, LailatulCoder Ai will automatically handle the authentication flow:
 
 ```bash
 qwen mcp add --transport sse oauth-server https://api.example.com/sse/ \
@@ -301,9 +301,9 @@ qwen mcp add --transport sse oauth-server https://api.example.com/sse/ \
 
 The OAuth flow requires a redirect URI where the authorization provider sends the authentication code.
 
-- **Local development**: By default, Qwen Code uses `http://localhost:7777/oauth/callback`. This works when running Qwen Code on your local machine with a local browser.
+- **Local development**: By default, LailatulCoder Ai uses `http://localhost:7777/oauth/callback`. This works when running LailatulCoder Ai on your local machine with a local browser.
 
-- **Remote/cloud deployments**: When running Qwen Code on remote servers, cloud IDEs, or web terminals, the default `localhost` redirect will NOT work. Configure `--oauth-redirect-uri` with a public URL ending in `/oauth/callback`, then reverse-proxy that path to `http://127.0.0.1:7777/oauth/callback` on the machine running Qwen Code. Qwen Code does not terminate TLS; the proxy must do so.
+- **Remote/cloud deployments**: When running LailatulCoder Ai on remote servers, cloud IDEs, or web terminals, the default `localhost` redirect will NOT work. Configure `--oauth-redirect-uri` with a public URL ending in `/oauth/callback`, then reverse-proxy that path to `http://127.0.0.1:7777/oauth/callback` on the machine running LailatulCoder Ai. LailatulCoder Ai does not terminate TLS; the proxy must do so.
 
 Example for remote servers:
 
@@ -361,19 +361,19 @@ OAuth configuration properties:
 
 OAuth tokens are automatically:
 
-- **Stored** in `~/.qwen/mcp-oauth-tokens.json` (plaintext, mode 0600) by default. If `QWEN_CODE_FORCE_ENCRYPTED_FILE_STORAGE=true` is set, Qwen Code uses keychain-backed storage where available, or `~/.qwen/mcp-oauth-tokens-v2.json` with AES-256-GCM encryption.
+- **Stored** in `~/.qwen/mcp-oauth-tokens.json` (plaintext, mode 0600) by default. If `QWEN_CODE_FORCE_ENCRYPTED_FILE_STORAGE=true` is set, LailatulCoder Ai uses keychain-backed storage where available, or `~/.qwen/mcp-oauth-tokens-v2.json` with AES-256-GCM encryption.
 - **Refreshed** when expired (if refresh tokens are available)
 - **Validated** before each connection attempt
 
 > [!WARNING]
 > By default, OAuth tokens are stored unencrypted on disk. On shared or multi-user machines, set `QWEN_CODE_FORCE_ENCRYPTED_FILE_STORAGE=true` to protect credentials.
 
-Use the `/mcp` dialog within Qwen Code to inspect MCP servers and manage
+Use the `/mcp` dialog within LailatulCoder Ai to inspect MCP servers and manage
 authentication interactively.
 
 ### Tool filtering (allow/deny tools per server)
 
-Use `includeTools` / `excludeTools` to restrict tools exposed by a server (from Qwen Code’s perspective).
+Use `includeTools` / `excludeTools` to restrict tools exposed by a server (from LailatulCoder Ai’s perspective).
 
 Example: include only a few tools:
 
@@ -414,7 +414,7 @@ Example:
 
 - **Server shows “Disconnected” in `qwen mcp list`**: verify the URL/command is correct, then increase `timeout`.
 - **Stdio server fails to start**: use an absolute `command` path, and double-check `cwd`/`env`.
-- **Environment variables in JSON don’t resolve**: ensure they exist in the environment where Qwen Code runs (shell vs GUI app environments can differ).
+- **Environment variables in JSON don’t resolve**: ensure they exist in the environment where LailatulCoder Ai runs (shell vs GUI app environments can differ).
 
 ## Reference
 

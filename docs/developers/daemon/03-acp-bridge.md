@@ -187,7 +187,7 @@ sequenceDiagram
 | Upstream                                                                                     | Downstream                                     |
 | -------------------------------------------------------------------------------------------- | ---------------------------------------------- |
 | `@agentclientprotocol/sdk` — `ClientSideConnection`, `PROTOCOL_VERSION`, ACP types           | `packages/cli/src/serve/` (the daemon)         |
-| `@qwen-code/qwen-code-core` — `ApprovalMode`, `TrustGateError`, `getCurrentGeminiMdFilename` | `packages/channels/base/` (planned, F4)        |
+| `@lailatul-coder/lailatul-coder-core` — `ApprovalMode`, `TrustGateError`, `getCurrentGeminiMdFilename` | `packages/channels/base/` (planned, F4)        |
 | `node:crypto`, `node:fs`, `node:path`                                                        | `packages/vscode-ide-companion/` (planned, F4) |
 
 ## Configuration
@@ -267,7 +267,7 @@ calls; it carries `clientId`, `fromLoopback: boolean`, and `promptId`.
 - `MCP_RESTART_TIMEOUT_MS = 300_000` (5 min) — the bridge timeout for `/workspace/mcp/:server/restart` is intentionally large because `McpClientManager.MAX_DISCOVERY_TIMEOUT_MS` can be up to 5 min for stdio servers. A shorter deadline would produce false timeouts while the ACP child kept reconnecting in the background.
 - `BridgeOptions.eventRingSize > 1_000_000` throws at construction.
 - `connection.unstable_resumeSession` is exposed through the stable `session_resume` daemon capability; `unstable_session_resume` remains advertised as a deprecated compatibility alias for older SDKs. Clients should feature-detect `session_resume`.
-- The bridge package is `@qwen-code/acp-bridge`. Current code imports event-bus and status primitives directly from package subpaths; `serve/acp-session-bridge.ts` remains as the CLI-local compatibility facade for the broader bridge surface.
+- The bridge package is `@lailatul-coder/acp-bridge`. Current code imports event-bus and status primitives directly from package subpaths; `serve/acp-session-bridge.ts` remains as the CLI-local compatibility facade for the broader bridge surface.
 
 ## References
 
@@ -278,4 +278,4 @@ calls; it carries `clientId`, `fromLoopback: boolean`, and `promptId`.
 - `packages/acp-bridge/src/channel.ts`
 - `packages/acp-bridge/src/spawnChannel.ts`
 - `packages/acp-bridge/src/bridgeErrors.ts`
-- Issues: [#3803](https://github.com/QwenLM/qwen-code/issues/3803), [#4175](https://github.com/QwenLM/qwen-code/issues/4175).
+- Issues: [#3803](https://github.com/LailatulCoder/lailatul-coder/issues/3803), [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175).

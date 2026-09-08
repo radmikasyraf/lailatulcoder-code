@@ -72,7 +72,7 @@ import {
   ENV_WAS_RECOVERED,
 } from './settings.js';
 import { needsMigration } from './migration/index.js';
-import { QWEN_DIR } from '@qwen-code/qwen-code-core';
+import { QWEN_DIR } from '@lailatul-coder/lailatul-coder-core';
 
 const mockDebugLogger = vi.hoisted(() => ({
   debug: vi.fn(),
@@ -81,9 +81,9 @@ const mockDebugLogger = vi.hoisted(() => ({
   info: vi.fn(),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     createDebugLogger: () => mockDebugLogger,
@@ -651,7 +651,7 @@ describe('Settings Loading and Merging', () => {
       );
       const userSettingsContent = {
         [SETTINGS_VERSION_KEY]: SETTINGS_VERSION,
-        model: { name: 'qwen-coder' },
+        model: { name: 'lailatul-coderr' },
       };
       (fs.readFileSync as Mock).mockImplementation(
         (p: fs.PathOrFileDescriptor) => {
@@ -787,7 +787,7 @@ describe('Settings Loading and Merging', () => {
       );
       const legacySettingsContent = {
         theme: 'dark',
-        model: 'qwen-coder',
+        model: 'lailatul-coderr',
       };
       (fs.readFileSync as Mock).mockImplementation(
         (p: fs.PathOrFileDescriptor) => {
@@ -823,7 +823,7 @@ describe('Settings Loading and Merging', () => {
           theme: 'dark',
         },
         model: {
-          name: 'qwen-coder',
+          name: 'lailatul-coderr',
         },
       };
       (fs.readFileSync as Mock).mockImplementation(
@@ -852,7 +852,7 @@ describe('Settings Loading and Merging', () => {
           theme: 'dark',
         },
         model: {
-          name: 'qwen-coder',
+          name: 'lailatul-coderr',
         },
       };
       (fs.readFileSync as Mock).mockImplementation(
@@ -878,7 +878,7 @@ describe('Settings Loading and Merging', () => {
 
       expect(writtenContent[SETTINGS_VERSION_KEY]).toBe(SETTINGS_VERSION);
       expect(writtenContent.ui?.theme).toBe('dark');
-      expect(writtenContent.model?.name).toBe('qwen-coder');
+      expect(writtenContent.model?.name).toBe('lailatul-coderr');
       // Verify writeWithBackupSync was called by checking temp file write
       expect(fs.writeFileSync).toHaveBeenCalled();
     });
@@ -890,7 +890,7 @@ describe('Settings Loading and Merging', () => {
       // Edge case: model already in V2 format (object), but autoAccept in V1 format
       const partiallyMigratedContent = {
         model: {
-          name: 'qwen-coder',
+          name: 'lailatul-coderr',
         },
         autoAccept: false, // V1 key
       };
@@ -919,7 +919,7 @@ describe('Settings Loading and Merging', () => {
       const writtenContent = JSON.parse(writeCall[1] as string);
 
       // Model should remain as an object, not double-nested
-      expect(writtenContent.model).toEqual({ name: 'qwen-coder' });
+      expect(writtenContent.model).toEqual({ name: 'lailatul-coderr' });
       // autoAccept should be migrated to tools.autoAccept
       expect(writtenContent.tools?.autoAccept).toBe(false);
       // Version field should be added
@@ -5283,7 +5283,7 @@ describe('Settings Loading and Merging', () => {
         // but other fields in V1 format
         const partiallyMigrated = {
           model: {
-            name: 'qwen-coder',
+            name: 'lailatul-coderr',
           },
           autoAccept: false, // V1 key
         };
@@ -5295,7 +5295,7 @@ describe('Settings Loading and Merging', () => {
         const partiallyMigratedWithVersion = {
           [SETTINGS_VERSION_KEY]: SETTINGS_VERSION,
           model: {
-            name: 'qwen-coder',
+            name: 'lailatul-coderr',
           },
           autoAccept: false, // This would look like V1 but version says it's V2
         };

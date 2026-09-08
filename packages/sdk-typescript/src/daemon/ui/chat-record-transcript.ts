@@ -7,8 +7,8 @@
 import {
   prepareTranscriptRecords,
   TranscriptRecordPreparationError,
-} from '@qwen-code/qwen-code-core/transcriptRecords';
-import { createTranscriptReplayMachine } from '@qwen-code/acp-bridge/transcriptReplay';
+} from '@lailatul-coder/lailatul-coder-core/transcriptRecords';
+import { createTranscriptReplayMachine } from '@lailatul-coder/acp-bridge/transcriptReplay';
 import type { DaemonEvent } from '../types.js';
 import { normalizeDaemonEvent } from './normalizer.js';
 import {

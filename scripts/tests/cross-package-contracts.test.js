@@ -56,22 +56,22 @@ const imports = [
   [
     'LIVE_TASK_TOOL_NAMES',
     'packages/cli/src/serve/live/live-task-tools.ts',
-    '@qwen-code/acp-bridge/bridgeOptions',
+    '@lailatul-coder/acp-bridge/bridgeOptions',
   ],
   [
     'LIVE_TASK_TOOL_NAMES',
     'packages/cli/src/serve/live/live-task-service.ts',
-    '@qwen-code/acp-bridge/bridgeOptions',
+    '@lailatul-coder/acp-bridge/bridgeOptions',
   ],
   [
     'LiveTaskToolName',
     'packages/cli/src/serve/live/live-task-tools.ts',
-    '@qwen-code/acp-bridge/bridgeOptions',
+    '@lailatul-coder/acp-bridge/bridgeOptions',
   ],
   [
     'LiveTaskToolName',
     'packages/cli/src/serve/live/live-task-service.ts',
-    '@qwen-code/acp-bridge/bridgeOptions',
+    '@lailatul-coder/acp-bridge/bridgeOptions',
   ],
   [
     'MAX_SUB_SESSION_PROMPT_CHARS',
@@ -81,7 +81,7 @@ const imports = [
   [
     'MAX_SUB_SESSION_PROMPT_CHARS',
     'packages/acp-bridge/src/bridgeOptions.ts',
-    '@qwen-code/qwen-code-core/subSessionConstants',
+    '@lailatul-coder/lailatul-coder-core/subSessionConstants',
   ],
   [
     'MAX_SUB_SESSION_PROMPT_CHARS',

@@ -70,14 +70,14 @@ describe('ImageGenTool', () => {
     );
 
     const result = await tool.buildAndExecute(
-      { prompt: 'A Qwen Code poster', size: '1536*864' },
+      { prompt: 'A LailatulCoder Ai poster', size: '1536*864' },
       new AbortController().signal,
     );
 
     expect(generateImage).toHaveBeenCalledWith(
       expect.objectContaining({
         model: 'qwen-image-2.0',
-        prompt: 'A Qwen Code poster',
+        prompt: 'A LailatulCoder Ai poster',
         size: '1536*864',
         apiKey: 'secret',
       }),

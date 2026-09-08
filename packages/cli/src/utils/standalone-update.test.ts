@@ -33,12 +33,12 @@ describe('standalone-update', () => {
 
   describe('rollbackStandaloneUpdate', () => {
     it('returns no-old when .old directory does not exist', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       fs.mkdirSync(standaloneDir);
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'darwin-arm64',
         }),
       );
@@ -49,14 +49,14 @@ describe('standalone-update', () => {
     });
 
     it('returns no-manifest when .old directory has no manifest.json', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const oldDir = `${standaloneDir}.old`;
       fs.mkdirSync(standaloneDir);
       fs.mkdirSync(oldDir);
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'darwin-arm64',
         }),
       );
@@ -67,7 +67,7 @@ describe('standalone-update', () => {
     });
 
     it('swaps current with .old directory on valid rollback', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const oldDir = `${standaloneDir}.old`;
       fs.mkdirSync(standaloneDir);
       fs.mkdirSync(oldDir);
@@ -75,7 +75,7 @@ describe('standalone-update', () => {
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'darwin-arm64',
           version: '0.17.0',
         }),
@@ -85,7 +85,7 @@ describe('standalone-update', () => {
       fs.writeFileSync(
         path.join(oldDir, 'manifest.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'darwin-arm64',
           version: '0.16.2',
         }),
@@ -106,14 +106,14 @@ describe('standalone-update', () => {
     });
 
     it('succeeds even with minimal manifest in .old', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const oldDir = `${standaloneDir}.old`;
       fs.mkdirSync(standaloneDir);
       fs.mkdirSync(oldDir);
 
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
-        JSON.stringify({ name: '@qwen-code/qwen-code', version: '0.17.0' }),
+        JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version: '0.17.0' }),
       );
       fs.writeFileSync(path.join(oldDir, 'manifest.json'), '{}');
 
@@ -140,7 +140,7 @@ describe('standalone-update', () => {
       'creates a Unix shell wrapper script',
       () => {
         const libDir = path.join(tempDir, '.local', 'lib');
-        const standaloneDir = path.join(libDir, 'qwen-code');
+        const standaloneDir = path.join(libDir, 'lailatul-coder');
         fs.mkdirSync(standaloneDir, { recursive: true });
 
         // Isolate HOME so ensurePathInShellRc doesn't touch real shell rc
@@ -167,7 +167,7 @@ describe('standalone-update', () => {
 
     it('creates a Windows cmd wrapper', () => {
       const libDir = path.join(tempDir, '.local', 'lib');
-      const standaloneDir = path.join(libDir, 'qwen-code');
+      const standaloneDir = path.join(libDir, 'lailatul-coder');
       fs.mkdirSync(standaloneDir, { recursive: true });
 
       ensureBinWrapper(standaloneDir, 'win-x64');
@@ -182,7 +182,7 @@ describe('standalone-update', () => {
       'escapes single quotes in Unix wrapper paths',
       () => {
         const libDir = path.join(tempDir, "o'brien", '.local', 'lib');
-        const standaloneDir = path.join(libDir, 'qwen-code');
+        const standaloneDir = path.join(libDir, 'lailatul-coder');
         fs.mkdirSync(standaloneDir, { recursive: true });
 
         const origHome = process.env['HOME'];
@@ -212,7 +212,7 @@ describe('standalone-update', () => {
       'allows shell metacharacters in single-quoted Unix wrapper paths',
       () => {
         const libDir = path.join(tempDir, 'with$dollar', '.local', 'lib');
-        const standaloneDir = path.join(libDir, 'qwen-code');
+        const standaloneDir = path.join(libDir, 'lailatul-coder');
         fs.mkdirSync(standaloneDir, { recursive: true });
 
         const origHome = process.env['HOME'];
@@ -242,7 +242,7 @@ describe('standalone-update', () => {
       'does not overwrite existing wrapper',
       () => {
         const libDir = path.join(tempDir, '.local', 'lib');
-        const standaloneDir = path.join(libDir, 'qwen-code');
+        const standaloneDir = path.join(libDir, 'lailatul-coder');
         const binDir = path.join(tempDir, '.local', 'bin');
         fs.mkdirSync(standaloneDir, { recursive: true });
         fs.mkdirSync(binDir, { recursive: true });
@@ -271,7 +271,7 @@ describe('standalone-update', () => {
       'throws when wrapper creation fails safety validation',
       () => {
         const libDir = path.join(tempDir, 'bad\npath', '.local', 'lib');
-        const standaloneDir = path.join(libDir, 'qwen-code');
+        const standaloneDir = path.join(libDir, 'lailatul-coder');
         fs.mkdirSync(standaloneDir, { recursive: true });
 
         expect(() => ensureBinWrapper(standaloneDir, 'linux-x64')).toThrow(
@@ -283,12 +283,12 @@ describe('standalone-update', () => {
 
   describe('performStandaloneUpdate', () => {
     it('rejects invalid version format', async () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       fs.mkdirSync(standaloneDir);
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'darwin-arm64',
         }),
       );
@@ -299,22 +299,22 @@ describe('standalone-update', () => {
     });
 
     it('rejects directory without manifest as non-managed install', async () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       fs.mkdirSync(standaloneDir);
       // No manifest.json — could be user data
 
       await expect(
         performStandaloneUpdate(standaloneDir, '1.0.0'),
-      ).rejects.toThrow('not a Qwen Code standalone install');
+      ).rejects.toThrow('not a LailatulCoder Ai standalone install');
     });
 
     it('rejects unknown target in manifest', async () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       fs.mkdirSync(standaloneDir);
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'freebsd-mips',
         }),
       );
@@ -325,13 +325,13 @@ describe('standalone-update', () => {
     });
 
     it('fails gracefully when another update is in progress', async () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const parentDir = path.dirname(standaloneDir);
       fs.mkdirSync(standaloneDir, { recursive: true });
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'darwin-arm64',
         }),
       );
@@ -349,14 +349,14 @@ describe('standalone-update', () => {
     });
 
     it('rejects a stale lock when a Windows deferred swap is pending', async () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const parentDir = path.dirname(standaloneDir);
       fs.mkdirSync(standaloneDir, { recursive: true });
       fs.mkdirSync(`${standaloneDir}.new`);
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
         JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'win-x64',
         }),
       );
@@ -375,18 +375,18 @@ describe('standalone-update', () => {
 
   describe('isSafeTarEntryPath', () => {
     it('allows double dots inside a filename segment', () => {
-      expect(isSafeTarEntryPath('qwen-code/release..notes.md')).toBe(true);
-      expect(isSafeTarEntryPath('qwen-code/node/lib/foo..bar')).toBe(true);
-      expect(isSafeTarEntryPath('qwen-code/.../file.txt')).toBe(true);
-      expect(isSafeTarEntryPath('./qwen-code/bin/qwen')).toBe(true);
+      expect(isSafeTarEntryPath('lailatul-coder/release..notes.md')).toBe(true);
+      expect(isSafeTarEntryPath('lailatul-coder/node/lib/foo..bar')).toBe(true);
+      expect(isSafeTarEntryPath('lailatul-coder/.../file.txt')).toBe(true);
+      expect(isSafeTarEntryPath('./lailatul-coder/bin/qwen')).toBe(true);
     });
 
     it('rejects parent-directory segments and absolute paths', () => {
-      expect(isSafeTarEntryPath('../qwen-code/manifest.json')).toBe(false);
-      expect(isSafeTarEntryPath('qwen-code/../manifest.json')).toBe(false);
-      expect(isSafeTarEntryPath('qwen-code\\..\\manifest.json')).toBe(false);
-      expect(isSafeTarEntryPath('/tmp/qwen-code/manifest.json')).toBe(false);
-      expect(isSafeTarEntryPath('C:\\tmp\\qwen-code\\manifest.json')).toBe(
+      expect(isSafeTarEntryPath('../lailatul-coder/manifest.json')).toBe(false);
+      expect(isSafeTarEntryPath('lailatul-coder/../manifest.json')).toBe(false);
+      expect(isSafeTarEntryPath('lailatul-coder\\..\\manifest.json')).toBe(false);
+      expect(isSafeTarEntryPath('/tmp/lailatul-coder/manifest.json')).toBe(false);
+      expect(isSafeTarEntryPath('C:\\tmp\\lailatul-coder\\manifest.json')).toBe(
         false,
       );
       expect(isSafeTarEntryPath('')).toBe(false);
@@ -397,9 +397,9 @@ describe('standalone-update', () => {
     it('allows relative link targets inside the extraction directory', () => {
       const dest = path.join(tempDir, 'extract');
       expect(
-        isSafeTarLinkTarget('qwen-code/bin/qwen', '../lib/cli.js', dest),
+        isSafeTarLinkTarget('lailatul-coder/bin/qwen', '../lib/cli.js', dest),
       ).toBe(true);
-      expect(isSafeTarLinkTarget('qwen-code/bin/qwen', './qwen', dest)).toBe(
+      expect(isSafeTarLinkTarget('lailatul-coder/bin/qwen', './qwen', dest)).toBe(
         true,
       );
     });
@@ -407,21 +407,21 @@ describe('standalone-update', () => {
     it('allows symlink targets in child directories starting with two dots', () => {
       const dest = path.join(tempDir, 'extract');
       expect(
-        isSafeTarLinkTarget('qwen-code/bin/qwen', '../..hidden/tool', dest),
+        isSafeTarLinkTarget('lailatul-coder/bin/qwen', '../..hidden/tool', dest),
       ).toBe(true);
     });
 
     it('rejects symlink targets outside the extraction directory', () => {
       const dest = path.join(tempDir, 'extract');
       expect(
-        isSafeTarLinkTarget('qwen-code/bin/qwen', '../../../etc/passwd', dest),
+        isSafeTarLinkTarget('lailatul-coder/bin/qwen', '../../../etc/passwd', dest),
       ).toBe(false);
       expect(
-        isSafeTarLinkTarget('qwen-code/bin/qwen', '/etc/passwd', dest),
+        isSafeTarLinkTarget('lailatul-coder/bin/qwen', '/etc/passwd', dest),
       ).toBe(false);
       expect(
         isSafeTarLinkTarget(
-          'qwen-code/bin/qwen',
+          'lailatul-coder/bin/qwen',
           'C:\\Windows\\System32',
           dest,
         ),
@@ -431,10 +431,10 @@ describe('standalone-update', () => {
     it('rejects symlink targets outside the archive root that will be installed', () => {
       const dest = path.join(tempDir, 'extract');
       expect(
-        isSafeTarLinkTarget('qwen-code/bin/qwen', '../../shared/node', dest),
+        isSafeTarLinkTarget('lailatul-coder/bin/qwen', '../../shared/node', dest),
       ).toBe(false);
       expect(
-        isSafeTarLinkTarget('./qwen-code/bin/qwen', '../../shared/node', dest),
+        isSafeTarLinkTarget('./lailatul-coder/bin/qwen', '../../shared/node', dest),
       ).toBe(false);
     });
   });
@@ -444,7 +444,7 @@ describe('standalone-update', () => {
       const dest = path.join(tempDir, 'extract');
       expect(
         isSafeTarEntry(
-          'qwen-code/bin/qwen',
+          'lailatul-coder/bin/qwen',
           { type: 'Link', linkpath: '../poc.txt' },
           dest,
         ),
@@ -453,15 +453,15 @@ describe('standalone-update', () => {
 
     it('allows safe regular entries and safe symlinks', () => {
       const dest = path.join(tempDir, 'extract');
-      expect(isSafeTarEntry('qwen-code/bin/qwen', { type: 'File' }, dest)).toBe(
+      expect(isSafeTarEntry('lailatul-coder/bin/qwen', { type: 'File' }, dest)).toBe(
         true,
       );
-      expect(isSafeTarEntry('qwen-code/lib', { type: 'Directory' }, dest)).toBe(
+      expect(isSafeTarEntry('lailatul-coder/lib', { type: 'Directory' }, dest)).toBe(
         true,
       );
       expect(
         isSafeTarEntry(
-          'qwen-code/bin/qwen',
+          'lailatul-coder/bin/qwen',
           { type: 'SymbolicLink', linkpath: '../lib/cli.js' },
           dest,
         ),
@@ -474,7 +474,7 @@ describe('standalone-update', () => {
       fs.writeFileSync(filePath, 'entry');
 
       expect(
-        isSafeTarEntry('qwen-code/bin/qwen', fs.statSync(filePath), dest),
+        isSafeTarEntry('lailatul-coder/bin/qwen', fs.statSync(filePath), dest),
       ).toBe(true);
     });
 
@@ -486,7 +486,7 @@ describe('standalone-update', () => {
         'FIFO',
         'ContiguousFile',
       ]) {
-        expect(isSafeTarEntry('qwen-code/bin/qwen', { type }, dest)).toBe(
+        expect(isSafeTarEntry('lailatul-coder/bin/qwen', { type }, dest)).toBe(
           false,
         );
       }
@@ -504,21 +504,21 @@ describe('standalone-update', () => {
         process.env['SHELL'] = '/bin/bash';
 
         try {
-          const standaloneDir = path.join(home, '.local', 'lib', 'qwen-code');
+          const standaloneDir = path.join(home, '.local', 'lib', 'lailatul-coder');
           const artifacts = ensureBinWrapper(standaloneDir, 'linux-x64');
           const wrapperPath = path.join(home, '.local', 'bin', 'qwen');
           const bashrc = path.join(home, '.bashrc');
 
           expect(fs.existsSync(wrapperPath)).toBe(true);
           expect(fs.readFileSync(bashrc, 'utf-8')).toContain(
-            '# Qwen Code PATH block begin',
+            '# LailatulCoder Ai PATH block begin',
           );
 
           cleanupFirstTimeMigrationArtifacts(artifacts);
 
           expect(fs.existsSync(wrapperPath)).toBe(false);
           expect(fs.readFileSync(bashrc, 'utf-8')).not.toContain(
-            '# Qwen Code PATH block begin',
+            '# LailatulCoder Ai PATH block begin',
           );
         } finally {
           process.env['HOME'] = originalHome;
@@ -530,7 +530,7 @@ describe('standalone-update', () => {
 
   describe('rollbackStandaloneUpdate — concurrent lock protection', () => {
     it('returns error when an active update holds the lock', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const oldDir = `${standaloneDir}.old`;
       const lockPath = path.join(tempDir, '.qwen-update.lock');
       fs.mkdirSync(standaloneDir);
@@ -547,18 +547,18 @@ describe('standalone-update', () => {
     });
 
     it('proceeds when lock has dead PID', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const oldDir = `${standaloneDir}.old`;
       const lockPath = path.join(tempDir, '.qwen-update.lock');
       fs.mkdirSync(standaloneDir);
       fs.mkdirSync(oldDir);
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
-        JSON.stringify({ name: '@qwen-code/qwen-code', version: '0.17.0' }),
+        JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version: '0.17.0' }),
       );
       fs.writeFileSync(
         path.join(oldDir, 'manifest.json'),
-        JSON.stringify({ name: '@qwen-code/qwen-code', version: '0.16.0' }),
+        JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version: '0.16.0' }),
       );
       fs.writeFileSync(lockPath, '999999999');
       const result = rollbackStandaloneUpdate(standaloneDir);
@@ -568,7 +568,7 @@ describe('standalone-update', () => {
 
   describe('acquireLock deferred marker handling', () => {
     it('rejects lock takeover while a deferred bat process is alive', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const lockPath = path.join(tempDir, '.qwen-update.lock');
       fs.writeFileSync(lockPath, '999999999');
       fs.writeFileSync(`${standaloneDir}.deferred`, String(process.pid));
@@ -581,7 +581,7 @@ describe('standalone-update', () => {
     });
 
     it('cleans a stale deferred marker before taking over a dead lock', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const lockPath = path.join(tempDir, '.qwen-update.lock');
       fs.writeFileSync(lockPath, '999999999');
       fs.writeFileSync(`${standaloneDir}.deferred`, '999999998');
@@ -592,7 +592,7 @@ describe('standalone-update', () => {
     });
 
     it('cleans an unparseable deferred marker before taking over a dead lock', () => {
-      const standaloneDir = path.join(tempDir, 'qwen-code');
+      const standaloneDir = path.join(tempDir, 'lailatul-coder');
       const lockPath = path.join(tempDir, '.qwen-update.lock');
       fs.writeFileSync(lockPath, '999999999');
       fs.writeFileSync(`${standaloneDir}.deferred`, 'not-a-pid');
@@ -617,8 +617,8 @@ describe('standalone-update', () => {
       try {
         ensurePathInShellRc(binDir);
         const content = fs.readFileSync(zshrc, 'utf-8');
-        expect(content).toContain('# Qwen Code PATH block begin');
-        expect(content).toContain('# Qwen Code PATH block end');
+        expect(content).toContain('# LailatulCoder Ai PATH block begin');
+        expect(content).toContain('# LailatulCoder Ai PATH block end');
         // Uses single-quoted paths matching install-qwen-standalone.sh shell_quote
         expect(content).toContain(`export PATH='${binDir}':$PATH`);
       } finally {
@@ -632,7 +632,7 @@ describe('standalone-update', () => {
       const zshrc = path.join(tempDir, '.zshrc');
       fs.writeFileSync(
         zshrc,
-        `# Qwen Code PATH block begin\nexport PATH='${binDir}':$PATH\n# Qwen Code PATH block end\n`,
+        `# LailatulCoder Ai PATH block begin\nexport PATH='${binDir}':$PATH\n# LailatulCoder Ai PATH block end\n`,
       );
 
       const origShell = process.env['SHELL'];
@@ -643,7 +643,7 @@ describe('standalone-update', () => {
       try {
         ensurePathInShellRc(binDir);
         const content = fs.readFileSync(zshrc, 'utf-8');
-        const matches = content.match(/# Qwen Code PATH block begin/g);
+        const matches = content.match(/# LailatulCoder Ai PATH block begin/g);
         expect(matches).toHaveLength(1);
       } finally {
         process.env['SHELL'] = origShell;
@@ -656,7 +656,7 @@ describe('standalone-update', () => {
       const zshrc = path.join(tempDir, '.zshrc');
       fs.writeFileSync(
         zshrc,
-        `# Added by Qwen Code standalone installer\nexport PATH="${binDir}:$PATH"\n`,
+        `# Added by LailatulCoder Ai standalone installer\nexport PATH="${binDir}:$PATH"\n`,
       );
 
       const origShell = process.env['SHELL'];
@@ -669,7 +669,7 @@ describe('standalone-update', () => {
         const content = fs.readFileSync(zshrc, 'utf-8');
         const matches = content.match(/export PATH/g);
         expect(matches).toHaveLength(1);
-        expect(content).not.toContain('# Qwen Code PATH block begin');
+        expect(content).not.toContain('# LailatulCoder Ai PATH block begin');
       } finally {
         process.env['SHELL'] = origShell;
         process.env['HOME'] = origHome;
@@ -691,7 +691,7 @@ describe('standalone-update', () => {
       try {
         ensurePathInShellRc(binDir);
         expect(fs.readFileSync(bashrc, 'utf-8')).toContain(
-          '# Qwen Code PATH block begin',
+          '# LailatulCoder Ai PATH block begin',
         );
         expect(fs.readFileSync(profile, 'utf-8')).toBe('# profile\n');
       } finally {
@@ -713,7 +713,7 @@ describe('standalone-update', () => {
       try {
         ensurePathInShellRc(binDir);
         expect(fs.readFileSync(profile, 'utf-8')).toContain(
-          '# Qwen Code PATH block begin',
+          '# LailatulCoder Ai PATH block begin',
         );
         expect(fs.existsSync(path.join(tempDir, '.bashrc'))).toBe(false);
       } finally {
@@ -737,8 +737,8 @@ describe('standalone-update', () => {
         const content = fs.readFileSync(fishConfig, 'utf-8');
         // Matches install-qwen-standalone.sh's maybe_update_shell_path fish branch
         expect(content).toContain('set -gx PATH');
-        expect(content).toContain('# Qwen Code PATH block begin');
-        expect(content).toContain('# Qwen Code PATH block end');
+        expect(content).toContain('# LailatulCoder Ai PATH block begin');
+        expect(content).toContain('# LailatulCoder Ai PATH block end');
         expect(content).toContain(binDir);
       } finally {
         process.env['SHELL'] = origShell;

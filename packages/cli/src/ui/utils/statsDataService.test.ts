@@ -8,18 +8,18 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import type {
   UsageSummaryRecord,
   AggregatedReport,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     loadUsageHistory: vi.fn(),
   };
 });
 
-import { loadUsageHistory } from '@qwen-code/qwen-code-core';
+import { loadUsageHistory } from '@lailatul-coder/lailatul-coder-core';
 import {
   loadStatsData,
   getPreviousRangeBounds,

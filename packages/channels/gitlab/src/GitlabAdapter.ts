@@ -4,8 +4,8 @@ import type {
   ChannelBaseOptions,
   ChannelConfig,
   Envelope,
-} from '@qwen-code/channel-base';
-import { PollingChannelBase } from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
+import { PollingChannelBase } from '@lailatul-coder/channel-base';
 import { Gitlab, type TodoSchema } from '@gitbeaker/rest';
 import { z } from 'zod';
 import { testBotMention, stripBotMention } from './mention.js';

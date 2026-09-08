@@ -64,7 +64,7 @@ const wasmBinaryPlugin = {
 // (issue #7264). From sdk-node 0.221 the env auto-configuration helpers were
 // additionally extracted into `@opentelemetry/configuration` and the two
 // `otlp-*exporter-base` packages, which sdk-node requires eagerly; they get
-// the same treatment. qwen-code always passes explicit `spanProcessors` /
+// the same treatment. lailatul-coder always passes explicit `spanProcessors` /
 // `logRecordProcessors` to NodeSDK, so those env code paths are unreachable
 // for traces and logs. Stub the packages ONLY when imported by
 // sdk-node itself — our own protocol modules keep resolving the real ones.
@@ -93,10 +93,10 @@ const sdkNodeExporterStubPlugin = {
         contents: `
           const throwStubbed = (name) => {
             throw new Error(
-              'qwen-code bundles @opentelemetry/sdk-node without ' +
+              'lailatul-coder bundles @opentelemetry/sdk-node without ' +
                 ${JSON.stringify(args.path)} + ' (env-based exporter ' +
                 'selection is unsupported; configure telemetry via ' +
-                'qwen-code settings instead). Attempted to construct: ' + name,
+                'lailatul-coder settings instead). Attempted to construct: ' + name,
             );
           };
           const handler = {
@@ -159,7 +159,7 @@ const external = [
   '@lydell/node-pty-linux-x64',
   '@lydell/node-pty-win32-arm64',
   '@lydell/node-pty-win32-x64',
-  '@qwen-code/audio-capture',
+  '@lailatul-coder/audio-capture',
   '@teddyzhu/clipboard',
   '@teddyzhu/clipboard-darwin-arm64',
   '@teddyzhu/clipboard-darwin-x64',
@@ -198,7 +198,7 @@ const mainBuild = esbuild.build({
   alias: {
     'is-in-ci': path.resolve(__dirname, 'packages/cli/src/patches/is-in-ci.ts'),
     'jsonc-parser': require.resolve('jsonc-parser/lib/esm/main.js'),
-    '@qwen-code/web-templates': path.resolve(
+    '@lailatul-coder/web-templates': path.resolve(
       __dirname,
       'packages/web-templates/src/index.ts',
     ),

@@ -7,7 +7,7 @@
 import { Box, Text } from 'ink';
 import { theme } from '../../../semantic-colors.js';
 import { shouldShowColor, getColorForDisplay } from '../utils.js';
-import { type SubagentConfig } from '@qwen-code/qwen-code-core';
+import { type SubagentConfig } from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../../../i18n/index.js';
 
 interface AgentViewerStepProps {
@@ -71,3 +71,4 @@ export const AgentViewerStep = ({ selectedAgent }: AgentViewerStepProps) => {
     </Box>
   );
 };
+

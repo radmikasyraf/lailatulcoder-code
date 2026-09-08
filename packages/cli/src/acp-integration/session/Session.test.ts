@@ -32,14 +32,14 @@ import type {
   Config,
   Extension,
   GeminiChat,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   ApprovalMode,
   AuthType,
   SYSTEM_REMINDER_OPEN,
   SYSTEM_REMINDER_CLOSE,
-} from '@qwen-code/qwen-code-core';
-import * as core from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import * as core from '@lailatul-coder/lailatul-coder-core';
 import { SettingScope } from '../../config/settings.js';
 import type {
   AgentSideConnection,
@@ -53,7 +53,7 @@ import type { LoadedSettings } from '../../config/settings.js';
 import * as nonInteractiveCliCommands from '../../nonInteractiveCliCommands.js';
 import { CommandKind } from '../../ui/commands/types.js';
 import { buildAcpModelOptions } from '../../utils/acpModelUtils.js';
-import { CHANNEL_PROMPT_META_KEY } from '@qwen-code/channel-base';
+import { CHANNEL_PROMPT_META_KEY } from '@lailatul-coder/channel-base';
 import { CAPTURE_SCREEN_CONTEXT_TOOL_NAME } from '../../serve/live/capture-screen-context.js';
 import { SPEAK_TO_USER_TOOL_NAME } from '../../serve/live/live-speak-to-user.js';
 import {
@@ -93,9 +93,9 @@ const TODO_STOP_GUARD_CONTINUATION_CLAIM_METHOD =
 // Session computed (e.g. the home confinement root) without a private-field peek.
 const loopTickResolverDepsSpy = vi.hoisted(() => vi.fn());
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     createDebugLogger: () => ({

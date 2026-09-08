@@ -2,7 +2,7 @@
 
 ## Context
 
-Qwen Code currently has no settings file change detection mechanism. Users must restart the session after modifying `settings.json` for changes to take effect. This proposal implements the infrastructure layer for the #3696 hot-reload system — automatic detection and event dispatching for settings file changes.
+LailatulCoder Ai currently has no settings file change detection mechanism. Users must restart the session after modifying `settings.json` for changes to take effect. This proposal implements the infrastructure layer for the #3696 hot-reload system — automatic detection and event dispatching for settings file changes.
 
 **Scope**: This sub-task is only responsible for "detect file changes → reload → notify listeners". `Config` copies many settings fields at construction time (`approvalMode`, `mcpServers`, `telemetry`, etc.), and these snapshots are NOT automatically updated by this sub-task. Only consumers that read `LoadedSettings.merged` in real time (e.g., the `useSettings()` hook, `disabledSkillNamesProvider`) will immediately see changes. Other sub-tasks (MCP reconnection, `/reload` command) are responsible for pushing updates to Config's internal state.
 
@@ -413,7 +413,7 @@ content-generator/client construction, child-process spawning, Node runtime
 flags). Examples the user explicitly called out: **API tokens, `env`, and model
 providers**. Emitting a hot-reload event for these is actively misleading — the
 listener would "refresh" but the new value would not actually apply until the
-user restarts `qwen-code`. Sensitive values (credentials) additionally should
+user restarts `lailatul-coder`. Sensitive values (credentials) additionally should
 not be re-plumbed through a running session.
 
 ### Decision: Reuse the schema's `requiresRestart` flag (single source of truth)

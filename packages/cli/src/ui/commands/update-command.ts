@@ -11,7 +11,7 @@ import { t } from '../../i18n/index.js';
 export const updateCommand: SlashCommand = {
   name: 'update',
   get description() {
-    return t('Check for Qwen Code updates and install if available');
+    return t('Check for LailatulCoder Ai updates and install if available');
   },
   kind: CommandKind.BUILT_IN,
   supportedModes: ['interactive', 'non_interactive', 'acp'] as const,
@@ -39,7 +39,7 @@ export const updateCommand: SlashCommand = {
     const updateCheck = await checkForUpdatesDetailed();
 
     if (updateCheck.status === 'up-to-date') {
-      const msg = t('Qwen Code {{version}} is up to date!', {
+      const msg = t('LailatulCoder Ai {{version}} is up to date!', {
         version: updateCheck.currentVersion,
       });
       return {
@@ -93,7 +93,7 @@ export const updateCommand: SlashCommand = {
           type: 'message' as const,
           messageType: 'info' as const,
           content: `${info.message}\n${t(
-            'This session uses the custom sandbox image {{image}}. Update that image and restart Qwen Code.',
+            'This session uses the custom sandbox image {{image}}. Update that image and restart LailatulCoder Ai.',
             { image: customSandboxImage },
           )}`,
         };
@@ -110,7 +110,7 @@ export const updateCommand: SlashCommand = {
           type: 'message' as const,
           messageType: 'info' as const,
           content: `${info.message}\n${t(
-            'Update Qwen Code on the host, then restart the sandbox.',
+            'Update LailatulCoder Ai on the host, then restart the sandbox.',
           )}`,
         };
       }

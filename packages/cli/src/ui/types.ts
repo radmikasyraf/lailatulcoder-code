@@ -16,7 +16,7 @@ import type {
   ArenaDiffSummary,
   GoalSnapshotV2,
   GoalStateCause,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { PartListUnion } from '@google/genai';
 import type { ReactNode } from 'react';
 

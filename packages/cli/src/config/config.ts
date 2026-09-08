@@ -44,7 +44,7 @@ import {
   type WebSearchSettings,
   MAX_SUBAGENT_DEPTH_LIMIT,
   addDaemonRequestAttribute,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { extensionsCommand } from '../commands/extensions.js';
 import { hooksCommand } from '../commands/hooks.js';
 import { resolveAcpChannelFallback } from './acp-channel-fallback.js';
@@ -561,7 +561,7 @@ export async function parseArguments(): Promise<CliArgs> {
     .locale('en')
     .scriptName('qwen')
     .usage(
-      'Usage: qwen [options] [command]\n\nQwen Code - Launch an interactive CLI, use -p/--prompt for non-interactive mode',
+      'Usage: qwen [options] [command]\n\nLailatulCoder Ai - Launch an interactive CLI, use -p/--prompt for non-interactive mode',
     )
     .option('telemetry', {
       type: 'boolean',
@@ -637,7 +637,7 @@ export async function parseArguments(): Promise<CliArgs> {
     })
     .option('proxy', {
       type: 'string',
-      description: 'Proxy for Qwen Code, like schema://user:password@host:port',
+      description: 'Proxy for LailatulCoder Ai, like schema://user:password@host:port',
     })
     .deprecateOption(
       'proxy',
@@ -654,7 +654,7 @@ export async function parseArguments(): Promise<CliArgs> {
       description:
         'Enable chat recording to disk. If false, chat history is not saved and --continue/--resume will not work.',
     })
-    .command('$0 [query..]', 'Launch Qwen Code CLI', (yargsInstance: Argv) =>
+    .command('$0 [query..]', 'Launch LailatulCoder Ai CLI', (yargsInstance: Argv) =>
       yargsInstance
         .positional('query', {
           description:
@@ -2014,7 +2014,7 @@ export async function loadCliConfig(
       if (sessionRestoreProjectionSource) {
         if (!deferProjectionUntilWriterLease && !argv.forkSession) {
           addDaemonRequestAttribute(
-            'qwen-code.daemon.session_restore.projection_acquisition',
+            'lailatul-coder.daemon.session_restore.projection_acquisition',
             'preloaded',
           );
           sessionRestoreProjection =
@@ -2046,7 +2046,7 @@ export async function loadCliConfig(
         sessionData = undefined;
         if (!deferProjectionUntilWriterLease) {
           addDaemonRequestAttribute(
-            'qwen-code.daemon.session_restore.projection_acquisition',
+            'lailatul-coder.daemon.session_restore.projection_acquisition',
             'preloaded',
           );
           sessionRestoreProjection =

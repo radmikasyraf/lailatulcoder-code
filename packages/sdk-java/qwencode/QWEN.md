@@ -1,4 +1,4 @@
-# Qwen Code Java SDK
+# LailatulCoder Ai Java SDK
 
 This package publishes `com.alibaba:qwencode-sdk:0.1.0-alpha` and requires
 Java 11 or newer. Java 8 users must remain on `0.0.3-alpha`.

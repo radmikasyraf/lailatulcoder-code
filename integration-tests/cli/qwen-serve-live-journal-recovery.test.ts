@@ -8,7 +8,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, it } from 'vitest';
-import { DaemonSessionClient, type DaemonEvent } from '@qwen-code/sdk';
+import { DaemonSessionClient, type DaemonEvent } from '@lailatul-coder/sdk';
 import {
   makeTempWorkspace,
   spawnDaemon,

@@ -771,7 +771,7 @@ describe('package asset scripts', () => {
     expect(distPackageJson.files).toContain('examples');
     expect(distPackageJson.bundledDependencies).toBeUndefined();
     expect(distPackageJson.optionalDependencies).toMatchObject({
-      '@qwen-code/audio-capture': rootPackageJson.version,
+      '@lailatul-coder/audio-capture': rootPackageJson.version,
     });
 
     expect(distPackageJson.optionalDependencies.sharp).toBe('0.35.4');
@@ -781,7 +781,7 @@ describe('package asset scripts', () => {
           rootDir,
           'dist',
           'node_modules',
-          '@qwen-code',
+          '@lailatul-coder',
           'audio-capture',
         ),
       ),
@@ -811,7 +811,7 @@ describe('package asset scripts', () => {
       'packages/core/package.json',
       JSON.stringify(
         {
-          name: '@qwen-code/qwen-code-core',
+          name: '@lailatul-coder/lailatul-coder-core',
           version: '0.17.0',
           dependencies: {
             sharp: '^0.35.0',
@@ -978,7 +978,7 @@ describe('package asset scripts', () => {
           rootDir,
           'dist',
           'node_modules',
-          '@qwen-code',
+          '@lailatul-coder',
           'audio-capture',
         ),
       ),
@@ -990,7 +990,7 @@ describe('package asset scripts', () => {
     createBundleArtifacts(rootDir);
     writeFile(
       rootDir,
-      'dist/node_modules/@qwen-code/audio-capture/prebuilds/darwin-arm64/@qwen-code+audio-capture.node',
+      'dist/node_modules/@lailatul-coder/audio-capture/prebuilds/darwin-arm64/@lailatul-coder+audio-capture.node',
       'stale native addon\n',
     );
     stubConsole();
@@ -1012,7 +1012,7 @@ describe('package asset scripts', () => {
           rootDir,
           'dist',
           'node_modules',
-          '@qwen-code',
+          '@lailatul-coder',
           'audio-capture',
         ),
       ),
@@ -1053,7 +1053,7 @@ describe('package asset scripts', () => {
         'audio-capture',
         'prebuilds',
         'darwin-arm64',
-        '@qwen-code+audio-capture.node',
+        '@lailatul-coder+audio-capture.node',
       ),
     );
     createBundleArtifacts(rootDir);
@@ -1090,7 +1090,7 @@ describe('package asset scripts', () => {
           rootDir,
           'dist',
           'node_modules',
-          '@qwen-code',
+          '@lailatul-coder',
           'audio-capture',
         ),
       ),
@@ -1134,7 +1134,7 @@ describe('package asset scripts', () => {
           rootDir,
           'dist',
           'node_modules',
-          '@qwen-code',
+          '@lailatul-coder',
           'audio-capture',
         ),
       ),
@@ -1156,19 +1156,19 @@ describe('package asset scripts', () => {
     const rootDir = mkdtempSync(path.join(tmpdir(), 'qwen-package-assets-'));
     tempDirs.push(rootDir);
 
-    writeFile(rootDir, 'README.md', '# Qwen Code\n');
+    writeFile(rootDir, 'README.md', '# LailatulCoder Ai\n');
     writeFile(rootDir, 'LICENSE', 'Apache-2.0\n');
     writeFile(
       rootDir,
       'package.json',
       JSON.stringify(
         {
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           version: '0.17.0',
-          description: 'Qwen Code',
+          description: 'LailatulCoder Ai',
           repository: {
             type: 'git',
-            url: 'https://github.com/QwenLM/qwen-code.git',
+            url: 'https://github.com/LailatulCoder/lailatul-coder.git',
           },
           config: {},
           engines: {
@@ -1212,7 +1212,7 @@ describe('package asset scripts', () => {
       'packages/core/package.json',
       JSON.stringify(
         {
-          name: '@qwen-code/qwen-code-core',
+          name: '@lailatul-coder/lailatul-coder-core',
           version: '0.17.0',
           dependencies: {
             sharp: '^0.35.0',
@@ -1227,7 +1227,7 @@ describe('package asset scripts', () => {
       'packages/audio-capture/package.json',
       JSON.stringify(
         {
-          name: '@qwen-code/audio-capture',
+          name: '@lailatul-coder/audio-capture',
           version: '0.17.0',
           type: 'module',
           main: 'dist/index.js',
@@ -1258,7 +1258,7 @@ describe('package asset scripts', () => {
     );
     writeFile(
       rootDir,
-      'packages/audio-capture/prebuilds/darwin-arm64/@qwen-code+audio-capture.node',
+      'packages/audio-capture/prebuilds/darwin-arm64/@lailatul-coder+audio-capture.node',
       'fake native addon\n',
     );
     writeFile(

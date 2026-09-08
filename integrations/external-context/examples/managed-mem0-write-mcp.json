@@ -3,9 +3,9 @@
     "external-context": {
       "command": "/absolute/path/to/node",
       "args": [
-        "/administrator/path/to/qwen-code/integrations/external-context/dist/main.js"
+        "/administrator/path/to/lailatul-coder/integrations/external-context/dist/main.js"
       ],
-      "cwd": "/administrator/path/to/qwen-code/integrations/external-context",
+      "cwd": "/administrator/path/to/lailatul-coder/integrations/external-context",
       "includeTools": ["context_search", "context_remember"]
     }
   }

@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { INSIGHT_JS, INSIGHT_CSS } from '@qwen-code/web-templates';
+import { INSIGHT_JS, INSIGHT_CSS } from '@lailatul-coder/web-templates';
 import type { InsightData } from '../types/StaticInsightTypes.js';
 
 export class TemplateRenderer {
@@ -26,7 +26,7 @@ export class TemplateRenderer {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Qwen Code Insights</title>
+    <title>LailatulCoder Ai Insights</title>
     <style>
       ${INSIGHT_CSS}
     </style>

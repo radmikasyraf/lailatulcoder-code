@@ -12,16 +12,16 @@ import {
   SessionService,
   stripTerminalControlSequences,
   type SessionListItem,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   AcpSessionBridge,
   BridgeSession,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 import {
   SessionArchivedError,
   SessionNotFoundError,
-} from '@qwen-code/acp-bridge/bridgeErrors';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
+} from '@lailatul-coder/acp-bridge/bridgeErrors';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
 import type {
   WorkspaceRegistry,
   WorkspaceRuntime,
@@ -1299,7 +1299,7 @@ export class LiveSessionCoordinator {
               context.realtime === source
             ) {
               source.sendBackendContext(
-                `The Qwen Code agent could not complete the request: ${errorMessage(error)}`,
+                `The LailatulCoder Ai agent could not complete the request: ${errorMessage(error)}`,
               );
             }
           });
@@ -1353,7 +1353,7 @@ export class LiveSessionCoordinator {
       );
       persisted = true;
     } catch (error) {
-      const message = `The Qwen Code agent could not complete the request: ${errorMessage(error)}`;
+      const message = `The LailatulCoder Ai agent could not complete the request: ${errorMessage(error)}`;
       if (
         this.isCurrentSocket(context, generation) &&
         context.realtime === source

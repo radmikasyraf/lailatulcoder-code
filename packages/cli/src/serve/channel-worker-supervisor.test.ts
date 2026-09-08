@@ -1,6 +1,6 @@
 import { EventEmitter } from 'node:events';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { ChannelWebhookTask } from '@qwen-code/channel-base';
+import type { ChannelWebhookTask } from '@lailatul-coder/channel-base';
 import {
   ChannelWorkerStartupError,
   createChannelWorkerSupervisor,

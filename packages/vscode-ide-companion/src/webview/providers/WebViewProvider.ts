@@ -40,7 +40,7 @@ import {
 import {
   buildInstallPlan,
   parseInsightMessage,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { isLogLevel, logger } from '../../utils/logger.js';
 
 /** Threshold (ms) before a completed task triggers a notification. */
@@ -64,9 +64,9 @@ const DOT_ICON: Record<DotColor | 'default', string> = {
 };
 
 const AUTH_RELATED_QWEN_SETTINGS = [
-  'qwen-code.provider',
-  'qwen-code.apiKey',
-  'qwen-code.codingPlanRegion',
+  'lailatul-coder.provider',
+  'lailatul-coder.apiKey',
+  'lailatul-coder.codingPlanRegion',
 ] as const;
 
 export function resolveQwenCliEntryPath(
@@ -195,7 +195,7 @@ export class WebViewProvider {
 
         if (authSettingsChanged && !this.isSyncingToVSCode) {
           logger.log(
-            '[WebViewProvider] Auth-related qwen-code settings changed by user, syncing...',
+            '[WebViewProvider] Auth-related lailatul-coder settings changed by user, syncing...',
           );
           const synced = await this.syncVSCodeSettingsToQwenConfig();
           if (synced && this.agentInitialized) {
@@ -216,14 +216,14 @@ export class WebViewProvider {
           } else if (
             !synced &&
             this.agentInitialized &&
-            e.affectsConfiguration('qwen-code.apiKey')
+            e.affectsConfiguration('lailatul-coder.apiKey')
           ) {
-            // Only de-auth when qwen-code.apiKey itself was cleared.
+            // Only de-auth when lailatul-coder.apiKey itself was cleared.
             // Other auth-related settings (provider, codingPlanRegion) returning
             // synced=false is normal for api-key providers — those are managed by
             // the interactive auth flow, not VS Code Settings sync.
             const apiKey = vscode.workspace
-              .getConfiguration('qwen-code')
+              .getConfiguration('lailatul-coder')
               .get<string>('apiKey', '');
             if (!apiKey) {
               logger.log(
@@ -964,7 +964,7 @@ export class WebViewProvider {
           ).trim();
           const panelRef = this.panelManager.getPanel();
           if (panelRef) {
-            panelRef.title = title ? truncatePanelTitle(title) : 'Qwen Code';
+            panelRef.title = title ? truncatePanelTitle(title) : 'LailatulCoder Ai';
           }
           return;
         }
@@ -1115,14 +1115,14 @@ export class WebViewProvider {
   }
 
   /**
-   * Sync VSCode extension settings (qwen-code.*) to ~/.qwen/settings.json
+   * Sync VSCode extension settings (lailatul-coder.*) to ~/.qwen/settings.json
    * if an API key is configured. This enables auto-connect on startup
    * without requiring the user to click "Connect" each time.
    *
    * @returns true if settings were synced (apiKey is configured), false otherwise
    */
   private async syncVSCodeSettingsToQwenConfig(): Promise<boolean> {
-    const config = vscode.workspace.getConfiguration('qwen-code');
+    const config = vscode.workspace.getConfiguration('lailatul-coder');
     const apiKey = config.get<string>('apiKey', '');
 
     if (!apiKey) {
@@ -1172,7 +1172,7 @@ export class WebViewProvider {
       );
 
       // Set guard to prevent onDidChangeConfiguration from triggering a write-back
-      const config = vscode.workspace.getConfiguration('qwen-code');
+      const config = vscode.workspace.getConfiguration('lailatul-coder');
       const target = vscode.ConfigurationTarget.Global;
       const updates: Array<Thenable<void>> = [];
 
@@ -1376,8 +1376,8 @@ export class WebViewProvider {
    * Mirrors the CLI's `qwen auth coding-plan` / `qwen auth` flow.
    */
   private async handleAuthInteractive(
-    providerConfig: import('@qwen-code/qwen-code-core').ProviderConfig,
-    inputs: import('@qwen-code/qwen-code-core').ProviderSetupInputs,
+    providerConfig: import('@lailatul-coder/lailatul-coder-core').ProviderConfig,
+    inputs: import('@lailatul-coder/lailatul-coder-core').ProviderSetupInputs,
   ): Promise<void> {
     if (!inputs.apiKey) {
       this.sendMessageToWebView({
@@ -1934,7 +1934,7 @@ export class WebViewProvider {
 
   /** Update the tab-dot icon. Blue takes priority over orange. */
   private setTabDot(color: DotColor): void {
-    const config = vscode.workspace.getConfiguration('qwen-code');
+    const config = vscode.workspace.getConfiguration('lailatul-coder');
     if (!config.get<boolean>('dotIndicator', true)) {
       return;
     }
@@ -2019,11 +2019,11 @@ export class WebViewProvider {
 
   /**
    * Show a VS Code notification with sound and a "Show" button that focuses
-   * the Qwen Code panel (or sidebar view) when clicked.
+   * the LailatulCoder Ai panel (or sidebar view) when clicked.
    */
   private notifyUser(message: string): void {
     void vscode.window
-      .showInformationMessage(`Qwen Code: ${message}`, 'Show')
+      .showInformationMessage(`LailatulCoder Ai: ${message}`, 'Show')
       .then((action) => {
         if (action === 'Show') {
           const panel = this.panelManager.getPanel();
@@ -2031,7 +2031,7 @@ export class WebViewProvider {
             panel.reveal();
           } else if (this.isViewHost) {
             // Sidebar view host: focus the view via its command.
-            void vscode.commands.executeCommand('qwen-code.focusChat');
+            void vscode.commands.executeCommand('lailatul-coder.focusChat');
           }
         }
       });
@@ -2039,7 +2039,7 @@ export class WebViewProvider {
   }
 
   /**
-   * Whether the user can currently see the Qwen Code panel.
+   * Whether the user can currently see the LailatulCoder Ai panel.
    * Only true when VS Code is the foreground app AND the panel tab is visible.
    * If either condition is false the user needs a notification.
    */
@@ -2050,10 +2050,10 @@ export class WebViewProvider {
     return windowFocused && panelVisible;
   }
 
-  /** Whether the qwen-code.notifications setting is enabled. */
+  /** Whether the lailatul-coder.notifications setting is enabled. */
   private isNotificationsEnabled(): boolean {
     return vscode.workspace
-      .getConfiguration('qwen-code')
+      .getConfiguration('lailatul-coder')
       .get<boolean>('notifications', true);
   }
 
@@ -2278,7 +2278,7 @@ export class WebViewProvider {
     // Ensure restored tab starts from default label and icon
     this.dotState = null;
     try {
-      panel.title = 'Qwen Code';
+      panel.title = 'LailatulCoder Ai';
       panel.iconPath = vscode.Uri.joinPath(
         this.extensionUri,
         'assets',
@@ -2308,7 +2308,7 @@ export class WebViewProvider {
           ).trim();
           const panelRef = this.panelManager.getPanel();
           if (panelRef) {
-            panelRef.title = title ? truncatePanelTitle(title) : 'Qwen Code';
+            panelRef.title = title ? truncatePanelTitle(title) : 'LailatulCoder Ai';
           }
           return;
         }

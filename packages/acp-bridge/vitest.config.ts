@@ -10,19 +10,19 @@ import path from 'node:path';
 export default defineConfig({
   resolve: {
     alias: {
-      '@qwen-code/qwen-code-core/subSessionConstants': path.resolve(
+      '@lailatul-coder/lailatul-coder-core/subSessionConstants': path.resolve(
         __dirname,
         '../core/src/tools/sub-session-constants.ts',
       ),
-      '@qwen-code/qwen-code-core/goalWire': path.resolve(
+      '@lailatul-coder/lailatul-coder-core/goalWire': path.resolve(
         __dirname,
         '../core/src/goals/goal-wire.ts',
       ),
-      '@qwen-code/qwen-code-core/transcriptRecords': path.resolve(
+      '@lailatul-coder/lailatul-coder-core/transcriptRecords': path.resolve(
         __dirname,
         '../core/src/utils/transcript-records.ts',
       ),
-      '@qwen-code/qwen-code-core/userPromptSubmitContext': path.resolve(
+      '@lailatul-coder/lailatul-coder-core/userPromptSubmitContext': path.resolve(
         __dirname,
         '../core/src/hooks/user-prompt-submit-context.ts',
       ),

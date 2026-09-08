@@ -5,8 +5,8 @@
  */
 
 import type { Application, Request, RequestHandler, Response } from 'express';
-import { redactLogCredentials } from '@qwen-code/acp-bridge/logRedaction';
-import { sanitizeLogText } from '@qwen-code/channel-base';
+import { redactLogCredentials } from '@lailatul-coder/acp-bridge/logRedaction';
+import { sanitizeLogText } from '@lailatul-coder/channel-base';
 import { supportedChannelCatalog } from '../../commands/channel/channel-registry.js';
 import type {
   ChannelPairingApprovalSubject,

@@ -16,7 +16,7 @@ import {
   loadServerHierarchicalMemory,
   ConditionalRulesRegistry,
   expandHomeDir,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../i18n/index.js';
 import { SettingScope } from '../../config/settings.js';
 
@@ -363,3 +363,4 @@ export const directoryCommand: SlashCommand = {
     },
   ],
 };
+

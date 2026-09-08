@@ -196,7 +196,7 @@ function renderSetup(state: HostPublicState): void {
     state.live.message ??
     state.live.blocker ??
     state.connectionError ??
-    '等待 Qwen Code WebShell…';
+    '等待 LailatulCoder Ai WebShell…';
   panel.append(blocker);
 
   if (state.permissions.microphone === 'granted') {

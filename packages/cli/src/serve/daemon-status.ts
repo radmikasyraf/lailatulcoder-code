@@ -29,11 +29,11 @@ import {
   MIN_CHILD_HEAP_MB,
   recommendedChildShareMb,
   type DaemonMemoryBudget,
-} from '@qwen-code/acp-bridge/daemonMemoryBudget';
+} from '@lailatul-coder/acp-bridge/daemonMemoryBudget';
 import type {
   ChildHeapMode,
   ChildHeapPolicySnapshot,
-} from '@qwen-code/acp-bridge/childHeapPolicy';
+} from '@lailatul-coder/acp-bridge/childHeapPolicy';
 import {
   computeDaemonMemoryPressure,
   type DaemonMemoryPressure,

@@ -414,7 +414,7 @@ describe('GeminiChat', async () => {
 
       expect(mockAcquireSleepInhibitor).toHaveBeenCalledWith(
         mockConfig,
-        'Qwen Code is streaming a model response',
+        'LailatulCoder Ai is streaming a model response',
       );
       expect(mockSleepInhibitorRelease).toHaveBeenCalledTimes(1);
     });

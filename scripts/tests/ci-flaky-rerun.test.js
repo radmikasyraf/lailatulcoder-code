@@ -28,12 +28,12 @@ function run(overrides = {}) {
   return {
     databaseId: 11,
     name: 'E2E Tests',
-    workflowName: 'Qwen Code CI',
+    workflowName: 'LailatulCoder Ai CI',
     status: 'COMPLETED',
     conclusion: 'FAILURE',
     startedAt: '2026-07-12T07:10:00.000Z',
     completedAt: '2026-07-12T07:20:00.000Z',
-    detailsUrl: 'https://github.com/QwenLM/qwen-code/actions/runs/123/job/1',
+    detailsUrl: 'https://github.com/LailatulCoder/lailatul-coder/actions/runs/123/job/1',
     ...overrides,
   };
 }
@@ -121,7 +121,7 @@ function client(overrides = {}) {
 }
 
 describe('ci flaky rerun patrol', () => {
-  it('selects only recent stale current Qwen Code CI failures', () => {
+  it('selects only recent stale current LailatulCoder Ai CI failures', () => {
     const selected = selectCandidateTargets(
       [
         pr({
@@ -134,7 +134,7 @@ describe('ci flaky rerun patrol', () => {
               completedAt: null,
               startedAt: '2026-07-12T07:40:00.000Z',
               detailsUrl:
-                'https://github.com/QwenLM/qwen-code/actions/runs/124/job/2',
+                'https://github.com/LailatulCoder/lailatul-coder/actions/runs/124/job/2',
             }),
           ],
         }),
@@ -146,7 +146,7 @@ describe('ci flaky rerun patrol', () => {
               databaseId: 13,
               conclusion: 'TIMED_OUT',
               detailsUrl:
-                'https://github.com/QwenLM/qwen-code/actions/runs/125/job/3',
+                'https://github.com/LailatulCoder/lailatul-coder/actions/runs/125/job/3',
             }),
           ],
         }),
@@ -178,7 +178,7 @@ describe('ci flaky rerun patrol', () => {
             run({
               completedAt: '2026-07-12T06:00:00.000Z',
               detailsUrl:
-                'https://github.com/QwenLM/qwen-code/actions/runs/121/job/1',
+                'https://github.com/LailatulCoder/lailatul-coder/actions/runs/121/job/1',
             }),
           ],
         }),
@@ -200,7 +200,7 @@ describe('ci flaky rerun patrol', () => {
               name: 'Unit Tests',
               completedAt: '2026-07-12T07:25:00.000Z',
               detailsUrl:
-                'https://github.com/QwenLM/qwen-code/actions/runs/124/job/2',
+                'https://github.com/LailatulCoder/lailatul-coder/actions/runs/124/job/2',
             }),
           ],
         }),
@@ -264,7 +264,7 @@ describe('ci flaky rerun patrol', () => {
   });
 
   it('ignores empty lines in paginated comment output', async () => {
-    const api = new GhClient('QwenLM/qwen-code');
+    const api = new GhClient('LailatulCoder/lailatul-coder');
     api.gh = async () => '{"body":"first"}\n\n{"body":"second"}\n';
     await expect(api.comments(42)).resolves.toEqual([
       { body: 'first' },
@@ -273,7 +273,7 @@ describe('ci flaky rerun patrol', () => {
   });
 
   it('requests the PR number when refreshing current PR state', async () => {
-    const api = new GhClient('QwenLM/qwen-code');
+    const api = new GhClient('LailatulCoder/lailatul-coder');
     let args = [];
     api.gh = async (nextArgs) => {
       args = nextArgs;
@@ -321,7 +321,7 @@ describe('ci flaky rerun patrol', () => {
               conclusion: 'SUCCESS',
               completedAt: '2026-07-12T07:30:00.000Z',
               detailsUrl:
-                'https://github.com/QwenLM/qwen-code/actions/runs/124/job/2',
+                'https://github.com/LailatulCoder/lailatul-coder/actions/runs/124/job/2',
             }),
           ],
         }),
@@ -359,7 +359,7 @@ describe('ci flaky rerun patrol', () => {
     const body = deflakeIssueBody(
       flaky(),
       { reason_en: 'timed out', reason_zh: '超时' },
-      { prNumber: 42, runId: 99, repo: 'QwenLM/qwen-code' },
+      { prNumber: 42, runId: 99, repo: 'LailatulCoder/lailatul-coder' },
     );
     expect(body).toContain(deflakeMarker(flaky()));
     expect(body).toContain('.qwen/skills/deflake/SKILL.md');
@@ -468,12 +468,12 @@ describe('ci flaky rerun patrol', () => {
       flaky(),
       { reason_en: 'x', reason_zh: 'x' },
       { prNumber: 7, runId: 42 },
-      'my-fork/qwen-code',
+      'my-fork/lailatul-coder',
     );
     expect(body).toContain(
-      'https://github.com/my-fork/qwen-code/actions/runs/42',
+      'https://github.com/my-fork/lailatul-coder/actions/runs/42',
     );
-    expect(body).not.toContain('QwenLM/qwen-code/actions/runs/42');
+    expect(body).not.toContain('LailatulCoder/lailatul-coder/actions/runs/42');
   });
 
   it('keeps the rerun when deflake issue creation fails (best-effort)', async () => {
@@ -599,7 +599,7 @@ describe('ci flaky rerun patrol', () => {
         statusCheckRollup: [
           run({
             detailsUrl:
-              'https://github.com/QwenLM/qwen-code/actions/runs/123/job/2',
+              'https://github.com/LailatulCoder/lailatul-coder/actions/runs/123/job/2',
           }),
         ],
       }),
@@ -633,7 +633,7 @@ describe('ci flaky rerun patrol', () => {
             headRefOid: prNumber === 42 ? 'abc123' : 'def456',
             statusCheckRollup: [
               run({
-                detailsUrl: `https://github.com/QwenLM/qwen-code/actions/runs/${prNumber === 42 ? 123 : 124}/job/1`,
+                detailsUrl: `https://github.com/LailatulCoder/lailatul-coder/actions/runs/${prNumber === 42 ? 123 : 124}/job/1`,
               }),
             ],
           }),

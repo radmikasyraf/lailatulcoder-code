@@ -16,10 +16,10 @@ import type {
 } from './types.js';
 // Single source of truth: the daemon publisher owns the wire literal in
 // acp-bridge's dependency-free `daemonEventTypes` module. We re-export it so the
-// validator/reducer below, and the browser consumer via `@qwen-code/sdk/daemon`,
+// validator/reducer below, and the browser consumer via `@lailatul-coder/sdk/daemon`,
 // share the exact same value — a rename can't silently break browser-side dedup.
 // The build-time devDep on acp-bridge inlines the value into the published bundle
-// (same lightweight mechanism as `@qwen-code/acp-bridge/mcpTimeouts`). A `const`
+// (same lightweight mechanism as `@lailatul-coder/acp-bridge/mcpTimeouts`). A `const`
 // keeps its literal type, so it still narrows in `switch (event.type)` and works
 // as a `typeof`-d type argument.
 import {
@@ -27,7 +27,7 @@ import {
   PENDING_PROMPT_ADDED_EVENT,
   PENDING_PROMPT_STARTED_EVENT,
   PENDING_PROMPT_COMPLETED_EVENT,
-} from '@qwen-code/acp-bridge/daemonEventTypes';
+} from '@lailatul-coder/acp-bridge/daemonEventTypes';
 export {
   MID_TURN_MESSAGE_INJECTED_EVENT,
   PENDING_PROMPT_ADDED_EVENT,

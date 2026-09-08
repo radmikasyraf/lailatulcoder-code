@@ -9,8 +9,8 @@ import { readFileSync } from 'node:fs';
 import { createServer, type Server } from 'node:http';
 import { createServer as createSecureServer } from 'node:https';
 import type { Application } from 'express';
-import type { SleepInhibitorHandle } from '@qwen-code/qwen-code-core';
-import { sleepInhibitor } from '@qwen-code/qwen-code-core';
+import type { SleepInhibitorHandle } from '@lailatul-coder/lailatul-coder-core';
+import { sleepInhibitor } from '@lailatul-coder/lailatul-coder-core';
 import type { MutableOriginAllowlist } from '../auth.js';
 import type { CredentialStore } from './credentials.js';
 import { tagListener } from './listener-identity.js';
@@ -229,7 +229,7 @@ export class LocalControlService {
     // SSH sessions and on hosts without a usable backend. A phone losing its
     // session to a sleeping laptop should be explainable from the status, so
     // `sleepInhibited` reflects what actually happened rather than intent.
-    this.#sleep = sleepInhibitor.acquire('Qwen Code Local Control is active');
+    this.#sleep = sleepInhibitor.acquire('LailatulCoder Ai Local Control is active');
     return this.status();
   }
 

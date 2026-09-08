@@ -103,7 +103,7 @@ function resolveWorkspaceProjectScope(): boolean {
     warnedUnknownMemoryProjectScope = true;
     // eslint-disable-next-line no-console
     console.warn(
-      `[qwen-code] Ignoring unrecognized QWEN_CODE_MEMORY_PROJECT_SCOPE="${raw}"; ` +
+      `[lailatul-coder] Ignoring unrecognized QWEN_CODE_MEMORY_PROJECT_SCOPE="${raw}"; ` +
         'falling back to "git-root". Expected "git-root" or "workspace".',
     );
   }

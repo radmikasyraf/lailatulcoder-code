@@ -1,7 +1,7 @@
 /**
  * Model Fetcher — Centralized Model Discovery
  *
- * Type-safe plugin interface for fetching available models from Qwen Code.
+ * Type-safe plugin interface for fetching available models from LailatulCoder Ai.
  */
 
 import type { ModelDefinition } from './models';

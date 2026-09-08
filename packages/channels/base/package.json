@@ -1,10 +1,10 @@
 {
-  "name": "@qwen-code/channel-base",
+  "name": "@lailatul-coder/channel-base",
   "version": "0.21.14",
-  "description": "Base channel infrastructure for Qwen Code",
+  "description": "Base channel infrastructure for LailatulCoder Ai",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git",
+    "url": "git+https://github.com/LailatulCoder/lailatul-coder.git",
     "directory": "packages/channels/base"
   },
   "type": "module",

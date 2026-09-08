@@ -8,7 +8,7 @@ import {
   SessionService,
   Storage,
   type SessionServiceOptions,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { WorkspaceRuntime } from './workspace-registry.js';
 
 export function runWithWorkspaceRuntimeStorage<T>(

@@ -8,7 +8,7 @@ import { performance } from 'node:perf_hooks';
 import {
   CHANNEL_STARTUP_PROFILE_VERSION,
   type ChannelStartupProfileV1,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 
 export type AcpStartupMark =
   | 'profilerReady'

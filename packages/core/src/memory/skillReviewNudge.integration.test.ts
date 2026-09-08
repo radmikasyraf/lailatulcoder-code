@@ -46,7 +46,7 @@ describe('Skill Nudge E2E Integration Tests', () => {
     mgr = new MemoryManager();
     mockConfig = {
       getSessionId: () => 'test-session-1',
-      getModel: () => 'qwen-coder-32b',
+      getModel: () => 'lailatul-coderr-32b',
       getProjectRoot: () => projectRoot,
     } as Config;
   });

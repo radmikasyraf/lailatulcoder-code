@@ -10,7 +10,7 @@ import * as path from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-// Mock cleanup.ts to avoid pulling in @qwen-code/qwen-code-core dependency chain
+// Mock cleanup.ts to avoid pulling in @lailatul-coder/lailatul-coder-core dependency chain
 vi.mock('./cleanup.js', () => ({
   registerCleanup: vi.fn(),
 }));
@@ -144,7 +144,7 @@ describe('cpuProfiler', () => {
 
       expect(result.ok).toBe(true);
       if (result.ok) {
-        expect(result.filePath).toMatch(/qwen-code-cpu-\d+-.*\.cpuprofile$/);
+        expect(result.filePath).toMatch(/lailatul-coder-cpu-\d+-.*\.cpuprofile$/);
         expect(fs.existsSync(result.filePath)).toBe(true);
 
         const content = JSON.parse(fs.readFileSync(result.filePath, 'utf8'));
@@ -240,7 +240,7 @@ describe('cpuProfiler', () => {
     it('removes old profiles beyond max count', async () => {
       // Create 5 existing profiles
       for (let i = 0; i < 5; i++) {
-        const name = `qwen-code-cpu-99999-2026-05-29T0${i}-00-00-000Z.cpuprofile`;
+        const name = `lailatul-coder-cpu-99999-2026-05-29T0${i}-00-00-000Z.cpuprofile`;
         fs.writeFileSync(path.join(tmpDir, name), '{}');
         // Stagger mtime so sort is deterministic
         const mtime = new Date(Date.now() - (5 - i) * 1000);

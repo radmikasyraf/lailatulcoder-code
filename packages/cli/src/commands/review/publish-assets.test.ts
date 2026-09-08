@@ -105,7 +105,7 @@ describe('publish-assets', () => {
     writeFileSync(argsFile, '8346 --comment\n');
     process.env['QWEN_REVIEW_ASSETS_REPO'] = 'owner/assets';
     // The skillArgs test seam is honoured only when no session id is present;
-    // running this suite from inside an active Qwen Code session would
+    // running this suite from inside an active LailatulCoder Ai session would
     // otherwise route the gate at the real session-scoped path and fail eight
     // of these tests for reasons that have nothing to do with the code.
     savedSessionId = process.env['QWEN_CODE_SESSION_ID'];

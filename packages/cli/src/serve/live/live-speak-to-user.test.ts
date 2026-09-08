@@ -18,7 +18,7 @@ describe('SpeakToUserTool', () => {
 
     expect(tool.name).toBe(SPEAK_TO_USER_TOOL_NAME);
     expect(tool.description).toContain(
-      'Automatic backend Qwen Code text is silent context',
+      'Automatic backend LailatulCoder Ai text is silent context',
     );
     await expect(invocation.getDefaultPermission()).resolves.toBe('allow');
     await expect(

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DaemonHttpError } from '@qwen-code/sdk/daemon';
+import { DaemonHttpError } from '@lailatul-coder/sdk/daemon';
 import { isDefinitelyRejectedPromptAdmission } from './promptAdmission';
 
 describe('isDefinitelyRejectedPromptAdmission', () => {

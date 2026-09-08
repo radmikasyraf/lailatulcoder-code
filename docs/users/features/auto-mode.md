@@ -10,12 +10,12 @@ For an introduction, see the
 
 ## How it works
 
-When you're in Auto Mode and the agent tries to run a tool, Qwen Code
+When you're in Auto Mode and the agent tries to run a tool, LailatulCoder Ai
 walks three layers in order:
 
 1. **acceptEdits fast-path** — Edit / Write whose target path is inside
    the workspace is auto-approved without invoking the classifier.
-   **Exception:** writes to Qwen Code's own self-modification surfaces
+   **Exception:** writes to LailatulCoder Ai's own self-modification surfaces
    (`.qwen/settings*.json`, `QWEN.md`, `AGENTS.md`, `QWEN.local.md`,
    configured context filenames, `.qwen/rules/`, `.qwen/commands/`,
    `.qwen/agents/`, `.qwen/skills/`, `.qwen/hooks/`, `.mcp.json`) and
@@ -64,7 +64,7 @@ runs:
   protected self-modification or persistence path (see the list under
   "How it works"). In that case Auto Mode re-checks the call through
   the classifier so an allow rule on `Bash(*)` cannot silently turn
-  into permission to rewrite Qwen Code settings, commands, hooks,
+  into permission to rewrite LailatulCoder Ai settings, commands, hooks,
   skills, or MCP servers.
 - `permissions.ask` rules force manual confirmation even in Auto Mode.
 
@@ -78,7 +78,7 @@ without classifier review:
 - `Agent` / `Agent(coder)` — any allow on the Agent tool
 - `Skill` / `Skill(pdf)` — any allow on the Skill tool
 
-When you enter Auto Mode, Qwen Code temporarily removes these rules from
+When you enter Auto Mode, LailatulCoder Ai temporarily removes these rules from
 the active permission set and prints a notice listing them. The rules
 come back the moment you leave Auto Mode. `settings.json` is never
 modified.
@@ -116,7 +116,7 @@ There are three hint categories plus an environment list:
           "Reading any file under /Users/me/code/"
         ],
         "softDeny": [
-          "Editing Qwen Code settings unless I explicitly ask for the exact change",
+          "Editing LailatulCoder Ai settings unless I explicitly ask for the exact change",
           "Running migration scripts that touch the production DB"
         ],
         "hardDeny": [
@@ -302,7 +302,7 @@ tightened over time.
 **Does Auto Mode send my code to a third party?**
 
 Auto Mode reuses your existing model configuration — same endpoint as
-the main agent. If you've configured Qwen Code to use a self-hosted
+the main agent. If you've configured LailatulCoder Ai to use a self-hosted
 model, the classifier runs against that endpoint too.
 
 **Will my secrets / `.env` contents reach the classifier?**

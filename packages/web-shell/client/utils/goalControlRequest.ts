@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { GoalControlRequest, GoalRecord } from '@qwen-code/sdk/daemon';
+import type { GoalControlRequest, GoalRecord } from '@lailatul-coder/sdk/daemon';
 
 export type GoalControlAction =
   | 'create'

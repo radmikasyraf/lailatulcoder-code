@@ -7,7 +7,7 @@
 import { act } from '@testing-library/react';
 import { render } from 'ink-testing-library';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { FileHistoryService } from '@qwen-code/qwen-code-core';
+import { FileHistoryService } from '@lailatul-coder/lailatul-coder-core';
 import type { HistoryItem } from '../types.js';
 import type { KeypressHandler, Key } from '../contexts/KeypressContext.js';
 import { useKeypress } from '../hooks/useKeypress.js';
@@ -347,3 +347,4 @@ describe('RewindSelector', () => {
     await flush();
   });
 });
+

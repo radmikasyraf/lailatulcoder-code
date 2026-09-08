@@ -2302,7 +2302,7 @@ describe('PR 21 — auth device-flow events', () => {
         data: {
           releaseTag: 'v1.2.3',
           readmeUrl:
-            'https://github.com/QwenLM/qwen-code-action/blob/v1.2.3/README.md#quick-start',
+            'https://github.com/LailatulCoder/lailatul-coder-action/blob/v1.2.3/README.md#quick-start',
           workflows: [
             {
               path: '.github/workflows/qwen-dispatch.yml',

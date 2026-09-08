@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type {
   ChannelUserInputRequestContext,
   UserInputPresentationResult,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import {
   QUESTION_CARD_TEMPLATE_ID,
   type DingtalkInteractiveCardClient,

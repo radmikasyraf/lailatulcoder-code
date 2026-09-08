@@ -58,7 +58,7 @@
  *   npx tsx subagent-flicker-regression.ts
  *
  * Useful env:
- *   QWEN_TUI_E2E_REPO=/path/to/qwen-code
+ *   QWEN_TUI_E2E_REPO=/path/to/lailatul-coder
  *   QWEN_TUI_E2E_OUT=/tmp/qwen-tui-subagent-flicker
  *   QWEN_TUI_E2E_MAX_CLEAR_PAIRS=10       (default: 10)
  *   QWEN_TUI_E2E_MAX_CLEAR_SCREEN=20      (default: 20)

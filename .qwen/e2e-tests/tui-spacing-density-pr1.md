@@ -50,13 +50,13 @@ ffmpeg -y -i /tmp/qwen-pr1-spacing-evidence/base.gif -i /tmp/qwen-pr1-spacing-ev
 
 ## Evidence Artifacts
 
-- Release: <https://github.com/QwenLM/qwen-code/releases/tag/tui-spacing-density-pr1-evidence>
-- Side-by-side GIF: <https://github.com/QwenLM/qwen-code/releases/download/tui-spacing-density-pr1-evidence/base-vs-fixed-optimized.gif>
-- Final screenshot: <https://github.com/QwenLM/qwen-code/releases/download/tui-spacing-density-pr1-evidence/base-vs-fixed-final.png>
-- Base tmux capture: <https://github.com/QwenLM/qwen-code/releases/download/tui-spacing-density-pr1-evidence/base.tmux.txt>
-- Fixed tmux capture: <https://github.com/QwenLM/qwen-code/releases/download/tui-spacing-density-pr1-evidence/fixed.tmux.txt>
-- Base summary JSON: <https://github.com/QwenLM/qwen-code/releases/download/tui-spacing-density-pr1-evidence/base.summary.json>
-- Fixed summary JSON: <https://github.com/QwenLM/qwen-code/releases/download/tui-spacing-density-pr1-evidence/fixed.summary.json>
+- Release: <https://github.com/LailatulCoder/lailatul-coder/releases/tag/tui-spacing-density-pr1-evidence>
+- Side-by-side GIF: <https://github.com/LailatulCoder/lailatul-coder/releases/download/tui-spacing-density-pr1-evidence/base-vs-fixed-optimized.gif>
+- Final screenshot: <https://github.com/LailatulCoder/lailatul-coder/releases/download/tui-spacing-density-pr1-evidence/base-vs-fixed-final.png>
+- Base tmux capture: <https://github.com/LailatulCoder/lailatul-coder/releases/download/tui-spacing-density-pr1-evidence/base.tmux.txt>
+- Fixed tmux capture: <https://github.com/LailatulCoder/lailatul-coder/releases/download/tui-spacing-density-pr1-evidence/fixed.tmux.txt>
+- Base summary JSON: <https://github.com/LailatulCoder/lailatul-coder/releases/download/tui-spacing-density-pr1-evidence/base.summary.json>
+- Fixed summary JSON: <https://github.com/LailatulCoder/lailatul-coder/releases/download/tui-spacing-density-pr1-evidence/fixed.summary.json>
 
 ## Expected Results
 

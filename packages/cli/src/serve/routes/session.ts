@@ -31,14 +31,14 @@ import {
   type SessionGroupPresetColor,
   type SessionArchiveState,
   parseGoalControlRequest,
-} from '@qwen-code/qwen-code-core';
-import type { SessionArtifactInput } from '@qwen-code/acp-bridge/sessionArtifacts';
+} from '@lailatul-coder/lailatul-coder-core';
+import type { SessionArtifactInput } from '@lailatul-coder/acp-bridge/sessionArtifacts';
 import {
   CHANNEL_PROMPT_META_KEY,
   DAEMON_PROMPT_DISPLAY_TEXT_META_KEY,
   type BridgeBranchedSession,
-} from '@qwen-code/acp-bridge/bridgeTypes';
-import { parseSessionSource } from '@qwen-code/acp-bridge';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
+import { parseSessionSource } from '@lailatul-coder/acp-bridge';
 import {
   isReservedLiveSessionSource,
   isReservedStandaloneSessionSource,
@@ -4704,7 +4704,7 @@ export function registerSessionRoutes(
         // SSE resume position from this 202 must also learn the bus epoch so
         // a daemon restart in between is detected (DAEMON-001).
         const eventEpoch = ownerBridge.getSessionEventEpoch(sessionId);
-        addDaemonRequestAttribute('qwen-code.prompt_id', promptId);
+        addDaemonRequestAttribute('lailatul-coder.prompt_id', promptId);
 
         const abort = new AbortController();
         let responseFinished = false;

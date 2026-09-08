@@ -6,7 +6,7 @@
 
 /**
  * postCompactAttachments — pure builders for the message blocks injected
- * AFTER the summary in a compacted history. Replaces qwen-code's tail-
+ * AFTER the summary in a compacted history. Replaces lailatul-coder's tail-
  * preservation model (split-point + last 30%) with claude-code's
  * "summary + restored attachments" model.
  *
@@ -148,7 +148,7 @@ export interface ExtractedImage {
 /**
  * Walk a single content's parts in REVERSE and return every image part
  * it carries — both top-level `inlineData` (user-pasted images) and
- * images nested inside `functionResponse.parts` (qwen-code's tool-media
+ * images nested inside `functionResponse.parts` (lailatul-coder's tool-media
  * carrier; see coreToolScheduler.convertToFunctionResponse). Reverse
  * order means the last-emitted image is treated as the most recent.
  *

@@ -14,7 +14,7 @@ regressions.
 ## Input
 
 A GitHub issue URL or number. Slash-command arguments are appended to this skill
-body by Qwen Code.
+body by LailatulCoder Ai.
 
 ## Artifact Path
 

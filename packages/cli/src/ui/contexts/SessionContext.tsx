@@ -22,8 +22,8 @@ import type {
   ToolCallStats,
   SkillCallStats,
   SkillMetrics,
-} from '@qwen-code/qwen-code-core';
-import { uiTelemetryService } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import { uiTelemetryService } from '@lailatul-coder/lailatul-coder-core';
 
 const EMPTY_SKILL_METRICS: SkillMetrics = {
   totalCalls: 0,
@@ -475,3 +475,4 @@ export const useSessionStats = () => {
   }
   return context;
 };
+

@@ -1,4 +1,4 @@
-import type { DaemonExtensionEntry } from '@qwen-code/sdk/daemon';
+import type { DaemonExtensionEntry } from '@lailatul-coder/sdk/daemon';
 
 export function preserveSelectedExtensionName(
   name: string | null,

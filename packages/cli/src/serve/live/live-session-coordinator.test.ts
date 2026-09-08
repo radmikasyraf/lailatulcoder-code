@@ -8,9 +8,9 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import type {
   AcpSessionBridge,
   BridgePendingInteraction,
-} from '@qwen-code/acp-bridge/bridgeTypes';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
-import type { SessionListItem } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
+import type { SessionListItem } from '@lailatul-coder/lailatul-coder-core';
 import type {
   WorkspaceRegistry,
   WorkspaceRuntime,
@@ -32,9 +32,9 @@ const buildRealtimeStartupContext = vi.hoisted(() =>
   vi.fn(async () => '<startup_context>test context</startup_context>'),
 );
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     SessionService: class {

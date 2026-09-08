@@ -411,7 +411,7 @@ function permissionModeToApprovalMode(mode: PermissionMode): ApprovalMode {
  * independent imports of this module observe the same Symbol identity.
  */
 export const TOOL_REGISTRY_REBUILT: unique symbol = Symbol.for(
-  'qwen-code:tool-registry-rebuilt',
+  'lailatul-coder:tool-registry-rebuilt',
 );
 
 /**
@@ -1895,7 +1895,7 @@ class AgentToolInvocation extends BaseToolInvocation<AgentParams, ToolResult> {
   }
 
   /**
-   * Wrap a subagent body in `qwen-code.subagent` span lifecycle.
+   * Wrap a subagent body in `lailatul-coder.subagent` span lifecycle.
    *
    * Single entry point for the 3 invocation paths (foreground named, fork,
    * background). Captures the invoker span context (for fork/background's
@@ -2053,7 +2053,7 @@ class AgentToolInvocation extends BaseToolInvocation<AgentParams, ToolResult> {
       signal?: AbortSignal;
       updateOutput?: (output: ToolResultDisplay) => void;
       /**
-       * Optional sink the qwen-code.subagent span wrapper passes in so this
+       * Optional sink the lailatul-coder.subagent span wrapper passes in so this
        * method can report its actual terminal state (the outer try/catch
        * swallows errors, so the wrapper cannot derive it from a throw).
        * Review wenshao @ #4410.
@@ -3819,7 +3819,7 @@ class AgentToolInvocation extends BaseToolInvocation<AgentParams, ToolResult> {
         // do this in their finally blocks. Without it, every AgentTool /
         // SkillTool the fork's model instantiates from this registry leaks
         // its change-listener on shared SubagentManager / SkillManager.
-        // Wrap fork body in qwen-code.subagent span (#3731 Phase 3). Forks
+        // Wrap fork body in lailatul-coder.subagent span (#3731 Phase 3). Forks
         // are fire-and-forget — span gets a NEW traceId + `Link` back to the
         // invoking tool span. Spec recommends Link for "long running
         // asynchronous data processing operations" (OTel trace spec). Span
@@ -3885,8 +3885,8 @@ class AgentToolInvocation extends BaseToolInvocation<AgentParams, ToolResult> {
       }
 
       const fgHookOpts = { ...hookOpts, signal: fgAbortController.signal };
-      // Wrap in qwen-code.subagent span (#3731 Phase 3). Foreground
-      // invocations are child spans of the AGENT tool's `qwen-code.tool`
+      // Wrap in lailatul-coder.subagent span (#3731 Phase 3). Foreground
+      // invocations are child spans of the AGENT tool's `lailatul-coder.tool`
       // span, inheriting its traceId so the trace tree stays unified.
       const runFramed = () =>
         this.runWithSubagentSpan(

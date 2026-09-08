@@ -13,7 +13,7 @@ import {
   createDebugLogger,
   getSubagentsRootDir,
   resolveOpenAILogDir,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../../config/settings.js';
 import { DEFAULT_OPENAI_LOG_RETENTION_DAYS } from '../../config/settingsSchema.js';
 import {

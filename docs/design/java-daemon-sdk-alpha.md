@@ -173,7 +173,7 @@ The whole artifact now requires Java 11. Java 8 users must remain on
 and obtains logging through `slf4j-api`; applications choose their own SLF4J
 provider because Logback is test-only.
 
-The compatible daemon is the qwen-code build released from the same source
+The compatible daemon is the lailatul-coder build released from the same source
 revision as the SDK. It contains the per-client detach ledger from #7386, the
 per-epoch terminal guarantee from #7400, restart-safe event cursor epochs from
 #7458, and this release's acknowledged admission cancellation plus FIFO

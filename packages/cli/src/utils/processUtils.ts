@@ -21,7 +21,7 @@ export const CUSTOM_SANDBOX_IMAGE_ENV_VAR = 'QWEN_CODE_CUSTOM_SANDBOX_IMAGE';
 
 export const HOST_UPDATE_RELAUNCH_ENV_VAR = 'QWEN_CODE_HOST_UPDATE_RELAUNCH';
 
-export const UPDATE_ON_EXIT_MESSAGE = 'qwen-code:update-on-exit';
+export const UPDATE_ON_EXIT_MESSAGE = 'lailatul-coder:update-on-exit';
 
 /**
  * Exits the process with a special code to signal that the parent process should relaunch it.

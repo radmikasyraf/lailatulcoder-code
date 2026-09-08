@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { ApprovalMode } from '@qwen-code/qwen-code-core';
+import { ApprovalMode } from '@lailatul-coder/lailatul-coder-core';
 import { theme } from '../semantic-colors.js';
 import {
   getApprovalModeIndicatorColor,

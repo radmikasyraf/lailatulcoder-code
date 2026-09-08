@@ -27,7 +27,7 @@ const debugLogger = createDebugLogger('WORKTREE_CLEANUP');
  * here.
  *
  * Mirrors claude-code's `EPHEMERAL_WORKTREE_PATTERNS` in
- * `utils/worktree.ts`, restricted to the patterns qwen-code actually emits.
+ * `utils/worktree.ts`, restricted to the patterns lailatul-coder actually emits.
  */
 const EPHEMERAL_WORKTREE_PATTERNS: readonly RegExp[] = [
   AGENT_WORKTREE_SLUG_PATTERN,

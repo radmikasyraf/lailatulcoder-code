@@ -2,7 +2,7 @@
 
 ## Context
 
-When OpenAI-compatible API logging is enabled, Qwen Code writes one JSON file per request and response. Heavy use can create hundreds of thousands of files and consume tens of gigabytes because the log directory has no retention policy.
+When OpenAI-compatible API logging is enabled, LailatulCoder Ai writes one JSON file per request and response. Heavy use can create hundreds of thousands of files and consume tens of gigabytes because the log directory has no retention policy.
 
 Historical files have one in-tree reader, which searches only recent logs for the current session. Removing sufficiently old writer-owned files does not affect session restore or active requests.
 

@@ -477,4 +477,4 @@ Design document: [`../../design/f2-mcp-transport-pool.md`](../../design/f2-mcp-t
 - `packages/core/src/tools/mcp-pool-events.ts` (event types)
 - `packages/core/src/tools/session-mcp-view.ts` (per-session filtered view)
 - F2 design document (v2.2, with the 32-item review fold-in changelog): [`../../design/f2-mcp-transport-pool.md`](../../design/f2-mcp-transport-pool.md). Treat the design contract as authoritative; this page is the developer deep dive.
-- F2 design notes: issue [#4175](https://github.com/QwenLM/qwen-code/issues/4175) (commits 4-6 of the F2 series).
+- F2 design notes: issue [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) (commits 4-6 of the F2 series).

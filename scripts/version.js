@@ -44,7 +44,7 @@ run(`npm version ${versionType} --no-git-tag-version --allow-same-version`);
 
 // 3. Get all workspaces and filter out the one we don't want to version.
 // We intend to maintain sdk and mobile-mcp versions independently.
-const workspacesToExclude = ['@qwen-code/sdk', '@qwen-code/mobile-mcp'];
+const workspacesToExclude = ['@lailatul-coder/sdk', '@lailatul-coder/mobile-mcp'];
 let lsOutput;
 try {
   lsOutput = JSON.parse(
@@ -110,7 +110,7 @@ if (cliPackageJson.config?.sandboxImageUri) {
   writeJson(cliPackageJsonPath, cliPackageJson);
 }
 
-// 7. Pin channel adapters' semver dependency on @qwen-code/channel-base to
+// 7. Pin channel adapters' semver dependency on @lailatul-coder/channel-base to
 // the exact new version. A caret range like ^0.21.0 does not match a
 // prerelease bump (e.g. 0.21.1-preview.0), so npm would replace the workspace
 // link with the stale registry package and the release build would compile
@@ -120,12 +120,12 @@ for (const entry of readdirSync(channelsDir)) {
   const pkgPath = join(channelsDir, entry, 'package.json');
   if (!existsSync(pkgPath)) continue;
   const pkg = readJson(pkgPath);
-  const dep = pkg.dependencies?.['@qwen-code/channel-base'];
+  const dep = pkg.dependencies?.['@lailatul-coder/channel-base'];
   if (dep && !dep.startsWith('file:')) {
-    pkg.dependencies['@qwen-code/channel-base'] = newVersion;
+    pkg.dependencies['@lailatul-coder/channel-base'] = newVersion;
     writeJson(pkgPath, pkg);
     console.log(
-      `Pinned @qwen-code/channel-base to ${newVersion} in ${pkg.name}`,
+      `Pinned @lailatul-coder/channel-base to ${newVersion} in ${pkg.name}`,
     );
   }
 }
@@ -142,7 +142,7 @@ run('npm install --ignore-scripts');
 // The install above cleans both lockfiles but can leave that directory on
 // disk, where it shadows the workspace link during tsc. Remove it.
 for (const entry of readdirSync(channelsDir)) {
-  rmSync(join(channelsDir, entry, 'node_modules', '@qwen-code'), {
+  rmSync(join(channelsDir, entry, 'node_modules', '@lailatul-coder'), {
     recursive: true,
     force: true,
   });

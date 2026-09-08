@@ -13,7 +13,7 @@ import {
   TURN_INTERRUPTION_HISTORY_TAIL_COUNT,
   type ChatRecord,
   type ResumedSessionData,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   appendPromptLedgerRecord,
   danglingInFlightPromptIds,
@@ -23,9 +23,9 @@ import {
   type PromptLedgerInFlightRecord,
   type PromptLedgerRecord,
   type PromptLedgerTerminalRecord,
-} from '@qwen-code/acp-bridge/promptLedger';
-import type { PromptLedgerSink } from '@qwen-code/acp-bridge/bridgeOptions';
-import type { BridgeRestoredSession } from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/promptLedger';
+import type { PromptLedgerSink } from '@lailatul-coder/acp-bridge/bridgeOptions';
+import type { BridgeRestoredSession } from '@lailatul-coder/acp-bridge/bridgeTypes';
 
 /**
  * Serve-layer assembly of the bridge's ledger sink: the bridge only calls

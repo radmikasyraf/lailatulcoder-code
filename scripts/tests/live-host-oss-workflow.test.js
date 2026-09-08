@@ -30,7 +30,7 @@ describe('Live Host OSS mirror workflow', () => {
 
     const syncOss = getWorkflowJob(releaseWorkflow, 'sync-oss');
     expect(syncOss).toContain(
-      "if: \"${{ github.event_name == 'workflow_dispatch' && inputs.dry_run == false && inputs.draft == false && inputs.prerelease == false && github.repository == 'QwenLM/qwen-code' }}\"",
+      "if: \"${{ github.event_name == 'workflow_dispatch' && inputs.dry_run == false && inputs.draft == false && inputs.prerelease == false && github.repository == 'LailatulCoder/lailatul-coder' }}\"",
     );
     expect(syncOss).toContain("- 'publish'");
     expect(syncOss).toContain("source: 'artifact'");

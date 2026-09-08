@@ -44,7 +44,7 @@ vi.mock('./login.js', () => ({
   qrCodeLogin: vi.fn(),
 }));
 
-vi.mock('@qwen-code/channel-base', () => ({
+vi.mock('@lailatul-coder/channel-base', () => ({
   ChannelBase: class {
     protected config: Record<string, unknown> = {};
     protected bridge: Record<string, unknown> = {};
@@ -107,7 +107,7 @@ function makeChannel(): QQChannelClass {
       appID: 'test-app-id',
       appSecret: 'test-secret',
     },
-    {} as unknown as import('@qwen-code/channel-base').AcpBridge,
+    {} as unknown as import('@lailatul-coder/channel-base').AcpBridge,
   );
   return ch;
 }
@@ -493,14 +493,14 @@ describe('fixRestoredSessions', () => {
         appID: 'test-app-id',
         appSecret: 'test-secret',
       },
-      {} as unknown as import('@qwen-code/channel-base').AcpBridge,
+      {} as unknown as import('@lailatul-coder/channel-base').AcpBridge,
       {
         router: {
           restoreSessions: () => Promise.resolve(),
           toSession,
           toTarget,
           toCwd,
-        } as unknown as import('@qwen-code/channel-base').SessionRouter,
+        } as unknown as import('@lailatul-coder/channel-base').SessionRouter,
       },
     );
 
@@ -530,13 +530,13 @@ describe('fixRestoredSessions', () => {
         appID: 'test-app-id',
         appSecret: 'test-secret',
       },
-      {} as unknown as import('@qwen-code/channel-base').AcpBridge,
+      {} as unknown as import('@lailatul-coder/channel-base').AcpBridge,
       {
         router: {
           restoreSessions: () => Promise.resolve(),
           toSession,
           toTarget: new Map(),
-        } as unknown as import('@qwen-code/channel-base').SessionRouter,
+        } as unknown as import('@lailatul-coder/channel-base').SessionRouter,
       },
     );
 
@@ -575,13 +575,13 @@ describe('fixRestoredSessions', () => {
         appID: 'test-app-id',
         appSecret: 'test-secret',
       },
-      {} as unknown as import('@qwen-code/channel-base').AcpBridge,
+      {} as unknown as import('@lailatul-coder/channel-base').AcpBridge,
       {
         router: {
           restoreSessions: () => Promise.resolve(),
           toSession,
           toTarget,
-        } as unknown as import('@qwen-code/channel-base').SessionRouter,
+        } as unknown as import('@lailatul-coder/channel-base').SessionRouter,
       },
     );
 

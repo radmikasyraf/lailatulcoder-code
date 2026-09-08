@@ -10,7 +10,7 @@ import {
   HookEventName,
   HooksConfigSource,
   HookType,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { HookDetailStep } from './HookDetailStep.js';
 import type { HookConfigDisplayInfo, HookEventDisplayInfo } from './types.js';
 
@@ -323,3 +323,4 @@ describe('HookDetailStep', () => {
     });
   });
 });
+

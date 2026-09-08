@@ -4,7 +4,7 @@
 
 `POST /workspace/mcp/reload` reloads persisted settings but reconciles MCP
 connections incrementally. A server whose settings are unchanged retains its
-existing transport. OAuth credentials written by another Qwen Code process are
+existing transport. OAuth credentials written by another LailatulCoder Ai process are
 therefore not read until that transport reconnects.
 
 ## Design

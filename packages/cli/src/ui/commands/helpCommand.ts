@@ -15,7 +15,7 @@ export const helpCommand: SlashCommand = {
   supportedModes: ['interactive'] as const,
   canRunDuringStreaming: true,
   get description() {
-    return t('for help on Qwen Code');
+    return t('for help on LailatulCoder Ai');
   },
   action: async () => ({
     type: 'dialog',

@@ -18,7 +18,7 @@ const sleepInhibitorMock = vi.hoisted(() => ({
   isRunning: vi.fn(() => true),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   sleepInhibitor: sleepInhibitorMock,
 }));
 

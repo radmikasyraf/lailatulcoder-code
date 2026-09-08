@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { IdeInfo } from '@qwen-code/qwen-code-core';
+import type { IdeInfo } from '@lailatul-coder/lailatul-coder-core';
 import { Box, Text } from 'ink';
 import type { RadioSelectItem } from './components/shared/RadioButtonSelect.js';
 import { RadioButtonSelect } from './components/shared/RadioButtonSelect.js';
@@ -101,3 +101,4 @@ export function IdeIntegrationNudge({
     </Box>
   );
 }
+

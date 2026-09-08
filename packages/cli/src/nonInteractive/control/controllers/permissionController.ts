@@ -22,12 +22,12 @@ import type {
   TeammateApprovalRequestEvent,
   ToolConfirmationPayload,
   WorkflowApproval,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   InputFormat,
   ToolConfirmationOutcome,
   ToolNames,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   CLIControlPermissionRequest,
   CLIControlSetPermissionModeRequest,

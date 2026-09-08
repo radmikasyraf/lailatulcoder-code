@@ -1,18 +1,18 @@
 # Commands
 
-This document details all commands supported by Qwen Code, helping you efficiently manage sessions, customize the interface, and control its behavior.
+This document details all commands supported by LailatulCoder Ai, helping you efficiently manage sessions, customize the interface, and control its behavior.
 
-Qwen Code commands are triggered through specific prefixes and fall into three categories:
+LailatulCoder Ai commands are triggered through specific prefixes and fall into three categories:
 
 | Prefix Type                | Function Description                                | Typical Use Case                                                 |
 | -------------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
-| Slash Commands (`/`)       | Meta-level control of Qwen Code itself              | Managing sessions, modifying settings, getting help              |
+| Slash Commands (`/`)       | Meta-level control of LailatulCoder Ai itself              | Managing sessions, modifying settings, getting help              |
 | At Commands (`@`)          | Quickly inject local file content into conversation | Allowing AI to analyze specified files or code under directories |
 | Exclamation Commands (`!`) | Direct interaction with system Shell                | Executing system commands like `git status`, `ls`, etc.          |
 
 ## 1. Slash Commands (`/`)
 
-Slash commands are used to manage Qwen Code sessions, interface, and basic behavior.
+Slash commands are used to manage LailatulCoder Ai sessions, interface, and basic behavior.
 
 ### 1.1 Session and Project Management
 
@@ -54,7 +54,7 @@ Commands for adjusting interface appearance and work environment.
 | `/history`           | Control history display preferences and visibility                                                                                                                                | `/history collapse-on-resume`, `/history expand-on-resume`, `/history expand-now` |
 | `/diff`              | Open an interactive diff viewer showing uncommitted changes and per-turn diffs. Use ←/→ to switch between current git diff and individual conversation turns, ↑/↓ to browse files | `/diff`                                                                           |
 | `/log`               | Open a commit history viewer for the workspace (Web Shell only)                                                                                                                   | `/log`                                                                            |
-| `/theme`             | Change Qwen Code visual theme                                                                                                                                                     | `/theme`                                                                          |
+| `/theme`             | Change LailatulCoder Ai visual theme                                                                                                                                                     | `/theme`                                                                          |
 | `/vim`               | Turn input area Vim editing mode on/off                                                                                                                                           | `/vim`                                                                            |
 | `/voice`             | Toggle voice dictation input                                                                                                                                                      | `/voice`, `/voice hold`, `/voice tap`, `/voice off`, `/voice status`              |
 | `/directory`         | Manage multi-directory support workspace                                                                                                                                          | `/dir add ./src,./tests`, `/dir show`                                             |
@@ -112,7 +112,7 @@ Commands for managing AI tools and models.
 | `/remember`           | Save a durable memory                                                                 | `/remember Prefer terse responses`                                                                        |
 | `/forget`             | Remove matching entries from auto-memory                                              | `/forget <query>`                                                                                         |
 | `/dream`              | Manually run auto-memory consolidation                                                | `/dream`                                                                                                  |
-| `/hooks`              | Manage Qwen Code hooks                                                                | `/hooks`, `/hooks list`                                                                                   |
+| `/hooks`              | Manage LailatulCoder Ai hooks                                                                | `/hooks`, `/hooks list`                                                                                   |
 | `/reload-plugins`     | Reload extension changes (commands, skills, agents, hooks, MCP/LSP servers) from disk | `/reload-plugins`                                                                                         |
 | `/permissions`        | Manage permission rules                                                               | `/permissions`                                                                                            |
 | `/agents`             | Manage subagents                                                                      | `/agents manage`, `/agents create`                                                                        |
@@ -125,7 +125,7 @@ Commands for managing AI tools and models.
 
 > [!warning]
 >
-> Only install extensions (`/extensions install`) from sources you trust. Extensions can bundle MCP servers, skills, and commands that run with the same permissions as Qwen Code itself — they can access your files, API keys, and conversation data. `/extensions install` does not prompt for confirmation.
+> Only install extensions (`/extensions install`) from sources you trust. Extensions can bundle MCP servers, skills, and commands that run with the same permissions as LailatulCoder Ai itself — they can access your files, API keys, and conversation data. `/extensions install` does not prompt for confirmation.
 
 > [!warning]
 >
@@ -145,7 +145,7 @@ These commands invoke bundled skills that provide specialized workflows.
 | `/coordinate` | Coordinate read-only workers and one optional worktree writer | `/coordinate investigate and fix the authentication regression`           |
 | `/loop`       | Run a prompt on a recurring schedule                          | `/loop 5m check the build`                                                |
 | `/simplify`   | Review recent changes and apply safe cleanup edits directly   | `/simplify`, `/simplify focus on duplication`                             |
-| `/qc-helper`  | Answer questions about Qwen Code usage and configuration      | `/qc-helper how do I configure MCP?`                                      |
+| `/qc-helper`  | Answer questions about LailatulCoder Ai usage and configuration      | `/qc-helper how do I configure MCP?`                                      |
 
 See [Code Review](./code-review.md) for full `/review` documentation.
 
@@ -459,13 +459,13 @@ Commands for obtaining information and performing system settings.
 | → `memory`       | Show current process memory diagnostics                                                                                        | `/doctor memory [--json] [--sample] [--snapshot]`                                   |
 | → `cpu-profile`  | Record a CPU profile for Chrome DevTools analysis                                                                              | `/doctor cpu-profile [--duration <seconds>]`                                        |
 | → `rollback`     | Roll back the standalone CLI binary to the previous version (standalone installs only; for conversation history use `/rewind`) | `/doctor rollback`                                                                  |
-| `/docs`          | Open full Qwen Code documentation in browser                                                                                   | `/docs`                                                                             |
+| `/docs`          | Open full LailatulCoder Ai documentation in browser                                                                                   | `/docs`                                                                             |
 | `/ide`           | Manage IDE integration                                                                                                         | `/ide status`, `/ide install`, `/ide enable`, `/ide disable`                        |
 | `/insight`       | Generate programming insights from chat history                                                                                | `/insight`                                                                          |
 | `/setup-github`  | Set up GitHub Actions                                                                                                          | `/setup-github`                                                                     |
-| `/bug`           | Submit issue about Qwen Code                                                                                                   | `/bug Button click unresponsive`                                                    |
+| `/bug`           | Submit issue about LailatulCoder Ai                                                                                                   | `/bug Button click unresponsive`                                                    |
 | `/copy`          | Copy to clipboard: reply (Nth-last), code (by lang), LaTeX, or Mermaid                                                         | `/copy`, `/copy 2`, `/copy python`, `/copy latex`, `/copy mermaid`                  |
-| `/quit`          | Exit Qwen Code immediately                                                                                                     | `/quit` or `/exit`                                                                  |
+| `/quit`          | Exit LailatulCoder Ai immediately                                                                                                     | `/quit` or `/exit`                                                                  |
 
 > [!warning]
 >
@@ -487,7 +487,7 @@ Commands for obtaining information and performing system settings.
 
 ### 1.12 Authentication Commands
 
-Use `/auth` inside a Qwen Code session to configure authentication. Use `/doctor` to inspect the current authentication and environment status.
+Use `/auth` inside a LailatulCoder Ai session to configure authentication. Use `/doctor` to inspect the current authentication and environment status.
 
 | Command   | Description                                                            |
 | --------- | ---------------------------------------------------------------------- |
@@ -512,7 +512,7 @@ Note: Spaces in paths need to be escaped with backslash (e.g., `@My\ Documents/f
 
 ## 3. Exclamation Commands (`!`) - Shell Command Execution
 
-Exclamation commands allow you to execute system commands directly within Qwen Code.
+Exclamation commands allow you to execute system commands directly within LailatulCoder Ai.
 
 | Command Format     | Description                                                        | Examples                               |
 | ------------------ | ------------------------------------------------------------------ | -------------------------------------- |
@@ -711,7 +711,7 @@ These commands are run from the shell as `qwen <subcommand>` before starting an 
 
 #### `qwen sessions list`
 
-Lists your recent Qwen Code sessions with metadata.
+Lists your recent LailatulCoder Ai sessions with metadata.
 
 **Flags:**
 
@@ -749,7 +749,7 @@ qwen sessions list --json | jq .
 
 #### `qwen sessions ps`
 
-Lists the interactive Qwen Code sessions running on this machine right
+Lists the interactive LailatulCoder Ai sessions running on this machine right
 now. `sessions list` walks saved transcripts ("what have I worked on");
 this walks the live-process registry ("what is running at this moment").
 Records left behind by a killed session are swept as they are found.

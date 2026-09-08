@@ -48,7 +48,7 @@ import {
   type CronTaskDelivery,
   type DurableCronTask,
   type CronTaskRun,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { writeStderrLine } from '../../utils/stdioHelpers.js';
 import { isChannelDeliveryError } from '../../runtime/channel-delivery-ipc.js';
 import {

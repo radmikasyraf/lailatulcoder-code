@@ -6,8 +6,8 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { Config } from '@qwen-code/qwen-code-core';
-import { createDebugLogger, runSideQuery } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
+import { createDebugLogger, runSideQuery } from '@lailatul-coder/lailatul-coder-core';
 import type { TurnContent, MessageRewriteConfig } from './types.js';
 
 const debugLogger = createDebugLogger('MESSAGE_REWRITER');

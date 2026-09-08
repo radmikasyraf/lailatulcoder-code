@@ -1,7 +1,7 @@
 /**
  * Unified Auth State Management
  *
- * Qwen Code is the only built-in backend and does not require app-managed LLM
+ * LailatulCoder Ai is the only built-in backend and does not require app-managed LLM
  * credentials. Source and workspace OAuth still use their dedicated auth flows.
  */
 

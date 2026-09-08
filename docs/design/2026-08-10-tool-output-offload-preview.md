@@ -1,6 +1,6 @@
 # Tool Output Offload/Preview: State Transitions and Privacy Model
 
-> Design note required by [#4184](https://github.com/QwenLM/qwen-code/issues/4184)
+> Design note required by [#4184](https://github.com/LailatulCoder/lailatul-coder/issues/4184)
 > (acceptance criterion: "A design note documents the offload/preview state
 > transition and privacy model"). Mitigation implemented in #4880; retention
 > diagnostics added in the accompanying `/doctor memory` change.

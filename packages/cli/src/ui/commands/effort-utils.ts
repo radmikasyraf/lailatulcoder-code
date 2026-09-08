@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config, ReasoningEffort } from '@qwen-code/qwen-code-core';
+import type { Config, ReasoningEffort } from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../i18n/index.js';
 
 export function formatEffortChangeMessage(

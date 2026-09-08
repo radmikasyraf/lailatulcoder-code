@@ -9,12 +9,12 @@ import {
   detectRuntime,
   formatMemoryUsage,
   redactProxyCredentials,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   STATUS_SCHEMA_VERSION,
   type ServeEnvCell,
   type ServeWorkspaceEnvStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 
 /**
  * Whitelisted environment variables whose **presence** the daemon will

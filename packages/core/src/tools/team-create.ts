@@ -112,7 +112,7 @@ class TeamCreateInvocation extends BaseToolInvocation<
         if (!reclaimed) {
           const msg =
             `Team "${teamName}" already exists and appears to be ` +
-            `owned by a live qwen-code session. Pick a different ` +
+            `owned by a live lailatul-coder session. Pick a different ` +
             `name, or — if you're sure no other session is using ` +
             `it — remove the on-disk artifacts manually:\n` +
             `  rm -rf "${getTeamDir(teamName)}" "${getTasksDir(teamName)}"`;

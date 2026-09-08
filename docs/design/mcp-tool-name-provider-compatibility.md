@@ -2,7 +2,7 @@
 
 ## Problem
 
-Qwen Code currently accepts MCP tool names using Gemini's character set. Names such as `literature.search_pubmed` become `mcp__server__literature.search_pubmed`, which Gemini accepts but stricter OpenAI-compatible and Anthropic-compatible endpoints may reject before the tool can run.
+LailatulCoder Ai currently accepts MCP tool names using Gemini's character set. Names such as `literature.search_pubmed` become `mcp__server__literature.search_pubmed`, which Gemini accepts but stricter OpenAI-compatible and Anthropic-compatible endpoints may reject before the tool can run.
 
 The same raw name is reconstructed independently for registration, permission persistence, reconnect lookup, output truncation, and restored history. Changing only the provider request would therefore make the model-visible name differ from the registry key.
 

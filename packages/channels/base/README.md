@@ -1,13 +1,13 @@
-# @qwen-code/channel-base
+# @lailatul-coder/channel-base
 
-Base infrastructure for building Qwen Code channel adapters. Provides the abstract base class, access control, session routing, and the adapter-facing bridge interface used to communicate with the agent.
+Base infrastructure for building LailatulCoder Ai channel adapters. Provides the abstract base class, access control, session routing, and the adapter-facing bridge interface used to communicate with the agent.
 
 If you're building a channel plugin, this is your only dependency.
 
 ## Install
 
 ```bash
-npm install @qwen-code/channel-base
+npm install @lailatul-coder/channel-base
 ```
 
 ## Quick start
@@ -15,13 +15,13 @@ npm install @qwen-code/channel-base
 Subclass `ChannelBase` and implement three methods:
 
 ```typescript
-import { ChannelBase } from '@qwen-code/channel-base';
+import { ChannelBase } from '@lailatul-coder/channel-base';
 import type {
   ChannelAgentBridge,
   ChannelBaseOptions,
   ChannelConfig,
   Envelope,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 class MyChannel extends ChannelBase {
   constructor(
@@ -52,7 +52,7 @@ class MyChannel extends ChannelBase {
 Export a `ChannelPlugin` object so the extension loader can discover it:
 
 ```typescript
-import type { ChannelPlugin } from '@qwen-code/channel-base';
+import type { ChannelPlugin } from '@lailatul-coder/channel-base';
 
 export const plugin: ChannelPlugin = {
   channelType: 'my-platform',
@@ -63,7 +63,7 @@ export const plugin: ChannelPlugin = {
 };
 ```
 
-For a complete working example, see [`@qwen-code/channel-plugin-example`](../plugin-example/).
+For a complete working example, see [`@lailatul-coder/channel-plugin-example`](../plugin-example/).
 
 Migration note for existing TypeScript plugins: if your adapter constructor or factory explicitly types `bridge` as `AcpBridge`, change that annotation to `ChannelAgentBridge` and keep using only the methods exposed by that contract. JavaScript plugins are unaffected at runtime, and standalone `qwen channel start` still passes the current `AcpBridge` implementation.
 
@@ -71,7 +71,7 @@ Migration note for existing TypeScript plugins: if your adapter constructor or f
 
 Channel adapters can run in two host modes:
 
-- `qwen channel start [name]` is the standalone service. It uses `AcpBridge` over a `qwen-code --acp` child process and remains the default channel command.
+- `qwen channel start [name]` is the standalone service. It uses `AcpBridge` over a `lailatul-coder --acp` child process and remains the default channel command.
 - `qwen serve --channel <name>` and `qwen serve --channel all` are experimental daemon-managed modes. Named channels are grouped by owning workspace and `qwen serve` starts one out-of-process worker per owning runtime. Each worker connects back to the daemon through the SDK, and adapters receive a `DaemonChannelBridge`-backed `ChannelAgentBridge` facade. `--channel all` stays primary-only.
 
 In daemon-managed mode, every named channel's `cwd` must resolve to exactly one registered, trusted workspace. Its worker receives that runtime's cwd and environment overlay; an ambiguous or untrusted selection fails instead of using primary. The optional `shellCommand` method is exposed to adapters only when the daemon advertises the `session_shell_command` capability.
@@ -102,7 +102,7 @@ Everything between `handleInbound()` and `sendMessage()` is handled by the base 
 | Class           | Purpose                                                                              |
 | --------------- | ------------------------------------------------------------------------------------ |
 | `ChannelBase`   | Abstract base class — extend this to build a channel adapter                         |
-| `AcpBridge`     | Current standalone `qwen channel start` bridge implementation over `qwen-code --acp` |
+| `AcpBridge`     | Current standalone `qwen channel start` bridge implementation over `lailatul-coder --acp` |
 | `BlockStreamer` | Progressive multi-message delivery for block streaming                               |
 | `SessionRouter` | Maps senders to agent sessions with configurable scoping                             |
 | `SenderGate`    | DM access control (allowlist / pairing / open)                                       |
@@ -210,7 +210,7 @@ interface ChannelAgentBridge {
 
 ### AcpBridge
 
-`AcpBridge` is the current implementation used by standalone `qwen channel start`. It manages the `qwen-code --acp` child process and implements `ChannelAgentBridge`.
+`AcpBridge` is the current implementation used by standalone `qwen channel start`. It manages the `lailatul-coder --acp` child process and implements `ChannelAgentBridge`.
 
 ```typescript
 constructor(options: { cliEntryPath: string; cwd: string; model?: string })
@@ -376,4 +376,4 @@ Block streaming and `onResponseChunk` work independently — plugins can overrid
 ## Further reading
 
 - [Channel Plugin Developer Guide](../../../docs/developers/channel-plugins.md)
-- [`@qwen-code/channel-plugin-example`](../plugin-example/) — working reference implementation
+- [`@lailatul-coder/channel-plugin-example`](../plugin-example/) — working reference implementation

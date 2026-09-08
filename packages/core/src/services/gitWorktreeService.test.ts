@@ -557,7 +557,7 @@ describe('GitWorktreeService', () => {
     it('recognises full GitHub PR URLs (any host)', () => {
       expect(
         GitWorktreeService.parsePRReference(
-          'https://github.com/QwenLM/qwen-code/pull/4174',
+          'https://github.com/LailatulCoder/lailatul-coder/pull/4174',
         ),
       ).toBe(4174);
       expect(

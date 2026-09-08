@@ -1,7 +1,7 @@
 import type {
   ChannelUserInputRequestContext,
   UserInputPresentationResult,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import {
   buildQuestionCard,
   buildQuestionTerminalCard,

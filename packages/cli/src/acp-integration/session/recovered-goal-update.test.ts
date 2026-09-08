@@ -9,7 +9,7 @@ import {
   GoalPersistenceUnavailableError,
   type GoalRuntime,
   type GoalSnapshotV2,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { renderPreparedGoalUpdate } from './recovered-goal-update.js';
 
 const hiddenSnapshot: GoalSnapshotV2 = {

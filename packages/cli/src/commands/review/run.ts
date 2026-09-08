@@ -26,7 +26,7 @@
 // reached a verdict" from "blocking verdict" (opt-in via --fail-on).
 
 import type { CommandModule } from 'yargs';
-import { isUnusableScriptEntry } from '@qwen-code/qwen-code-core';
+import { isUnusableScriptEntry } from '@lailatul-coder/lailatul-coder-core';
 import { spawn, execFileSync } from 'node:child_process';
 import { readdirSync, readFileSync, realpathSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';

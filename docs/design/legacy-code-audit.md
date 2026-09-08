@@ -1360,7 +1360,7 @@ capped accordingly, the reason recorded in the header.
   (with the user's confirmation, which also discloses that a common-dir
   exclude entry applies to every worktree of the repository, not only
   the current one) — and in a fresh repository that has never used
-  qwen-code, that offer is the default first-run experience; (b) where a
+  lailatul-coder, that offer is the default first-run experience; (b) where a
   tracked pattern re-includes the audits path, the probe's answer decides
   the remedy: where the re-include leaves the representative file exposed
   (the directory-only shape), the plan offers the exclude entry first — the

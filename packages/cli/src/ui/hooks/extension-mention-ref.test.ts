@@ -20,7 +20,7 @@ import type {
   SkillConfig,
   SubagentConfig,
   MCPServerConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 function makeExtension(overrides: Partial<Extension> = {}): Extension {
   return {

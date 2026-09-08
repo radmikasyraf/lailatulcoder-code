@@ -1,13 +1,13 @@
 {
-  "name": "qwen-code-vscode-ide-companion",
-  "displayName": "Qwen Code Companion",
-  "description": "Enable Qwen Code with direct access to your VS Code workspace.",
+  "name": "lailatul-coder-vscode-ide-companion",
+  "displayName": "LailatulCoder Ai Companion",
+  "description": "Enable LailatulCoder Ai with direct access to your VS Code workspace.",
   "version": "0.21.14",
-  "publisher": "qwenlm",
+  "publisher": "LailatulCoder",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/QwenLM/qwen-code.git",
+    "url": "https://github.com/LailatulCoder/lailatul-coder.git",
     "directory": "packages/vscode-ide-companion"
   },
   "engines": {
@@ -19,21 +19,21 @@
     "AI"
   ],
   "keywords": [
-    "qwen-code",
-    "qwen code",
+    "lailatul-coder",
+    "LailatulCoder Ai",
     "qwen",
-    "qwen code",
+    "LailatulCoder Ai",
     "cli",
     "ide integration",
     "ide companion"
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onView:qwen-code.chatView.sidebar",
-    "onCommand:qwen-code.openChat",
-    "onCommand:qwen-code.focusChat",
-    "onCommand:qwen-code.newConversation",
-    "onCommand:qwen-code.showLogs"
+    "onView:lailatul-coder.chatView.sidebar",
+    "onCommand:lailatul-coder.openChat",
+    "onCommand:lailatul-coder.focusChat",
+    "onCommand:lailatul-coder.newConversation",
+    "onCommand:lailatul-coder.showLogs"
   ],
   "contributes": {
     "jsonValidation": [
@@ -45,18 +45,18 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "qwen-code-sidebar",
-          "title": "Qwen Code",
+          "id": "lailatul-coder-sidebar",
+          "title": "LailatulCoder Ai",
           "icon": "assets/sidebar-icon.svg"
         }
       ]
     },
     "views": {
-      "qwen-code-sidebar": [
+      "lailatul-coder-sidebar": [
         {
           "type": "webview",
-          "id": "qwen-code.chatView.sidebar",
-          "name": "Qwen Code",
+          "id": "lailatul-coder.chatView.sidebar",
+          "name": "LailatulCoder Ai",
           "icon": "assets/sidebar-icon.svg"
         }
       ]
@@ -69,54 +69,54 @@
     "commands": [
       {
         "command": "qwen.diff.accept",
-        "title": "Qwen Code: Accept Current Diff",
+        "title": "LailatulCoder Ai: Accept Current Diff",
         "icon": "$(check)"
       },
       {
         "command": "qwen.diff.cancel",
-        "title": "Qwen Code: Close Diff Editor",
+        "title": "LailatulCoder Ai: Close Diff Editor",
         "icon": "$(close)"
       },
       {
-        "command": "qwen-code.runQwenCode",
-        "title": "Qwen Code: Run"
+        "command": "lailatul-coder.runQwenCode",
+        "title": "LailatulCoder Ai: Run"
       },
       {
-        "command": "qwen-code.showNotices",
-        "title": "Qwen Code: View Third-Party Notices"
+        "command": "lailatul-coder.showNotices",
+        "title": "LailatulCoder Ai: View Third-Party Notices"
       },
       {
-        "command": "qwen-code.openChat",
-        "title": "Qwen Code: Open",
+        "command": "lailatul-coder.openChat",
+        "title": "LailatulCoder Ai: Open",
         "icon": "./assets/icon.png"
       },
       {
-        "command": "qwen-code.auth",
-        "title": "Qwen Code: Auth"
+        "command": "lailatul-coder.auth",
+        "title": "LailatulCoder Ai: Auth"
       },
       {
-        "command": "qwen-code.focusChat",
-        "title": "Qwen Code: Focus Chat View"
+        "command": "lailatul-coder.focusChat",
+        "title": "LailatulCoder Ai: Focus Chat View"
       },
       {
-        "command": "qwen-code.newConversation",
-        "title": "Qwen Code: New Conversation"
+        "command": "lailatul-coder.newConversation",
+        "title": "LailatulCoder Ai: New Conversation"
       },
       {
-        "command": "qwen-code.showLogs",
-        "title": "Qwen Code: Show Logs"
+        "command": "lailatul-coder.showLogs",
+        "title": "LailatulCoder Ai: Show Logs"
       },
       {
-        "command": "qwen-code.copyMessage",
-        "title": "%qwen-code.copyMessage.title%"
+        "command": "lailatul-coder.copyMessage",
+        "title": "%lailatul-coder.copyMessage.title%"
       },
       {
-        "command": "qwen-code.copyAllMessages",
-        "title": "%qwen-code.copyAllMessages.title%"
+        "command": "lailatul-coder.copyAllMessages",
+        "title": "%lailatul-coder.copyAllMessages.title%"
       },
       {
-        "command": "qwen-code.copyLastReply",
-        "title": "%qwen-code.copyLastReply.title%"
+        "command": "lailatul-coder.copyLastReply",
+        "title": "%lailatul-coder.copyLastReply.title%"
       }
     ],
     "menus": {
@@ -130,34 +130,34 @@
           "when": "qwen.diff.isVisible"
         },
         {
-          "command": "qwen-code.auth"
+          "command": "lailatul-coder.auth"
         },
         {
-          "command": "qwen-code.copyMessage",
+          "command": "lailatul-coder.copyMessage",
           "when": "false"
         },
         {
-          "command": "qwen-code.copyAllMessages",
+          "command": "lailatul-coder.copyAllMessages",
           "when": "false"
         },
         {
-          "command": "qwen-code.copyLastReply",
+          "command": "lailatul-coder.copyLastReply",
           "when": "false"
         }
       ],
       "webview/context": [
         {
-          "command": "qwen-code.copyMessage",
+          "command": "lailatul-coder.copyMessage",
           "when": "webviewSection == 'chat-messages'",
           "group": "9_cutcopypaste@1"
         },
         {
-          "command": "qwen-code.copyAllMessages",
+          "command": "lailatul-coder.copyAllMessages",
           "when": "webviewSection == 'chat-messages'",
           "group": "9_cutcopypaste@2"
         },
         {
-          "command": "qwen-code.copyLastReply",
+          "command": "lailatul-coder.copyLastReply",
           "when": "webviewSection == 'chat-messages'",
           "group": "9_cutcopypaste@3"
         }
@@ -174,15 +174,15 @@
           "group": "navigation"
         },
         {
-          "command": "qwen-code.openChat",
+          "command": "lailatul-coder.openChat",
           "group": "navigation"
         }
       ]
     },
     "configuration": {
-      "title": "Qwen Code",
+      "title": "LailatulCoder Ai",
       "properties": {
-        "qwen-code.provider": {
+        "lailatul-coder.provider": {
           "order": 0,
           "type": "string",
           "enum": [
@@ -191,18 +191,18 @@
           ],
           "enumDescriptions": [
             "Alibaba Cloud Coding Plan — configurable from VS Code Settings",
-            "Configured via Qwen Code: Auth or the onboarding button"
+            "Configured via LailatulCoder Ai: Auth or the onboarding button"
           ],
           "default": "coding-plan",
-          "markdownDescription": "**Coding Plan**: enter API Key + Region here to sync `~/.qwen/settings.json`.\n\n**API Key**: use **Qwen Code: Auth** or the onboarding button to configure ModelStudio or custom OpenAI-compatible providers."
+          "markdownDescription": "**Coding Plan**: enter API Key + Region here to sync `~/.qwen/settings.json`.\n\n**API Key**: use **LailatulCoder Ai: Auth** or the onboarding button to configure ModelStudio or custom OpenAI-compatible providers."
         },
-        "qwen-code.apiKey": {
+        "lailatul-coder.apiKey": {
           "order": 1,
           "type": "string",
           "default": "",
-          "markdownDescription": "API key used for **Coding Plan** settings sync. For **API Key** providers, configure the full provider details through **Qwen Code: Auth**."
+          "markdownDescription": "API key used for **Coding Plan** settings sync. For **API Key** providers, configure the full provider details through **LailatulCoder Ai: Auth**."
         },
-        "qwen-code.codingPlanRegion": {
+        "lailatul-coder.codingPlanRegion": {
           "order": 2,
           "type": "string",
           "enum": [
@@ -216,17 +216,17 @@
           "default": "china",
           "markdownDescription": "Region for Coding Plan. _(Only used when Provider is `coding-plan`)_"
         },
-        "qwen-code.dotIndicator": {
+        "lailatul-coder.dotIndicator": {
           "order": 3,
           "type": "boolean",
           "default": true,
           "description": "Show a colored dot on the tab icon when a task completes (orange) or needs your attention (blue) while the tab is hidden."
         },
-        "qwen-code.notifications": {
+        "lailatul-coder.notifications": {
           "order": 4,
           "type": "boolean",
           "default": true,
-          "description": "Show notifications with sound when a task completes (at least 20 seconds) or needs your attention, while you are not actively viewing the Qwen Code panel."
+          "description": "Show notifications with sound when a task completes (at least 20 seconds) or needs your attention, while you are not actively viewing the LailatulCoder Ai panel."
         }
       }
     },
@@ -242,7 +242,7 @@
         "when": "qwen.diff.isVisible"
       },
       {
-        "command": "qwen-code.focusChat",
+        "command": "lailatul-coder.focusChat",
         "key": "ctrl+shift+l",
         "mac": "cmd+shift+l"
       }
@@ -290,9 +290,9 @@
   },
   "dependencies": {
     "@agentclientprotocol/sdk": "^0.14.1",
-    "@qwen-code/acp-bridge": "*",
-    "@qwen-code/sdk": "*",
-    "@qwen-code/webui": "*",
+    "@lailatul-coder/acp-bridge": "*",
+    "@lailatul-coder/sdk": "*",
+    "@lailatul-coder/webui": "*",
     "@modelcontextprotocol/sdk": "^1.30.0",
     "cors": "^2.8.5",
     "dotenv": "^17.1.0",

@@ -1,6 +1,6 @@
 ---
 name: autofix
-description: Review and repair current local changes until they converge, or run Qwen Code Autofix issue and review workflows from GitHub Actions.
+description: Review and repair current local changes until they converge, or run LailatulCoder Ai Autofix issue and review workflows from GitHub Actions.
 disable-model-invocation: true
 ---
 
@@ -356,7 +356,7 @@ silently overriding or silently complying.
   budgeted separately; the section's preamble names the cause). The counter is
   not always the count of rounds YOU have run: a maintainer taking over a PR
   that already spent N rounds in ordinary review can seed the window at N
-  (`@qwen-code /takeover from N`), so the brake can engage on your second or
+  (`@lailatul-coder /takeover from N`), so the brake can engage on your second or
   third round. The preamble says so when it applies; treat it exactly the same
   either way. That section is an audit record,
   not work: do not modify code, resolve threads, or write comment replies for

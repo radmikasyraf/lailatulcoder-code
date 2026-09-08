@@ -1549,7 +1549,7 @@ export const ORPHAN_TOOL_USE_REPAIR_REASON =
  * pairs so the React scheduler's dedup can drop late real results for
  * those ids; hoisted ids are NOT returned (the real fr is still in
  * history, scheduler dedup handles them naturally). See the canonical
- * note above `ORPHAN_TOOL_USE_REPAIR_REASON`. qwen-code analogue of
+ * note above `ORPHAN_TOOL_USE_REPAIR_REASON`. lailatul-coder analogue of
  * upstream Claude Code's `yieldMissingToolResultBlocks`.
  */
 /** Location of a `functionResponse` part within `history`. */
@@ -2710,7 +2710,7 @@ export class GeminiChat {
     return (async function* () {
       const sleepInhibitorHandle = acquireSleepInhibitor(
         self.config,
-        'Qwen Code is streaming a model response',
+        'LailatulCoder Ai is streaming a model response',
       );
       try {
         // Surface a successful auto-compression to the caller as the first
@@ -4062,7 +4062,7 @@ export class GeminiChat {
         ? {
             heartbeatFn: (info: HeartbeatInfo) => {
               process.stderr.write(
-                `[qwen-code] Waiting for API capacity... attempt ${info.attempt}, retry in ${Math.ceil(info.remainingMs / 1000)}s\n`,
+                `[lailatul-coder] Waiting for API capacity... attempt ${info.attempt}, retry in ${Math.ceil(info.remainingMs / 1000)}s\n`,
               );
             },
           }

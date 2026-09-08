@@ -8,8 +8,8 @@ import { describe, expect, it, vi } from 'vitest';
 import {
   InputFormat,
   ToolConfirmationOutcome,
-} from '@qwen-code/qwen-code-core';
-import type { WorkflowApproval } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import type { WorkflowApproval } from '@lailatul-coder/lailatul-coder-core';
 import { createMinimalSettings } from '../../../config/settings.js';
 import type { StreamJsonOutputAdapter } from '../../io/StreamJsonOutputAdapter.js';
 import type { IControlContext } from '../ControlContext.js';

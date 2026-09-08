@@ -16,7 +16,7 @@ export default {
   name: 'markdown-rendering',
   spawn: ['node', 'dist/cli.js', '--yolo'],
   terminal: {
-    title: 'qwen-code markdown rendering',
+    title: 'lailatul-coder markdown rendering',
     cwd: '../../..',
     cols: 140,
     rows: 42,

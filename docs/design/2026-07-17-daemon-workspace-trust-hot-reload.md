@@ -2,7 +2,7 @@
 
 ## Status
 
-Implemented for QwenLM/qwen-code#6378.
+Implemented for LailatulCoder/lailatul-coder#6378.
 
 ## Problem
 

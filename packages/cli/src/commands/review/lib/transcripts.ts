@@ -41,7 +41,7 @@ import { lstatSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import {
   ToolNames,
   sanitizeFilenameComponent,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { join } from 'node:path';
 import { priorSessionEntries } from './run-ledger.js';
 

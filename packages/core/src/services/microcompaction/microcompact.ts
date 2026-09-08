@@ -275,7 +275,7 @@ function stripNestedMedia(
   fnResp: NonNullable<Part['functionResponse']>,
 ): NonNullable<Part['functionResponse']> {
   // `parts` isn't declared on the standard FunctionResponse type but is
-  // a qwen-code extension — see `coreToolScheduler.createFunctionResponsePart`.
+  // a lailatul-coder extension — see `coreToolScheduler.createFunctionResponsePart`.
   const { parts: _droppedNested, ...rest } = fnResp as typeof fnResp & {
     parts?: unknown;
   };

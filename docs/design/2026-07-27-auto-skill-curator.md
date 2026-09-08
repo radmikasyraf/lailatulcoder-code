@@ -2,7 +2,7 @@
 
 ## Problem
 
-Qwen Code can extract reusable project skills from tool-heavy conversations,
+LailatulCoder Ai can extract reusable project skills from tool-heavy conversations,
 but accepted auto-skills only accumulate. The existing review agent can create
 or update `source: auto-skill` skills and is explicitly forbidden from deleting
 them. Path gating and `skills.disabled` reduce prompt noise but do not maintain

@@ -1,6 +1,6 @@
 ---
 name: desktop-brand-builder
-description: Generate a branded qwen-code desktop package from a minimal brandId and logo. Use when the user wants a custom, white-label, rebranded, ModelStudio/OpenWork/Qwen Code desktop client, installer, DMG/EXE/AppImage, or one-click brand build.
+description: Generate a branded lailatul-coder desktop package from a minimal brandId and logo. Use when the user wants a custom, white-label, rebranded, ModelStudio/OpenWork/LailatulCoder Ai desktop client, installer, DMG/EXE/AppImage, or one-click brand build.
 ---
 
 # Desktop Brand Builder
@@ -65,7 +65,7 @@ Use explicit user-provided override values as-is after basic validation.
 ## Build Workflow
 
 Use an isolated build directory under the current working directory so user
-changes in the current worktree are not mutated. Default to the qwen-code main
+changes in the current worktree are not mutated. Default to the lailatul-coder main
 branch; do not clone from `craft-agents-oss`, OpenWork, or another local
 checkout unless the user explicitly asks for that source:
 
@@ -73,9 +73,9 @@ checkout unless the user explicitly asks for that source:
 BUILD_ROOT="$PWD/brand-builds/<brandId>-<timestamp>"
 mkdir -p "$BUILD_ROOT"
 git clone --branch main --single-branch \
-  https://github.com/QwenLM/qwen-code.git \
-  "$BUILD_ROOT/qwen-code"
-cd "$BUILD_ROOT/qwen-code"
+  https://github.com/LailatulCoder/lailatul-coder.git \
+  "$BUILD_ROOT/lailatul-coder"
+cd "$BUILD_ROOT/lailatul-coder"
 git checkout -B brand-<brandId> origin/main
 ```
 
@@ -106,9 +106,9 @@ bun install
 Then run this skill's bundled brand creation script:
 
 ```bash
-cd /absolute/path/to/qwen-code
+cd /absolute/path/to/lailatul-coder
 bun run packages/desktop/.agents/skills/desktop-brand-builder/scripts/brand-create.ts \
-  --desktop-root /absolute/path/to/qwen-code/packages/desktop \
+  --desktop-root /absolute/path/to/lailatul-coder/packages/desktop \
   --config /absolute/path/to/brand.json
 ```
 

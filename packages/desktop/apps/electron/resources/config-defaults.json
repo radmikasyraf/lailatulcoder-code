@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "description": "Default configuration values for Qwen Code",
+  "description": "Default configuration values for LailatulCoder Ai",
   "defaults": {
     "notificationsEnabled": true,
     "colorTheme": "default",

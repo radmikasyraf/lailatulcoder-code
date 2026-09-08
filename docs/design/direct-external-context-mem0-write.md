@@ -53,7 +53,7 @@ not a server-side authorization boundary.
 ```mermaid
 sequenceDiagram
     participant M as Model
-    participant Q as Qwen Code
+    participant Q as LailatulCoder Ai
     participant H as PreToolUse Hook
     participant E as External Context MCP
     participant P as Bound Mem0 Project

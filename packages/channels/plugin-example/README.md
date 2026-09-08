@@ -1,6 +1,6 @@
-# @qwen-code/channel-plugin-example
+# @lailatul-coder/channel-plugin-example
 
-A reference channel plugin for Qwen Code. It connects to a WebSocket server and routes messages through the full channel pipeline (access control, session routing, agent bridge).
+A reference channel plugin for LailatulCoder Ai. It connects to a WebSocket server and routes messages through the full channel pipeline (access control, session routing, agent bridge).
 
 Use this package to:
 
@@ -12,15 +12,15 @@ Use this package to:
 ### 1. Install the package
 
 ```bash
-npm install @qwen-code/channel-plugin-example
+npm install @lailatul-coder/channel-plugin-example
 ```
 
-### 2. Link it as a Qwen Code extension
+### 2. Link it as a LailatulCoder Ai extension
 
 The package ships a `qwen-extension.json` manifest, so it works as an extension out of the box:
 
 ```bash
-qwen extensions link ./node_modules/@qwen-code/channel-plugin-example
+qwen extensions link ./node_modules/@lailatul-coder/channel-plugin-example
 ```
 
 ### 3. Configure the channel
@@ -88,7 +88,7 @@ Mock Server (HTTP + WS)
 MockPluginChannel (this package)
   → Envelope → ChannelBase.handleInbound()
     → SenderGate → SessionRouter → ChannelAgentBridge.prompt()
-      → qwen-code agent → model API
+      → lailatul-coder agent → model API
     ← response
   ← sendMessage() → WebSocket → Mock Server
   ← HTTP response
@@ -104,7 +104,7 @@ See `src/MockPluginChannel.ts` for a working example. The key points:
 4. Export a `plugin` object conforming to `ChannelPlugin`
 5. Add a `qwen-extension.json` manifest
 
-`AcpBridge` is still the current standalone `qwen channel start` implementation. Plugin adapters should depend on the `ChannelAgentBridge` abstraction provided by `@qwen-code/channel-base`.
+`AcpBridge` is still the current standalone `qwen channel start` implementation. Plugin adapters should depend on the `ChannelAgentBridge` abstraction provided by `@lailatul-coder/channel-base`.
 
 Existing TypeScript plugins that explicitly type the adapter constructor or factory `bridge` parameter as `AcpBridge` should change that annotation to `ChannelAgentBridge`. JavaScript plugins are unaffected at runtime.
 

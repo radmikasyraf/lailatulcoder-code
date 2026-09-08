@@ -11,7 +11,7 @@ import {
   MAX_TERMINAL_IMAGE_BYTES,
   type TerminalImageRenderSupport,
   type TerminalImageDisplay,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   buildKittyPlaceholder,
   createRendererChildEnv,

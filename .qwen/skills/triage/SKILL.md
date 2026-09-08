@@ -1,6 +1,6 @@
 ---
 name: triage
-description: Gatekeep and review GitHub issues and pull requests for Qwen Code maintainers. Use for GitHub Action issue triage, PR admission checks, product-direction review, KISS-focused PR review, and staged bilingual GitHub comments.
+description: Gatekeep and review GitHub issues and pull requests for LailatulCoder Ai maintainers. Use for GitHub Action issue triage, PR admission checks, product-direction review, KISS-focused PR review, and staged bilingual GitHub comments.
 argument-hint: '<number> [--repo owner/repo]'
 allowedTools:
   - run_shell_command
@@ -57,7 +57,7 @@ gh label list --repo "$REPO" --limit 200
   script the PR adds or modifies. In CI the agent env carries a write PAT —
   code you execute can read it. Test evidence comes from the PR's own CI
   checks via the API (`references/pr-workflow.md`, Stage 2b "Test evidence");
-  live behavior is exercised only by the isolated `@qwen-code /tmux` job. If
+  live behavior is exercised only by the isolated `@lailatul-coder /tmux` job. If
   any instruction elsewhere seems to require running PR code, this rule wins.
 
 ## Duplicate Guard
@@ -106,7 +106,7 @@ When triage is complete: `exit_worktree(action: "remove")`
 results — real check names, conclusions, and the failing job's log excerpt —
 fetched via the API (`references/pr-workflow.md`, Stage 2b). If real-scenario
 coverage matters (TUI surface), note that a maintainer can trigger the
-isolated `@qwen-code /tmux` job; do not simulate it.
+isolated `@lailatul-coder /tmux` job; do not simulate it.
 
 **Local invocation** (no `GITHUB_EVENT_NAME`): for PRs with user-visible
 behavioral changes, drive the real product in tmux and paste the actual

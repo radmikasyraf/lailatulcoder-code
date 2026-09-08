@@ -35,8 +35,8 @@ vi.mock('../i18n/index.js', () => ({
   }),
 }));
 
-// Mock @qwen-code/qwen-code-core
-vi.mock('@qwen-code/qwen-code-core', () => ({
+// Mock @lailatul-coder/lailatul-coder-core
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   Storage: {
     getGlobalQwenDir: vi.fn(() => '/mock/home/.qwen'),
   },
@@ -226,7 +226,7 @@ describe('languageUtils', () => {
 
       const writtenContent = vi.mocked(fs.writeFileSync).mock.calls[0][1];
       expect(writtenContent).toContain(
-        '<!-- qwen-code:llm-output-language: Chinese -->',
+        '<!-- lailatul-coder:llm-output-language: Chinese -->',
       );
     });
 
@@ -239,7 +239,7 @@ describe('languageUtils', () => {
         '# Output language preference: Test--Language',
       );
       expect(writtenContent).toContain(
-        '<!-- qwen-code:llm-output-language: TestLanguage -->',
+        '<!-- lailatul-coder:llm-output-language: TestLanguage -->',
       );
     });
 
@@ -264,7 +264,7 @@ describe('languageUtils', () => {
         .calls[0][1] as string;
       expect(writtenContent).toContain('# Output language preference: auto');
       expect(writtenContent).toContain(
-        '<!-- qwen-code:llm-output-language: auto -->',
+        '<!-- lailatul-coder:llm-output-language: auto -->',
       );
       expect(writtenContent).toContain(
         "Respond in the same language as the user's input.",
@@ -378,7 +378,7 @@ describe('languageUtils', () => {
       vi.mocked(i18n.detectSystemLanguage).mockReturnValue('en');
       vi.mocked(fs.readFileSync).mockReturnValue(
         `# Output language preference: French
-<!-- qwen-code:llm-output-language: French -->
+<!-- lailatul-coder:llm-output-language: French -->
 `,
       );
 
@@ -391,7 +391,7 @@ describe('languageUtils', () => {
       vi.mocked(fs.existsSync).mockReturnValue(true);
       vi.mocked(fs.readFileSync).mockReturnValue(
         `# Output language preference: French
-<!-- qwen-code:llm-output-language: French -->
+<!-- lailatul-coder:llm-output-language: French -->
 `,
       );
 
@@ -490,7 +490,7 @@ describe('languageUtils', () => {
       vi.mocked(fs.existsSync).mockReturnValue(true);
       vi.mocked(fs.readFileSync).mockReturnValue(
         `# Output language preference: Chinese
-<!-- qwen-code:llm-output-language: Chinese -->
+<!-- lailatul-coder:llm-output-language: Chinese -->
 
 ## Custom
 Always use formal tone.

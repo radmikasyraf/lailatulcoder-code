@@ -5,7 +5,7 @@
  */
 
 import ansiEscapes from 'ansi-escapes';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import stringWidth from 'string-width';
 import stripAnsi from 'strip-ansi';
 import {

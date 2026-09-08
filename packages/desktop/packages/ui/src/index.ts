@@ -1,5 +1,5 @@
 /**
- * @craft-agent/ui - Shared React UI components for Qwen Code
+ * @craft-agent/ui - Shared React UI components for LailatulCoder Ai
  *
  * This package provides platform-agnostic UI components that work in both:
  * - Electron desktop app (full interactive mode)

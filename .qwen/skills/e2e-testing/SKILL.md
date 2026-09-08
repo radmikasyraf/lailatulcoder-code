@@ -1,11 +1,11 @@
 ---
 name: e2e-testing
-description: Guide for running end-to-end tests of the Qwen Code CLI, including headless mode, MCP server testing, and API traffic inspection. Use this skill whenever you need to verify CLI behavior with real model calls, reproduce user-reported bugs end-to-end, test MCP tool integrations, or inspect raw API request/response payloads. Trigger on mentions of E2E testing, headless testing, MCP tool testing, or reproducing issues.
+description: Guide for running end-to-end tests of the LailatulCoder Ai CLI, including headless mode, MCP server testing, and API traffic inspection. Use this skill whenever you need to verify CLI behavior with real model calls, reproduce user-reported bugs end-to-end, test MCP tool integrations, or inspect raw API request/response payloads. Trigger on mentions of E2E testing, headless testing, MCP tool testing, or reproducing issues.
 ---
 
 # E2E Testing Guide
 
-How to run the Qwen Code CLI end-to-end — from building the bundle to inspecting
+How to run the LailatulCoder Ai CLI end-to-end — from building the bundle to inspecting
 raw API traffic. Use when unit tests aren't enough and you need to verify behavior
 through the full pipeline (model API → tool validation → tool execution).
 

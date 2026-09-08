@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { SessionService } from '@qwen-code/qwen-code-core';
-import type { SessionListItem } from '@qwen-code/qwen-code-core';
+import { SessionService } from '@lailatul-coder/lailatul-coder-core';
+import type { SessionListItem } from '@lailatul-coder/lailatul-coder-core';
 import type { Suggestion } from '../components/SuggestionsDisplay.js';
 import {
   buildSessionRef,

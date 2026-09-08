@@ -5,8 +5,8 @@ import {
   usePromptStatus,
   useDaemonSessionOwnerGuard,
   useWorkspaceEventSignals,
-} from '@qwen-code/webui/daemon-react-sdk';
-import type { DaemonSessionArtifact } from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/webui/daemon-react-sdk';
+import type { DaemonSessionArtifact } from '@lailatul-coder/sdk/daemon';
 
 const SESSION_ARTIFACTS_FEATURE = 'session_artifacts';
 

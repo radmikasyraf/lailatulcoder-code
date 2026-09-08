@@ -31,7 +31,7 @@ vi.mock('../contexts/VimModeContext.js', () => ({
     setVimMode: vi.fn(),
   })),
 }));
-import { ApprovalMode } from '@qwen-code/qwen-code-core';
+import { ApprovalMode } from '@lailatul-coder/lailatul-coder-core';
 import { StreamingState } from '../types.js';
 
 // Mock child components
@@ -458,3 +458,4 @@ describe('Composer', () => {
     });
   });
 });
+

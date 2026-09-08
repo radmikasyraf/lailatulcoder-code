@@ -1,6 +1,6 @@
 # DingTalk (Dingtalk)
 
-This guide covers setting up a Qwen Code channel on DingTalk (钉钉).
+This guide covers setting up a LailatulCoder Ai channel on DingTalk (钉钉).
 
 ## Prerequisites
 
@@ -93,7 +93,7 @@ question cards time out after 270,000 milliseconds (270 seconds).
 Set `interactiveCards.enabled` to `false` to disable all interactive cards.
 Use `statusCard.enabled` or `questionCard.enabled` to disable one card type,
 and set `questionCard.timeoutMs` to a finite positive number to change how long
-Qwen Code waits for a question-card response. Values above 2,147,483,647
+LailatulCoder Ai waits for a question-card response. Values above 2,147,483,647
 milliseconds (about 24.8 days) are capped at that maximum. Interactive cards
 are configured through `settings.json` or the management API; the Web Shell
 channel editor does not render them, and it preserves the stored object when
@@ -103,7 +103,7 @@ you edit other fields.
 
 `useConnectionManager` defaults to `true`. The connection manager monitors the Stream WebSocket and replaces the DingTalk SDK client when the connection stops responding. You should normally leave it enabled.
 
-Set `"useConnectionManager": false` to disable Qwen Code's connection manager and fall back to the SDK's keepalive and automatic reconnect behavior.
+Set `"useConnectionManager": false` to disable LailatulCoder Ai's connection manager and fall back to the SDK's keepalive and automatic reconnect behavior.
 
 ## Running
 

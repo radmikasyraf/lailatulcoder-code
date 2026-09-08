@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { SkillConfig } from '@qwen-code/qwen-code-core';
-import type { ServeWorkspaceSkillStatus } from '@qwen-code/acp-bridge/status';
+import type { SkillConfig } from '@lailatul-coder/lailatul-coder-core';
+import type { ServeWorkspaceSkillStatus } from '@lailatul-coder/acp-bridge/status';
 import type { SkillDisablement } from '../config/skill-settings.js';
 
 /**

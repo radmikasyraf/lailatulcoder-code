@@ -586,12 +586,12 @@ export interface TelemetryMetricsSettings {
 
 /**
  * Security-relevant settings controlling what client-side correlation
- * data qwen-code writes into outbound LLM API requests.
+ * data lailatul-coder writes into outbound LLM API requests.
  *
  * **Why this is a separate namespace from `telemetry.*`:** telemetry
  * controls data flow into the user's OWN observability backend (OTLP
  * collector / file outfile). The settings here control data flow OUT of
- * the qwen-code process and INTO third-party LLM provider request
+ * the lailatul-coder process and INTO third-party LLM provider request
  * streams (DashScope, OpenAI, Anthropic, etc.). Different recipients =
  * different consent decision, so a different settings tree.
  *
@@ -1126,7 +1126,7 @@ export interface ConfigParameters {
    * Wall-clock budget for an unattended run, in seconds. `-1` (default)
    * means no limit. Enforced by the CLI's non-interactive run loop
    * see `RunBudgetEnforcer` in `packages/cli/src/utils/runBudget.ts`.
-   * Issue: QwenLM/qwen-code#4103.
+   * Issue: LailatulCoder/lailatul-coder#4103.
    */
   maxWallTimeSeconds?: number;
   /**
@@ -1259,7 +1259,7 @@ export interface ConfigParameters {
   channel?: string;
   /**
    * File descriptor number for structured JSON event output (dual output mode).
-   * When set, Qwen Code outputs structured JSON events to this fd while
+   * When set, LailatulCoder Ai outputs structured JSON events to this fd while
    * continuing to render the TUI on stdout. The caller must provide this fd
    * via spawn stdio configuration.
    * Mutually exclusive with jsonFile.
@@ -1647,7 +1647,7 @@ const EMPTY_DISABLED_SKILL_NAMES: ReadonlySet<string> = Object.freeze(
 
 // Tracks whether the first Config in this process has claimed the global
 // QWEN_CODE_SESSION_ID env var. Prevents throwaway Config instances from
-// overwriting the real session's ID while still allowing nested qwen-code
+// overwriting the real session's ID while still allowing nested lailatul-coder
 // processes to claim their own (they start with a fresh module scope).
 let sessionEnvClaimed = false;
 let projectDirEnvClaimed = false;
@@ -2170,7 +2170,7 @@ export class Config {
     // Only set the global env marker once per process lifetime, so
     // throwaway Config instances (e.g. telemetry-only) don't clobber
     // the real interactive session's ID. Uses a module-level flag
-    // rather than checking env existence — otherwise a nested qwen-code
+    // rather than checking env existence — otherwise a nested lailatul-coder
     // launched from within a session would inherit the parent's ID and
     // never claim its own.
     if (!sessionEnvClaimed && process.env) {
@@ -2282,8 +2282,8 @@ export class Config {
     };
     this.gitCoAuthor = {
       ...normalizeGitCoAuthor(params.gitCoAuthor),
-      name: 'Qwen-Coder',
-      email: 'qwen-coder@alibabacloud.com',
+      name: 'lailatul-coderr',
+      email: 'lailatul-coderr@alibabacloud.com',
     };
     this.usageStatisticsEnabled = params.usageStatisticsEnabled ?? true;
     this.fileReadCacheDisabled = params.fileReadCacheDisabled ?? false;
@@ -3248,7 +3248,7 @@ export class Config {
       let projection: SessionRestoreProjection | undefined;
       if (this.sessionRestoreProjectionSource) {
         addDaemonRequestAttribute(
-          'qwen-code.daemon.session_restore.projection_acquisition',
+          'lailatul-coder.daemon.session_restore.projection_acquisition',
           'after_writer_lease',
         );
         projection = await this.sessionRestoreProjectionSource();

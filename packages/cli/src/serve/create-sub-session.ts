@@ -41,17 +41,17 @@ import {
   escapeXml,
   SessionService,
   stripTerminalControlSequences,
-} from '@qwen-code/qwen-code-core';
-import { SessionNotFoundError } from '@qwen-code/acp-bridge/bridgeErrors';
+} from '@lailatul-coder/lailatul-coder-core';
+import { SessionNotFoundError } from '@lailatul-coder/acp-bridge/bridgeErrors';
 import type {
   AcpSessionBridge,
   BridgeBackgroundNotification,
   BridgeSession,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 import type {
   CreateSubSessionInfo,
   CreateSubSessionResult,
-} from '@qwen-code/acp-bridge/bridgeOptions';
+} from '@lailatul-coder/acp-bridge/bridgeOptions';
 import { writeStderrLine } from '../utils/stdioHelpers.js';
 
 const log = createDebugLogger('SUB_SESSION');

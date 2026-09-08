@@ -19,7 +19,7 @@ import {
   MISSING_TOOL_RESULT_MESSAGE,
 } from './history-replayer.js';
 import type { SessionContext } from './types.js';
-import { ChatRecordingService } from '@qwen-code/qwen-code-core';
+import { ChatRecordingService } from '@lailatul-coder/lailatul-coder-core';
 import type {
   Config,
   ChatRecord,
@@ -27,7 +27,7 @@ import type {
   ToolRegistry,
   ToolResultDisplay,
   TodoResultDisplay,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 describe('HistoryReplayer', () => {
   let mockContext: SessionContext;

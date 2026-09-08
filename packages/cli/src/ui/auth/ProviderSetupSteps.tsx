@@ -14,12 +14,12 @@ import { theme } from '../semantic-colors.js';
 import { ICON } from '../constants.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { t } from '../../i18n/index.js';
-import { AuthType } from '@qwen-code/qwen-code-core';
+import { AuthType } from '@lailatul-coder/lailatul-coder-core';
 import type {
   ProviderConfig,
   BaseUrlOption,
   ModelSpec,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { ProviderSetupFlow } from './useProviderSetupFlow.js';
 import { normalizeModelIds } from './useAuth.js';
 
@@ -806,3 +806,4 @@ export function ProviderSetupSteps({
       return null;
   }
 }
+

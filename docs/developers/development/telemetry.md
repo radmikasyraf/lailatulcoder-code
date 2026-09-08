@@ -1,6 +1,6 @@
 # Observability with OpenTelemetry
 
-Learn how to enable and setup OpenTelemetry for Qwen Code.
+Learn how to enable and setup OpenTelemetry for LailatulCoder Ai.
 
 - [Observability with OpenTelemetry](#observability-with-opentelemetry)
   - [Key Benefits](#key-benefits)
@@ -21,11 +21,11 @@ Learn how to enable and setup OpenTelemetry for Qwen Code.
 
 ## Migration Notes
 
-- `tool_output_truncated` was renamed to `qwen-code.tool_output_truncated` for namespace consistency — downstream consumers filtering on the old name should update their queries.
+- `tool_output_truncated` was renamed to `lailatul-coder.tool_output_truncated` for namespace consistency — downstream consumers filtering on the old name should update their queries.
 
 - The `tool.call.latency` histogram documentation previously listed a `decision` attribute — this was never set on the histogram (only `function_name` is recorded). The `tool.call.count` counter continues to include `decision`.
 
-- The `qwen-code.file_operation` log event and `file.operation.count` metric documentation previously listed diff-stat attributes (`model_added_lines`, `model_removed_lines`, `user_added_lines`, `user_removed_lines`) — these were never set on either. Diff-stat data is available via the `tool_call` log event's `metadata` attribute.
+- The `lailatul-coder.file_operation` log event and `file.operation.count` metric documentation previously listed diff-stat attributes (`model_added_lines`, `model_removed_lines`, `user_added_lines`, `user_removed_lines`) — these were never set on either. Diff-stat data is available via the `tool_call` log event's `metadata` attribute.
 
 ## Key Benefits
 
@@ -43,7 +43,7 @@ Learn how to enable and setup OpenTelemetry for Qwen Code.
 ## OpenTelemetry Integration
 
 Built on **[OpenTelemetry]** — the vendor-neutral, industry-standard
-observability framework — Qwen Code's observability system provides:
+observability framework — LailatulCoder Ai's observability system provides:
 
 - **Universal Compatibility**: Export to any OpenTelemetry backend (Aliyun,
   Jaeger, Prometheus, Datadog, etc.)
@@ -137,7 +137,7 @@ secrets in env vars or arguments), and model responses to the configured OTLP
 backend. Treat the backend as a privileged data sink. The flag defaults to
 `false`.
 
-**Cost / payload size:** At the default limit, one LLM span can carry at most about 4 MiB across input, output, system instructions, and tool definitions; one Tool span can carry about 2 MiB across arguments and result; and one interaction can carry about 3 MiB across Agent input, Agent output, and compatibility `new_context`. This is Qwen Code's application-side cap, not a guarantee that every collector or backend accepts a single attribute that large. If spans are rejected or dropped, lower `sensitiveSpanAttributeMaxLength` (for example, to `61440`) and monitor exporter throughput.
+**Cost / payload size:** At the default limit, one LLM span can carry at most about 4 MiB across input, output, system instructions, and tool definitions; one Tool span can carry about 2 MiB across arguments and result; and one interaction can carry about 3 MiB across Agent input, Agent output, and compatibility `new_context`. This is LailatulCoder Ai's application-side cap, not a guarantee that every collector or backend accepts a single attribute that large. If spans are rejected or dropped, lower `sensitiveSpanAttributeMaxLength` (for example, to `61440`) and monitor exporter throughput.
 
 This setting does not disable sensitive data in OTel logs or other telemetry
 sinks; non-internal API response telemetry can populate `response_text`, so
@@ -145,7 +145,7 @@ OTel logs, UI telemetry, and chat recording may receive response text
 independently of this setting. QwenLogger does not include `response_text`.
 
 **HTTP OTLP signal routing:** When using HTTP protocol (`otlpProtocol: "http"`),
-Qwen Code automatically appends signal-specific paths (`/v1/traces`, `/v1/logs`,
+LailatulCoder Ai automatically appends signal-specific paths (`/v1/traces`, `/v1/logs`,
 `/v1/metrics`) to the base `otlpEndpoint`. For example, `http://collector:4318`
 becomes `http://collector:4318/v1/traces` for traces. If the URL already ends
 with a signal path, it is used as-is. Per-signal endpoint overrides
@@ -197,7 +197,7 @@ export OTEL_RESOURCE_ATTRIBUTES="team=platform,env=prod,cost_center=eng-123"
 **Route to a per-tenant collector via `service.name`:**
 
 ```bash
-export OTEL_SERVICE_NAME=qwen-code-ci
+export OTEL_SERVICE_NAME=lailatul-coder-ci
 ```
 
 **Fleet baseline (`~/.qwen/settings.json`) + per-host override:**
@@ -253,7 +253,7 @@ If a custom resource attribute isn't appearing on exported telemetry:
 1. Check `~/.qwen/log/otel-*.log` for lines matching `cannot override` (reserved
    key dropped), `Skipping malformed` (bad env var pair), or `must be a string`
    (non-string settings value).
-2. Verify the env var is set in the qwen-code process's environment (not just
+2. Verify the env var is set in the lailatul-coder process's environment (not just
    your shell) and that values are percent-encoded.
 3. Confirm `telemetry.enabled` is `true` — telemetry init only runs if enabled.
 
@@ -265,7 +265,7 @@ high-cardinality field like `session.id` to a metric causes time-series fan-out
 proportional to the number of sessions, which quickly exhausts metric backend
 storage.
 
-To prevent this, Qwen Code keeps high-cardinality attributes off metric data
+To prevent this, LailatulCoder Ai keeps high-cardinality attributes off metric data
 points by default. Spans and logs are per-event and unaffected, so they
 continue to carry `session.id` for trace and log correlation.
 
@@ -308,7 +308,7 @@ cardinality pressure.
 
 ### Client-side HTTP span on outbound fetch
 
-When telemetry is enabled, Qwen Code registers `UndiciInstrumentation`
+When telemetry is enabled, LailatulCoder Ai registers `UndiciInstrumentation`
 which creates a client-side HTTP span for every outbound `fetch()`
 request originated by the process — including the LLM SDKs (`openai`,
 `@google/genai`, `@anthropic-ai/sdk`), the MCP StreamableHTTP client, the
@@ -326,7 +326,7 @@ also written into the outgoing request stream is controlled by a
 
 **Feedback-loop avoidance.** OTel SDK uses `fetch` internally to upload OTLP
 data. Without protection, instrumenting `fetch` would trace those uploads,
-which would themselves be uploaded, causing an infinite loop. Qwen Code's
+which would themselves be uploaded, causing an infinite loop. LailatulCoder Ai's
 undici instrumentation is configured with an `ignoreRequestHook` that skips
 URLs matching the configured `telemetry.otlpEndpoint` /
 `telemetry.otlpTracesEndpoint` / `telemetry.otlpLogsEndpoint` /
@@ -338,7 +338,7 @@ outbound HTTP uploads, so the hook is a no-op.
 These settings live in a **separate top-level namespace** from `telemetry.*`
 on purpose: telemetry controls data flow into the operator's own
 observability backend, while `outboundCorrelation.*` controls what
-client-side correlation data qwen-code writes **into outbound LLM API
+client-side correlation data lailatul-coder writes **into outbound LLM API
 request streams** that reach third-party LLM provider endpoints
 (DashScope, OpenAI, Anthropic, etc.). Different recipients, different
 consent decision. **All values default to off.** See PR #4390 review
@@ -352,7 +352,7 @@ discussion for the framing rationale.
 }
 ```
 
-When `false` (default), Qwen Code installs a no-op `TextMapPropagator` on
+When `false` (default), LailatulCoder Ai installs a no-op `TextMapPropagator` on
 the OTel SDK. UndiciInstrumentation still creates client HTTP spans for
 your OTLP collector, but `propagation.inject()` is a no-op so **no
 `traceparent` is written onto outbound requests**. Trace IDs stay
@@ -395,7 +395,7 @@ Verify both flags when wiring an ARMS+DashScope correlation setup:
 
 ### Other outbound correlation headers
 
-`X-Qwen-Code-Session-Id` and `X-Qwen-Code-Request-Id` are **not part of
+`X-lailatul-coder-Session-Id` and `X-lailatul-coder-Request-Id` are **not part of
 this PR**. They will be designed and proposed in their own follow-up
 PR(s) under the same `outboundCorrelation.*` namespace, each with its
 own threat model and operator-consent flow. PR #4390 review (LaZzyMan)
@@ -425,7 +425,7 @@ request. Two consumers read it independently:
 
 An invalid-but-present header is rejected (the span stays parentless) and
 leaves a rate-limited DEBUG breadcrumb
-(`qwen-code.daemon.traceparent.invalid`) recording the rejected value, so a
+(`lailatul-coder.daemon.traceparent.invalid`) recording the rejected value, so a
 broken cross-service join is diagnosable from daemon logs alone.
 
 ### Forced sampling under inbound parents
@@ -446,12 +446,12 @@ fresh header per request.
 
 ### Manual OTLP Export
 
-To view Qwen Code telemetry in Alibaba Cloud Managed Service for
-OpenTelemetry, configure Qwen Code to export to the OTLP endpoint
+To view LailatulCoder Ai telemetry in Alibaba Cloud Managed Service for
+OpenTelemetry, configure LailatulCoder Ai to export to the OTLP endpoint
 provided by ARMS.
 
 Setting `"target": "gcp"` alone does not configure the export
-destination. If `otlpEndpoint` is not set, Qwen Code still defaults to
+destination. If `otlpEndpoint` is not set, LailatulCoder Ai still defaults to
 `http://localhost:4317`. If `outfile` is set, it overrides
 `otlpEndpoint` and telemetry is written to the file instead of being
 sent to Alibaba Cloud.
@@ -489,7 +489,7 @@ sent to Alibaba Cloud.
    ```
 
    > **Note:** When using HTTP protocol with only `otlpEndpoint` (no
-   > per-signal overrides), Qwen Code appends standard OTLP paths
+   > per-signal overrides), LailatulCoder Ai appends standard OTLP paths
    > (`/v1/traces`, `/v1/logs`, `/v1/metrics`) to the base URL. If your
    > backend uses different paths, use per-signal endpoint overrides as
    > shown in Option B.
@@ -519,7 +519,7 @@ sent to Alibaba Cloud.
    `OTEL_EXPORTER_OTLP_HEADERS` (or the signal-specific variants). Qwen
    Code does not currently expose OTLP auth headers directly in
    `.qwen/settings.json`.
-3. Run Qwen Code and send prompts.
+3. Run LailatulCoder Ai and send prompts.
 4. View telemetry in Managed Service for OpenTelemetry:
    - Product overview:
      [What is Managed Service for OpenTelemetry?][aliyun-opentelemetry-overview]
@@ -561,7 +561,7 @@ For local development and debugging, you can capture telemetry data locally:
    > The `target` and `otlpEndpoint` settings are not needed for file-only
    > output and can be safely omitted from your config.
 
-2. Run Qwen Code and send prompts.
+2. Run LailatulCoder Ai and send prompts.
 3. View logs and metrics in the specified file (e.g., `.qwen/telemetry.log`).
 
 ### Collector-Based Export (Advanced)
@@ -576,14 +576,14 @@ For local development and debugging, you can capture telemetry data locally:
    - Provide a Jaeger UI at http://localhost:16686
    - Save logs/metrics to `~/.qwen/tmp/<projectHash>/otel/collector.log`
    - Stop collector on exit (e.g. `Ctrl+C`)
-2. Run Qwen Code and send prompts.
+2. Run LailatulCoder Ai and send prompts.
 3. View traces at http://localhost:16686 and logs/metrics in the collector log
    file.
 
 ## Logs and Metrics
 
 The following section describes the structure of logs, metrics, and spans
-generated for Qwen Code.
+generated for LailatulCoder Ai.
 
 - A `sessionId` is included as a common attribute on all logs and metrics.
 
@@ -595,7 +595,7 @@ The following events are logged:
 
 #### Core Session Events
 
-- `qwen-code.config`: Emitted once at startup with CLI configuration.
+- `lailatul-coder.config`: Emitted once at startup with CLI configuration.
   - **Attributes**: `model`, `sandbox_enabled`, `core_tools_enabled`, `approval_mode`, `file_filtering_respect_git_ignore`, `debug_mode`, `truncate_tool_output_threshold`, `truncate_tool_output_lines`, `hooks` (comma-separated, omitted if disabled), `ide_enabled`, `interactive_shell_enabled`, `mcp_servers`, `mcp_servers_count`, `mcp_tools`, `mcp_tools_count`, `output_format`, `skills`, `subagents`
 
 - `session.start`: A session begins. Emitted after telemetry initialization at startup and again on every session switch; lifecycle semantics are described in the Spans section.
@@ -604,248 +604,248 @@ The following events are logged:
 - `session.end`: A session ends. Emitted before a session switch replaces the current session, and at telemetry shutdown.
   - **Attributes**: `session.id` (string)
 
-- `qwen-code.user_prompt`: User submits a prompt.
+- `lailatul-coder.user_prompt`: User submits a prompt.
   - **Attributes**: `prompt_length` (int), `prompt_id` (string), `prompt` (string, excluded if `log_prompts_enabled` is false), `auth_type` (string)
 
-- `qwen-code.user_retry`: User retries the last prompt.
+- `lailatul-coder.user_retry`: User retries the last prompt.
   - **Attributes**: `prompt_id` (string)
 
-- `qwen-code.conversation_finished`: A conversation turn sequence completes.
+- `lailatul-coder.conversation_finished`: A conversation turn sequence completes.
   - **Attributes**: `approvalMode` (string), `turnCount` (int)
 
-- `qwen-code.user_feedback`: User submits session feedback.
+- `lailatul-coder.user_feedback`: User submits session feedback.
   - **Attributes**: `session_id` (string), `rating` (int: 1=bad, 2=fine, 3=good), `model` (string), `approval_mode` (string), `prompt_id` (string, optional)
 
 #### Tool Events
 
-- `qwen-code.tool_call`: Each function/tool call. Terminal events are normalized so `status` is authoritative: success and cancelled events omit error fields, while error events always have a non-empty `error_type` (`unknown` when the producer did not classify the error). Blank tool names are emitted as `unknown_tool`. A missing `execution_status` is normalized to `unknown` and is never inferred from the terminal `status`.
+- `lailatul-coder.tool_call`: Each function/tool call. Terminal events are normalized so `status` is authoritative: success and cancelled events omit error fields, while error events always have a non-empty `error_type` (`unknown` when the producer did not classify the error). Blank tool names are emitted as `unknown_tool`. A missing `execution_status` is normalized to `unknown` and is never inferred from the terminal `status`.
   - **Attributes**: `function_name` (string), `function_args` (object), `call_id` (string, optional), `duration_ms` (int), `status` (string: "success", "error", or "cancelled"), `execution_status` (string: "not_started", "success", "error", "cancelled", or "unknown"), `success` (boolean), `decision` (string: "accept", "reject", "auto_accept", or "modify", optional), `error` (string, optional), `error_type` (string, present for error events), `prompt_id` (string), `response_id` (string, optional), `content_length` (int, optional), `tool_type` (string: "native" or "mcp"), `mcp_server_name` (string, optional), `metadata` (object, optional — for file-writing tools contains `model_added_lines`, `model_removed_lines`, `user_added_lines`, `user_removed_lines`, `model_added_chars`, `model_removed_chars`, `user_added_chars`, `user_removed_chars`)
 
-- `qwen-code.file_operation`: Each file operation.
+- `lailatul-coder.file_operation`: Each file operation.
   - **Attributes**: `tool_name` (string), `operation` (string: "create", "read", "update"), `lines` (int, optional), `mimetype` (string, optional), `extension` (string, optional), `programming_language` (string, optional)
 
-- `qwen-code.tool_output_truncated`: Tool output exceeded size threshold.
+- `lailatul-coder.tool_output_truncated`: Tool output exceeded size threshold.
   - **Attributes**: `tool_name` (string), `original_content_length` (int), `truncated_content_length` (int), `threshold` (int), `lines` (int), `prompt_id` (string)
 
 #### API Events
 
-- `qwen-code.api_request`: Outgoing request to the LLM API.
+- `lailatul-coder.api_request`: Outgoing request to the LLM API.
   - **Attributes**: `model` (string), `prompt_id` (string), `request_text` (string, optional), `subagent_name` (string, optional)
 
-- `qwen-code.api_response`: Response received from LLM API.
+- `lailatul-coder.api_response`: Response received from LLM API.
   - **Attributes**: `response_id` (string), `model` (string), `status_code` (int/string, optional), `duration_ms` (int), `input_token_count` (int), `output_token_count` (int), `cached_content_token_count` (int), `thoughts_token_count` (int), `total_token_count` (int), `prompt_id` (string), `auth_type` (string, optional), `response_text` (string, optional), `subagent_name` (string, optional)
 
-- `qwen-code.api_error`: API request failed.
+- `lailatul-coder.api_error`: API request failed.
   - **Attributes**: `model` (string), `prompt_id` (string), `duration_ms` (int), `error_message` (string), `response_id` (string, optional), `auth_type` (string, optional), `error_type` (string, optional), `status_code` (int/string, optional), `subagent_name` (string, optional)
 
   Additionally, OTel-standard aliases (`http.status_code`, `error.message`, `model_name`, `duration`) are emitted for compatibility.
 
-- `qwen-code.api_cancel`: API request cancelled by user.
+- `lailatul-coder.api_cancel`: API request cancelled by user.
   - **Attributes**: `model` (string), `prompt_id` (string), `auth_type` (string, optional), `loop_wakeups_cancelled` (int, optional)
 
-- `qwen-code.api_retry`: HTTP-status retry (429/5xx) at an LLM call site. Distinct from `chat.content_retry` which handles `InvalidStreamError` retries on a separate budget.
-  - **Attributes**: `model` (string), `prompt_id` (string, optional), `attempt_number` (int), `error_type` (string, optional), `error_message` (string), `status_code` (int/string, optional), `retry_delay_ms` (int), `duration_ms` (int, equals retry_delay_ms — backoff sleep, not HTTP round-trip; for attempt duration see the qwen-code.llm_request span), `subagent_name` (string, optional)
+- `lailatul-coder.api_retry`: HTTP-status retry (429/5xx) at an LLM call site. Distinct from `chat.content_retry` which handles `InvalidStreamError` retries on a separate budget.
+  - **Attributes**: `model` (string), `prompt_id` (string, optional), `attempt_number` (int), `error_type` (string, optional), `error_message` (string), `status_code` (int/string, optional), `retry_delay_ms` (int), `duration_ms` (int, equals retry_delay_ms — backoff sleep, not HTTP round-trip; for attempt duration see the lailatul-coder.llm_request span), `subagent_name` (string, optional)
 
-- `qwen-code.malformed_json_response`: `generateJson` response couldn't be parsed.
+- `lailatul-coder.malformed_json_response`: `generateJson` response couldn't be parsed.
   - **Attributes**: `model` (string)
 
-- `qwen-code.flash_fallback`: Switched to flash model as fallback.
+- `lailatul-coder.flash_fallback`: Switched to flash model as fallback.
   - **Attributes**: `auth_type` (string)
 
-- `qwen-code.ripgrep_fallback`: Switched to grep as fallback.
+- `lailatul-coder.ripgrep_fallback`: Switched to grep as fallback.
   - **Attributes**: `use_ripgrep` (boolean), `use_builtin_ripgrep` (boolean), `error` (string, optional)
 
 #### Resilience Events
 
-- `qwen-code.chat.content_retry`: Content-error retry (e.g. empty stream).
+- `lailatul-coder.chat.content_retry`: Content-error retry (e.g. empty stream).
   - **Attributes**: `attempt_number` (int), `error_type` (string), `retry_delay_ms` (int), `model` (string)
 
-- `qwen-code.chat.content_retry_failure`: All content retries exhausted.
+- `lailatul-coder.chat.content_retry_failure`: All content retries exhausted.
   - **Attributes**: `total_attempts` (int), `final_error_type` (string), `total_duration_ms` (int, optional), `model` (string)
 
-- `qwen-code.chat.invalid_chunk`: Invalid chunk received from stream.
+- `lailatul-coder.chat.invalid_chunk`: Invalid chunk received from stream.
   - **Attributes**: `error.message` (string, optional)
 
 #### Command & Extension Events
 
-- `qwen-code.slash_command`: User executes a slash command.
+- `lailatul-coder.slash_command`: User executes a slash command.
   - **Attributes**: `command` (string), `subcommand` (string, optional), `status` (string: "success" or "error", optional)
 
-- `qwen-code.slash_command.model`: User switches model via `/model` command.
+- `lailatul-coder.slash_command.model`: User switches model via `/model` command.
   - **Attributes**: `model_name` (string)
 
-- `qwen-code.skill_launch`: A skill is launched.
+- `lailatul-coder.skill_launch`: A skill is launched.
   - **Attributes**: `skill_name` (string), `success` (boolean), `prompt_id` (string)
 
-- `qwen-code.extension_install`: Extension installed.
+- `lailatul-coder.extension_install`: Extension installed.
   - **Attributes**: `extension_name` (string), `extension_version` (string), `extension_source` (string), `status` (string: "success"/"error")
 
-- `qwen-code.extension_uninstall`: Extension uninstalled.
+- `lailatul-coder.extension_uninstall`: Extension uninstalled.
   - **Attributes**: `extension_name` (string), `status` (string)
 
-- `qwen-code.extension_enable`: Extension enabled.
+- `lailatul-coder.extension_enable`: Extension enabled.
   - **Attributes**: `extension_name` (string), `setting_scope` (string)
 
-- `qwen-code.extension_disable`: Extension disabled.
+- `lailatul-coder.extension_disable`: Extension disabled.
   - **Attributes**: `extension_name` (string), `setting_scope` (string)
 
-- `qwen-code.extension_update`: Extension updated.
+- `lailatul-coder.extension_update`: Extension updated.
   - **Attributes**: `extension_name` (string), `extension_id` (string), `extension_previous_version` (string), `extension_version` (string), `extension_source` (string), `status` (string: "success"/"error")
 
-- `qwen-code.ide_connection`: IDE connection event.
+- `lailatul-coder.ide_connection`: IDE connection event.
   - **Attributes**: `connection_type` (string: "start" or "session")
 
-- `qwen-code.auth`: Authentication event.
+- `lailatul-coder.auth`: Authentication event.
   - **Attributes**: `auth_type` (string), `action_type` ("auto", "manual", "coding-plan"), `status` ("success", "error", "cancelled"), `error_message` (optional)
 
 #### Subagent Events
 
-- `qwen-code.subagent_execution`: Subagent lifecycle event.
+- `lailatul-coder.subagent_execution`: Subagent lifecycle event.
   - **Attributes**: `subagent_name` (string), `status` ("started", "completed", "failed", "cancelled"), `terminate_reason` (optional), `result` (optional), `execution_summary` (optional)
 
 #### Arena Events
 
-- `qwen-code.arena_session_started`: Arena session begins.
+- `lailatul-coder.arena_session_started`: Arena session begins.
   - **Attributes**: `arena_session_id` (string), `model_ids` (JSON string array), `task_length` (int)
 
-- `qwen-code.arena_agent_completed`: An arena agent finishes.
+- `lailatul-coder.arena_agent_completed`: An arena agent finishes.
   - **Attributes**: `arena_session_id` (string), `agent_session_id` (string), `agent_model_id` (string), `status` (string: "completed"/"failed"/"cancelled"), `duration_ms` (int), `rounds` (int), `total_tokens` (int), `input_tokens` (int), `output_tokens` (int), `tool_calls` (int), `successful_tool_calls` (int), `failed_tool_calls` (int)
 
-- `qwen-code.arena_session_ended`: Arena session completes.
+- `lailatul-coder.arena_session_ended`: Arena session completes.
   - **Attributes**: `arena_session_id` (string), `status` (string: "selected"/"discarded"/"failed"/"cancelled"), `duration_ms` (int), `display_backend` (string, optional), `agent_count` (int), `completed_agents` (int), `failed_agents` (int), `cancelled_agents` (int), `winner_model_id` (string, optional)
 
 #### Workflow Events
 
-- `qwen-code.workflow_keyword`: Workflow keyword trigger fired.
+- `lailatul-coder.workflow_keyword`: Workflow keyword trigger fired.
 
-- `qwen-code.workflow_run`: Workflow run reached terminal state.
+- `lailatul-coder.workflow_run`: Workflow run reached terminal state.
   - **Attributes**: `status` (string), `agents_dispatched` (int), `agents_completed` (int), `phase_count` (int), `tokens_spent` (int), `duration_ms` (int)
 
 #### Auto-Memory Events
 
-- `qwen-code.memory.extract`: Memory extraction run completed.
+- `lailatul-coder.memory.extract`: Memory extraction run completed.
   - **Attributes**: `trigger` ("auto"/"manual"), `status` ("completed"/"skipped"/"failed"), `skipped_reason` (optional), `patches_count` (int), `touched_topics` (string), `duration_ms` (int)
 
-- `qwen-code.memory.dream`: Memory consolidation (dream) run completed.
+- `lailatul-coder.memory.dream`: Memory consolidation (dream) run completed.
   - **Attributes**: `trigger` ("auto"/"manual"), `status` ("updated"/"noop"/"failed"/"cancelled"), `deduped_entries` (int), `touched_topics_count` (int), `touched_topics` (string), `duration_ms` (int)
 
-- `qwen-code.memory.recall`: Memory recall operation completed.
+- `lailatul-coder.memory.recall`: Memory recall operation completed.
   - **Attributes**: `query_length` (int), `docs_scanned` (int), `docs_selected` (int), `strategy` ("none"/"heuristic"/"model"), `duration_ms` (int)
 
 #### Prompt Suggestion & Speculation Events
 
-- `qwen-code.prompt_suggestion`: Prompt suggestion outcome.
+- `lailatul-coder.prompt_suggestion`: Prompt suggestion outcome.
   - **Attributes**: `outcome` ("accepted"/"ignored"/"suppressed"), `prompt_id` (optional), `accept_method` ("tab"/"enter"/"right", optional), `accept_source` ("live"/"fallback", optional), `time_to_accept_ms` (optional), `time_to_ignore_ms` (optional), `time_to_first_keystroke_ms` (optional), `suggestion_length` (optional), `similarity` (optional), `was_focused_when_shown` (optional), `reason` (optional)
 
-- `qwen-code.speculation`: Speculative execution outcome.
+- `lailatul-coder.speculation`: Speculative execution outcome.
   - **Attributes**: `outcome` ("accepted"/"aborted"/"failed"), `turns_used` (int), `files_written` (int), `tool_use_count` (int), `duration_ms` (int), `boundary_type` (optional), `had_pipelined_suggestion` (boolean)
 
 #### Other Events
 
-- `qwen-code.chat_compression`: Chat context compressed.
+- `lailatul-coder.chat_compression`: Chat context compressed.
   - **Attributes**: `tokens_before` (int), `tokens_after` (int), `compression_input_token_count` (int, optional), `compression_output_token_count` (int, optional)
 
-- `qwen-code.next_speaker_check`: Next speaker determination.
+- `lailatul-coder.next_speaker_check`: Next speaker determination.
   - **Attributes**: `prompt_id` (string), `finish_reason` (string), `result` (string)
 
-- `loop_detected`: Loop detected during agent execution. _(Note: emitted without `qwen-code.` prefix — pre-existing inconsistency.)_
+- `loop_detected`: Loop detected during agent execution. _(Note: emitted without `lailatul-coder.` prefix — pre-existing inconsistency.)_
   - **Attributes**: `loop_type` (string), `prompt_id` (string)
 
-- `kitty_sequence_overflow`: Kitty graphics protocol sequence exceeded buffer size. _(Note: emitted without `qwen-code.` prefix — pre-existing inconsistency.)_
+- `kitty_sequence_overflow`: Kitty graphics protocol sequence exceeded buffer size. _(Note: emitted without `lailatul-coder.` prefix — pre-existing inconsistency.)_
   - **Attributes**: `sequence_length` (int), `truncated_sequence` (string, first 20 chars)
 
 ### Metrics
 
-Metrics are numerical measurements of behavior over time. Metric names use the `qwen-code.*` prefix.
+Metrics are numerical measurements of behavior over time. Metric names use the `lailatul-coder.*` prefix.
 
 #### Core Metrics
 
-- `qwen-code.session.count` (Counter, Int): Incremented once per CLI startup.
+- `lailatul-coder.session.count` (Counter, Int): Incremented once per CLI startup.
 
-- `qwen-code.tool.call.count` (Counter, Int): Counts tool calls.
+- `lailatul-coder.tool.call.count` (Counter, Int): Counts tool calls.
   - **Attributes**: `function_name`, `status` ("success"/"error"/"cancelled"), `success` (boolean, retained for compatibility), `decision` ("accept"/"reject"/"auto_accept"/"modify", optional), `tool_type` ("mcp"/"native", optional)
 
-- `qwen-code.tool.execution.count` (Counter, Int): Counts tool execution outcomes. Deliberately carries no `function_name` dimension to stay low-cardinality, so an execution-failure rate cannot be attributed to a specific tool without dropping to the `qwen-code.tool_call` logs; exclude `unknown`, `not_started`, and `cancelled` when computing execution-failure ratios (denominator is `success` + `error`).
+- `lailatul-coder.tool.execution.count` (Counter, Int): Counts tool execution outcomes. Deliberately carries no `function_name` dimension to stay low-cardinality, so an execution-failure rate cannot be attributed to a specific tool without dropping to the `lailatul-coder.tool_call` logs; exclude `unknown`, `not_started`, and `cancelled` when computing execution-failure ratios (denominator is `success` + `error`).
   - **Attributes**: `execution_status` ("not_started"/"success"/"error"/"cancelled"/"unknown"), `tool_type` ("mcp"/"native"), plus globally configured common metric attributes such as the opt-in `session.id`
 
-- `qwen-code.tool.call.latency` (Histogram, ms): Measures tool call latency.
+- `lailatul-coder.tool.call.latency` (Histogram, ms): Measures tool call latency.
   - **Attributes**: `function_name` (string)
 
-- `qwen-code.api.request.count` (Counter, Int): Counts all API requests.
+- `lailatul-coder.api.request.count` (Counter, Int): Counts all API requests.
   - **Attributes**: `model`, `status_code`, `error_type` (optional)
 
-- `qwen-code.api.request.latency` (Histogram, ms): Measures API request latency.
+- `lailatul-coder.api.request.latency` (Histogram, ms): Measures API request latency.
   - **Attributes**: `model` (string)
 
-- `qwen-code.token.usage` (Counter, Int): Counts tokens used.
+- `lailatul-coder.token.usage` (Counter, Int): Counts tokens used.
   - **Attributes**: `model`, `type` ("input"/"output"/"thought"/"cache")
 
-- `qwen-code.file.operation.count` (Counter, Int): Counts file operations.
+- `lailatul-coder.file.operation.count` (Counter, Int): Counts file operations.
   - **Attributes**: `operation` ("create"/"read"/"update"), `lines` (optional), `mimetype` (optional), `extension` (optional), `programming_language` (optional)
 
-- `qwen-code.chat_compression` (Counter, Int): Counts chat compression operations.
+- `lailatul-coder.chat_compression` (Counter, Int): Counts chat compression operations.
   - **Attributes**: `tokens_before` (int), `tokens_after` (int)
 
-- `qwen-code.slash_command.model.call_count` (Counter, Int): Counts model slash command calls.
+- `lailatul-coder.slash_command.model.call_count` (Counter, Int): Counts model slash command calls.
   - **Attributes**: `slash_command.model.model_name` (string)
 
-- `qwen-code.subagent.execution.count` (Counter, Int): Counts subagent execution events.
+- `lailatul-coder.subagent.execution.count` (Counter, Int): Counts subagent execution events.
   - **Attributes**: `subagent_name`, `status` ("started"/"completed"/"failed"/"cancelled"), `terminate_reason` (optional)
 
 #### Resilience Metrics
 
-- `qwen-code.api.retry.count` (Counter, Int): HTTP-status retries (429/5xx) at LLM call sites.
+- `lailatul-coder.api.retry.count` (Counter, Int): HTTP-status retries (429/5xx) at LLM call sites.
   - **Attributes**: `model` (string)
 
-- `qwen-code.chat.content_retry.count` (Counter, Int): Retries due to content errors.
+- `lailatul-coder.chat.content_retry.count` (Counter, Int): Retries due to content errors.
 
-- `qwen-code.chat.content_retry_failure.count` (Counter, Int): All content retries exhausted.
+- `lailatul-coder.chat.content_retry_failure.count` (Counter, Int): All content retries exhausted.
 
-- `qwen-code.chat.invalid_chunk.count` (Counter, Int): Invalid chunks from stream.
+- `lailatul-coder.chat.invalid_chunk.count` (Counter, Int): Invalid chunks from stream.
 
 #### Arena Metrics
 
-- `qwen-code.arena.session.count` (Counter, Int): Arena sessions by status.
+- `lailatul-coder.arena.session.count` (Counter, Int): Arena sessions by status.
   - **Attributes**: `status`, `display_backend` (optional)
 
-- `qwen-code.arena.session.duration` (Histogram, ms): Arena session duration.
+- `lailatul-coder.arena.session.duration` (Histogram, ms): Arena session duration.
   - **Attributes**: `status`
 
-- `qwen-code.arena.agent.count` (Counter, Int): Arena agent completions.
+- `lailatul-coder.arena.agent.count` (Counter, Int): Arena agent completions.
   - **Attributes**: `status`, `model_id`
 
-- `qwen-code.arena.agent.duration` (Histogram, ms): Arena agent execution duration.
+- `lailatul-coder.arena.agent.duration` (Histogram, ms): Arena agent execution duration.
   - **Attributes**: `model_id`
 
-- `qwen-code.arena.agent.tokens` (Counter, Int): Token usage by arena agents.
+- `lailatul-coder.arena.agent.tokens` (Counter, Int): Token usage by arena agents.
   - **Attributes**: `model_id`, `type` ("input"/"output")
 
-- `qwen-code.arena.result.selected` (Counter, Int): Arena result selections.
+- `lailatul-coder.arena.result.selected` (Counter, Int): Arena result selections.
   - **Attributes**: `model_id`
 
 #### Auto-Memory Metrics
 
-- `qwen-code.memory.extract.count` (Counter, Int): Auto-memory extraction runs.
+- `lailatul-coder.memory.extract.count` (Counter, Int): Auto-memory extraction runs.
   - **Attributes**: `trigger` ("auto"/"manual"), `status`
 
-- `qwen-code.memory.extract.duration` (Histogram, ms): Extraction duration.
+- `lailatul-coder.memory.extract.duration` (Histogram, ms): Extraction duration.
   - **Attributes**: `trigger`, `status`
 
-- `qwen-code.memory.dream.count` (Counter, Int): Auto-memory dream runs.
+- `lailatul-coder.memory.dream.count` (Counter, Int): Auto-memory dream runs.
   - **Attributes**: `trigger` ("auto"/"manual"), `status`
 
-- `qwen-code.memory.dream.duration` (Histogram, ms): Dream run duration.
+- `lailatul-coder.memory.dream.duration` (Histogram, ms): Dream run duration.
   - **Attributes**: `trigger`, `status`
 
-- `qwen-code.memory.recall.count` (Counter, Int): Auto-memory recall operations.
+- `lailatul-coder.memory.recall.count` (Counter, Int): Auto-memory recall operations.
   - **Attributes**: `strategy` ("none"/"heuristic"/"model")
 
-- `qwen-code.memory.recall.duration` (Histogram, ms): Recall duration.
+- `lailatul-coder.memory.recall.duration` (Histogram, ms): Recall duration.
   - **Attributes**: `strategy`
 
 #### API Request Breakdown
 
-- `qwen-code.api.request.breakdown` (Histogram, ms): API request time breakdown by phase.
+- `lailatul-coder.api.request.breakdown` (Histogram, ms): API request time breakdown by phase.
   - **Attributes**: `model`, `phase` ("request_preparation"/"network_latency"/"response_processing"/"token_processing")
 
 ### Daemon Metrics
@@ -856,52 +856,52 @@ The daemon process (long-running HTTP server mode) exposes its own metrics.
 
 #### HTTP
 
-- `qwen-code.daemon.http.request.count` (Counter, Int): Request count by route and status class.
+- `lailatul-coder.daemon.http.request.count` (Counter, Int): Request count by route and status class.
   - **Attributes**: `route`, `status_class` ("2xx"/"4xx"/"5xx")
 
-- `qwen-code.daemon.http.request.duration` (Histogram, ms): Request duration.
+- `lailatul-coder.daemon.http.request.duration` (Histogram, ms): Request duration.
   - **Attributes**: `route`
   - **Buckets**: 1, 2, 5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 30000
 
 #### Sessions
 
-- `qwen-code.daemon.session.active` (ObservableGauge, Int): Current active sessions.
+- `lailatul-coder.daemon.session.active` (ObservableGauge, Int): Current active sessions.
 
-- `qwen-code.daemon.session.lifecycle` (Counter, Int): Session lifecycle events.
+- `lailatul-coder.daemon.session.lifecycle` (Counter, Int): Session lifecycle events.
   - **Attributes**: `action` ("spawn"/"close"/"die")
 
 #### Channels
 
-- `qwen-code.daemon.channel.lifecycle` (Counter, Int): ACP channel lifecycle events.
+- `lailatul-coder.daemon.channel.lifecycle` (Counter, Int): ACP channel lifecycle events.
   - **Attributes**: `action` ("spawn"/"exit"), `expected` (boolean, optional)
 
 #### Prompts
 
-- `qwen-code.daemon.prompt.queue_wait` (Histogram, ms): Prompt FIFO queue wait time.
+- `lailatul-coder.daemon.prompt.queue_wait` (Histogram, ms): Prompt FIFO queue wait time.
   - **Buckets**: 1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 30000, 60000
 
-- `qwen-code.daemon.prompt.duration` (Histogram, ms): End-to-end prompt duration.
+- `lailatul-coder.daemon.prompt.duration` (Histogram, ms): End-to-end prompt duration.
   - **Buckets**: 100, 500, 1000, 2500, 5000, 10000, 30000, 60000, 120000, 300000, 600000
 
 #### Errors
 
-- `qwen-code.daemon.bridge.error.count` (Counter, Int): Bridge errors by type.
+- `lailatul-coder.daemon.bridge.error.count` (Counter, Int): Bridge errors by type.
   - **Attributes**: `error_type` (known class name or "unknown")
 
-- `qwen-code.daemon.cancel.count` (Counter, Int): Cancel request count.
+- `lailatul-coder.daemon.cancel.count` (Counter, Int): Cancel request count.
 
 #### Resources
 
-- `qwen-code.daemon.sse.active` (ObservableGauge, Int): Active SSE connections.
+- `lailatul-coder.daemon.sse.active` (ObservableGauge, Int): Active SSE connections.
 
-- `qwen-code.daemon.process.heap_used` (ObservableGauge, Int, bytes): Heap memory usage.
+- `lailatul-coder.daemon.process.heap_used` (ObservableGauge, Int, bytes): Heap memory usage.
 
 ### Spans
 
-Distributed tracing spans form a tree rooted at `qwen-code.interaction`. In the CLI, each interaction is a trace root with its own `traceId`; ACP and daemon paths may inherit an inbound parent context. Cross-prompt correlation uses the `session.id` attribute.
+Distributed tracing spans form a tree rooted at `lailatul-coder.interaction`. In the CLI, each interaction is a trace root with its own `traceId`; ACP and daemon paths may inherit an inbound parent context. Cross-prompt correlation uses the `session.id` attribute.
 
 Session lifecycle is also exported through the OpenTelemetry General Session
-semantic conventions. When the OTel logs pipeline is enabled, Qwen Code emits
+semantic conventions. When the OTel logs pipeline is enabled, LailatulCoder Ai emits
 `session.start` and `session.end` log events with the required `session.id`
 attribute (cataloged under Core Session Events above). A resumed persisted
 conversation includes `session.previous_id` on its `session.start` event only
@@ -910,37 +910,37 @@ resumptions (`--resume`, `--continue`, `--fork-session`) do not carry it.
 `/clear` and other replacement flows intentionally do not claim continuation
 because they discard the previous conversation.
 
-The existing Qwen-specific `qwen-code.config`/`cli_config` and RUM
+The existing Qwen-specific `lailatul-coder.config`/`cli_config` and RUM
 `session_start` records remain available for compatibility. GenAI request
 spans continue to use `gen_ai.conversation.id` for the same owning session ID.
 
-- `qwen-code.interaction`: Main-agent invocation span. It covers all LLM requests, tool approval/execution, and continuations for one logical prompt. User queries, retries, cron prompts, notifications, teammate messages, and Goal turns create invocations; tool results, hooks, and steering reuse the exact active prompt ID.
-  - **GenAI attributes**: `gen_ai.operation.name` (`invoke_agent`), `gen_ai.agent.name` (`qwen-code`), `gen_ai.conversation.id`, optional `gen_ai.output.type` (`json` only with a configured JSON Schema), sensitive `gen_ai.input.messages`, sensitive `gen_ai.output.messages`, and optional ARMS extension `gen_ai.user.id`
-  - **Compatibility attributes**: `session.id`, `qwen-code.prompt_id`, `qwen-code.message_type`, `qwen-code.model`, `qwen-code.approval_mode`, `interaction.sequence`, `interaction.duration_ms`, `qwen-code.turn_status` ("ok"/"error"/"cancelled")
+- `lailatul-coder.interaction`: Main-agent invocation span. It covers all LLM requests, tool approval/execution, and continuations for one logical prompt. User queries, retries, cron prompts, notifications, teammate messages, and Goal turns create invocations; tool results, hooks, and steering reuse the exact active prompt ID.
+  - **GenAI attributes**: `gen_ai.operation.name` (`invoke_agent`), `gen_ai.agent.name` (`lailatul-coder`), `gen_ai.conversation.id`, optional `gen_ai.output.type` (`json` only with a configured JSON Schema), sensitive `gen_ai.input.messages`, sensitive `gen_ai.output.messages`, and optional ARMS extension `gen_ai.user.id`
+  - **Compatibility attributes**: `session.id`, `lailatul-coder.prompt_id`, `lailatul-coder.message_type`, `lailatul-coder.model`, `lailatul-coder.approval_mode`, `interaction.sequence`, `interaction.duration_ms`, `lailatul-coder.turn_status` ("ok"/"error"/"cancelled")
   - `gen_ai.request.model` is intentionally omitted because the agent supports overrides, fallback, and dynamic model selection. `gen_ai.provider.name` and agent ID/version/description are also omitted.
   - Agent input is one original user prompt, not the expanded model request. Agent output is one final user-visible text projection; structured JSON uses compact JSON text with `finish_reason=tool_call`. Both are omitted unless sensitive span attributes are enabled and the complete JSON fits the per-attribute limit.
 
-- `qwen-code.llm_request`: Wraps a single LLM API call.
+- `lailatul-coder.llm_request`: Wraps a single LLM API call.
   - **GenAI attributes**: `gen_ai.operation.name`, `gen_ai.provider.name`, `gen_ai.conversation.id`, optional ARMS extension `gen_ai.user.id`, `gen_ai.request.model`, `gen_ai.request.stream`, `gen_ai.request.choice.count`, `gen_ai.request.max_tokens`, `gen_ai.request.temperature`, `gen_ai.request.top_p`, `gen_ai.request.frequency_penalty`, `gen_ai.request.presence_penalty`, `gen_ai.request.stop_sequences`, optional `gen_ai.output.type`, `gen_ai.response.id`, `gen_ai.response.model`, `gen_ai.response.finish_reasons`, `gen_ai.response.time_to_first_chunk`, `gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`, `gen_ai.usage.cache_read.input_tokens`, `gen_ai.usage.cache_creation.input_tokens`
-  - **Compatibility attributes**: `session.id`, `qwen-code.prompt_id`, `llm_request.context` ("subagent"/"interaction"/"standalone"), `duration_ms`, `ttft_ms`, `request_setup_ms`, `attempt`, `retry_total_delay_ms`, `sampling_ms`, `output_tokens_per_second`, `success`, `error`, `finish_reason`, `thoughts_token_count`, `subagent_name`, `error_type`, `error_status_code`
+  - **Compatibility attributes**: `session.id`, `lailatul-coder.prompt_id`, `llm_request.context` ("subagent"/"interaction"/"standalone"), `duration_ms`, `ttft_ms`, `request_setup_ms`, `attempt`, `retry_total_delay_ms`, `sampling_ms`, `output_tokens_per_second`, `success`, `error`, `finish_reason`, `thoughts_token_count`, `subagent_name`, `error_type`, `error_status_code`
   - Standard response fields come from the provider response. Standard token fields are emitted only for provider-reported non-negative safe integers. If the provider reports only a total token count, input/output usage is omitted rather than estimated.
-  - Standard request-parameter fields come from the first provider-final SDK request object after adapter defaults, overrides, unsupported-field removal, and output-window clamps. Qwen Code does not infer SDK or server defaults.
+  - Standard request-parameter fields come from the first provider-final SDK request object after adapter defaults, overrides, unsupported-field removal, and output-window clamps. LailatulCoder Ai does not infer SDK or server defaults.
   - Streaming requests emit `gen_ai.request.stream=true`. `gen_ai.response.time_to_first_chunk` measures seconds from the provider call to the first normalized response yielded by the provider adapter, which may differ from the first raw network frame. Non-streaming requests omit both standard streaming attributes because an absent `gen_ai.request.stream` means non-streaming in the semantic convention.
 
-- `qwen-code.tool`: Wraps the full tool lifecycle (approval wait + execution).
+- `lailatul-coder.tool`: Wraps the full tool lifecycle (approval wait + execution).
   - **Attributes**: `session.id`, optional ARMS extension `gen_ai.user.id`, `gen_ai.operation.name` (`execute_tool`), optional inherited `gen_ai.agent.name`, `gen_ai.tool.name`, `gen_ai.tool.type` (`function`), `gen_ai.tool.call.id`, `tool.call_id`, `duration_ms`, `success`, `error`, `error.type` on failure, `tool.failure_kind` (string, optional — the specific failure reason, e.g. "cancelled", "tool_error", "tool_exception", "timeout", "permission_denied", "pre_hook_blocked")
 
-- `qwen-code.tool.execution`: Wraps the tool execution phase (after approval). Emitted only for attempted executions.
+- `lailatul-coder.tool.execution`: Wraps the tool execution phase (after approval). Emitted only for attempted executions.
   - **Attributes**: `session.id`, `gen_ai.tool.name` (optional), `tool.call_id` (optional), `duration_ms`, `success`, `error`, `execution_status` ("success"/"error"/"cancelled"), `error_type`, `error.type`
 
-- `qwen-code.tool.blocked_on_user`: Time a tool spends waiting on user approval.
+- `lailatul-coder.tool.blocked_on_user`: Time a tool spends waiting on user approval.
   - **Attributes**: `session.id`, `tool.name`, `tool.call_id`, `duration_ms`, `decision` ("proceed_once"/"proceed_always"/"cancel"/"aborted"/"auto_approved"/"error"), `source` ("cli"/"ide"/"hook"/"auto"/"system")
 
-- `qwen-code.hook`: Wraps each pre/post-tool-use hook fire site.
+- `lailatul-coder.hook`: Wraps each pre/post-tool-use hook fire site.
   - **Attributes**: `session.id`, `hook_event` ("PreToolUse"/"PostToolUse"/"PostToolUseFailure"/"PostToolBatch"), `tool.name`, `tool.use_id` (optional), `is_interrupt` (boolean, optional), `duration_ms`, `success`, `should_proceed` (optional), `should_stop` (optional), `block_type` (optional), `error` (optional)
 
-- `qwen-code.subagent`: Wraps a single subagent invocation.
-  - **Attributes**: `gen_ai.operation.name` (`invoke_agent`), `gen_ai.agent.name`, `gen_ai.agent.description`, `gen_ai.conversation.id`, optional ARMS extension `gen_ai.user.id`, optional `gen_ai.request.model`, `qwen-code.subagent.id`, `qwen-code.subagent.name`, `qwen-code.subagent.invocation_kind` ("foreground"/"fork"/"background"), `qwen-code.subagent.is_built_in`, `qwen-code.subagent.depth`, `qwen-code.subagent.status`, `qwen-code.subagent.terminate_reason`, `qwen-code.subagent.duration_ms`
+- `lailatul-coder.subagent`: Wraps a single subagent invocation.
+  - **Attributes**: `gen_ai.operation.name` (`invoke_agent`), `gen_ai.agent.name`, `gen_ai.agent.description`, `gen_ai.conversation.id`, optional ARMS extension `gen_ai.user.id`, optional `gen_ai.request.model`, `lailatul-coder.subagent.id`, `lailatul-coder.subagent.name`, `lailatul-coder.subagent.invocation_kind` ("foreground"/"fork"/"background"), `lailatul-coder.subagent.is_built_in`, `lailatul-coder.subagent.depth`, `lailatul-coder.subagent.status`, `lailatul-coder.subagent.terminate_reason`, `lailatul-coder.subagent.duration_ms`
 
 Successful and cancelled GenAI spans leave `SpanStatus` as `UNSET`. Failures set `ERROR`, a bounded status description, and low-cardinality `error.type`.
 
@@ -960,45 +960,45 @@ To make ARMS recognize exported spans as a GenAI application, configure its reso
 }
 ```
 
-Qwen Code does not inject this ARMS-specific resource attribute or `gen_ai.span.kind`. ARMS can infer LLM, Tool, and Agent roles from `gen_ai.operation.name`.
+LailatulCoder Ai does not inject this ARMS-specific resource attribute or `gen_ai.span.kind`. ARMS can infer LLM, Tool, and Agent roles from `gen_ai.operation.name`.
 
-- `qwen-code.daemon.request`: Wraps a daemon HTTP request.
-  - **Attributes**: `http.request.method`, `http.route`, `qwen-code.daemon.operation`, `session.id`, `http.response.status_code`
+- `lailatul-coder.daemon.request`: Wraps a daemon HTTP request.
+  - **Attributes**: `http.request.method`, `http.route`, `lailatul-coder.daemon.operation`, `session.id`, `http.response.status_code`
 
-- `qwen-code.daemon.bridge`: Wraps daemon bridge operations.
-  - **Attributes**: `qwen-code.daemon.operation`
+- `lailatul-coder.daemon.bridge`: Wraps daemon bridge operations.
+  - **Attributes**: `lailatul-coder.daemon.operation`
 
 #### Resource Metrics
 
-- `qwen-code.memory.usage` (Histogram, bytes): Memory usage. Recorded by the memory-pressure monitor when telemetry is enabled.
+- `lailatul-coder.memory.usage` (Histogram, bytes): Memory usage. Recorded by the memory-pressure monitor when telemetry is enabled.
   - **Attributes**: `memory_type` (string: "heap_used"/"rss")
 
-- `qwen-code.cpu.usage` (Histogram, percent): CPU usage percentage. Recorded by the memory-pressure monitor when telemetry is enabled.
+- `lailatul-coder.cpu.usage` (Histogram, percent): CPU usage percentage. Recorded by the memory-pressure monitor when telemetry is enabled.
   - **Attributes**: (none)
 
 ### Performance Monitoring (Reserved)
 
 The following metrics are defined but **not yet enabled in production**. They will be activated behind a dedicated performance monitoring config flag.
 
-- `qwen-code.startup.duration` (Histogram, ms): CLI startup time by phase.
+- `lailatul-coder.startup.duration` (Histogram, ms): CLI startup time by phase.
   - **Attributes**: `phase` (string)
 
-- `qwen-code.tool.queue.depth` (Histogram, count): Tools in execution queue.
+- `lailatul-coder.tool.queue.depth` (Histogram, count): Tools in execution queue.
 
-- `qwen-code.tool.execution.breakdown` (Histogram, ms): Tool execution time by phase.
+- `lailatul-coder.tool.execution.breakdown` (Histogram, ms): Tool execution time by phase.
   - **Attributes**: `function_name`, `phase` ("validation"/"preparation"/"execution"/"result_processing")
 
-- `qwen-code.token.efficiency` (Histogram, ratio): Token efficiency metrics.
+- `lailatul-coder.token.efficiency` (Histogram, ratio): Token efficiency metrics.
   - **Attributes**: `model`, `metric`, `context` (optional)
 
-- `qwen-code.performance.score` (Histogram, score): Composite performance score (0-100).
+- `lailatul-coder.performance.score` (Histogram, score): Composite performance score (0-100).
   - **Attributes**: `category`, `baseline` (optional)
 
-- `qwen-code.performance.regression` (Counter, Int): Regression detection events.
+- `lailatul-coder.performance.regression` (Counter, Int): Regression detection events.
   - **Attributes**: `metric`, `severity` ("low"/"medium"/"high"), `current_value`, `baseline_value`
 
-- `qwen-code.performance.regression.percentage_change` (Histogram, percent): Percentage change vs baseline.
+- `lailatul-coder.performance.regression.percentage_change` (Histogram, percent): Percentage change vs baseline.
   - **Attributes**: `metric`, `severity`, `current_value`, `baseline_value`
 
-- `qwen-code.performance.baseline.comparison` (Histogram, percent): Performance vs baseline.
+- `lailatul-coder.performance.baseline.comparison` (Histogram, percent): Performance vs baseline.
   - **Attributes**: `metric`, `category`, `current_value`, `baseline_value`

@@ -150,4 +150,4 @@ Out-of-pass refusals (e.g. lazy `readResource` spawn that bypasses the bulk pass
 - `packages/core/src/tools/mcp-client-manager.ts` (`BudgetExhaustedError`, `McpBudgetEvent`, hysteresis constants)
 - `packages/core/src/tools/mcp-transport-pool.ts` (pool's `acquire` site that calls `tryReserve`)
 - F2 design document (v2.2): [`../../design/f2-mcp-transport-pool.md`](../../design/f2-mcp-transport-pool.md) §11 for workspace-level budget and the v2.2 changelog entries about budget and fingerprint follow-ups.
-- F2 design notes: issue [#4175](https://github.com/QwenLM/qwen-code/issues/4175) commit 6.
+- F2 design notes: issue [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) commit 6.

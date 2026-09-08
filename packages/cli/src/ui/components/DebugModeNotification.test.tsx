@@ -6,11 +6,11 @@
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { render } from 'ink-testing-library';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import { ConfigContext } from '../contexts/ConfigContext.js';
 import { DebugModeNotification } from './DebugModeNotification.js';
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   createDebugLogger: () => ({
     isEnabled: () => false,
     debug: () => undefined,
@@ -76,3 +76,4 @@ describe('DebugModeNotification', () => {
     expect(lastFrame()).not.toContain('Logging to:');
   });
 });
+

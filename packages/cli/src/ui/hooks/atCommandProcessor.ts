@@ -7,7 +7,7 @@
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import type { Part, PartListUnion } from '@google/genai';
-import type { Config, Extension } from '@qwen-code/qwen-code-core';
+import type { Config, Extension } from '@lailatul-coder/lailatul-coder-core';
 import {
   getErrorMessage,
   isNodeError,
@@ -21,7 +21,7 @@ import {
   summarizeMcpResource,
   SessionService,
   SessionReferenceService,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   HistoryItemToolGroup,
   HistoryItemWithoutId,

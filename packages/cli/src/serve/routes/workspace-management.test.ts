@@ -5,7 +5,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { _setSandboxMountExistsForTest } from '@qwen-code/acp-bridge/workspacePaths';
+import { _setSandboxMountExistsForTest } from '@lailatul-coder/acp-bridge/workspacePaths';
 import express, { type Request, type Response } from 'express';
 import request from 'supertest';
 import {
@@ -164,7 +164,7 @@ describe('owned workspace runtime publication', () => {
       makeRuntime('/Users/test', { primary: true }),
     ]);
     const runtime = makeRuntime(
-      '/Users/test/Documents/Qwen Code/Conversations',
+      '/Users/test/Documents/LailatulCoder Ai/Conversations',
       {
         provenance: 'live-conversation',
         removable: false,
@@ -213,12 +213,12 @@ describe('owned workspace runtime publication', () => {
 
   it('does not let the Live root contain an existing workspace', async () => {
     const registry = createMockRegistry([
-      makeRuntime('/Users/test/Documents/Qwen Code/Conversations/project', {
+      makeRuntime('/Users/test/Documents/LailatulCoder Ai/Conversations/project', {
         primary: true,
       }),
     ]);
     const runtime = makeRuntime(
-      '/Users/test/Documents/Qwen Code/Conversations',
+      '/Users/test/Documents/LailatulCoder Ai/Conversations',
       {
         provenance: 'live-conversation',
         removable: false,
@@ -853,7 +853,7 @@ describe('POST /workspaces', () => {
   it.skipIf(process.platform === 'win32')(
     'translates a Windows-shaped cwd past the absolute-path guard in a sandbox',
     async () => {
-      vi.stubEnv('SANDBOX', 'qwen-code-sandbox-0');
+      vi.stubEnv('SANDBOX', 'lailatul-coder-sandbox-0');
       _setSandboxMountExistsForTest((p) => p === '/c/qwen-repro');
       try {
         const { app } = createApp();
@@ -926,7 +926,7 @@ describe('POST /workspaces', () => {
 
   it('does not expose the hidden Live runtime to workspace nesting checks', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'Qwen Code', 'Conversations');
+    const liveRoot = join(parent, 'Documents', 'LailatulCoder Ai', 'Conversations');
     try {
       const { app } = createApp({
         workspaceRegistry: createMockRegistry([
@@ -948,7 +948,7 @@ describe('POST /workspaces', () => {
 
   it('still blocks a user workspace inside the hidden Live runtime', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'Qwen Code', 'Conversations');
+    const liveRoot = join(parent, 'Documents', 'LailatulCoder Ai', 'Conversations');
     const child = join(liveRoot, 'conversation');
     try {
       await mkdir(child, { recursive: true });
@@ -1420,7 +1420,7 @@ describe('POST /workspaces', () => {
 
   it('promotes a workspace that contains the hidden Live runtime', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'Qwen Code', 'Conversations');
+    const liveRoot = join(parent, 'Documents', 'LailatulCoder Ai', 'Conversations');
     const add = vi.fn().mockResolvedValue(true);
     try {
       const { app } = createApp({
@@ -2482,7 +2482,7 @@ describe('persistent workspace registrations', () => {
   });
 
   it('keeps legacy Conversations registrations inactive and only forgets the stored record', async () => {
-    const reserved = '/reserved/qwen-code/conversations';
+    const reserved = '/reserved/lailatul-coder/conversations';
     const registrationId = workspaceRegistrationId(reserved);
     const internal = makeRuntime(reserved, {
       provenance: 'live-conversation',

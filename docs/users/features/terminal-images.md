@@ -1,6 +1,6 @@
 # Terminal Images
 
-Qwen Code can display image parts from assistant responses and completed tool
+LailatulCoder Ai can display image parts from assistant responses and completed tool
 results directly in the interactive terminal UI. This display path is separate
 from Markdown rendering and behaves the same in Markdown `render` and `raw`
 modes.

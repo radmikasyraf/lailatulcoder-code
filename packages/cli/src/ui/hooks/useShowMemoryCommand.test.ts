@@ -15,12 +15,12 @@ const { mockDebugLogger } = vi.hoisted(() => ({
     error: vi.fn(),
   },
 }));
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   createDebugLogger: () => mockDebugLogger,
 }));
 
 import { createShowMemoryAction } from './useShowMemoryCommand.js';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../../config/settings.js';
 import { MessageType, type Message } from '../types.js';
 

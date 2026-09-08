@@ -1,6 +1,6 @@
 # Exit Plan Mode Tool (`exit_plan_mode`)
 
-This document describes the `exit_plan_mode` tool for Qwen Code.
+This document describes the `exit_plan_mode` tool for LailatulCoder Ai.
 
 ## Description
 
@@ -16,9 +16,9 @@ The tool is specifically designed for tasks that require planning implementation
 - `originalRequest` (string, optional): The original request, used when a plan-required teammate asks its leader for approval.
 - `researchSummary` (string, optional): Investigation context for a plan-required teammate's leader review.
 
-## How to use `exit_plan_mode` with Qwen Code
+## How to use `exit_plan_mode` with LailatulCoder Ai
 
-The Exit Plan Mode tool is part of Qwen Code's planning workflow. When you're in plan mode (typically after exploring a codebase and designing an implementation approach), you use this tool to:
+The Exit Plan Mode tool is part of LailatulCoder Ai's planning workflow. When you're in plan mode (typically after exploring a codebase and designing an implementation approach), you use this tool to:
 
 1. Present your implementation plan to the user
 2. Request approval to proceed with implementation

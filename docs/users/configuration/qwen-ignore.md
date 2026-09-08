@@ -1,8 +1,8 @@
 # Ignoring Files
 
-This document provides an overview of the Qwen Ignore (`.qwenignore`) feature of Qwen Code. Qwen Code also recognizes custom ignore files configured by `context.fileFiltering.customIgnoreFiles`, which defaults to the compatibility files `.agentignore` and `.aiignore`.
+This document provides an overview of the Qwen Ignore (`.qwenignore`) feature of LailatulCoder Ai. LailatulCoder Ai also recognizes custom ignore files configured by `context.fileFiltering.customIgnoreFiles`, which defaults to the compatibility files `.agentignore` and `.aiignore`.
 
-Qwen Code includes the ability to automatically ignore files, similar to `.gitignore` (used by Git). Adding paths to `.qwenignore` or a configured custom ignore file will exclude them from tools that support this feature, although they will still be visible to other services (such as Git).
+LailatulCoder Ai includes the ability to automatically ignore files, similar to `.gitignore` (used by Git). Adding paths to `.qwenignore` or a configured custom ignore file will exclude them from tools that support this feature, although they will still be visible to other services (such as Git).
 
 ## How it works
 
@@ -16,7 +16,7 @@ For the most part, these ignore files follow the conventions of `.gitignore` fil
 - Putting a `/` at the beginning anchors the path relative to the ignore file.
 - `!` negates a pattern.
 
-You can update these ignore files at any time. To apply the changes, you must restart your Qwen Code session.
+You can update these ignore files at any time. To apply the changes, you must restart your LailatulCoder Ai session.
 
 ## How to use ignore files
 
@@ -25,7 +25,7 @@ You can update these ignore files at any time. To apply the changes, you must re
 | **Enable ignore rules** | Create `.qwenignore`, a default custom file (`.agentignore` / `.aiignore`), or a configured custom ignore file in your project root directory |
 | **Add ignore rules**    | Open the ignore file and add paths to ignore, example: `/archive/` or `apikeys.txt`                                                           |
 
-By default, Qwen Code reads `.qwenignore`, `.agentignore`, and `.aiignore`.
+By default, LailatulCoder Ai reads `.qwenignore`, `.agentignore`, and `.aiignore`.
 To use a different custom ignore file, configure:
 
 ```json

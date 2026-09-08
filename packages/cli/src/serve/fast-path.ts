@@ -5,11 +5,11 @@
  */
 
 import type { RunHandle } from './run-qwen-serve.js';
-import { MAX_COMPACTED_REPLAY_MAX_BYTES } from '@qwen-code/acp-bridge/replayWindowLimits';
+import { MAX_COMPACTED_REPLAY_MAX_BYTES } from '@lailatul-coder/acp-bridge/replayWindowLimits';
 import {
   isValidMemoryBudgetMb,
   memoryBudgetRangeError,
-} from '@qwen-code/acp-bridge/daemonMemoryBudget';
+} from '@lailatul-coder/acp-bridge/daemonMemoryBudget';
 import { normalizeServeFastPathArgv } from '../utils/serve-fast-path-argv.js';
 import type { ServeFastPathSettings } from './fast-path-settings.js';
 import { RUNTIME_STARTUP_CANCELLED_MESSAGE } from './runtime-startup-errors.js';

@@ -5,14 +5,14 @@
  */
 
 import { beforeEach, describe, it, expect, vi } from 'vitest';
-import { AuthType, expandHomeDir } from '@qwen-code/qwen-code-core';
+import { AuthType, expandHomeDir } from '@lailatul-coder/lailatul-coder-core';
 import { learnCommand } from './learn-command.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import type { SubmitPromptActionReturn } from './types.js';
 import { CommandKind } from './types.js';
 
 const mockReadPathFromWorkspace = vi.hoisted(() => vi.fn());
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original = await importOriginal<object>();
   return {
     ...original,

@@ -9,12 +9,12 @@ import { tmpdir } from 'node:os';
 import * as path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { afterAll, describe, expect, it } from 'vitest';
-import { SessionService, type ChatRecord } from '@qwen-code/qwen-code-core';
+import { SessionService, type ChatRecord } from '@lailatul-coder/lailatul-coder-core';
 import {
   appendPromptLedgerRecord,
   readPromptLedgerRecords,
   type PromptLedgerRecord,
-} from '@qwen-code/acp-bridge/promptLedger';
+} from '@lailatul-coder/acp-bridge/promptLedger';
 import {
   createPromptLedgerSink,
   readRecentPromptTerminals,

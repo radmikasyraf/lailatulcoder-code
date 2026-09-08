@@ -14,22 +14,22 @@ import { normalizeServeChannelSelection } from '../serve/channel-selection.js';
 // with ~50ms of cold ESM resolution. The runtime import is deferred to the
 // handler below so it only loads when the user actually runs `qwen serve`.
 import { writeStderrLine, writeStdoutLine } from '../utils/stdioHelpers.js';
-import { DEFAULT_RING_SIZE } from '@qwen-code/acp-bridge/eventBus';
+import { DEFAULT_RING_SIZE } from '@lailatul-coder/acp-bridge/eventBus';
 import {
   DEFAULT_COMPACTED_REPLAY_MAX_BYTES,
   DEFAULT_MAX_JOURNAL_BYTES,
   DEFAULT_MAX_JOURNAL_EVENTS,
   JOURNAL_GROWTH_HARD_CAP_BYTES,
-} from '@qwen-code/acp-bridge/replayWindowLimits';
-import { EXTERNAL_TOOL_GUARD_TOKEN_ENV } from '@qwen-code/acp-bridge/externalToolGuard';
-import type { ChildHeapMode } from '@qwen-code/acp-bridge/childHeapPolicy';
+} from '@lailatul-coder/acp-bridge/replayWindowLimits';
+import { EXTERNAL_TOOL_GUARD_TOKEN_ENV } from '@lailatul-coder/acp-bridge/externalToolGuard';
+import type { ChildHeapMode } from '@lailatul-coder/acp-bridge/childHeapPolicy';
 import {
   isValidMemoryBudgetMb,
   JOURNAL_GROWTH_POOL_FRACTION,
   MAX_JOURNAL_GROWTH_POOL_MB,
   memoryBudgetRangeError,
   MIN_MEMORY_BUDGET_MB,
-} from '@qwen-code/acp-bridge/daemonMemoryBudget';
+} from '@lailatul-coder/acp-bridge/daemonMemoryBudget';
 import {
   ApprovalMode,
   MCP_BUDGET_WARN_FRACTION,
@@ -38,7 +38,7 @@ import {
   parsePositiveIntegerEnv,
   shouldLaunchBrowser,
   type MemoryProjectScope,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { loadSettings } from '../config/settings.js';
 import { HEADLESS_YOLO_NO_SANDBOX_WARNING } from '../utils/headlessSafetyWarnings.js';
 
@@ -235,7 +235,7 @@ function primaryWorkspaceArg(
 export const serveCommand: CommandModule<unknown, ServeArgs> = {
   command: 'serve',
   describe:
-    'Run Qwen Code as a local HTTP daemon (Stage 1 experimental: --http-bridge)',
+    'Run LailatulCoder Ai as a local HTTP daemon (Stage 1 experimental: --http-bridge)',
   builder: (yargs: Argv) =>
     yargs
       .option('port', {

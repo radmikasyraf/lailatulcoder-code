@@ -16,7 +16,7 @@ export function sessionTools(state: BridgeState): any[] {
   return [
     tool(
       'session_create',
-      'Create a new qwen-code session or attach to an existing one. The created session becomes the default for subsequent tool calls.',
+      'Create a new lailatul-coder session or attach to an existing one. The created session becomes the default for subsequent tool calls.',
       {
         workspace_cwd: z
           .string()

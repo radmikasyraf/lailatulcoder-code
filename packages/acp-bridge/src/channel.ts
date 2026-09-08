@@ -22,7 +22,7 @@ export interface AcpChannelTransportGuard {
  * This contract is consumed by the daemon HTTP bridge and is available
  * for `packages/channels/base/AcpBridge.ts` and the VSCode IDE
  * companion's `acpConnection.ts` to consume directly via
- * `@qwen-code/acp-bridge/spawnChannel` instead of each reimplementing
+ * `@lailatul-coder/acp-bridge/spawnChannel` instead of each reimplementing
  * the child lifecycle. The adapter migrations land separately.
  */
 export interface AcpChannel {

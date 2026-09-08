@@ -471,7 +471,7 @@ export interface NotificationHookResult {
 
 /**
  * Fire Notification hook via MessageBus
- * Called when Qwen Code sends a notification
+ * Called when LailatulCoder Ai sends a notification
  */
 export async function fireNotificationHook(
   messageBus: MessageBus | undefined,

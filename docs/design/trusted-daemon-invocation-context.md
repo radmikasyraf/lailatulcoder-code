@@ -15,7 +15,7 @@ daemon prompt admission
 
 ## Wire contract
 
-Qwen adds the following value to `tools/call.params._meta["qwen-code/invocation"]`:
+Qwen adds the following value to `tools/call.params._meta["lailatul-coder/invocation"]`:
 
 ```ts
 interface InvocationContextV1 {

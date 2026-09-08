@@ -17,7 +17,7 @@ import type {
   MCPServerConfig,
   TeammateApprovalRequestEvent,
   WorkflowApproval,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { PermissionSuggestion } from '../../types.js';
 
 /**

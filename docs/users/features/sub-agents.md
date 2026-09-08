@@ -1,6 +1,6 @@
 # Subagents
 
-Subagents are specialized AI assistants that handle specific types of tasks within Qwen Code. They allow you to delegate focused work to AI agents that are configured with task-specific prompts, tools, and behaviors.
+Subagents are specialized AI assistants that handle specific types of tasks within LailatulCoder Ai. They allow you to delegate focused work to AI agents that are configured with task-specific prompts, tools, and behaviors.
 
 ## What are Subagents?
 
@@ -14,7 +14,7 @@ Subagents are independent AI assistants that:
 
 ## Fork Subagent
 
-In addition to named subagents, Qwen Code supports **forking** — selected explicitly with `subagent_type: "fork"`. A fork inherits the parent's full conversation context and normally runs detached in the background. Forks work in both interactive and headless sessions; headless forks always use the background path. Omitting `subagent_type` does **not** fork; it launches the general-purpose subagent. Top-level named subagents run in the background by default and deliver their results through completion notifications. Set `run_in_background: false` when the current turn must wait for a regular subagent's result inline.
+In addition to named subagents, LailatulCoder Ai supports **forking** — selected explicitly with `subagent_type: "fork"`. A fork inherits the parent's full conversation context and normally runs detached in the background. Forks work in both interactive and headless sessions; headless forks always use the background path. Omitting `subagent_type` does **not** fork; it launches the general-purpose subagent. Top-level named subagents run in the background by default and deliver their results through completion notifications. Set `run_in_background: false` when the current turn must wait for a regular subagent's result inline.
 
 ## Fork Context with `fork_turns`
 
@@ -121,7 +121,7 @@ Fork children cannot spawn any further sub-agent. This is enforced at runtime �
 
 ## Background Agent Continuation
 
-Top-level regular subagents run in the background by default. After a background agent finishes, Qwen Code keeps enough state to continue related work without launching a duplicate agent:
+Top-level regular subagents run in the background by default. After a background agent finishes, LailatulCoder Ai keeps enough state to continue related work without launching a duplicate agent:
 
 - `list_agents` returns the addressable background agents in the current session, including compatible agents restored with a resumed session. Each entry includes a `task_id`, status, and whether it can receive a message.
 - `send_message` with that `task_id` queues a message for a running agent, resumes a paused agent, or continues a completed agent. Completed agents reuse their resident runtime when available and otherwise revive from their retained transcript.
@@ -135,7 +135,7 @@ Use continuation for related follow-up work. Launch a new agent when the task is
 
 For a named regular subagent, `working_dir` pins the agent to an existing git worktree of the current repository. Relative paths resolve from the current directory, and the worktree must already be registered with git as a linked worktree of this repository.
 
-A `working_dir` launch runs in the foreground because Qwen Code does not own that worktree's lifecycle. It cannot be combined with `subagent_type: "fork"` or background execution. If both `working_dir` and `isolation: "worktree"` are supplied, Qwen Code reuses the caller-owned worktree instead of creating another one. Workflow scripts are deliberately stricter: a workflow `agent()` call that receives both `workingDir` and `isolation` is rejected rather than run with `isolation` ignored.
+A `working_dir` launch runs in the foreground because LailatulCoder Ai does not own that worktree's lifecycle. It cannot be combined with `subagent_type: "fork"` or background execution. If both `working_dir` and `isolation: "worktree"` are supplied, LailatulCoder Ai reuses the caller-owned worktree instead of creating another one. Workflow scripts are deliberately stricter: a workflow `agent()` call that receives both `workingDir` and `isolation` is rejected rather than run with `isolation` ignored.
 
 ## Getting Started
 
@@ -229,7 +229,7 @@ Use the optional `model` frontmatter field to control which model a subagent use
 - Omit the field: Same as `inherit`.
 - `fast`: Use the configured `fastModel`. If no valid fast model is configured,
   the subagent falls back to `inherit`.
-- `glm-5`: Use that model ID. Qwen Code first checks the main conversation's
+- `glm-5`: Use that model ID. LailatulCoder Ai first checks the main conversation's
   auth type; if the model is not available there, it can resolve the model from
   another configured provider.
 - `openai:gpt-4o`: Use an explicit provider and model ID. This is useful when a
@@ -264,13 +264,13 @@ tools:
 The `fast` selector uses the same `fastModel` setting configured in
 `settings.json` or with `/model --fast`. That setting may itself refer to a
 model under another configured auth type, such as `openai:deepseek-v4-flash`.
-When the selector resolves to another auth type, Qwen Code creates a dedicated
+When the selector resolves to another auth type, LailatulCoder Ai creates a dedicated
 runtime provider for that subagent request and sends the provider only the bare
 model ID.
 
 The built-in Explore agent inherits the main session model by default. To
 select a different model for only that built-in agent, configure
-`agents.builtin.exploreModel` in `settings.json` and restart Qwen Code:
+`agents.builtin.exploreModel` in `settings.json` and restart LailatulCoder Ai:
 
 Earlier versions used `fastModel` for Explore by default. To preserve that
 behavior, set `agents.builtin.exploreModel` to `fast`.
@@ -286,7 +286,7 @@ behavior, set `agents.builtin.exploreModel` to `fast`.
 ```
 
 This setting accepts the same selectors described above. It is applied only
-when Qwen Code resolves the built-in Explore definition; a session, project,
+when LailatulCoder Ai resolves the built-in Explore definition; a session, project,
 user, or extension agent named Explore keeps its own `model` setting.
 
 To let the model select from user-defined grades without exposing concrete
@@ -393,7 +393,7 @@ disallowedTools:
 
 #### Claude Code Compatibility Fields
 
-Qwen Code accepts the Claude Code 2.1.168 frontmatter fields below so you
+LailatulCoder Ai accepts the Claude Code 2.1.168 frontmatter fields below so you
 can drop a CC agent file into `.qwen/agents/` and have the supported fields
 parse identically. Optional fields with invalid values are silently dropped
 at parse time rather than rejected — the same lenient posture CC uses.
@@ -469,7 +469,7 @@ new contributors and end users understand the project.
 
 ### Automatic Delegation
 
-Qwen Code proactively delegates tasks based on:
+LailatulCoder Ai proactively delegates tasks based on:
 
 - The task description in your request
 - The description field in Subagents configurations

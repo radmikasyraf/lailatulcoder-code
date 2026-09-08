@@ -17,7 +17,7 @@
  * - Project-level: `.qwen/skills/`
  * - User-level: `~/.qwen/skills/`
  * - Extension-level: provided by installed extensions
- * - Bundled: built-in skills shipped with qwen-code
+ * - Bundled: built-in skills shipped with lailatul-coder
  */
 
 // Core types and interfaces

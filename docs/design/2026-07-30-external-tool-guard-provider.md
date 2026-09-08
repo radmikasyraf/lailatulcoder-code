@@ -1,12 +1,12 @@
 # External Tool Guard Provider for Managed ACP
 
 Status: implementation design
-Tracking issue: https://github.com/QwenLM/qwen-code/issues/8102
-Depends on: https://github.com/QwenLM/qwen-code/pull/8032
+Tracking issue: https://github.com/LailatulCoder/lailatul-coder/issues/8102
+Depends on: https://github.com/LailatulCoder/lailatul-coder/pull/8032
 
 ## Problem and scope
 
-Qwen Code already supports permission rules and hooks, but those mechanisms do
+LailatulCoder Ai already supports permission rules and hooks, but those mechanisms do
 not give a managed `qwen serve` deployment a mandatory, external,
 machine-verifiable decision immediately before every tool executor. PR #8032
 adds that executor-boundary callback. This change connects the callback to a
@@ -171,7 +171,7 @@ Handshake request:
 {
   "protocolVersion": 1,
   "nonce": "runtime-random-value",
-  "client": "qwen-code"
+  "client": "lailatul-coder"
 }
 ```
 
@@ -293,15 +293,15 @@ suite. The PR report records commands and exact results.
 
 - Unix-domain socket transport; v1 uses an origin-only loopback HTTP(S)
   endpoint.
-- Provider-side decision replay or idempotent re-submission; Qwen Code sends no
+- Provider-side decision replay or idempotent re-submission; LailatulCoder Ai sends no
   retries.
 - Nested/delegated execution lineage (`agent`, `workflow`,
   `create_sub_session`, `send_message`, `/fork`), agent-backed workspace
   memory controls, and a future attempt-aware Guard protocol. V1 rejects those
   nested/hidden agent entry points rather than claiming unsupported
   correlation.
-- Result reporting or audit storage in Qwen Code. The provider and DataAgent
-  own their audit records; Qwen Code supplies stable correlation keys and
+- Result reporting or audit storage in LailatulCoder Ai. The provider and DataAgent
+  own their audit records; LailatulCoder Ai supplies stable correlation keys and
   existing lifecycle events.
 - Continuous authorization or a new terminal-result contract for a background
   shell/monitor process after its guarded start. Providers may reject those

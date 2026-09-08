@@ -2,7 +2,7 @@
 
 ## Context
 
-Issue #4479 asks for daily Qwen Code token-consumption visibility. The scope was
+Issue #4479 asks for daily LailatulCoder Ai token-consumption visibility. The scope was
 clarified in the issue thread to prefer a CLI command, export support, monthly
 summaries, and per-model token consumption. A maintainer comment also called out
 coordination with adjacent statistics work:

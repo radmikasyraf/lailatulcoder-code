@@ -28,7 +28,7 @@ import {
   MCPOAuthTokenStorage,
   createDebugLogger,
   matchesAnyServerPattern,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   loadSettings,
   SettingScope as CliSettingScope,
@@ -822,3 +822,4 @@ export const InstalledTab = ({
     </Box>
   );
 };
+

@@ -25,14 +25,14 @@ describe('parseUploadArgs', () => {
       '--config',
       '/tmp/.ossutilconfig',
       '--prefix',
-      'releases/qwen-code/v1.2.3',
+      'releases/lailatul-coder/v1.2.3',
       'a.tar.gz',
       'b.zip',
     ]);
     expect(args).toMatchObject({
       bucket: 'my-bucket',
       config: '/tmp/.ossutilconfig',
-      prefix: 'releases/qwen-code/v1.2.3',
+      prefix: 'releases/lailatul-coder/v1.2.3',
       assets: ['a.tar.gz', 'b.zip'],
       help: false,
     });
@@ -121,17 +121,17 @@ describe('uploadAssets (integration)', () => {
           assets,
           bucket: 'qwen-test-bucket',
           config: configPath,
-          prefix: 'releases/qwen-code/v0.0.0',
+          prefix: 'releases/lailatul-coder/v0.0.0',
         },
         { ossutilCommand, ossutilCommandArgs },
       );
 
       const log = fs.readFileSync(logPath, 'utf8');
       expect(log).toContain(
-        `oss://qwen-test-bucket/releases/qwen-code/v0.0.0/a.tar.gz`,
+        `oss://qwen-test-bucket/releases/lailatul-coder/v0.0.0/a.tar.gz`,
       );
       expect(log).toContain(
-        `oss://qwen-test-bucket/releases/qwen-code/v0.0.0/b.zip`,
+        `oss://qwen-test-bucket/releases/lailatul-coder/v0.0.0/b.zip`,
       );
       expect(log).toContain(`-c\n${configPath}`);
       expect(log).toContain('--acl\npublic-read');
@@ -158,7 +158,7 @@ describe('uploadAssets (integration)', () => {
             assets: [assetPath],
             bucket: 'qwen-test-bucket',
             config: configPath,
-            prefix: 'releases/qwen-code/v0.0.0',
+            prefix: 'releases/lailatul-coder/v0.0.0',
           },
           { ossutilCommand, ossutilCommandArgs },
         ),

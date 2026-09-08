@@ -2,7 +2,7 @@
 
 ## Background
 
-Qwen Code already supports `cache_control` in the Anthropic and DashScope
+LailatulCoder Ai already supports `cache_control` in the Anthropic and DashScope
 request conversion layers. When a provider supports prompt caching, a stable
 request prefix can be cached and reused, reducing repeated input-token cost and
 lowering time to first token.

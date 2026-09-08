@@ -8,7 +8,7 @@
  * Vitest globalSetup guard for package-local unit tests.
  *
  * In a fresh clone or a new worktree, workspace packages such as
- * `@qwen-code/acp-bridge`, `@qwen-code/web-templates` and the channel
+ * `@lailatul-coder/acp-bridge`, `@lailatul-coder/web-templates` and the channel
  * packages have no `dist/` output until `npm run build` has run, and
  * `src/generated/git-commit.ts` does not exist until `npm run generate`
  * has run. Unit tests that import them then fail during collection with
@@ -16,7 +16,7 @@
  *
  * This guard checks those prerequisites up front and fails with a message
  * that names both the missing pieces and the command that creates them.
- * See https://github.com/QwenLM/qwen-code/issues/9149.
+ * See https://github.com/LailatulCoder/lailatul-coder/issues/9149.
  */
 
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
@@ -32,7 +32,7 @@ export const repoRoot = path.resolve(__dirname, '..');
 // `main`/`exports` entries — i.e. packages that are NOT fully aliased to
 // TypeScript source in that package's vitest.config.ts. `packages/core`
 // lists itself: several core test files import the bare
-// `@qwen-code/qwen-code-core` specifier, which resolves through the
+// `@lailatul-coder/lailatul-coder-core` specifier, which resolves through the
 // package's own exports to `dist/index.js`.
 // Verified against a clean checkout: each missing entry below produces a
 // "Failed to resolve" collection error. When you add a cross-package import
@@ -76,7 +76,7 @@ function readManifest(packageDir) {
 }
 
 // Specifiers aliased to TypeScript source in a consumer's vitest config
-// (keys of `resolve.alias`, e.g. `'@qwen-code/acp-bridge/bridgeErrors'`).
+// (keys of `resolve.alias`, e.g. `'@lailatul-coder/acp-bridge/bridgeErrors'`).
 // Dist targets behind an aliased specifier are never resolved from dist/
 // during test collection, so probing them would block runs that pass.
 // Alias keys are matched as quoted object keys containing a `/` — the only
@@ -100,7 +100,7 @@ export function aliasedSpecifiers(configPath) {
 // Every file under `dist/` that the manifest's `exports`/`main` entries
 // point at, each paired with the import specifier it serves. Checking all
 // of them (not only the '.' entry) also covers unaliased subpath imports
-// such as `@qwen-code/acp-bridge/sessionRestoreTimeout`; a package whose
+// such as `@lailatul-coder/acp-bridge/sessionRestoreTimeout`; a package whose
 // dist is missing any listed file would still break test collection. Note
 // that dist files reachable only through a root-index re-export are not
 // listed in `exports` and remain outside this probe.

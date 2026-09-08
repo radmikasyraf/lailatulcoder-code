@@ -374,7 +374,7 @@ export class SubscriberLimitExceededError extends Error {
 // of running parallel event streams. The `BridgeEvent` shape is
 // already close to what's needed; what's missing is the bus being
 // publicly addressable. Reference:
-// https://github.com/QwenLM/qwen-code/pull/3889#issuecomment-4427773706
+// https://github.com/LailatulCoder/lailatul-coder/pull/3889#issuecomment-4427773706
 export class EventBus {
   private nextId = 1;
   /**

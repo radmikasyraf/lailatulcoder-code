@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useStdin } from 'ink';
-import type { EditorType } from '@qwen-code/qwen-code-core';
-import { getEditorExecutable } from '@qwen-code/qwen-code-core';
+import type { EditorType } from '@lailatul-coder/lailatul-coder-core';
+import { getEditorExecutable } from '@lailatul-coder/lailatul-coder-core';
 import { spawnSync } from 'child_process';
 import { useSettings } from '../contexts/SettingsContext.js';
 

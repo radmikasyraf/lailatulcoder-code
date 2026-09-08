@@ -10,7 +10,7 @@ point.
 The sidebar is **disabled by default**. Pass the `sidebar` prop to enable:
 
 ```tsx
-import { WebShellWithProviders } from '@qwen-code/web-shell';
+import { WebShellWithProviders } from '@lailatul-coder/web-shell';
 
 <WebShellWithProviders
   baseUrl="http://localhost:4170"
@@ -56,7 +56,7 @@ interface WebShellSidebarBranding {
 
 | Value                            | Effect                                            |
 | -------------------------------- | ------------------------------------------------- |
-| `undefined` (default)            | Qwen logo + "Qwen Code" text                      |
+| `undefined` (default)            | Qwen logo + "LailatulCoder Ai" text                      |
 | `false`                          | Branding row hidden entirely                      |
 | `{ render: () => <MyHeader /> }` | Full replacement with custom content              |
 | `{ hideWhenCompact: false }`     | Keep branding visible in collapsed icon-rail mode |
@@ -295,7 +295,7 @@ These `WebShellProps` affect sidebar behavior indirectly:
 | Mobile    | Drawer slides from left with backdrop overlay      |
 
 Collapse state is persisted in `localStorage` under the key
-`qwen-code-web-shell-sidebar-collapsed`.
+`lailatul-coder-web-shell-sidebar-collapsed`.
 
 ## Source locations
 

@@ -16,7 +16,7 @@ import { z } from 'zod';
 /**
  * Available permission modes (internal storage keys).
  *
- * Qwen Code / ACP mode mapping:
+ * LailatulCoder Ai / ACP mode mapping:
  * - yolo              -> allow-all
  * - plan              -> safe
  * - default           -> ask

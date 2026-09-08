@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 把 qwen-code 自动压缩的单层比例阈值（70%）升级为「比例 + 绝对」混合的三层阈值梯子（warn / auto / hard），同时给压缩调用本身打上 `maxOutputTokens` 上限、关闭 thinking、引入失败熔断、修复 `lastPromptTokenCount` 的滞后/首轮缺口、清理用户配置面。
+**Goal:** 把 lailatul-coder 自动压缩的单层比例阈值（70%）升级为「比例 + 绝对」混合的三层阈值梯子（warn / auto / hard），同时给压缩调用本身打上 `maxOutputTokens` 上限、关闭 thinking、引入失败熔断、修复 `lastPromptTokenCount` 的滞后/首轮缺口、清理用户配置面。
 
 **Architecture:**
 
@@ -1205,7 +1205,7 @@ if (
     .contextPercentageThreshold !== 'undefined'
 ) {
   console.warn(
-    '[qwen-code] chatCompression.contextPercentageThreshold has been removed ' +
+    '[lailatul-coder] chatCompression.contextPercentageThreshold has been removed ' +
       'and is now controlled by built-in thresholds. Setting will be ignored.',
   );
 }
@@ -1488,8 +1488,8 @@ Expected: FAIL — `TipContext` 没有 `thresholds` 字段；三条 tip 仍按 5
 [tipRegistry.ts:15-21](packages/cli/src/services/tips/tipRegistry.ts:15)：
 
 ```ts
-import type { CompactionThresholds } from '@qwen-code/qwen-code-core';
-import { DEFAULT_TOKEN_LIMIT } from '@qwen-code/qwen-code-core';
+import type { CompactionThresholds } from '@lailatul-coder/lailatul-coder-core';
+import { DEFAULT_TOKEN_LIMIT } from '@lailatul-coder/lailatul-coder-core';
 
 export type TipTrigger = 'startup' | 'post-response';
 
@@ -1571,7 +1571,7 @@ const tipCtx: TipContext = {
 加 import 到 AppContainer.tsx：
 
 ```tsx
-import { computeThresholds } from '@qwen-code/qwen-code-core';
+import { computeThresholds } from '@lailatul-coder/lailatul-coder-core';
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -1653,7 +1653,7 @@ Expected: FAIL — 当前 [contextCommand.ts:177-183](packages/cli/src/ui/comman
 替换 [contextCommand.ts:177-183](packages/cli/src/ui/commands/contextCommand.ts:177) 那段：
 
 ```ts
-import { computeThresholds } from '@qwen-code/qwen-code-core';
+import { computeThresholds } from '@lailatul-coder/lailatul-coder-core';
 
 // ... 在 buildContextSummary 或类似入口里：
 const thresholds = computeThresholds(contextWindowSize);

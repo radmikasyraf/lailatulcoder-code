@@ -1,6 +1,6 @@
 # Skills Configuration Guide
 
-This guide explains how to create and configure skills in Qwen Code.
+This guide explains how to create and configure skills in LailatulCoder Ai.
 
 > **CLI-first workflow (recommended):** Use `craft-agent skill ...` commands instead of editing `SKILL.md` files directly.
 > - `craft-agent skill --help`
@@ -18,13 +18,13 @@ Skills are specialized instructions that extend the agent for specific tasks. Th
 
 ## Skill Format
 
-Qwen Code uses a `SKILL.md` file for each skill. This means:
+LailatulCoder Ai uses a `SKILL.md` file for each skill. This means:
 
 1. **Format portability**: Skills are plain files that can be reviewed and edited
 2. **Same frontmatter fields**: `name`, `description`, `globs`, `alwaysAllow`, `requiredSources`
 3. **Simple content structure**: Markdown body with instructions for the agent
 
-**What Qwen Code adds:**
+**What LailatulCoder Ai adds:**
 - **Visual icons**: Display custom icons in the UI for each skill
 - **Workspace organization**: Skills are scoped to workspaces
 - **UI management**: Browse, edit, and validate skills through the interface

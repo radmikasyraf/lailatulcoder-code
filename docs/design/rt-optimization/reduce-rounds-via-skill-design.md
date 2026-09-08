@@ -229,7 +229,7 @@ description updated: "Returns workspaces with owner, last_active, status"
 
 **目标**：对于独立工具（多文件读、多目录搜），让模型在同一轮里并发发起 tool_calls，把 N 轮压成 1 轮。
 
-**前提**：基础设施已就绪 — `tools/tools.ts:818` 的 `CONCURRENCY_SAFE_KINDS` + `coreToolScheduler` 的 `partitionToolCalls` 已经能并发执行同 batch 内的 read/search/fetch 工具。**差的只是模型主动发起并发 tool_calls 的意愿**，qwen-coder 默认偏串行。
+**前提**：基础设施已就绪 — `tools/tools.ts:818` 的 `CONCURRENCY_SAFE_KINDS` + `coreToolScheduler` 的 `partitionToolCalls` 已经能并发执行同 batch 内的 read/search/fetch 工具。**差的只是模型主动发起并发 tool_calls 的意愿**，lailatul-coderr 默认偏串行。
 
 **改动位置**：`packages/core/src/core/prompts.ts`（已审计过，加在 `# Final Reminder` 段 L396 附近不会破坏 cache 命中以外的事 — 仅一次性预热成本）。
 
@@ -504,7 +504,7 @@ D3（`StreamingState.Summarizing`）是感知层优化，与本方案完全正�
 
 1. **覆盖率受改造范围限制** — 改 10 个 skill 就只覆盖那 10 个的场景。但收益是确定可测有复利的
 2. **Skill 内联 followup 可能让单 skill 变重** — 描述膨胀、加载慢、复用度下降。Layer 2 检查清单第 5 条防御
-3. **Layer 3 模型可能不听并发指导** — qwen-coder 训练数据偏串行；A/B 数据可能显示 prompt 改动无效，作为已知失败模式
+3. **Layer 3 模型可能不听并发指导** — lailatul-coderr 训练数据偏串行；A/B 数据可能显示 prompt 改动无效，作为已知失败模式
 4. **Telemetry 隐私边界** — `SkillFollowupRecord` 不应记录工具参数（已默认从 `ToolCallEvent.function_args` 拿，但要审计 skill_name 是否泄露用户意图）
 5. **不适用于子 agent / cron / notification** — 这些路径不走 skill 系统，本方案不覆盖
 6. **基线数据单薄** — 沿用 `rt-optimization-design.md` §1.2 的单次采样，Layer 2 落地前需补 ≥3 类场景基线

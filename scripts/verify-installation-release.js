@@ -335,7 +335,7 @@ function standaloneArchiveName(qwenTarget) {
   if (!targetConfig) {
     fail(`Unknown release target: ${qwenTarget}`);
   }
-  return `qwen-code-${qwenTarget}.${targetConfig.outputExtension}`;
+  return `lailatul-coder-${qwenTarget}.${targetConfig.outputExtension}`;
 }
 
 function isPrivateOrReservedHost(hostname) {

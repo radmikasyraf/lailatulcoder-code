@@ -6,7 +6,7 @@ local development workflow for the desktop app and shared packages.
 ## Prerequisites
 
 - [Bun](https://bun.sh/) 1.3 or newer
-- Node.js 22 or newer for the Qwen Code runtime and related tooling
+- Node.js 22 or newer for the LailatulCoder Ai runtime and related tooling
 - macOS, Linux, or Windows
 
 ## Development Setup
@@ -30,12 +30,12 @@ local development workflow for the desktop app and shared packages.
    CRAFT_BRAND=modelstudio bun run electron:dev
    ```
 
-   To run against a local Qwen Code checkout instead of a vendored or npm
+   To run against a local LailatulCoder Ai checkout instead of a vendored or npm
    runtime, pass the source root:
 
    ```bash
    CRAFT_BRAND=modelstudio \
-   QWEN_CODE_ROOT=/path/to/qwen-code \
+   QWEN_CODE_ROOT=/path/to/lailatul-coder \
    bun run electron:dev
    ```
 

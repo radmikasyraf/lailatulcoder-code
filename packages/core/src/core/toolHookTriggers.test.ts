@@ -974,7 +974,7 @@ describe('toolHookTriggers', () => {
 
       await fireNotificationHook(
         mockMessageBus,
-        'Qwen Code needs your permission to use Bash',
+        'LailatulCoder Ai needs your permission to use Bash',
         NotificationType.PermissionPrompt,
         'Permission needed',
       );
@@ -984,7 +984,7 @@ describe('toolHookTriggers', () => {
           type: MessageBusType.HOOK_EXECUTION_REQUEST,
           eventName: 'Notification',
           input: {
-            message: 'Qwen Code needs your permission to use Bash',
+            message: 'LailatulCoder Ai needs your permission to use Bash',
             notification_type: 'permission_prompt',
             title: 'Permission needed',
           },
@@ -1002,7 +1002,7 @@ describe('toolHookTriggers', () => {
 
       await fireNotificationHook(
         mockMessageBus,
-        'Qwen Code is waiting for your input',
+        'LailatulCoder Ai is waiting for your input',
         NotificationType.IdlePrompt,
         'Waiting for input',
       );
@@ -1012,7 +1012,7 @@ describe('toolHookTriggers', () => {
           type: MessageBusType.HOOK_EXECUTION_REQUEST,
           eventName: 'Notification',
           input: {
-            message: 'Qwen Code is waiting for your input',
+            message: 'LailatulCoder Ai is waiting for your input',
             notification_type: 'idle_prompt',
             title: 'Waiting for input',
           },

@@ -50,7 +50,7 @@ This file records _why the code is the way it is_, indexed by code site. For
 task-oriented guides — what a maintainer types and what happens next — see:
 
 - [`qwen-autofix-round-seed.md`](./qwen-autofix-round-seed.md) — seeding the
-  round counter with `@qwen-code /takeover from N`.
+  round counter with `@lailatul-coder /takeover from N`.
 
 ## Contents
 
@@ -90,7 +90,7 @@ task-oriented guides — what a maintainer types and what happens next — see:
 - [34. review-scan · Scan for PRs with new feedback — A red check is a persistent STATE, not the instant it turned red.](#af-034)
 - [35. review-scan · Scan for PRs with new feedback — Stamp the dispatch-pending marker now, while this scan still owns the decision: an…](#af-035)
 - [36. review-scan · Scan for PRs with new feedback — Fan out: emit EVERY eligible PR up to the per-scan budget. The address matrix bounds…](#af-036)
-- [37. build-cli · Prepare Qwen Code CLI — The repo-root dist/ plus packages/core/dist are shipped:](#af-037)
+- [37. build-cli · Prepare LailatulCoder Ai CLI — The repo-root dist/ plus packages/core/dist are shipped:](#af-037)
 - [38. review-address — Secret-bearing and executes PR code, but every target is live-gated to write+ (internal)…](#af-038)
 - [39. review-address — Simultaneity bound for the whole fleet — the ONLY place different PRs wait on each other…](#af-039)
 - [40. review-address — Serialises every writer of THIS PR's head branch, across workflows.](#af-040)
@@ -164,11 +164,11 @@ tick runs only the phase(s) that make sense, decided by the `route` job:
                             they are the bot's own generated work, trust-
                             equal to an in-repo bot PR; autofix/skip still
                             opts them out.
-  • issue_comment         → '@qwen-code /takeover' (apply the label),
-                            '@qwen-code /takeover from N' (apply it and
+  • issue_comment         → '@lailatul-coder /takeover' (apply the label),
+                            '@lailatul-coder /takeover from N' (apply it and
                             seed this window's round counter at N, for a
                             PR that already spent N rounds in review), and
-                            '@qwen-code /takeover stop' (remove it) — sugar
+                            '@lailatul-coder /takeover stop' (remove it) — sugar
                             for people without label access: the PR author,
                             or write+ collaborators. Exact-match constants,
                             and the ONLY side effect is the label toggle;
@@ -198,14 +198,14 @@ feedback is recorded and left open. Lowered from 10: at 10 the threshold
 only ever bound takeover PRs (the strict cap discards a plain PR at round
 10 before Critical-only could engage), so long-running managed PRs spent
 ten rounds growing their diff on suggestions before the brake applied.
-Counted from the window's SEED, not always from zero: '@qwen-code
+Counted from the window's SEED, not always from zero: '@lailatul-coder
 /takeover from N' starts the window's counter at N so a PR taken over
 after N rounds of ordinary review reaches this threshold in the
 REMAINDER rather than a fresh five. Without a seed the counter starts at
 0 exactly as before, so a PR that spent nine human rounds getting to
 "almost mergeable" no longer restarts the suggestion valve at full
 travel the moment it is managed. The seed is window-scoped like every
-other census: '@qwen-code /retry' or a bare re-takeover opens a window
+other census: '@lailatul-coder /retry' or a bare re-takeover opens a window
 with no seed and the counter returns to 0 (that IS what re-arming
 means), so a late-stage PR is re-seeded by re-issuing the command with
 its number. It does NOT seed the GROWTH brake below, which anchors its
@@ -232,7 +232,7 @@ window's baseline; once live growth beyond the baseline exceeds a budget,
 Critical-only mode engages early. Everything Critical-only preserves
 still flows — Critical findings, Request changes reviews, in-budget
 maintainer feedback, failed checks, conflict resolution — only the
-suggestion channel stops. `@qwen-code /retry` (or re-engaging takeover)
+suggestion channel stops. `@lailatul-coder /retry` (or re-engaging takeover)
 opens a fresh window and re-anchors the baseline at the current size.
 TWO budgets, not one: measured bloat concentrates in TESTS (#8853's
 growth was 86% test lines — every round pins ever-more-marginal behavior;
@@ -484,10 +484,10 @@ run-agent.mjs's budget kill removes the container it launched,
 but a JOB timeout still reaps only the HOST-side docker client,
 not the container: a killed sandbox can keep running on this
 persistent runner. Observed directly — a hung leg's container
-name counter found qwen-code-0.21.8-0 already occupied and
+name counter found lailatul-coder-0.21.8-0 already occupied and
 picked -1. But the docker DAEMON is per host while this pool
 runs several runner registrations on one OS, so a RUNNING
-qwen-code-* container can belong to a job executing on another
+lailatul-coder-* container can belong to a job executing on another
 registration of this same host — reaping it would destroy a
 live sandbox mid-run. Reap only provably-dead containers
 (exited/dead), before the sandbox picks a name (and before the
@@ -972,7 +972,7 @@ in-flight review-pr from blocking the FEEDBACK gate (its
 conclusion carries nothing the loop acts on — #7416), but every
 head mutation this scan can make (a stale-base update-branch,
 infra rerun, or address push later) is a synchronize event that
-cancels the in-flight review via qwen-code-pr-review.yml's
+cancels the in-flight review via lailatul-coder-pr-review.yml's
 cancel-in-progress, discarding up to ~3h of review work — the
 self-reinforcing cancellation loop of #8830 (three killed runs
 in one PR, two by merge-main). Its findings are also the very
@@ -1186,9 +1186,9 @@ the remainder (their signals persist).
 
 <a id="af-037"></a>
 
-### 37. build-cli · Prepare Qwen Code CLI — The repo-root dist/ plus packages/core/dist are shipped:
+### 37. build-cli · Prepare LailatulCoder Ai CLI — The repo-root dist/ plus packages/core/dist are shipped:
 
-In `build-cli` · `Prepare Qwen Code CLI`.
+In `build-cli` · `Prepare LailatulCoder Ai CLI`.
 
 ```text
 The repo-root dist/ plus packages/core/dist are shipped:
@@ -1201,7 +1201,7 @@ rms it first, so no staleness leaks through). packages/core/dist is
 the exception: the settings-schema check runs BEFORE any build (on
 every path, including no-action), and its generator — tsx run from
 the repo root, whose tsconfig has NO `paths` — imports cli sources
-that resolve '@qwen-code/qwen-code-core' through the workspace
+that resolve '@lailatul-coder/lailatul-coder-core' through the workspace
 symlink to core's dist entry point. Without it the generator crashes
 with ERR_MODULE_NOT_FOUND and the gate misreports a deterministic
 "settings schema is stale" rejection. The i18n check needs no dist:
@@ -1219,7 +1219,7 @@ In `review-address`.
 Secret-bearing and executes PR code, but every target is live-gated to
 write+ (internal) authors at scan AND address time. That is an
 author-permission gate by design, not a head-repository gate: takeover
-engages maintainer fork PRs, and the pattern matches qwen-code-pr-review,
+engages maintainer fork PRs, and the pattern matches lailatul-coder-pr-review,
 whose ECS-routed review job also rides its upstream write+ check. The
 job therefore runs host-side (no `container:`): the branch code it
 executes is collaborator-authored — the same trust class ci.yml's
@@ -1279,9 +1279,9 @@ In `review-address`.
 ```text
 Serialises every writer of THIS PR's head branch, across workflows.
 GitHub concurrency groups are repository-scoped, so sharing one name with
-qwen-code-pr-review.yml's resolve-pr job is what makes the two mutually
+lailatul-coder-pr-review.yml's resolve-pr job is what makes the two mutually
 exclusive — a per-workflow name only guards against itself.
-Without this, a `@qwen-code /resolve` and this job's own conflict path
+Without this, a `@lailatul-coder /resolve` and this job's own conflict path
 both merge the base branch and both push. Observed on #7355: /resolve
 pushed at 03:51, this job pushed at 04:05 and was rejected `fetch first`,
 discarding a full agent run and leaving no marker to show for it.

@@ -471,7 +471,7 @@ describe('npmScriptOf', () => {
       'npm ls --workspaces',
       'npm pack',
       'npm publish --dry-run',
-      'npm view qwen-code version',
+      'npm view lailatul-coder version',
       'npm outdated',
       'yarn add left-pad',
     ]) {
@@ -622,16 +622,16 @@ describe('runTestPlan', () => {
 
     it('claims a slash token as a path only with EVIDENCE it is one', () => {
       // This PR's own Test Plan produced two false `contradicted` notes before
-      // this bar: `QwenLM/qwen-code` (a --repo slug) and `.qwen/tmp/review-…`
+      // this bar: `LailatulCoder/lailatul-coder` (a --repo slug) and `.qwen/tmp/review-…`
       // (a path the reader is told to CREATE). A bare two-segment token with
       // no extension is a slug or a ref far more often than a directory.
       const r = run(
-        '## Test Plan\n\nRun `gh pr view 1 --repo QwenLM/qwen-code`, ' +
+        '## Test Plan\n\nRun `gh pr view 1 --repo LailatulCoder/lailatul-coder`, ' +
           'check `origin/main`, create `.qwen/tmp/review-pr-1/x.json`, ' +
           'then read `packages/cli/` and `./run.sh`',
       );
       const texts = r.claims.map((c) => c.text);
-      expect(texts).not.toContain('QwenLM/qwen-code'); // flag value AND slug
+      expect(texts).not.toContain('LailatulCoder/lailatul-coder'); // flag value AND slug
       expect(texts).not.toContain('origin/main'); // ref, no extension
       expect(texts.some((t) => t.startsWith('.qwen/'))).toBe(false); // temp root
       expect(texts).not.toContain('packages/cli/'); // bare dir, no evidence

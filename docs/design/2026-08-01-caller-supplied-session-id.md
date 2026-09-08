@@ -58,7 +58,7 @@ Existing duplicate history is not migrated or renamed. If a workspace containing
 
 ## Transport behavior
 
-REST accepts `POST /session { sessionId }`. ACP accepts `session/new._meta["qwen-code/sessionId"]`. Both use the same admission instance, including primary and workspace-qualified ACP mounts. REST and ACP load/resume also share restore claims, closing cross-transport races.
+REST accepts `POST /session { sessionId }`. ACP accepts `session/new._meta["lailatul-coder/sessionId"]`. Both use the same admission instance, including primary and workspace-qualified ACP mounts. REST and ACP load/resume also share restore claims, closing cross-transport races.
 
 Both create paths force `sessionScope: "thread"`. After the bridge returns, the dispatcher compares the actual and requested IDs. A mismatch returns `session_id_not_honored` and removes the newly created live and persisted orphan before releasing admission.
 

@@ -28,7 +28,7 @@ import type { DaemonWorkspaceService } from '../workspace-service/index.js';
 import { getServeProtocolVersions } from '../capabilities.js';
 import type { TotalSessionAdmissionSnapshot } from '../total-session-admission.js';
 import type { WorkspaceRegistry } from '../workspace-registry.js';
-import type { ChildHeapPolicySnapshot } from '@qwen-code/acp-bridge/childHeapPolicy';
+import type { ChildHeapPolicySnapshot } from '@lailatul-coder/acp-bridge/childHeapPolicy';
 
 interface RegisterDaemonStatusRoutesDeps {
   opts: ServeOptions;

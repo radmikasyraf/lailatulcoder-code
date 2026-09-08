@@ -8,7 +8,7 @@ import { promises as fsp } from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { SessionIdCaseConflictError } from '@qwen-code/qwen-code-core';
+import { SessionIdCaseConflictError } from '@lailatul-coder/lailatul-coder-core';
 import type { AcpSessionBridge } from './acp-session-bridge.js';
 import { SessionNotFoundError } from './acp-session-bridge.js';
 import { SessionArchiveCoordinator } from './server/session-archive.js';
@@ -37,9 +37,9 @@ const sessionServiceMock = vi.hoisted(() => ({
     >(),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     SessionService: class {

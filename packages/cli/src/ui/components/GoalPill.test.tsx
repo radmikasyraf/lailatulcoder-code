@@ -13,7 +13,7 @@ import type {
   GoalRuntime,
   GoalSnapshotV2,
   GoalStateCause,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { ConfigContext } from '../contexts/ConfigContext.js';
 import {
   GoalPill,
@@ -184,3 +184,4 @@ describe('GoalPill', () => {
     expect(second.unsubscribe).toHaveBeenCalledOnce();
   });
 });
+

@@ -8,7 +8,7 @@ import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { ChatRecord } from '@qwen-code/qwen-code-core';
+import type { ChatRecord } from '@lailatul-coder/lailatul-coder-core';
 import type {
   WorkspaceRegistry,
   WorkspaceRuntime,
@@ -24,9 +24,9 @@ const sessionServiceConstructions = vi.hoisted(
   () => [] as Array<{ cwd: string; runtimeBaseDir?: string }>,
 );
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     SessionService: class {

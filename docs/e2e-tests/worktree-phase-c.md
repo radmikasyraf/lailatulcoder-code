@@ -3,7 +3,7 @@
 ## Scope
 
 End-to-end verification of Phase C features against the local build at
-`/Users/mochi/code/qwen-code/.claude/worktrees/romantic-burnell-b6e48c/dist/cli.js`.
+`/Users/mochi/code/lailatul-coder/.claude/worktrees/romantic-burnell-b6e48c/dist/cli.js`.
 
 Phase C delivers:
 
@@ -19,7 +19,7 @@ Phase C delivers:
 
 ## Binaries
 
-- **Local build**: `node /Users/mochi/code/qwen-code/.claude/worktrees/romantic-burnell-b6e48c/dist/cli.js`
+- **Local build**: `node /Users/mochi/code/lailatul-coder/.claude/worktrees/romantic-burnell-b6e48c/dist/cli.js`
 - **Baseline (for pre-impl comparison if needed)**: globally installed `qwen`
 
 ## Test environment template
@@ -39,7 +39,7 @@ git add README.md
 git commit -q -m "initial" --no-verify
 ```
 
-`QWEN=/Users/mochi/code/qwen-code/.claude/worktrees/romantic-burnell-b6e48c/dist/cli.js`
+`QWEN=/Users/mochi/code/lailatul-coder/.claude/worktrees/romantic-burnell-b6e48c/dist/cli.js`
 
 ---
 

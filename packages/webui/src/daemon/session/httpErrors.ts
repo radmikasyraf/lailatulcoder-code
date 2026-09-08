@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { DaemonHttpError } from '@qwen-code/sdk/daemon';
+import { DaemonHttpError } from '@lailatul-coder/sdk/daemon';
 
 export function extractHttpStatus(error: unknown): number | undefined {
   if (error instanceof DaemonHttpError) return error.status;

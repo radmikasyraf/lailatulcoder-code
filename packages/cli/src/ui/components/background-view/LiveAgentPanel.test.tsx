@@ -7,7 +7,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { act } from '@testing-library/react';
 import { render } from 'ink-testing-library';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import { LiveAgentPanel } from './LiveAgentPanel.js';
 import {
   BackgroundTaskViewActionsContext,
@@ -763,3 +763,4 @@ describe('<LiveAgentPanel />', () => {
     });
   });
 });
+

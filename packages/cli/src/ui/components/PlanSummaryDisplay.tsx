@@ -8,7 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { MarkdownDisplay } from '../utils/MarkdownDisplay.js';
 import { Colors } from '../colors.js';
-import type { PlanResultDisplay } from '@qwen-code/qwen-code-core';
+import type { PlanResultDisplay } from '@lailatul-coder/lailatul-coder-core';
 
 interface PlanSummaryDisplayProps {
   data: PlanResultDisplay;
@@ -40,3 +40,4 @@ export const PlanSummaryDisplay: React.FC<PlanSummaryDisplayProps> = ({
     </Box>
   );
 };
+

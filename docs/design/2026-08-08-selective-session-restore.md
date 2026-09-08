@@ -1071,7 +1071,7 @@ explicitly unchanged public and legacy paths remain outside that assertion.
 
 ## Observability
 
-Build on #8691's `qwen-code.daemon.session_restore` span. Add child-stage
+Build on #8691's `lailatul-coder.daemon.session_restore` span. Add child-stage
 durations or nested spans for:
 
 - `transcript_index`;

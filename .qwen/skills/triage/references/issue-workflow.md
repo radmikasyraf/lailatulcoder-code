@@ -23,7 +23,7 @@ Key points only — no verbose prose.
 - **下一步**: <一句话动作>
 </details>
 
---- Qwen Code
+--- LailatulCoder Ai
 ```
 
 ## Stage 1: Intake Gate
@@ -34,7 +34,7 @@ below.
 Classify the issue from title, body, comments, labels, docs, and source context:
 
 - **Inadmissible**: religious or political flame wars, harassment, abusive
-  language, spam, or content unrelated to Qwen Code.
+  language, spam, or content unrelated to LailatulCoder Ai.
 - **Unclear**: missing reproduction, expected behavior, environment, or enough
   detail to answer.
 - **Docs / usage**: how-to questions, configuration confusion, documentation
@@ -133,6 +133,6 @@ gh api -X PATCH repos/$REPO/issues/comments/$COMMENT_ID -F body=@/tmp/triage-com
 
 ### For feature requests:
 
-1. Run `/goal Is this feature request truly aligned with Qwen Code's product direction, and is the proposed approach the best solution?`
+1. Run `/goal Is this feature request truly aligned with LailatulCoder Ai's product direction, and is the proposed approach the best solution?`
 2. Append verdict: accept for exploration, suggest a smaller alternative, or
    decline as out of direction.

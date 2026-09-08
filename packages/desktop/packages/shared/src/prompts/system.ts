@@ -427,9 +427,9 @@ rg -n "session|OAuth|\"level\":\"error\"" "${logFilePath}" | tail -n 50
 }
 
 /**
- * Get the Qwen Code environment marker for session detection.
+ * Get the LailatulCoder Ai environment marker for session detection.
  * This marker is embedded in the system prompt and allows us to identify
- * Qwen Code sessions in exported logs.
+ * LailatulCoder Ai sessions in exported logs.
  */
 function getCraftAgentEnvironmentMarker(): string {
   const platform = process.platform; // 'darwin', 'win32', 'linux'

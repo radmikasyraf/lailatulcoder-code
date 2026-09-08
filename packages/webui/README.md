@@ -1,6 +1,6 @@
-# @qwen-code/webui
+# @lailatul-coder/webui
 
-A shared React component library for Qwen Code applications, providing cross-platform UI components with consistent styling and behavior.
+A shared React component library for LailatulCoder Ai applications, providing cross-platform UI components with consistent styling and behavior.
 
 ## Features
 
@@ -15,7 +15,7 @@ A shared React component library for Qwen Code applications, providing cross-pla
 ## Installation
 
 ```bash
-npm install @qwen-code/webui
+npm install @lailatul-coder/webui
 ```
 
 ## CDN Usage
@@ -61,12 +61,12 @@ You can also use this library directly in the browser via CDN:
     </script>
 
     <!-- Load the webui library -->
-    <script src="https://unpkg.com/@qwen-code/webui@0.1.0-beta.2/dist/index.umd.js"></script>
+    <script src="https://unpkg.com/@lailatul-coder/webui@0.1.0-beta.2/dist/index.umd.js"></script>
 
     <!-- Load the CSS -->
     <link
       rel="stylesheet"
-      href="https://unpkg.com/@qwen-code/webui@0.1.0-beta.2/dist/styles.css"
+      href="https://unpkg.com/@lailatul-coder/webui@0.1.0-beta.2/dist/styles.css"
     />
   </head>
   <body>
@@ -123,12 +123,12 @@ You can also use this library directly in the browser via CDN:
     </script>
 
     <!-- Load the webui library -->
-    <script src="https://unpkg.com/@qwen-code/webui@0.1.0-beta.2/dist/index.umd.js"></script>
+    <script src="https://unpkg.com/@lailatul-coder/webui@0.1.0-beta.2/dist/index.umd.js"></script>
 
     <!-- Load the CSS -->
     <link
       rel="stylesheet"
-      href="https://unpkg.com/@qwen-code/webui@0.1.0-beta.2/dist/styles.css"
+      href="https://unpkg.com/@lailatul-coder/webui@0.1.0-beta.2/dist/styles.css"
     />
   </head>
   <body>
@@ -156,8 +156,8 @@ For a complete working example, see [examples/cdn-usage-demo.html](./examples/cd
 ## Quick Start
 
 ```tsx
-import { Button, Input, Tooltip } from '@qwen-code/webui';
-import { PlatformProvider } from '@qwen-code/webui/context';
+import { Button, Input, Tooltip } from '@lailatul-coder/webui';
+import { PlatformProvider } from '@lailatul-coder/webui/context';
 
 function App() {
   return (
@@ -170,9 +170,9 @@ function App() {
 }
 ```
 
-## Daemon React SDK (`@qwen-code/webui/daemon-react-sdk`)
+## Daemon React SDK (`@lailatul-coder/webui/daemon-react-sdk`)
 
-All daemon-related React bindings (Providers, hooks, types) are published under the `daemon-react-sdk` sub-path. The main entry (`@qwen-code/webui`) is purely UI components with zero daemon dependency.
+All daemon-related React bindings (Providers, hooks, types) are published under the `daemon-react-sdk` sub-path. The main entry (`@lailatul-coder/webui`) is purely UI components with zero daemon dependency.
 
 ```tsx
 import {
@@ -182,7 +182,7 @@ import {
   useConnection,
   useActions,
   useStreamingState,
-} from '@qwen-code/webui/daemon-react-sdk';
+} from '@lailatul-coder/webui/daemon-react-sdk';
 ```
 
 ### Architecture
@@ -210,7 +210,7 @@ import {
   useTranscriptBlocks,
   useActions,
   useConnection,
-} from '@qwen-code/webui/daemon-react-sdk';
+} from '@lailatul-coder/webui/daemon-react-sdk';
 
 function App() {
   return (
@@ -311,7 +311,7 @@ All resource hooks accept `{ autoLoad?: boolean, enabled?: boolean }` and return
 #### Button
 
 ```tsx
-import { Button } from '@qwen-code/webui';
+import { Button } from '@lailatul-coder/webui';
 
 <Button variant="primary" size="md" loading={false}>
   Submit
@@ -330,7 +330,7 @@ import { Button } from '@qwen-code/webui';
 #### Input
 
 ```tsx
-import { Input } from '@qwen-code/webui';
+import { Input } from '@lailatul-coder/webui';
 
 <Input
   label="Email"
@@ -353,7 +353,7 @@ import { Input } from '@qwen-code/webui';
 #### Tooltip
 
 ```tsx
-import { Tooltip } from '@qwen-code/webui';
+import { Tooltip } from '@lailatul-coder/webui';
 
 <Tooltip content="Helpful tip">
   <span>Hover me</span>
@@ -363,7 +363,7 @@ import { Tooltip } from '@qwen-code/webui';
 ### Icons
 
 ```tsx
-import { FileIcon, FolderIcon, CheckIcon } from '@qwen-code/webui/icons';
+import { FileIcon, FolderIcon, CheckIcon } from '@lailatul-coder/webui/icons';
 
 <FileIcon size={16} className="text-gray-500" />;
 ```
@@ -397,7 +397,7 @@ Available icon categories:
 The Platform Context provides an abstraction layer for platform-specific capabilities:
 
 ```tsx
-import { PlatformProvider, usePlatform } from '@qwen-code/webui/context';
+import { PlatformProvider, usePlatform } from '@lailatul-coder/webui/context';
 
 const platformContext = {
   postMessage: (message) => vscode.postMessage(message),
@@ -432,7 +432,7 @@ Use the shared Tailwind preset for consistent styling:
 ```js
 // tailwind.config.js
 module.exports = {
-  presets: [require('@qwen-code/webui/tailwind.preset.cjs')],
+  presets: [require('@lailatul-coder/webui/tailwind.preset.cjs')],
   // your customizations
 };
 ```

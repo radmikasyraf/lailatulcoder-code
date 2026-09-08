@@ -11,8 +11,8 @@ import type {
   ToolCallRequestInfo,
   McpToolProgressData,
   ShellProgressData,
-} from '@qwen-code/qwen-code-core';
-import { GeminiEventType } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import { GeminiEventType } from '@lailatul-coder/lailatul-coder-core';
 import type {
   CLIAssistantMessage,
   CLIMessage,

@@ -2,7 +2,7 @@
   "name": "@craft-agent/messaging-gateway",
   "version": "0.0.1",
   "license": "Apache-2.0",
-  "description": "Messaging gateway for Qwen Code — Telegram & WhatsApp",
+  "description": "Messaging gateway for LailatulCoder Ai — Telegram & WhatsApp",
   "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",

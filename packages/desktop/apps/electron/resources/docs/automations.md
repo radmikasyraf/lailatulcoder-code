@@ -1,6 +1,6 @@
 # Automations Configuration Guide
 
-This guide explains how to configure automations in Qwen Code to automate workflows based on events.
+This guide explains how to configure automations in LailatulCoder Ai to automate workflows based on events.
 
 > **CLI-first workflow (recommended):** Use `craft-agent automation ...` commands instead of editing JSON directly.
 > - `craft-agent automation --help`
@@ -8,7 +8,7 @@ This guide explains how to configure automations in Qwen Code to automate workfl
 
 ## What Are Automations?
 
-Automations allow you to trigger actions automatically when specific events occur in Qwen Code. You can:
+Automations allow you to trigger actions automatically when specific events occur in LailatulCoder Ai. You can:
 - Send prompts to create agent sessions based on events
 - Send webhook HTTP requests to external services (Slack, Discord, custom APIs, etc.)
 - Execute actions on a schedule using cron expressions
@@ -60,7 +60,7 @@ craft-agent automation validate
 
 ## Supported Events
 
-### App Events (triggered by Qwen Code)
+### App Events (triggered by LailatulCoder Ai)
 
 | Event | Trigger | Match Value |
 |-------|---------|-------------|
@@ -96,7 +96,7 @@ craft-agent automation validate
 
 ### Prompt Actions
 
-Send a prompt to Qwen Code (creates a new session for scheduled prompts).
+Send a prompt to LailatulCoder Ai (creates a new session for scheduled prompts).
 
 ```json
 {
@@ -122,12 +122,12 @@ Send a prompt to Qwen Code (creates a new session for scheduled prompts).
 {
   "type": "prompt",
   "prompt": "Quick code review of recent changes",
-  "llmConnection": "qwen-code",
+  "llmConnection": "lailatul-coder",
   "model": "qwen3-coder-flash"
 }
 ```
 
-The `llmConnection` value is the slug of an LLM connection configured in AI Settings. The `model` value is a model ID supported by Qwen Code. If either is invalid or not found, it gracefully falls back to the workspace default. Both can be used independently or together.
+The `llmConnection` value is the slug of an LLM connection configured in AI Settings. The `model` value is a model ID supported by LailatulCoder Ai. If either is invalid or not found, it gracefully falls back to the workspace default. Both can be used independently or together.
 
 ### Webhook Actions
 
@@ -255,7 +255,7 @@ Then reference them in `automations.json`:
   "type": "webhook",
   "url": "${CRAFT_WH_SLACK_URL}",
   "method": "POST",
-  "body": { "text": "Hello from Qwen Code!" }
+  "body": { "text": "Hello from LailatulCoder Ai!" }
 }
 ```
 
@@ -753,7 +753,7 @@ Automations are validated when:
 
 **Using config_validate:**
 
-Ask Qwen Code to validate your automations configuration:
+Ask LailatulCoder Ai to validate your automations configuration:
 
 ```
 Validate my automations configuration
@@ -831,7 +831,7 @@ When a limit is hit, further events of that type are **silently dropped** for th
 ### Webhook not working
 
 1. **Check URL** — Must be a valid `http://` or `https://` URL. Other protocols (ftp, ws, etc.) are rejected at runtime with a clear error.
-2. **Check env vars** — Ensure `CRAFT_WH_*` variables are set in your shell profile and Qwen Code was restarted after adding them. URLs using `$VAR` templates are validated after variable expansion — if the variable is empty or unset, the URL will be invalid.
+2. **Check env vars** — Ensure `CRAFT_WH_*` variables are set in your shell profile and LailatulCoder Ai was restarted after adding them. URLs using `$VAR` templates are validated after variable expansion — if the variable is empty or unset, the URL will be invalid.
 3. **Use the Test button** — Tests connectivity to the URL (note: env vars are not expanded during test)
 4. **Check method** — Some endpoints require specific HTTP methods (POST, PUT, etc.)
 5. **Check response** — The automation history shows HTTP status codes for webhook executions

@@ -7,7 +7,7 @@
 import {
   SessionIdCaseConflictError,
   SessionService,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { access } from 'node:fs/promises';
 import {
   SessionNotFoundError,

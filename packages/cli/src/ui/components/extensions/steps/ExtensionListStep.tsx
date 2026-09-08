@@ -13,7 +13,7 @@ import {
   type Extension,
   getExtensionDisplayName,
   getExtensionDescription,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { useTerminalSize } from '../../../hooks/useTerminalSize.js';
 import { t, getCurrentLanguage } from '../../../../i18n/index.js';
 import { ExtensionUpdateState } from '../../../state/extensions.js';
@@ -229,3 +229,4 @@ export const ExtensionListStep = ({
     </Box>
   );
 };
+

@@ -5,8 +5,8 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useWorkspace } from '@qwen-code/webui/daemon-react-sdk';
-import type { DaemonSessionSummary } from '@qwen-code/sdk/daemon';
+import { useWorkspace } from '@lailatul-coder/webui/daemon-react-sdk';
+import type { DaemonSessionSummary } from '@lailatul-coder/sdk/daemon';
 import {
   SESSION_LIST_PAGE_SIZE,
   WEB_SHELL_SESSION_SOURCE_TYPE,

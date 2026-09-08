@@ -19,7 +19,7 @@ import {
   type AgentCore,
   type AgentInteractive,
   type AgentStatusChangeEvent,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { useUIState } from '../../contexts/UIStateContext.js';
 import { useTerminalSize } from '../../hooks/useTerminalSize.js';
 import { useKeypress } from '../../hooks/useKeypress.js';
@@ -282,3 +282,4 @@ export const AgentChatMissing = ({ label }: { label: string }) => (
     <Text color={theme.status.error}>{label}</Text>
   </Box>
 );
+

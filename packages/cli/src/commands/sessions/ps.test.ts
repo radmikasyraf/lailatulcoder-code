@@ -6,11 +6,11 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import stringWidth from 'string-width';
-import type { SessionRegistryRecord } from '@qwen-code/qwen-code-core';
+import type { SessionRegistryRecord } from '@lailatul-coder/lailatul-coder-core';
 
 const listLiveSessions = vi.fn();
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   listLiveSessions: (...args: unknown[]) => listLiveSessions(...args),
 }));
 
@@ -124,7 +124,7 @@ describe('qwen sessions ps', () => {
     listLiveSessions.mockResolvedValue([]);
     await run({ json: false });
     expect(stdout).toEqual([
-      'No other interactive Qwen Code sessions are running.',
+      'No other interactive LailatulCoder Ai sessions are running.',
     ]);
   });
 

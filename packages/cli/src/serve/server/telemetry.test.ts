@@ -29,7 +29,7 @@ const coreMocks = vi.hoisted(() => ({
 // the test stays a pure unit on the `recordRequest` seam.
 // `withDaemonRequestSpan` just runs the wrapped fn (which registers the res
 // listeners and calls next()).
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   ...coreMocks,
 }));
 
@@ -232,7 +232,7 @@ describe('daemonTelemetryMiddleware — recordRequest seam', () => {
         'http.request.header.traceparent': 'junk-header',
       },
       {
-        eventName: 'qwen-code.daemon.traceparent.invalid',
+        eventName: 'lailatul-coder.daemon.traceparent.invalid',
         severityNumber: 5,
       },
     );
@@ -258,7 +258,7 @@ describe('daemonTelemetryMiddleware — recordRequest seam', () => {
         'http.request.header.traceparent': 'x'.repeat(128),
       }),
       expect.objectContaining({
-        eventName: 'qwen-code.daemon.traceparent.invalid',
+        eventName: 'lailatul-coder.daemon.traceparent.invalid',
       }),
     );
   });
@@ -282,7 +282,7 @@ describe('daemonTelemetryMiddleware — recordRequest seam', () => {
         'http.request.header.traceparent': 'junk  header\\nvalue',
       }),
       expect.objectContaining({
-        eventName: 'qwen-code.daemon.traceparent.invalid',
+        eventName: 'lailatul-coder.daemon.traceparent.invalid',
       }),
     );
   });
@@ -564,7 +564,7 @@ describe('daemonTelemetryMiddleware — recordRequest seam', () => {
         expect.any(Function),
       );
       expect(coreMocks.spanSetAttribute).toHaveBeenLastCalledWith(
-        'qwen-code.workspace.hash',
+        'lailatul-coder.workspace.hash',
         'hash:/workspace/secondary',
       );
     }
@@ -880,12 +880,12 @@ describe('daemonTelemetryMiddleware — recordRequest seam', () => {
     );
     expect(coreMocks.spanSetAttribute).toHaveBeenNthCalledWith(
       1,
-      'qwen-code.workspace.hash',
+      'lailatul-coder.workspace.hash',
       'hash:/workspace/one',
     );
     expect(coreMocks.spanSetAttribute).toHaveBeenNthCalledWith(
       2,
-      'qwen-code.workspace.hash',
+      'lailatul-coder.workspace.hash',
       'hash:/workspace/two',
     );
   });
@@ -936,7 +936,7 @@ describe('daemonTelemetryMiddleware — recordRequest seam', () => {
 
     expect(resolveWorkspaceCwd).not.toHaveBeenCalled();
     expect(coreMocks.spanSetAttribute).toHaveBeenCalledWith(
-      'qwen-code.workspace.hash',
+      'lailatul-coder.workspace.hash',
       'hash:/workspace/secondary',
     );
   });
@@ -958,7 +958,7 @@ describe('daemonTelemetryMiddleware — recordRequest seam', () => {
 
     expect(coreMocks.spanSetAttribute).toHaveBeenCalledTimes(1);
     expect(coreMocks.spanSetAttribute).toHaveBeenCalledWith(
-      'qwen-code.workspace.hash',
+      'lailatul-coder.workspace.hash',
       'hash:/workspace/first',
     );
   });
@@ -1263,7 +1263,7 @@ describe('daemonInboundTraceIdCaptureMiddleware', () => {
     res.emit('finish');
 
     expect(coreMocks.spanSetAttribute).not.toHaveBeenCalledWith(
-      'qwen-code.workspace.hash',
+      'lailatul-coder.workspace.hash',
       expect.anything(),
     );
   });

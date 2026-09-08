@@ -15,7 +15,7 @@ vi.mock('../../utils/stdioHelpers.js', () => ({
 import type {
   BridgeSessionGoal,
   BridgeSessionSummary,
-} from '@qwen-code/acp-bridge';
+} from '@lailatul-coder/acp-bridge';
 import { writeStderrLine } from '../../utils/stdioHelpers.js';
 import { createWorkspaceGenerationGuard } from '../workspace-registry.js';
 import {

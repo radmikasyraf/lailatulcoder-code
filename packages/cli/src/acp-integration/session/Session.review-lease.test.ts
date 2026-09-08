@@ -16,20 +16,20 @@
  *   RL4: consecutive prompts sweep under their own prompt IDs.
  *
  * Mirrors the harness in Session.worktree.test.ts: real Session, no
- * module-level mock of @qwen-code/qwen-code-core.
+ * module-level mock of @lailatul-coder/lailatul-coder-core.
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { Session } from './Session.js';
-import type { Config, GeminiChat } from '@qwen-code/qwen-code-core';
+import type { Config, GeminiChat } from '@lailatul-coder/lailatul-coder-core';
 import {
   ApprovalMode,
   AuthType,
   GoalPersistenceUnavailableError,
   Storage,
   promptIdContext,
-} from '@qwen-code/qwen-code-core';
-import * as core from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import * as core from '@lailatul-coder/lailatul-coder-core';
 import type {
   AgentSideConnection,
   PromptRequest,

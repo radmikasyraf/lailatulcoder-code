@@ -5,7 +5,7 @@
  */
 
 import * as vscode from 'vscode';
-import type { File, IdeContext } from '@qwen-code/qwen-code-core';
+import type { File, IdeContext } from '@lailatul-coder/lailatul-coder-core';
 import {
   isFileUri,
   isNotebookFileUri,

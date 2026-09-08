@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 describe('imageSupport browser bundling', () => {
-  it('does not leave qwen-code-core runtime imports in the webview bundle', async () => {
+  it('does not leave lailatul-coder-core runtime imports in the webview bundle', async () => {
     const result = await esbuild.build({
       entryPoints: [
         fileURLToPath(new URL('./imageSupport.ts', import.meta.url)),
@@ -19,16 +19,16 @@ describe('imageSupport browser bundling', () => {
       platform: 'browser',
       write: false,
       logLevel: 'silent',
-      external: ['@qwen-code/qwen-code-core'],
+      external: ['@lailatul-coder/lailatul-coder-core'],
     });
 
     const output = result.outputFiles[0]?.text ?? '';
 
-    expect(output).not.toContain('@qwen-code/qwen-code-core');
+    expect(output).not.toContain('@lailatul-coder/lailatul-coder-core');
     expect(output).not.toContain('supportedImageFormats.js');
   });
 
-  it('does not leave qwen-code-core runtime imports in the App webview bundle', async () => {
+  it('does not leave lailatul-coder-core runtime imports in the App webview bundle', async () => {
     const result = await esbuild.build({
       entryPoints: [
         fileURLToPath(new URL('../webview/App.tsx', import.meta.url)),
@@ -38,7 +38,7 @@ describe('imageSupport browser bundling', () => {
       platform: 'browser',
       write: false,
       logLevel: 'silent',
-      external: ['@qwen-code/qwen-code-core'],
+      external: ['@lailatul-coder/lailatul-coder-core'],
       loader: {
         '.png': 'dataurl',
       },
@@ -46,7 +46,7 @@ describe('imageSupport browser bundling', () => {
 
     const output = result.outputFiles[0]?.text ?? '';
 
-    expect(output).not.toContain('@qwen-code/qwen-code-core');
+    expect(output).not.toContain('@lailatul-coder/lailatul-coder-core');
     expect(output).not.toContain('tokenLimits.js');
   });
 });

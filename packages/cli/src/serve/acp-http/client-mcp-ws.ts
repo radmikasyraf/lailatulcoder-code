@@ -39,7 +39,7 @@
 import {
   ClientMcpRegistrar,
   type ClientMcpFrame,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { JSONRPCMessage } from '@modelcontextprotocol/sdk/types.js';
 import { isValidServerName } from '../../runtime/validate-server-name.js';
 

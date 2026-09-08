@@ -10,7 +10,7 @@ import {
   type GoalControlRequest,
   type GoalSnapshotV2,
   type GoalStateResponse,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import { withActionTimeout } from '../timing.js';
 import type {
   DaemonDirectoryListing,

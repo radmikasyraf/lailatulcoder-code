@@ -98,9 +98,9 @@ vi.mock('./useTerminalSize.js', () => ({
   useTerminalSize: () => ({ columns: 110, rows: 24 }),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...original,
     createDebugLogger: () => debugLogMock,
@@ -388,7 +388,7 @@ describe('useStatusLine', () => {
 
     it('keeps an automatic indicator when the rendered footer column clips it', () => {
       mockConfig.getTargetDir.mockReturnValue(
-        '/home/runner/actions-runner-19/_work/qwen-code/qwen-code',
+        '/home/runner/actions-runner-19/_work/lailatul-coder/lailatul-coder',
       );
       mockConfig.getModelDisplayName.mockReturnValue('Qwen3 Code Plus');
       mockConfig.getContentGeneratorConfig.mockReturnValue({

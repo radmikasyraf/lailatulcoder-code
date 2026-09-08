@@ -1,7 +1,7 @@
 /**
  * Config Validate Handler
  *
- * Validates Qwen Code configuration files.
+ * Validates LailatulCoder Ai configuration files.
  * Uses full validators if available, otherwise basic validation.
  */
 

@@ -934,7 +934,7 @@ describe('Telemetry SDK', () => {
     it('always sets service.name and service.version from runtime', async () => {
       await initializeTelemetry(mockConfig);
       const attrs = getResourceAttributes();
-      expect(attrs['service.name']).toBe('qwen-code');
+      expect(attrs['service.name']).toBe('lailatul-coder');
       expect(attrs['service.version']).toBe('1.0.0-test');
     });
 
@@ -951,10 +951,10 @@ describe('Telemetry SDK', () => {
 
     it('user-provided service.name wins over default', async () => {
       vi.spyOn(mockConfig, 'getTelemetryResourceAttributes').mockReturnValue({
-        'service.name': 'qwen-code-ci',
+        'service.name': 'lailatul-coder-ci',
       });
       await initializeTelemetry(mockConfig);
-      expect(getResourceAttributes()['service.name']).toBe('qwen-code-ci');
+      expect(getResourceAttributes()['service.name']).toBe('lailatul-coder-ci');
     });
 
     it('user-provided service.version is ignored (runtime value wins)', async () => {
@@ -972,7 +972,7 @@ describe('Telemetry SDK', () => {
         'service.name': '',
       });
       await initializeTelemetry(mockConfig);
-      expect(getResourceAttributes()['service.name']).toBe('qwen-code');
+      expect(getResourceAttributes()['service.name']).toBe('lailatul-coder');
     });
 
     it('whitespace-only service.name from settings falls back to default', async () => {
@@ -983,7 +983,7 @@ describe('Telemetry SDK', () => {
         'service.name': '   ',
       });
       await initializeTelemetry(mockConfig);
-      expect(getResourceAttributes()['service.name']).toBe('qwen-code');
+      expect(getResourceAttributes()['service.name']).toBe('lailatul-coder');
     });
 
     it('emits a console summary when resource-attribute warnings are present', async () => {

@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 /**
- * craft-cli — Terminal client for Qwen Code server.
+ * craft-cli — Terminal client for LailatulCoder Ai server.
  *
- * Connects over WebSocket (ws:// or wss://) to a running Qwen Code server
+ * Connects over WebSocket (ws:// or wss://) to a running LailatulCoder Ai server
  * and provides commands for listing resources, managing sessions, sending
  * messages with real-time streaming, and validating server health.
  */
@@ -514,7 +514,7 @@ async function spawnLocalServer(args: CliArgs, opts?: { quiet?: boolean }): Prom
 // ---------------------------------------------------------------------------
 
 function getProviderDisplayName(provider: string): string {
-  return provider === 'qwen' ? 'Qwen Code' : provider.charAt(0).toUpperCase() + provider.slice(1)
+  return provider === 'qwen' ? 'LailatulCoder Ai' : provider.charAt(0).toUpperCase() + provider.slice(1)
 }
 
 export function resolveApiKey(_provider: string, explicit: string): string {
@@ -530,7 +530,7 @@ async function setupLlmConnection(
   _args: CliArgs,
 ): Promise<{ connectionSlug: string }> {
   const provider = 'qwen'
-  const connectionSlug = 'qwen-code'
+  const connectionSlug = 'lailatul-coder'
 
   await client.invoke('LLM_Connection:save', {
     slug: connectionSlug,
@@ -544,7 +544,7 @@ async function setupLlmConnection(
     throw new Error(`LLM connection setup failed: ${setupResult?.error ?? 'unknown error'}`)
   }
   await client.invoke('LLM_Connection:setDefault', connectionSlug)
-  process.stderr.write('LLM connection configured: Qwen Code\n')
+  process.stderr.write('LLM connection configured: LailatulCoder Ai\n')
 
   return { connectionSlug }
 }
@@ -593,7 +593,7 @@ async function cmdRun(args: CliArgs): Promise<void> {
       process.stderr.write(`Workspace registered: ${absPath}\n`)
     }
 
-    // Auto-setup the Qwen Code connection when no connection exists yet.
+    // Auto-setup the LailatulCoder Ai connection when no connection exists yet.
     const connections = (await client.invoke('LLM_Connection:list')) as any[]
     let connectionSlug: string | undefined
     if (shouldSetupLlmConnection(connections?.length ?? 0, args)) {
@@ -999,10 +999,10 @@ export function getValidateSteps(): ValidateStep[] {
         if (!shouldSetupLlmConnection(r?.length ?? 0, { provider, baseUrl: ctx.baseUrl ?? '' })) {
           return `${r.length} connections`
         }
-        const slug = 'qwen-code'
+        const slug = 'lailatul-coder'
         await client.invoke('LLM_Connection:save', {
           slug,
-          name: 'Qwen Code',
+          name: 'LailatulCoder Ai',
           providerType: 'qwen',
           authType: 'none',
           createdAt: Date.now(),
@@ -1010,7 +1010,7 @@ export function getValidateSteps(): ValidateStep[] {
         const result = await client.invoke('settings:setupLlmConnection', { slug }) as { success: boolean; error?: string }
         if (!result?.success) return `setup failed: ${result?.error ?? 'unknown'}`
         await client.invoke('LLM_Connection:setDefault', slug)
-        return '0 found -> created Qwen Code connection'
+        return '0 found -> created LailatulCoder Ai connection'
       },
     },
     {
@@ -1741,7 +1741,7 @@ export async function runValidation(
 // ---------------------------------------------------------------------------
 
 function printHelp(): void {
-  process.stdout.write(`craft-cli — Terminal client for Qwen Code server
+  process.stdout.write(`craft-cli — Terminal client for LailatulCoder Ai server
 
 Usage: craft-cli [options] <command> [args...]
 
@@ -1757,8 +1757,8 @@ LLM Configuration (for 'run' command):
   --provider <name>      LLM provider (default: qwen, or $LLM_PROVIDER)
                          Supported: qwen
   --model <id>           Model to use (or $LLM_MODEL)
-  --api-key <key>        Ignored for Qwen Code; kept for script compatibility
-  --base-url <url>       Ignored for Qwen Code; kept for script compatibility
+  --api-key <key>        Ignored for LailatulCoder Ai; kept for script compatibility
+  --base-url <url>       Ignored for LailatulCoder Ai; kept for script compatibility
 
 Commands:
   run <message>          Spawn server, send message, stream response, exit

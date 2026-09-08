@@ -31,4 +31,4 @@ export {
   resolveTelemetrySettings,
   shutdownTelemetry,
   startEventLoopLagMonitor,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';

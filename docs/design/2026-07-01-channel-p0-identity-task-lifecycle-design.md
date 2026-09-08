@@ -4,7 +4,7 @@
 
 Implement the first P0 foundation for channel-resident multiplayer agents:
 channel-scoped identity and memory-boundary metadata, plus a shared task
-lifecycle hook in `@qwen-code/channel-base`.
+lifecycle hook in `@lailatul-coder/channel-base`.
 
 This intentionally does not add a Slack adapter, daemon event stream, adapter UI
 changes, proactive scheduling, cross-channel context, or real core-memory path

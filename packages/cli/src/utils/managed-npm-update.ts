@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2026 Qwen Code
+ * Copyright 2026 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Storage, createDebugLogger } from '@qwen-code/qwen-code-core';
+import { Storage, createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import { execFile, execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import * as fs from 'node:fs';
@@ -15,7 +15,7 @@ import lockfile from 'proper-lockfile';
 import semver from 'semver';
 import { getNpmCliPath } from './installationInfo.js';
 
-const PACKAGE_NAME = '@qwen-code/qwen-code';
+const PACKAGE_NAME = '@lailatul-coder/lailatul-coder';
 const debugLogger = createDebugLogger('MANAGED_NPM_UPDATE');
 const execFileAsync = promisify(execFile);
 
@@ -35,12 +35,12 @@ function assertVersion(version: string): void {
 }
 
 function packageDir(prefix: string): string {
-  return path.join(prefix, 'node_modules', '@qwen-code', 'qwen-code');
+  return path.join(prefix, 'node_modules', '@lailatul-coder', 'lailatul-coder');
 }
 
 function resolveBootstrapPath(bootstrapPath?: string): string {
   if (!bootstrapPath) {
-    throw new Error('Unable to identify the Qwen Code npm launcher');
+    throw new Error('Unable to identify the LailatulCoder Ai npm launcher');
   }
   return fs.realpathSync(bootstrapPath);
 }
@@ -142,7 +142,7 @@ function readBaseInstallation(bootstrapPath: string): {
     ),
   ) as { name?: unknown; version?: unknown };
   if (manifest.name !== PACKAGE_NAME || typeof manifest.version !== 'string') {
-    throw new Error('Unable to identify the base Qwen Code npm installation');
+    throw new Error('Unable to identify the base LailatulCoder Ai npm installation');
   }
   return {
     version: manifest.version,
@@ -322,7 +322,7 @@ export async function activateManagedNpmUpdate(
       base.ctimeMs !== update.bootstrapCtimeMs
     ) {
       throw new Error(
-        'The base Qwen Code npm installation changed during update',
+        'The base LailatulCoder Ai npm installation changed during update',
       );
     }
 

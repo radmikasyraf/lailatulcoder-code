@@ -6,7 +6,7 @@
 
 import { describe, it, expect, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import type { Config, WorkflowTask } from '@qwen-code/qwen-code-core';
+import type { Config, WorkflowTask } from '@lailatul-coder/lailatul-coder-core';
 import { useBackgroundTaskView, entryId } from './useBackgroundTaskView.js';
 
 interface FakeRegistry {

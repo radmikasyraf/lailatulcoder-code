@@ -20,7 +20,7 @@ qwen --worktree=my-feature
 
 # PR reference — fetches refs/pull/<N>/head from `origin`
 qwen --worktree=#4174
-qwen --worktree https://github.com/QwenLM/qwen-code/pull/4174
+qwen --worktree https://github.com/LailatulCoder/lailatul-coder/pull/4174
 
 # Continue a previous --worktree session — re-attaches to the existing dir
 qwen --resume <session-id> --worktree=my-feature
@@ -40,7 +40,7 @@ The `--worktree` flag cannot be combined with `--acp`/`--experimental-acp` — f
 
 ### Or ask mid-session
 
-Alternatively, ask Qwen Code in plain language to create a worktree from inside an existing session:
+Alternatively, ask LailatulCoder Ai in plain language to create a worktree from inside an existing session:
 
 ```text
 > start a worktree called experiment-a
@@ -169,7 +169,7 @@ The model is **not** automatically `chdir`'d into the worktree — the reminder 
 
 ## Sub-Agent Isolation
 
-The `agent` tool accepts an optional `isolation: "worktree"` parameter. When set, Qwen Code creates an ephemeral worktree at `<repoRoot>/.qwen/worktrees/agent-<7hex>/` before the sub-agent starts, and:
+The `agent` tool accepts an optional `isolation: "worktree"` parameter. When set, LailatulCoder Ai creates an ephemeral worktree at `<repoRoot>/.qwen/worktrees/agent-<7hex>/` before the sub-agent starts, and:
 
 - **No changes** → the worktree is automatically removed when the agent finishes.
 - **Has changes** → the worktree is preserved; its path and branch are appended to the agent's result, e.g.

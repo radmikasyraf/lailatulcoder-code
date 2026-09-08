@@ -1,6 +1,6 @@
 ---
 name: feat-dev
-description: End-to-end workflow for implementing a non-trivial qwen-code
+description: End-to-end workflow for implementing a non-trivial lailatul-coder
   feature. Covers requirements investigation, design, E2E test planning,
   baseline dry-run, implementation, verification, self-audit, code review,
   and iteration.
@@ -8,7 +8,7 @@ description: End-to-end workflow for implementing a non-trivial qwen-code
 
 # Feature Development Workflow
 
-Use this workflow when implementing a feature in qwen-code that needs design,
+Use this workflow when implementing a feature in lailatul-coder that needs design,
 behavioral validation, or coordinated changes across multiple files. Each phase
 produces a concrete artifact. Do not combine phases; the output of each phase
 feeds the next.
@@ -22,10 +22,10 @@ Use these paths for planning artifacts:
 
 ## Phase 1: Investigate
 
-Understand the requested behavior and the current qwen-code implementation.
+Understand the requested behavior and the current lailatul-coder implementation.
 
 Use a code exploration agent when available. Ask it to inspect the relevant
-qwen-code areas for:
+lailatul-coder areas for:
 
 - Existing feature definitions: tools, parameters, schemas, commands, UI, or
   config.

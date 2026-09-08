@@ -4,7 +4,7 @@ Your uninstall method depends on how you installed the CLI.
 
 ## Method 1: Using npx
 
-npx runs packages from a temporary cache without a permanent installation. To "uninstall" the CLI, you must clear this cache, which will remove qwen-code and any other packages previously executed with npx.
+npx runs packages from a temporary cache without a permanent installation. To "uninstall" the CLI, you must clear this cache, which will remove lailatul-coder and any other packages previously executed with npx.
 
 The npx cache is a directory named `_npx` inside your main npm cache folder. You can find your npm cache path by running `npm config get cache`.
 
@@ -33,10 +33,10 @@ Remove-Item -Path (Join-Path $env:LocalAppData "npm-cache\_npx") -Recurse -Force
 
 ## Method 2: Using npm (Global Install)
 
-If you installed the CLI globally (e.g. `npm install -g @qwen-code/qwen-code`), use the `npm uninstall` command with the `-g` flag to remove it.
+If you installed the CLI globally (e.g. `npm install -g @lailatul-coder/lailatul-coder`), use the `npm uninstall` command with the `-g` flag to remove it.
 
 ```bash
-npm uninstall -g @qwen-code/qwen-code
+npm uninstall -g @lailatul-coder/lailatul-coder
 ```
 
 This command completely removes the package from your system.
@@ -48,13 +48,13 @@ If you installed via the standalone installer (`curl ... | bash` or `irm ... | i
 **Linux / macOS**
 
 ```bash
-curl -fsSL https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.sh | bash
+curl -fsSL https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.sh | bash
 ```
 
 **Windows**
 
 ```powershell
-irm https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.ps1 | iex
+irm https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.ps1 | iex
 ```
 
-The uninstaller removes the standalone runtime, generated `qwen` wrapper, and installer-managed PATH changes. Your Qwen Code configuration (`~/.qwen`) is preserved by default.
+The uninstaller removes the standalone runtime, generated `qwen` wrapper, and installer-managed PATH changes. Your LailatulCoder Ai configuration (`~/.qwen`) is preserved by default.

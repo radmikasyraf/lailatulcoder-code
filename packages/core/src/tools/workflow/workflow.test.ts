@@ -502,7 +502,7 @@ describe('WorkflowTool', () => {
     });
   });
 
-  // PR #4947 R2 T8 (qwen-code-ci-bot): pipeline() through WorkflowTool
+  // PR #4947 R2 T8 (lailatul-coder-ci-bot): pipeline() through WorkflowTool
   // exercises a vm wrapper path that is structurally distinct from parallel's
   // single-argument call — pipeline uses `callPipeline.apply(null, arguments)`
   // and `[items].concat(stages)` to spread the variadic stage list

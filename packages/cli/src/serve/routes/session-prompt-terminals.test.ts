@@ -11,11 +11,11 @@ import { randomUUID } from 'node:crypto';
 import express, { type Response } from 'express';
 import request from 'supertest';
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { SessionService, type ChatRecord } from '@qwen-code/qwen-code-core';
+import { SessionService, type ChatRecord } from '@lailatul-coder/lailatul-coder-core';
 import {
   appendPromptLedgerRecord,
   readPromptLedgerRecords,
-} from '@qwen-code/acp-bridge/promptLedger';
+} from '@lailatul-coder/acp-bridge/promptLedger';
 import {
   SessionNotFoundError,
   type AcpSessionBridge,

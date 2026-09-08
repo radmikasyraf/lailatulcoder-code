@@ -40,11 +40,11 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { DaemonClient, type SubscribeOptions } from '@qwen-code/sdk';
+import { DaemonClient, type SubscribeOptions } from '@lailatul-coder/sdk';
 import {
   hashMcpServerConfig,
   type MCPServerConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

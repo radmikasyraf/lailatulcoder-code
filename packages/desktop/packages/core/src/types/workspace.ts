@@ -11,7 +11,7 @@ export type McpAuthType = 'workspace_oauth' | 'workspace_bearer' | 'public';
 export type WorkspaceKind = 'project' | 'conversation';
 
 /**
- * Configuration for a remote Qwen Code Server.
+ * Configuration for a remote LailatulCoder Ai Server.
  * When set on a workspace, handler calls are proxied over WebSocket.
  */
 export interface RemoteServerConfig {
@@ -49,7 +49,7 @@ export interface Workspace extends WorkspaceInfo {
 
 /**
  * Authentication type for the built-in AI backend.
- * Qwen Code auth is handled by the local Qwen CLI, so the app stores no LLM
+ * LailatulCoder Ai auth is handled by the local Qwen CLI, so the app stores no LLM
  * credential here.
  */
 export type AuthType = 'none';

@@ -150,7 +150,7 @@ const CASES: Case[] = [
   },
   {
     name: 'PR URL → owner/repo/number extracted',
-    raw: 'https://github.com/QwenLM/qwen-code/pull/6711',
+    raw: 'https://github.com/LailatulCoder/lailatul-coder/pull/6711',
     expect: { targetType: 'pr-url', effort: 'high', warningCount: 0 },
   },
   {
@@ -262,19 +262,19 @@ const CASES: Case[] = [
   },
   {
     name: 'numeric-prefix junk after /pull/ is not a PR URL (bug: /pull/42oops read as PR 42)',
-    raw: 'https://github.com/QwenLM/qwen-code/pull/42oops',
+    raw: 'https://github.com/LailatulCoder/lailatul-coder/pull/42oops',
     expect: {
       targetType: 'local',
-      extraTokens: ['https://github.com/QwenLM/qwen-code/pull/42oops'],
+      extraTokens: ['https://github.com/LailatulCoder/lailatul-coder/pull/42oops'],
       warningCount: 1,
     },
   },
   {
     name: 'shell metacharacters in owner never reach the verdict',
-    raw: '"https://github.com/$(rm -rf x)/qwen-code/pull/42"',
+    raw: '"https://github.com/$(rm -rf x)/lailatul-coder/pull/42"',
     expect: {
       targetType: 'local',
-      extraTokens: ['https://github.com/$(rm -rf x)/qwen-code/pull/42'],
+      extraTokens: ['https://github.com/$(rm -rf x)/lailatul-coder/pull/42'],
       warningCount: 1,
     },
   },
@@ -294,27 +294,27 @@ describe('parseReviewArgs', () => {
   });
 
   it('extracts host/owner/repo/number from a PR URL', () => {
-    const got = parseReviewArgs('https://github.com/QwenLM/qwen-code/pull/42');
+    const got = parseReviewArgs('https://github.com/LailatulCoder/lailatul-coder/pull/42');
     expect(got.target).toEqual({
       type: 'pr-url',
-      url: 'https://github.com/QwenLM/qwen-code/pull/42',
+      url: 'https://github.com/LailatulCoder/lailatul-coder/pull/42',
       host: 'github.com',
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
       number: 42,
     });
   });
 
   it('canonicalizes an uppercase scheme/host and drops query and fragment', () => {
     const got = parseReviewArgs(
-      'HTTPS://GitHub.com/QwenLM/qwen-code/pull/42?diff=split#discussion',
+      'HTTPS://GitHub.com/LailatulCoder/lailatul-coder/pull/42?diff=split#discussion',
     );
     expect(got.target).toEqual({
       type: 'pr-url',
-      url: 'https://github.com/QwenLM/qwen-code/pull/42',
+      url: 'https://github.com/LailatulCoder/lailatul-coder/pull/42',
       host: 'github.com',
-      owner: 'QwenLM',
-      repo: 'qwen-code',
+      owner: 'LailatulCoder',
+      repo: 'lailatul-coder',
       number: 42,
     });
     expect(got.warnings).toHaveLength(0);
@@ -322,7 +322,7 @@ describe('parseReviewArgs', () => {
 
   it('a trailing path segment after the number stays a valid URL boundary', () => {
     const got = parseReviewArgs(
-      'https://github.com/QwenLM/qwen-code/pull/42/files',
+      'https://github.com/LailatulCoder/lailatul-coder/pull/42/files',
     );
     expect(got.target).toMatchObject({ type: 'pr-url', number: 42 });
   });
@@ -384,7 +384,7 @@ describe('parseReviewArgs', () => {
     // is Aone-only — on any other host it must hit the fail-closed
     // invalid-url refusal, not become a live PR target.
     const got = parseReviewArgs(
-      'https://github.com/QwenLM/qwen-code/codereview/123',
+      'https://github.com/LailatulCoder/lailatul-coder/codereview/123',
     );
     expect(got.target).toEqual({ type: 'local' });
     expect(got.warnings[0]).toContain('not a PR/CR URL');
@@ -414,11 +414,11 @@ describe('parseReviewArgs', () => {
 
   it('refuses a junk PR URL instead of guessing (never a file path, never PR 42)', () => {
     const got = parseReviewArgs(
-      'https://github.com/QwenLM/qwen-code/pull/42oops',
+      'https://github.com/LailatulCoder/lailatul-coder/pull/42oops',
     );
     expect(got.target).toEqual({ type: 'local' });
     expect(got.extraTokens).toEqual([
-      'https://github.com/QwenLM/qwen-code/pull/42oops',
+      'https://github.com/LailatulCoder/lailatul-coder/pull/42oops',
     ]);
     expect(got.warnings[0]).toContain('not a PR/CR URL');
   });
@@ -682,7 +682,7 @@ describe('parseReviewArgs — --severity-floor (the convergence posture knob)', 
     // a same-number URL name one PR (round-9 finding — a raw-token Set read
     // them as two and fell back to the local tree).
     const mixed = parseReviewArgs(
-      '--severity-floor 6711 --effort https://github.com/QwenLM/qwen-code/pull/6711',
+      '--severity-floor 6711 --effort https://github.com/LailatulCoder/lailatul-coder/pull/6711',
     );
     expect(mixed.target).toMatchObject({ number: 6711 });
     expect(mixed.warnings.some((w) => w.includes('Ambiguous'))).toBe(false);
@@ -1579,7 +1579,7 @@ describe('--resume', () => {
 
   it('is effective on a PR URL target', () => {
     const r = parseReviewArgs(
-      'https://github.com/QwenLM/qwen-code/pull/6711 --resume',
+      'https://github.com/LailatulCoder/lailatul-coder/pull/6711 --resume',
     );
     expect(r.resume).toEqual({ requested: true, effective: true });
   });

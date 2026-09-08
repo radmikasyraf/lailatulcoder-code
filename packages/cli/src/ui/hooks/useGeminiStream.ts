@@ -75,7 +75,7 @@ import {
   finalizeToolResponses,
   endInteractionSpan,
   getActiveInteractionSpan,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { type Part, type PartListUnion, FinishReason } from '@google/genai';
 import type {
   HistoryItem,
@@ -5728,10 +5728,10 @@ export const useGeminiStream = (
   // otherwise a stale TeamManager could keep pushing into
   // the active queue ref after team recreation/remount.
   useEffect(() => {
-    let boundManager: import('@qwen-code/qwen-code-core').TeamManager | null =
+    let boundManager: import('@lailatul-coder/lailatul-coder-core').TeamManager | null =
       null;
     const handleManagerChange = (
-      manager: import('@qwen-code/qwen-code-core').TeamManager | null,
+      manager: import('@lailatul-coder/lailatul-coder-core').TeamManager | null,
     ) => {
       if (boundManager && boundManager !== manager) {
         boundManager.setLeaderMessageCallback(null);

@@ -61,13 +61,13 @@ describe('channel startup profile parsing', () => {
     );
 
     expect(attributes).toMatchObject({
-      'qwen-code.daemon.acp_startup.profile.version': 1,
-      'qwen-code.daemon.acp_startup.profile.complete': true,
-      'qwen-code.daemon.acp_startup.child.process_to_response_ms': 900,
-      'qwen-code.daemon.acp_startup.child.unattributed_ms': 139,
-      'qwen-code.daemon.acp_startup.phase.gemini_import_ms': 200,
-      'qwen-code.daemon.acp_startup.config.ripgrep_probe_ms': 50,
-      'qwen-code.daemon.acp_startup.response_transport_ms': 7,
+      'lailatul-coder.daemon.acp_startup.profile.version': 1,
+      'lailatul-coder.daemon.acp_startup.profile.complete': true,
+      'lailatul-coder.daemon.acp_startup.child.process_to_response_ms': 900,
+      'lailatul-coder.daemon.acp_startup.child.unattributed_ms': 139,
+      'lailatul-coder.daemon.acp_startup.phase.gemini_import_ms': 200,
+      'lailatul-coder.daemon.acp_startup.config.ripgrep_probe_ms': 50,
+      'lailatul-coder.daemon.acp_startup.response_transport_ms': 7,
     });
   });
 
@@ -97,20 +97,20 @@ describe('channel startup profile parsing', () => {
       10_000,
     );
 
-    expect(attributes?.['qwen-code.daemon.acp_startup.profile.complete']).toBe(
+    expect(attributes?.['lailatul-coder.daemon.acp_startup.profile.complete']).toBe(
       false,
     );
     expect(attributes).not.toHaveProperty(
-      'qwen-code.daemon.acp_startup.phase.gemini_import_ms',
+      'lailatul-coder.daemon.acp_startup.phase.gemini_import_ms',
     );
     expect(attributes).not.toHaveProperty(
-      'qwen-code.daemon.acp_startup.phase.args_parse_ms',
+      'lailatul-coder.daemon.acp_startup.phase.args_parse_ms',
     );
     expect(attributes).not.toHaveProperty(
-      'qwen-code.daemon.acp_startup.config.tool_registry_ms',
+      'lailatul-coder.daemon.acp_startup.config.tool_registry_ms',
     );
     expect(attributes).not.toHaveProperty(
-      'qwen-code.daemon.acp_startup.config.tool_warmup_ms',
+      'lailatul-coder.daemon.acp_startup.config.tool_warmup_ms',
     );
   });
 
@@ -125,7 +125,7 @@ describe('channel startup profile parsing', () => {
     );
 
     expect(attributes).not.toHaveProperty(
-      'qwen-code.daemon.acp_startup.response_transport_ms',
+      'lailatul-coder.daemon.acp_startup.response_transport_ms',
     );
   });
 });

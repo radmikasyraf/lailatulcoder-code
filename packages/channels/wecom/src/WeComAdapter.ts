@@ -9,14 +9,14 @@ import { Buffer } from 'node:buffer';
 import { isIP, type LookupFunction } from 'node:net';
 import { lookup } from 'node:dns/promises';
 import { WSClient, decryptFile } from '@wecom/aibot-node-sdk';
-import { ChannelBase, sanitizeLogText } from '@qwen-code/channel-base';
+import { ChannelBase, sanitizeLogText } from '@lailatul-coder/channel-base';
 import type {
   Attachment,
   ChannelAgentBridge,
   ChannelBaseOptions,
   ChannelConfig,
   Envelope,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 type WeComMediaType = 'image' | 'file' | 'voice' | 'video';
 

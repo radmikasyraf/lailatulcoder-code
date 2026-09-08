@@ -14,7 +14,7 @@ import {
   TOKEN_PLAN_CHINA_BASE_URL,
   TOKEN_PLAN_ENV_KEY,
   TOKEN_PLAN_GLOBAL_BASE_URL,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 export { CODING_PLAN_ENV_KEY, TOKEN_PLAN_ENV_KEY };
 

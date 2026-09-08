@@ -12,7 +12,7 @@ import {
   isSuccessStatus,
   type Config,
   type ArenaAgentResult,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { theme } from '../../semantic-colors.js';
 import { useKeypress } from '../../hooks/useKeypress.js';
 import { MessageType, type HistoryItemWithoutId } from '../../types.js';
@@ -408,3 +408,4 @@ function getDiffLineColor(line: string): string {
   }
   return theme.text.secondary;
 }
+

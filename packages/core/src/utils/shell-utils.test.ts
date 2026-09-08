@@ -713,17 +713,17 @@ describe('stripTrailingBackgroundAmp', () => {
 });
 
 describe('detectSelfKillCommand', () => {
-  it('detects broad Windows taskkill patterns that target qwen-code hosts', () => {
+  it('detects broad Windows taskkill patterns that target lailatul-coder hosts', () => {
     expect(detectSelfKillCommand('taskkill /F /IM node.exe 2>nul')).toBe(true);
     expect(
-      detectSelfKillCommand('taskkill /FI "IMAGENAME eq qwen-code.exe" /F'),
+      detectSelfKillCommand('taskkill /FI "IMAGENAME eq lailatul-coder.exe" /F'),
     ).toBe(true);
   });
 
   it('detects broad Unix killall and pkill patterns', () => {
     expect(detectSelfKillCommand('killall -9 node')).toBe(true);
     expect(detectSelfKillCommand('pkill node')).toBe(true);
-    expect(detectSelfKillCommand('pkill -f qwen-code')).toBe(true);
+    expect(detectSelfKillCommand('pkill -f lailatul-coder')).toBe(true);
     expect(detectSelfKillCommand('pkill -f /usr/bin/node')).toBe(true);
     expect(detectSelfKillCommand('pkill -9f node')).toBe(true);
     expect(detectSelfKillCommand("bash -lc 'pkill -f qwen'")).toBe(true);
@@ -735,11 +735,11 @@ describe('detectSelfKillCommand', () => {
       true,
     );
     expect(detectSelfKillCommand('sudo killall node')).toBe(true);
-    expect(detectSelfKillCommand('env FOO=bar pkill -f qwen-code')).toBe(true);
+    expect(detectSelfKillCommand('env FOO=bar pkill -f lailatul-coder')).toBe(true);
     expect(detectSelfKillCommand('command -p killall node')).toBe(true);
   });
 
-  it('detects kill commands using pgrep selectors for qwen-code hosts', () => {
+  it('detects kill commands using pgrep selectors for lailatul-coder hosts', () => {
     expect(detectSelfKillCommand('kill -9 $(pgrep node)')).toBe(true);
     expect(detectSelfKillCommand('kill $(pgrep -f node)')).toBe(true);
     expect(detectSelfKillCommand('kill -9 $(pgrep node | head -1)')).toBe(true);
@@ -754,7 +754,7 @@ describe('detectSelfKillCommand', () => {
   it('detects taskkill inline and dash-prefixed image options', () => {
     expect(detectSelfKillCommand('taskkill /IM:node.exe /F')).toBe(true);
     expect(
-      detectSelfKillCommand('taskkill /FI:"IMAGENAME eq qwen-code.exe" /F'),
+      detectSelfKillCommand('taskkill /FI:"IMAGENAME eq lailatul-coder.exe" /F'),
     ).toBe(true);
     expect(detectSelfKillCommand('taskkill -IM node.exe -F')).toBe(true);
   });
@@ -797,7 +797,7 @@ describe('detectSelfKillCommand', () => {
     expect(detectSelfKillCommand('kill -9 $(pgrep -f "node server.js")')).toBe(
       false,
     );
-    expect(detectSelfKillCommand('pkill -F qwen-code.pid vite')).toBe(false);
+    expect(detectSelfKillCommand('pkill -F lailatul-coder.pid vite')).toBe(false);
     expect(detectSelfKillCommand('taskkill /IM notepad.exe')).toBe(false);
   });
 });

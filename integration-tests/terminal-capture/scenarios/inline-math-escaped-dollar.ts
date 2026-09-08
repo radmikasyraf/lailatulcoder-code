@@ -13,7 +13,7 @@ export default {
   name: 'inline-math-escaped-dollar',
   spawn: ['node', 'dist/cli.js', '--yolo', '--model', 'qwen3.7-max-2026-06-08'],
   terminal: {
-    title: 'qwen-code inline math',
+    title: 'lailatul-coder inline math',
     cwd: '../../..',
     cols: 120,
     rows: 32,

@@ -81,7 +81,7 @@ async function main(): Promise<void> {
     rows: 40,
     cwd: repoRoot,
     outputDir,
-    title: 'qwen-code',
+    title: 'lailatul-coder',
     theme: 'dracula',
     chrome: true,
   });

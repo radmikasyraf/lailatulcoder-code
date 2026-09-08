@@ -106,7 +106,7 @@ function makeGhHarness(label) {
       '  printf "%s\\n" "$*" > "$GH_STUB_CALL"',
       'fi',
       'case "$*" in',
-      "  'api user --jq .login') echo qwen-code-ci-bot ;;",
+      "  'api user --jq .login') echo lailatul-coder-ci-bot ;;",
       '  *--paginate*) [ -n "${GH_STUB_FAIL_LIST:-}" ] && exit 1; cat "$GH_STUB_COMMENTS" ;;',
       '  *PATCH*) [ -n "${GH_STUB_FAIL_WRITE:-}" ] && exit 1 ;;',
       '  *) [ -n "${GH_STUB_FAIL_WRITE:-}" ] && exit 1; echo "${GH_STUB_POST_ID:-7777}" ;;',
@@ -115,7 +115,7 @@ function makeGhHarness(label) {
     ].join('\n'),
     { mode: 0o755 },
   );
-  const RUN_URL = 'https://github.com/QwenLM/qwen-code/actions/runs/77';
+  const RUN_URL = 'https://github.com/LailatulCoder/lailatul-coder/actions/runs/77';
   const bashArgs = ['--noprofile', '--norc', '-eo', 'pipefail', '-c'];
   const run = (script, env) => {
     rmSync(bodyOut, { force: true });
@@ -126,7 +126,7 @@ function makeGhHarness(label) {
         ...process.env,
         PATH: `${dir}:${process.env.PATH}`,
         GH_TOKEN: 'x',
-        GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+        GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
         NUMBER: '7999',
         RUN_URL,
         GITHUB_OUTPUT: outputFile,
@@ -378,7 +378,7 @@ describe('qwen-triage tmux workflow', () => {
     expect(notifyStep).toContain("github.event_name == 'issue_comment'");
     expect(notifyStep).toContain('github.event.issue.pull_request');
     expect(notifyStep).toContain(
-      "startsWith(github.event.comment.body, '@qwen-code /triage')",
+      "startsWith(github.event.comment.body, '@lailatul-coder /triage')",
     );
     expect(notifyStep).toContain('--method GET');
     expect(notifyStep).toContain('--paginate');
@@ -758,11 +758,11 @@ describe('qwen-triage tmux workflow', () => {
         const marker = '<!-- qwen-triage lifecycle -->';
         const comment = (id, body) => ({
           id,
-          user: { login: 'qwen-code-ci-bot' },
+          user: { login: 'lailatul-coder-ci-bot' },
           body,
         });
         const tombstone = (runId) =>
-          `${marker}\n\n✅ earlier verdict [finalize run](https://github.com/QwenLM/qwen-code/actions/runs/${runId})`;
+          `${marker}\n\n✅ earlier verdict [finalize run](https://github.com/LailatulCoder/lailatul-coder/actions/runs/${runId})`;
 
         // No marker yet: POST the running claim and export the created id.
         // The body must START with the lifecycle marker — the selector is
@@ -916,7 +916,7 @@ describe('qwen-triage tmux workflow', () => {
       'apt-get install -y --no-install-recommends tmux util-linux',
     );
     expect(installStep).toContain(
-      "npm install -g --registry=https://registry.npmjs.org '@qwen-code/qwen-code@latest'",
+      "npm install -g --registry=https://registry.npmjs.org '@lailatul-coder/lailatul-coder@latest'",
     );
     expect(installStep).toContain('qwen --version');
     expect(installStep).toContain('tmux -V');
@@ -1035,7 +1035,7 @@ describe('qwen-triage tmux workflow', () => {
     expect(section).toContain('applies on an unattended run');
     expect(section).not.toContain('Never in unattended CI');
     // ...name the trigger and what it settles, not just the trigger...
-    expect(section).toContain('@qwen-code /verify');
+    expect(section).toContain('@lailatul-coder /verify');
     expect(section).toContain('the specific claim it would settle');
     // ...and keep the author-permission case, which since the sponsored
     // lane shipped must offer the sponsored /verify (ephemeral runner +
@@ -1109,7 +1109,7 @@ describe('qwen-triage tmux workflow', () => {
       prSkill.indexOf('If any file matches (the strongest triage-time signal'),
       prSkill.indexOf('This signal is NOT a terminal gate'),
     );
-    expect(highRisk).toContain('@qwen-code /verify');
+    expect(highRisk).toContain('@lailatul-coder /verify');
     expect(highRisk).toContain('2b-bis');
     // The dead pointer into the local-only section must not come back.
     expect(highRisk).not.toContain('Stage 2c');
@@ -1218,7 +1218,7 @@ describe('qwen-triage tmux workflow', () => {
             env: {
               ...process.env,
               PATH: `${bin}:${process.env.PATH}`,
-              GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+              GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
               NUMBER: '1',
               TRIGGERED_AT: '2026-01-02T00:00:00Z',
               RUN_URL: 'https://example.invalid/run',
@@ -1367,7 +1367,7 @@ describe('qwen-triage verify workflow', () => {
           ...process.env,
           PATH: `${dir}:${process.env.PATH}`,
           GH_TOKEN: 'x',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           GITHUB_STEP_SUMMARY: '/dev/null',
           GITHUB_OUTPUT: out,
           EVENT_NAME: 'issue_comment',
@@ -1398,35 +1398,35 @@ describe('qwen-triage verify workflow', () => {
     try {
       // Drive-by commenter without write cannot spend the sandbox budget,
       // whoever the author is.
-      expect(gate('@qwen-code /verify', 'alice', 'mallory').run).toBe('false');
+      expect(gate('@lailatul-coder /verify', 'alice', 'mallory').run).toBe('false');
       // Write-access author -> trusted, no snapshot needed.
-      const trusted = gate('@qwen-code /verify', 'alice', 'bob');
+      const trusted = gate('@lailatul-coder /verify', 'alice', 'bob');
       expect(trusted.run).toBe('true');
       expect(trusted.trust).toBe('trusted');
       expect(trusted.oid).toBeUndefined();
       // EXTERNAL author + trusted commenter -> allowed as a sponsored run
       // with the head OID snapped now. This is the case that used to deny.
-      const sponsored = gate('@qwen-code /verify', 'mallory', 'bob');
+      const sponsored = gate('@lailatul-coder /verify', 'mallory', 'bob');
       expect(sponsored.run).toBe('true');
       expect(sponsored.trust).toBe('external');
       expect(sponsored.oid).toBe('deadbeefcafe');
       // Author commenting on their own PR is still trusted.
-      expect(gate('@qwen-code /verify', 'alice', 'alice').trust).toBe(
+      expect(gate('@lailatul-coder /verify', 'alice', 'alice').trust).toBe(
         'trusted',
       );
       // Author permission unreadable -> deny; routing must not guess.
-      expect(gate('@qwen-code /verify', 'charlie', 'bob').run).toBe('false');
+      expect(gate('@lailatul-coder /verify', 'charlie', 'bob').run).toBe('false');
       // Deleted author (empty login) -> deny, same reason.
-      expect(gate('@qwen-code /verify', '', 'bob').run).toBe('false');
+      expect(gate('@lailatul-coder /verify', '', 'bob').run).toBe('false');
       // Head OID snapshot failure -> deny: a sponsored run without a
       // pinned head would execute whatever gets pushed next.
-      expect(gate('@qwen-code /verify', 'mallory', 'bob', '99').run).toBe(
+      expect(gate('@lailatul-coder /verify', 'mallory', 'bob', '99').run).toBe(
         'false',
       );
       // /tmux keeps its author-only gate; /triage keeps the commenter gate.
-      expect(gate('@qwen-code /tmux', 'alice', 'mallory').run).toBe('true');
-      expect(gate('@qwen-code /tmux', 'mallory', 'bob').run).toBe('false');
-      expect(gate('@qwen-code /triage', 'mallory', 'bob').run).toBe('true');
+      expect(gate('@lailatul-coder /tmux', 'alice', 'mallory').run).toBe('true');
+      expect(gate('@lailatul-coder /tmux', 'mallory', 'bob').run).toBe('false');
+      expect(gate('@lailatul-coder /triage', 'mallory', 'bob').run).toBe('true');
 
       // /triage on a PR ALSO starts the verify lane, in parallel — and the
       // point of routing it through the same classifier is that an external
@@ -1434,39 +1434,39 @@ describe('qwen-triage verify workflow', () => {
       // `trusted` (or no trust at all) for `mallory`, the head-OID pin, the
       // risk screen and both workspace wipes silently stop firing while the
       // lane keeps executing that author's code on the persistent pool.
-      const triagePr = gate('@qwen-code /triage', 'mallory', 'bob');
+      const triagePr = gate('@lailatul-coder /triage', 'mallory', 'bob');
       expect(triagePr.run).toBe('true');
       expect(triagePr.lane).toBe('true');
       expect(triagePr.trust).toBe('external');
       expect(triagePr.oid).toBe('deadbeefcafe');
-      expect(gate('@qwen-code /triage', 'alice', 'bob').trust).toBe('trusted');
+      expect(gate('@lailatul-coder /triage', 'alice', 'bob').trust).toBe('trusted');
 
       // The lane fails closed DIFFERENTLY from an explicit /verify. An
       // unreadable author permission denies `/verify` outright, because the
       // commenter asked for exactly that; on `/triage` it must only close
       // the lane, or a flaky permission API silently costs the reviewer
       // their triage too. Same for a failed head-OID snapshot (issue 99).
-      const laneFail = gate('@qwen-code /triage', 'charlie', 'bob');
+      const laneFail = gate('@lailatul-coder /triage', 'charlie', 'bob');
       expect(laneFail.run).toBe('true');
       expect(laneFail.lane).toBe('false');
       expect(laneFail.trust).toBeUndefined();
-      const oidFail = gate('@qwen-code /triage', 'mallory', 'bob', '99');
+      const oidFail = gate('@lailatul-coder /triage', 'mallory', 'bob', '99');
       expect(oidFail.run).toBe('true');
       expect(oidFail.lane).toBe('false');
-      expect(gate('@qwen-code /verify', 'charlie', 'bob').run).toBe('false');
+      expect(gate('@lailatul-coder /verify', 'charlie', 'bob').run).toBe('false');
 
       // On a plain ISSUE there is nothing to build, so the lane stays off
       // and no author lookup is spent. This assertion used to be written as
       // "/triage emits no trust outputs" with a fixture that never set
       // IS_PR — true for the wrong reason, and it would have stayed green
       // through the change above.
-      const triageIssue = gate('@qwen-code /triage', 'mallory', 'bob', '1', '');
+      const triageIssue = gate('@lailatul-coder /triage', 'mallory', 'bob', '1', '');
       expect(triageIssue.run).toBe('true');
       expect(triageIssue.lane).toBeUndefined();
       expect(triageIssue.trust).toBeUndefined();
       expect(triageIssue.oid).toBeUndefined();
 
-      const tmux = gate('@qwen-code /tmux', 'alice', 'bob');
+      const tmux = gate('@lailatul-coder /tmux', 'alice', 'bob');
       expect(tmux.trust).toBeUndefined();
       expect(tmux.oid).toBeUndefined();
       expect(tmux.lane).toBeUndefined();
@@ -1544,8 +1544,8 @@ describe('qwen-triage verify workflow', () => {
     // Concurrency is evaluated after `needs`, so it can and must read the
     // same output; an unguarded group would let non-runnable triggers share
     // the per-PR group and cancel a real run.
-    expect(ifBlock).not.toContain("comment.body == '@qwen-code /verify'");
-    expect(concBlock).not.toContain("comment.body == '@qwen-code /verify'");
+    expect(ifBlock).not.toContain("comment.body == '@lailatul-coder /verify'");
+    expect(concBlock).not.toContain("comment.body == '@lailatul-coder /verify'");
 
     // And the authorize job has to actually publish it.
     expect(job('authorize')).toContain(
@@ -1580,7 +1580,7 @@ describe('qwen-triage verify hardening', () => {
   const verifyJob = job('verify');
 
   // GitHub Actions expression comparisons are case-insensitive, so
-  // `@QWEN-CODE /VERIFY` satisfies the job predicates and reaches the shell.
+  // `@lailatul-coder /VERIFY` satisfies the job predicates and reaches the shell.
   // A case-sensitive `case` would fall through to commenter-only gating and
   // run the PR author's code without ever checking the author.
   it('matches verify/tmux commands case-insensitively in the shell gate', () => {
@@ -2609,7 +2609,7 @@ describe('qwen-triage verify hardening', () => {
           GH_TOKEN: 'x',
           GH_STUB_DIFF: diffFile,
           GH_STUB_OID: prOid ?? 'oid-1',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           GITHUB_STEP_SUMMARY: '/dev/null',
           GITHUB_OUTPUT: out,
           RUNNER_TEMP: temp,
@@ -2858,7 +2858,7 @@ describe('qwen-triage verify hardening', () => {
     // Bilingual, and it names the alternative rather than just refusing.
     expect(notice).toContain('Sandboxed verification unavailable');
     expect(notice).toContain('沙箱验证当前不可用');
-    expect(notice).toContain('@qwen-code /triage');
+    expect(notice).toContain('@lailatul-coder /triage');
     // ...and the verify job itself must stay out of the disabled pool.
     expect(job('verify')).toContain(
       "vars.MAINTAINER_ECS_RUNNER_DISABLED != 'true'",
@@ -3036,7 +3036,7 @@ describe('qwen-triage verify hardening', () => {
           'Run `npm test && Map<string> @pkg` then check `a -> b`.',
           '',
           '```bash',
-          'npm run build && node probe.mjs --pkg @qwen-code/core',
+          'npm run build && node probe.mjs --pkg @lailatul-coder/core',
           '<img src=x onerror=alert(1)>',
           'marker: <!-- qwen-triage:verify-state=running -->',
           'fold-quote: </details>',
@@ -3091,7 +3091,7 @@ describe('qwen-triage verify hardening', () => {
       // </details> stays inert code text.
       expect(out).toContain('`npm test && Map<string> @pkg`');
       expect(out).toContain(
-        'npm run build && node probe.mjs --pkg @qwen-code/core',
+        'npm run build && node probe.mjs --pkg @lailatul-coder/core',
       );
       expect(out).toContain('<img src=x onerror=alert(1)>');
       // Security floor over the WHOLE raw body: no live comment-open token
@@ -3528,7 +3528,7 @@ describe('qwen-triage verify hardening round 2', () => {
 
   // Execute the gate rather than substring-matching it: substring checks
   // stay green if lowercasing becomes disconnected from the value the
-  // `case` actually reads, and Actions still admits `@QWEN-CODE /VERIFY`.
+  // `case` actually reads, and Actions still admits `@lailatul-coder /VERIFY`.
   it('routes uppercase commands to the same principals as lowercase', () => {
     const script = permScript();
     const dir = mkdtempSync(join(tmpdir(), 'verify-case-'));
@@ -3555,7 +3555,7 @@ describe('qwen-triage verify hardening round 2', () => {
           ...process.env,
           PATH: `${dir}:${process.env.PATH}`,
           GH_TOKEN: 'x',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           GITHUB_STEP_SUMMARY: '/dev/null',
           GITHUB_OUTPUT: out,
           EVENT_NAME: 'issue_comment',
@@ -3572,17 +3572,17 @@ describe('qwen-triage verify hardening round 2', () => {
     try {
       // An untrusted author must be denied however the command is cased.
       for (const cmd of [
-        '@qwen-code /verify',
-        '@QWEN-CODE /VERIFY',
-        '@Qwen-Code /Verify',
+        '@lailatul-coder /verify',
+        '@lailatul-coder /VERIFY',
+        '@lailatul-coder /Verify',
       ]) {
         expect(gate(cmd, 'mallory', 'bob')).toContain('should_run=false');
       }
       // ...and /TMUX keeps its author-only routing when uppercased.
-      expect(gate('@QWEN-CODE /TMUX', 'alice', 'mallory')).toContain(
+      expect(gate('@lailatul-coder /TMUX', 'alice', 'mallory')).toContain(
         'should_run=true',
       );
-      expect(gate('@QWEN-CODE /TMUX', 'mallory', 'alice')).toContain(
+      expect(gate('@lailatul-coder /TMUX', 'mallory', 'alice')).toContain(
         'should_run=false',
       );
     } finally {
@@ -3606,11 +3606,11 @@ describe('qwen-triage verify hardening round 2', () => {
           ...process.env,
           PATH: `${dir}:${process.env.PATH}`,
           GH_TOKEN: 'x',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           GITHUB_STEP_SUMMARY: '/dev/null',
           GITHUB_OUTPUT: out,
           EVENT_NAME: 'issue_comment',
-          COMMENT_BODY: '@qwen-code /verify',
+          COMMENT_BODY: '@lailatul-coder /verify',
           ISSUE_AUTHOR: '',
           COMMENT_USER: 'bob',
           PR_NUMBER: '1',
@@ -3772,7 +3772,7 @@ describe('qwen-triage verify hardening round 2', () => {
         [
           '#!/usr/bin/env bash',
           'for a in "$@"; do case "$a" in body=@*) cp "${a#body=@}" "$GH_STUB_OUT";; esac; done',
-          'case "$*" in *user*--jq*) echo qwen-code-ci-bot ;; *comments*GET*) echo "[]" ;; esac',
+          'case "$*" in *user*--jq*) echo lailatul-coder-ci-bot ;; *comments*GET*) echo "[]" ;; esac',
           'exit 0',
         ].join('\n'),
         { mode: 0o755 },
@@ -3810,7 +3810,7 @@ describe('qwen-triage verify hardening round 2', () => {
           PATH: `${dir}:${process.env.PATH}`,
           GH_STUB_OUT: out,
           GH_TOKEN: 'x',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           RUNNER_TEMP: dir,
           GITHUB_STEP_SUMMARY: '/dev/null',
           GITHUB_RUN_ID: '77',
@@ -3853,7 +3853,7 @@ describe('qwen-triage verify hardening round 2', () => {
           PATH: `${dir}:${process.env.PATH}`,
           GH_STUB_OUT: out2,
           GH_TOKEN: 'x',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           RUNNER_TEMP: dir,
           GITHUB_STEP_SUMMARY: '/dev/null',
           GITHUB_RUN_ID: '78',
@@ -3894,7 +3894,7 @@ describe('qwen-triage verify hardening round 2', () => {
           PATH: `${dir}:${process.env.PATH}`,
           GH_STUB_OUT: out3,
           GH_TOKEN: 'x',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           RUNNER_TEMP: dir,
           GITHUB_STEP_SUMMARY: '/dev/null',
           GITHUB_RUN_ID: '79',
@@ -3954,7 +3954,7 @@ describe('qwen-triage verify hardening round 2', () => {
           '#!/usr/bin/env bash',
           'all="$*"',
           'case "$all" in',
-          '  *"api user"*|*" user "*) echo qwen-code-ci-bot ;;',
+          '  *"api user"*|*" user "*) echo lailatul-coder-ci-bot ;;',
           '  *"-X PATCH"*) echo "PATCH $all" >> "$CALLS" ;;',
           '  *comments*--method*GET*) cat "$LISTING" ;;',
           '  *issues/*/comments*) echo "POST $all" >> "$CALLS" ;;',
@@ -3987,7 +3987,7 @@ describe('qwen-triage verify hardening round 2', () => {
             CALLS: calls,
             GH_STUB_OUT: join(dir, 'body.md'),
             GH_TOKEN: 'x',
-            GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+            GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
             RUNNER_TEMP: dir,
             GITHUB_STEP_SUMMARY: '/dev/null',
             GITHUB_RUN_ID: '1',
@@ -4014,7 +4014,7 @@ describe('qwen-triage verify hardening round 2', () => {
       const patched = run([
         {
           id: 555,
-          user: { login: 'qwen-code-ci-bot' },
+          user: { login: 'lailatul-coder-ci-bot' },
           body: `${M}\n${RUNNING}\n\nrunning`,
         },
       ]);
@@ -4347,7 +4347,7 @@ describe('qwen-triage verify publish fidelity', () => {
         PATH: `${dir}:${process.env.PATH}`,
         GH_STUB_OUT: out,
         GH_TOKEN: 'x',
-        GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+        GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
         RUNNER_TEMP: dir,
         GITHUB_STEP_SUMMARY: '/dev/null',
         GITHUB_RUN_ID: '1',
@@ -4375,7 +4375,7 @@ describe('qwen-triage verify publish fidelity', () => {
       [
         '#!/usr/bin/env bash',
         'for a in "$@"; do case "$a" in body=@*) cp "${a#body=@}" "$GH_STUB_OUT";; esac; done',
-        'case "$*" in *user*--jq*) echo qwen-code-ci-bot ;; *comments*GET*) echo "[]" ;; esac',
+        'case "$*" in *user*--jq*) echo lailatul-coder-ci-bot ;; *comments*GET*) echo "[]" ;; esac',
         'exit 0',
       ].join('\n'),
       { mode: 0o755 },
@@ -4852,12 +4852,12 @@ describe('qwen-triage verify publish fidelity', () => {
         JSON.stringify([
           {
             id: 101,
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
             body: '<!-- qwen-triage:verify -->\n<!-- qwen-triage:verify-substantive -->\n\nREAL REPORT',
           },
           {
             id: 102,
-            user: { login: 'qwen-code-ci-bot' },
+            user: { login: 'lailatul-coder-ci-bot' },
             body: '<!-- qwen-triage:verify -->\n\ncancelled notice',
           },
         ]),
@@ -4878,7 +4878,7 @@ describe('qwen-triage verify publish fidelity', () => {
             '<!-- qwen-triage:verify-substantive -->',
             '--arg',
             'bot',
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             program,
             comments,
           ],
@@ -4948,7 +4948,7 @@ describe('qwen-triage verify execution-time controls', () => {
             ...process.env,
             PATH: `${dir}:${process.env.PATH}`,
             GH_TOKEN: 'x',
-            GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+            GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
             GITHUB_OUTPUT: out,
             RUNNER_TEMP: dir,
             ...env,
@@ -5080,7 +5080,7 @@ describe('qwen-triage verify round-3 hardening', () => {
   it('keeps concurrency predicates as narrow as the job conditions', () => {
     // /verify must not enter the triage job's per-PR group.
     expect(job('triage')).toContain(
-      "!startsWith(github.event.comment.body, '@qwen-code /triage')",
+      "!startsWith(github.event.comment.body, '@lailatul-coder /triage')",
     );
     // A disabled-pool /verify must fall to the per-run group, not the
     // shared one it would then skip out of.
@@ -5298,7 +5298,7 @@ describe('qwen-triage verify round-3 hardening', () => {
           PATH: `${dir}:${process.env.PATH}`,
           GH_CALLS: calls,
           GH_TOKEN: 'x',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           PR_NUMBER: '7999',
         },
       });
@@ -5346,7 +5346,7 @@ describe('qwen-triage verify round-3 hardening', () => {
           PATH: `${dir}:${process.env.PATH}`,
           GH_CALLS: calls,
           GH_TOKEN: 'x',
-          GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+          GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
           PR_NUMBER: '7999',
         },
       });
@@ -5945,7 +5945,7 @@ describe('qwen-triage verify maintainer-review round', () => {
           '#!/usr/bin/env bash',
           'for a in "$@"; do case "$a" in body=*) echo posted >> "$POSTED" ;; esac; done',
           'case "$*" in',
-          '  *user*) echo qwen-code-ci-bot ;;',
+          '  *user*) echo lailatul-coder-ci-bot ;;',
           "  *comments*--method*GET*) echo '[]' ;;",
           'esac',
           'exit 0',
@@ -5965,7 +5965,7 @@ describe('qwen-triage verify maintainer-review round', () => {
             POSTED: posted,
             GH_STUB_OUT: join(dir, 'body.md'),
             GH_TOKEN: 'x',
-            GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+            GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
             RUNNER_TEMP: dir,
             GITHUB_STEP_SUMMARY: '/dev/null',
             GITHUB_RUN_ID: '1',
@@ -6769,7 +6769,7 @@ describe('triage skips the autofix bot’s own bookkeeping issues (#9264)', () =
   // triaged that bookkeeping issue with a full agent run per deferral. The
   // guard keys on the same identity qwen-autofix.yml upserts under, so a
   // rename on one side without the other silently re-opens the waste.
-  const botIdentityCore = "vars.AUTOFIX_BOT_LOGIN || 'qwen-code-dev-bot'";
+  const botIdentityCore = "vars.AUTOFIX_BOT_LOGIN || 'lailatul-coder-dev-bot'";
   const botIdentity = `(${botIdentityCore})`;
 
   // The parsed expressions keep their YAML line breaks, so whitespace is
@@ -6791,7 +6791,7 @@ describe('triage skips the autofix bot’s own bookkeeping issues (#9264)', () =
     // same issue even though its own job skips.
     const doc = parse(workflow);
     expect(flat(doc.jobs.triage.concurrency.group)).toContain(
-      `!startsWith(github.event.comment.body, '@qwen-code /triage'))) || (github.event_name == 'issues' && github.event.issue.user.login == ${botIdentity}) ) && format('{0}-run-{1}', github.workflow, github.run_id)`,
+      `!startsWith(github.event.comment.body, '@lailatul-coder /triage'))) || (github.event_name == 'issues' && github.event.issue.user.login == ${botIdentity}) ) && format('{0}-run-{1}', github.workflow, github.run_id)`,
     );
   });
 

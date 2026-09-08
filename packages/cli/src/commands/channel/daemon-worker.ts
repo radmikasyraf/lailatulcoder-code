@@ -1,5 +1,5 @@
 import type { CommandModule } from 'yargs';
-import { canonicalizeWorkspace } from '@qwen-code/acp-bridge/workspacePaths';
+import { canonicalizeWorkspace } from '@lailatul-coder/acp-bridge/workspacePaths';
 import {
   addChannelMemoryEntries,
   clearChannelMemory,
@@ -10,7 +10,7 @@ import {
   recordChannelMemoryRecallMetrics,
   removeChannelMemoryEntries,
   updateChannelMemoryEntry,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { loadSettings } from '../../config/settings.js';
 import { scrubAndReportInheritedLoaderEnv } from '../../config/shared-env-keys.js';
 import {
@@ -20,7 +20,7 @@ import {
   isChannelProactiveDeliveryError,
   sanitizeLogText,
   SessionRouter,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type {
   ChannelAgentBridge,
   ChannelBase,
@@ -31,7 +31,7 @@ import type {
   DaemonChannelSessionClient,
   DaemonChannelSessionFactory,
   DaemonChannelSessionFactoryRequest,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type { ServeChannelSelection } from '../../serve/types.js';
 import { normalizeServeChannelSelection } from '../../serve/channel-selection.js';
 import {
@@ -42,7 +42,7 @@ import {
   QWEN_DAEMON_WORKSPACE_ENV,
   QWEN_SERVER_TOKEN_ENV,
 } from '../../serve/channel-worker-env.js';
-import { EXTERNAL_TOOL_GUARD_TOKEN_ENV } from '@qwen-code/acp-bridge/externalToolGuard';
+import { EXTERNAL_TOOL_GUARD_TOKEN_ENV } from '@lailatul-coder/acp-bridge/externalToolGuard';
 import {
   isChannelWebhookTaskMessage,
   type ChannelWebhookEnqueueErrorCode,
@@ -283,7 +283,7 @@ export function createDaemonChannelBridgeFacade(
 }
 
 async function loadDaemonSdk(): Promise<DaemonSdkLike> {
-  return (await import('@qwen-code/sdk/daemon')) as unknown as DaemonSdkLike;
+  return (await import('@lailatul-coder/sdk/daemon')) as unknown as DaemonSdkLike;
 }
 
 function selectedChannelNames(

@@ -1,19 +1,19 @@
 # Extension Runtime Refresh Implementation Plan
 
-Tracking issue: https://github.com/QwenLM/qwen-code/issues/3696
+Tracking issue: https://github.com/LailatulCoder/lailatul-coder/issues/3696
 
 Working branch: `feat/extension-runtime-refresh`
 
 ## Summary
 
-Qwen Code should keep the existing user experience where extension UI
+LailatulCoder Ai should keep the existing user experience where extension UI
 mutations take effect automatically. Installing, updating, enabling, disabling,
 or uninstalling an extension should continue to refresh runtime state without
 requiring the user to run a manual command.
 
 The remaining work is to make that automatic path complete, cheaper, and more
 visible to the model. A separate `/reload-plugins` path should be added later
-for external file changes that Qwen Code did not initiate, such as editing
+for external file changes that LailatulCoder Ai did not initiate, such as editing
 installed extension files by hand.
 
 ## Current Behavior
@@ -51,7 +51,7 @@ Extension UI mutations should remain automatic. This differs from Claude Code's
 plugin flow, where plugin mutations primarily set a stale flag and ask the user
 to run `/reload-plugins`.
 
-For Qwen Code, automatic mutation refresh is the better default because it
+For LailatulCoder Ai, automatic mutation refresh is the better default because it
 preserves the current UX: when a user toggles an extension, the extension should
 actually become usable or unusable in the running session.
 
@@ -293,7 +293,7 @@ Expected value:
 
 ## Non-Goals
 
-- Do not replace Qwen Code's automatic extension mutation behavior with a
+- Do not replace LailatulCoder Ai's automatic extension mutation behavior with a
   mandatory manual reload flow.
 - Do not introduce a broad generic refresh framework before concrete call sites
   need it.

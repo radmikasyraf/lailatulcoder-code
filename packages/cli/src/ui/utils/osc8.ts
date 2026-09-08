@@ -9,7 +9,7 @@
  *
  * The shared primitives — `sanitizeForOsc`, `osc8Hyperlink`,
  * `supportsHyperlinks`, `wrapForMultiplexer`, `HYPERLINK_ENV_KEYS` — now live
- * in `@qwen-code/qwen-code-core` so core-side emitters (e.g. the Qwen OAuth
+ * in `@lailatul-coder/lailatul-coder-core` so core-side emitters (e.g. the Qwen OAuth
  * device-flow fallback message) can wrap a URL in a single clickable link.
  * They are re-exported here so existing CLI imports of this module keep
  * resolving unchanged. The markdown-link and label-deception helpers below are
@@ -28,7 +28,7 @@ import {
   supportsHyperlinks,
   wrapForMultiplexer,
   HYPERLINK_ENV_KEYS,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 export {
   osc8Hyperlink,

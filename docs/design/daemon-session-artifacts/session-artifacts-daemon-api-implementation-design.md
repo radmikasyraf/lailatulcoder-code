@@ -1,8 +1,8 @@
-# Qwen-Code Daemon Session Artifacts API 可实施设计
+# lailatul-coder Daemon Session Artifacts API 可实施设计
 
 > 输入资料：session artifacts daemon API 初版草案与 artifact design v1 草案。
 >
-> 源码基线：当前 qwen-code 代码。  
+> 源码基线：当前 lailatul-coder 代码。  
 > 目标：基于现有 Daemon / ACP / SSE / SDK / hooks / extension 能力，设计一套可实施、可验证、边界清楚的 session artifacts API。
 
 ## 1. 设计结论
@@ -1279,7 +1279,7 @@ V1 提供 hook artifacts 后，extension 可在 `qwen-extension.json` 或 `hooks
 }
 ```
 
-当前 qwen-code extension/hook 变量替换仍支持 `${CLAUDE_PLUGIN_ROOT}`；如果后续引入新的 qwen-specific root 变量，示例可随实现同步迁移。
+当前 lailatul-coder extension/hook 变量替换仍支持 `${CLAUDE_PLUGIN_ROOT}`；如果后续引入新的 qwen-specific root 变量，示例可随实现同步迁移。
 
 脚本 stdout：
 

@@ -1,6 +1,6 @@
 # Agent Tool (`agent`)
 
-This document describes the `agent` tool for Qwen Code.
+This document describes the `agent` tool for LailatulCoder Ai.
 
 ## Description
 
@@ -17,10 +17,10 @@ Use `agent` to launch a specialized subagent to handle complex, multi-step tasks
 - `fork_tools` (array of strings, optional): Only valid with `subagent_type="fork"`. Restricts execution to exact canonical tool names or MCP server patterns while keeping the fork's current model-visible tool declarations unchanged for prompt-cache sharing. Entries cannot have surrounding whitespace; wildcards are limited to `mcp__*` or a trailing MCP tool-prefix pattern such as `mcp__github__read_*`. Forks never execute `ask_user_question`; omit `fork_tools` to allow every other inherited tool, or use an empty array to reject every tool call.
 - `fork_profile` (string, optional): Only valid with `subagent_type="fork"`. Loads a frontmatter-only regular `.qwen/fork-profiles/<name>.md` of at most 64 KiB from the active project root and applies its required `tools` array plus an optional `promptHint` of at most 200 characters. The file cannot resolve outside the project profile directory. `fork_profile` cannot be combined with `fork_tools` or a named teammate, and it is unavailable in safe mode or bare mode.
 - `run_in_background` (boolean, optional): Defaults to `true` for top-level regular agents. Set to `false` to wait for a regular agent's result inline. Headless forks always run in the background. Nested agents run in the foreground unless `run_in_background` is explicitly `true`, which is rejected because nested agents cannot receive background completion notifications. Caller-owned `working_dir` launches run in the foreground and reject explicit or configured background execution.
-- `isolation` (string, optional): Set to `"worktree"` to run an explicitly named, non-fork agent in an isolated git worktree that Qwen Code creates and manages.
+- `isolation` (string, optional): Set to `"worktree"` to run an explicitly named, non-fork agent in an isolated git worktree that LailatulCoder Ai creates and manages.
 - `working_dir` (string, optional): Pin an explicitly named, non-fork agent to an existing registered git worktree inside the current repository. The caller owns the worktree lifecycle, so this mode runs in the foreground. If both `working_dir` and `isolation` are provided, `working_dir` takes precedence.
 
-## How to use `agent` with Qwen Code
+## How to use `agent` with LailatulCoder Ai
 
 The Agent tool dynamically loads available subagents from your configuration and delegates tasks to them. Each subagent runs independently and can use its own set of tools, allowing for specialized expertise and parallel execution.
 
@@ -51,7 +51,7 @@ The available subagents depend on your configuration. Common subagent types migh
 - **test-runner**: For running tests and analyzing results
 - **documentation-writer**: For creating and updating documentation
 
-You can view available subagents by using the `/agents` command in Qwen Code.
+You can view available subagents by using the `/agents` command in LailatulCoder Ai.
 
 ## Agent Tool Features
 
@@ -160,7 +160,7 @@ Don't use the Agent tool for:
 
 ## Configuration
 
-Subagents are configured through Qwen Code's agent configuration system. Use the `/agents` command to:
+Subagents are configured through LailatulCoder Ai's agent configuration system. Use the `/agents` command to:
 
 - View available subagents
 - Create new subagent configurations

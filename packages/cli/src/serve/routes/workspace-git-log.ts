@@ -12,7 +12,7 @@ import {
   DEFAULT_LOG_LIMIT,
   type GitLogResult,
   type GitCommitDetail,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { SendBridgeError } from '../server/error-response.js';
 import type {
   WorkspaceRegistry,

@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config, DebugLogger } from '@qwen-code/qwen-code-core';
+import type { Config, DebugLogger } from '@lailatul-coder/lailatul-coder-core';
 
 export function fireSessionDeleteHook(
   config: Config,

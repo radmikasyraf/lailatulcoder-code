@@ -28,7 +28,7 @@ https://openai.com/zh-Hans-CN/index/harness-engineering/
 
 ## Desktop Application Pattern
 
-For qwen-code desktop work, the harness is:
+For lailatul-coder desktop work, the harness is:
 
 1. Desktop runtime logs under `~/Library/Logs/@craft-agent/electron/`.
 2. Domain-specific logs such as `~/.craft-agent/logs/messaging-gateway.log`.

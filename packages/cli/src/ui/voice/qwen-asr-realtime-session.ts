@@ -5,7 +5,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import WebSocket from 'ws';
 import type {
   SocketLike,

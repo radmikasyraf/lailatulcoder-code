@@ -30,7 +30,7 @@ function manifest() {
     schemaVersion: 1,
     version: '0.1.0',
     protocolVersion: LIVE_HOST_PROTOCOL_VERSION,
-    bundleId: 'com.alibaba.qwen-code.live-host',
+    bundleId: 'com.alibaba.lailatul-coder.live-host',
     assets: {
       arm64: {
         name: 'Qwen-Live-Host-arm64.zip',
@@ -69,10 +69,10 @@ function manifestForBytes(version: string, bytes: Buffer) {
 describe('LiveHostInstaller', () => {
   it('prefers the OSS mirror and retains the independent GitHub fallback', () => {
     expect(LIVE_HOST_OSS_BASE_URL).toBe(
-      'https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/live-host',
+      'https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/live-host',
     );
     expect(LIVE_HOST_RELEASE_BASE_URL).toBe(
-      'https://github.com/QwenLM/qwen-code/releases/download/live-host-latest',
+      'https://github.com/LailatulCoder/lailatul-coder/releases/download/live-host-latest',
     );
     expect(resolveLiveHostManifestUrls()).toEqual([
       `${LIVE_HOST_OSS_BASE_URL}/latest/Qwen-Live-Host-manifest.json`,

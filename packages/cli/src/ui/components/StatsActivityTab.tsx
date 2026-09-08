@@ -15,7 +15,7 @@ import {
 import { fmtTokens, fmtDurationShort, TableRow } from './stats-helpers.js';
 import { HeatmapView } from './StatsHeatmapView.js';
 import type { StatsData } from '../utils/statsDataService.js';
-import type { TimeRange } from '@qwen-code/qwen-code-core';
+import type { TimeRange } from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../i18n/index.js';
 
 export const ActivityTab: React.FC<{
@@ -273,3 +273,4 @@ export const ActivityTab: React.FC<{
     </Box>
   );
 };
+

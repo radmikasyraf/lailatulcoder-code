@@ -38,120 +38,120 @@
       // These tests import package sources by relative path
       // (`../../packages/cli/src/...`), so those files get checked here too
       // and must resolve their own imports.
-      "@qwen-code/qwen-code-core": ["../packages/core/src/index.ts"],
-      "@qwen-code/qwen-code-core/subSessionConstants": [
+      "@lailatul-coder/lailatul-coder-core": ["../packages/core/src/index.ts"],
+      "@lailatul-coder/lailatul-coder-core/subSessionConstants": [
         "../packages/core/src/tools/sub-session-constants.ts"
       ],
-      "@qwen-code/qwen-code-core/transcriptRecords": [
+      "@lailatul-coder/lailatul-coder-core/transcriptRecords": [
         "../packages/core/src/utils/transcript-records.ts"
       ],
-      "@qwen-code/qwen-code-core/goalWire": [
+      "@lailatul-coder/lailatul-coder-core/goalWire": [
         "../packages/core/src/goals/goal-wire.ts"
       ],
-      "@qwen-code/qwen-code-core/memoryScopes": [
+      "@lailatul-coder/lailatul-coder-core/memoryScopes": [
         "../packages/core/src/memory/scopes.ts"
       ],
-      "@qwen-code/qwen-code-core/userPromptSubmitContext": [
+      "@lailatul-coder/lailatul-coder-core/userPromptSubmitContext": [
         "../packages/core/src/hooks/user-prompt-submit-context.ts"
       ],
-      "@qwen-code/sdk": ["../packages/sdk-typescript/src/index.ts"],
-      "@qwen-code/sdk/daemon": [
+      "@lailatul-coder/sdk": ["../packages/sdk-typescript/src/index.ts"],
+      "@lailatul-coder/sdk/daemon": [
         "../packages/sdk-typescript/src/daemon/index.ts"
       ],
-      "@qwen-code/sdk/daemon/transcript": [
+      "@lailatul-coder/sdk/daemon/transcript": [
         "../packages/sdk-typescript/src/daemon/transcript.ts"
       ],
-      "@qwen-code/sdk/daemon/transports": [
+      "@lailatul-coder/sdk/daemon/transports": [
         "../packages/sdk-typescript/src/daemon/transports.ts"
       ],
-      "@qwen-code/sdk/daemon/types": [
+      "@lailatul-coder/sdk/daemon/types": [
         "../packages/sdk-typescript/src/daemon/types.ts"
       ],
-      "@qwen-code/sdk/daemon/ui/transcript": [
+      "@lailatul-coder/sdk/daemon/ui/transcript": [
         "../packages/sdk-typescript/src/daemon/ui/transcript.ts"
       ],
-      "@qwen-code/acp-bridge": ["../packages/acp-bridge/src/index.ts"],
-      "@qwen-code/acp-bridge/bridge": ["../packages/acp-bridge/src/bridge.ts"],
-      "@qwen-code/acp-bridge/bridgeClient": [
+      "@lailatul-coder/acp-bridge": ["../packages/acp-bridge/src/index.ts"],
+      "@lailatul-coder/acp-bridge/bridge": ["../packages/acp-bridge/src/bridge.ts"],
+      "@lailatul-coder/acp-bridge/bridgeClient": [
         "../packages/acp-bridge/src/bridgeClient.ts"
       ],
-      "@qwen-code/acp-bridge/bridgeErrors": [
+      "@lailatul-coder/acp-bridge/bridgeErrors": [
         "../packages/acp-bridge/src/bridgeErrors.ts"
       ],
-      "@qwen-code/acp-bridge/bridgeFileSystem": [
+      "@lailatul-coder/acp-bridge/bridgeFileSystem": [
         "../packages/acp-bridge/src/bridgeFileSystem.ts"
       ],
-      "@qwen-code/acp-bridge/bridgeOptions": [
+      "@lailatul-coder/acp-bridge/bridgeOptions": [
         "../packages/acp-bridge/src/bridgeOptions.ts"
       ],
-      "@qwen-code/acp-bridge/bridgeTypes": [
+      "@lailatul-coder/acp-bridge/bridgeTypes": [
         "../packages/acp-bridge/src/bridgeTypes.ts"
       ],
-      "@qwen-code/acp-bridge/channelControlTimeouts": [
+      "@lailatul-coder/acp-bridge/channelControlTimeouts": [
         "../packages/acp-bridge/src/channel-control-timeouts.ts"
       ],
-      "@qwen-code/acp-bridge/childHeapPolicy": [
+      "@lailatul-coder/acp-bridge/childHeapPolicy": [
         "../packages/acp-bridge/src/child-heap-policy.ts"
       ],
-      "@qwen-code/acp-bridge/daemonEventTypes": [
+      "@lailatul-coder/acp-bridge/daemonEventTypes": [
         "../packages/acp-bridge/src/daemonEventTypes.ts"
       ],
-      "@qwen-code/acp-bridge/daemonMemoryBudget": [
+      "@lailatul-coder/acp-bridge/daemonMemoryBudget": [
         "../packages/acp-bridge/src/daemon-memory-budget.ts"
       ],
-      "@qwen-code/acp-bridge/eventBus": [
+      "@lailatul-coder/acp-bridge/eventBus": [
         "../packages/acp-bridge/src/eventBus.ts"
       ],
-      "@qwen-code/acp-bridge/externalToolGuard": [
+      "@lailatul-coder/acp-bridge/externalToolGuard": [
         "../packages/acp-bridge/src/externalToolGuard.ts"
       ],
-      "@qwen-code/acp-bridge/logRedaction": [
+      "@lailatul-coder/acp-bridge/logRedaction": [
         "../packages/acp-bridge/src/logRedaction.ts"
       ],
-      "@qwen-code/acp-bridge/mcpTimeouts": [
+      "@lailatul-coder/acp-bridge/mcpTimeouts": [
         "../packages/acp-bridge/src/mcpTimeouts.ts"
       ],
-      "@qwen-code/acp-bridge/sessionArtifacts": [
+      "@lailatul-coder/acp-bridge/sessionArtifacts": [
         "../packages/acp-bridge/src/sessionArtifacts.ts"
       ],
-      "@qwen-code/acp-bridge/spawnChannel": [
+      "@lailatul-coder/acp-bridge/spawnChannel": [
         "../packages/acp-bridge/src/spawnChannel.ts"
       ],
-      "@qwen-code/acp-bridge/status": ["../packages/acp-bridge/src/status.ts"],
-      "@qwen-code/acp-bridge/transcriptReplay": [
+      "@lailatul-coder/acp-bridge/status": ["../packages/acp-bridge/src/status.ts"],
+      "@lailatul-coder/acp-bridge/transcriptReplay": [
         "../packages/acp-bridge/src/transcript-replay.ts"
       ],
-      "@qwen-code/acp-bridge/workspacePaths": [
+      "@lailatul-coder/acp-bridge/workspacePaths": [
         "../packages/acp-bridge/src/workspacePaths.ts"
       ],
       // qwen-serve-webui-live-journal-recovery.test.ts imports this subpath;
       // without an entry it resolves through the exports map to dist.
-      "@qwen-code/webui/daemon-react-sdk": [
+      "@lailatul-coder/webui/daemon-react-sdk": [
         "../packages/webui/src/daemon-react-sdk.ts"
       ],
       // channel-plugin.test.ts and the plugin-example sources it imports
-      // both import `@qwen-code/channel-base`. Map it to source so the
+      // both import `@lailatul-coder/channel-base`. Map it to source so the
       // typecheck does not depend on channel-base's dist and both import
       // sites share one declaration — mixing src and dist declarations
       // produces duplicate-private-class errors.
-      "@qwen-code/channel-base": ["../packages/channels/base/src/index.ts"],
+      "@lailatul-coder/channel-base": ["../packages/channels/base/src/index.ts"],
       // cli's channel-registry.ts imports the eight builtin channel
       // adapters and html.ts imports web-templates; without entries they
       // resolve through their exports maps to dist, leaving the typecheck
       // dependent on those packages being built.
-      "@qwen-code/channel-telegram": [
+      "@lailatul-coder/channel-telegram": [
         "../packages/channels/telegram/src/index.ts"
       ],
-      "@qwen-code/channel-weixin": ["../packages/channels/weixin/src/index.ts"],
-      "@qwen-code/channel-dingtalk": [
+      "@lailatul-coder/channel-weixin": ["../packages/channels/weixin/src/index.ts"],
+      "@lailatul-coder/channel-dingtalk": [
         "../packages/channels/dingtalk/src/index.ts"
       ],
-      "@qwen-code/channel-wecom": ["../packages/channels/wecom/src/index.ts"],
-      "@qwen-code/channel-feishu": ["../packages/channels/feishu/src/index.ts"],
-      "@qwen-code/channel-qqbot": ["../packages/channels/qqbot/src/index.ts"],
-      "@qwen-code/channel-github": ["../packages/channels/github/src/index.ts"],
-      "@qwen-code/channel-gitlab": ["../packages/channels/gitlab/src/index.ts"],
-      "@qwen-code/web-templates": ["../packages/web-templates/src/index.ts"],
+      "@lailatul-coder/channel-wecom": ["../packages/channels/wecom/src/index.ts"],
+      "@lailatul-coder/channel-feishu": ["../packages/channels/feishu/src/index.ts"],
+      "@lailatul-coder/channel-qqbot": ["../packages/channels/qqbot/src/index.ts"],
+      "@lailatul-coder/channel-github": ["../packages/channels/github/src/index.ts"],
+      "@lailatul-coder/channel-gitlab": ["../packages/channels/gitlab/src/index.ts"],
+      "@lailatul-coder/web-templates": ["../packages/web-templates/src/index.ts"],
       // node-pty declares `types` at the top level but its `exports` map is a
       // bare string with no `types` condition, so nodenext resolution never
       // reaches the declarations and every pty handle degrades to `any` —

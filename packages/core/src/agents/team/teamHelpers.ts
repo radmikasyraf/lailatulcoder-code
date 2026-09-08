@@ -278,7 +278,7 @@ export async function writeTeamFile(
 
 /**
  * Atomically create a team file. Throws ENOENT-equivalent
- * `EEXIST` if a different qwen-code session already owns the
+ * `EEXIST` if a different lailatul-coder session already owns the
  * team name — `team_create`'s in-process guard only checks the
  * current Config, so without this two sessions opening the same
  * team name would silently clobber each other's state.

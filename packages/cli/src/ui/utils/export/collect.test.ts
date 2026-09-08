@@ -6,7 +6,7 @@
 
 import { describe, expect, it, vi } from 'vitest';
 import { createHash } from 'node:crypto';
-import type { ChatRecord, Config } from '@qwen-code/qwen-code-core';
+import type { ChatRecord, Config } from '@lailatul-coder/lailatul-coder-core';
 import { collectSessionData } from './collect.js';
 import type { ExportConfig } from './types.js';
 

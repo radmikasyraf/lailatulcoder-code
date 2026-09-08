@@ -35,7 +35,7 @@ export function getHeadlessYoloSafetyWarning(
   if (config.getSandbox()) return null;
   // `SANDBOX` is set by the sandbox transport itself: macOS seatbelt sets
   // it to `sandbox-exec`, Docker/Podman to the container name (e.g.
-  // `qwen-code-sandbox`). Match the rest of the codebase
+  // `lailatul-coder-sandbox`). Match the rest of the codebase
   // (sandboxConfig.ts, gemini.tsx, Footer.tsx, prompts.ts, …) which all
   // treat any non-empty value as "inside a sandbox". A strict 1/true
   // check here misfires inside real sandboxes, where the helper would

@@ -216,7 +216,7 @@ export function estimatePartChars(
   if (typeof part.text === 'string') {
     return part.text.length;
   }
-  // Tool results in qwen-code carry media on `functionResponse.parts`
+  // Tool results in lailatul-coder carry media on `functionResponse.parts`
   // (an extension to the @google/genai schema; see
   // `coreToolScheduler.createFunctionResponsePart`). Walk into those
   // nested parts so a base64 image attached to a `read_file` result
@@ -245,7 +245,7 @@ export function estimatePartChars(
 
 /**
  * Returns the nested-parts array from a `functionResponse`, if present.
- * qwen-code attaches media here (see
+ * lailatul-coder attaches media here (see
  * `coreToolScheduler.createFunctionResponsePart`); the standard
  * `@google/genai` FunctionResponse type does not declare it.
  *
@@ -340,7 +340,7 @@ function transformPart(
     }
     return mediaPlaceholderPart(part.fileData.mimeType, stats);
   }
-  // Walk into functionResponse.parts (qwen-code's nested-media carrier
+  // Walk into functionResponse.parts (lailatul-coder's nested-media carrier
   // for tool results — see `coreToolScheduler.createFunctionResponsePart`).
   // Without this, base64 images returned by read_file et al. leak into
   // the side-query payload.
@@ -395,7 +395,7 @@ function mediaPlaceholderPart(
 
 function isNonImageMime(mime: string): boolean {
   // Anything outside image/* is rendered with the `[document: ...]`
-  // placeholder. audio/video are rare on qwen-code's tool surface and
+  // placeholder. audio/video are rare on lailatul-coder's tool surface and
   // the placeholder is purely informational, so the conservative
   // grouping is acceptable.
   return !mime.startsWith('image/');

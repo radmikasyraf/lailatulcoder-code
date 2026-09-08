@@ -17,7 +17,7 @@ import {
   type TranscriptProjectionDiagnostic,
   type TranscriptRecordInput,
   type TranscriptReplayGapInput,
-} from '@qwen-code/qwen-code-core/transcriptRecords';
+} from '@lailatul-coder/lailatul-coder-core/transcriptRecords';
 import {
   isGoalCheckpointBookkeepingRecord,
   parseGoalSnapshotV2,
@@ -26,7 +26,7 @@ import {
   projectGoalStateToLegacy,
   type GoalSnapshotV2,
   type GoalStateCause,
-} from '@qwen-code/qwen-code-core/goalWire';
+} from '@lailatul-coder/lailatul-coder-core/goalWire';
 
 export const MISSING_TRANSCRIPT_TOOL_RESULT_MESSAGE =
   'Tool result missing from saved history; the previous run likely ended ' +

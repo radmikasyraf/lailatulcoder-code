@@ -6,7 +6,7 @@
 
 import { Box, Text } from 'ink';
 import { Colors } from '../colors.js';
-import { type ProjectSummaryInfo } from '@qwen-code/qwen-code-core';
+import { type ProjectSummaryInfo } from '@lailatul-coder/lailatul-coder-core';
 import {
   RadioButtonSelect,
   type RadioSelectItem,
@@ -132,3 +132,4 @@ export function WelcomeBackDialog({
     </Box>
   );
 }
+

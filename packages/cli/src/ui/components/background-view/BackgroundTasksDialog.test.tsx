@@ -12,8 +12,8 @@ import type {
   Config,
   WorkflowApproval,
   WorkflowTask,
-} from '@qwen-code/qwen-code-core';
-import { ToolConfirmationOutcome } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import { ToolConfirmationOutcome } from '@lailatul-coder/lailatul-coder-core';
 import { BackgroundTasksDialog } from './BackgroundTasksDialog.js';
 import {
   BackgroundTaskViewProvider,
@@ -1968,3 +1968,4 @@ describe('BackgroundTasksDialog', () => {
     });
   });
 });
+

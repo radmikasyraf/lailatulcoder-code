@@ -12,7 +12,7 @@ import {
   ApprovalMode,
   type AgentInteractive,
   type Config,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   AgentViewProvider,
   useAgentViewActions,
@@ -170,3 +170,4 @@ describe('AgentViewProvider in-process bridges', () => {
     expect(lastFrame()).toContain('main:false');
   });
 });
+

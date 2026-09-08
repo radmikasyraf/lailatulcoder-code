@@ -7,7 +7,7 @@
 /**
  * Daemon vs CLI — performance benchmark.
  *
- * Compares the two qwen-code execution modes across startup latency,
+ * Compares the two lailatul-coder execution modes across startup latency,
  * session creation, memory footprint, and (when a model key is
  * available) prompt round-trip latency and concurrent queuing behavior.
  *
@@ -22,7 +22,7 @@ import * as fs from 'node:fs';
 import { performance } from 'node:perf_hooks';
 import { afterAll, describe, expect, it } from 'vitest';
 
-import { DaemonHttpError } from '@qwen-code/sdk';
+import { DaemonHttpError } from '@lailatul-coder/sdk';
 import {
   spawnDaemon,
   percentiles,

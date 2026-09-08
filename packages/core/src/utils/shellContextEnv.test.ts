@@ -496,7 +496,7 @@ describe('getShellContextEnvVars', () => {
 
     it('blanks the key when nothing published one', () => {
       // `''`, not absent: the spawn-site spread would otherwise leak an
-      // inherited value from a parent qwen-code process. `roundModelIdFrom`
+      // inherited value from a parent lailatul-coder process. `roundModelIdFrom`
       // reads an empty identity as unpublished and falls back to the bare id.
       process.env['QWEN_CODE_MODEL'] = 'qwen3-coder-plus';
       expect(getShellContextEnvVars()['QWEN_CODE_MODEL_IDENTITY']).toBe('');
@@ -543,7 +543,7 @@ describe('getShellContextEnvVars', () => {
   });
 
   it('sets empty string for agent/prompt to override inherited env', () => {
-    // Simulates a nested qwen-code process where parent injected these
+    // Simulates a nested lailatul-coder process where parent injected these
     const env = getShellContextEnvVars();
     expect(env['QWEN_CODE_AGENT_ID']).toBe('');
     expect(env['QWEN_CODE_PROMPT_ID']).toBe('');

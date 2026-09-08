@@ -17,8 +17,8 @@ import {
 import * as fs from 'node:fs/promises';
 import * as os from 'node:os';
 import * as path from 'node:path';
-import { NOT_CURRENTLY_GENERATING_CANCEL_MESSAGE } from '@qwen-code/acp-bridge/bridgeErrors';
-import { ACP_EVENT_LOOP_STALL_RESTART_MS } from '@qwen-code/channel-base';
+import { NOT_CURRENTLY_GENERATING_CANCEL_MESSAGE } from '@lailatul-coder/acp-bridge/bridgeErrors';
+import { ACP_EVENT_LOOP_STALL_RESTART_MS } from '@lailatul-coder/channel-base';
 
 // Mock cleanup module before importing anything else
 const { mockRunExitCleanup } = vi.hoisted(() => ({
@@ -179,7 +179,7 @@ vi.mock('@agentclientprotocol/sdk', async (importOriginal) => ({
   PROTOCOL_VERSION: '1.0.0',
 }));
 
-vi.mock('@qwen-code/acp-bridge/ndJsonStream', () => ({
+vi.mock('@lailatul-coder/acp-bridge/ndJsonStream', () => ({
   ndJsonStream: vi.fn().mockReturnValue({}),
 }));
 
@@ -194,49 +194,49 @@ vi.mock('node:stream', async (importOriginal) => {
 });
 
 // Mock core dependencies
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
   BranchPointInvalidError: class BranchPointInvalidError extends Error {
     constructor(readonly recordId: string) {
       super(`Invalid or inactive branch point: ${recordId}`);
     }
   },
-  INVOCATION_CONTEXT_META_KEY: 'qwen-code/invocation',
+  INVOCATION_CONTEXT_META_KEY: 'lailatul-coder/invocation',
   PRIVATE_ACP_CAPABILITY_ENV: 'QWEN_CODE_PRIVATE_ACP_CAPABILITY',
-  PRIVATE_PARENT_CAPABILITY_META_KEY: 'qwen-code/private-parent-capability',
+  PRIVATE_PARENT_CAPABILITY_META_KEY: 'lailatul-coder/private-parent-capability',
   parseInvocationContext: vi.fn(
-    (await importOriginal<typeof import('@qwen-code/qwen-code-core')>())
+    (await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>())
       .parseInvocationContext,
   ),
   isTurnResultRecordPayload: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).isTurnResultRecordPayload,
   SESSION_ARTIFACT_PERSISTENCE_VERSION: 2,
   GOAL_STATE_VERSION: 2,
   // The real helper: the goal get/clear fallbacks return its exact shape and
   // the assertions below compare against it.
   emptyGoalSnapshot: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).emptyGoalSnapshot,
   // The real class: `acpAgent` narrows on it with `instanceof`, so a stand-in
   // would make the goal get/clear fallbacks untestable.
   GoalPersistenceUnavailableError: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).GoalPersistenceUnavailableError,
   parseGoalControlRequest: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).parseGoalControlRequest,
   // The real classes for the same reason as above: `mapGoalControlError`
   // narrows on them with `instanceof`, and a stand-in (or an omission, which
   // resolves to undefined) makes every conflict/transition branch throw before
   // it can be asserted.
   GoalConflictError: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).GoalConflictError,
   GoalInvalidTransitionError: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).GoalInvalidTransitionError,
   SessionIdCaseConflictError: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).SessionIdCaseConflictError,
   normalizeEventPayload: vi.fn((payload: unknown) =>
     typeof payload === 'object' &&
@@ -258,10 +258,10 @@ vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
   addDaemonRequestAttribute: mockAddDaemonRequestAttribute,
   observeToolResultBoundary: vi.fn(() => false),
   toolResultArtifactState: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).toolResultArtifactState,
   toolResultPartDiagnosticValues: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).toolResultPartDiagnosticValues,
   preloadContentGenerator: mockPreloadContentGenerator,
   createDebugLogger: () => mockDebugLogger,
@@ -345,16 +345,16 @@ vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
   ),
   SessionTranscriptReader: vi.fn(),
   isReplayTurnStartType: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).isReplayTurnStartType,
   parseGoalSnapshotV2: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).parseGoalSnapshotV2,
   parseGoalStateCause: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).parseGoalStateCause,
   findBoundaryAtOrBefore: (
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>()
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
   ).findBoundaryAtOrBefore,
   ALL_PROVIDERS: [
     {
@@ -920,7 +920,7 @@ import {
   createManagedExternalToolGuard,
 } from './acpAgent.js';
 import { gzipSync } from 'node:zlib';
-import type { Config, GoalSnapshotV2 } from '@qwen-code/qwen-code-core';
+import type { Config, GoalSnapshotV2 } from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../config/settings.js';
 import type { CliArgs } from '../config/config.js';
 import {
@@ -960,9 +960,9 @@ import {
   GoalPersistenceUnavailableError,
   GoalConflictError,
   GoalInvalidTransitionError,
-} from '@qwen-code/qwen-code-core';
-import { ndJsonStream } from '@qwen-code/acp-bridge/ndJsonStream';
-import { SESSION_SOURCE_META_KEY } from '@qwen-code/acp-bridge';
+} from '@lailatul-coder/lailatul-coder-core';
+import { ndJsonStream } from '@lailatul-coder/acp-bridge/ndJsonStream';
+import { SESSION_SOURCE_META_KEY } from '@lailatul-coder/acp-bridge';
 import type {
   Agent,
   LoadSessionResponse,
@@ -984,12 +984,12 @@ import { Session, buildAvailableCommandsSnapshot } from './session/Session.js';
 import {
   SERVE_STATUS_EXT_METHODS,
   SERVE_CONTROL_EXT_METHODS,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 import {
   EXTERNAL_TOOL_GUARD_READY_META_KEY,
   EXTERNAL_TOOL_GUARD_REQUIRED_VALUE,
-} from '@qwen-code/acp-bridge/externalToolGuard';
-import type { ServeWorkspaceSkillsStatus } from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/externalToolGuard';
+import type { ServeWorkspaceSkillsStatus } from '@lailatul-coder/acp-bridge/status';
 import {
   resolveOutputLanguageOrPreserveAuto,
   updateOutputLanguageFile,
@@ -1008,7 +1008,7 @@ import {
   PROMPT_CANCEL_METHOD,
   TODO_STOP_GUARD_QUEUE_RELEASE_METHOD,
   WORKTREE_MCP_DEFER_META_KEY,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 import {
   initializeAcpStartupProfiler,
   resetAcpStartupProfilerForTesting,
@@ -2175,7 +2175,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
         agent.initialize({
           clientCapabilities: {},
           _meta: {
-            'qwen-code/private-parent-capability': capability,
+            'lailatul-coder/private-parent-capability': capability,
           },
         }),
       ).rejects.toThrow('Invalid private ACP parent capability');
@@ -2183,7 +2183,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
         agent.initialize({
           clientCapabilities: {},
           _meta: {
-            'qwen-code/private-parent-capability': 'expected-capability',
+            'lailatul-coder/private-parent-capability': 'expected-capability',
           },
         }),
       ).rejects.toThrow('Invalid private ACP parent capability');
@@ -2210,7 +2210,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     await agent.newSession({ cwd: '/tmp', mcpServers: [] });
@@ -2226,8 +2226,8 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
       prompt: [{ type: 'text', text: 'hello' }],
       _meta: {
         keep: true,
-        'qwen-code/invocation': invocation,
-        'qwen-code/private-parent-capability': 'must-not-propagate',
+        'lailatul-coder/invocation': invocation,
+        'lailatul-coder/private-parent-capability': 'must-not-propagate',
         'qwen.daemon.modelPrompt': 'trusted model-only prompt',
         'qwen.daemon.promptDisplayText': 'trusted display text',
         'qwen.channel.prompt': true,
@@ -2339,7 +2339,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     await agent.newSession({ cwd: '/tmp', mcpServers: [] });
@@ -2376,7 +2376,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
 
@@ -2417,7 +2417,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     const newSessionResult = agent
@@ -2481,7 +2481,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     await agent.newSession({ cwd: '/tmp', mcpServers: [] });
@@ -2531,7 +2531,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     mockMcpPoolDrainAll.mockRejectedValueOnce(new Error('pool stuck'));
@@ -2562,7 +2562,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     await agent.newSession({ cwd: '/tmp', mcpServers: [] });
@@ -2572,7 +2572,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
         sessionId: 'trusted-session',
         prompt: [{ type: 'text', text: 'hello' }],
         _meta: {
-          'qwen-code/invocation': {
+          'lailatul-coder/invocation': {
             version: 2,
             sessionId: 'trusted-session',
             promptId: 'trusted-prompt',
@@ -2603,7 +2603,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     await agent.newSession({ cwd: '/tmp', mcpServers: [] });
@@ -2613,7 +2613,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
         sessionId: 'trusted-session',
         prompt: [{ type: 'text', text: 'hello' }],
         _meta: {
-          'qwen-code/invocation': {
+          'lailatul-coder/invocation': {
             version: 1,
             sessionId: 'trusted-session',
             promptId: 'trusted-prompt',
@@ -2649,12 +2649,12 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
       prompt: [{ type: 'text', text: 'hello' }],
       _meta: {
         keep: true,
-        'qwen-code/invocation': {
+        'lailatul-coder/invocation': {
           version: 1,
           sessionId: 'forged-session',
           promptId: 'forged-prompt',
         },
-        'qwen-code/private-parent-capability': 'forged-capability',
+        'lailatul-coder/private-parent-capability': 'forged-capability',
         'qwen.daemon.modelPrompt': 'forged model-only prompt',
         'qwen.daemon.promptDisplayText': 'forged display text',
       },
@@ -3488,8 +3488,8 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
 
     expect(mockExtractDaemonTraceContext).toHaveBeenCalledWith(request);
     expect(mockWithDaemonSpan).toHaveBeenCalledWith(
-      'qwen-code.daemon.session_start',
-      { 'qwen-code.daemon.operation': 'acp_session_new' },
+      'lailatul-coder.daemon.session_start',
+      { 'lailatul-coder.daemon.operation': 'acp_session_new' },
       expect.any(Function),
       { parentContext },
     );
@@ -3504,7 +3504,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
       'session_register',
       'response_build',
     ]) {
-      expect(attributes[`qwen-code.daemon.session_start.${stage}_ms`]).toEqual(
+      expect(attributes[`lailatul-coder.daemon.session_start.${stage}_ms`]).toEqual(
         expect.any(Number),
       );
     }
@@ -3525,7 +3525,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.newSession({
       cwd: '/tmp',
       mcpServers: [],
-      _meta: { 'qwen-code/sessionId': '550e8400-e29b-41d4-a716-446655440000' },
+      _meta: { 'lailatul-coder/sessionId': '550e8400-e29b-41d4-a716-446655440000' },
     });
 
     const argv = vi.mocked(loadCliConfig).mock.calls[0]![1];
@@ -3550,7 +3550,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
       agent.newSession({
         cwd: '/tmp',
         mcpServers: [],
-        _meta: { 'qwen-code/sessionId': '../../escape' },
+        _meta: { 'lailatul-coder/sessionId': '../../escape' },
       }),
     ).rejects.toMatchObject({
       code: -32602,
@@ -3583,7 +3583,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     const request = {
       cwd: '/tmp',
       mcpServers: [],
-      _meta: { 'qwen-code/sessionId': sessionId },
+      _meta: { 'lailatul-coder/sessionId': sessionId },
     };
 
     const first = agent.newSession(request);
@@ -3701,7 +3701,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
       agent.newSession({ cwd: '/tmp', mcpServers: [] }),
     ).rejects.toBe(configError);
     expect(mockSessionStartSpan.setAttribute).toHaveBeenCalledWith(
-      'qwen-code.daemon.session_start.failed_stage',
+      'lailatul-coder.daemon.session_start.failed_stage',
       'config_setup',
     );
 
@@ -3747,7 +3747,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
         agent.newSession({ cwd: '/tmp', mcpServers: [] }),
       ).rejects.toBe(fileSystemError);
       expect(mockSessionStartSpan.setAttribute).toHaveBeenCalledWith(
-        'qwen-code.daemon.session_start.failed_stage',
+        'lailatul-coder.daemon.session_start.failed_stage',
         'file_system_setup',
       );
     } finally {
@@ -4222,7 +4222,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
       ...(privateParentCapability
         ? {
             _meta: {
-              'qwen-code/private-parent-capability': privateParentCapability,
+              'lailatul-coder/private-parent-capability': privateParentCapability,
             },
           }
         : {}),
@@ -5528,7 +5528,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
 
@@ -6364,7 +6364,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
 
   it('extMethod preflight surfaces SkillError as parse_error errorKind', async () => {
     const skillError = new (
-      await import('@qwen-code/qwen-code-core')
+      await import('@lailatul-coder/lailatul-coder-core')
     ).SkillError('bad frontmatter', 'PARSE_ERROR');
     mockConfig = {
       ...mockConfig,
@@ -9346,7 +9346,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     const initializeResponse = (await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     })) as { _meta?: Record<string, unknown> };
     expect(initializeResponse._meta?.[EXTERNAL_TOOL_GUARD_READY_META_KEY]).toBe(
@@ -9401,7 +9401,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
 
@@ -9532,7 +9532,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     await agent.newSession({ cwd: '/tmp', mcpServers: [] });
@@ -9603,7 +9603,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.initialize({
       clientCapabilities: {},
       _meta: {
-        'qwen-code/private-parent-capability': 'expected-capability',
+        'lailatul-coder/private-parent-capability': 'expected-capability',
       },
     });
     await agent.newSession({ cwd: '/tmp', mcpServers: [] });
@@ -12880,7 +12880,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
         expect.objectContaining({
           headers: expect.objectContaining({
             Accept: 'application/vnd.github+json',
-            'User-Agent': 'qwen-code',
+            'User-Agent': 'lailatul-coder',
           }),
         }),
       );
@@ -16790,7 +16790,7 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
       await agent.initialize({
         clientCapabilities: {},
         _meta: {
-          'qwen-code/private-parent-capability': privateParentCapability,
+          'lailatul-coder/private-parent-capability': privateParentCapability,
         },
       });
     }
@@ -16812,7 +16812,7 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
       data: { uri: 'session:persisted-missing' },
     });
     expect(mockSessionStartSpan.setAttribute).toHaveBeenCalledWith(
-      'qwen-code.daemon.session_restore.failed_stage',
+      'lailatul-coder.daemon.session_restore.failed_stage',
       'existence_check',
     );
 
@@ -16847,10 +16847,10 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
 
       expect(mockExtractDaemonTraceContext).toHaveBeenCalledWith(request);
       expect(mockWithDaemonSpan).toHaveBeenCalledWith(
-        'qwen-code.daemon.session_restore',
+        'lailatul-coder.daemon.session_restore',
         {
-          'qwen-code.daemon.operation': `acp_session_${action}`,
-          'qwen-code.daemon.session_restore.action': action,
+          'lailatul-coder.daemon.operation': `acp_session_${action}`,
+          'lailatul-coder.daemon.session_restore.action': action,
           'session.id': 'persisted-1',
         },
         expect.any(Function),
@@ -16871,16 +16871,16 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
         'post_replay_services',
       ]) {
         expect(
-          attributes[`qwen-code.daemon.session_restore.${stage}_ms`],
+          attributes[`lailatul-coder.daemon.session_restore.${stage}_ms`],
         ).toEqual(expect.any(Number));
       }
       if (action === 'load') {
         expect(
-          attributes['qwen-code.daemon.session_restore.history_replay_ms'],
+          attributes['lailatul-coder.daemon.session_restore.history_replay_ms'],
         ).toEqual(expect.any(Number));
       } else {
         expect(
-          attributes['qwen-code.daemon.session_restore.history_replay_ms'],
+          attributes['lailatul-coder.daemon.session_restore.history_replay_ms'],
         ).toBeUndefined();
       }
       // Mirror of the live-path test's `existence_check_ms` absence check.
@@ -16888,7 +16888,7 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
       // cold loads report a stage that implies a live session existed,
       // polluting restore-stage dashboards while every test stayed green.
       expect(
-        attributes['qwen-code.daemon.session_restore.live_restore_ms'],
+        attributes['lailatul-coder.daemon.session_restore.live_restore_ms'],
       ).toBeUndefined();
 
       mockConnectionState.resolve();
@@ -16920,9 +16920,9 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
           await agent.unstable_resumeSession(request);
         }
         expect(mockWithDaemonSpan).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_restore',
+          'lailatul-coder.daemon.session_restore',
           expect.objectContaining({
-            'qwen-code.daemon.session_restore.action': action,
+            'lailatul-coder.daemon.session_restore.action': action,
           }),
           expect.any(Function),
           {},
@@ -16939,16 +16939,16 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
           mockSessionStartSpan.setAttribute.mock.calls,
         );
         expect(
-          attributes['qwen-code.daemon.session_restore.settings_load_ms'],
+          attributes['lailatul-coder.daemon.session_restore.settings_load_ms'],
         ).toEqual(expect.any(Number));
         expect(
-          attributes['qwen-code.daemon.session_restore.live_restore_ms'],
+          attributes['lailatul-coder.daemon.session_restore.live_restore_ms'],
         ).toEqual(expect.any(Number));
         expect(
-          attributes['qwen-code.daemon.session_restore.response_build_ms'],
+          attributes['lailatul-coder.daemon.session_restore.response_build_ms'],
         ).toEqual(expect.any(Number));
         expect(
-          attributes['qwen-code.daemon.session_restore.existence_check_ms'],
+          attributes['lailatul-coder.daemon.session_restore.existence_check_ms'],
         ).toBeUndefined();
       } finally {
         mockConnectionState.resolve();
@@ -17160,7 +17160,7 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
     expect(result).toBe(initializationError);
     expect(innerConfig.shutdown).toHaveBeenCalledOnce();
     expect(mockSessionStartSpan.setAttribute).toHaveBeenCalledWith(
-      'qwen-code.daemon.session_restore.failed_stage',
+      'lailatul-coder.daemon.session_restore.failed_stage',
       'config_setup',
     );
 
@@ -17397,11 +17397,11 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
     expect(lastSessionMock?.primeTurnState).toHaveBeenCalledWith(0, []);
     expect(mockHistoryReplay).toHaveBeenCalledTimes(1);
     expect(mockAddDaemonRequestAttribute).toHaveBeenCalledWith(
-      'qwen-code.daemon.session_restore.partial_replay',
+      'lailatul-coder.daemon.session_restore.partial_replay',
       false,
     );
     expect(mockAddDaemonRequestAttribute).toHaveBeenCalledWith(
-      'qwen-code.daemon.session_restore.partial_replay',
+      'lailatul-coder.daemon.session_restore.partial_replay',
       false,
     );
 
@@ -19232,7 +19232,7 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
       data: { uri: 'session:persisted-missing' },
     });
     expect(mockSessionStartSpan.setAttribute).toHaveBeenCalledWith(
-      'qwen-code.daemon.session_restore.failed_stage',
+      'lailatul-coder.daemon.session_restore.failed_stage',
       'existence_check',
     );
 

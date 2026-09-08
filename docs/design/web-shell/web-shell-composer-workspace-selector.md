@@ -2,7 +2,7 @@
 
 ## Status
 
-Revised proposal for [#6700](https://github.com/QwenLM/qwen-code/issues/6700), under [#6699](https://github.com/QwenLM/qwen-code/issues/6699).
+Revised proposal for [#6700](https://github.com/LailatulCoder/lailatul-coder/issues/6700), under [#6699](https://github.com/LailatulCoder/lailatul-coder/issues/6699).
 
 This is one end-to-end solution delivered in two dependent changes:
 

@@ -6,7 +6,7 @@
 
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { atomicWriteFile, Storage } from '@qwen-code/qwen-code-core';
+import { atomicWriteFile, Storage } from '@lailatul-coder/lailatul-coder-core';
 import type {
   AgentViewActivityFile,
   AgentViewLaunchFile,

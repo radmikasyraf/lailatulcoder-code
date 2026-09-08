@@ -35,7 +35,7 @@ import { join } from 'node:path';
 import {
   atomicWriteFileSync,
   sanitizeFilenameComponent,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { promptRecordDir, runEpochMs } from './prompt-record.js';
 
 const SESSIONS_FILE = 'run-sessions.json';

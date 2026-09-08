@@ -1,13 +1,13 @@
 ---
 name: desktop-pet
-description: Create pixel-art desktop pet companions for Qwen Code. Generates a customized chibi spritesheet (1536×1872, 8×9 grid) for any character the user names — F1 drivers, anime characters, celebrities, fictional characters, animals, etc. Use when the user says "desktop pet", "桌宠", "桌面宠物", "想要XXX当桌宠", "换个宠物", or similar.
+description: Create pixel-art desktop pet companions for LailatulCoder Ai. Generates a customized chibi spritesheet (1536×1872, 8×9 grid) for any character the user names — F1 drivers, anime characters, celebrities, fictional characters, animals, etc. Use when the user says "desktop pet", "桌宠", "桌面宠物", "想要XXX当桌宠", "换个宠物", or similar.
 ---
 
 # Desktop Pet Creator
 
-Create pixel-art chibi desktop pet companions for Qwen Code's floating pet window.
+Create pixel-art chibi desktop pet companions for LailatulCoder Ai's floating pet window.
 Given any character name, generate a complete pet package with animated spritesheet
-and place it in `~/.qwen/pets/` where Qwen Code auto-discovers it.
+and place it in `~/.qwen/pets/` where LailatulCoder Ai auto-discovers it.
 
 ## Prerequisites
 
@@ -106,7 +106,7 @@ ls -lh ~/.qwen/pets/<character_id>/
 open ~/.qwen/pets/<character_id>/spritesheet.webp
 ```
 
-3. Tell the user to activate: open Qwen Code **Settings → Appearance → Pet
+3. Tell the user to activate: open LailatulCoder Ai **Settings → Appearance → Pet
 Companion**, click **Refresh**, then select the new pet.
 
 ## Design Guidelines

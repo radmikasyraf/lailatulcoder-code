@@ -1,6 +1,6 @@
-# @qwen-code/mobile-mcp
+# @lailatul-coder/mobile-mcp
 
-Fork of [mobile-next/mobile-mcp](https://github.com/mobile-next/mobile-mcp) for [qwen-code](https://github.com/QwenLM/qwen-code), with opt-in relative coordinate support and additional Android tooling.
+Fork of [mobile-next/mobile-mcp](https://github.com/mobile-next/mobile-mcp) for [lailatul-coder](https://github.com/LailatulCoder/lailatul-coder), with opt-in relative coordinate support and additional Android tooling.
 
 This package is an MCP server that enables LLM agents to interact with mobile devices (iOS and Android) through screenshots, accessibility elements, and coordinate-based touch actions. It supports simulators, emulators, and real devices.
 
@@ -104,7 +104,7 @@ Upstream PostHog telemetry is off by default in this fork. Set `MOBILEMCP_ENABLE
   "mcpServers": {
     "mobile-mcp": {
       "command": "npx",
-      "args": ["@qwen-code/mobile-mcp"]
+      "args": ["@lailatul-coder/mobile-mcp"]
     }
   }
 }
@@ -117,7 +117,7 @@ With relative coordinates enabled:
   "mcpServers": {
     "mobile-mcp": {
       "command": "npx",
-      "args": ["@qwen-code/mobile-mcp"],
+      "args": ["@lailatul-coder/mobile-mcp"],
       "env": {
         "MOBILE_MCP_COORDINATE_SPACE": "1"
       }
@@ -135,7 +135,7 @@ for those routes by adding `MCP_MODEL_PAYLOAD_FILTER=1`:
   "mcpServers": {
     "mobile-mcp": {
       "command": "npx",
-      "args": ["@qwen-code/mobile-mcp"],
+      "args": ["@lailatul-coder/mobile-mcp"],
       "env": {
         "MCP_MODEL_PAYLOAD_FILTER": "1"
       }

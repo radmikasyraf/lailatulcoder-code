@@ -1,6 +1,6 @@
 # Computer Use
 
-Qwen Code ships built-in **Computer Use** tools that let the agent drive your desktop — clicking, typing, scrolling, launching apps, reading window contents, and taking screenshots. This turns Qwen Code into a general desktop automation agent, not just a coding assistant confined to the terminal.
+LailatulCoder Ai ships built-in **Computer Use** tools that let the agent drive your desktop — clicking, typing, scrolling, launching apps, reading window contents, and taking screenshots. This turns LailatulCoder Ai into a general desktop automation agent, not just a coding assistant confined to the terminal.
 
 Computer Use is powered by the [`cua-driver`](https://github.com/trycua/cua) native driver. The tools are registered as deferred (lazy-loaded) built-ins under the `computer_use__` prefix, so they only cost prompt space once the model actually reaches for them.
 
@@ -28,7 +28,7 @@ This setting requires a restart to take effect.
 
 ## First run and the native driver
 
-The first time the agent invokes a Computer Use tool, Qwen Code downloads a pinned, signed `cua-driver` binary (~20 MB) into `~/.qwen/computer-use/` and spawns it as a local process. Prebuilt binaries are published for macOS (Apple Silicon and Intel), Linux (x86_64), and Windows (x86_64).
+The first time the agent invokes a Computer Use tool, LailatulCoder Ai downloads a pinned, signed `cua-driver` binary (~20 MB) into `~/.qwen/computer-use/` and spawns it as a local process. Prebuilt binaries are published for macOS (Apple Silicon and Intel), Linux (x86_64), and Windows (x86_64).
 
 ### macOS permissions
 
@@ -37,7 +37,7 @@ On macOS, desktop automation requires two system permissions:
 - **Accessibility** — to read window/UI state and synthesize input
 - **Screen Recording** — to capture screenshots
 
-On first use the driver walks you through granting these via the standard macOS system dialogs. The agent can also check permission status on demand (the `check_permissions` tool). Because macOS attributes permission grants to the _responsible_ process, grants may need to be given to the terminal or IDE that launched Qwen Code.
+On first use the driver walks you through granting these via the standard macOS system dialogs. The agent can also check permission status on demand (the `check_permissions` tool). Because macOS attributes permission grants to the _responsible_ process, grants may need to be given to the terminal or IDE that launched LailatulCoder Ai.
 
 ## What the agent can do
 
@@ -66,7 +66,7 @@ All Computer Use settings live under `tools.computerUse` in `settings.json`. See
 | ------------------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tools.computerUse.enabled`           | boolean | `true`   | Register the `computer_use__*` tools. When `false`, the driver is never downloaded or spawned.                                                                                                                                                            |
 | `tools.computerUse.maxImageDimension` | number  | `-1`     | Longest-edge pixel cap for screenshots. `-1` keeps the driver's default (1568); `0` disables resizing (full resolution); a positive value caps the longest edge. Lower caps cut vision-token cost. Env override: `QWEN_COMPUTER_USE_MAX_IMAGE_DIMENSION`. |
-| `tools.computerUse.idleTimeoutMs`     | number  | `300000` | Milliseconds to keep the driver process alive after the last `computer_use__*` call (default 5 minutes). `0` keeps it running until Qwen Code exits.                                                                                                      |
+| `tools.computerUse.idleTimeoutMs`     | number  | `300000` | Milliseconds to keep the driver process alive after the last `computer_use__*` call (default 5 minutes). `0` keeps it running until LailatulCoder Ai exits.                                                                                                      |
 
 All three settings require a restart to take effect.
 

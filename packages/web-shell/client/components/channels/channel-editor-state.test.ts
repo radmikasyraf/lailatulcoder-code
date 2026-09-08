@@ -8,7 +8,7 @@ import { describe, expect, it } from 'vitest';
 import type {
   DaemonChannelInstanceSnapshot,
   DaemonChannelTypeDescriptor,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   buildChannelUpsertRequest,
   createChannelEditorDraft,

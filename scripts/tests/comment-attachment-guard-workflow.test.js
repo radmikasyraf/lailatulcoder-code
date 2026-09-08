@@ -82,7 +82,7 @@ describe('comment attachment guard workflow', () => {
     };
     const context = {
       eventName: options.eventName ?? 'issue_comment',
-      repo: { owner: 'QwenLM', repo: 'qwen-code' },
+      repo: { owner: 'LailatulCoder', repo: 'lailatul-coder' },
       payload: {
         action: options.action ?? 'created',
         sender: options.sender ?? { type: 'User', login: 'attacker' },

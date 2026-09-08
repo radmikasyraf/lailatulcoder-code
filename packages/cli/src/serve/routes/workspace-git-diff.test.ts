@@ -10,7 +10,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   fetchGitDiff,
   fetchGitDiffHunksForFile,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { AcpSessionBridge } from '../acp-session-bridge.js';
 import { sendBridgeError } from '../server/error-response.js';
 import {
@@ -24,7 +24,7 @@ import {
   registerWorkspaceQualifiedGitDiffRoutes,
 } from './workspace-git-diff.js';
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   fetchGitDiff: vi.fn(),
   fetchGitDiffHunksForFile: vi.fn(),
 }));

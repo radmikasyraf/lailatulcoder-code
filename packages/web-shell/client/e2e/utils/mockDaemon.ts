@@ -35,7 +35,7 @@ import {
   type GoalSnapshotV2,
   type PermissionResponse,
   type PromptRequest,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import { installSseTransport, type SseTransport } from './sseTransport';
 
 export interface DaemonRequestRecord {

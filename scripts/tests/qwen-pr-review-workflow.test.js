@@ -24,7 +24,7 @@ import { basename, join, sep } from 'node:path';
 import { parse } from 'yaml';
 
 const workflow = readFileSync(
-  '.github/workflows/qwen-code-pr-review.yml',
+  '.github/workflows/lailatul-coder-pr-review.yml',
   'utf8',
 );
 const workflowsDir = '.github/workflows';
@@ -1595,7 +1595,7 @@ describe('docs-only medium gate', () => {
     // action must not be review_requested. Pinning only the action half let a
     // deleted event condition survive — the branch is shared with
     // pull_request_review(_comment), whose actions are never review_requested,
-    // so a review-body `@qwen-code /review` would have downgraded silently.
+    // so a review-body `@lailatul-coder /review` would have downgraded silently.
     expect(context.run).toMatch(
       /= "pull_request_target" \] &&\s*\n\s*\[ "\$\{\{ github\.event\.action \}\}" != "review_requested" \]; then\s*\n\s*AUTO_REVIEW=true/,
     );
@@ -1774,7 +1774,7 @@ describe('docs-only gate and relay, executed', () => {
   });
 
   it('a manually requested review is never tightened, whatever its size', () => {
-    // Production-reachable: an @qwen-code /review comment without --timeout
+    // Production-reachable: an @lailatul-coder /review comment without --timeout
     // populates PR_SIZE_LINES but is not an automatic review — its budget
     // is the caller's. A mutant dropping the AUTO_REVIEW guard survived the
     // suite until this pin.
@@ -2304,7 +2304,7 @@ describe('workflow expression length', () => {
   // and GitHub caps a single expression at 21000 characters. Blowing that cap
   // does not fail a job — it makes the whole workflow file *invalid*, so no
   // event triggers it at all and no run is even created for the ones that
-  // matter. That is how every automatic review and every `@qwen-code /review`
+  // matter. That is how every automatic review and every `@lailatul-coder /review`
   // in this repository silently stopped for ~12h on 2026-08-07: #8648 pushed
   // the "Run review" body from 17705 to 22282 characters, and from that merge
   // onward the only runs left were startup failures reading
@@ -2344,7 +2344,7 @@ describe('workflow expression length', () => {
 });
 
 describe('command shape matching', () => {
-  // A comment may be `@qwen-code /review` followed by a newline and a body.
+  // A comment may be `@lailatul-coder /review` followed by a newline and a body.
   // The `if`s tried to accept that with format('…{0}', '\n'), but expression
   // string literals are NOT escape-processed: that '\n' is a literal
   // backslash + n, so the branch matched nothing and every multi-line command
@@ -2369,21 +2369,21 @@ describe('command shape matching', () => {
     // `authorize` deliberately matches only a loose prefix — it is a filter to
     // avoid spawning a job per comment, and delegates the exact shape to the
     // downstream jobs. Jobs that do the shape match are the ones that use
-    // format('@qwen-code /<cmd>{0}', …), so key off that.
+    // format('@lailatul-coder /<cmd>{0}', …), so key off that.
     const withShape = ifs.filter(([, cond]) =>
-      cond.includes("format('@qwen-code /"),
+      cond.includes("format('@lailatul-coder /"),
     );
     expect(withShape.length).toBeGreaterThan(0);
     const missing = [];
     for (const [id, cond] of withShape) {
       for (const cmd of ['review', 'resolve']) {
         // Only check commands this job actually matches on.
-        if (!cond.includes(`format('@qwen-code /${cmd}{0}'`)) continue;
+        if (!cond.includes(`format('@lailatul-coder /${cmd}{0}'`)) continue;
         const lf = cond.includes(
-          `format('@qwen-code /${cmd}{0}', fromJSON('"\\n"'))`,
+          `format('@lailatul-coder /${cmd}{0}', fromJSON('"\\n"'))`,
         );
         const cr = cond.includes(
-          `format('@qwen-code /${cmd}{0}', fromJSON('"\\r"'))`,
+          `format('@lailatul-coder /${cmd}{0}', fromJSON('"\\r"'))`,
         );
         if (!lf || !cr) missing.push(`${id}/${cmd} (LF:${lf} CR:${cr})`);
       }
@@ -2599,7 +2599,7 @@ describe('review_requested burst coalescing (#8945)', () => {
   );
 
   it('resolves the bot login from review-config, not a paraphrase', () => {
-    expect(botLogin).toBe('qwen-code-ci-bot');
+    expect(botLogin).toBe('lailatul-coder-ci-bot');
   });
 
   it('filters non-bot review_requested events before authorize spends compute', () => {
@@ -3079,7 +3079,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
     );
     expect(job.if).toContain("needs.precheck-pr.result == 'failure'");
     expect(job.if).not.toContain("!= 'success'");
-    expect(job.if).toContain("github.repository == 'QwenLM/qwen-code'");
+    expect(job.if).toContain("github.repository == 'LailatulCoder/lailatul-coder'");
     // On pull_request_target and issue_comment events review_mode is null,
     // so collapsing this disjunction would skip the job exactly where dead
     // review runs happen.
@@ -3092,13 +3092,13 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
 
   it('never opens the gate on a /resolve run, dispatch- or comment-driven', () => {
     // /resolve is a first-class issue_comment command too: authorize runs on
-    // `@qwen-code /resolve` comments, and github.event.inputs is empty on
+    // `@lailatul-coder /resolve` comments, and github.event.inputs is empty on
     // issue_comment, so the dispatch exclusion alone misdiagnoses a failed
     // resolve run as a dead review and recommends the wrong command.
     expect(job.if).toContain("github.event.inputs.command != 'resolve'");
     expect(job.if).toContain(
       "!(github.event_name == 'issue_comment' &&\n" +
-        " startsWith(github.event.comment.body, '@qwen-code /resolve')) &&",
+        " startsWith(github.event.comment.body, '@lailatul-coder /resolve')) &&",
     );
   });
 
@@ -3276,7 +3276,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
           'for a in "$@"; do if [ "$prev" = "--jq" ]; then filter="$a"; fi; prev="$a"; done',
           'if [ "$cmd" = "api" ] && [ "$sub" = "user" ]; then',
           '  [ "${SCENARIO:-}" = "lookup_fail" ] && exit 1',
-          '  echo "qwen-code-ci-bot"; exit 0',
+          '  echo "lailatul-coder-ci-bot"; exit 0',
           'fi',
           'if [ "$cmd" = "run" ] && [ "$sub" = "view" ]; then',
           '  case "$*" in',
@@ -3351,12 +3351,12 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
             env: {
               PATH: `${bin}:${process.env.PATH}`,
               SCENARIO: scenario,
-              GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+              GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
               GITHUB_RUN_ID: '12345',
               GITHUB_EVENT_NAME: eventName,
               GITHUB_STEP_SUMMARY: summary,
               PR_NUMBER: '42',
-              RUN_URL: 'https://github.com/QwenLM/qwen-code/actions/runs/12345',
+              RUN_URL: 'https://github.com/LailatulCoder/lailatul-coder/actions/runs/12345',
               EXPECTED_HEAD_SHA: '',
               FAILURE_KIND: '',
               FAILURE_REASON:
@@ -3401,7 +3401,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
     // Mirrors a prior fallback comment's rendered shape: the run URL is a
     // markdown link, so the run id is always immediately followed by ')'.
     const r = runFallbackStep('already', {
-      comments: `${marker}\n\nSee [workflow logs](https://github.com/QwenLM/qwen-code/actions/runs/12345).`,
+      comments: `${marker}\n\nSee [workflow logs](https://github.com/LailatulCoder/lailatul-coder/actions/runs/12345).`,
     });
     expect(r.status).toBe(0);
     expect(r.posted).toBe('');
@@ -3413,7 +3413,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
     // this run's (12345) as a substring — the match must stay anchored to
     // this run's URL or a distinct run's death is silently suppressed.
     const r = runFallbackStep('other_run', {
-      comments: `${marker}\n\nSee [workflow logs](https://github.com/QwenLM/qwen-code/actions/runs/123450).`,
+      comments: `${marker}\n\nSee [workflow logs](https://github.com/LailatulCoder/lailatul-coder/actions/runs/123450).`,
     });
     expect(r.status).toBe(0);
     expect(r.posted).not.toBe('');
@@ -3553,11 +3553,11 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
   ];
 
   // What the guard recognizes a review THIS pipeline composed by: every
-  // composed body carries the "via Qwen Code /review" attribution footer or
+  // composed body carries the "via LailatulCoder Ai /review" attribution footer or
   // the invisible qwen-review-ledger marker — at least one, never neither —
   // and no foreign approval carries either. Matching on that evidence is how
   // the guard stays closed to a producer set no exclusion list can finish.
-  const REVIEW_FOOTER = '_— qwen3.8-max via Qwen Code /review (v0.21.14)_';
+  const REVIEW_FOOTER = '_— qwen3.8-max via LailatulCoder Ai /review (v0.21.14)_';
   const REVIEW_LEDGER = '<!-- qwen-review-ledger {"v":1,"round":2} -->';
   const COMPOSED_REVIEW_BODIES = [
     // Attribution on: the footer and the ledger marker both ride the body.
@@ -3583,7 +3583,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
             prHead: 'HEADSHA1',
             runCreated: RUN_CREATED,
             runStartedAttempt: RUN_RESTARTED,
-            reviews: reviewFixture('qwen-code-ci-bot', 'HEADSHA1', AFTER, body),
+            reviews: reviewFixture('lailatul-coder-ci-bot', 'HEADSHA1', AFTER, body),
           });
           expect(r.status, body).toBe(0);
           expect(r.posted, body).toBe('');
@@ -3604,7 +3604,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
         // — see the attribute-by-TIME test below.
         const cases = {
           stale: reviewFixture(
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             'HEADSHA1',
             BEFORE,
             COMPOSED_REVIEW_BODIES[0],
@@ -3616,7 +3616,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
             COMPOSED_REVIEW_BODIES[0],
           ),
           pending: reviewFixture(
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             'HEADSHA1',
             null,
             COMPOSED_REVIEW_BODIES[0],
@@ -3652,7 +3652,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
             prHead: 'HEADSHA1',
             runCreated: RUN_CREATED,
             runStartedAttempt: RUN_RESTARTED,
-            reviews: reviewFixture('qwen-code-ci-bot', 'HEADSHA1', AFTER, body),
+            reviews: reviewFixture('lailatul-coder-ci-bot', 'HEADSHA1', AFTER, body),
           });
           expect(r.posted, body).not.toBe('');
         }
@@ -3676,7 +3676,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
           runCreated: RUN_CREATED,
           runStartedAttempt: RUN_RESTARTED,
           reviews: reviewFixture(
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             'HEADSHA1',
             MID_RERUN,
             COMPOSED_REVIEW_BODIES[0],
@@ -3700,7 +3700,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
             prHead: 'HEADSHA1',
             runCreated: RUN_CREATED,
             runStartedAttempt: RUN_RESTARTED,
-            reviews: reviewFixture('qwen-code-ci-bot', 'HEADSHA1', AFTER),
+            reviews: reviewFixture('lailatul-coder-ci-bot', 'HEADSHA1', AFTER),
           });
           expect(r.posted, scenario).not.toBe('');
           expect(r.stdout, scenario).toContain(
@@ -3724,7 +3724,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
           prHead: 'HEADSHA1',
           runCreated: RUN_CREATED,
           runStartedAttempt: RUN_RESTARTED,
-          reviews: reviewFixture('qwen-code-ci-bot', 'HEADSHA1', AFTER),
+          reviews: reviewFixture('lailatul-coder-ci-bot', 'HEADSHA1', AFTER),
         });
         expect(r.posted).not.toBe('');
       },
@@ -3740,7 +3740,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
           prHead: 'HEADSHA1',
           runCreated: RUN_CREATED,
           runStartedAttempt: RUN_RESTARTED,
-          reviews: reviewFixture('qwen-code-ci-bot', 'HEADSHA1', AFTER),
+          reviews: reviewFixture('lailatul-coder-ci-bot', 'HEADSHA1', AFTER),
         });
         expect(r.posted).not.toBe('');
       },
@@ -3764,7 +3764,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
           runCreated: RUN_CREATED,
           runStartedAttempt: RUN_RESTARTED,
           reviews: reviewFixture(
-            'qwen-code-ci-bot',
+            'lailatul-coder-ci-bot',
             'OLDSHA',
             AFTER,
             COMPOSED_REVIEW_BODIES[0],
@@ -3797,7 +3797,7 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
     // this run, so the in-job step must not add a second comment.
     const r = runFallbackStep('already', {
       useInJobStep: true,
-      comments: `${marker}\n\nSee [workflow logs](https://github.com/QwenLM/qwen-code/actions/runs/12345).`,
+      comments: `${marker}\n\nSee [workflow logs](https://github.com/LailatulCoder/lailatul-coder/actions/runs/12345).`,
     });
     expect(r.status).toBe(0);
     expect(r.posted).toBe('');

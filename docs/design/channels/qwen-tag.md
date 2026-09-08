@@ -1,4 +1,4 @@
-# RFC: "qwen tag" — a persistent, multiplayer, channel-resident agent for qwen-code (DingTalk-first)
+# RFC: "qwen tag" — a persistent, multiplayer, channel-resident agent for lailatul-coder (DingTalk-first)
 
 > **Historical decision record.** The one-process-per-workspace / one-daemon-per-
 > workspace premise in this draft is superseded. Named daemon-managed channels
@@ -9,7 +9,7 @@
 
 **Status:** Historical draft (v2)
 **Date:** 2026-06-25
-**Author:** (qwen-code)
+**Author:** (lailatul-coder)
 
 ---
 
@@ -50,7 +50,7 @@ The verified ground-truth facts from v1 (AcpBridge topology, AcpBridge auto-appr
 
 ## 1. Summary
 
-**"qwen tag"** is one shared qwen-code agent that lives inside a chat channel — a DingTalk group first, Feishu second — and that any member of that channel summons by `@`-mentioning it. Once summoned, it runs the full qwen-code agent loop (tools, file edits, shell, MCP) against a bound workspace, streams its work back into the channel as it goes, **remembers the channel across turns and restarts**, and can act **proactively or on a schedule** without waiting to be asked. This mirrors the Claude Tag form factor — a single persistent multiplayer agent that is a _resident_ of the room rather than a 1:1 DM bot — but it is built entirely on qwen-code's existing channel adapter stack (`qwen channel start`, `packages/channels/*`) and the `qwen serve` daemon, not on a new hosted service.
+**"qwen tag"** is one shared lailatul-coder agent that lives inside a chat channel — a DingTalk group first, Feishu second — and that any member of that channel summons by `@`-mentioning it. Once summoned, it runs the full lailatul-coder agent loop (tools, file edits, shell, MCP) against a bound workspace, streams its work back into the channel as it goes, **remembers the channel across turns and restarts**, and can act **proactively or on a schedule** without waiting to be asked. This mirrors the Claude Tag form factor — a single persistent multiplayer agent that is a _resident_ of the room rather than a 1:1 DM bot — but it is built entirely on lailatul-coder's existing channel adapter stack (`qwen channel start`, `packages/channels/*`) and the `qwen serve` daemon, not on a new hosted service.
 
 The deliberate framing of this RFC is that **the reactive half of the form factor is largely already shipped, and the proactive/memory half is not.** The pieces that make a Claude-Tag-style _reply_ agent hard — a long-running process that multiplexes sessions, an agent transport that preserves the one-prompt-per-session invariant, multiplayer session routing, per-channel access control, streaming card rendering, and durable session persistence — already exist and are exercised by the current channel adapters. What is _missing_ is a well-bounded set of capabilities that turn a reactive reply-bot into a resident agent: sender attribution in shared sessions, a proactive/scheduled output path, per-room memory, and multiplayer governance. This RFC scopes that gap into **four build areas** and specifies them across Phase 0–2.
 
@@ -143,7 +143,7 @@ The four build areas, developed in detail in §6:
 
 Built (B), partial (P), missing (M). "File" cites the authoritative symbol. "Topology" notes whether the capability exists on the `AcpBridge` channel path (A), the `qwen serve` daemon path (D), or both — and, because Phase 1+ is committed to run under the daemon, a "→D" note where the migration is what unlocks the capability.
 
-| Capability                             | qwen-code today (file / symbol)                                                                    | Topology                              | Gap                                                                                                                                                                           | Size              |
+| Capability                             | lailatul-coder today (file / symbol)                                                                    | Topology                              | Gap                                                                                                                                                                           | Size              |
 | -------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | One-room-one-session routing           | `SessionRouter.routingKey()` `'thread'` (`SessionRouter.ts:44-60`)                                 | A+D                                   | Default scope is `'user'` (`config-utils.ts:91-92`); operator must set `'thread'`                                                                                             | Config (S)        |
 | Summon-by-mention                      | `GroupGate.requireMention` default `true` (`GroupGate.ts:49-52`)                                   | A+D                                   | None — already correct                                                                                                                                                        | —                 |
@@ -314,7 +314,7 @@ Every new layer attaches at an existing seam: identity at the `promptText` build
 
 ### 6.1 Multiplayer & Identity (Build Area 1)
 
-A "qwen tag" lives in a group chat. Every member talks to the _same_ agent, which must (a) maintain one shared conversation for the whole channel, (b) know _who_ is speaking each turn, (c) not let one member's message destroy another's running task, and (d) ideally ask the _group_ for approval on risky tool calls. qwen-code has primitives for (a)–(c) today; (d) is daemon-hosted Phase-1+ work (committed migration, §1).
+A "qwen tag" lives in a group chat. Every member talks to the _same_ agent, which must (a) maintain one shared conversation for the whole channel, (b) know _who_ is speaking each turn, (c) not let one member's message destroy another's running task, and (d) ideally ask the _group_ for approval on risky tool calls. lailatul-coder has primitives for (a)–(c) today; (d) is daemon-hosted Phase-1+ work (committed migration, §1).
 
 #### Group-shared session: `sessionScope: 'thread'`
 
@@ -371,7 +371,7 @@ With `'thread'` + `[senderName]` prefixes + `followup`, handoff _is_ the default
 
 #### Multi-member approvals — phasing (OD-3, decided)
 
-The intent is right: risky tool calls should be group-approvable, and qwen-code ships `MultiClientPermissionMediator` with four policies (`permissionMediator.ts:348,621-637`). **But none of it is reachable from the channel on the Phase-0 `AcpBridge` path:**
+The intent is right: risky tool calls should be group-approvable, and lailatul-coder ships `MultiClientPermissionMediator` with four policies (`permissionMediator.ts:348,621-637`). **But none of it is reachable from the channel on the Phase-0 `AcpBridge` path:**
 
 1. **`qwen channel start` wires `AcpBridge`, whose `requestPermission` auto-approves** every request (`AcpBridge.ts:108-118`). No approval prompt at all.
 2. The mediator lives in the daemon's HTTP serve layer. The only permission-capable channel bridge is `DaemonChannelBridge` (`respondToPermission`, `:346-374`) — reached once Phase 1 migrates channel hosting into the daemon (committed, §1).
@@ -592,9 +592,9 @@ Two-tier capture in `handleInbound()` after gates pass (`:240-252`): an explicit
 
 ### 6.3 Channel-scoped Memory & Learning (Build Area 3)
 
-A tag must _remember the group over time_ without leaking into a sibling group. Today qwen-code's memory is **workspace-global**: no chat/channel/group/session axis.
+A tag must _remember the group over time_ without leaking into a sibling group. Today lailatul-coder's memory is **workspace-global**: no chat/channel/group/session axis.
 
-> **Topology / dependency facts (Fix #3).** Two hard constraints shape the wiring: (1) In the default `AcpBridge` topology there is **no `qwen serve` daemon and no `POST /workspace/memory` route** — the `--acp` child has no HTTP client; even after the Phase-1+ daemon migration the memory route is **daemon-only and strict-auth** (`deps.mutate({ strict: true })`, `workspace-memory.ts:114`). (2) `@qwen-code/channel-base` depends only on `@agentclientprotocol/sdk` (`packages/channels/base/package.json`), **not** on `@qwen-code/qwen-code-core`, so `ChannelBase` **cannot** `import { writeWorkspaceContextFile }`. The corrected design therefore writes/reads channel memory **in-process via the core helper, reached from `channel-base` through callbacks injected by the CLI layer** (`packages/cli`, which _can_ depend on core) — not over HTTP, and not by adding a core dependency to `channel-base`.
+> **Topology / dependency facts (Fix #3).** Two hard constraints shape the wiring: (1) In the default `AcpBridge` topology there is **no `qwen serve` daemon and no `POST /workspace/memory` route** — the `--acp` child has no HTTP client; even after the Phase-1+ daemon migration the memory route is **daemon-only and strict-auth** (`deps.mutate({ strict: true })`, `workspace-memory.ts:114`). (2) `@lailatul-coder/channel-base` depends only on `@agentclientprotocol/sdk` (`packages/channels/base/package.json`), **not** on `@lailatul-coder/lailatul-coder-core`, so `ChannelBase` **cannot** `import { writeWorkspaceContextFile }`. The corrected design therefore writes/reads channel memory **in-process via the core helper, reached from `channel-base` through callbacks injected by the CLI layer** (`packages/cli`, which _can_ depend on core) — not over HTTP, and not by adding a core dependency to `channel-base`.
 
 #### Current state: two scopes, neither per-conversation
 
@@ -650,7 +650,7 @@ export interface ChannelBaseOptions {
 import {
   writeWorkspaceContextFile,
   readChannelContextFile,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 const baseOpts: ChannelBaseOptions = {
   router, // config & bridge are positional args of createChannel(name, config, bridge, baseOpts) — not bag members
@@ -713,7 +713,7 @@ Size guardrails (reuse existing machinery): the 16 MB existing-file cap on appen
 
 ### 6.4 Governance: Token Budgets & Audit Log (Build Area 4)
 
-A channel-resident agent that any member can drive — and that can act proactively — needs spend limits, an audit trail recording _who_ asked _what_, and per-identity isolation. qwen-code ships three of the four primitives: `rate-limit.ts` (per-key token buckets), the `permission-audit.ts` ring, and `MultiClientPermissionMediator`. This area composes them and fills the gaps (no cost budget anywhere; no audit row carries a human sender). Guiding principle: **decline, do not truncate** — but, per Fix #6, an _estimated_ budget never hard-declines a user prompt; it only WARNs.
+A channel-resident agent that any member can drive — and that can act proactively — needs spend limits, an audit trail recording _who_ asked _what_, and per-identity isolation. lailatul-coder ships three of the four primitives: `rate-limit.ts` (per-key token buckets), the `permission-audit.ts` ring, and `MultiClientPermissionMediator`. This area composes them and fills the gaps (no cost budget anywhere; no audit row carries a human sender). Guiding principle: **decline, do not truncate** — but, per Fix #6, an _estimated_ budget never hard-declines a user prompt; it only WARNs.
 
 #### Which process owns governance?
 
@@ -722,7 +722,7 @@ A channel-resident agent that any member can drive — and that can act proactiv
 | **Phase 0 — `qwen channel start` / `AcpBridge`**    | spawns its own `--acp` stdio child (`start.ts:213,356`) | **None.** No Express server, no `rate-limit.ts`, no HTTP routes, no `permission-audit.ts` ring. |
 | **Phase 1+ — `qwen serve` + `DaemonChannelBridge`** | channels hosted in the daemon                           | All of `serve/`: real usage, mediator, rate-limit, audit ring, routes.                          |
 
-Resolution: **budget admission + decline live in `@qwen-code/channel-base`** (the common chokepoint `ChannelBase.handleInbound()`), in a new **`packages/channels/base/src/BudgetLedger.ts`** — _not_ `serve/budget.ts`, because the Phase-0 channel process never loads `serve/`, and the channel layer is the only place with human-sender context. **Audit + attribution** also originate in the channel layer. On the Phase-1+ daemon path the ledger reads real usage and is _additionally_ surfaced via a route; on the Phase-0 path it estimates and is exposed via a channel command (`/audit`).
+Resolution: **budget admission + decline live in `@lailatul-coder/channel-base`** (the common chokepoint `ChannelBase.handleInbound()`), in a new **`packages/channels/base/src/BudgetLedger.ts`** — _not_ `serve/budget.ts`, because the Phase-0 channel process never loads `serve/`, and the channel layer is the only place with human-sender context. **Audit + attribution** also originate in the channel layer. On the Phase-1+ daemon path the ledger reads real usage and is _additionally_ surfaced via a route; on the Phase-0 path it estimates and is exposed via a channel command (`/audit`).
 
 #### Where governance attaches today (and the gaps)
 
@@ -777,7 +777,7 @@ export interface BudgetLedger {
 - **Default-inherit semantics + strictest-wins org rollup (OD-9).** `admit(key)` resolves the effective window with the `GroupGate`-style `channel → '*' → built-in` fallback. A prompt must pass **both** the per-channel window and the **per-process "org" rollup** (strictest-wins, debit both). "org" = _this single process's_ rollup; a true cross-process org cap needs a shared store (out of scope). **Fixed daily window.**
 - **75%/95% alerts.** `debit()` fires `onAlert` once per threshold per window, using the event-bus hysteresis idiom (`WARN_THRESHOLD_RATIO`/`WARN_RESET_RATIO`, `eventBus.ts:101-103`). **Posting the alert is a proactive send** — a hard dependency on Build Area 2 (DingTalk cold-group caveat; Feishu posts freely). Degrade to "attach the warning to the next reply" when no proactive channel exists.
 - **Decline-not-truncate (only when `source==='daemon'`).** Checked at admission, _before_ `bridge.prompt()` (`:425`). On a real-usage `!allowed`, the adapter calls `sendMessage(chatId, refusal)` and returns — it does **not** enter the steer/cancel path, so an in-flight prompt finishes and the _next_ is declined. On an estimate, `allowed` is always true (advisory).
-- **Cost (`usd`)** multiplies tokens by an operator-supplied per-model rate table (qwen-code is multi-model; no single price). Missing entry → fall back to `tokens` + one-time warning.
+- **Cost (`usd`)** multiplies tokens by an operator-supplied per-model rate table (lailatul-coder is multi-model; no single price). Missing entry → fall back to `tokens` + one-time warning.
 - **Config.** `ChannelConfig` (`types.ts:27-51`) gains `budget?: { unit; limit; windowMs; reset? }`, parsed by `parseChannelConfig`. On the daemon path, `ServeOptions` gains `--budget-org-daily`/`--budget-unit`, and `daemon-status.ts` (which already reports `rateLimit`, `:295-297`) gains a parallel `budget` block.
 
 #### Audit log — human `senderId` carried with the turn (Fix #7)
@@ -977,13 +977,13 @@ Phases 0→1→2 are additive: multiplayer + identity (on `AcpBridge`) → daemo
 
 ## 8. qwen tag vs Claude Tag (tradeoffs)
 
-Claude Tag is a hosted, multi-tenant agent: Anthropic operates the runtime, identity, and per-user metering; the channel app is a thin client. `qwen tag` is the inverse — it runs on operator-controlled infrastructure on top of qwen-code's adapters. That inversion is the whole value proposition and the whole risk surface.
+Claude Tag is a hosted, multi-tenant agent: Anthropic operates the runtime, identity, and per-user metering; the channel app is a thin client. `qwen tag` is the inverse — it runs on operator-controlled infrastructure on top of lailatul-coder's adapters. That inversion is the whole value proposition and the whole risk surface.
 
 ### Where qwen wins
 
 - **Open / self-hosted, data stays internal.** The agent runs locally — over stdio in Phase 0 (`AcpBridge.start()` runs `node <cli> --acp`), in-process under `qwen serve` from Phase 1 — never a vendor API. Repo contents, model traffic, and transcripts stay on operator hosts. Claude Tag cannot make this claim.
 - **MCP / any-tool.** Strict superset of a closed hosted agent's tool surface.
-- **Per-action permission voting — _a Phase-1+ capability once daemon-hosted_.** qwen-code ships `MultiClientPermissionMediator` (four policies, consensus quorum `floor(M/2)+1`, separate audit ring). Genuinely a differentiator — **unreachable on the Phase-0 `AcpBridge` path** (`requestPermission` auto-approves, `:108-118`), reachable once Phase 1 hosts channels in the daemon; even there, votes key by `clientId` and a channel is a _single_ client until the OD-3 roster lands. The dead `ChannelConfig.approvalMode` field (`types.ts:36`) confirms planned-but-absent.
+- **Per-action permission voting — _a Phase-1+ capability once daemon-hosted_.** lailatul-coder ships `MultiClientPermissionMediator` (four policies, consensus quorum `floor(M/2)+1`, separate audit ring). Genuinely a differentiator — **unreachable on the Phase-0 `AcpBridge` path** (`requestPermission` auto-approves, `:108-118`), reachable once Phase 1 hosts channels in the daemon; even there, votes key by `clientId` and a channel is a _single_ client until the OD-3 roster lands. The dead `ChannelConfig.approvalMode` field (`types.ts:36`) confirms planned-but-absent.
 - **Durable, inspectable state.** `SessionRouter` persistence, plain `QWEN.md`/`AGENTS.md` files, and (daemon, Phase 1+) a Last-Event-ID replay ring. Nothing opaque.
 
 ### Where it diverges and must compensate

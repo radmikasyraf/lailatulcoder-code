@@ -30,7 +30,7 @@ export type SdkMcpToolDefinition<Schema extends ZodRawShape = ZodRawShape> = {
  * @example
  * ```typescript
  * import { z } from 'zod';
- * import { tool } from '@qwen-code/sdk';
+ * import { tool } from '@lailatul-coder/sdk';
  *
  * const calculatorTool = tool(
  *   'calculate_sum',

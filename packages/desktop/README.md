@@ -1,19 +1,19 @@
-# Qwen Code
+# LailatulCoder Ai
 
-Qwen Code is a desktop and headless agent workspace. It provides multi-session chat, source connections, skills, file previews, automations, and permission modes in a local-first application.
+LailatulCoder Ai is a desktop and headless agent workspace. It provides multi-session chat, source connections, skills, file previews, automations, and permission modes in a local-first application.
 
 ## Backend
 
 This fork is Qwen-only:
 
-- Agent sessions run through Qwen Code over ACP.
+- Agent sessions run through LailatulCoder Ai over ACP.
 - The app does not store third-party LLM API keys.
-- The built-in LLM connection is `qwen-code`.
+- The built-in LLM connection is `lailatul-coder`.
 - Legacy multi-provider backends and package/runtime wiring have been removed.
 
-## Qwen Code CLI Runtime
+## LailatulCoder Ai CLI Runtime
 
-The desktop app talks to the Qwen Code CLI over ACP. Treat the CLI as a
+The desktop app talks to the LailatulCoder Ai CLI over ACP. Treat the CLI as a
 runtime artifact, not as desktop source code. A packaged app must bundle a
 known CLI build so users can launch it without installing `qwen` separately.
 
@@ -23,27 +23,27 @@ Use one of these workflows depending on what you are developing:
 | --------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | Default desktop development | You are developing desktop only.                                          | `bun run dev`                                                        |
 | Published npm package       | You want a specific published CLI version for dev, CI, or release builds. | `QWEN_CODE_VERSION=0.15.12-acp.0 bun run dev`                        |
-| Local npm tarball           | You need to verify the exact package contents before publishing.          | `QWEN_CODE_TARBALL=/path/to/qwen-code-0.15.12-acp.0.tgz bun run dev` |
-| Local qwen-code checkout    | You are changing ACP or other CLI behavior while testing desktop.         | `QWEN_CODE_ROOT=/path/to/qwen-code bun run dev`                      |
-| Explicit CLI entry          | You need to point at a specific CLI file.                                 | `QWEN_CODE_CLI=/path/to/qwen-code/scripts/dev.js bun run dev`        |
+| Local npm tarball           | You need to verify the exact package contents before publishing.          | `QWEN_CODE_TARBALL=/path/to/lailatul-coder-0.15.12-acp.0.tgz bun run dev` |
+| Local lailatul-coder checkout    | You are changing ACP or other CLI behavior while testing desktop.         | `QWEN_CODE_ROOT=/path/to/lailatul-coder bun run dev`                      |
+| Explicit CLI entry          | You need to point at a specific CLI file.                                 | `QWEN_CODE_CLI=/path/to/lailatul-coder/scripts/dev.js bun run dev`        |
 
 `electron:dev` uses local overrides first. If no override is set and this
-repository is not inside the qwen-code monorepo, it vendors the default version
+repository is not inside the lailatul-coder monorepo, it vendors the default version
 from `qwenCodeRuntime.version` in `package.json` and points Electron at the
 vendored CLI automatically.
 
 If you are preparing a package without publishing it, create the tarball from
-the Qwen Code repository and point desktop at it:
+the LailatulCoder Ai repository and point desktop at it:
 
 ```bash
-cd /path/to/qwen-code
+cd /path/to/lailatul-coder
 npm run build
 npm run bundle
 npm run prepare:package
 npm pack
 
 cd /path/to/desktop
-QWEN_CODE_TARBALL=/path/to/qwen-code/qwen-code-0.15.12-acp.0.tgz bun run dist:mac
+QWEN_CODE_TARBALL=/path/to/lailatul-coder/lailatul-coder-0.15.12-acp.0.tgz bun run dist:mac
 ```
 
 Distribution builds run `electron:vendor:qwen` automatically. Set
@@ -136,15 +136,15 @@ All artifacts are written to `apps/electron/release/`:
 
 | Platform | Artifact                                                                 |
 | -------- | ------------------------------------------------------------------------ |
-| macOS    | `Qwen-Code-Desktop-{arm64,x64}.dmg`, `Qwen-Code-Desktop-{arm64,x64}.zip` |
-| Windows  | `Qwen-Code-Desktop-x64.exe`                                              |
-| Linux    | `Qwen-Code-Desktop-x64.AppImage`                                         |
+| macOS    | `lailatul-coder-Desktop-{arm64,x64}.dmg`, `lailatul-coder-Desktop-{arm64,x64}.zip` |
+| Windows  | `lailatul-coder-Desktop-x64.exe`                                              |
+| Linux    | `lailatul-coder-Desktop-x64.AppImage`                                         |
 
 ### What the Build Does
 
 Each `electron:dist:*` command runs three stages:
 
-1. **`electron:vendor:qwen`** — vendors a Qwen Code CLI runtime into `vendor/qwen-code/`. Set `QWEN_CODE_VERSION` to download a published npm version, or `QWEN_CODE_TARBALL` to use a local `npm pack` tarball. If neither is set in this monorepo, it builds from the local checkout.
+1. **`electron:vendor:qwen`** — vendors a LailatulCoder Ai CLI runtime into `vendor/lailatul-coder/`. Set `QWEN_CODE_VERSION` to download a published npm version, or `QWEN_CODE_TARBALL` to use a local `npm pack` tarball. If neither is set in this monorepo, it builds from the local checkout.
 2. **`electron:build`** — compiles the app via esbuild (main + preload), Vite (renderer), and copies resources/assets.
 3. **`electron-builder`** — downloads the Electron runtime, packages the app, signs it, and produces distributable installers (DMG, NSIS, AppImage).
 
@@ -155,7 +155,7 @@ bun run apps/cli/src/index.ts run "Hello from Qwen"
 bun run apps/cli/src/index.ts run --workspace-dir ./project "Summarize this repo"
 ```
 
-The `run` command spawns a headless server, creates a temporary session, streams the response, and exits. Provider flags are accepted only for compatibility; the backend remains Qwen Code.
+The `run` command spawns a headless server, creates a temporary session, streams the response, and exits. Provider flags are accepted only for compatibility; the backend remains LailatulCoder Ai.
 
 ## Repository Layout
 
@@ -177,7 +177,7 @@ scripts/        Build and packaging helpers
 ## Capabilities
 
 - Multi-session inbox with streaming responses and tool visualization
-- Qwen Code model discovery through ACP
+- LailatulCoder Ai model discovery through ACP
 - MCP, REST API, and local filesystem sources
 - Skills stored per workspace
 - Permission modes for planning, asking before edits, and autonomous execution

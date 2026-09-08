@@ -8,7 +8,7 @@ Screen Recording once; the embedded driver inherits those grants.
 
 A working daemon-host reference lives in the cua repo at
 `packages/cua-driver/rust/examples/embedded-host-macos/`
-(https://github.com/QwenLM/qwen-code). This doc ships standalone in the skill
+(https://github.com/LailatulCoder/lailatul-coder). This doc ships standalone in the skill
 pack, so the path is given rather than a relative link.
 
 ## How macOS attributes these permissions (what you must know)

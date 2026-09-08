@@ -424,7 +424,7 @@ describe('AnthropicContentGenerator', () => {
     it('suppresses ANTHROPIC_API_KEY back-fill on the proxy branch (prevents credential leak)', async () => {
       // Scenario: user runs Claude Code in the same shell so
       // ANTHROPIC_API_KEY is exported with their real Anthropic key, and
-      // separately configures qwen-code with an IdeaLab proxy + IdeaLab
+      // separately configures lailatul-coder with an IdeaLab proxy + IdeaLab
       // token. Pre-fix, the SDK's destructuring default would back-fill
       // `apiKey` from the env, then the auth resolver would prefer it
       // over our `authToken` and ship `X-Api-Key: <real Anthropic key>`
@@ -480,7 +480,7 @@ describe('AnthropicContentGenerator', () => {
     it('applies proxy identity when ANTHROPIC_BASE_URL env points to a proxy and config.baseUrl is unset', async () => {
       // Symmetric concern: pre-fix, `isAnthropicNativeBaseUrl` only read
       // `config.baseUrl`, so a user who set ANTHROPIC_BASE_URL only via
-      // env (leaving qwen-code's baseUrl unset) had the SDK route to the
+      // env (leaving lailatul-coder's baseUrl unset) had the SDK route to the
       // proxy while our predicate thought it was Anthropic-native — wrong
       // UA, wrong auth shape, and the cache-scope beta + scope:'global'
       // shipped to a proxy that likely doesn't recognize them.
@@ -536,7 +536,7 @@ describe('AnthropicContentGenerator', () => {
 
     it('config.baseUrl wins over ANTHROPIC_BASE_URL when both are set', async () => {
       // Mirror the SDK's own resolution: explicit config beats env. A
-      // user who deliberately points qwen-code at api.anthropic.com
+      // user who deliberately points lailatul-coder at api.anthropic.com
       // shouldn't have a stray ANTHROPIC_BASE_URL silently flip them
       // onto the proxy path.
       process.env['ANTHROPIC_BASE_URL'] = 'https://idealab.example/anthropic';
@@ -2891,7 +2891,7 @@ describe('AnthropicContentGenerator', () => {
     });
   });
 
-  // https://github.com/QwenLM/qwen-code/issues/3786 — DeepSeek's
+  // https://github.com/LailatulCoder/lailatul-coder/issues/3786 — DeepSeek's
   // anthropic-compatible API rejects requests in thinking mode when a prior
   // assistant turn carrying `tool_use` omits a thinking block. Plain-text
   // assistant turns without thinking are accepted unchanged.

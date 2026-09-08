@@ -5,7 +5,7 @@ import type {
   ChannelConfig,
   ChannelTaskLifecycleEvent,
   Envelope,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 type LifecycleBase = Omit<
   Extract<ChannelTaskLifecycleEvent, { type: 'started' }>,
@@ -355,7 +355,7 @@ describe('TelegramChannel', () => {
 
     expect(bot.api.sendMessage).toHaveBeenCalledWith(
       'chat-1',
-      expect.stringContaining('Qwen Code Telegram bot'),
+      expect.stringContaining('LailatulCoder Ai Telegram bot'),
       { parse_mode: 'HTML' },
     );
   });
@@ -378,7 +378,7 @@ describe('TelegramChannel', () => {
 
     expect(bot.api.sendMessage).toHaveBeenCalledWith(
       '2',
-      expect.stringContaining('Qwen Code Telegram bot'),
+      expect.stringContaining('LailatulCoder Ai Telegram bot'),
       { parse_mode: 'HTML', message_thread_id: 42 },
     );
   });

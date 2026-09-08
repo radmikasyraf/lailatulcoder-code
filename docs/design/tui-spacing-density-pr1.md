@@ -8,7 +8,7 @@ sessions this makes simple answers, file lists, tool output, error states,
 diffs, and long streaming output harder to scan because users need to scroll
 through blank space rather than content.
 
-This PR is the first focused pass for QwenLM/qwen-code#4588. It addresses only
+This PR is the first focused pass for LailatulCoder/lailatul-coder#4588. It addresses only
 spacing and density so the review can compare row usage before and after
 without also reviewing thinking visibility, tool borders, SubAgent layout,
 branding, or theme color changes.

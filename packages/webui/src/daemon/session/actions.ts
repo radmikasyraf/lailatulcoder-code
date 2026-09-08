@@ -31,14 +31,14 @@ import type {
   DaemonSessionAttachmentReference,
   PermissionResponse,
   PromptContentBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   DaemonHttpError,
   DaemonPendingPromptLimitError,
   isDaemonTurnError,
   isStaleBranchPointError,
   type PromptResult,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import { extractHttpStatus, isInvalidClientIdError } from './httpErrors.js';
 import {
   mapReasoningControls,

@@ -22,7 +22,7 @@ import {
   getOrCreateSharedDispatcher,
   preloadRuntimeFetchModule,
   redactProxyCredentials,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { loadUndici } from './load-undici.js';
 
 const debugLogger = createDebugLogger('PRECONNECT');

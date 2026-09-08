@@ -43,7 +43,7 @@ to the workspace `.lsp.json`.
 ## Goals
 
 Make LSP server configuration changes take effect without restarting the
-current Qwen Code session:
+current LailatulCoder Ai session:
 
 - start a server when it is added;
 - stop a server when it is removed, and remove it from status and tool routing;

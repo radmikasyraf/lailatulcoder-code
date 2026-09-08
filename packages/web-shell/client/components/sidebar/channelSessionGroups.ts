@@ -2,7 +2,7 @@ import type {
   DaemonChannelInstanceSnapshot,
   DaemonChannelTypeCatalog,
   DaemonSessionSummary,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 export interface ChannelSessionGroup {
   id: string;

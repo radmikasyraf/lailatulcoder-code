@@ -8,7 +8,7 @@ import { describe, expect, it, vi } from 'vitest';
 import type {
   DaemonCapabilities,
   DaemonWorkspaceCapability,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   loadVoiceProviders,
   loadVoiceStatus,

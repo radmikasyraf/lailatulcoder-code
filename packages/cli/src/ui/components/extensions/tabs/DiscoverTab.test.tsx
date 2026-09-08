@@ -8,7 +8,7 @@ import { act } from 'react';
 import { render } from 'ink-testing-library';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { waitFor } from '@testing-library/react';
-import type { Config, DiscoveredPlugin } from '@qwen-code/qwen-code-core';
+import type { Config, DiscoveredPlugin } from '@lailatul-coder/lailatul-coder-core';
 import type { Key } from '../../../hooks/useKeypress.js';
 import { DiscoverTab } from './DiscoverTab.js';
 
@@ -32,9 +32,9 @@ vi.mock('../../shared/RadioButtonSelect.js', () => ({
   RadioButtonSelect: mockRadioButtonSelect,
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return { ...actual, parseInstallSource: mockParseInstallSource };
 });
 
@@ -151,3 +151,4 @@ describe('DiscoverTab', () => {
     );
   });
 });
+

@@ -13,17 +13,17 @@ import { CHAT_VIEW_ID_SIDEBAR } from '../constants/viewIds.js';
 
 type Logger = (message: string) => void;
 
-export const runQwenCodeCommand = 'qwen-code.runQwenCode';
+export const runQwenCodeCommand = 'lailatul-coder.runQwenCode';
 export const showDiffCommand = 'qwenCode.showDiff';
-export const openChatCommand = 'qwen-code.openChat';
+export const openChatCommand = 'lailatul-coder.openChat';
 export const openNewChatTabCommand = 'qwenCode.openNewChatTab';
-export const authCommand = 'qwen-code.auth';
-export const focusChatCommand = 'qwen-code.focusChat';
-export const newConversationCommand = 'qwen-code.newConversation';
-export const showLogsCommand = 'qwen-code.showLogs';
+export const authCommand = 'lailatul-coder.auth';
+export const focusChatCommand = 'lailatul-coder.focusChat';
+export const newConversationCommand = 'lailatul-coder.newConversation';
+export const showLogsCommand = 'lailatul-coder.showLogs';
 
 /**
- * Register all Qwen Code chat-related commands.
+ * Register all LailatulCoder Ai chat-related commands.
  *
  * `openChat` and `newConversation` always open an editor tab, while
  * `focusChat` focuses the Activity Bar chat view.
@@ -131,7 +131,7 @@ export function registerNewCommands(
         outputChannel.show(true);
       } else {
         vscode.window.showWarningMessage(
-          'Qwen Code Companion log channel is not available.',
+          'LailatulCoder Ai Companion log channel is not available.',
         );
       }
     }),

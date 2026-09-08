@@ -17,8 +17,8 @@ import type {
   ToolRegistry,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@qwen-code/qwen-code-core';
-import { Kind, ToolNames } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import { Kind, ToolNames } from '@lailatul-coder/lailatul-coder-core';
 import type { Part } from '@google/genai';
 
 // Helper to create mock message parts for tests

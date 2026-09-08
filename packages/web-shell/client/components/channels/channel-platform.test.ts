@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import type { DaemonChannelTypeDescriptor } from '@qwen-code/sdk/daemon';
+import type { DaemonChannelTypeDescriptor } from '@lailatul-coder/sdk/daemon';
 import {
   isChannelPlatformAvailable,
   isSupportedChannelType,

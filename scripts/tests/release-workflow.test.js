@@ -37,7 +37,7 @@ describe('release workflow', () => {
     // fails review instead of silently shipping a non-stable fleet.
     expect(workflow).toContain(
       'if: |-\n' +
-        "          ${{ github.repository == 'QwenLM/qwen-code' &&\n" +
+        "          ${{ github.repository == 'LailatulCoder/lailatul-coder' &&\n" +
         "              needs.prepare.outputs.is_dry_run == 'false' &&\n" +
         "              needs.prepare.outputs.npm_tag == 'latest' }}",
     );
@@ -247,7 +247,7 @@ describe('Live Host release workflow', () => {
       expect(liveHostInstaller).toContain(asset);
     }
     expect(liveHostInstaller).toContain(
-      'https://github.com/QwenLM/qwen-code/releases/download/live-host-latest',
+      'https://github.com/LailatulCoder/lailatul-coder/releases/download/live-host-latest',
     );
   });
 

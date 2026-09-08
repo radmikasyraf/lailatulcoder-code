@@ -11,7 +11,7 @@ import {
   type Config,
   getMCPServerStatus,
   type MCPServerConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from './settings.js';
 import type { SettingsWatcher } from './settingsWatcher.js';
 import { assembleMcpServers } from './mcpServers.js';

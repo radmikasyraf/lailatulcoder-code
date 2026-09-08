@@ -7,7 +7,7 @@ scenario captures its tmux pane via `tmux pipe-pane -o 'cat >> <log>'`.
 
 ```sh
 # Point WT at your local checkout of the branch under review.
-WT=/path/to/qwen-code/worktree
+WT=/path/to/lailatul-coder/worktree
 LOGDIR=$WT/docs/verification/abort-controller-refactor/logs
 mkdir -p "$LOGDIR"
 

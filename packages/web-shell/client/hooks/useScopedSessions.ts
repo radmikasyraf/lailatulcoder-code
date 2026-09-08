@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
-import { useWorkspace } from '@qwen-code/webui/daemon-react-sdk';
-import type { DaemonSessionArchiveState } from '@qwen-code/sdk/daemon';
+import { useWorkspace } from '@lailatul-coder/webui/daemon-react-sdk';
+import type { DaemonSessionArchiveState } from '@lailatul-coder/sdk/daemon';
 import { WEB_SHELL_SESSION_SOURCE_TYPE } from '../constants/sessions';
 import {
   useSessionCatalogController,

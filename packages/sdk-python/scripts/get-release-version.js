@@ -19,7 +19,7 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const PACKAGE_NAME = 'qwen-code-sdk';
+const PACKAGE_NAME = 'lailatul-coder-sdk';
 const TAG_PREFIX = 'sdk-python-v';
 const NETWORK_COMMAND_TIMEOUT_MS = 30_000;
 const LOCAL_COMMAND_TIMEOUT_MS = 10_000;

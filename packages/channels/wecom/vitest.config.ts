@@ -8,7 +8,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@qwen-code/channel-base': path.resolve(
+      '@lailatul-coder/channel-base': path.resolve(
         __dirname,
         '../base/src/index.ts',
       ),

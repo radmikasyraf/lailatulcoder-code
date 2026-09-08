@@ -6,7 +6,7 @@
 
 /**
  * `BridgeOptions` and the daemon-host injection seam (`DaemonStatusProvider`)
- * for the ACP bridge factory. Lifted to `@qwen-code/acp-bridge` so the
+ * for the ACP bridge factory. Lifted to `@lailatul-coder/acp-bridge` so the
  * bridge package owns the construction contract independently of
  * `cli/src/serve/`.
  */
@@ -14,8 +14,8 @@
 import type {
   ApprovalMode,
   DaemonBridgeTelemetryMetrics,
-} from '@qwen-code/qwen-code-core';
-import { MAX_SUB_SESSION_PROMPT_CHARS } from '@qwen-code/qwen-code-core/subSessionConstants';
+} from '@lailatul-coder/lailatul-coder-core';
+import { MAX_SUB_SESSION_PROMPT_CHARS } from '@lailatul-coder/lailatul-coder-core/subSessionConstants';
 import type { ChannelFactory } from './channel.js';
 import type { PermissionPolicy } from './permission.js';
 import type { PermissionAuditPublisher } from './permissionMediator.js';
@@ -231,7 +231,7 @@ export interface BridgeOptions {
    * omits the field. See the `session_scope_override` capability on
    * `/capabilities.features` for negotiation.
    * Reference:
-   * https://github.com/QwenLM/qwen-code/pull/3889#issuecomment-4427875644
+   * https://github.com/LailatulCoder/lailatul-coder/pull/3889#issuecomment-4427875644
    */
   sessionScope?: 'single' | 'thread';
   /** Channel factory; defaults to spawning `qwen --acp` as a child process. */

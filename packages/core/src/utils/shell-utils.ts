@@ -604,7 +604,7 @@ const XARGS_OPTIONS_WITH_VALUES = new Set([
 ]);
 
 export const SHELL_SELF_KILL_REJECTION =
-  'Blocked: this command may terminate the running qwen-code process because it targets all node/qwen-code processes. Use task_stop for managed background shells, or kill a specific PID instead.';
+  'Blocked: this command may terminate the running lailatul-coder process because it targets all node/lailatul-coder processes. Use task_stop for managed background shells, or kill a specific PID instead.';
 
 function parseShellSegment(segment: string): string[] | null {
   try {

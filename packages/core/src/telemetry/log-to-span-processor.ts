@@ -335,7 +335,7 @@ export class LogToSpanProcessor implements LogRecordProcessor {
       try {
         this.spanExporter.export(
           spans as unknown as ReadableSpan[],
-          (result) => {
+          (result: any) => {
             clearTimeout(timeout);
             if (result.code !== 0) {
               this.emitDiagnostic(
@@ -534,3 +534,5 @@ function hrTimeDiff(start: HrTime, end: HrTime): HrTime {
   }
   return [secs, nanos] as HrTime;
 }
+
+

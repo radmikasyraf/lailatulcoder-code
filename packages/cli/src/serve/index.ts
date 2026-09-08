@@ -98,7 +98,7 @@ export {
   type ServeExtensionInstallType,
   type ServeExtensionOriginSource,
   type ServeWorkspaceExtensionsStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 export {
   ENV_NONSECRET_VARS,
   ENV_PROXY_VARS,
@@ -145,5 +145,5 @@ export {
   EVENT_SCHEMA_VERSION,
   type BridgeEvent,
   type SubscribeOptions,
-} from '@qwen-code/acp-bridge/eventBus';
-export { createInMemoryChannel } from '@qwen-code/acp-bridge/inMemoryChannel';
+} from '@lailatul-coder/acp-bridge/eventBus';
+export { createInMemoryChannel } from '@lailatul-coder/acp-bridge/inMemoryChannel';

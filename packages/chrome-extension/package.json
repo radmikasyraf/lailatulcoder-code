@@ -1,11 +1,11 @@
 {
-  "name": "@qwen-code/chrome-bridge",
+  "name": "@lailatul-coder/chrome-bridge",
   "version": "0.21.14",
   "description": "Chrome extension bridge for Qwen CLI - enables AI-powered browser interactions",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/QwenLM/qwen-code.git",
+    "url": "https://github.com/LailatulCoder/lailatul-coder.git",
     "directory": "packages/chrome-extension"
   },
   "keywords": [

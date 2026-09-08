@@ -6,7 +6,7 @@
 
 import { render } from 'ink-testing-library';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { MCPServerStatus } from '@qwen-code/qwen-code-core';
+import { MCPServerStatus } from '@lailatul-coder/lailatul-coder-core';
 import { useKeypress } from '../../../hooks/useKeypress.js';
 import { ServerDetailStep } from './ServerDetailStep.js';
 import type { MCPServerDisplayInfo } from '../types.js';
@@ -82,3 +82,4 @@ describe('ServerDetailStep — View resources action gating', () => {
     expect(lastFrame()).not.toContain('View resources');
   });
 });
+

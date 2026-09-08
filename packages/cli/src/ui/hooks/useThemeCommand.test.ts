@@ -12,7 +12,7 @@ import { SettingScope } from '../../config/settings.js';
 import { useThemeCommand } from './useThemeCommand.js';
 import { themeManager } from '../themes/theme-manager.js';
 import { MessageType } from '../types.js';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import process from 'node:process';
 
 describe('useThemeCommand', () => {

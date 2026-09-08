@@ -1,6 +1,6 @@
 # External Context extension
 
-This private Qwen Code integration connects one interactive CLI process to one
+This private LailatulCoder Ai integration connects one interactive CLI process to one
 administrator-bound external context corpus without changing Qwen Core. It has
 three managed deployment variants:
 
@@ -100,11 +100,11 @@ confirmation; use the governed profile when that is required.
    5000 and may be between 1 and 30000 milliseconds.
 3. Have the managed launcher set `QWEN_EXTERNAL_CONTEXT_CONFIG` to the absolute
    configuration path.
-4. From the Qwen Code checkout, install dependencies and build this workspace:
+4. From the LailatulCoder Ai checkout, install dependencies and build this workspace:
 
    ```bash
    npm install
-   npm run build --workspace @qwen-code/external-context
+   npm run build --workspace @lailatul-coder/external-context
    ```
 
    Phase 1 is a private monorepo workspace. Copying the directory or its npm

@@ -24,14 +24,14 @@ import type {
   McpToolProgressData,
   FileDiff,
   TerminalImageDisplay,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   formatVisionBridgeNoticeDisplay,
   isTerminalImageDisplay,
   isVisionBridgeNoticeDisplay,
   ToolNames,
   ToolNamesMigration,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { ToolConfirmationMessage } from './ToolConfirmationMessage.js';
 import { PlanSummaryDisplay } from '../PlanSummaryDisplay.js';
 import { ShellInputPrompt } from '../ShellInputPrompt.js';
@@ -1107,3 +1107,4 @@ const TrailingIndicator: React.FC = () => (
     ←
   </Text>
 );
+

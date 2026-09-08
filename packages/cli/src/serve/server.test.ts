@@ -53,7 +53,7 @@ import {
 import {
   CHANNEL_PROMPT_DISPLAY_TEXT_META_KEY,
   CHANNEL_PROMPT_META_KEY,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import {
   resolveWebShellDir,
   isDocumentNavigation,
@@ -91,9 +91,9 @@ import {
   type SessionListItem,
   type GoalControlRequest,
   type GoalSnapshotV2,
-} from '@qwen-code/qwen-code-core';
-import * as qwenCore from '@qwen-code/qwen-code-core';
-import type { DaemonStatusProvider } from '@qwen-code/acp-bridge';
+} from '@lailatul-coder/lailatul-coder-core';
+import * as qwenCore from '@lailatul-coder/lailatul-coder-core';
+import type { DaemonStatusProvider } from '@lailatul-coder/acp-bridge';
 import {
   CancelSentinelCollisionError,
   InvalidClientIdError,
@@ -134,7 +134,7 @@ import {
 import type {
   BridgeEvent,
   SubscribeOptions,
-} from '@qwen-code/acp-bridge/eventBus';
+} from '@lailatul-coder/acp-bridge/eventBus';
 import type {
   ServeSessionContextStatus,
   ServeSessionContextUsageStatus,
@@ -153,7 +153,7 @@ import type {
   ServeWorkspaceProvidersStatus,
   ServeWorkspaceSkillsStatus,
   ServeWorkspaceToolsStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 import { CAPABILITIES_SCHEMA_VERSION, type ServeOptions } from './types.js';
 import { isValidSessionId } from '../config/config.js';
 import type { DaemonLogger } from './daemon-logger.js';
@@ -238,9 +238,9 @@ vi.mock('node:fs', async (importOriginal) => {
     realpathSync: wrapped,
   };
 });
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...original,
     readWorktreeSession: (...args: unknown[]) =>
@@ -3435,7 +3435,7 @@ describe('createServeApp', () => {
   describe('Web Shell static serving', () => {
     let webShellDir: string;
     const INDEX_HTML =
-      '<!doctype html><html><head><title>Qwen Code Web terminal</title>' +
+      '<!doctype html><html><head><title>LailatulCoder Ai Web terminal</title>' +
       '<script type="module" src="/assets/app.js"></script></head>' +
       '<body><div id="root"></div></body></html>';
     const host = `127.0.0.1:${baseOpts.port}`;
@@ -11315,7 +11315,7 @@ describe('createServeApp', () => {
                       method: 'session/new',
                       params: {
                         workspaceCwd: WS_BOUND,
-                        _meta: { 'qwen-code/sessionId': sessionId },
+                        _meta: { 'lailatul-coder/sessionId': sessionId },
                       },
                     }),
                   );
@@ -14512,7 +14512,7 @@ describe('createServeApp', () => {
 
         expect(res.status).toBe(202);
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.prompt_id',
+          'lailatul-coder.prompt_id',
           res.body.promptId,
         );
       } finally {
@@ -16194,11 +16194,11 @@ describe('createServeApp', () => {
           { status: 'rejected', reason: error },
         ]);
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.cache_status',
+          'lailatul-coder.daemon.session_list.cache_status',
           'scan',
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.cache_status',
+          'lailatul-coder.daemon.session_list.cache_status',
           'single_flight',
         );
 
@@ -16223,41 +16223,41 @@ describe('createServeApp', () => {
           { runtimeBaseDir: runtimeDir },
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.cache_status',
+          'lailatul-coder.daemon.session_list.cache_status',
           'cache_hit',
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.cache_age_ms',
+          'lailatul-coder.daemon.session_list.cache_age_ms',
           expect.any(Number),
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.archive_state',
+          'lailatul-coder.daemon.session_list.archive_state',
           'active',
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.query_kind',
+          'lailatul-coder.daemon.session_list.query_kind',
           'metadata',
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.persisted_sessions',
+          'lailatul-coder.daemon.session_list.persisted_sessions',
           0,
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.scan_pages',
+          'lailatul-coder.daemon.session_list.scan_pages',
           1,
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.truncated',
+          'lailatul-coder.daemon.session_list.truncated',
           false,
         );
         expect(setAttribute).toHaveBeenCalledWith(
-          'qwen-code.daemon.session_list.scan_duration_ms',
+          'lailatul-coder.daemon.session_list.scan_duration_ms',
           expect.any(Number),
         );
         expect(
           setAttribute.mock.calls.filter(
             ([name]) =>
-              name === 'qwen-code.daemon.session_list.scan_duration_ms',
+              name === 'lailatul-coder.daemon.session_list.scan_duration_ms',
           ),
         ).toHaveLength(2);
       } finally {
@@ -23546,7 +23546,7 @@ describe('createServeApp', () => {
       expect(res.headers['cache-control']).toBe('no-store');
       expect(res.headers['x-content-type-options']).toBe('nosniff');
       expect(res.headers['content-disposition']).toMatch(
-        /^attachment; filename="qwen-code-export-.+\.html"$/,
+        /^attachment; filename="lailatul-coder-export-.+\.html"$/,
       );
       expect(res.text).toContain('id="chat-data"');
       expect(res.text).toContain('hello export');
@@ -29021,19 +29021,19 @@ describe('GET /session/:id/events (SSE)', () => {
           .mock.calls.filter(([message]) => message === 'SSE stream closed'),
       ).toHaveLength(1);
       expect(setAttribute).toHaveBeenCalledWith(
-        'qwen-code.daemon.sse.stream_id',
+        'lailatul-coder.daemon.sse.stream_id',
         streamId,
       );
       expect(setAttribute).toHaveBeenCalledWith(
-        'qwen-code.daemon.sse.close_reason',
+        'lailatul-coder.daemon.sse.close_reason',
         'source_complete',
       );
       expect(setAttribute).toHaveBeenCalledWith(
-        'qwen-code.daemon.sse.event_frames_write_settled',
+        'lailatul-coder.daemon.sse.event_frames_write_settled',
         1,
       );
       expect(setAttribute).toHaveBeenCalledWith(
-        'qwen-code.daemon.sse.duration_ms',
+        'lailatul-coder.daemon.sse.duration_ms',
         expect.any(Number),
       );
       expect(
@@ -29084,7 +29084,7 @@ describe('GET /session/:id/events (SSE)', () => {
       expect(res.status).toBe(404);
       expect(
         setAttribute.mock.calls.some(
-          ([key]) => key === 'qwen-code.daemon.sse.stream_id',
+          ([key]) => key === 'lailatul-coder.daemon.sse.stream_id',
         ),
       ).toBe(false);
     } finally {
@@ -29993,7 +29993,7 @@ describe('GET /session/:id/events (SSE)', () => {
     // UI consumers can render "retry" on init_timeout vs "show stack
     // trace" on unknown errors, without regex-matching the message
     // string.
-    const { BridgeTimeoutError } = await import('@qwen-code/acp-bridge');
+    const { BridgeTimeoutError } = await import('@lailatul-coder/acp-bridge');
     const bridge = fakeBridge({
       async *subscribeImpl(_sessionId, _opts) {
         yield { id: 1, v: 1, type: 'session_update', data: 'first' };
@@ -30156,7 +30156,7 @@ describe('GET /session/:id/events (SSE)', () => {
     // BridgeTimeoutError → classified as `init_timeout`. The log line
     // must include `[init_timeout]` so operators can `grep '\[init_'`
     // for that specific failure class.
-    const { BridgeTimeoutError } = await import('@qwen-code/acp-bridge');
+    const { BridgeTimeoutError } = await import('@lailatul-coder/acp-bridge');
     const stderrSpy = vi.spyOn(process.stderr, 'write').mockReturnValue(true);
     try {
       const bridge = fakeBridge({
@@ -32797,7 +32797,7 @@ describe('T2.9 serve-side errorKind taxonomy (issue #4514)', () => {
     // (different package, no cross-package import). Together they
     // guarantee a PR adding a kind on one side without the other
     // fails CI.
-    const { SERVE_ERROR_KINDS } = await import('@qwen-code/acp-bridge/status');
+    const { SERVE_ERROR_KINDS } = await import('@lailatul-coder/acp-bridge/status');
     expect(SERVE_ERROR_KINDS).toContain('prompt_deadline_exceeded');
     expect(SERVE_ERROR_KINDS).toContain('writer_idle_timeout');
   });
@@ -33840,7 +33840,7 @@ describe('Live conversation runtime lifecycle', () => {
     const realHome = path.join(tmp, 'real-home');
     const linkedHome = path.join(tmp, 'linked-home');
     const alternateRootAlias = path.join(tmp, 'alternate-root-alias');
-    const relativeRoot = path.join('Documents', 'Qwen Code', 'Conversations');
+    const relativeRoot = path.join('Documents', 'LailatulCoder Ai', 'Conversations');
     const realRoot = path.join(realHome, relativeRoot);
     const realChild = path.join(realRoot, 'conversation-probe');
     await fsp.mkdir(realChild, { recursive: true });

@@ -7,7 +7,7 @@
 import { act } from 'react';
 import { render } from 'ink-testing-library';
 import { describe, expect, it, vi } from 'vitest';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -377,3 +377,4 @@ describe('StatusLineDialog', () => {
     expect(lastFrame()).not.toContain('> mk');
   });
 });
+

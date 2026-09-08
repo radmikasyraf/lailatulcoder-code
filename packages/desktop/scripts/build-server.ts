@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Build script for standalone Qwen Code server.
+ * Build script for standalone LailatulCoder Ai server.
  *
  * Assembles a self-contained distribution directory with all runtime
  * dependencies, resources, and platform-specific binaries.
@@ -81,7 +81,7 @@ interface ServerBuildConfig {
 
 function showHelp(): void {
   console.log(`
-Standalone server build script for Qwen Code
+Standalone server build script for LailatulCoder Ai
 
 Usage:
   bun run scripts/build-server.ts [options]
@@ -588,7 +588,7 @@ exec "$ROOT/vendor/bun/bun" run "$ROOT/packages/server/src/index.ts" "$@"
 
   // start.sh — convenience entry
   const startSh = `#!/bin/sh
-# Qwen Code Server — convenience entry point
+# LailatulCoder Ai Server — convenience entry point
 DIR="$(cd "$(dirname "$0")" && pwd)"
 exec "$DIR/bin/craft-server" "$@"
 `;
@@ -600,7 +600,7 @@ set -euo pipefail
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-echo "=== Qwen Code Server Setup ==="
+echo "=== LailatulCoder Ai Server Setup ==="
 echo ""
 
 # Make binaries executable
@@ -646,7 +646,7 @@ if [ "\${1:-}" = "--systemd" ]; then
 
   cat > "$SERVICE_FILE" <<UNIT
 [Unit]
-Description=Qwen Code Server
+Description=LailatulCoder Ai Server
 After=network.target
 
 [Service]
@@ -815,7 +815,7 @@ async function main(): Promise<void> {
     version,
   };
 
-  console.log(`=== Building Qwen Code Server ${version} for ${platform}-${arch} ===`);
+  console.log(`=== Building LailatulCoder Ai Server ${version} for ${platform}-${arch} ===`);
   console.log(`  Output: ${outputDir}`);
 
   // Step 1: Clean

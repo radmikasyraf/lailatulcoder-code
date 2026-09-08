@@ -14,7 +14,7 @@ import type {
   DaemonWorkspaceProvidersStatus,
   DaemonWorkspaceSkillsStatus,
   GoalSnapshotV2,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import type {
   DaemonCommandInfo,
   DaemonConnectionState,

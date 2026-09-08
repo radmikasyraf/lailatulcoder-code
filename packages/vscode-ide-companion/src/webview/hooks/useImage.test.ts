@@ -51,7 +51,7 @@ describe('formatFileSize', () => {
 });
 
 describe('useImage browser bundle', () => {
-  it('bundles without resolving node-only qwen-code-core modules', async () => {
+  it('bundles without resolving node-only lailatul-coder-core modules', async () => {
     const entryPoint = fileURLToPath(new URL('./useImage.ts', import.meta.url));
 
     await expect(

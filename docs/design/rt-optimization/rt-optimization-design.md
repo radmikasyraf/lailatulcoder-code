@@ -1,10 +1,10 @@
-# Qwen Code Agent Loop RT 优化技术方案
+# LailatulCoder Ai Agent Loop RT 优化技术方案
 
 ## 1. 背景与问题定义
 
 ### 1.1 现状
 
-Qwen Code 的 Agent Loop 为严格串行模型：
+LailatulCoder Ai 的 Agent Loop 为严格串行模型：
 
 ```
 User Prompt → [LLM 决策] → Tool Execution → [LLM 决策] → Tool Execution → ... → [LLM 回复] → Idle
@@ -754,7 +754,7 @@ abort 中断的 stream **大概率收不到 `finishReason` / `usageMetadata`**�
 
 #### 发布策略（适配本地 CLI）
 
-Qwen Code 是本地 CLI，**没有运行时下发能力**——传统"5% / 25% / 100% 灰度"不适用。采用**阶段性 release 推进**：
+LailatulCoder Ai 是本地 CLI，**没有运行时下发能力**——传统"5% / 25% / 100% 灰度"不适用。采用**阶段性 release 推进**：
 
 | 阶段                  | Release 节点           | feature flag 默认值 | 触发条件                                                    |
 | --------------------- | ---------------------- | ------------------- | ----------------------------------------------------------- |
@@ -1171,7 +1171,7 @@ TTL 滑动窗口意味着 agent loop 内 summary 轮**几乎 100% 命中** prima
 | L190     | `process.env['QWEN_SYSTEM_MD']` 决定 basePrompt 来源（默认 vs 用户 system.md）                   | 进程内不变                |
 | L342-343 | `process.env['SANDBOX']` 决定 sandbox 段选哪一版（Seatbelt / Sandbox / Outside）                 | 进程内不变                |
 | L366     | `isGitRepository(process.cwd())` 决定 git 段是否插入                                             | cwd 同 session 内通常不变 |
-| L871     | `process.env['QWEN_CODE_TOOL_CALL_STYLE']` 决定 tool call 风格（qwen-coder / qwen-vl / general） | 进程内不变                |
+| L871     | `process.env['QWEN_CODE_TOOL_CALL_STYLE']` 决定 tool call 风格（lailatul-coderr / qwen-vl / general） | 进程内不变                |
 
 #### 事件触发（低频）
 

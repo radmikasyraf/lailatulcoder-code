@@ -13,7 +13,7 @@ import {
   SettingScope,
   type Config,
   type Extension,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { StatusMessage } from '../ExtensionsManagerDialog.js';
 import type { PluginDetailAction } from './PluginDetailView.js';
 import { ExtensionActionsView } from './ExtensionActionsView.js';
@@ -285,3 +285,4 @@ describe('ExtensionActionsView', () => {
     });
   });
 });
+

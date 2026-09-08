@@ -207,10 +207,10 @@ describe('extension tests', () => {
     savedForceFileStorage = process.env['QWEN_CODE_FORCE_FILE_STORAGE'];
     delete process.env['QWEN_HOME'];
     tempHomeDir = fs.mkdtempSync(
-      path.join(os.tmpdir(), 'qwen-code-test-home-'),
+      path.join(os.tmpdir(), 'lailatul-coder-test-home-'),
     );
     tempWorkspaceDir = fs.mkdtempSync(
-      path.join(tempHomeDir, 'qwen-code-test-workspace-'),
+      path.join(tempHomeDir, 'lailatul-coder-test-workspace-'),
     );
     userExtensionsDir = path.join(tempHomeDir, EXTENSIONS_DIRECTORY_NAME);
     fs.mkdirSync(userExtensionsDir, { recursive: true });
@@ -703,7 +703,7 @@ describe('extension tests', () => {
         }),
       );
       const storage = new FileTokenStorage(
-        'Qwen Code Extension Git Credentials',
+        'LailatulCoder Ai Extension Git Credentials',
       );
       await expect(
         storage.getSecret(resolved.selector.secretKey),

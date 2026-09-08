@@ -2,7 +2,7 @@
 
 ## Context
 
-Qwen Code already has a repository-owned Autofix skill used by GitHub Actions.
+LailatulCoder Ai already has a repository-owned Autofix skill used by GitHub Actions.
 It contains review-feedback triage and verification rules, while the workflow
 owns scheduling, trust filtering, credentials, GitHub writes, and round
 budgets.

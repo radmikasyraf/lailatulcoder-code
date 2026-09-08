@@ -25,7 +25,7 @@ git commit -q -m "initial"
 Each group uses a unique tmux session name (e.g. `wt-test-a`, `wt-test-b`) and a unique temp dir.
 
 Baseline binary: globally installed `qwen` (0.15.10).
-Local build binary: `node /Users/mochi/code/qwen-code/.claude/worktrees/trusting-euclid-6fdfb9/bundle/qwen.js`.
+Local build binary: `node /Users/mochi/code/lailatul-coder/.claude/worktrees/trusting-euclid-6fdfb9/bundle/qwen.js`.
 
 ## Test Group A: EnterWorktree tool registration and basic creation
 

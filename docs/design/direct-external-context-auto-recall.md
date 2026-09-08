@@ -65,7 +65,7 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     participant U as User
-    participant Q as Qwen Code
+    participant Q as LailatulCoder Ai
     participant H as Auto-recall Hook process
     participant P as Credential-bound provider
     participant M as Model provider

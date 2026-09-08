@@ -8,7 +8,7 @@ import {
   fetchGitDiff,
   type GitDiffResult,
   type PerFileStats,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   CommandKind,
   type CommandContext,

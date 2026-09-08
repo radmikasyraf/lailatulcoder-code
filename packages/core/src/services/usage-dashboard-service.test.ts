@@ -132,7 +132,7 @@ describe('loadUsageDashboard', () => {
         subtype: 'ui_telemetry',
         systemPayload: {
           uiEvent: {
-            'event.name': 'qwen-code.api_response',
+            'event.name': 'lailatul-coder.api_response',
             'event.timestamp': ts,
             response_id: 'r1',
             model: 'qwen-max',

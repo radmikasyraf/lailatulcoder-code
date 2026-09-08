@@ -1,12 +1,12 @@
 # Declarative Agent Definitions — Port from Claude Code 2.1.168
 
 Internal design document for porting Claude Code's declarative agent (markdown +
-YAML frontmatter) schema to qwen-code, addressing issue [#4821][i4821] and
+YAML frontmatter) schema to lailatul-coder, addressing issue [#4821][i4821] and
 coordinating with the workflow port in issue [#4721][i4721] / PR [#4732][p4732].
 
-[i4821]: https://github.com/QwenLM/qwen-code/issues/4821
-[i4721]: https://github.com/QwenLM/qwen-code/issues/4721
-[p4732]: https://github.com/QwenLM/qwen-code/pull/4732
+[i4821]: https://github.com/LailatulCoder/lailatul-coder/issues/4821
+[i4721]: https://github.com/LailatulCoder/lailatul-coder/issues/4721
+[p4732]: https://github.com/LailatulCoder/lailatul-coder/pull/4732
 
 ## Implementation status (vertical-sliced)
 
@@ -36,8 +36,8 @@ for the deferred fields — schema constants, DL7/Ig5 semantics, error
 messages, and the coordination matrix with workflow are still load-bearing
 for that work.
 
-[p4842]: https://github.com/QwenLM/qwen-code/pull/4842
-[p4870]: https://github.com/QwenLM/qwen-code/pull/4870
+[p4842]: https://github.com/LailatulCoder/lailatul-coder/pull/4842
+[p4870]: https://github.com/LailatulCoder/lailatul-coder/pull/4870
 
 ---
 
@@ -94,7 +94,7 @@ Subtle observation that survived refutation: even though `skills` is "optional",
 DL7's emit clause is `...I !== void 0 && {skills: I}` and `ml(undefined)`
 returns `[]` (non-undefined), so the **final emitted record will carry
 `skills: []` even when the frontmatter omits the field**. This affects equality
-checks downstream — flag for the qwen-code port.
+checks downstream — flag for the lailatul-coder port.
 
 ### Possible additional fields beyond the 15
 
@@ -205,16 +205,16 @@ projectSettings. This is surprising — flag in open questions.
 | Q1  | Is `color`'s omission from #4821 intentional (it is `@internal`) or oversight?                                                            | **O** | Treat as **intentional** — port the field but mark as internal/UI-only  |
 | Q2  | Is the lenient DL7 behaviour (background accepts strings, maxTurns accepts strings) a documented user-facing feature or back-compat hack? | **O** | Mirror it for parity, but warn in port docs                             |
 | Q3  | Why is `isolation` enum `["worktree"]` only for agents while the background-session settings schema accepts `["none","worktree"]`?        | **O** | Likely "no isolation" = omitted field; document explicitly              |
-| Q4  | Does `--agents <json>` (flagSettings) intentionally sit at precedence 5 (above project, below policy)?                                    | **O** | qwen-code can skip the flag in v1, defer the decision                   |
-| Q5  | Innermost-first push by `iV_` + Map.set last-wins → **outer-tree wins** for projectSettings collisions. Footgun or intentional?           | **O** | qwen-code should pick **innermost-wins** semantics to avoid the footgun |
+| Q4  | Does `--agents <json>` (flagSettings) intentionally sit at precedence 5 (above project, below policy)?                                    | **O** | lailatul-coder can skip the flag in v1, defer the decision                   |
+| Q5  | Innermost-first push by `iV_` + Map.set last-wins → **outer-tree wins** for projectSettings collisions. Footgun or intentional?           | **O** | lailatul-coder should pick **innermost-wins** semantics to avoid the footgun |
 
 ---
 
-## Phase 2 — Implementation plan for qwen-code
+## Phase 2 — Implementation plan for lailatul-coder
 
 ### Current state — one-paragraph map
 
-qwen-code already ships substantial subagent infrastructure:
+lailatul-coder already ships substantial subagent infrastructure:
 `SubagentManager` (`packages/core/src/subagents/subagent-manager.ts`) implements
 CRUD over markdown+YAML frontmatter files in `.qwen/agents/` (project) and
 `~/.qwen/agents/` (user), backed by a custom YAML parser
@@ -245,7 +245,7 @@ under `runConfig.max_turns` — needs to be promoted to top-level per #2409.
 **Decision:** Reuse `packages/core/src/utils/yaml-parser.ts` (already used by
 `SubagentManager.parseSubagentContent` and the skill loader).
 **Rationale:** Claude Code's `lz` is the same shared parser used for skills +
-commands + agents; qwen-code already mirrors that pattern. Adding `gray-matter`
+commands + agents; lailatul-coder already mirrors that pattern. Adding `gray-matter`
 or `js-yaml` is unnecessary churn. The existing parser handles `--- … ---`
 splitting and is silent on malformed input (matches `lz`'s
 `warn-and-return-empty` posture).
@@ -254,12 +254,12 @@ splitting and is silent on malformed input (matches `lz`'s
 
 **Decision:** Use `session > project (.qwen/agents/) > user (~/.qwen/agents/)
 
-> extension > builtin`— i.e. **keep the existing qwen-code SubagentLevel
+> extension > builtin`— i.e. **keep the existing lailatul-coder SubagentLevel
 order, do NOT mirror Claude Code's`flagSettings`/`policySettings` buckets in
 v1**.
 **Rationale:** Claude Code's policySettings (managed dir) is an enterprise
-deploy story qwen-code does not have. Flag-injected agents (`--agents <json>`)
-is a power-user feature that can land in P4. The existing five-level qwen-code
+deploy story lailatul-coder does not have. Flag-injected agents (`--agents <json>`)
+is a power-user feature that can land in P4. The existing five-level lailatul-coder
 precedence already covers the cases #4821 cares about: project overrides user
 overrides built-in. The `extension` level slots in cleanly between user and
 > builtin.
@@ -295,7 +295,7 @@ CliArgs. Behaviour: look up against the resolved registry, set the agent as
 the main-thread agent, throw a clear error if name doesn't resolve. Match
 Claude Code semantics (replace default system prompt unless agent has
 `appendSystemPrompt: true`). Do NOT use a `CLAUDE_CODE_AGENT` env-var
-indirection — qwen-code's `Config` object can carry it directly.
+indirection — lailatul-coder's `Config` object can carry it directly.
 **Rationale:** This is the user-facing handle on #4821 — without it, declarative
 agents are only reachable via the Agent tool's `subagent_type` param, which
 is too indirect for a "set my default agent" use case. `--agents <json>`
@@ -357,7 +357,7 @@ workflow's floor, applied at the workflow dispatch site.
 is set, map it to `approvalMode` using the existing table in
 `claude-converter.ts:195-208` (`default → default`, `plan → plan`,
 `acceptEdits → auto-edit`, `dontAsk → default`, `bypassPermissions → yolo`).
-If both are present, `approvalMode` wins (more specific to qwen-code) and emit
+If both are present, `approvalMode` wins (more specific to lailatul-coder) and emit
 a `tengu_frontmatter_shadow_*`-style telemetry event noting both were set.
 **Rationale:** Preserves backward compat with existing `.qwen/agents/*.md`
 that use `approvalMode`, while accepting Claude Code's `permissionMode`
@@ -365,11 +365,11 @@ verbatim so users can drop in Claude Code agent files unchanged.
 
 ### Schema mapping table
 
-| Claude Code 2.1.168 field  | qwen-code field                                    | Adaptation                                                                                                   | Notes                                                                                                    |
+| Claude Code 2.1.168 field  | lailatul-coder field                                    | Adaptation                                                                                                   | Notes                                                                                                    |
 | -------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | `name`                     | `name`                                             | none                                                                                                         | identical, required                                                                                      |
 | `description`              | `description`                                      | none                                                                                                         | identical, required                                                                                      |
-| `model`                    | `model`                                            | accept `inherit`, `fast`, `haiku`, `sonnet`, `opus`, or `authType:model-id`                                  | qwen-code already supports the broader vocabulary; `inherit` is new                                      |
+| `model`                    | `model`                                            | accept `inherit`, `fast`, `haiku`, `sonnet`, `opus`, or `authType:model-id`                                  | lailatul-coder already supports the broader vocabulary; `inherit` is new                                      |
 | `tools`                    | `tools`                                            | accept string\|array; `*` → undefined (inherit-all)                                                          | already supported as array; add string + `*` handling                                                    |
 | `disallowedTools`          | `disallowedTools`                                  | accept string\|array; **always carried separately from `tools`**                                             | precedence rule (#4821 "ignored if tools is set") enforced by **callers**, not parser                    |
 | `effort`                   | `effort` (new)                                     | enum `low/medium/high/xhigh/max` + integer; alias `med → medium`                                             | runtime effect is qwen-specific (map to existing thinking-effort knob if present, else store and ignore) |
@@ -455,8 +455,8 @@ this PR lands.
 | R3  | `permissionMode` ↔ `approvalMode` round-trip lossy (Claude has 6 modes, qwen has 4-ish)                                                                                                            | Map both directions explicitly per D7; emit telemetry on dual-set; do NOT silently rewrite on save                                                             |
 | R4  | New fields (`hooks`, `mcpServers`, `skills`, `memory`) carried in registry but no runtime in v1 → users may set them and silently get no effect                                                     | Document v1 scope clearly; emit a one-time info log per agent when a "carried but not yet runtime" field is non-empty                                          |
 | R5  | Adversarial-verify flagged that `EXCLUDED_TOOLS_FOR_SUBAGENTS` does NOT include `WORKFLOW` on `main` — could mean the workflow port is not yet merged or that the recursive-fanout guard is missing | Confirm with the workflow PR author (LaZzyMan = self) that the guard lands with PR #4732, not in this port                                                     |
-| R6  | The outer-tree-beats-inner-tree projectSettings behaviour (Q5) is a footgun if mirrored                                                                                                             | qwen-code chooses **innermost-wins** explicitly; tested via R5 fixture                                                                                         |
-| R7  | Field `color` is documented as `@internal` in the binary's describe text — we may be porting something Anthropic explicitly does not support                                                        | Port it but mark `@internal` in qwen-code docs too; treat as UI-only; do not surface in user-facing reference docs                                             |
+| R6  | The outer-tree-beats-inner-tree projectSettings behaviour (Q5) is a footgun if mirrored                                                                                                             | lailatul-coder chooses **innermost-wins** explicitly; tested via R5 fixture                                                                                         |
+| R7  | Field `color` is documented as `@internal` in the binary's describe text — we may be porting something Anthropic explicitly does not support                                                        | Port it but mark `@internal` in lailatul-coder docs too; treat as UI-only; do not surface in user-facing reference docs                                             |
 
 ### Open questions — proposed resolutions
 
@@ -470,7 +470,7 @@ this PR lands.
 | Q6  | `tools` vs `disallowedTools` precedence: #4821 says "ignored if tools is set"; #4721 says "union with workflow floor"                                          | **Registry is dumb data**. Parser preserves both fields independently. Precedence rules live at the dispatch site (Agent tool / workflow). Resolves the contradiction.                                                                                                                                                                                   |
 | Q7  | Tool-name canonical form for the workflow disallowedTools floor — verified against PR #4732 as `ToolNames.SEND_MESSAGE`, `ToolNames.EXIT_PLAN_MODE`            | **Not this PR's concern** — owned by the workflow PR. Document in coordination matrix only.                                                                                                                                                                                                                                                              |
 | Q8  | Does #2409 close-resolution affect anything?                                                                                                                   | **Inherit #2409's "promote model + maxTurns to top-level" guidance**. Already baked into this plan.                                                                                                                                                                                                                                                      |
-| Q9  | Should `extension`-level agents in qwen-code's existing `SubagentLevel` precedence stay above `builtin` (current) or below it (Claude Code has no equivalent)? | **Keep `extension > builtin`**. Extensions are user-installed; built-ins are vendor-default. User-installed wins.                                                                                                                                                                                                                                        |
+| Q9  | Should `extension`-level agents in lailatul-coder's existing `SubagentLevel` precedence stay above `builtin` (current) or below it (Claude Code has no equivalent)? | **Keep `extension > builtin`**. Extensions are user-installed; built-ins are vendor-default. User-installed wins.                                                                                                                                                                                                                                        |
 | Q10 | Are issues #4821, #4721, #4732 fully specified for the contract this doc proposes?                                                                             | **Post a coordination comment on #4821** linking this doc, summarising the field-by-field decisions, and asking maintainers to ack: (a) schema parity with Claude Code 2.1.168's 16 fields, (b) D7 `permissionMode`/`approvalMode` bridge, (c) D2 precedence order, (d) registry-as-dumb-data resolution of the `tools`/`disallowedTools` contradiction. |
 
 ### Coordination action items

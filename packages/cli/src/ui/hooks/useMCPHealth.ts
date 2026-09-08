@@ -19,7 +19,7 @@ import {
   addMCPStatusChangeListener,
   removeMCPStatusChangeListener,
   getAllMCPServerStatuses,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 export interface MCPHealthSnapshot {
   /** Total servers tracked by the registry (configured + discovered). */

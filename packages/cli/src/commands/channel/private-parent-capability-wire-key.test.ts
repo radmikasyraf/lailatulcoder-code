@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   ACP_PRIVATE_PARENT_CAPABILITY_ENV,
   ACP_PRIVATE_PARENT_CAPABILITY_META_KEY,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import {
   PRIVATE_ACP_CAPABILITY_ENV,
   PRIVATE_PARENT_CAPABILITY_META_KEY,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 // The standalone channel bridge performs the private-parent capability
 // handshake under the channel-base constants and the ACP child validates it

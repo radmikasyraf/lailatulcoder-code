@@ -1453,7 +1453,7 @@ describe('DaemonClient', () => {
         textResponse(200, '<html>export</html>', {
           'content-type': 'text/html; charset=utf-8',
           'content-disposition':
-            'attachment; filename="qwen-code-export-2026.html"',
+            'attachment; filename="lailatul-coder-export-2026.html"',
         }),
       );
       const client = new DaemonClient({
@@ -1477,7 +1477,7 @@ describe('DaemonClient', () => {
 
       expect(result).toEqual({
         content: '<html>export</html>',
-        filename: 'qwen-code-export-2026.html',
+        filename: 'lailatul-coder-export-2026.html',
         mimeType: 'text/html; charset=utf-8',
         format: 'html',
       });
@@ -5223,7 +5223,7 @@ describe('DaemonClient', () => {
         workspaceCwd: '/work',
         gitRepoRoot: '/work',
         releaseTag: 'v1.2.3',
-        readmeUrl: 'https://github.com/QwenLM/qwen-code-action',
+        readmeUrl: 'https://github.com/LailatulCoder/lailatul-coder-action',
         workflows: [],
         gitignore: { path: '.gitignore', status: 'unchanged' },
         warnings: [],
@@ -5246,7 +5246,7 @@ describe('DaemonClient', () => {
           workspaceCwd: '/work',
           gitRepoRoot: '/work',
           releaseTag: 'v1.2.3',
-          readmeUrl: 'https://github.com/QwenLM/qwen-code-action',
+          readmeUrl: 'https://github.com/LailatulCoder/lailatul-coder-action',
           workflows: [],
           gitignore: { path: '.gitignore', status: 'unchanged' },
           warnings: [],
@@ -5279,7 +5279,7 @@ describe('DaemonClient', () => {
         workspaceCwd: '/work',
         gitRepoRoot: '/work',
         releaseTag: 'v1.2.3',
-        readmeUrl: 'https://github.com/QwenLM/qwen-code-action',
+        readmeUrl: 'https://github.com/LailatulCoder/lailatul-coder-action',
         workflows: [],
         gitignore: { path: '.gitignore', status: 'unchanged' },
         warnings: [],
@@ -5311,7 +5311,7 @@ describe('DaemonClient', () => {
   describe('MCP restart timeout coupling (#4330)', () => {
     it('SDK default timeout equals server deadline + client headroom', async () => {
       const { MCP_RESTART_SERVER_DEADLINE_MS, MCP_RESTART_CLIENT_HEADROOM_MS } =
-        await import('@qwen-code/acp-bridge/mcpTimeouts');
+        await import('@lailatul-coder/acp-bridge/mcpTimeouts');
       const expected =
         MCP_RESTART_SERVER_DEADLINE_MS + MCP_RESTART_CLIENT_HEADROOM_MS;
       expect(expected).toBe(330_000);

@@ -8,7 +8,7 @@ import { promises as fs, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import * as path from 'node:path';
 import type { ContentBlock } from '@agentclientprotocol/sdk';
-import { getSpecificMimeType } from '@qwen-code/qwen-code-core';
+import { getSpecificMimeType } from '@lailatul-coder/lailatul-coder-core';
 
 export const SESSION_ATTACHMENT_MAX_ITEM_BYTES = 8 * 1024 * 1024;
 const SESSION_ATTACHMENT_MAX_NAME_BYTES = 255;

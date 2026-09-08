@@ -5,9 +5,9 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import type { AgentTask, Config, MonitorTask } from '@qwen-code/qwen-code-core';
+import type { AgentTask, Config, MonitorTask } from '@lailatul-coder/lailatul-coder-core';
 import { buildSessionTasksStatus } from './tasksSnapshot.js';
-import type { ServeSessionAgentTaskStatus } from '@qwen-code/acp-bridge/status';
+import type { ServeSessionAgentTaskStatus } from '@lailatul-coder/acp-bridge/status';
 
 function agentTask(overrides: Partial<AgentTask> = {}): AgentTask {
   return {

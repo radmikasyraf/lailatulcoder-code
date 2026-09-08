@@ -378,4 +378,4 @@ When `bridge.respondToSessionPermission` throws (e.g. malformed vote body), the 
 - `packages/cli/src/serve/acp-http/connection-registry.ts` (`AcpConnection.pending` — connection-local request mapping)
 - `packages/cli/src/serve/routes/permission.ts` (REST vote routes)
 - `packages/cli/src/serve/permission-audit.ts` (audit ring + publisher)
-- Issue: [#4175](https://github.com/QwenLM/qwen-code/issues/4175) F3 series.
+- Issue: [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) F3 series.

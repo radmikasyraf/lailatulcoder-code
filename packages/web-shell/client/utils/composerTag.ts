@@ -2,7 +2,7 @@ import extensionIconUrl from '../assets/icons/at-extension.svg';
 import fileIconUrl from '../assets/icons/at-file.svg';
 import mcpIconUrl from '../assets/icons/at-mcp.svg';
 import skillIconUrl from '../assets/icons/at-skill.svg';
-import type { DaemonInputAnnotation } from '@qwen-code/sdk/daemon';
+import type { DaemonInputAnnotation } from '@lailatul-coder/sdk/daemon';
 import type {
   UserMessageContentParser,
   WebShellBuiltinComposerTagKind,

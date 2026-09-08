@@ -34,7 +34,7 @@ Next steps:
      • Codex (OpenAI):
          codex mcp add cua-driver -- {{BINARY}} mcp
 
-     • Qwen Code:
+     • LailatulCoder Ai:
          qwen mcp add cua-driver {{BINARY}} mcp
 
      • Factory Droid:
@@ -79,4 +79,4 @@ Next steps:
          {{BINARY}} serve --permission-mode unrestricted \
            --dangerously-bypass-approvals
 
-Docs: https://github.com/QwenLM/qwen-code/tree/main/packages/cua-driver/rust
+Docs: https://github.com/LailatulCoder/lailatul-coder/tree/main/packages/cua-driver/rust

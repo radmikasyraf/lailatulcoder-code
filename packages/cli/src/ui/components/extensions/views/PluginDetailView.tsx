@@ -11,7 +11,7 @@ import { RadioButtonSelect } from '../../shared/RadioButtonSelect.js';
 import {
   redactUrlCredentials,
   type Extension,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../../../i18n/index.js';
 import { stripUnsafeCharacters } from '../../../utils/textUtils.js';
 
@@ -161,3 +161,4 @@ export const PluginDetailView = ({
     </Box>
   );
 };
+

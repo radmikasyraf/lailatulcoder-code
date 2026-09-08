@@ -1,6 +1,6 @@
 # Memory 记忆管理系统
 
-> 本文介绍 Qwen Code 中 **Managed Auto-Memory**（托管自动记忆）的记忆管理机制、触发时机和实现细节。
+> 本文介绍 LailatulCoder Ai 中 **Managed Auto-Memory**（托管自动记忆）的记忆管理机制、触发时机和实现细节。
 
 ---
 

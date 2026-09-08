@@ -6,7 +6,7 @@
 
 import { Buffer } from 'node:buffer';
 import type { SessionUpdate } from '@agentclientprotocol/sdk';
-import { isA2uiToolMeta } from '@qwen-code/acp-bridge/bridgeClient';
+import { isA2uiToolMeta } from '@lailatul-coder/acp-bridge/bridgeClient';
 import {
   JSON_STRING_DELIMITER_BYTES,
   jsonStringJsonByteLength,

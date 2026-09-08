@@ -15,8 +15,8 @@ import {
   recordDaemonHttpRequest,
   recordDaemonHttpResponse,
   withDaemonRequestSpan,
-} from '@qwen-code/qwen-code-core';
-import { sanitizeLogText } from '@qwen-code/channel-base';
+} from '@lailatul-coder/lailatul-coder-core';
+import { sanitizeLogText } from '@lailatul-coder/channel-base';
 import type { NextFunction, Request, Response } from 'express';
 import {
   CLIENT_ID_HEADER,
@@ -862,7 +862,7 @@ export function daemonTelemetryMiddleware(
               ),
             },
             {
-              eventName: 'qwen-code.daemon.traceparent.invalid',
+              eventName: 'lailatul-coder.daemon.traceparent.invalid',
               severityNumber: 5, // SeverityNumber.DEBUG
             },
           );
@@ -910,7 +910,7 @@ export function daemonTelemetryMiddleware(
               delete telemetryRes[daemonTelemetryResponseContext];
               if (context?.workspaceCwd !== undefined) {
                 span?.setAttribute(
-                  'qwen-code.workspace.hash',
+                  'lailatul-coder.workspace.hash',
                   resolveWorkspaceHash(context.workspaceCwd),
                 );
               }

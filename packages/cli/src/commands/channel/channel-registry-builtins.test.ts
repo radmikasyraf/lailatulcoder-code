@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import type { ChannelPlugin } from '@qwen-code/channel-base';
+import type { ChannelPlugin } from '@lailatul-coder/channel-base';
 
 const { dingtalkPlugin } = vi.hoisted(() => {
   // A prototype-based (class-instance) plugin, a shape the extension loader
@@ -27,7 +27,7 @@ const { dingtalkPlugin } = vi.hoisted(() => {
   return { dingtalkPlugin: new InvalidDingtalkPlugin() };
 });
 
-vi.mock('@qwen-code/channel-dingtalk', () => ({
+vi.mock('@lailatul-coder/channel-dingtalk', () => ({
   plugin: dingtalkPlugin,
 }));
 

@@ -6,7 +6,7 @@
 
 import { render } from 'ink-testing-library';
 import { describe, expect, it } from 'vitest';
-import type { GoalSnapshotV2 } from '@qwen-code/qwen-code-core';
+import type { GoalSnapshotV2 } from '@lailatul-coder/lailatul-coder-core';
 import { GOAL_STATUS_KINDS, MessageType } from '../../types.js';
 import { GoalStatusMessage } from './GoalStatusMessage.js';
 
@@ -145,3 +145,4 @@ describe('<GoalStatusMessage />', () => {
     }
   });
 });
+

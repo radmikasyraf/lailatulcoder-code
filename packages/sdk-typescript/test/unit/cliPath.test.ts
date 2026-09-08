@@ -119,7 +119,7 @@ describe('CLI Path Utilities', () => {
 
       it('should accept valid command names', () => {
         expect(() => prepareSpawnInfo('qwen')).not.toThrow();
-        expect(() => prepareSpawnInfo('qwen-code')).not.toThrow();
+        expect(() => prepareSpawnInfo('lailatul-coder')).not.toThrow();
         expect(() => prepareSpawnInfo('qwen_code')).not.toThrow();
         expect(() => prepareSpawnInfo('qwen.exe')).not.toThrow();
         expect(() => prepareSpawnInfo('qwen123')).not.toThrow();

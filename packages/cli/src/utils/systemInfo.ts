@@ -15,7 +15,7 @@ import {
   createDebugLogger,
   formatMemoryUsage,
   type LspStatusSnapshot,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { GIT_COMMIT_INFO } from '../generated/git-commit.js';
 
 const debugLogger = createDebugLogger('STATUS');
@@ -133,7 +133,7 @@ export async function getIdeClientName(
 /**
  * Gets the sandbox environment information.
  * Handles different sandbox types including sandbox-exec and custom sandbox environments.
- * For bug reports, removes 'qwen-' or 'qwen-code-' prefixes from sandbox names.
+ * For bug reports, removes 'qwen-' or 'lailatul-coder-' prefixes from sandbox names.
  *
  * @param stripPrefix - Whether to strip 'qwen-' prefix (used for bug reports)
  */

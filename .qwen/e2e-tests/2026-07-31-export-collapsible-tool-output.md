@@ -4,7 +4,7 @@
 
 Verify that long shell output and long `think` tool content keep their full
 text in the shared WebUI while remaining collapsed by default. This covers the
-HTML export viewer and the other consumers of `@qwen-code/webui`.
+HTML export viewer and the other consumers of `@lailatul-coder/webui`.
 
 ## Baseline
 

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { gradeActiveWorkCoverage } from '@qwen-code/acp-bridge/bridgeTypes';
+import { gradeActiveWorkCoverage } from '@lailatul-coder/acp-bridge/bridgeTypes';
 import type { Application, Request, Response } from 'express';
 import { writeStderrLine } from '../../utils/stdioHelpers.js';
 import { isDeepHealthQuery } from '../health-query.js';

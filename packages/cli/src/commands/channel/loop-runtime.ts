@@ -1,8 +1,8 @@
-import { nextFireTime, parseCron } from '@qwen-code/qwen-code-core';
+import { nextFireTime, parseCron } from '@lailatul-coder/lailatul-coder-core';
 import type {
   ChannelLoopController,
   ChannelLoopStore,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 export function createChannelLoopController(
   store: ChannelLoopStore,

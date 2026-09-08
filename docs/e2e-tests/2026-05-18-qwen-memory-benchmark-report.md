@@ -1,19 +1,19 @@
-# Qwen Code Runtime Memory Benchmark Report
+# LailatulCoder Ai Runtime Memory Benchmark Report
 
 Date: 2026-05-18
 
 ## Summary
 
-This report records local memory benchmarks for Qwen Code runtime behavior. It
-compares Qwen Code across models and compares Qwen Code with Claude Code on the
+This report records local memory benchmarks for LailatulCoder Ai runtime behavior. It
+compares LailatulCoder Ai across models and compares LailatulCoder Ai with Claude Code on the
 same task shapes where equivalent model endpoints were available.
 
 The headline result is consistent across the latest matrix (single run per cell,
 not statistically repeated):
 
-- Qwen Code process-tree RSS peak: about `852-1062 MiB` (`0.83-1.04 GiB`).
+- LailatulCoder Ai process-tree RSS peak: about `852-1062 MiB` (`0.83-1.04 GiB`).
 - Claude Code process-tree RSS peak: about `279-366 MiB` (`0.27-0.36 GiB`).
-- Qwen Code was about `2.3x-3.6x` higher in the tested
+- LailatulCoder Ai was about `2.3x-3.6x` higher in the tested
   non-interactive CLI task benchmarks.
 
 Note: process-tree RSS includes MCP child processes (~350 MiB overhead on the
@@ -34,15 +34,15 @@ unknown, and what diagnostics should be added next.
 | --------------------------------------------- | ------------------------------------------ |
 | Date                                          | 2026-05-18                                 |
 | Platform                                      | macOS local development machine            |
-| Qwen Code version                             | `0.15.11`                                  |
-| Qwen Code binary                              | PATH-resolved `qwen` binary                |
+| LailatulCoder Ai version                             | `0.15.11`                                  |
+| LailatulCoder Ai binary                              | PATH-resolved `qwen` binary                |
 | Claude Code version used in the latest matrix | `2.1.129`                                  |
 | Claude Code binary used in the latest matrix  | PATH-resolved `claude` binary              |
 | Node.js version                               | v22.x (default system install)             |
 | Sampling method                               | External `ps` RSS sampling once per second |
 | Headline metric                               | Process-tree RSS peak                      |
 
-Process-tree RSS is used as the headline metric because Qwen Code launches a
+Process-tree RSS is used as the headline metric because LailatulCoder Ai launches a
 root wrapper and a child Node/Qwen worker. Looking only at the root process can
 understate the memory footprint seen by users.
 
@@ -53,11 +53,11 @@ did not depend on global CLI state.
 
 Five local reports were produced before this consolidated report:
 
-1. Qwen Code PR review memory run.
-2. Qwen Code model comparison run.
-3. Strict Qwen Code vs Claude Code comparison with `pai/glm-5`.
-4. Qwen Code vs Claude Code, two CLIs by two models.
-5. Qwen Code vs Claude Code, five-case matrix.
+1. LailatulCoder Ai PR review memory run.
+2. LailatulCoder Ai model comparison run.
+3. Strict LailatulCoder Ai vs Claude Code comparison with `pai/glm-5`.
+4. LailatulCoder Ai vs Claude Code, two CLIs by two models.
+5. LailatulCoder Ai vs Claude Code, five-case matrix.
 
 This consolidated report covers the conclusions and headline metrics from all
 five reports. It does not embed every raw sample row, terminal transcript, or
@@ -70,19 +70,19 @@ shapes rather than only one PR review workload.
 
 ## Preliminary Conclusion
 
-The current data is strong enough to say that Qwen Code has a higher runtime
+The current data is strong enough to say that LailatulCoder Ai has a higher runtime
 memory footprint than Claude Code in these local non-interactive CLI task
 benchmarks. It is not strong enough to name one final root cause yet.
 
-The leading explanation is a Qwen Code runtime/path difference rather than a
+The leading explanation is a LailatulCoder Ai runtime/path difference rather than a
 model provider difference:
 
 - the gap reproduces with both `pai/glm-5` and `qwen3.6-plus`;
 - the gap reproduces in small PR and code-navigation tasks, not only in large
   diff tasks;
-- Qwen Code repeatedly sends or accounts for more tokens than Claude Code for
+- LailatulCoder Ai repeatedly sends or accounts for more tokens than Claude Code for
   similar work;
-- Qwen Code's largest observed component is the child Node/Qwen worker process,
+- LailatulCoder Ai's largest observed component is the child Node/Qwen worker process,
   which points toward task-time process footprint, module loading, context
   assembly, live history, tool-result retention, or subagent/saved-output
   paths.
@@ -107,12 +107,12 @@ problem area.
 
 The current best explanation is therefore:
 
-1. **Task-time runtime cost first**: Qwen Code likely initializes or retains
+1. **Task-time runtime cost first**: LailatulCoder Ai likely initializes or retains
    more runtime state during non-interactive CLI task execution than Claude
    Code. This may include agent runtime, tool registry, provider adapters,
    session services, or UI/history structures that are not strictly needed for
    a short non-interactive task.
-2. **Context/tool-result volume second**: Qwen Code appears to carry larger
+2. **Context/tool-result volume second**: LailatulCoder Ai appears to carry larger
    model-facing or session-facing context for similar work. The token gap makes
    context assembly, tool result normalization, and history retention important
    suspects.
@@ -133,7 +133,7 @@ The next diagnostic run should answer where the `~1 GiB` sits:
 
 The latest benchmark ran:
 
-- 2 CLIs: Qwen Code and Claude Code.
+- 2 CLIs: LailatulCoder Ai and Claude Code.
 - 2 model labels: `pai/glm-5` and `qwen3.6-plus`.
 - 5 cases:
   - small PR review: PR `#4268`, one-line change
@@ -171,7 +171,7 @@ Average process-tree RSS peak by case:
 
 ## Runtime And Token Signals
 
-The same matrix also showed Qwen Code using more model-side tokens in every
+The same matrix also showed LailatulCoder Ai using more model-side tokens in every
 tested case.
 
 Selected examples:
@@ -198,7 +198,7 @@ metrics before it can be treated as a root cause.
 
 What the data supports today:
 
-- Qwen Code used more total tokens than Claude Code in every matrix cell.
+- LailatulCoder Ai used more total tokens than Claude Code in every matrix cell.
 - The gap appears even when tool-call counts are similar.
 - Claude sometimes used more turns or tool calls while still using less memory.
 
@@ -228,9 +228,9 @@ shape:
 
 | Model          | CLI         | Process-tree RSS peak |
 | -------------- | ----------- | --------------------: |
-| `pai/glm-5`    | Qwen Code   |            1000.7 MiB |
+| `pai/glm-5`    | LailatulCoder Ai   |            1000.7 MiB |
 | `pai/glm-5`    | Claude Code |             349.0 MiB |
-| `qwen3.6-plus` | Qwen Code   |            1095.8 MiB |
+| `qwen3.6-plus` | LailatulCoder Ai   |            1095.8 MiB |
 | `qwen3.6-plus` | Claude Code |             341.1 MiB |
 
 That earlier run was not enough by itself because a large PR can trigger unusual
@@ -242,7 +242,7 @@ gap.
 
 The current evidence supports these hypotheses, in priority order:
 
-1. Qwen Code has a higher non-interactive task-time process footprint than
+1. LailatulCoder Ai has a higher non-interactive task-time process footprint than
    Claude Code. The Qwen child Node worker was typically the largest process in
    local sampling, often around `0.7-0.8 GiB`.
 2. Model choice is not the main explanation. Both `pai/glm-5` and
@@ -250,7 +250,7 @@ The current evidence supports these hypotheses, in priority order:
 3. Large diff size alone is not the main explanation. The synthetic diff size
    did not scale linearly from 100 KiB to 5 MiB, likely because tool-output
    truncation caps how much output reaches the model.
-4. Context/tool-result handling is still a likely contributor. Qwen Code used
+4. Context/tool-result handling is still a likely contributor. LailatulCoder Ai used
    more tokens than Claude Code in every matrix cell, and earlier large-PR runs
    showed saved tool-output recovery and subagent amplification paths.
 5. The next diagnostic layer should separate V8 heap, native RSS, loaded
@@ -263,7 +263,7 @@ The current evidence supports these hypotheses, in priority order:
 - These are single runs per matrix cell, not repeated statistical samples.
 - RSS is external process RSS. It cannot distinguish V8 heap, native buffers,
   module loading, retained tool output, UI state, or session history.
-- Claude Code and Qwen Code use different runtime implementations and protocol
+- Claude Code and LailatulCoder Ai use different runtime implementations and protocol
   adapters, even when the model labels are the same.
 - The benchmark was run locally on macOS. Linux servers should be tested before
   drawing deployment-specific conclusions.
@@ -283,4 +283,4 @@ The next local investigation branch should add or use diagnostics for:
 - Tool-output truncation and saved-output recovery events.
 
 These measurements should be collected with the same benchmark matrix so the
-current RSS comparison can be connected to internal Qwen Code state.
+current RSS comparison can be connected to internal LailatulCoder Ai state.

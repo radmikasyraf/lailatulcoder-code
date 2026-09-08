@@ -1,12 +1,12 @@
-# Qwen Code Java SDK
+# LailatulCoder Ai Java SDK
 
-The Qwen Code Java SDK provides a recommended daemon transport for `qwen serve` and retains the experimental legacy stdio API for compatibility. Both APIs ship in the same `com.alibaba:qwencode-sdk` artifact.
+The LailatulCoder Ai Java SDK provides a recommended daemon transport for `qwen serve` and retains the experimental legacy stdio API for compatibility. Both APIs ship in the same `com.alibaba:qwencode-sdk` artifact.
 
 ## Requirements
 
 - Java >= 11 for `0.1.0-alpha`
 - Maven >= 3.9.2 when building or publishing this SDK from source
-- A compatible `qwen serve` for the daemon API, or qwen-code >= 0.5.0 for the legacy stdio API
+- A compatible `qwen serve` for the daemon API, or lailatul-coder >= 0.5.0 for the legacy stdio API
 
 ### Dependencies
 
@@ -67,7 +67,7 @@ npx tsx scripts/run-java-daemon-sdk-e2e.ts
 
 Start `qwen serve`, then create an independent thread-scoped session. `promptText` returns only after a matching `turn_complete`; incomplete streams fail with `PromptOutcomeIndeterminateException` rather than returning partial text as success.
 
-For the lifecycle guarantees assumed by `0.1.0-alpha`, use the qwen-code build released from the same source revision as the SDK. The daemon must contain the idempotent per-client detach ledger from [#7386](https://github.com/QwenLM/qwen-code/pull/7386), the per-epoch terminal guarantee from [#7400](https://github.com/QwenLM/qwen-code/pull/7400), and this release's acknowledged admission cancellation plus FIFO cancel-drain fence. The #7400 commit alone is not sufficient: a same-wire daemon can acknowledge cancel before agent dispatch without stopping the admitted prompt, or let an unacknowledged session-scoped cancel reach a queued successor. The bundled ACP child uses one acknowledged admission-aware cancellation handshake; a custom standards-compliant ACP child without that extension receives one standard `session/cancel` notification. Feature negotiation cannot distinguish older same-wire daemon builds, so the SDK fails closed rather than reporting partial output as success.
+For the lifecycle guarantees assumed by `0.1.0-alpha`, use the lailatul-coder build released from the same source revision as the SDK. The daemon must contain the idempotent per-client detach ledger from [#7386](https://github.com/LailatulCoder/lailatul-coder/pull/7386), the per-epoch terminal guarantee from [#7400](https://github.com/LailatulCoder/lailatul-coder/pull/7400), and this release's acknowledged admission cancellation plus FIFO cancel-drain fence. The #7400 commit alone is not sufficient: a same-wire daemon can acknowledge cancel before agent dispatch without stopping the admitted prompt, or let an unacknowledged session-scoped cancel reach a queued successor. The bundled ACP child uses one acknowledged admission-aware cancellation handshake; a custom standards-compliant ACP child without that extension receives one standard `session/cancel` notification. Feature negotiation cannot distinguish older same-wire daemon builds, so the SDK fails closed rather than reporting partial output as success.
 
 The bundled cancellation handshake deliberately waits for the targeted prompt call to settle before the daemon dispatches its queued successor. It has no timeout that merely acknowledges cancellation: doing so could let a late session-scoped cancel reach the next prompt. If a provider, tool, or custom integration ignores its `AbortSignal` indefinitely, the cancel mutation can therefore remain outcome-unknown and that session must not be reused. Treat a formal prompt terminal received within the caller's observation boundary as authoritative; otherwise close or destroy the session after observation fails. Recovering a wedged shared ACP child without disturbing its sibling sessions requires stronger runtime isolation and is outside this alpha contract.
 
@@ -307,9 +307,9 @@ For proper operation, the following timeout relationships should be maintained:
 
 ### Transport Options
 
-The `TransportOptions` class allows configuration of how the SDK communicates with the Qwen Code CLI:
+The `TransportOptions` class allows configuration of how the SDK communicates with the LailatulCoder Ai CLI:
 
-- `pathToQwenExecutable`: Path to the Qwen Code CLI executable
+- `pathToQwenExecutable`: Path to the LailatulCoder Ai CLI executable
 - `cwd`: Working directory for the CLI process
 - `model`: AI model to use for the session
 - `permissionMode`: Permission mode that controls tool execution
@@ -360,7 +360,7 @@ The SDK provides specific exception types for different error scenarios:
 ### Q: Do I need to install the Qwen CLI separately?
 
 A: Yes. The daemon API requires a compatible `qwen serve`; the legacy stdio
-API requires qwen-code 0.5.0 or higher.
+API requires lailatul-coder 0.5.0 or higher.
 
 ### Q: What Java versions are supported?
 

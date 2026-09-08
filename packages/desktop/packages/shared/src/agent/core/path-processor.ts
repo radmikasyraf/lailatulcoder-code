@@ -30,7 +30,7 @@ export { expandPath, normalizePath, pathStartsWith, toPortablePath };
  * These files have specific formats (JSON, TOML, YAML) that can break apps if malformed.
  */
 const CONFIG_FILE_PATTERNS = [
-  // Qwen Code configs
+  // LailatulCoder Ai configs
   /\.craft-agent\/.*\/(config|permissions|theme|guide|labels|statuses)\.json$/,
   /\.craft-agent\/config\.json$/,
   /\.craft-agent\/preferences\.json$/,

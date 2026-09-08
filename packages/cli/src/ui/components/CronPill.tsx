@@ -7,7 +7,7 @@
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { Text } from 'ink';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import { useConfig } from '../contexts/ConfigContext.js';
 import { ICON } from '../constants.js';
 import { theme } from '../semantic-colors.js';
@@ -50,3 +50,4 @@ export const CronPill: React.FC<CronPillProps> = ({ count }) => {
     </Text>
   );
 };
+

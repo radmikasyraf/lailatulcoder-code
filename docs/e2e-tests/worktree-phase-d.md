@@ -3,7 +3,7 @@
 ## Scope
 
 End-to-end verification of Phase D features against the local build at
-`/Users/mochi/code/qwen-code/.claude/worktrees/tender-jemison-037f0a/dist/cli.js`.
+`/Users/mochi/code/lailatul-coder/.claude/worktrees/tender-jemison-037f0a/dist/cli.js`.
 
 Phase D delivers three cross-cutting capabilities:
 
@@ -18,7 +18,7 @@ Phase D delivers three cross-cutting capabilities:
 
 ## Binaries
 
-- **Local build (Phase 6 verification)**: `node /Users/mochi/code/qwen-code/.claude/worktrees/tender-jemison-037f0a/dist/cli.js`
+- **Local build (Phase 6 verification)**: `node /Users/mochi/code/lailatul-coder/.claude/worktrees/tender-jemison-037f0a/dist/cli.js`
 - **Phase 4 dry-run baseline**: globally installed `qwen`
 
 For dry-runs the globally installed `qwen` is expected to fail Groups A / E / F
@@ -66,11 +66,11 @@ git add README.md
 git commit -q -m "initial" --no-verify
 
 PROJECT_ID=$(node -e "console.log(process.argv[1].replace(/[^a-zA-Z0-9]/g,'-'))" "$TEST_DIR")
-QWEN="node /Users/mochi/code/qwen-code/.claude/worktrees/tender-jemison-037f0a/dist/cli.js"
+QWEN="node /Users/mochi/code/lailatul-coder/.claude/worktrees/tender-jemison-037f0a/dist/cli.js"
 ```
 
 PR-ref tests (Group F) additionally require a checked-out clone of a public
-GitHub repo with at least one merged PR. Use this repo (qwen-code itself) as
+GitHub repo with at least one merged PR. Use this repo (lailatul-coder itself) as
 the test target — PR `#4174` (Phase C) is a guaranteed-present reference.
 
 ---
@@ -449,11 +449,11 @@ inside it; debug log carries warn lines.
 ### Setup template
 
 ```bash
-# Use qwen-code itself as the test repo
+# Use lailatul-coder itself as the test repo
 TEST_DIR=$(mktemp -d -t qwen-wt-phd-pr-XXXXXX)
 TEST_DIR=$(cd "$TEST_DIR" && pwd -P)
 cd "$TEST_DIR"
-git clone --depth 1 https://github.com/QwenLM/qwen-code.git .
+git clone --depth 1 https://github.com/LailatulCoder/lailatul-coder.git .
 PROJECT_ID=$(node -e "console.log(process.argv[1].replace(/[^a-zA-Z0-9]/g,'-'))" "$TEST_DIR")
 ```
 
@@ -476,7 +476,7 @@ git -C "$TEST_DIR/.qwen/worktrees/pr-4174" rev-parse --abbrev-ref HEAD
 ### F2: full URL form
 
 ```bash
-$QWEN --worktree "https://github.com/QwenLM/qwen-code/pull/4174" "say hi" \
+$QWEN --worktree "https://github.com/LailatulCoder/lailatul-coder/pull/4174" "say hi" \
   --approval-mode yolo --output-format json 2>/dev/null > /tmp/f2.out
 
 ls -d "$TEST_DIR/.qwen/worktrees/pr-4174"
@@ -656,7 +656,7 @@ implementation.**
 
 ### Phase 6 verification — local build
 
-**Binary**: `node /Users/mochi/code/qwen-code/.claude/worktrees/tender-jemison-037f0a/dist/cli.js`
+**Binary**: `node /Users/mochi/code/lailatul-coder/.claude/worktrees/tender-jemison-037f0a/dist/cli.js`
 **Date**: 2026-05-20
 **Scope**: Groups A, B, C, E, F, G (6 parallel `test-engineer` agents)
 

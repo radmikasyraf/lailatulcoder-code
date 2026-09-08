@@ -1,10 +1,10 @@
 # Daemon mode (`qwen serve`)
 
-Run Qwen Code as a local HTTP daemon so multiple clients (IDE plugins, web UIs, CI scripts, custom CLIs) share one agent session over HTTP + Server-Sent Events instead of each spawning their own subprocess.
+Run LailatulCoder Ai as a local HTTP daemon so multiple clients (IDE plugins, web UIs, CI scripts, custom CLIs) share one agent session over HTTP + Server-Sent Events instead of each spawning their own subprocess.
 
 > **🚧 v0.16-alpha**: `qwen serve` first ships to npm in v0.16-alpha as **text-only chat / coding** with **local-only deployment**. Image / file attachments on the prompt path, containerized deployment (Docker / k8s / nginx reverse-proxy), and remote / multi-daemon hardening land in a follow-up patch when an enterprise pilot is committed. See [v0.16-alpha known limits](#v016-alpha-known-limits) for the full deferred list.
 
-> **Status:** Stage 1 (experimental). The protocol surface is locked at the §04 routes table from issue [#3803](https://github.com/QwenLM/qwen-code/issues/3803). Stage 1.5 (`qwen --serve` flag — TUI co-hosts the same HTTP server) and Stage 2 (in-process refactor + `mDNS`/OpenAPI/WebSocket/Prometheus polish) are immediately downstream.
+> **Status:** Stage 1 (experimental). The protocol surface is locked at the §04 routes table from issue [#3803](https://github.com/LailatulCoder/lailatul-coder/issues/3803). Stage 1.5 (`qwen --serve` flag — TUI co-hosts the same HTTP server) and Stage 2 (in-process refactor + `mDNS`/OpenAPI/WebSocket/Prometheus polish) are immediately downstream.
 >
 > **Scope honesty:** Stage 1 is sized for **developers prototyping clients against the protocol surface** and for **local single-user / small-team collaboration**. Production-grade multi-client / long-running / network-flaky workloads (mobile companions, IM bots reaching 1000+ chats) need Stage 1.5+ guarantees that aren't in this release. See [Stage 1.5+ runtime guarantees](#stage-15-runtime-guarantees) for the full gap list and #3803 for the convergence roadmap.
 
@@ -18,7 +18,7 @@ Run Qwen Code as a local HTTP daemon so multiple clients (IDE plugins, web UIs, 
 - **One daemon, one or more workspaces** — repeat `--workspace` to register isolated workspace runtimes under one listener. The first workspace is primary and remains the default for requests that omit `cwd`.
 - **Experimental daemon-managed channels** — start with `qwen serve --channel <name>`, or start without a channel and select one later with `qwen channel set`. Workers are separate processes owned by the daemon lifecycle. Their selection can be queried, replaced, reloaded, and stopped without restarting the daemon.
 - **Remote runtime control** — change a session's approval mode (`POST /session/:id/approval-mode`), toggle a tool (`POST /workspace/tools/:name/enable`) or loaded skill (`POST /workspace/skills/:name/enable`) per workspace, scaffold an empty `QWEN.md` (`POST /workspace/init`, mechanical only — does NOT call the model; for AI-fill, follow up with `POST /session/:id/prompt`), restart a single MCP server with a budget pre-check (`POST /workspace/mcp/:server/restart`), or add/remove MCP servers at runtime without a daemon restart (`POST /workspace/mcp/servers`, `DELETE /workspace/mcp/servers/:name`). All strict-gated — configure `--token` first.
-- **Session recap** ([#4175](https://github.com/QwenLM/qwen-code/issues/4175) follow-up) — fetch a one-sentence "where did I leave off" summary of an active session (`POST /session/:id/recap`). Wraps core's `generateSessionRecap` as a side-query against the fast model; pollutes neither the main chat history nor the SSE stream. Non-strict gate (same posture as `/prompt`); SDK helper `client.recapSession(sessionId)`.
+- **Session recap** ([#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) follow-up) — fetch a one-sentence "where did I leave off" summary of an active session (`POST /session/:id/recap`). Wraps core's `generateSessionRecap` as a side-query against the fast model; pollutes neither the main chat history nor the SSE stream. Non-strict gate (same posture as `/prompt`); SDK helper `client.recapSession(sessionId)`.
   - **Known limit — token-cost amplification:** the route is a pure-cost endpoint (each call is an LLM side-query, no state benefit) and the daemon has no per-route rate limit in v1. On a no-token loopback default a buggy or malicious local client can spam it to burn tokens. Configure `--token` (and optionally `--require-auth`) on shared dev hosts before exposing the daemon.
   - **Concurrent recap safety:** two simultaneous `/recap` calls on the same session run two independent side-queries. `generateSessionRecap` reads a snapshot of the chat history via `GeminiClient.getChat().getHistory()` and feeds it to a separate `BaseLlmClient.generateText` call (via `runSideQuery`); it never appends to or mutates the session's `GeminiChat`. Safe to call from multiple clients without coordination.
 
@@ -43,7 +43,7 @@ The first npm release of `qwen serve` (v0.16-alpha) is intentionally narrow — 
 
 **Hardening — minimum viable for local single-user:**
 
-- ✅ Boot-time security gate (refuses non-loopback bind without a token, [PR 15 / #4236](https://github.com/QwenLM/qwen-code/pull/4236))
+- ✅ Boot-time security gate (refuses non-loopback bind without a token, [PR 15 / #4236](https://github.com/LailatulCoder/lailatul-coder/pull/4236))
 - ✅ Mutation-route auth gate, session-scoped permission routing (Wave 4 PRs)
 - ✅ MCP guardrails + multi-client permission coordination (F2 / F3)
 - ✅ **Prompt absolute deadline + SSE writer idle timeout** — opt-in via `--prompt-deadline-ms` and `--writer-idle-timeout-ms`; advertised through `prompt_absolute_deadline` and `writer_idle_timeout` when enabled.
@@ -412,7 +412,7 @@ Notes:
 | `--http-bridge`                         | `true`             | Stage 1 mode: production attempts to preheat one primary `qwen --acp` child for compatibility and retries on first use after failure, while each trusted secondary can start one child on demand. Sessions targeting a runtime multiplex onto its child via ACP `newSession()`; untrusted secondaries cannot start ACP. Stage 2 native in-process becomes available later.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `--initialize-timeout-ms <n>`           | `10000`            | ACP child request timeout, including the `initialize` handshake (ms). Must be a positive integer up to `2147483647`. Values above the JS timer ceiling (`2^31-1`) are rejected at boot because Node silently compresses them to 1 ms. Cold-container deployments that need extra headroom for child startup can raise this; the same value governs `newSession`, workspace-status polls, and other ACP ext-method deadlines.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `--session-restore-timeout-ms <n>`      | `60000`            | ACP session load/resume deadline in milliseconds. Must be a positive integer up to `2147483647`; `0` is invalid. If omitted, the default is 60 seconds, raised to an explicitly supplied `--initialize-timeout-ms` when that value is larger; a shorter initialize timeout never lowers the restore budget. The SDK and WebUI add 10 and 15 seconds of client headroom. A timeout returns retryable `504 session_restore_timeout`; it does not imply that the daemon itself exited.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `--allow-origin <pat>`                  | —                  | T2.4 ([#4514](https://github.com/QwenLM/qwen-code/issues/4514)). Cross-origin allowlist for browser webui clients. Repeatable. Each value is `*` (any origin — boot refuses if no bearer token is configured; `--require-auth` on loopback is recommended so `/health` is also bearer-gated, since it is pre-auth on loopback by default; the Web Shell static assets stay pre-auth in every mode, so pass `--no-web` to remove them) or a canonical URL origin (`<scheme>://<host>[:<port>]`, no trailing slash / path / userinfo / query). **Subdomain wildcards (`https://*.example.com`) are intentionally unsupported** — list each subdomain explicitly, or use `*` with a configured token (and `--require-auth` for full hardening). Matched origins receive CORS response headers (`Access-Control-Allow-Origin`, `Vary: Origin`, methods, headers, max-age, and exposed `Retry-After`); unmatched origins still get a 403 with the same envelope as today's wall. `Origin: null` (sandboxed iframes, file:// docs) is always rejected, even under `*`. Pre-flight via `caps.features.allow_origin`. Loopback self-origin hits are unaffected.                                             |
+| `--allow-origin <pat>`                  | —                  | T2.4 ([#4514](https://github.com/LailatulCoder/lailatul-coder/issues/4514)). Cross-origin allowlist for browser webui clients. Repeatable. Each value is `*` (any origin — boot refuses if no bearer token is configured; `--require-auth` on loopback is recommended so `/health` is also bearer-gated, since it is pre-auth on loopback by default; the Web Shell static assets stay pre-auth in every mode, so pass `--no-web` to remove them) or a canonical URL origin (`<scheme>://<host>[:<port>]`, no trailing slash / path / userinfo / query). **Subdomain wildcards (`https://*.example.com`) are intentionally unsupported** — list each subdomain explicitly, or use `*` with a configured token (and `--require-auth` for full hardening). Matched origins receive CORS response headers (`Access-Control-Allow-Origin`, `Vary: Origin`, methods, headers, max-age, and exposed `Retry-After`); unmatched origins still get a 403 with the same envelope as today's wall. `Origin: null` (sandboxed iframes, file:// docs) is always rejected, even under `*`. Pre-flight via `caps.features.allow_origin`. Loopback self-origin hits are unaffected.                                             |
 | `--web` / `--no-web`                    | `true`             | Serve the built Web Shell SPA at the daemon root (`GET /`, `/assets/*`, and `GET /session/<id>` document navigations). These entry points are registered **before** the bearer-auth gate — a browser can't attach a token to a `<script>` subresource or an address-bar navigation, and the shell carries no secrets. Every API route stays token-gated regardless, and the SPA deep-link fallback for all other paths sits behind the bearer gate too. On non-loopback binds a one-line stderr warning notes the UI is reachable without auth. Use `--no-web` for an API-only daemon. No effect when the build omits the Web Shell assets (the daemon logs a breadcrumb and runs API-only).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `--open`                                | `false`            | After the listener is up, open the Web Shell in your default browser at the daemon URL (with `#token=` appended as a URL fragment when a token is configured — a fragment is never sent to the server, keeping the token out of access logs and Referer headers). No-op with `--no-web`, or in headless / CI / SSH environments where no browser is available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
@@ -528,7 +528,7 @@ units without control characters. A successful prepare response is:
 
 A denial uses `allowed:false` and may add a short `reason`. For each supported
 top-level tool invocation that passes existing permission and `PreToolUse`
-gates and reaches the final execution boundary, Qwen Code sends one prepare
+gates and reaches the final execution boundary, LailatulCoder Ai sends one prepare
 request and never retries it. An earlier permission/hook denial sends no
 prepare request. Timeout, cancellation, transport failure, malformed or
 mismatched responses, and explicit denial prevent the executor from running.
@@ -602,7 +602,7 @@ provider decision with their normal tool policy and isolation boundary.
 > admission layer. Default sizing assumes single-user / small-team load; raise
 > progressively (and watch RSS) for larger deployments.
 
-> **MCP client guardrails (issue [#4175](https://github.com/QwenLM/qwen-code/issues/4175) PR 14).** A workspace declaring 30 MCP servers in `mcpServers` will start 30 clients with no upstream cap unless you set one. `--mcp-client-budget=N` caps the live MCP client count; `--mcp-budget-mode={enforce,warn,off}` chooses the behavior. Default is `warn` when a budget is set (snapshot surfaces the warning but no client is refused — useful for measuring real-world fanout before flipping on enforcement). Refused servers under `enforce` mode get `disabledReason: 'budget'` on their per-server cell, and the `budgets[0]` cell shows `status: 'error'` + `errorKind: 'budget_exhausted'`. Slot reservation is by server name and survives reconnects / discovery timeouts — a refused server can't take a slot from a healthy one.
+> **MCP client guardrails (issue [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) PR 14).** A workspace declaring 30 MCP servers in `mcpServers` will start 30 clients with no upstream cap unless you set one. `--mcp-client-budget=N` caps the live MCP client count; `--mcp-budget-mode={enforce,warn,off}` chooses the behavior. Default is `warn` when a budget is set (snapshot surfaces the warning but no client is refused — useful for measuring real-world fanout before flipping on enforcement). Refused servers under `enforce` mode get `disabledReason: 'budget'` on their per-server cell, and the `budgets[0]` cell shows `status: 'error'` + `errorKind: 'budget_exhausted'`. Slot reservation is by server name and survives reconnects / discovery timeouts — a refused server can't take a slot from a healthy one.
 >
 > **Current scope is capability-driven.** When `mcp_workspace_pool` is present, all sessions in one workspace runtime share its MCP transport pool and budget controller; `GET /workspace/mcp` emits `scope: 'workspace'`. A second workspace has an independent pool and budget. When the tag is absent (including `QWEN_SERVE_NO_MCP_POOL=1`), the daemon uses the legacy per-session `McpClientManager` and emits `scope: 'session'`; in that fallback, N sessions can each consume the configured cap.
 >
@@ -614,7 +614,7 @@ provider decision with their normal tool policy and isolation boundary.
 >
 > This is **not** the same as claude-code's `MCP_SERVER_CONNECTION_BATCH_SIZE` (which gates startup concurrency); they are orthogonal. Clients must branch on `mcp_workspace_pool`, not assume a scope from the protocol version alone.
 >
-> **Push events (issue [#4175](https://github.com/QwenLM/qwen-code/issues/4175) PR 14b).** SDK clients subscribed to `GET /session/:id/events` receive typed frames when budget thresholds cross — `mcp_budget_warning` (synthetic, fires once per upward 75% crossing with hysteresis re-arm at 37.5%, advertised via `mcp_guardrail_events`) and `mcp_child_refused_batch` (coalesced once per discovery pass under `enforce` mode; length-1 from `readResource` lazy-spawn refusal). The snapshot at `GET /workspace/mcp` is still the source-of-truth for state-after-reconnect; events are change-edges. Useful when dashboarding in real-time without polling.
+> **Push events (issue [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) PR 14b).** SDK clients subscribed to `GET /session/:id/events` receive typed frames when budget thresholds cross — `mcp_budget_warning` (synthetic, fires once per upward 75% crossing with hysteresis re-arm at 37.5%, advertised via `mcp_guardrail_events`) and `mcp_child_refused_batch` (coalesced once per discovery pass under `enforce` mode; length-1 from `readResource` lazy-spawn refusal). The snapshot at `GET /workspace/mcp` is still the source-of-truth for state-after-reconnect; events are change-edges. Useful when dashboarding in real-time without polling.
 
 ## Default deployment threat model
 
@@ -645,7 +645,7 @@ provider decision with their normal tool policy and isolation boundary.
 > 256 `server.maxConnections` ceiling.
 >
 > Set [`--writer-idle-timeout-ms <n>`](#deadlines-and-writer-idle-timeout)
-> (issue [#4514](https://github.com/QwenLM/qwen-code/issues/4514) T2.9)
+> (issue [#4514](https://github.com/LailatulCoder/lailatul-coder/issues/4514) T2.9)
 > to close the gap with an explicit application-level idle deadline:
 > when no write has successfully flushed for `n` ms the daemon emits
 > a terminal `client_evicted` frame with
@@ -659,7 +659,7 @@ provider decision with their normal tool policy and isolation boundary.
 
 ### Deadlines and writer idle timeout
 
-Issue [#4514](https://github.com/QwenLM/qwen-code/issues/4514) T2.9 ships two opt-in flags that close the long-running / remote-deployment gaps the 15s heartbeat + AbortSignal don't cover. Both are off by default — single-user loopback workflows stay bit-for-bit unchanged.
+Issue [#4514](https://github.com/LailatulCoder/lailatul-coder/issues/4514) T2.9 ships two opt-in flags that close the long-running / remote-deployment gaps the 15s heartbeat + AbortSignal don't cover. Both are off by default — single-user loopback workflows stay bit-for-bit unchanged.
 
 | Flag                           | Env var                             | Default | What it does                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------ | ----------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -694,7 +694,7 @@ Use separate daemon processes when you need a smaller fault or security boundary
 
 > **Subscribe BEFORE posting `modelServiceId` on attach.** When a client `POST /session` with a `modelServiceId` and the workspace already has a session running a different model, the daemon issues an internal `setSessionModel` call — failures are NOT propagated as an HTTP error (the session stays operational on its current model). The visible failure signal is a `model_switch_failed` event on the session's SSE stream. If you call `POST /session` and only THEN open `GET /session/:id/events`, you'll miss the failure event and silently keep talking to the wrong model. Open the SSE stream first, or pass `Last-Event-ID: 0` on subscribe to replay the ring's oldest available event.
 
-To handle multiple **users or security principals** (each with an independent token, quota, audit log, sandbox, or process fault boundary) or to scale beyond one process's reach (cold-start budget, FD count, RSS), spawn one daemon per principal behind an external orchestrator. Each such daemon may still host several workspaces for that principal. The orchestrator (multi-tenancy / OIDC / Quota / Audit / k8s) is **out of scope** for the qwen-code project — see issue [#3803](https://github.com/QwenLM/qwen-code/issues/3803) "External Reference Architecture" for the design pointers.
+To handle multiple **users or security principals** (each with an independent token, quota, audit log, sandbox, or process fault boundary) or to scale beyond one process's reach (cold-start budget, FD count, RSS), spawn one daemon per principal behind an external orchestrator. Each such daemon may still host several workspaces for that principal. The orchestrator (multi-tenancy / OIDC / Quota / Audit / k8s) is **out of scope** for the lailatul-coder project — see issue [#3803](https://github.com/LailatulCoder/lailatul-coder/issues/3803) "External Reference Architecture" for the design pointers.
 
 ## Loading and resuming a persisted session
 
@@ -713,7 +713,7 @@ For load and resume, the TypeScript SDK exposes static factories on
 `DaemonSessionClient`:
 
 ```ts
-import { DaemonClient, DaemonSessionClient } from '@qwen-code/sdk';
+import { DaemonClient, DaemonSessionClient } from '@lailatul-coder/sdk';
 
 const client = new DaemonClient({ baseUrl: 'http://127.0.0.1:4170' });
 
@@ -762,7 +762,7 @@ If your integration needs server-side cross-restart durability beyond what `sess
 
 ## Stage 1.5+ runtime guarantees
 
-Stage 1's contract is sized for prototyping. Per [#3889 chiga0 downstream-consumer review](https://github.com/QwenLM/qwen-code/pull/3889#issuecomment-4427875644), the following are **not** in Stage 1 — production-grade integrations need Stage 1.5+ before relying on them:
+Stage 1's contract is sized for prototyping. Per [#3889 chiga0 downstream-consumer review](https://github.com/LailatulCoder/lailatul-coder/pull/3889#issuecomment-4427875644), the following are **not** in Stage 1 — production-grade integrations need Stage 1.5+ before relying on them:
 
 **Blockers for serious downstream use:**
 
@@ -771,7 +771,7 @@ Stage 1's contract is sized for prototyping. Per [#3889 chiga0 downstream-consum
 
 **Reliability baseline:**
 
-3. ~~**Client-initiated heartbeat path**~~ — shipped via [#4175](https://github.com/QwenLM/qwen-code/issues/4175) PR 9. `POST /session/:id/heartbeat` records last-seen timestamps on the daemon (capability tag `client_heartbeat`); SDK helpers are `DaemonClient.heartbeat()` / `DaemonSessionClient.heartbeat()`.
+3. ~~**Client-initiated heartbeat path**~~ — shipped via [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) PR 9. `POST /session/:id/heartbeat` records last-seen timestamps on the daemon (capability tag `client_heartbeat`); SDK helpers are `DaemonClient.heartbeat()` / `DaemonSessionClient.heartbeat()`.
 4. **`permission_already_resolved` event** when a vote loses the first-responder race — currently UIs have to infer state from a `404`.
 5. ~~**Larger replay ring**~~ — bumped to 8000. **Per-session-configurable ring** still open — mobile / chatty-turn workloads may need per-session overrides.
 6. **`slow_client_warning` event before `client_evicted`** — soft backpressure so well-behaved slow clients can self-throttle (trim render depth, drop chunks) before being terminated.
@@ -782,13 +782,13 @@ Stage 1's contract is sized for prototyping. Per [#3889 chiga0 downstream-consum
 8. **`/capabilities` actual feature negotiation** — `protocol_versions: { acp: '0.14.x', daemon_envelope: 1 }` so clients can detect drift instead of falling through to "unknown frame, ignore".
 9. **First-class durability documentation** (this section) — already shipped above.
 
-The full convergence roadmap is tracked on [#3803](https://github.com/QwenLM/qwen-code/issues/3803).
+The full convergence roadmap is tracked on [#3803](https://github.com/LailatulCoder/lailatul-coder/issues/3803).
 
 ## Stage 1 scope boundaries — what we won't fix in Stage 1.5
 
 Two structural choices are explicit non-goals for the Stage 1 / 1.5 / 2 main-line roadmap. If your use case depends on either, plan around them rather than waiting for us.
 
-### Session state is local-mutation-only (per [LaZzyMan review #4270256721](https://github.com/QwenLM/qwen-code/pull/3889#pullrequestreview-4270256721))
+### Session state is local-mutation-only (per [LaZzyMan review #4270256721](https://github.com/LailatulCoder/lailatul-coder/pull/3889#pullrequestreview-4270256721))
 
 The Stage 1.5 plan describes TUI as an in-process EventBus subscriber. In practice **TUI UI is strictly larger than the wire protocol**:
 
@@ -819,7 +819,7 @@ In this mode, TUI is a **"super-client"** — it observes the same agent convers
 
 #### Why (A) and not (B) (promote mutations to `session_state_changed` event family)
 
-(B) is the more ambitious answer but locks Stage 1.5 into a substantially larger wire surface that must also pass cleanly through the planned in-process refactor. We'd rather walk the smaller scope honestly. The session-state-event taxonomy work — enumerating which TUI flows are local-only by design vs. could plausibly graduate to wire under a future opt-in (B)-flavor extension — moves to [#3803](https://github.com/QwenLM/qwen-code/issues/3803), not Stage 1.5 code.
+(B) is the more ambitious answer but locks Stage 1.5 into a substantially larger wire surface that must also pass cleanly through the planned in-process refactor. We'd rather walk the smaller scope honestly. The session-state-event taxonomy work — enumerating which TUI flows are local-only by design vs. could plausibly graduate to wire under a future opt-in (B)-flavor extension — moves to [#3803](https://github.com/LailatulCoder/lailatul-coder/issues/3803), not Stage 1.5 code.
 
 ### N parallel sessions share one `qwen --acp` child per workspace runtime
 
@@ -842,7 +842,7 @@ Each active workspace runtime keeps **one bridge boundary**. Production attempts
 
 **MCP server children** use the workspace-scoped transport pool when `mcp_workspace_pool` is advertised: matching `(workspace runtime, server name, config fingerprint)` entries are refcounted across sessions. If the capability is absent, the legacy per-session manager independently spawns them.
 
-**Peer agents (Cursor / Continue / Claude Code / OpenCode / Gemini CLI) all do single-process multi-session.** qwen-code matches them at the agent layer; the Stage 1 bridge in this PR makes the same architecture visible over HTTP.
+**Peer agents (Cursor / Continue / Claude Code / OpenCode / Gemini CLI) all do single-process multi-session.** lailatul-coder matches them at the agent layer; the Stage 1 bridge in this PR makes the same architecture visible over HTTP.
 
 ## Logging in to a remote daemon (issue #4175 PR 21)
 
@@ -882,7 +882,7 @@ curl http://127.0.0.1:4170/workspace/auth/device-flow/fa07c61b-… \
 The TypeScript SDK wraps both steps into a single helper:
 
 ```ts
-import { DaemonClient } from '@qwen-code/sdk';
+import { DaemonClient } from '@lailatul-coder/sdk';
 
 const client = new DaemonClient({ baseUrl, token });
 const flow = await client.auth.start({ providerId: 'qwen-oauth' });
@@ -960,7 +960,7 @@ mutating the family is safe. Older `serve-<pid>.log` and
 `serve-<pid>-<workspaceHash>.log` files are left untouched and are not counted
 by the new retention policy.
 
-## Runtime MCP server management (issue [#4514](https://github.com/QwenLM/qwen-code/issues/4514))
+## Runtime MCP server management (issue [#4514](https://github.com/LailatulCoder/lailatul-coder/issues/4514))
 
 Add or remove MCP servers at runtime without restarting the daemon. Runtime entries live in an ephemeral overlay that **shadows** settings-defined servers of the same name; the underlying `settings.json` / `mcpServers` config is never written to.
 
@@ -1093,4 +1093,4 @@ Budget-related events from the existing `mcp_guardrail_events` surface (`mcp_bud
 - **Setting up a long-running daemon?** [Local launch templates (systemd / launchd / nohup / tmux)](./qwen-serve-deploy-local.md) for v0.16-alpha (local-only).
 - **Build a client?** See the [DaemonClient TypeScript quickstart](../developers/examples/daemon-client-quickstart.md) and the [HTTP protocol reference](../developers/qwen-serve-protocol.md).
 - **Reading the source?** Bridge code lives at `packages/cli/src/serve/`; SDK client at `packages/sdk-typescript/src/daemon/`.
-- **Tracking the roadmap?** Stage 1.5 / Stage 2 progress is tracked on issue [#3803](https://github.com/QwenLM/qwen-code/issues/3803).
+- **Tracking the roadmap?** Stage 1.5 / Stage 2 progress is tracked on issue [#3803](https://github.com/LailatulCoder/lailatul-coder/issues/3803).

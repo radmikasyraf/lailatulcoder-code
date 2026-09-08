@@ -6,7 +6,7 @@
 
 import { describe, expect, it } from 'vitest';
 // Re-import via the relative source path so the new ownsModel envKey gate
-// is exercised even before dist/ is rebuilt (the @qwen-code/qwen-code-core
+// is exercised even before dist/ is rebuilt (the @lailatul-coder/lailatul-coder-core
 // package resolves to dist/ on a fresh branch).
 import {
   openRouterProvider,
@@ -64,8 +64,8 @@ describe('openRouterProvider', () => {
 
   it('declares customHeaders for attribution', () => {
     expect(openRouterProvider.customHeaders).toEqual({
-      'HTTP-Referer': 'https://github.com/QwenLM/qwen-code.git',
-      'X-OpenRouter-Title': 'Qwen Code',
+      'HTTP-Referer': 'https://github.com/LailatulCoder/lailatul-coder.git',
+      'X-OpenRouter-Title': 'LailatulCoder Ai',
     });
   });
 });

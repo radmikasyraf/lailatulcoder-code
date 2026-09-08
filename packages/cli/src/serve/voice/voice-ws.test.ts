@@ -7,7 +7,7 @@
 // @vitest-environment node
 
 import { afterEach, describe, it, expect, vi } from 'vitest';
-import { AuthType } from '@qwen-code/qwen-code-core';
+import { AuthType } from '@lailatul-coder/lailatul-coder-core';
 import { createVoiceWsConnectionHandler } from './voice-ws.js';
 import { WorkspaceVoiceCoordinator } from './workspace-voice-coordinator.js';
 import type { DaemonVoiceContext } from './resolve-voice-config.js';

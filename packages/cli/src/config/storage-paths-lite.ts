@@ -8,7 +8,7 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 
 // Keep this literal in sync with core's QWEN_DIR. This lite module must not
-// import @qwen-code/qwen-code-core because it runs before serve listener ready.
+// import @lailatul-coder/lailatul-coder-core because it runs before serve listener ready.
 export const SETTINGS_DIRECTORY_NAME = '.qwen';
 
 export function resolveConfigPathLite(dir: string, cwd?: string): string {
@@ -53,9 +53,9 @@ export function getSystemSettingsPath(): string {
     return '/Library/Application Support/QwenCode/settings.json';
   }
   if (os.platform() === 'win32') {
-    return 'C:\\ProgramData\\qwen-code\\settings.json';
+    return 'C:\\ProgramData\\lailatul-coder\\settings.json';
   }
-  return '/etc/qwen-code/settings.json';
+  return '/etc/lailatul-coder/settings.json';
 }
 
 export function getSystemDefaultsPath(): string {

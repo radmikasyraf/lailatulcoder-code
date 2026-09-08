@@ -5,7 +5,7 @@ import type {
   SubagentConfig,
   McpToolProgressData,
   ShellProgressData,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 /**
  * Annotation for attaching metadata to content blocks

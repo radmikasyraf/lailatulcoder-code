@@ -1,13 +1,13 @@
-# @qwen-code/sdk
+# @lailatul-coder/sdk
 
-A minimum experimental TypeScript SDK for programmatic access to Qwen Code.
+A minimum experimental TypeScript SDK for programmatic access to LailatulCoder Ai.
 
 Feel free to submit a feature request/issue/PR.
 
 ## Installation
 
 ```bash
-npm install @qwen-code/sdk
+npm install @lailatul-coder/sdk
 ```
 
 ## Requirements
@@ -19,7 +19,7 @@ npm install @qwen-code/sdk
 ## Quick Start
 
 ```typescript
-import { query } from '@qwen-code/sdk';
+import { query } from '@lailatul-coder/sdk';
 
 // Single-turn query
 const result = query({
@@ -43,7 +43,7 @@ for await (const message of result) {
 
 ### `query(config)`
 
-Creates a new query session with the Qwen Code.
+Creates a new query session with the LailatulCoder Ai.
 
 #### Parameters
 
@@ -56,11 +56,11 @@ Creates a new query session with the Qwen Code.
 | ------------------------ | -------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `cwd`                    | `string`                                                 | `process.cwd()`  | The working directory for the query session. Determines the context in which file operations and commands are executed.                                                                                                                                                                                                                                                                                                                                                               |
 | `model`                  | `string`                                                 | -                | The AI model to use (e.g., `'qwen-max'`, `'qwen-plus'`, `'qwen-turbo'`). Takes precedence over `OPENAI_MODEL` and `QWEN_MODEL` environment variables.                                                                                                                                                                                                                                                                                                                                 |
-| `pathToQwenExecutable`   | `string`                                                 | Auto-detected    | Path to the Qwen Code executable. Supports multiple formats: `'qwen'` (native binary from PATH), `'/path/to/qwen'` (explicit path), `'/path/to/cli.js'` (Node.js bundle), `'node:/path/to/cli.js'` (force Node.js runtime), `'bun:/path/to/cli.js'` (force Bun runtime). If not provided, auto-detects from: `QWEN_CODE_CLI_PATH` env var, `~/.volta/bin/qwen`, `~/.npm-global/bin/qwen`, `/usr/local/bin/qwen`, `~/.local/bin/qwen`, `~/node_modules/.bin/qwen`, `~/.yarn/bin/qwen`. |
+| `pathToQwenExecutable`   | `string`                                                 | Auto-detected    | Path to the LailatulCoder Ai executable. Supports multiple formats: `'qwen'` (native binary from PATH), `'/path/to/qwen'` (explicit path), `'/path/to/cli.js'` (Node.js bundle), `'node:/path/to/cli.js'` (force Node.js runtime), `'bun:/path/to/cli.js'` (force Bun runtime). If not provided, auto-detects from: `QWEN_CODE_CLI_PATH` env var, `~/.volta/bin/qwen`, `~/.npm-global/bin/qwen`, `/usr/local/bin/qwen`, `~/.local/bin/qwen`, `~/node_modules/.bin/qwen`, `~/.yarn/bin/qwen`. |
 | `permissionMode`         | `'default' \| 'plan' \| 'auto-edit' \| 'auto' \| 'yolo'` | `'default'`      | Permission mode controlling tool execution approval. See [Permission Modes](#permission-modes) for details.                                                                                                                                                                                                                                                                                                                                                                           |
 | `canUseTool`             | `CanUseTool`                                             | -                | Custom permission handler for tool execution approval. Invoked when a tool requires confirmation. Must respond within 60 seconds or the request will be auto-denied. See [Custom Permission Handler](#custom-permission-handler).                                                                                                                                                                                                                                                     |
-| `env`                    | `Record<string, string>`                                 | -                | Environment variables to pass to the Qwen Code process. Merged with the current process environment.                                                                                                                                                                                                                                                                                                                                                                                  |
-| `systemPrompt`           | `string \| QuerySystemPromptPreset`                      | -                | System prompt configuration for the main session. Use a string to fully override the built-in Qwen Code system prompt, or a preset object to keep the built-in prompt and append extra instructions.                                                                                                                                                                                                                                                                                  |
+| `env`                    | `Record<string, string>`                                 | -                | Environment variables to pass to the LailatulCoder Ai process. Merged with the current process environment.                                                                                                                                                                                                                                                                                                                                                                                  |
+| `systemPrompt`           | `string \| QuerySystemPromptPreset`                      | -                | System prompt configuration for the main session. Use a string to fully override the built-in LailatulCoder Ai system prompt, or a preset object to keep the built-in prompt and append extra instructions.                                                                                                                                                                                                                                                                                  |
 | `mcpServers`             | `Record<string, McpServerConfig>`                        | -                | MCP (Model Context Protocol) servers to connect. Supports external servers (stdio/SSE/HTTP) and SDK-embedded servers. External servers are configured with transport options like `command`, `args`, `url`, `httpUrl`, etc. SDK servers use `{ type: 'sdk', name: string, instance: Server }`.                                                                                                                                                                                        |
 | `abortController`        | `AbortController`                                        | -                | Controller to cancel the query session. Call `abortController.abort()` to terminate the session and cleanup resources.                                                                                                                                                                                                                                                                                                                                                                |
 | `debug`                  | `boolean`                                                | `false`          | Enable debug mode for verbose logging from the CLI process.                                                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -109,7 +109,7 @@ channel, IDE, or web backend adapters do not need to pass `sessionId` into every
 call.
 
 ```typescript
-import { DaemonClient, DaemonSessionClient } from '@qwen-code/sdk';
+import { DaemonClient, DaemonSessionClient } from '@lailatul-coder/sdk';
 
 const daemon = new DaemonClient({
   baseUrl: 'http://127.0.0.1:4170',
@@ -160,7 +160,7 @@ import {
   asKnownDaemonEvent,
   createDaemonSessionViewState,
   reduceDaemonSessionEvent,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 
 let view = createDaemonSessionViewState();
 for await (const event of session.events()) {
@@ -181,7 +181,7 @@ read files, parse JSONL text, start a daemon, or access network or browser
 storage.
 
 ```typescript
-import { projectChatRecordsToDaemonTranscript } from '@qwen-code/sdk/daemon/transcript';
+import { projectChatRecordsToDaemonTranscript } from '@lailatul-coder/sdk/daemon/transcript';
 
 const projection = projectChatRecordsToDaemonTranscript(records);
 if (!projection.complete) {
@@ -207,7 +207,7 @@ import {
   isSDKSystemMessage,
   isSDKResultMessage,
   isSDKPartialAssistantMessage,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 
 for await (const message of result) {
   if (isSDKAssistantMessage(message)) {
@@ -279,7 +279,7 @@ The first matching rule wins.
 ### Multi-turn Conversation
 
 ```typescript
-import { query, type SDKUserMessage } from '@qwen-code/sdk';
+import { query, type SDKUserMessage } from '@lailatul-coder/sdk';
 
 async function* generateMessages(): AsyncIterable<SDKUserMessage> {
   yield {
@@ -313,7 +313,7 @@ for await (const message of result) {
 ### Custom Permission Handler
 
 ```typescript
-import { query, type CanUseTool } from '@qwen-code/sdk';
+import { query, type CanUseTool } from '@lailatul-coder/sdk';
 
 const canUseTool: CanUseTool = async (toolName, input, { signal }) => {
   // Allow all read operations
@@ -349,7 +349,7 @@ object keyed by the question's index (as a string), where each value is the
 label of the chosen option (or free-form text when the user picks "Other").
 
 ```typescript
-import { query, type CanUseTool } from '@qwen-code/sdk';
+import { query, type CanUseTool } from '@lailatul-coder/sdk';
 
 const canUseTool: CanUseTool = async (toolName, input, { signal }) => {
   if (toolName === 'ask_user_question') {
@@ -381,7 +381,7 @@ const canUseTool: CanUseTool = async (toolName, input, { signal }) => {
 ### With External MCP Servers
 
 ```typescript
-import { query } from '@qwen-code/sdk';
+import { query } from '@lailatul-coder/sdk';
 
 const result = query({
   prompt: 'Use the custom tool from my MCP server',
@@ -400,7 +400,7 @@ const result = query({
 ### Override the System Prompt
 
 ```typescript
-import { query } from '@qwen-code/sdk';
+import { query } from '@lailatul-coder/sdk';
 
 const result = query({
   prompt: 'Say hello in one sentence.',
@@ -413,7 +413,7 @@ const result = query({
 ### Append to the Built-in System Prompt
 
 ```typescript
-import { query } from '@qwen-code/sdk';
+import { query } from '@lailatul-coder/sdk';
 
 const result = query({
   prompt: 'Review the current directory.',
@@ -471,7 +471,7 @@ Returns a `McpSdkServerConfigWithInstance` object that can be passed directly to
 
 ```typescript
 import { z } from 'zod';
-import { query, tool, createSdkMcpServer } from '@qwen-code/sdk';
+import { query, tool, createSdkMcpServer } from '@lailatul-coder/sdk';
 
 // Define a tool with Zod schema
 const calculatorTool = tool(
@@ -508,7 +508,7 @@ for await (const message of result) {
 ### Abort a Query
 
 ```typescript
-import { query, isAbortError } from '@qwen-code/sdk';
+import { query, isAbortError } from '@lailatul-coder/sdk';
 
 const abortController = new AbortController();
 
@@ -540,7 +540,7 @@ try {
 The SDK provides an `AbortError` class for handling aborted queries:
 
 ```typescript
-import { AbortError, isAbortError } from '@qwen-code/sdk';
+import { AbortError, isAbortError } from '@lailatul-coder/sdk';
 
 try {
   // ... query operations
@@ -559,16 +559,16 @@ try {
 
 If you're using SDK version **0.1.0**, please note the following requirements:
 
-#### Qwen Code Installation Required
+#### LailatulCoder Ai Installation Required
 
-Version 0.1.0 requires [Qwen Code](https://github.com/QwenLM/qwen-code) **>= 0.4.0** to be installed separately and accessible in your PATH.
+Version 0.1.0 requires [LailatulCoder Ai](https://github.com/LailatulCoder/lailatul-coder) **>= 0.4.0** to be installed separately and accessible in your PATH.
 
 ```bash
-# Install Qwen Code globally
-npm install -g @qwen-code/qwen-code@latest
+# Install LailatulCoder Ai globally
+npm install -g @lailatul-coder/lailatul-coder@latest
 ```
 
-**Note**: From version **0.1.1** onwards, the CLI is bundled with the SDK, so no separate Qwen Code installation is needed.
+**Note**: From version **0.1.1** onwards, the CLI is bundled with the SDK, so no separate LailatulCoder Ai installation is needed.
 
 ## License
 

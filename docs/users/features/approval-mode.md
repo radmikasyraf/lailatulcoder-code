@@ -1,6 +1,6 @@
 # Approval Mode
 
-Qwen Code offers five distinct permission modes that allow you to flexibly control how AI interacts with your code and system based on task complexity and risk level.
+LailatulCoder Ai offers five distinct permission modes that allow you to flexibly control how AI interacts with your code and system based on task complexity and risk level.
 
 ## Permission Modes Comparison
 
@@ -26,19 +26,19 @@ Qwen Code offers five distinct permission modes that allow you to flexibly contr
 
 > [!tip]
 >
-> You can quickly cycle through modes during a session using **Shift+Tab** (or **Tab** on Windows). The terminal status bar shows your current mode, so you always know what permissions Qwen Code has.
+> You can quickly cycle through modes during a session using **Shift+Tab** (or **Tab** on Windows). The terminal status bar shows your current mode, so you always know what permissions LailatulCoder Ai has.
 
 > The cycle order is: **plan → default → auto-edit → auto → yolo → plan → ...**
 
 ## 1. Use Plan Mode for safe code analysis
 
-Plan Mode instructs Qwen Code to create a plan by analyzing the codebase with **read-only** operations, perfect for exploring codebases, planning complex changes, or reviewing code safely.
+Plan Mode instructs LailatulCoder Ai to create a plan by analyzing the codebase with **read-only** operations, perfect for exploring codebases, planning complex changes, or reviewing code safely.
 
 ### When to use Plan Mode
 
 - **Multi-step implementation**: When your feature requires making edits to many files
 - **Code exploration**: When you want to research the codebase thoroughly before changing anything
-- **Interactive development**: When you want to iterate on the direction with Qwen Code
+- **Interactive development**: When you want to iterate on the direction with LailatulCoder Ai
 
 ### How to use Plan Mode
 
@@ -84,7 +84,7 @@ qwen --prompt "What is machine learning?"
 /plan I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.
 ```
 
-Qwen Code enters Plan Mode and analyzes the current implementation to create a comprehensive plan. Refine with follow-ups:
+LailatulCoder Ai enters Plan Mode and analyzes the current implementation to create a comprehensive plan. Refine with follow-ups:
 
 ```
 What about backward compatibility?
@@ -104,13 +104,13 @@ How should we handle database migration?
 
 ## 2. Use Ask Permissions Mode for Controlled Interaction
 
-Ask Permissions Mode is the standard way to work with Qwen Code. In this mode, you maintain full control over all potentially risky operations - Qwen Code will ask for your approval before making any file changes or executing shell commands.
+Ask Permissions Mode is the standard way to work with LailatulCoder Ai. In this mode, you maintain full control over all potentially risky operations - LailatulCoder Ai will ask for your approval before making any file changes or executing shell commands.
 
 ### When to use Ask Permissions Mode
 
 - **New to a codebase**: When you're exploring an unfamiliar project and want to be extra cautious
 - **Critical systems**: When working on production code, infrastructure, or sensitive data
-- **Learning and teaching**: When you want to understand each step Qwen Code is taking
+- **Learning and teaching**: When you want to understand each step LailatulCoder Ai is taking
 - **Team collaboration**: When multiple people are working on the same codebase
 - **Complex operations**: When the changes involve multiple files or complex logic
 
@@ -122,7 +122,7 @@ You can switch into Ask Permissions Mode during a session using **Shift+Tab**�
 
 **Start a new session in Ask Permissions Mode**
 
-Ask Permissions Mode is the initial mode when you start Qwen Code. If you've changed modes and want to return to Ask Permissions Mode, use:
+Ask Permissions Mode is the initial mode when you start LailatulCoder Ai. If you've changed modes and want to return to Ask Permissions Mode, use:
 
 ```
 /approval-mode default
@@ -146,7 +146,7 @@ qwen --prompt "Analyze this code for potential bugs"
 I need to add user profile pictures to our application. The pictures should be stored in an S3 bucket and the URLs saved in the database.
 ```
 
-Qwen Code will analyze your codebase and propose a plan. It will then ask for approval before:
+LailatulCoder Ai will analyze your codebase and propose a plan. It will then ask for approval before:
 
 1. Creating new files (controllers, models, migrations)
 2. Modifying existing files (adding new columns, updating APIs)
@@ -167,7 +167,7 @@ You can review each proposed change and approve or reject it individually.
 
 ## 3. Auto Edits Mode
 
-Auto-Edit Mode instructs Qwen Code to automatically approve file edits while requiring manual approval for shell commands, ideal for accelerating development workflows while maintaining system safety.
+Auto-Edit Mode instructs LailatulCoder Ai to automatically approve file edits while requiring manual approval for shell commands, ideal for accelerating development workflows while maintaining system safety.
 
 Auto-approved edit tools include `edit`, `write_file`, and `notebook_edit`.
 
@@ -189,7 +189,7 @@ Shift+Tab (or Tab on Windows) # Switch from other modes
 
 ### Workflow Example
 
-1. You ask Qwen Code to refactor a function
+1. You ask LailatulCoder Ai to refactor a function
 2. AI analyzes the code and proposes changes
 3. **Automatically**​ applies all file changes without confirmation
 4. If tests need to be run, it will **request approval**​ to execute `npm test`
@@ -280,7 +280,7 @@ settings.json. See [auto-mode.md](./auto-mode.md#configuring-hints).
 Refactor the auth module to use OAuth2. Run the full test suite afterwards.
 ```
 
-Qwen Code makes the file edits (in-workspace edits skip the classifier),
+LailatulCoder Ai makes the file edits (in-workspace edits skip the classifier),
 runs `npm test` (classifier judges safe), and surfaces a block if it ever
 tries something risky like `rm -rf /Users/me/.aws`. You can review the
 reason inline and decide whether to switch to Ask Permissions Mode for that step.
@@ -310,7 +310,7 @@ reason inline and decide whether to switch to Ask Permissions Mode for that step
 
 ## 5. YOLO Mode - Full Automation
 
-YOLO Mode grants Qwen Code the highest permissions, automatically approving all tool calls including file editing and shell commands.
+YOLO Mode grants LailatulCoder Ai the highest permissions, automatically approving all tool calls including file editing and shell commands.
 
 ### When to use YOLO Mode
 
@@ -367,7 +367,7 @@ qwen --prompt "Run the test suite, fix all failing tests, then commit changes"
 
 ### Keyboard Shortcut Switching
 
-During a Qwen Code session, use **Shift+Tab**​ (or **Tab** on Windows) to quickly cycle through the five modes:
+During a LailatulCoder Ai session, use **Shift+Tab**​ (or **Tab** on Windows) to quickly cycle through the five modes:
 
 ```
 Plan Mode → Ask Permissions Mode → Auto-Edit Mode → Auto Mode → YOLO Mode → Plan Mode

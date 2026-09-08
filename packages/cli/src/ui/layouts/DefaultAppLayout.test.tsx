@@ -160,7 +160,7 @@ describe('DefaultAppLayout', () => {
           latest: '0.20.0',
           current: '0.19.12',
           type: 'latest',
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/qwen-code',
         },
       },
     });
@@ -304,7 +304,7 @@ describe('DefaultAppLayout', () => {
           latest: '0.20.0',
           current: '0.19.12',
           type: 'latest',
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/qwen-code',
         },
       },
     });
@@ -316,3 +316,4 @@ describe('DefaultAppLayout', () => {
     );
   });
 });
+

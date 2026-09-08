@@ -5,7 +5,7 @@
 The daemon already _propagates_ trace context outbound: prompt requests carry a
 `traceparent` inside JSON-RPC `_meta`, and the daemon extracts it to parent its
 bridge spans (`extractDaemonTraceContext`). The HTTP surface, however, only
-_records_ request spans — every `qwen-code.daemon.request` span starts a new
+_records_ request spans — every `lailatul-coder.daemon.request` span starts a new
 trace. An HTTP caller that forwards the standard W3C `traceparent` header
 (corporate proxies, OTel-instrumented clients, ACP gateways) gets no linkage:
 the server-side span cannot be joined back to the caller's trace, so
@@ -36,7 +36,7 @@ the plumbing already exists: `withDaemonSpan` accepts an explicit
    telemetry-off deployments pay no OTel machinery on the hot path — only the
    single-regex trace-id capture described under Log correlation — and a
    present-but-invalid header emits a debug daemon log
-   (`qwen-code.daemon.traceparent.invalid`) so a rejected header is
+   (`lailatul-coder.daemon.traceparent.invalid`) so a rejected header is
    diagnosable from daemon logs alone.
 
    Note the whole subtree relocates with the request span, not just
@@ -95,7 +95,7 @@ input exactly like the HTTP header and gets the same protection.
 
 ## Non-goals
 
-- No new span kinds or attributes: existing `qwen-code.daemon.request` spans
+- No new span kinds or attributes: existing `lailatul-coder.daemon.request` spans
   stay `SpanKind.INTERNAL` with the same attributes; only the parent link
   changes when a valid header is present.
 - No `traceparent` _response_ injection and no W3C `tracingresponse` support.
@@ -106,7 +106,7 @@ input exactly like the HTTP header and gets the same protection.
 ## Alternatives considered
 
 - Changing the request span to `SpanKind.SERVER` per HTTP semconv: **known
-  gap** — `qwen-code.daemon.request` is the daemon's only SERVER-adjacent
+  gap** — `lailatul-coder.daemon.request` is the daemon's only SERVER-adjacent
   span (`HttpInstrumentation` never patches the server side here because the
   SDK loads lazily), so backends deriving service topology / RED metrics
   from SERVER spans (Tempo service-graph, ARMS) will not recognize the

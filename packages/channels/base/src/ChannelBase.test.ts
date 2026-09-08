@@ -5990,7 +5990,7 @@ describe('ChannelBase', () => {
 
       await ch.handleInbound(
         envelope({
-          text: '记住：这个群默认讨论 qwen-code',
+          text: '记住：这个群默认讨论 lailatul-coder',
           senderId: 'alice',
           isGroup: true,
           chatId: 'group-1',
@@ -6004,7 +6004,7 @@ describe('ChannelBase', () => {
           chatId: 'group-1',
           threadId: undefined,
         },
-        ['这个群默认讨论 qwen-code'],
+        ['这个群默认讨论 lailatul-coder'],
         'alice',
       );
       expect(ch.sent).toEqual([
@@ -6027,7 +6027,7 @@ describe('ChannelBase', () => {
 
       await ch.handleInbound(
         envelope({
-          text: '记住：这个群默认讨论 qwen-code',
+          text: '记住：这个群默认讨论 lailatul-coder',
           senderId: 'alice',
           isGroup: true,
           chatId: 'group-1',

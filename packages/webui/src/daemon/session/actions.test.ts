@@ -5,7 +5,7 @@ import {
   type DaemonCapabilities,
   type DaemonSessionClient,
   type GoalSnapshotV2,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   createDaemonSessionActions,
   getConnectionAfterSessionClear,

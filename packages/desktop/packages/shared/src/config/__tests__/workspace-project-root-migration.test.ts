@@ -34,7 +34,7 @@ function setupConfigDir() {
   return configDir
 }
 
-function setupProjectDir(name = 'qwen-code') {
+function setupProjectDir(name = 'lailatul-coder') {
   const projectDir = join(tmpdir(), `${name}-${crypto.randomUUID()}`)
   mkdirSync(join(projectDir, '.git'), { recursive: true })
   writeFileSync(join(projectDir, 'package.json'), '{"name":"project"}\n', 'utf-8')
@@ -76,7 +76,7 @@ describe('project-root workspace storage', () => {
 
     const output = runEval(
       configDir,
-      `const ws = addWorkspace({ name: 'qwen-code', rootPath: ${JSON.stringify(projectDir)} }); console.log(JSON.stringify(ws));`,
+      `const ws = addWorkspace({ name: 'lailatul-coder', rootPath: ${JSON.stringify(projectDir)} }); console.log(JSON.stringify(ws));`,
     )
     const workspace = JSON.parse(output)
 
@@ -127,8 +127,8 @@ describe('project-root workspace storage', () => {
       join(projectDir, 'config.json'),
       JSON.stringify({
         id: 'ws_legacy',
-        name: 'qwen-code',
-        slug: 'qwen-code',
+        name: 'lailatul-coder',
+        slug: 'lailatul-coder',
         defaults: { permissionMode: 'safe' },
         createdAt: 1,
         updatedAt: 1,
@@ -138,7 +138,7 @@ describe('project-root workspace storage', () => {
     writeFileSync(
       join(configDir, 'config.json'),
       JSON.stringify({
-        workspaces: [{ id: 'ws-1', name: 'qwen-code', slug: 'qwen-code', rootPath: projectDir, createdAt: 1 }],
+        workspaces: [{ id: 'ws-1', name: 'lailatul-coder', slug: 'lailatul-coder', rootPath: projectDir, createdAt: 1 }],
         activeWorkspaceId: 'ws-1',
         activeSessionId: null,
       }, null, 2),
@@ -149,10 +149,10 @@ describe('project-root workspace storage', () => {
 
     const config = readJson(join(configDir, 'config.json'))
     const workspace = config.workspaces[0]
-    expect(workspace.rootPath).toBe(join(configDir, 'workspaces', 'qwen-code'))
+    expect(workspace.rootPath).toBe(join(configDir, 'workspaces', 'lailatul-coder'))
     expect(existsSync(join(projectDir, '.agents-plugin', 'plugin.json'))).toBe(false)
 
-    const managedRoot = join(configDir, 'workspaces', 'qwen-code')
+    const managedRoot = join(configDir, 'workspaces', 'lailatul-coder')
     expect(existsSync(join(managedRoot, 'skills'))).toBe(false)
     const workspaceConfig = readJson(join(managedRoot, 'config.json'))
     expect(workspaceConfig.defaults.workingDirectory).toBe(projectDir)

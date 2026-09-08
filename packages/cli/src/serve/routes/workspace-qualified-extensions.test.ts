@@ -14,7 +14,7 @@ import {
   hashDaemonWorkspace,
   type Extension,
   type ExtensionStoreSnapshot,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { createServeApp } from '../server.js';
 import { ClientMcpSenderRegistry } from '../acp-http/client-mcp-sender-registry.js';
 import {

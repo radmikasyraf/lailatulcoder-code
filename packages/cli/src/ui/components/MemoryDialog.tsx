@@ -17,7 +17,7 @@ import {
   getAutoMemoryProjectStateDir,
   getUserAutoMemoryRoot,
   AUTO_MEMORY_INDEX_FILENAME,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { useConfig } from '../contexts/ConfigContext.js';
 import { useSettings } from '../contexts/SettingsContext.js';
 import { SettingScope } from '../../config/settings.js';
@@ -564,3 +564,4 @@ export function MemoryDialog({ onClose }: MemoryDialogProps) {
     </Box>
   );
 }
+

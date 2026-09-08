@@ -31,7 +31,7 @@ You may make accurate, factual statements about your relationship to the project
 - "Compatible with OpenWork"
 - "Fork of OpenWork"
 
-You may also make accurate attribution statements about upstream projects, such as Craft Agents OSS and Qwen Code, when describing the technical foundations of OpenWork.
+You may also make accurate attribution statements about upstream projects, such as Craft Agents OSS and LailatulCoder Ai, when describing the technical foundations of OpenWork.
 
 ### Contribute to the Project
 
@@ -63,7 +63,7 @@ You may not use the trademarks in any way that:
 
 - Suggests your product is created by or affiliated with Model Studio AI
 - Could cause confusion between your product and the official OpenWork project
-- Misrepresents the relationship between your product, OpenWork, Model Studio AI, Craft Agents OSS, or Qwen Code
+- Misrepresents the relationship between your product, OpenWork, Model Studio AI, Craft Agents OSS, or LailatulCoder Ai
 
 ## Branding Locations
 

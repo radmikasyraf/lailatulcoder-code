@@ -7,8 +7,8 @@ import type { LlmConnection } from '../../../config/storage'
 
 function makeConnection(overrides: Partial<LlmConnection> = {}): LlmConnection {
   return {
-    slug: 'qwen-code',
-    name: 'Qwen Code',
+    slug: 'lailatul-coder',
+    name: 'LailatulCoder Ai',
     providerType: 'qwen',
     authType: 'none',
     createdAt: 1,

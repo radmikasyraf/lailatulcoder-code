@@ -396,7 +396,7 @@ export interface DaemonCapabilities {
    */
   protocolVersions?: DaemonProtocolVersions;
   /**
-   * Qwen Code CLI/SDK version served by this daemon. Optional because this is
+   * LailatulCoder Ai CLI/SDK version served by this daemon. Optional because this is
    * additive to v=1; older v=1 daemons omit it.
    */
   qwenCodeVersion?: string;

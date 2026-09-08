@@ -155,11 +155,11 @@ function resolveQwenCliPath(
   const envOverride = resolveQwenCliOverride();
   if (envOverride) return envOverride;
 
-  const packagedCliRelative = join('vendor', 'qwen-code', 'dist', 'cli.js');
-  const packagedRootCliRelative = join('vendor', 'qwen-code', 'cli.js');
+  const packagedCliRelative = join('vendor', 'lailatul-coder', 'dist', 'cli.js');
+  const packagedRootCliRelative = join('vendor', 'lailatul-coder', 'cli.js');
   const packagedIndexRelative = join(
     'vendor',
-    'qwen-code',
+    'lailatul-coder',
     'packages',
     'cli',
     'dist',
@@ -187,21 +187,21 @@ function resolveQwenCliPath(
 
   const packageCliRelative = join(
     'node_modules',
-    '@qwen-code',
-    'qwen-code',
+    '@lailatul-coder',
+    'lailatul-coder',
     'dist',
     'cli.js',
   );
   const packageRootCliRelative = join(
     'node_modules',
-    '@qwen-code',
-    'qwen-code',
+    '@lailatul-coder',
+    'lailatul-coder',
     'cli.js',
   );
   const packageIndexRelative = join(
     'node_modules',
-    '@qwen-code',
-    'qwen-code',
+    '@lailatul-coder',
+    'lailatul-coder',
     'packages',
     'cli',
     'dist',

@@ -1,11 +1,11 @@
 ---
 name: openwork-desktop-sync
-description: Sync qwen-code packages/desktop with modelstudioai/openwork using commit-by-commit path migration, not subtree split or tree overwrite. Use when exporting qwen-code desktop changes to OpenWork, importing OpenWork desktop changes into qwen-code, preserving target-owned overlay files such as README.md, resolving sync conflicts, or preparing sync PR branches between the two repositories.
+description: Sync lailatul-coder packages/desktop with modelstudioai/openwork using commit-by-commit path migration, not subtree split or tree overwrite. Use when exporting lailatul-coder desktop changes to OpenWork, importing OpenWork desktop changes into lailatul-coder, preserving target-owned overlay files such as README.md, resolving sync conflicts, or preparing sync PR branches between the two repositories.
 ---
 
 # OpenWork Desktop Sync
 
-Use this skill to sync desktop changes between this qwen-code repo and an
+Use this skill to sync desktop changes between this lailatul-coder repo and an
 OpenWork checkout. The repository script owns the Git mechanics:
 
 ```bash
@@ -23,11 +23,11 @@ OPENWORK_OVERLAY_PATHS='README.md'
 
 This is commit-by-commit path migration, not snapshot replacement. The script
 walks source commits from `source-base..source-head`, rewrites paths between
-qwen-code `packages/desktop` and the OpenWork repository root, then applies each
+lailatul-coder `packages/desktop` and the OpenWork repository root, then applies each
 commit with `git apply -3`.
 
 Commits that already came from the receiving repository are skipped by their
-sync trailers. During import, qwen-code-origin export commits are skipped;
+sync trailers. During import, lailatul-coder-origin export commits are skipped;
 during export, OpenWork-origin import commits are skipped.
 
 Merge commits are not migrated as merge commits. The script migrates the regular
@@ -42,20 +42,20 @@ same hunk. If that happens, Git leaves a normal conflict for the agent to
 resolve. Do not use `git subtree split` or full tree replacement for normal
 sync.
 
-Successful sync commits include trailers such as `Qwen-Code-Commit` or
+Successful sync commits include trailers such as `lailatul-coder-Commit` or
 `OpenWork-Commit`. Later syncs can use the latest trailer as the next source
 base. The first sync needs an explicit source base when no previous sync trailer
 exists:
 
 ```bash
-bun run desktop-openwork-sync --mode export --source-base <qwen-code-ref>
+bun run desktop-openwork-sync --mode export --source-base <lailatul-coder-ref>
 bun run desktop-openwork-sync --mode import --source-base <openwork-ref>
 ```
 
 ## Modes
 
-- `--mode export`: qwen-code `packages/desktop` commits -> OpenWork.
-- `--mode import`: OpenWork commits -> qwen-code `packages/desktop`.
+- `--mode export`: lailatul-coder `packages/desktop` commits -> OpenWork.
+- `--mode import`: OpenWork commits -> lailatul-coder `packages/desktop`.
 - `--mode auto`: guardrail only; use explicit directions for real sync.
 
 ## Workflow
@@ -74,7 +74,7 @@ bun run desktop-openwork-sync --mode import --source-base <openwork-ref>
    ```bash
    OPENWORK_DIR=/path/to/openwork \
    OPENWORK_OVERLAY_PATHS='README.md' \
-   bun run desktop-openwork-sync --mode export --source-base <qwen-code-ref>
+   bun run desktop-openwork-sync --mode export --source-base <lailatul-coder-ref>
    ```
 
 3. If Git reports conflicts, resolve only the conflicted hunks, preserving

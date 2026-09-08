@@ -1,4 +1,4 @@
-import type { DaemonWorkspaceSkillStatus } from '@qwen-code/webui/daemon-react-sdk';
+import type { DaemonWorkspaceSkillStatus } from '@lailatul-coder/webui/daemon-react-sdk';
 
 export type SkillLevelFilter = 'all' | DaemonWorkspaceSkillStatus['level'];
 export type SkillStatusFilter = 'all' | 'enabled' | 'disabled';

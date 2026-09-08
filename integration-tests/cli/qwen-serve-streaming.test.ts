@@ -51,13 +51,13 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import {
   isPathWithinRoot,
   TURN_RESULT_TEXT_MAX_CHARS,
-} from '@qwen-code/qwen-code-core';
-import { DaemonClient, parseSseStream } from '@qwen-code/sdk';
-import type { DaemonEvent, DaemonSessionSummary } from '@qwen-code/sdk';
+} from '@lailatul-coder/lailatul-coder-core';
+import { DaemonClient, parseSseStream } from '@lailatul-coder/sdk';
+import type { DaemonEvent, DaemonSessionSummary } from '@lailatul-coder/sdk';
 import {
   isNonBlockingAccepted,
   type NonBlockingPromptAccepted,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   fakeToolCall,
   startFakeOpenAIServer,

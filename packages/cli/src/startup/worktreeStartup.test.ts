@@ -22,8 +22,8 @@ import {
   Storage,
   writeRuntimeStatus,
   writeWorktreeSessionMarker,
-} from '@qwen-code/qwen-code-core';
-import type { Config } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 
 const exec = promisify(execFile);
 
@@ -188,7 +188,7 @@ describe('setupStartupWorktree', () => {
     process.chdir(tempRepo);
 
     const res = await setupStartupWorktree(
-      'https://github.com/QwenLM/qwen-code/pull/4174',
+      'https://github.com/LailatulCoder/lailatul-coder/pull/4174',
     );
     expect(res).not.toBeNull();
     expect(res!.ok).toBe(false);

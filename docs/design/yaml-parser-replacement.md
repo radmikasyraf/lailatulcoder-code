@@ -6,8 +6,8 @@ Internal design document for replacing the hand-rolled 192-line YAML parser at
 round-trip safely through subagent / skill / converter code paths.
 
 Companion to [`docs/design/declarative-agents-port.md`](./declarative-agents-port.md).
-Issue: [#4821](https://github.com/QwenLM/qwen-code/issues/4821). Prereq for
-the follow-up to [PR #4842](https://github.com/QwenLM/qwen-code/pull/4842).
+Issue: [#4821](https://github.com/LailatulCoder/lailatul-coder/issues/4821). Prereq for
+the follow-up to [PR #4842](https://github.com/LailatulCoder/lailatul-coder/pull/4842).
 
 ## Phase 0 — Sources verified
 
@@ -42,7 +42,7 @@ export function parseYaml(input: string): unknown {
 - **API**: top-level `.parse(input)`. Uses the package's default schema (which
   is YAML 1.2 `core` — JSON-superset, no JS extensions). **C**
 - **Bun shortcut**: when running under Bun, CC uses `Bun.YAML.parse()` to
-  avoid bundling ~270 KB of YAML parser. **C** Not relevant to qwen-code
+  avoid bundling ~270 KB of YAML parser. **C** Not relevant to lailatul-coder
   (we don't target Bun runtime).
 - **Schema mode**: NOT explicitly set anywhere in CC. Relies on `yaml`
   package's default behavior, plus zod validation at the consumer layer
@@ -56,7 +56,7 @@ export function parseYaml(input: string): unknown {
 | `!!js/function` tag      | NOT supported in 4.x (was in 3.x)                                                          | Never supported                                      |
 | Billion-laughs guard     | None (manual responsibility)                                                               | Built-in `maxAliasCount: 100` default                |
 | Merge keys (`<<`)        | Supported (must opt-out via `MERGE_SCHEMA` or filtering)                                   | Disabled by default, opt-in via `{ merge: true }`    |
-| Already a qwen-code dep? | `js-yaml@4.1.1` ✓                                                                          | `yaml@2.8.1` ✓ (already imported by `skill-manager`) |
+| Already a lailatul-coder dep? | `js-yaml@4.1.1` ✓                                                                          | `yaml@2.8.1` ✓ (already imported by `skill-manager`) |
 
 Both are reasonable choices in 2026, but **the original task brief
 recommended `js-yaml`'s `FAILSAFE_SCHEMA` / `CORE_SCHEMA`**. We are deviating
@@ -78,7 +78,7 @@ from that guidance for three concrete reasons:
 If a future maintainer wants to drop the `yaml` dependency and unify on
 `js-yaml`, the migration is mechanical: replace `yaml.parse` / `yaml.stringify`
 with `jsYaml.load(s, { schema: jsYaml.CORE_SCHEMA })` / `jsYaml.dump`. The
-two libraries agree on output for the 100% subset that CC and qwen-code
+two libraries agree on output for the 100% subset that CC and lailatul-coder
 actually use (key-value pairs, lists, nested maps, scalar booleans/numbers).
 Track that decision separately if it comes up.
 
@@ -95,8 +95,8 @@ findings:
 | Failure fallthrough | Both passes failed → log via `logForDebugging`, return `{ data: {}, content: text }`. Agent loads with empty frontmatter. | end of function **C**                                                                                         |
 | Telemetry           | Wrapped further upstream — `tengu_frontmatter_shadow_unknown_key` / `_mismatch` events fire from `ug5.agent` (Ig5 schema) | `claude.strings:308120`, `309074`, `309076` (cross-cited in `docs/design/declarative-agents-port.md` Phase 1) |
 
-**Implication for qwen-code**: we do NOT need to clone the 2-pass recovery.
-qwen-code's `subagent-manager.ts` already enforces stricter "throw on malformed
+**Implication for lailatul-coder**: we do NOT need to clone the 2-pass recovery.
+lailatul-coder's `subagent-manager.ts` already enforces stricter "throw on malformed
 frontmatter at top level" semantics for its loader (see `parseSubagentContent`),
 and the 2-pass recovery is specifically there to forgive old hand-edited CC
 agent files. Porting a stricter posture is fine; we just need to **not crash
@@ -125,13 +125,13 @@ mcpServers: z.union([
 | `"stdio"`          | `command: string`, `args?: string[]` | Plus `env?: Record<string,string>`, `cwd?: string` |
 | `"sse"`            | `url: string`                        | Plus `headers?: Record<string,string>`             |
 | `"http"`           | `url: string`                        | Plus `headers?`, `method?`                         |
-| `"websocket"`      | `url: string`                        | qwen-code parity unknown — defer until needed      |
+| `"websocket"`      | `url: string`                        | lailatul-coder parity unknown — defer until needed      |
 | `"sdk"`            | varies                               | Internal CC use; we do NOT need to support         |
 | `"claudeai-proxy"` | varies                               | Internal CC use; we do NOT need to support         |
 
-**For qwen-code v1**: validate as `Record<string, unknown>` (lenient
+**For lailatul-coder v1**: validate as `Record<string, unknown>` (lenient
 DL7-style), and let the downstream merge into `Config.getMcpServers()` do the
-shape coercion. `qwen-code` already has `MCPServerConfig` class with
+shape coercion. `lailatul-coder` already has `MCPServerConfig` class with
 `type` discrimination — we reuse that converter instead of duplicating the
 zod schema. See Phase 4 of the runtime-wiring plan in
 `docs/design/declarative-agents-port.md`.
@@ -148,14 +148,14 @@ HookConfig (discriminated union on `type`):
   - { type: 'http',    url: string, headers?, ... }
 ```
 
-The hook-event keys per the strings cross-check are the same set qwen-code
+The hook-event keys per the strings cross-check are the same set lailatul-coder
 already supports: `PreToolUse`, `PostToolUse`, `UserPromptSubmit`,
 `SessionStart`, `SessionEnd`, `Stop`, `SubagentStart`, `SubagentStop`,
 `Notification` — plus a few qwen-only events (`TodoCreated`, `TodoCompleted`)
 that CC does not have.
 
-**For qwen-code v1**: validate as `Record<string, unknown>` (lenient), then
-hand off to qwen-code's existing `SessionHooksManager` validators, which
+**For lailatul-coder v1**: validate as `Record<string, unknown>` (lenient), then
+hand off to lailatul-coder's existing `SessionHooksManager` validators, which
 already implement the `HookDefinition[]` per-event shape (see
 `packages/core/src/hooks/types.ts:207–211` per the Phase-1 runtime mapping).
 
@@ -172,7 +172,7 @@ every inline mcpServers spec. The real validation is delegated to:
   `DL7` per-item `safeParse`
 - `TKO` (for `hooks`) — called **at hook firing time** from `_u().safeParse`
 
-This **lazy validation** is the model qwen-code should mimic: keep the
+This **lazy validation** is the model lailatul-coder should mimic: keep the
 frontmatter parser permissive (`z.unknown()` equivalent in TS), validate at
 the point of use. Trying to bring the full zod tree forward into
 `SubagentConfig` would force us to also import qwen's `MCPServerConfig` class
@@ -182,7 +182,7 @@ would require us to invent fake validators for `type: 'sdk'` /
 
 ## Phase 4 — Security posture
 
-Empirical verification of `yaml@2.8.1` defaults in this qwen-code tree:
+Empirical verification of `yaml@2.8.1` defaults in this lailatul-coder tree:
 
 ### Probe results
 
@@ -235,7 +235,7 @@ object/array. **C**
 
 ### Safety summary
 
-| Vector                         | `yaml@2.8.1` default              | Action needed in qwen-code                             |
+| Vector                         | `yaml@2.8.1` default              | Action needed in lailatul-coder                             |
 | ------------------------------ | --------------------------------- | ------------------------------------------------------ |
 | Arbitrary JS execution         | Impossible — no eval              | None                                                   |
 | `!!js/function` tag            | Becomes literal string + warning  | None                                                   |
@@ -259,7 +259,7 @@ CC chooses **graceful warn-and-drop** at every layer:
    string when the schema wants an object) → per-item `safeParse` drops just
    that item, keeps the rest
 
-qwen-code already implements the per-field warn-and-drop posture for
+lailatul-coder already implements the per-field warn-and-drop posture for
 `permissionMode`, `maxTurns`, `color`, `effort` (see
 `packages/core/src/subagents/agent-frontmatter-schema.ts`). We extend the same
 pattern to `mcpServers` and `hooks`.
@@ -267,12 +267,12 @@ pattern to `mcpServers` and `hooks`.
 What we DO NOT clone from CC:
 
 - **2-pass YAML recovery with auto-quoting**. This is dead weight for
-  qwen-code — we're a new project, no legacy hand-edited frontmatter files
+  lailatul-coder — we're a new project, no legacy hand-edited frontmatter files
   to forgive. A clean error is more useful than a guessed reinterpretation.
-- **`tengu_*` telemetry events**. Replaced by qwen-code's own logger /
+- **`tengu_*` telemetry events**. Replaced by lailatul-coder's own logger /
   whatever telemetry layer the rest of the loader uses.
 
-## Phase 6 — Recommendation for qwen-code
+## Phase 6 — Recommendation for lailatul-coder
 
 ### Library choice
 
@@ -475,11 +475,11 @@ from the existing test suites in `packages/core/src/subagents/`,
 
 | #   | Question                                                                                                                                              | Blocking?                                                               | Resolution path                                                                                                                                                         |
 | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Q1  | Does `yaml.parse` need an explicit logger to redirect `YAMLWarning` (e.g., `Unresolved tag`) to qwen-code's logger instead of `process.emitWarning`?  | No — defer                                                              | If logs get noisy in CI, plumb `{ logLevel: 'silent' }` or a custom `onWarning` callback. Not load-bearing for v1.                                                      |
+| Q1  | Does `yaml.parse` need an explicit logger to redirect `YAMLWarning` (e.g., `Unresolved tag`) to lailatul-coder's logger instead of `process.emitWarning`?  | No — defer                                                              | If logs get noisy in CI, plumb `{ logLevel: 'silent' }` or a custom `onWarning` callback. Not load-bearing for v1.                                                      |
 | Q2  | Should `parse()` continue to return `{}` for empty-string / null-document YAML, or throw?                                                             | No — preserve current behavior                                          | Current hand-rolled returns `{}`; we keep that. Add a regression test pinning the choice.                                                                               |
 | Q3  | When `mcpServers` is malformed at the top level (e.g., `mcpServers: "string"`), should the whole agent fail to load, or load with that field dropped? | Yes — drives the warn-and-drop posture in Phase 3 of the implementation | **Resolution**: drop the field, emit a console warning (parity with CC `DL7` per Phase 3 of `docs/design/declarative-agents-port.md`).                                  |
 | Q4  | Same as Q3 but for `hooks`: drop the field, the event, or just the individual matcher?                                                                | Yes — drives the warn-and-drop posture                                  | **Resolution**: drop the whole `hooks` field on top-level shape failure. Per-event / per-matcher granularity is deferred to a future PR if a real user surfaces a need. |
-| Q5  | Does the `Bun.YAML.parse` shortcut from CC's helper apply to qwen-code?                                                                               | No                                                                      | qwen-code does not target Bun runtime. Skip.                                                                                                                            |
+| Q5  | Does the `Bun.YAML.parse` shortcut from CC's helper apply to lailatul-coder?                                                                               | No                                                                      | lailatul-coder does not target Bun runtime. Skip.                                                                                                                            |
 
 ---
 

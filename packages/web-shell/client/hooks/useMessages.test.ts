@@ -7,7 +7,7 @@ import {
   DaemonHttpError,
   type DaemonStatusTranscriptBlock,
   type DaemonTranscriptBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   type BackgroundAgentResolution,
   getBackgroundAgentNotificationKey,
@@ -34,7 +34,7 @@ const hookState = vi.hoisted(() => {
   };
 });
 
-vi.mock('@qwen-code/webui/daemon-react-sdk', () => ({
+vi.mock('@lailatul-coder/webui/daemon-react-sdk', () => ({
   useConnection: () => hookState.connection,
   useTranscriptBlocks: () => hookState.blocks,
   useWorkspace: () => ({ client: hookState.client }),

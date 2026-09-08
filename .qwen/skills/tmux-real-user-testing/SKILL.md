@@ -5,7 +5,7 @@ description: This skill should be used when the user asks to "用 tmux 做真实
 
 # tmux Real User Testing
 
-Run Qwen Code in a real tmux TUI session as a user would: navigate dialogs,
+Run LailatulCoder Ai in a real tmux TUI session as a user would: navigate dialogs,
 trigger slash commands, exercise workflows, and save a readable log that
 maintainers can review. Prefer this workflow when the goal is not just a pass/fail
 assertion, but a narrative artifact showing what happened on screen.

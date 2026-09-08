@@ -344,7 +344,7 @@ function resolveStreamGuardMs(
     }
     // eslint-disable-next-line no-console
     console.warn(
-      `[qwen-code] Ignoring out-of-range ${configLabel}=${fromConfig} ` +
+      `[lailatul-coder] Ignoring out-of-range ${configLabel}=${fromConfig} ` +
         `(expected an integer in (-∞, ${MAX_STREAM_GUARD_TIMEOUT_MS}]); ` +
         `falling back to ${envName}/default.`,
     );
@@ -363,7 +363,7 @@ function resolveStreamGuardMs(
     }
     // eslint-disable-next-line no-console
     console.warn(
-      `[qwen-code] Ignoring invalid ${envName}="${raw}" ` +
+      `[lailatul-coder] Ignoring invalid ${envName}="${raw}" ` +
         `(expected an integer of milliseconds in [0, ${MAX_STREAM_GUARD_TIMEOUT_MS}]); ` +
         `using default ${defaultMs}ms.`,
     );
@@ -1552,7 +1552,7 @@ export class ContentGenerationPipeline {
         // `role: "tool"` messages, so tool-returned media (e.g. an image read
         // by read_file) embedded there is silently dropped or rejected by
         // strict providers (doubao / new-api / LM Studio) and the model never
-        // sees it (QwenLM/qwen-code#4876). Splitting it into a follow-up user
+        // sees it (LailatulCoder/lailatul-coder#4876). Splitting it into a follow-up user
         // message is spec-compliant and safe for permissive providers too.
         // Opt out via generationConfig.splitToolMedia = false.
         true,

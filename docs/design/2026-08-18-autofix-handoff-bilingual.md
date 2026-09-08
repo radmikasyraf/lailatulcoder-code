@@ -41,7 +41,7 @@ English first.
    `.github/scripts/run-autofix-review-verification.sh`; static reason
    sentence + untranslatable log evidence), fenced by
    `<!-- autofix-gate-rejection-start/end -->`.
-4. Footer: Run log link, `🧠 Handled by Qwen Code` signature, and the
+4. Footer: Run log link, `🧠 Handled by LailatulCoder Ai` signature, and the
    `autofix-eval` / `autofix-growth-now` / `autofix-redcheck` markers. The
    next scan parses these markers out of the raw comment body.
 

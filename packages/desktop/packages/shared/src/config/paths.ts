@@ -1,5 +1,5 @@
 /**
- * Centralized path configuration for Qwen Code.
+ * Centralized path configuration for LailatulCoder Ai.
  *
  * Supports multi-instance development via CRAFT_CONFIG_DIR environment variable.
  * When running from a numbered folder (e.g., craft-tui-agent-1), the detect-instance.sh

@@ -163,13 +163,13 @@ describe('plan-diff', () => {
       out,
       maxChunkLines: 400,
       pr: 6998,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       host: 'ghe.example.com',
     });
 
     const plan = JSON.parse(readFileSync(out, 'utf8'));
     expect(plan.prNumber).toBe('6998');
-    expect(plan.ownerRepo).toBe('QwenLM/qwen-code');
+    expect(plan.ownerRepo).toBe('LailatulCoder/lailatul-coder');
     // The host rides along — Agent 0's welded issue-context command routes
     // at it (a lightweight run has no fetch-pr to carry it otherwise).
     expect(plan.host).toBe('ghe.example.com');
@@ -186,7 +186,7 @@ describe('plan-diff', () => {
       out,
       maxChunkLines: 400,
       pr: 6998,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
     expect(JSON.parse(readFileSync(out, 'utf8')).host).toBeUndefined();
 
@@ -198,7 +198,7 @@ describe('plan-diff', () => {
       out,
       maxChunkLines: 400,
       pr: 6998,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       host: 'ghe.example.com; touch /tmp/pwned',
     });
     expect(process.exitCode).toBe(2);

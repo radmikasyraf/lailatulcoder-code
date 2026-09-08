@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 import { MCPManagementDialog } from './MCPManagementDialog.js';
 import { renderWithProviders } from '../../../test-utils/render.js';
 
@@ -36,3 +36,4 @@ describe('MCPManagementDialog', () => {
     expect(lastFrame()).toContain('╮');
   });
 });
+

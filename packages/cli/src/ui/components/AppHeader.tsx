@@ -10,7 +10,7 @@ import {
   AuthType,
   findProviderByCredentials,
   resolveMetadataKey,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { Header, AuthDisplayType } from './Header.js';
 import { Tips } from './Tips.js';
 import { useSettings } from '../contexts/SettingsContext.js';
@@ -88,3 +88,4 @@ export const AppHeader = ({ version }: AppHeaderProps) => {
     </Box>
   );
 };
+

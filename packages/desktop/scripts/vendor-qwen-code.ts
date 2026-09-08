@@ -13,8 +13,8 @@ import { join, resolve } from 'node:path';
 const desktopRoot = join(import.meta.dir, '..');
 const defaultRepoRoot = join(desktopRoot, '..', '..');
 const electronDir = join(desktopRoot, 'apps', 'electron');
-const vendorDir = join(electronDir, 'vendor', 'qwen-code');
-const qwenCodePackageName = '@qwen-code/qwen-code';
+const vendorDir = join(electronDir, 'vendor', 'lailatul-coder');
+const qwenCodePackageName = '@lailatul-coder/lailatul-coder';
 const qwenCodeMetadataUrl = `https://registry.npmjs.org/${encodeURIComponent(qwenCodePackageName)}`;
 
 interface DesktopPackageJson {
@@ -87,7 +87,7 @@ function verifyVendoredCli(): void {
   const hasDistCli = existsSync(join(vendorDir, 'dist', 'cli.js'));
   if (!hasRootCli && !hasDistCli) {
     throw new Error(
-      `Qwen Code CLI not found in ${vendorDir}. Expected cli.js or dist/cli.js.`,
+      `LailatulCoder Ai CLI not found in ${vendorDir}. Expected cli.js or dist/cli.js.`,
     );
   }
 }
@@ -95,11 +95,11 @@ function verifyVendoredCli(): void {
 async function vendorLocalCheckout(repoRoot: string): Promise<void> {
   if (!isQwenSourceRoot(repoRoot)) {
     throw new Error(
-      `Qwen Code source checkout not found at ${repoRoot}. Set QWEN_CODE_VERSION, QWEN_CODE_TARBALL, or QWEN_CODE_ROOT.`,
+      `LailatulCoder Ai source checkout not found at ${repoRoot}. Set QWEN_CODE_VERSION, QWEN_CODE_TARBALL, or QWEN_CODE_ROOT.`,
     );
   }
 
-  console.log(`Building Qwen Code CLI from ${repoRoot}...`);
+  console.log(`Building LailatulCoder Ai CLI from ${repoRoot}...`);
 
   const npm = npmCommand();
   await run([npm, 'run', 'build', '--', '--cli-only'], repoRoot);
@@ -109,7 +109,7 @@ async function vendorLocalCheckout(repoRoot: string): Promise<void> {
   const localDistDir = join(repoRoot, 'dist');
   if (!existsSync(join(localDistDir, 'cli.js'))) {
     throw new Error(
-      `Local Qwen Code bundle not found at ${join(localDistDir, 'cli.js')}.`,
+      `Local LailatulCoder Ai bundle not found at ${join(localDistDir, 'cli.js')}.`,
     );
   }
 
@@ -117,7 +117,7 @@ async function vendorLocalCheckout(repoRoot: string): Promise<void> {
   mkdirSync(vendorDir, { recursive: true });
   cpSync(localDistDir, vendorDir, { recursive: true, force: true });
   verifyVendoredCli();
-  console.log(`Vendored local Qwen Code CLI into ${vendorDir}`);
+  console.log(`Vendored local LailatulCoder Ai CLI into ${vendorDir}`);
 }
 
 async function readNpmPackageMetadata(): Promise<NpmPackageMetadata> {
@@ -135,7 +135,7 @@ async function resolveNpmVersionOrTag(
 ): Promise<{ tarballUrl: string; version: string }> {
   const requested = versionOrTag.trim();
   if (!requested) {
-    throw new Error('Qwen Code npm version or dist-tag is required.');
+    throw new Error('LailatulCoder Ai npm version or dist-tag is required.');
   }
 
   const metadata = await readNpmPackageMetadata();
@@ -162,10 +162,10 @@ async function vendorNpmVersion(versionOrTag: string): Promise<void> {
   const { tarballUrl, version } = await resolveNpmVersionOrTag(versionOrTag);
   const sourceLabel =
     versionOrTag === version ? version : `${versionOrTag} (${version})`;
-  console.log(`Downloading Qwen Code ${sourceLabel} from npm...`);
+  console.log(`Downloading LailatulCoder Ai ${sourceLabel} from npm...`);
 
-  const tempDir = mkdtempSync(join(tmpdir(), 'qwen-code-vendor-'));
-  const tarballPath = join(tempDir, `qwen-code-${version}.tgz`);
+  const tempDir = mkdtempSync(join(tmpdir(), 'lailatul-coder-vendor-'));
+  const tarballPath = join(tempDir, `lailatul-coder-${version}.tgz`);
 
   try {
     const response = await fetch(tarballUrl);
@@ -195,10 +195,10 @@ async function vendorNpmVersion(versionOrTag: string): Promise<void> {
 async function vendorTarball(tarballPath: string): Promise<void> {
   const source = resolve(tarballPath);
   if (!existsSync(source)) {
-    throw new Error(`Qwen Code tarball not found: ${source}`);
+    throw new Error(`LailatulCoder Ai tarball not found: ${source}`);
   }
 
-  console.log(`Vendoring Qwen Code from tarball ${source}...`);
+  console.log(`Vendoring LailatulCoder Ai from tarball ${source}...`);
 
   rmSync(vendorDir, { recursive: true, force: true });
   mkdirSync(vendorDir, { recursive: true });
@@ -210,7 +210,7 @@ async function vendorTarball(tarballPath: string): Promise<void> {
   );
 
   verifyVendoredCli();
-  console.log(`Vendored Qwen Code tarball into ${vendorDir}`);
+  console.log(`Vendored LailatulCoder Ai tarball into ${vendorDir}`);
 }
 
 async function main(): Promise<void> {

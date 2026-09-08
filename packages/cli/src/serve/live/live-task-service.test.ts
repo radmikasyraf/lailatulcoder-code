@@ -6,12 +6,12 @@
 
 import path from 'node:path';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { SessionNotFoundError } from '@qwen-code/acp-bridge/bridgeErrors';
-import { LIVE_TASK_TOOL_NAMES } from '@qwen-code/acp-bridge/bridgeOptions';
+import { SessionNotFoundError } from '@lailatul-coder/acp-bridge/bridgeErrors';
+import { LIVE_TASK_TOOL_NAMES } from '@lailatul-coder/acp-bridge/bridgeOptions';
 import type {
   AcpSessionBridge,
   BridgeSessionSummary,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 import type {
   WorkspaceRegistry,
   WorkspaceRuntime,
@@ -36,9 +36,9 @@ const removeSessionMock = vi.hoisted(() =>
 const removeSessionRuntimeBaseDirs = vi.hoisted(() => new Array<string>());
 const listWorkspaceSessionsForResponse = vi.hoisted(() => vi.fn());
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     SessionService: class {

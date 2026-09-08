@@ -62,9 +62,9 @@ async function testBootstrapWorkspaceVisibility() {
     path.join(packageDir, 'bootstrap', 'index.html'),
     'utf8',
   );
-  assert.match(bootstrapHtml, /class="mark" src="qwen-code-logo\.svg"/);
+  assert.match(bootstrapHtml, /class="mark" src="lailatul-coder-logo\.svg"/);
   assert.ok(
-    fs.existsSync(path.join(packageDir, 'bootstrap', 'qwen-code-logo.svg')),
+    fs.existsSync(path.join(packageDir, 'bootstrap', 'lailatul-coder-logo.svg')),
     'The bootstrap splash mark must ship with the frontendDist directory.',
   );
   assert.doesNotMatch(bootstrapHtml, /class="mark">Q</);
@@ -98,7 +98,7 @@ async function testBootstrapWorkspaceVisibility() {
   const { body, commands, element, listeners, resolveBootstrapState } = primary;
 
   listeners['runtime-starting']({
-    payload: '/Users/example/Projects/qwen-code',
+    payload: '/Users/example/Projects/lailatul-coder',
   });
   assert.equal(body.dataset.state, 'starting');
   assert.equal(element('#workspace').hidden, true);
@@ -108,7 +108,7 @@ async function testBootstrapWorkspaceVisibility() {
   assert.equal(element('#workspace').hidden, false);
   assert.equal(
     element('#workspace').textContent,
-    '/Users/example/Projects/qwen-code',
+    '/Users/example/Projects/lailatul-coder',
   );
   await element('#logs').listeners.click();
   assert.equal(element('#workspace').hidden, false);
@@ -124,7 +124,7 @@ async function testBootstrapWorkspaceVisibility() {
     workspace: '/Users/example/Documents',
   });
   await new Promise((resolve) => setImmediate(resolve));
-  assert.equal(element('#title').textContent, 'Restarting Qwen Code');
+  assert.equal(element('#title').textContent, 'Restarting LailatulCoder Ai');
   assert.equal(
     element('#workspace').hidden,
     true,
@@ -222,8 +222,8 @@ function testLegacyApplicationIdentity() {
       'utf8',
     ),
   );
-  assert.equal(config.productName, 'Qwen Code Desktop');
-  assert.equal(config.identifier, 'com.alibaba.qwen-code');
+  assert.equal(config.productName, 'LailatulCoder Ai Desktop');
+  assert.equal(config.identifier, 'com.alibaba.lailatul-coder');
   assert.equal(
     config.bundle.windows.nsis.installerHooks,
     'windows/electron-migration.nsh',
@@ -236,15 +236,15 @@ function testLegacyApplicationIdentity() {
   assert.match(migrationHook, /!macro NSIS_HOOK_PREINSTALL/);
   assert.match(
     migrationHook,
-    /StrCpy \$R1 \$R1 17\s*\n\s*\$\{If\} \$R0 != ""\s*\n\s*\$\{AndIf\} \$R1 == "Qwen Code Desktop"/,
+    /StrCpy \$R1 \$R1 17\s*\n\s*\$\{If\} \$R0 != ""\s*\n\s*\$\{AndIf\} \$R1 == "LailatulCoder Ai Desktop"/,
   );
   assert.match(
     migrationHook,
-    /\$\{AndIf\} \$\{FileExists\} "\$R0\\Uninstall Qwen Code Desktop\.exe"/,
+    /\$\{AndIf\} \$\{FileExists\} "\$R0\\Uninstall LailatulCoder Ai Desktop\.exe"/,
   );
   assert.match(
     migrationHook,
-    /ExecWait '"\$R0\\Uninstall Qwen Code Desktop\.exe" \/currentuser \/S --updated _\?=\$R0'/,
+    /ExecWait '"\$R0\\Uninstall LailatulCoder Ai Desktop\.exe" \/currentuser \/S --updated _\?=\$R0'/,
   );
   assert.match(migrationHook, /\$\{If\} \$R2 != 0\s*\n\s*Abort/);
 }
@@ -273,10 +273,10 @@ function testElectronBridgeWorkflow() {
     /if \[ "\$ELECTRON_BRIDGE" = 'true' \]; then\s+echo "::error::Electron bridge \$RELEASE_VERSION cannot replace newer stable feed \$current\."\s+exit 1/,
   );
   for (const artifact of [
-    'Qwen-Code-Desktop-arm64.zip',
-    'Qwen-Code-Desktop-x64.zip',
-    'Qwen-Code-Desktop-arm64.dmg',
-    'Qwen-Code-Desktop-x64.dmg',
+    'lailatul-coder-Desktop-arm64.zip',
+    'lailatul-coder-Desktop-x64.zip',
+    'lailatul-coder-Desktop-arm64.dmg',
+    'lailatul-coder-Desktop-x64.dmg',
   ]) {
     assert.match(workflow, new RegExp(artifact.replaceAll('.', '\\.')));
   }
@@ -531,9 +531,9 @@ function testRuntimePreparation(directory) {
 globalThis.fetch = async (url) => {
   const value = String(url);
   const source = value.endsWith('/SHASUMS256.txt')
-    ? process.env.QWEN_TEST_NODE_CHECKSUMS
-    : process.env.QWEN_TEST_NODE_ARCHIVE;
-  fs.appendFileSync(process.env.QWEN_TEST_FETCH_LOG, value + '\\n');
+    ? process.env.lailatulcoder_TEST_NODE_CHECKSUMS
+    : process.env.lailatulcoder_TEST_NODE_ARCHIVE;
+  fs.appendFileSync(process.env.lailatulcoder_TEST_FETCH_LOG, value + '\\n');
   return new Response(fs.readFileSync(source), { status: 200 });
 };
 `,
@@ -565,7 +565,7 @@ globalThis.fetch = async (url) => {
   assert.doesNotMatch(first.stdout, /Using cached Node\.js runtime/);
   assert.ok(fs.existsSync(cachedArchivePath));
   assert.ok(
-    fs.existsSync(path.join(runtimeDir, 'qwen-code', 'checksums.json')),
+    fs.existsSync(path.join(runtimeDir, 'lailatul-coder', 'checksums.json')),
   );
 
   const second = spawnSync(process.execPath, [testScript], {
@@ -598,12 +598,12 @@ globalThis.fetch = async (url) => {
   );
   assert.equal(fs.existsSync(path.join(cacheDir, 'SHASUMS256.txt')), false);
 
-  const marker = path.join(runtimeDir, 'qwen-code', 'complete-marker');
+  const marker = path.join(runtimeDir, 'lailatul-coder', 'complete-marker');
   fs.writeFileSync(marker, 'preserve me');
   const strandedRoot = path.join(runtimeDir, '.prepare-stranded');
   fs.mkdirSync(strandedRoot);
   fs.renameSync(
-    path.join(runtimeDir, 'qwen-code'),
+    path.join(runtimeDir, 'lailatul-coder'),
     path.join(strandedRoot, 'previous'),
   );
   fs.rmSync(path.join(sourceRoot, 'LICENSE'));
@@ -621,8 +621,8 @@ globalThis.fetch = async (url) => {
 
 function testUpdaterMirrorConfiguration() {
   assert.deepEqual(tauriConfig.plugins?.updater?.endpoints, [
-    'https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/desktop/latest/desktop-latest.json',
-    'https://github.com/QwenLM/qwen-code/releases/download/desktop-latest/desktop-latest.json',
+    'https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/desktop/latest/desktop-latest.json',
+    'https://github.com/LailatulCoder/lailatul-coder/releases/download/desktop-latest/desktop-latest.json',
   ]);
   const main = fs.readFileSync(
     path.join(packageDir, 'src-tauri', 'src', 'main.rs'),
@@ -794,10 +794,10 @@ function testUpdateManifest(directory) {
   const assets = path.join(directory, 'assets');
   fs.mkdirSync(assets, { recursive: true });
   const artifacts = [
-    'Qwen-Code-aarch64-apple-darwin.app.tar.gz',
-    'Qwen-Code-x86_64-apple-darwin.app.tar.gz',
-    'Qwen-Code_0.1.0_x64-setup.exe',
-    'Qwen-Code_0.1.0_amd64.AppImage',
+    'lailatul-coder-aarch64-apple-darwin.app.tar.gz',
+    'lailatul-coder-x86_64-apple-darwin.app.tar.gz',
+    'lailatul-coder_0.1.0_x64-setup.exe',
+    'lailatul-coder_0.1.0_amd64.AppImage',
   ];
   for (const artifact of artifacts) {
     assert.ok(
@@ -818,7 +818,7 @@ function testUpdateManifest(directory) {
     '--assets',
     assets,
     '--repository',
-    'QwenLM/qwen-code',
+    'LailatulCoder/lailatul-coder',
     '--tag',
     'desktop-v0.1.0',
     '--version',
@@ -846,7 +846,7 @@ function testUpdateManifest(directory) {
     );
     assert.equal(
       manifest.platforms[platform].url,
-      `https://github.com/QwenLM/qwen-code/releases/download/desktop-v0.1.0/${encodeURIComponent(artifact)}`,
+      `https://github.com/LailatulCoder/lailatul-coder/releases/download/desktop-v0.1.0/${encodeURIComponent(artifact)}`,
     );
   }
 
@@ -855,7 +855,7 @@ function testUpdateManifest(directory) {
     '--assets',
     assets,
     '--repository',
-    'QwenLM/qwen-code',
+    'LailatulCoder/lailatul-coder',
     '--tag',
     'desktop-v0.1.0',
     '--version',
@@ -886,7 +886,7 @@ function testUpdateManifest(directory) {
       '--assets',
       assets,
       '--repository',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       '--tag',
       'desktop-v0.1.0',
       '--version',
@@ -904,17 +904,17 @@ function testElectronBridgeManifest(directory) {
   const assets = path.join(directory, 'assets');
   fs.mkdirSync(assets, { recursive: true });
   const artifacts = [
-    'Qwen-Code-Desktop-arm64.zip',
-    'Qwen-Code-Desktop-x64.zip',
-    'Qwen-Code-Desktop-arm64.dmg',
-    'Qwen-Code-Desktop-x64.dmg',
+    'lailatul-coder-Desktop-arm64.zip',
+    'lailatul-coder-Desktop-x64.zip',
+    'lailatul-coder-Desktop-arm64.dmg',
+    'lailatul-coder-Desktop-x64.dmg',
   ];
   for (const artifact of artifacts) {
     fs.writeFileSync(path.join(assets, artifact), `contents:${artifact}`);
   }
   artifacts.push(
-    'Qwen-Code-Desktop_0.1.0_x64-setup.exe',
-    'Qwen-Code-Desktop_0.1.0_amd64.AppImage',
+    'lailatul-coder-Desktop_0.1.0_x64-setup.exe',
+    'lailatul-coder-Desktop_0.1.0_amd64.AppImage',
   );
   for (const artifact of artifacts.slice(4)) {
     fs.writeFileSync(path.join(assets, artifact), `contents:${artifact}`);
@@ -974,7 +974,7 @@ function testElectronBridgeManifest(directory) {
   }
   const duplicateWindowsArtifact = path.join(
     assets,
-    'Qwen-Code-Desktop_0.1.0_arm64-setup.exe',
+    'lailatul-coder-Desktop_0.1.0_arm64-setup.exe',
   );
   fs.writeFileSync(duplicateWindowsArtifact, 'duplicate');
   const ambiguousWindows = spawnSync(

@@ -456,7 +456,7 @@ import * as nodeFs from 'node:fs';
 import * as nodePath from 'node:path';
 import * as crypto from 'node:crypto';
 import { writeStderrLine } from '../utils/stdioHelpers.js';
-import { Storage } from '@qwen-code/qwen-code-core';
+import { Storage } from '@lailatul-coder/lailatul-coder-core';
 
 function computeDaemonId(pid: number, boundWorkspace: string): string {
   const hash = crypto
@@ -832,7 +832,7 @@ export { updateSymlink } from './utils/symlink.js';
 Then import in `daemonLogger.ts`:
 
 ```ts
-import { Storage, updateSymlink } from '@qwen-code/qwen-code-core';
+import { Storage, updateSymlink } from '@lailatul-coder/lailatul-coder-core';
 ```
 
 (Merge with the existing `Storage` import added in Task 3.)
@@ -1272,7 +1272,7 @@ Edit `runQwenServe.ts`:
 
 ```ts
 import { initDaemonLogger, type DaemonLogger } from './daemonLogger.js';
-import { createSpawnChannelFactory } from '@qwen-code/acp-bridge/spawnChannel';
+import { createSpawnChannelFactory } from '@lailatul-coder/acp-bridge/spawnChannel';
 ```
 
 2. Inside `runQwenServe(opts)`, right after `boundWorkspace` is canonicalized (find the assignment; it's the value passed to `createHttpAcpBridge`):
@@ -1426,7 +1426,7 @@ git commit -m "docs(serve): document daemon log file path and opt-out (#4548)"
 - [ ] **Step 1: Full test sweep**
 
 ```bash
-cd /Users/jinye.djy/Projects/qwen-code/.claude/worktrees/feat-support-daemon-logger
+cd /Users/jinye.djy/Projects/lailatul-coder/.claude/worktrees/feat-support-daemon-logger
 npm run test --workspace=packages/acp-bridge
 npm run test --workspace=packages/cli
 ```
@@ -1479,7 +1479,7 @@ Closes #4548.
 - [x] `packages/cli/src/serve/runQwenServe.test.ts` covers boot banner + flush on shutdown.
 - [x] Manual smoke: log file created at boot, contains shutdown line on SIGTERM.
 
-🤖 Generated with [Qwen Code](https://github.com/QwenLM/qwen-code)
+🤖 Generated with [LailatulCoder Ai](https://github.com/LailatulCoder/lailatul-coder)
 EOF
 )"
 ```
@@ -1492,6 +1492,6 @@ EOF
 
 - **Trace context (§6 bullet)**: deferred. The spec leaves it explicit ("Helper extracted to a shared module ... or duplicated locally — leave to plan"). The current plan does NOT inject trace_id/span_id; that is a follow-up task tracked in §16. If reviewer pushes back, add a Task 4.5 that imports `trace` from `@opentelemetry/api` and folds the span context into `buildDaemonLogLine` — but only if the reviewer asks; YAGNI otherwise.
 
-- **`updateSymlink` import path**: Task 6 step 3 hedges on whether `updateSymlink` is exported from `@qwen-code/qwen-code-core`. Verify before editing: `grep -n updateSymlink packages/core/src/index.ts`. If missing, add the re-export in the same commit as Task 6.
+- **`updateSymlink` import path**: Task 6 step 3 hedges on whether `updateSymlink` is exported from `@lailatul-coder/lailatul-coder-core`. Verify before editing: `grep -n updateSymlink packages/core/src/index.ts`. If missing, add the re-export in the same commit as Task 6.
 
 - **acp-bridge test for `createSpawnChannelFactory`**: spawning a real child in a unit test is brittle. If Task 8 step 2 turns out to be flaky in CI, the fallback is to refactor the inner stderr forwarder into a small exported helper (`forwardChildStderr(stream, { prefix, onLine })`) and unit-test that in isolation — no real spawn needed.

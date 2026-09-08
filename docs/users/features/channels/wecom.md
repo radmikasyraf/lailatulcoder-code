@@ -1,6 +1,6 @@
 # WeCom (Enterprise WeChat)
 
-This guide covers setting up Qwen Code with a WeCom intelligent robot (企业微信智能机器人).
+This guide covers setting up LailatulCoder Ai with a WeCom intelligent robot (企业微信智能机器人).
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ This guide covers setting up Qwen Code with a WeCom intelligent robot (企业微
 3. Copy the Bot ID and Secret.
 4. Add the robot to the direct chats or groups where it should be available.
 
-The intelligent robot uses a WebSocket connection from Qwen Code to WeCom. You do not need a public callback URL, Token, EncodingAESKey, Corp ID, or Agent ID.
+The intelligent robot uses a WebSocket connection from LailatulCoder Ai to WeCom. You do not need a public callback URL, Token, EncodingAESKey, Corp ID, or Agent ID.
 
 ## Configuration
 
@@ -83,9 +83,9 @@ For groups, set `groupPolicy` to `"allowlist"`, `"pairing"`, or `"open"`. Under 
 
 ### Group Mention Compatibility
 
-Earlier Qwen Code versions also applied the generic `requireMention` gate after WeCom delivered a group callback. Because the callback does not include separate mention metadata, `requireMention: true`—including the default value—could reject every delivered group message and make group chat appear nonfunctional.
+Earlier LailatulCoder Ai versions also applied the generic `requireMention` gate after WeCom delivered a group callback. Because the callback does not include separate mention metadata, `requireMention: true`—including the default value—could reject every delivered group message and make group chat appear nonfunctional.
 
-Qwen Code now relies on WeCom's mention-scoped delivery and does not apply a second mention decision. Existing WeCom configurations containing either `requireMention: true` or `requireMention: false` remain valid and do not produce configuration errors. Both values have the same behavior for WeCom, so the field can be removed. Other settings in the same group entry, such as `dispatchMode`, continue to apply. `groupHistoryLimit` remains accepted but cannot collect new WeCom history because unmentioned group messages are not delivered.
+LailatulCoder Ai now relies on WeCom's mention-scoped delivery and does not apply a second mention decision. Existing WeCom configurations containing either `requireMention: true` or `requireMention: false` remain valid and do not produce configuration errors. Both values have the same behavior for WeCom, so the field can be removed. Other settings in the same group entry, such as `dispatchMode`, continue to apply. `groupHistoryLimit` remains accepted but cannot collect new WeCom history because unmentioned group messages are not delivered.
 
 ## Images and Files
 

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -9,7 +9,7 @@ import {
   createDebugLogger,
   type FileHistoryService,
   type TurnDiff,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { HistoryItem, HistoryItemUser } from '../types.js';
 
 type UserTurn = HistoryItem & HistoryItemUser;

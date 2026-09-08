@@ -40,7 +40,7 @@ If you omit `--models`, an interactive model selection dialog appears, letting y
 
 ### What happens when you start
 
-1. **Worktree setup**: Qwen Code creates isolated Git worktrees for each agent at `~/.qwen/arena/<session-id>/worktrees/<model-name>/`. Each worktree mirrors your current working directory state exactly — including staged changes, unstaged changes, and untracked files.
+1. **Worktree setup**: LailatulCoder Ai creates isolated Git worktrees for each agent at `~/.qwen/arena/<session-id>/worktrees/<model-name>/`. Each worktree mirrors your current working directory state exactly — including staged changes, unstaged changes, and untracked files.
 2. **Agent spawning**: Each agent starts in its own worktree with full tool access and its configured model. Agents are launched sequentially but execute in parallel.
 3. **Execution**: All agents work on the task independently with no shared state or communication. You can monitor their progress and interact with any of them.
 4. **Completion**: When all agents finish (or fail), you enter the result comparison phase.
@@ -217,4 +217,4 @@ Explore related approaches for parallel and delegated work:
 
 - **Lightweight delegation**: [Subagents](./sub-agents.md) handle focused subtasks within your session — better when you don't need model comparison
 - **Collaborative execution**: [Multi-Agent Coordination](./multi-agent-coordination.md) uses Agent Team for shared tasks and teammate messaging
-- **Manual parallel sessions**: Run multiple Qwen Code sessions yourself in separate terminals with [Git worktrees](https://git-scm.com/docs/git-worktree) for full manual control
+- **Manual parallel sessions**: Run multiple LailatulCoder Ai sessions yourself in separate terminals with [Git worktrees](https://git-scm.com/docs/git-worktree) for full manual control

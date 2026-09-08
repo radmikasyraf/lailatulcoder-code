@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
 
 /**
  * `available_commands_update` snapshots embed every installed skill's full

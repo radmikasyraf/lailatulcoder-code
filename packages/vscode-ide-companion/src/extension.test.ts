@@ -7,11 +7,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as vscode from 'vscode';
 import { activate } from './extension.js';
-import { IDE_DEFINITIONS, detectIdeFromEnv } from '@qwen-code/qwen-code-core';
+import { IDE_DEFINITIONS, detectIdeFromEnv } from '@lailatul-coder/lailatul-coder-core';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     detectIdeFromEnv: vi.fn(() => actual.IDE_DEFINITIONS.vscode),
@@ -122,11 +122,11 @@ describe('activate', () => {
     } as vscode.Extension<unknown>);
     await activate(context);
     expect(showInformationMessageMock).toHaveBeenCalledWith(
-      'Qwen Code Companion extension successfully installed.',
+      'LailatulCoder Ai Companion extension successfully installed.',
     );
   });
 
-  it('writes production logs to the Qwen Code Companion output channel', async () => {
+  it('writes production logs to the LailatulCoder Ai Companion output channel', async () => {
     const appendLine = vi.fn();
     vi.mocked(vscode.window.createOutputChannel).mockReturnValue({
       appendLine,
@@ -135,12 +135,12 @@ describe('activate', () => {
     await activate(context);
 
     expect(vscode.window.createOutputChannel).toHaveBeenCalledWith(
-      'Qwen Code Companion',
+      'LailatulCoder Ai Companion',
     );
     expect(appendLine).toHaveBeenCalledWith('[INFO] Extension activated');
   });
 
-  it('launches Qwen Code with the full multi-root workspace env', async () => {
+  it('launches LailatulCoder Ai with the full multi-root workspace env', async () => {
     vi.mocked(context.globalState.get).mockReturnValue(true);
     const first = {
       name: 'first',
@@ -166,7 +166,7 @@ describe('activate', () => {
 
     const command = vi
       .mocked(vscode.commands.registerCommand)
-      .mock.calls.find(([id]) => id === 'qwen-code.runQwenCode')?.[1] as
+      .mock.calls.find(([id]) => id === 'lailatul-coder.runQwenCode')?.[1] as
       | (() => Promise<void>)
       | undefined;
     expect(command).toBeDefined();
@@ -208,20 +208,20 @@ describe('activate', () => {
 
     const viewIds = registerCalls.map((call) => call[0]);
 
-    expect(viewIds).toContain('qwen-code.chatView.sidebar');
+    expect(viewIds).toContain('lailatul-coder.chatView.sidebar');
   });
 
-  it('should launch the Qwen Code when the user clicks the button', async () => {
+  it('should launch the LailatulCoder Ai when the user clicks the button', async () => {
     const showInformationMessageMock = vi
       .mocked(vscode.window.showInformationMessage)
-      .mockResolvedValue('Run Qwen Code' as never);
+      .mockResolvedValue('Run LailatulCoder Ai' as never);
     vi.mocked(context.globalState.get).mockReturnValue(undefined);
     vi.mocked(vscode.extensions.getExtension).mockReturnValue({
       packageJSON: { version: '1.1.0' },
     } as vscode.Extension<unknown>);
     await activate(context);
     expect(showInformationMessageMock).toHaveBeenCalledWith(
-      'Qwen Code Companion extension successfully installed.',
+      'LailatulCoder Ai Companion extension successfully installed.',
     );
   });
 
@@ -254,7 +254,7 @@ describe('activate', () => {
       await activate(context);
 
       expect(showInformationMessageMock).toHaveBeenCalledWith(
-        'A new version (1.2.0) of the Qwen Code Companion extension is available.',
+        'A new version (1.2.0) of the LailatulCoder Ai Companion extension is available.',
         'Update to latest version',
       );
     });
@@ -353,7 +353,7 @@ describe('activate', () => {
 
       expect(executeCommandMock).toHaveBeenCalledWith(
         'workbench.extensions.installExtension',
-        'qwenlm.qwen-code-vscode-ide-companion',
+        'LailatulCoder.lailatul-coder-vscode-ide-companion',
       );
     });
 

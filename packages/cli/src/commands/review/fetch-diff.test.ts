@@ -69,7 +69,7 @@ describe('runFetchDiff', () => {
     ghRawMock.mockReturnValue('diff --git a/x b/x\n+one\n+two\n');
     const result = runFetchDiff({
       prNumber: 8981,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: OUT,
     });
     expect(ghRawMock).toHaveBeenCalledWith(
@@ -77,7 +77,7 @@ describe('runFetchDiff', () => {
       'diff',
       '8981',
       '--repo',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
     );
     expect(mkdirSyncMock).toHaveBeenCalledWith(dirname(resolve(OUT)), {
       recursive: true,
@@ -98,7 +98,7 @@ describe('runFetchDiff', () => {
 
   it('keeps a trailing whitespace-only context line (no trim)', () => {
     ghRawMock.mockReturnValue('diff --git a/x b/x\n@@ -1 +1 @@\n ctx\n   \n');
-    runFetchDiff({ prNumber: 1, repo: 'QwenLM/qwen-code', out: OUT });
+    runFetchDiff({ prNumber: 1, repo: 'LailatulCoder/lailatul-coder', out: OUT });
     expect(writeFileSyncMock).toHaveBeenCalledWith(
       resolve(OUT),
       'diff --git a/x b/x\n@@ -1 +1 @@\n ctx\n   \n',
@@ -110,7 +110,7 @@ describe('runFetchDiff', () => {
     ghRawMock.mockReturnValue('');
     const result = runFetchDiff({
       prNumber: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: OUT,
     });
     expect(result.lines).toBe(0);
@@ -134,7 +134,7 @@ describe('fetchDiffCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: OUT,
     });
     expect(process.exitCode).toBeUndefined();
@@ -154,7 +154,7 @@ describe('fetchDiffCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: OUT,
       host: 'ghe.example.com',
     });
@@ -180,7 +180,7 @@ describe('fetchDiffCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: OUT,
     });
     expect(process.exitCode).toBe(1);
@@ -206,7 +206,7 @@ describe('fetchDiffCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 0,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: OUT,
     });
     expect(process.exitCode).toBe(2);
@@ -217,7 +217,7 @@ describe('fetchDiffCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1.5,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: OUT,
     });
     expect(process.exitCode).toBe(2);
@@ -230,7 +230,7 @@ describe('fetchDiffCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: '',
     });
     expect(process.exitCode).toBe(2);
@@ -243,7 +243,7 @@ describe('fetchDiffCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: ' ',
     });
     expect(process.exitCode).toBe(2);
@@ -259,7 +259,7 @@ describe('fetchDiffCommand handler', () => {
       _: [],
       $0: 'qwen',
       pr_number: 1,
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
       out: OUT,
       host: 'bad host; rm -rf /',
     });

@@ -9,8 +9,8 @@ import {
   AskUserQuestionDialog,
   computeHeaderCap,
 } from './AskUserQuestionDialog.js';
-import type { ToolAskUserQuestionConfirmationDetails } from '@qwen-code/qwen-code-core';
-import { ToolConfirmationOutcome } from '@qwen-code/qwen-code-core';
+import type { ToolAskUserQuestionConfirmationDetails } from '@lailatul-coder/lailatul-coder-core';
+import { ToolConfirmationOutcome } from '@lailatul-coder/lailatul-coder-core';
 import { renderWithProviders } from '../../../test-utils/render.js';
 import stripAnsi from 'strip-ansi';
 
@@ -875,3 +875,4 @@ describe('<AskUserQuestionDialog />', () => {
     });
   });
 });
+

@@ -5,7 +5,7 @@ const base = {
     cols: 112,
     rows: 40,
     theme: 'github-dark',
-    title: 'qwen-code skill review',
+    title: 'lailatul-coder skill review',
     cwd: '../../..',
   },
   gif: false,

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 Qwen Code
+ * Copyright 2026 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -49,7 +49,7 @@ describe('updateBeforeRelaunch', () => {
       },
     });
     getInstallationInfo.mockReturnValue({
-      updateCommand: 'npm install -g @qwen-code/qwen-code@latest',
+      updateCommand: 'npm install -g @lailatul-coder/lailatul-coder@latest',
     });
   });
 

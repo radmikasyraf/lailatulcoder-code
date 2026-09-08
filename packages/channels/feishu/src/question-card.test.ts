@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type {
   ChannelUserInputRequestContext,
   ChannelUserQuestion,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import {
   buildQuestionCard,
   buildQuestionTerminalCard,

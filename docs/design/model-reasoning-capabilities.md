@@ -27,7 +27,7 @@ The registered capabilities therefore are:
 
 Sources:
 
-- [Qwen Code and Coding Plan model ids](https://help.aliyun.com/zh/model-studio/qwen-code)
+- [LailatulCoder Ai and Coding Plan model ids](https://help.aliyun.com/zh/model-studio/lailatul-coder)
 - [Thinking modes and defaults](https://help.aliyun.com/zh/model-studio/deep-thinking)
 - [Chat Completions thinking parameters](https://help.aliyun.com/zh/model-studio/qwen-api-via-openai-chat-completions)
 

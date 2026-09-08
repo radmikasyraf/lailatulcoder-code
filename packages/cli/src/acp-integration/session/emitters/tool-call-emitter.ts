@@ -25,11 +25,11 @@ import {
   toolResultBoundaryArtifact,
   ToolNames,
   Kind,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   createTranscriptToolCallResultUpdate,
   createTranscriptToolCallStartUpdate,
-} from '@qwen-code/acp-bridge/transcriptReplay';
+} from '@lailatul-coder/acp-bridge/transcriptReplay';
 import { sanitizeTerminalText } from '../../../ui/utils/textUtils.js';
 import { associateAcpToolResultArtifact } from '../../../utils/tool-result-boundary-diagnostics.js';
 
@@ -295,7 +295,7 @@ export class ToolCallEmitter extends BaseEmitter {
    *   - toolName matches `mcp__<server>__<tool>` → `'mcp'` with
    *     `serverId: <server>`. Naming convention from
    *     `packages/core/src/tools/mcp-tool.ts` in the
-   *     `@qwen-code/qwen-code-core` package — mirrors the SDK's same
+   *     `@lailatul-coder/lailatul-coder-core` package — mirrors the SDK's same
    *     heuristic fallback so SDK consumers stay consistent with
    *     daemon classification.
    *   - everything else → `'builtin'`

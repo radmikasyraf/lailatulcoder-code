@@ -8,8 +8,8 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { PairingStore } from '@qwen-code/channel-base';
-import type { CreatePairingRequestResult } from '@qwen-code/channel-base';
+import { PairingStore } from '@lailatul-coder/channel-base';
+import type { CreatePairingRequestResult } from '@lailatul-coder/channel-base';
 import { pairingListCommand, pairingApproveCommand } from './pairing.js';
 
 vi.mock('../../utils/stdioHelpers.js', () => ({

@@ -25,7 +25,7 @@ import {
   type SessionArchiveState,
   type SubagentLevel,
   IMAGE_CAPABILITY,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 // Import the permission error classes from the same module REST's
 // `sendPermissionVoteError` uses, so `instanceof` matches the class the bridge
 // actually throws (the core re-export is a distinct identity at runtime).
@@ -52,9 +52,9 @@ import {
   REQUESTED_SESSION_ID_META_KEY,
   type BridgeBranchedSession,
   type HttpAcpBridge,
-} from '@qwen-code/acp-bridge/bridgeTypes';
-import { parseSessionSource } from '@qwen-code/acp-bridge';
-import { restoreRetryAfterSeconds } from '@qwen-code/acp-bridge/sessionRestoreTimeout';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
+import { parseSessionSource } from '@lailatul-coder/acp-bridge';
+import { restoreRetryAfterSeconds } from '@lailatul-coder/acp-bridge/sessionRestoreTimeout';
 import {
   isReservedLiveSessionSource,
   isReservedStandaloneSessionSource,
@@ -63,18 +63,18 @@ import {
 import {
   translateAndCheckAbsoluteWorkspacePath,
   canonicalizeWorkspace,
-} from '@qwen-code/acp-bridge/workspacePaths';
-import type { BridgeEvent } from '@qwen-code/acp-bridge/eventBus';
+} from '@lailatul-coder/acp-bridge/workspacePaths';
+import type { BridgeEvent } from '@lailatul-coder/acp-bridge/eventBus';
 import {
   SessionNotFoundError,
   SessionShellClientRequiredError,
   SessionShellDisabledError,
   WorkspaceMismatchError,
-} from '@qwen-code/acp-bridge/bridgeErrors';
+} from '@lailatul-coder/acp-bridge/bridgeErrors';
 import {
   SessionArtifactAuthorizationError,
   SessionArtifactValidationError,
-} from '@qwen-code/acp-bridge/sessionArtifacts';
+} from '@lailatul-coder/acp-bridge/sessionArtifacts';
 import { writeStderrLine } from '../../utils/stdioHelpers.js';
 import { MAX_WORKSPACE_PATH_LENGTH } from '../fs/paths.js';
 import {

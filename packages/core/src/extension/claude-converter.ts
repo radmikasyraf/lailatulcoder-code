@@ -5,7 +5,7 @@
  */
 
 /**
- * Converter for Claude Code plugins to Qwen Code format.
+ * Converter for Claude Code plugins to LailatulCoder Ai format.
  */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -178,9 +178,9 @@ function parseStringOrArray(value: unknown): string[] | undefined {
 }
 
 /**
- * Converts a Claude agent config to Qwen Code subagent format.
+ * Converts a Claude agent config to LailatulCoder Ai subagent format.
  * @param claudeAgent Claude agent configuration
- * @returns Converted agent config compatible with Qwen Code SubagentConfig
+ * @returns Converted agent config compatible with LailatulCoder Ai SubagentConfig
  */
 export function convertClaudeAgentConfig(
   claudeAgent: ClaudeAgentConfig,
@@ -384,7 +384,7 @@ function normalizeClaudeMcpServers(
 }
 
 /**
- * Converts a Claude plugin config to Qwen Code format.
+ * Converts a Claude plugin config to LailatulCoder Ai format.
  * @param claudeConfig Claude plugin configuration
  * @returns Qwen ExtensionConfig
  */
@@ -441,7 +441,7 @@ export function convertClaudeToQwenConfig(
 }
 
 /**
- * Converts a complete Claude plugin package to Qwen Code format.
+ * Converts a complete Claude plugin package to LailatulCoder Ai format.
  * Creates a new temporary directory with:
  * 1. Converted qwen-extension.json
  * 2. Commands, skills, and agents collected to respective folders
@@ -721,7 +721,7 @@ export async function buildQwenExtensionFromPlugin(
 }
 
 /**
- * Converts a standalone Claude plugin to Qwen Code format. A standalone plugin
+ * Converts a standalone Claude plugin to LailatulCoder Ai format. A standalone plugin
  * is a repo whose root holds `.claude-plugin/plugin.json` (no marketplace.json),
  * as produced by installing a Claude Code plugin directly from a git URL.
  *

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -10,7 +10,7 @@ import {
   type SlashCommandActionReturn,
   CommandKind,
 } from './types.js';
-import { generateSessionRecap } from '@qwen-code/qwen-code-core';
+import { generateSessionRecap } from '@lailatul-coder/lailatul-coder-core';
 import type { HistoryItemAwayRecap } from '../types.js';
 import { t } from '../../i18n/index.js';
 

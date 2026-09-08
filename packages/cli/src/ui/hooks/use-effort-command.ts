@@ -5,8 +5,8 @@
  */
 
 import { useState, useCallback } from 'react';
-import type { Config, ReasoningEffort } from '@qwen-code/qwen-code-core';
-import { applyReasoningEffort } from '@qwen-code/qwen-code-core';
+import type { Config, ReasoningEffort } from '@lailatul-coder/lailatul-coder-core';
+import { applyReasoningEffort } from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../../config/settings.js';
 import { getPersistScopeForModelSelection } from '../../config/modelProvidersScope.js';
 import { MessageType, type HistoryItemWithoutId } from '../types.js';

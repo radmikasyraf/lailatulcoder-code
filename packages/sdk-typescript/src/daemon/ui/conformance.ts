@@ -29,7 +29,7 @@
  * ## Usage (in adapter test file)
  *
  * ```ts
- * import { runAdapterConformanceSuite } from '@qwen-code/sdk/daemon';
+ * import { runAdapterConformanceSuite } from '@lailatul-coder/sdk/daemon';
  * import { reduceForTui, renderTuiState } from './my-tui-adapter';
  *
  * const result = runAdapterConformanceSuite({
@@ -351,7 +351,7 @@ export const DAEMON_UI_CONFORMANCE_FIXTURES: readonly DaemonUiConformanceFixture
               title: 'Create issue',
               status: 'completed',
               name: 'mcp__github__create_issue',
-              rawInput: { repo: 'qwen-code', title: 'Bug' },
+              rawInput: { repo: 'lailatul-coder', title: 'Bug' },
             },
           },
         },

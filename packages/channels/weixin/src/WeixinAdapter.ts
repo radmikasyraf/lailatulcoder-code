@@ -1,5 +1,5 @@
 /**
- * WeChat channel adapter for Qwen Code.
+ * WeChat channel adapter for LailatulCoder Ai.
  * Extends ChannelBase with WeChat iLink Bot API integration.
  */
 
@@ -10,14 +10,14 @@ import { tmpdir } from 'node:os';
 import {
   ChannelBase,
   isTerminalTaskLifecycleType,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type {
   ChannelConfig,
   ChannelBaseOptions,
   Envelope,
   ChannelAgentBridge,
   ChannelTaskLifecycleEvent,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { loadAccount, DEFAULT_BASE_URL } from './accounts.js';
 import { startPollLoop, getContextToken } from './monitor.js';
 import type { CdnRef, FileCdnRef } from './monitor.js';

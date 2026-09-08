@@ -20,12 +20,12 @@
 
 export const PREAPPROVED_HOSTS: ReadonlySet<string> = new Set([
   // Qwen ecosystem
-  'qwenlm.github.io',
+  'LailatulCoder.github.io',
   'qwen.readthedocs.io',
-  'github.com/QwenLM',
-  // Matches QwenLM raw files whether requested directly or via a github.com
+  'github.com/LailatulCoder',
+  // Matches LailatulCoder raw files whether requested directly or via a github.com
   // blob URL (the tool rewrites those to this host before fetching).
-  'raw.githubusercontent.com/QwenLM',
+  'raw.githubusercontent.com/LailatulCoder',
   'modelcontextprotocol.io',
 
   // Top programming languages
@@ -150,7 +150,7 @@ const stripWww = (hostname: string): string => hostname.replace(/^www\./, '');
 
 // Split once at module load: O(1) Set lookup for hostname-only entries, plus a
 // small per-host path-prefix list for path-scoped entries like
-// "github.com/QwenLM". Hosts are stored www-stripped; lookups strip too.
+// "github.com/LailatulCoder". Hosts are stored www-stripped; lookups strip too.
 const { HOSTNAME_ONLY, PATH_PREFIXES } = (() => {
   const hosts = new Set<string>();
   const paths = new Map<string, string[]>();
@@ -185,7 +185,7 @@ export function isPreapprovedHost(hostname: string, pathname: string): boolean {
   if (prefixes) {
     const path = pathname.toLowerCase();
     for (const prefix of prefixes) {
-      // Path-segment boundary: "/QwenLM" must not match "/QwenLM-evil/x".
+      // Path-segment boundary: "/LailatulCoder" must not match "/LailatulCoder-evil/x".
       if (path === prefix || path.startsWith(prefix + '/')) {
         return true;
       }

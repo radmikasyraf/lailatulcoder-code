@@ -16,7 +16,7 @@ import type {
   AnsiOutput,
   AnsiOutputDisplay,
   Config,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../../../config/settings.js';
 import { getScreenBuffer } from '../../selection/screen-buffer.js';
 import { getSelectedText } from '../../selection/selection-text.js';
@@ -1872,3 +1872,4 @@ describe('<ToolMessage /> localized badge', () => {
     expect(lastFrame() ?? '').toContain('ReadFile');
   }, 15000);
 });
+

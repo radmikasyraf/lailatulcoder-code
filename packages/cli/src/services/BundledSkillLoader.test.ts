@@ -15,7 +15,7 @@ import {
   buildSkillLlmContent,
   type Config,
   type SkillConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 function makeSkill(overrides: Partial<SkillConfig> = {}): SkillConfig {
   return {
@@ -316,7 +316,7 @@ describe('BundledSkillLoader', () => {
 
   it('should resolve {{model}} template variable in skill body', async () => {
     const skill = makeSkill({
-      body: 'Review by {{model}} via Qwen Code',
+      body: 'Review by {{model}} via LailatulCoder Ai',
     });
     mockSkillManager.listSkills.mockResolvedValue([skill]);
     (mockConfig.getModel as ReturnType<typeof vi.fn>).mockReturnValue(
@@ -335,7 +335,7 @@ describe('BundledSkillLoader', () => {
       content: [
         {
           text: makeSkillPrompt(
-            'YOUR_MODEL_ID="qwen3-coder"\n\nReview by qwen3-coder via Qwen Code',
+            'YOUR_MODEL_ID="qwen3-coder"\n\nReview by qwen3-coder via LailatulCoder Ai',
           ),
         },
       ],
@@ -344,7 +344,7 @@ describe('BundledSkillLoader', () => {
 
   it('should resolve the CLI version template variable in skill body', async () => {
     const skill = makeSkill({
-      body: 'via Qwen Code /review (v{{cliVersion}})',
+      body: 'via LailatulCoder Ai /review (v{{cliVersion}})',
     });
     mockSkillManager.listSkills.mockResolvedValue([skill]);
 
@@ -357,7 +357,7 @@ describe('BundledSkillLoader', () => {
 
     expect(result).toEqual({
       type: 'submit_prompt',
-      content: [{ text: makeSkillPrompt('via Qwen Code /review (v0.21.2)') }],
+      content: [{ text: makeSkillPrompt('via LailatulCoder Ai /review (v0.21.2)') }],
     });
   });
 

@@ -242,7 +242,7 @@ function createOwnedLlmSpan(
     userId?: string;
   },
 ) {
-  const name = 'qwen-code.llm_request';
+  const name = 'lailatul-coder.llm_request';
   const record = {
     name,
     attributes: {
@@ -371,20 +371,20 @@ const createResponse = (
 
 const getStreamSpanRecord = () => {
   const spanRecord = loggingSpanRecords.find(
-    (record) => record.name === 'qwen-code.llm_request',
+    (record) => record.name === 'lailatul-coder.llm_request',
   );
   if (!spanRecord) {
-    throw new Error('qwen-code.llm_request span was not created');
+    throw new Error('lailatul-coder.llm_request span was not created');
   }
   return spanRecord;
 };
 
 const getGenerateContentSpanRecord = () => {
   const spanRecord = loggingSpanRecords.find(
-    (record) => record.name === 'qwen-code.llm_request',
+    (record) => record.name === 'lailatul-coder.llm_request',
   );
   if (!spanRecord) {
-    throw new Error('qwen-code.llm_request span was not created');
+    throw new Error('lailatul-coder.llm_request span was not created');
   }
   return spanRecord;
 };
@@ -558,8 +558,8 @@ describe('LoggingContentGenerator', () => {
         userId: 'stream-user',
       }),
     );
-    expect(iterationContexts).toEqual(['qwen-code.llm_request']);
-    expect(responseLogContexts).toEqual(['qwen-code.llm_request']);
+    expect(iterationContexts).toEqual(['lailatul-coder.llm_request']);
+    expect(responseLogContexts).toEqual(['lailatul-coder.llm_request']);
     expect(logApiRequest).toHaveBeenCalledWith(
       expect.anything(),
       expect.anything(),
@@ -1011,7 +1011,7 @@ describe('LoggingContentGenerator', () => {
 
   it('does not emit an api_error event when the user cancelled the request', async () => {
     // A user cancel surfaces as the SDK's APIUserAbortError with the caller's
-    // signal aborted. It must not be reported as a qwen-code.api_error — the
+    // signal aborted. It must not be reported as a lailatul-coder.api_error — the
     // span already records the cancellation. Regression for #8356 at the layer
     // the bug is about: the util-level isAbortError fix alone does not gate this
     // separate telemetry path.
@@ -2088,7 +2088,7 @@ describe('LoggingContentGenerator', () => {
       // Consume stream to trigger cleanup.
     }
 
-    expect(activeContextDuringWrappedCall).toBe('qwen-code.llm_request');
+    expect(activeContextDuringWrappedCall).toBe('lailatul-coder.llm_request');
   });
 
   it('logs stream setup errors before leaving the stream span context', async () => {
@@ -2119,7 +2119,7 @@ describe('LoggingContentGenerator', () => {
     ).rejects.toThrow('setup-fail');
 
     expect(logApiError).toHaveBeenCalledTimes(1);
-    expect(activeContextDuringApiError).toBe('qwen-code.llm_request');
+    expect(activeContextDuringApiError).toBe('lailatul-coder.llm_request');
     expect(spanEndedDuringApiError).toBe(false);
 
     const spanRecord = getStreamSpanRecord();
@@ -2751,7 +2751,7 @@ describe('LoggingContentGenerator', () => {
   });
 
   it('preserves stream errors when the error status update fails', async () => {
-    loggingSpanNamesWithSetStatusFailure.add('qwen-code.llm_request');
+    loggingSpanNamesWithSetStatusFailure.add('lailatul-coder.llm_request');
     const response1 = createResponse('resp-1', 'model-stream', [
       { text: 'partial' },
     ]);
@@ -3630,7 +3630,7 @@ describe('LoggingContentGenerator — Phase 4b retry context propagation', () =>
 
     // Find the span that was ended by the idle timeout
     const records = loggingSpanRecords.filter(
-      (r) => r.name === 'qwen-code.llm_request' && r.endMetadata !== undefined,
+      (r) => r.name === 'lailatul-coder.llm_request' && r.endMetadata !== undefined,
     );
     const timeoutRecord = records.find(
       (r) => r.endMetadata?.error === 'Stream span timed out (idle)',

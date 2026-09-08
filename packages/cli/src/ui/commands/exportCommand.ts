@@ -16,7 +16,7 @@ import {
   createDebugLogger,
   isSubpath,
   SessionService,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   collectSessionData,
   normalizeSessionData,

@@ -38,7 +38,7 @@ const SERVE_BRIDGE_SOURCE = path.join(
   'bin.ts',
 );
 const ECHO_TOOL = 'mcp__invocation-echo__capture_invocation_context';
-const INVOCATION_META_KEY = 'qwen-code/invocation';
+const INVOCATION_META_KEY = 'lailatul-coder/invocation';
 const PROMPT_SENTINEL = 'CAPTURE_DAEMON_INVOCATION_CONTEXT';
 const FINAL_ASSISTANT_TEXT = 'INVOCATION_CONTEXT_CAPTURED';
 const UUID_PATTERN =

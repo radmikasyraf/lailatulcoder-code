@@ -23,7 +23,7 @@ import {
   type DaemonSessionActions,
   type DaemonStreamingState,
   type DaemonWorkspaceActions,
-} from '@qwen-code/webui/daemon-react-sdk';
+} from '@lailatul-coder/webui/daemon-react-sdk';
 import type {
   DaemonInputAnnotation,
   DaemonMidTurnMessagesResult,
@@ -31,7 +31,7 @@ import type {
   DaemonSessionAttachmentReference,
   DaemonTranscriptStore,
   PromptContentBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import type { PromptFile, PromptImage } from '../adapters/promptTypes';
 import type { EditorHandle } from './useComposerCore';
 import { removeInjectedFromQueue } from '../midTurnDedup';

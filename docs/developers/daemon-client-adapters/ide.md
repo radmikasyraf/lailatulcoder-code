@@ -15,9 +15,9 @@ VS Code settings:
 
 ```json
 {
-  "qwen-code.experimentalDaemon.enabled": true,
-  "qwen-code.experimentalDaemon.url": "http://127.0.0.1:4170",
-  "qwen-code.experimentalDaemon.token": ""
+  "lailatul-coder.experimentalDaemon.enabled": true,
+  "lailatul-coder.experimentalDaemon.url": "http://127.0.0.1:4170",
+  "lailatul-coder.experimentalDaemon.token": ""
 }
 ```
 

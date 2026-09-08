@@ -45,7 +45,7 @@ be updated alongside the docs themselves:
 - `.qwen/skills/*/SKILL.md` and `.qwen/skills/*/references/*.md` — Project-
   level skills may hardcode `docs/users/` or `docs/developers/` paths.
   Notable examples: `docs-update-from-diff`, `docs-audit-and-refresh`,
-  `qwen-code-claw`.
+  `lailatul-coder-claw`.
 - Source code comments in `packages/cli/src/` and `packages/core/src/`
   occasionally reference doc paths as contracts between code behavior and
   documentation. These are low-risk but should stay accurate.

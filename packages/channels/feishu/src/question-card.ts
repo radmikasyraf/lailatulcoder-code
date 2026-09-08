@@ -1,7 +1,7 @@
 import type {
   ChannelUserInputRequestContext,
   ChannelUserQuestion,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 export type FeishuQuestionTerminalState =
   | 'processing'

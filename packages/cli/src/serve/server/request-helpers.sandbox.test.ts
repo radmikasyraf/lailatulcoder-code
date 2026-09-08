@@ -6,7 +6,7 @@
 
 import type { Response } from 'express';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { _setSandboxMountExistsForTest } from '@qwen-code/acp-bridge/workspacePaths';
+import { _setSandboxMountExistsForTest } from '@lailatul-coder/acp-bridge/workspacePaths';
 import { parseOptionalWorkspaceCwd } from './request-helpers.js';
 
 // Regression for the #7228 review finding: every workspace-ingestion path
@@ -32,7 +32,7 @@ describe('parseOptionalWorkspaceCwd inside a POSIX container sandbox (#7139)', (
   it.skipIf(process.platform === 'win32')(
     'accepts a Windows-shaped cwd and returns its bind-mount location',
     () => {
-      vi.stubEnv('SANDBOX', 'qwen-code-sandbox-0');
+      vi.stubEnv('SANDBOX', 'lailatul-coder-sandbox-0');
       _setSandboxMountExistsForTest((p) => p === '/c/qwen-repro');
       const { res, status } = mockRes();
       const cwd = parseOptionalWorkspaceCwd(
@@ -63,7 +63,7 @@ describe('parseOptionalWorkspaceCwd inside a POSIX container sandbox (#7139)', (
   it.skipIf(process.platform === 'win32')(
     'rejects when the translated mount does not exist (no invented paths)',
     () => {
-      vi.stubEnv('SANDBOX', 'qwen-code-sandbox-0');
+      vi.stubEnv('SANDBOX', 'lailatul-coder-sandbox-0');
       const { res, status } = mockRes();
       const cwd = parseOptionalWorkspaceCwd(
         { cwd: 'D:\\never-mounted' },

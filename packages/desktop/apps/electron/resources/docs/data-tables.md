@@ -4,7 +4,7 @@ This guide covers how to present structured data using datatable and spreadsheet
 
 ## Overview
 
-Qwen Code supports three ways to display tabular data:
+LailatulCoder Ai supports three ways to display tabular data:
 
 | Format | Best For | Interactivity |
 |--------|----------|---------------|

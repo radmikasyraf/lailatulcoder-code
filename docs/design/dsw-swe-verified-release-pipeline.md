@@ -49,7 +49,7 @@ PR #7584.
 - Model credential: `/mnt/workspace/qwen-benchmark-dsw-release-v1/config/model.key`
   (`root:github-runner`, mode `0640`)
 - OSS: `/mnt/data/qwen-benchmark/dsw-release-v1`
-- Release markers: `qwen-code-dsw-swe-verified`
+- Release markers: `lailatul-coder-dsw-swe-verified`
 
 Docker image layers may use the DSW host cache, but experiment state and
 artifacts do not share paths or tables with another benchmark pipeline.
@@ -78,13 +78,13 @@ for the benchmark duration.
 - Dispatch / pool submit: one-shot run and task creator.
 - PostgreSQL: shared persistent state store, not the scheduler.
 - Coordinator: expired-lease recovery, run reconciliation, and completion gate.
-- Executors: task claim, Harbor/Qwen Code/grader execution, heartbeat, and
+- Executors: task claim, Harbor/LailatulCoder Ai/grader execution, heartbeat, and
   outcome submission.
 - Publisher: terminal-run validation, public result and trajectory bundle
   generation, and active GitHub Release writeback.
 
 The DSW implementation is maintained separately in the internal
-`qwen-code-benchmark-dsw` repository. This PR contains only the GitHub trigger,
+`lailatul-coder-benchmark-dsw` repository. This PR contains only the GitHub trigger,
 manifest, dispatch adapter, and public design contract.
 
 ## Full-suite validation
@@ -97,7 +97,7 @@ The isolated prerelease validation completed on 2026-07-25:
 - Pool run: `pool-31a24bc8acca49d2`
 - Dataset: `swe-bench/swe-bench-verified@2`, 500 frozen instances
 - Execution: 10 persistent Executors, at most two attempts per instance
-- Qwen Code: `v0.20.0-nightly.20260722.b98306b7e`
+- LailatulCoder Ai: `v0.20.0-nightly.20260722.b98306b7e`
 - Model: `qwen3.7-max`
 - Wall time: approximately 12 hours 27 minutes
 - Results: 332 `RESOLVED`, 107 `UNRESOLVED`, 56 `EXECUTION_ERROR`,
@@ -109,9 +109,9 @@ The isolated prerelease validation completed on 2026-07-25:
 
 Evidence:
 
-- https://github.com/QwenLM/qwen-code/releases/tag/dsw-swe-full-async-poc-20260724-2c5ad4a5d0-r3
-- https://github.com/QwenLM/qwen-code/actions/runs/30079405895
-- https://github.com/QwenLM/qwen-code/releases/download/dsw-swe-full-async-poc-20260724-2c5ad4a5d0-r3/swe-bench-verified-dsw-swe-full-async-poc-20260724-2c5ad4a5d0-r3.json
+- https://github.com/LailatulCoder/lailatul-coder/releases/tag/dsw-swe-full-async-poc-20260724-2c5ad4a5d0-r3
+- https://github.com/LailatulCoder/lailatul-coder/actions/runs/30079405895
+- https://github.com/LailatulCoder/lailatul-coder/releases/download/dsw-swe-full-async-poc-20260724-2c5ad4a5d0-r3/swe-bench-verified-dsw-swe-full-async-poc-20260724-2c5ad4a5d0-r3.json
 
 The full chain was validated, including asynchronous dispatch, task-pool
 execution, strict quarantine, and Publisher writeback. The run is not an

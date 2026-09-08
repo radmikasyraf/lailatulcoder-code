@@ -52,7 +52,7 @@ expand/collapse control already used for edited files.
 
 ## Adjustments after #9385 triage
 
-Upstream analysis (QwenLM/qwen-code@main) confirmed the original
+Upstream analysis (LailatulCoder/lailatul-coder@main) confirmed the original
 decision. Keep store-side expansion, `kind: document`, and the 3-card
 collapse. Fine-tune the landing, do not change the product rule.
 

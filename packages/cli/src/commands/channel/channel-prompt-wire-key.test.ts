@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { CHANNEL_PROMPT_META_KEY } from '@qwen-code/channel-base';
-import { CHANNEL_PROMPT_META_KEY as BRIDGE_CHANNEL_PROMPT_META_KEY } from '@qwen-code/acp-bridge/bridgeTypes';
+import { CHANNEL_PROMPT_META_KEY } from '@lailatul-coder/channel-base';
+import { CHANNEL_PROMPT_META_KEY as BRIDGE_CHANNEL_PROMPT_META_KEY } from '@lailatul-coder/acp-bridge/bridgeTypes';
 
 // The channel bridges write the channel-turn classification under the
 // channel-base key and the daemon-side strip/re-injection reads it under

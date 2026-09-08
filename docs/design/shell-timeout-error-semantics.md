@@ -54,7 +54,7 @@ Microcompaction continues to leave failed tool results untouched. Full chat comp
 
 ## Claude Code comparison
 
-Claude Code treats a command timeout as a failed tool result, retains output produced before termination for the model and user, and marks the tool result as an error in the Anthropic protocol. This design adopts those observable properties while keeping qwen-code's existing `ToolResult` shape and telemetry conventions. It does not copy command output into the short operational error channel.
+Claude Code treats a command timeout as a failed tool result, retains output produced before termination for the model and user, and marks the tool result as an error in the Anthropic protocol. This design adopts those observable properties while keeping lailatul-coder's existing `ToolResult` shape and telemetry conventions. It does not copy command output into the short operational error channel.
 
 ## Compatibility and observability
 

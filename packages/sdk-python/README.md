@@ -1,18 +1,18 @@
-# qwen-code-sdk
+# lailatul-coder-sdk
 
-Experimental Python SDK for programmatic access to Qwen Code through the
+Experimental Python SDK for programmatic access to LailatulCoder Ai through the
 `stream-json` protocol.
 
 ## Installation
 
 ```bash
-pip install qwen-code-sdk
+pip install lailatul-coder-sdk
 ```
 
 For preview releases, enable pre-release resolution:
 
 ```bash
-pip install --pre qwen-code-sdk
+pip install --pre lailatul-coder-sdk
 ```
 
 ## Requirements

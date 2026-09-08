@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { redactLogCredentials } from '@qwen-code/acp-bridge/logRedaction';
-import { sanitizeLogText } from '@qwen-code/channel-base';
+import { redactLogCredentials } from '@lailatul-coder/acp-bridge/logRedaction';
+import { sanitizeLogText } from '@lailatul-coder/channel-base';
 import stripAnsi from 'strip-ansi';
 
 const WORKER_LOG_INVISIBLE_RE = /[\p{Cf}\u2028\u2029]|\p{Variation_Selector}/gu;

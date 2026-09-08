@@ -227,7 +227,7 @@ function createSessionTools(includeDeveloperFeedback: boolean): Tool[] {
 }
 
 // ============================================================
-// Qwen Code Docs Upstream Proxy
+// LailatulCoder Ai Docs Upstream Proxy
 // ============================================================
 
 const DOCS_MCP_URL = 'https://agents.craft.do/docs/mcp';
@@ -254,9 +254,9 @@ async function connectDocsUpstream(): Promise<void> {
     docsTools = (result.tools || []) as Tool[];
     docsClient = client;
 
-    console.error(`Qwen Code Docs proxy connected: ${docsTools.length} tools`);
+    console.error(`LailatulCoder Ai Docs proxy connected: ${docsTools.length} tools`);
   } catch (err) {
-    console.error(`Qwen Code Docs proxy connection failed (non-fatal): ${err instanceof Error ? err.message : String(err)}`);
+    console.error(`LailatulCoder Ai Docs proxy connection failed (non-fatal): ${err instanceof Error ? err.message : String(err)}`);
     docsClient = null;
     docsTools = [];
   }
@@ -270,7 +270,7 @@ async function callDocsUpstream(
   args: Record<string, unknown>
 ): Promise<{ content: Array<{ type: 'text'; text: string }>; isError?: boolean }> {
   if (!docsClient) {
-    return errorResponse(`Qwen Code Docs server is not connected. Tool '${name}' unavailable.`);
+    return errorResponse(`LailatulCoder Ai Docs server is not connected. Tool '${name}' unavailable.`);
   }
 
   try {

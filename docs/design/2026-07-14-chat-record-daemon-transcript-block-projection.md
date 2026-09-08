@@ -18,7 +18,7 @@ Web callers use a separate opt-in SDK subpath:
     import {
       projectChatRecordsToDaemonTranscript,
       type ChatRecordTranscriptProjection,
-    } from "@qwen-code/sdk/daemon/transcript";
+    } from "@lailatul-coder/sdk/daemon/transcript";
 
     const projection = projectChatRecordsToDaemonTranscript(records);
     const { blocks, diagnostics, complete, truncated } = projection;
@@ -36,7 +36,7 @@ This synchronous function does not start the daemon, Express, or an ACP child pr
 The shared implementation is divided into three deep modules with explicit ownership:
 
     packages/core/src/utils/transcript-records.ts
-      -> package export @qwen-code/qwen-code-core/transcriptRecords
+      -> package export @lailatul-coder/lailatul-coder-core/transcriptRecords
       -> browser-safe record preparation
       -> active chain, aggregation, gaps, diagnostics
 
@@ -139,7 +139,7 @@ This design does not create a separate JSONL-to-blocks shortcut. Instead, it ext
 Record preparation is owned by core's persisted-session model. Add a browser-safe leaf:
 
     packages/core/src/utils/transcript-records.ts
-      -> @qwen-code/qwen-code-core/transcriptRecords
+      -> @lailatul-coder/lailatul-coder-core/transcriptRecords
 
 This module:
 
@@ -166,14 +166,14 @@ This both removes the two `aggregateRecords` implementations and fixes the reade
 
 This leaf may import only browser-safe types and pure functions. It must not import `fs`, `path`, `Buffer`, the `ChatRecordingService` class, or provider runtime code.
 
-Core currently has no exports map. The implementation must explicitly preserve exports for the root, `transcriptRecords`, `package.json`, and the existing `./dist/*` deep imports. Adding a browser leaf must not accidentally close the `@qwen-code/qwen-code-core/dist/...` paths recorded as compatible by the repository.
+Core currently has no exports map. The implementation must explicitly preserve exports for the root, `transcriptRecords`, `package.json`, and the existing `./dist/*` deep imports. Adding a browser leaf must not accidentally close the `@lailatul-coder/lailatul-coder-core/dist/...` paths recorded as compatible by the repository.
 
 ### 2. Transcript Replay Module
 
 `SessionUpdate` semantics belong to ACP, so the replay machine and pure update builders live in:
 
     packages/acp-bridge/src/transcript-replay.ts
-      -> @qwen-code/acp-bridge/transcriptReplay
+      -> @lailatul-coder/acp-bridge/transcriptReplay
 
 This module hides:
 
@@ -232,16 +232,16 @@ The SDK facade lives in a separate opt-in entry:
 
     packages/sdk-typescript/src/daemon/ui/chat-record-transcript.ts
     packages/sdk-typescript/src/daemon/transcript.ts
-    @qwen-code/sdk/daemon/transcript
+    @lailatul-coder/sdk/daemon/transcript
 
-It reuses the daemon UI normalizer and reducer but does not enter the default `@qwen-code/sdk/daemon` browser bundle. Callers only need to install the SDK and do not depend directly on core or acp-bridge subpaths.
+It reuses the daemon UI normalizer and reducer but does not enter the default `@lailatul-coder/sdk/daemon` browser bundle. Callers only need to install the SDK and do not depend directly on core or acp-bridge subpaths.
 
 ## Browser-safe Package Seams
 
 Add two internal leaf exports:
 
-    @qwen-code/qwen-code-core/transcriptRecords
-    @qwen-code/acp-bridge/transcriptReplay
+    @lailatul-coder/lailatul-coder-core/transcriptRecords
+    @lailatul-coder/acp-bridge/transcriptReplay
 
 Constraints:
 
@@ -657,8 +657,8 @@ Also add daemon integration fixtures that verify response-mode and stream-mode `
     import { useMemo } from "react";
     import {
       projectChatRecordsToDaemonTranscript,
-    } from "@qwen-code/sdk/daemon/transcript";
-    import { WebShellTranscript } from "@qwen-code/web-shell";
+    } from "@lailatul-coder/sdk/daemon/transcript";
+    import { WebShellTranscript } from "@lailatul-coder/web-shell";
 
     function ReadonlyHistory({ records }: { records: readonly unknown[] }) {
       const projection = useMemo(
@@ -688,7 +688,7 @@ The first version does not add a separate async/worker wrapper. Reconsider that 
 
 ## Bundle and Publishing Constraints
 
-The converter does not enter the default `@qwen-code/sdk/daemon` bundle. Add this package export:
+The converter does not enter the default `@lailatul-coder/sdk/daemon` bundle. Add this package export:
 
     "./daemon/transcript": {
       "types": "./dist/daemon/transcript.d.ts",

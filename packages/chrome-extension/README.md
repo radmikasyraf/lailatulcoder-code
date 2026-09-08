@@ -1,6 +1,6 @@
-# @qwen-code/chrome-bridge
+# @lailatul-coder/chrome-bridge
 
-A Chrome extension that brings Qwen Code into the browser as a thin client of a
+A Chrome extension that brings LailatulCoder Ai into the browser as a thin client of a
 local [`qwen serve`](../../docs/users/qwen-serve.md) daemon — no Native
 Messaging host to install.
 
@@ -54,7 +54,7 @@ QWEN_CDP_MCP_COMMAND=/path/to/cdp-mcp-adapter \
 qwen serve --allow-origin chrome-extension://<this-extension-id>
 ```
 
-No browser automation adapter is bundled with the main `@qwen-code/qwen-code`
+No browser automation adapter is bundled with the main `@lailatul-coder/lailatul-coder`
 package. When `QWEN_CDP_MCP_COMMAND` is unset, the extension can still open the
 Web Shell, but the daemon will not register browser automation MCP tools.
 Install the adapter separately and point the daemon at its executable:
@@ -67,7 +67,7 @@ QWEN_CDP_MCP_COMMAND=chrome-devtools-mcp \
   qwen serve --allow-origin chrome-extension://idkijaaipeeinemigojbjkmfmabokbdk
 ```
 
-The separately installed adapter is not included in the Qwen Code npm package
+The separately installed adapter is not included in the LailatulCoder Ai npm package
 or Chrome extension zip.
 Clients can distinguish the states through `/capabilities`:
 

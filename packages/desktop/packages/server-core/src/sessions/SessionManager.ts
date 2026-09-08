@@ -4843,7 +4843,7 @@ export class SessionManager implements ISessionManager {
         )
       } else {
         sessionLog.warn(
-          `No LLM connection found for session ${managed.id}, using Qwen Code fallback`,
+          `No LLM connection found for session ${managed.id}, using LailatulCoder Ai fallback`,
         )
       }
 

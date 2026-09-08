@@ -23,9 +23,9 @@ const context: InvocationContextV1 = {
 
 describe('invocation context wire contract', () => {
   it('exports the reserved metadata keys', () => {
-    expect(INVOCATION_CONTEXT_META_KEY).toBe('qwen-code/invocation');
+    expect(INVOCATION_CONTEXT_META_KEY).toBe('lailatul-coder/invocation');
     expect(PRIVATE_PARENT_CAPABILITY_META_KEY).toBe(
-      'qwen-code/private-parent-capability',
+      'lailatul-coder/private-parent-capability',
     );
   });
 

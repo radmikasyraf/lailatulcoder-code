@@ -8,7 +8,7 @@ WebShell 或 Session 窗口；具体对话和任务仍在现有 WebShell 中跟�
 ## 用户要求
 
 - macOS 12 或更高版本。
-- 本机运行的 Qwen Code WebShell。
+- 本机运行的 LailatulCoder Ai WebShell。
 - 可调用 `qwen3.5-omni-plus-realtime` 的 DashScope API key。
 
 Live Voice 仅在 macOS WebShell 中提供，默认关闭。普通 CLI/TUI、`--no-web`
@@ -49,7 +49,7 @@ bun run live-host:dist:mac
 ## 发布
 
 Live Host 使用独立的 **Qwen Live Host Release** workflow、版本号和发布节奏，
-不参与也不阻塞 Qwen Code Desktop Release。PR 会自动执行一次未签名 dry run，
+不参与也不阻塞 LailatulCoder Ai Desktop Release。PR 会自动执行一次未签名 dry run，
 检查 arm64/x64 的 DMG、ZIP 和 manifest；正式发布只能从 `main` 手工触发，并执行
 Developer ID 签名、notarization、Gatekeeper 和 stapler 验证。
 

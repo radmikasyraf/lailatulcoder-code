@@ -1,6 +1,6 @@
 # Memory
 
-Every Qwen Code session starts with a fresh context window. Two mechanisms carry knowledge across sessions so you don't have to re-explain yourself every time:
+Every LailatulCoder Ai session starts with a fresh context window. Two mechanisms carry knowledge across sessions so you don't have to re-explain yourself every time:
 
 - **QWEN.md** — instructions _you_ write once and Qwen reads every session
 - **Auto-memory** — notes Qwen writes itself based on what it learns from you
@@ -44,7 +44,7 @@ Use it for **project-specific but personal** instructions — things that belong
 
 It loads **after** the shared project `QWEN.md`, so your local instructions can supplement or override the team's.
 
-**You must gitignore it yourself.** Although `.qwen/` is often treated as a local directory, qwen-code does not generate a `.gitignore` for you, and some projects commit `.qwen/settings.json`. Add this line to your `.gitignore` (or to your global git ignore):
+**You must gitignore it yourself.** Although `.qwen/` is often treated as a local directory, lailatul-coder does not generate a `.gitignore` for you, and some projects commit `.qwen/settings.json`. Add this line to your `.gitignore` (or to your global git ignore):
 
 ```
 .qwen/QWEN.local.md

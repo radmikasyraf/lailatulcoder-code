@@ -13,7 +13,7 @@ import type {
   PerFileStats,
   TurnDiff,
   TurnFileDiff,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { HistoryItem } from '../types.js';
 import { theme } from '../semantic-colors.js';
 import { useKeypress } from '../hooks/useKeypress.js';
@@ -758,3 +758,4 @@ function emptyMessage(
   }
   return t('No file changes were captured in this turn.');
 }
+

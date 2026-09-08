@@ -516,19 +516,19 @@ Create `packages/cli/src/ui/utils/statsDataService.test.ts`:
 
 ```typescript
 import { describe, it, expect, vi } from 'vitest';
-import type { UsageSummaryRecord } from '@qwen-code/qwen-code-core';
+import type { UsageSummaryRecord } from '@lailatul-coder/lailatul-coder-core';
 
 // Mock loadUsageHistory to return controlled data
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const orig =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...orig,
     loadUsageHistory: vi.fn(),
   };
 });
 
-import { loadUsageHistory } from '@qwen-code/qwen-code-core';
+import { loadUsageHistory } from '@lailatul-coder/lailatul-coder-core';
 import { loadStatsData } from './statsDataService.js';
 
 const mockedLoad = vi.mocked(loadUsageHistory);

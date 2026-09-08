@@ -29,7 +29,7 @@ export const PRIVATE_EXTERNAL_TOOL_GUARD_PROVIDER_ENV =
  * private activation marker and installed the required executor callback.
  */
 export const EXTERNAL_TOOL_GUARD_READY_META_KEY =
-  'qwen-code/external-tool-guard-ready';
+  'lailatul-coder/external-tool-guard-ready';
 
 /**
  * The guard acknowledgment value the ACP child returns for
@@ -49,7 +49,7 @@ export const EXTERNAL_TOOL_GUARD_PROVIDER_ATTACHED_VALUE = 'attached-v1';
  * session's behalf. The daemon's built-in policy inspects exactly these, and
  * the ACP child resolves every other tool locally when no external provider
  * is attached. Pinned to `ToolNames.SHELL`/`ToolNames.MONITOR` in
- * `@qwen-code/qwen-code-core`, which this package deliberately does not
+ * `@lailatul-coder/lailatul-coder-core`, which this package deliberately does not
  * depend on; `daemon-git-worktree-guard.test.ts` asserts the values still
  * match so a rename cannot silently unhook a tool from the guard.
  */

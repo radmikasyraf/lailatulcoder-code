@@ -70,9 +70,9 @@ NOW=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json headRefOid --jq '.headRefOid
 Every staged comment (Stage 1 gate-pass, Stage 2, Stage 3) ends with the signature line, then a footer recording the commit this pass reflects. Because comments are updated in place on re-run, the SHA lets a maintainer tell at a glance whether new commits landed since the last review:
 
 ```
-— _Qwen Code · qwen3.7-max_
+— _LailatulCoder Ai · qwen3.7-max_
 
-<sub>Reviewed at `<HEAD_SHA>` · re-run with `@qwen-code /triage`</sub>
+<sub>Reviewed at `<HEAD_SHA>` · re-run with `@lailatul-coder /triage`</sub>
 ```
 
 **If `HEAD_SHA` comes back empty** (API failure or a null `headRefOid`): **fail closed.** Do not PATCH an existing staged comment — the update rewrites the whole body, so a dropped footer erases the previously valid `Reviewed at` line just as an empty-backtick footer would. Retry the capture, or leave the prior comment (with its footer) untouched until a full OID is available; only a brand-new post that never had a footer may go out without one. Terminal-gate reviews (Stage 1a/1b/1c, submitted via `gh pr review --request-changes`) use the signature only — no footer; they reject before a real review pass.
@@ -184,7 +184,7 @@ If the author cannot provide one on re-run, escalate to the maintainer and stop.
 
 </details>
 
-— _Qwen Code · qwen3.7-max_
+— _LailatulCoder Ai · qwen3.7-max_
 EOF
 gh pr review "$PR_NUMBER" --repo "$REPO" --request-changes --body-file /tmp/stage-1b-reproduction.md
 ```
@@ -200,7 +200,7 @@ If the author cannot provide a reproduction on re-run, escalate to the maintaine
 Ask the hard questions before reading a single line of code:
 
 - Does this solve a real user problem, or is it a solution looking for a problem?
-- Is it within qwen-code's core mission, or does it pull focus from what matters more?
+- Is it within lailatul-coder's core mission, or does it pull focus from what matters more?
 - "Can do" ≠ "should do" — technically feasible doesn't mean we should ship it.
 
 CHANGELOG is a reference signal, not the sole criterion (fetched through `gh`,
@@ -246,7 +246,7 @@ If any file matches (the strongest triage-time signal — 10 of 31 reverted PRs 
 
 - For non-maintainer PRs: do not skip any Stage 2 enrichment (2a-bis); require Stage 2b CI evidence before approving.
 - Flag the high-risk paths in the Stage 1 comment so the reviewer knows where to focus.
-- If the PR author has write access, name a sandboxed lane before approval per 2b-bis — `@qwen-code /verify` for a behavioural claim, `@qwen-code /tmux` for a TUI surface. These are the paths where a green suite that does not pin the change is most expensive, so the 2b-bis line is least optional here. If the author lacks write access, `/verify` is still available as a **sponsored run**: a maintainer's `@qwen-code /verify` comment approves the head it was written against, and that run carries a pre-execution risk screen and a full workspace wipe — say so, and remind the maintainer to read the resulting report with the same skepticism as a fork's CI logs.
+- If the PR author has write access, name a sandboxed lane before approval per 2b-bis — `@lailatul-coder /verify` for a behavioural claim, `@lailatul-coder /tmux` for a TUI surface. These are the paths where a green suite that does not pin the change is most expensive, so the 2b-bis line is least optional here. If the author lacks write access, `/verify` is still available as a **sponsored run**: a maintainer's `@lailatul-coder /verify` comment approves the head it was written against, and that run carries a pre-execution risk screen and a full workspace wipe — say so, and remind the maintainer to read the resulting report with the same skepticism as a fork's CI logs.
 
 This signal is NOT a terminal gate — it does not stop the review or close the PR. It escalates review depth and flags risk so the reviewer knows where to focus. A PR that touches high-risk paths but passes full review with clean E2E verification can still be approved.
 
@@ -294,9 +294,9 @@ Risk: <if Stage 1e matched, list the high-risk paths and recommended review dept
 
 </details>
 
-— _Qwen Code · qwen3.7-max_
+— _LailatulCoder Ai · qwen3.7-max_
 
-<sub>Reviewed at `<HEAD_SHA>` · re-run with `@qwen-code /triage`</sub>
+<sub>Reviewed at `<HEAD_SHA>` · re-run with `@lailatul-coder /triage`</sub>
 ```
 
 Save this comment's ID. Terminal exits — stop here if any applies:
@@ -477,8 +477,8 @@ that gap, and a maintainer triggers them by comment:
 
 | trigger              | what it produces                                                                                                                               |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@qwen-code /verify` | A/B load-bearing proof against the base build, mock-free wire-oracle harnesses, targeted gates, counted assertions (see the `verify-pr` skill) |
-| `@qwen-code /tmux`   | drives the TUI as a real user and captures the terminal                                                                                        |
+| `@lailatul-coder /verify` | A/B load-bearing proof against the base build, mock-free wire-oracle harnesses, targeted gates, counted assertions (see the `verify-pr` skill) |
+| `@lailatul-coder /tmux`   | drives the TUI as a real user and captures the terminal                                                                                        |
 
 **This is a required element of the Stage 2 comment whenever the PR's central
 claim is behavioural and neither static review nor 2b substantiates it** — a
@@ -489,7 +489,7 @@ on an unattended run, unlike 2c below.
 Emit one line that names the trigger **and the specific claim it would
 settle**:
 
-> Sandboxed verification would settle this: `@qwen-code /verify` — that the
+> Sandboxed verification would settle this: `@lailatul-coder /verify` — that the
 > new `ownsRunningPrompt` guard actually fails closed for a foreign owner is
 > not observable from the diff, and this PR's suite passes with the guard
 > removed.
@@ -520,7 +520,7 @@ gap was written down and the remedy was not.)
   do not pad the comment.
 - **The author lacks write access.** `/tmux` is unavailable (it executes the
   author's code and gates on the author). `/verify` is still available as a
-  **sponsored run**: a maintainer's `@qwen-code /verify` comment approves
+  **sponsored run**: a maintainer's `@lailatul-coder /verify` comment approves
   the head it was written against, and that run additionally carries a
   pre-execution risk screen (npm lifecycle scripts, off-registry dependency
   resolutions, package-manager config, plus a model screen — all failing
@@ -616,9 +616,9 @@ Post a single Stage 2 comment (must include `<!-- qwen-triage stage=2 -->` at th
 Close with the signature then the footer, and save this comment's ID — on an empty `HEAD_SHA`, follow the fail-closed rule above (leave an existing comment and its footer untouched; never blank it):
 
 ```markdown
-— _Qwen Code · qwen3.7-max_
+— _LailatulCoder Ai · qwen3.7-max_
 
-<sub>Reviewed at `<HEAD_SHA>` · re-run with `@qwen-code /triage`</sub>
+<sub>Reviewed at `<HEAD_SHA>` · re-run with `@lailatul-coder /triage`</sub>
 ```
 
 ### Stage 3: Reflect
@@ -654,7 +654,7 @@ Open it with a one-line confidence score — `**Confidence: N/5** — <one hones
 
 A fork `refactor` that hits the approval guardrail below, **or a PR that Stage 0 escalated for maintainer awareness**, caps at 3/5 no matter how clean every stage looked — the guardrail drives the action, not the score. At 3/5 the action is always the **defer path** (a comment, never `--request-changes`): name any concerns in the defer comment for the maintainer's attention without approving, and @mention the maintainer for an unresolvable question or when the cap is pure policy. When the cap is pure policy on an otherwise-clean PR, say so in the one-line score so 3/5 doesn't read as real doubt — e.g. `Confidence: 3/5 — clean review, but the fork-refactor guardrail needs a maintainer's sign-off`. Never post a 4–5/5 alongside a `--request-changes`, or a 1–2/5 alongside an `--approve`: the score and the verdict tell the same story.
 
-Then write what you're actually thinking. "Looks good, ships the feature cleanly, the before/after shows it works" — not a five-bullet summary of the stages. If you have reservations, say them plainly. If you're approving with mild concerns, name them. Sign with `— _Qwen Code · qwen3.7-max_`, add the reviewed-commit footer (empty `HEAD_SHA` → fail closed, as above — don't blank a prior footer), and save this comment's ID.
+Then write what you're actually thinking. "Looks good, ships the feature cleanly, the before/after shows it works" — not a five-bullet summary of the stages. If you have reservations, say them plainly. If you're approving with mild concerns, name them. Sign with `— _LailatulCoder Ai · qwen3.7-max_`, add the reviewed-commit footer (empty `HEAD_SHA` → fail closed, as above — don't blank a prior footer), and save this comment's ID.
 
 **Approve verdict while CI is still running → say so in this comment, before posting it.** Count pending **workflow runs with `event == "pull_request"`** — the PR's own CI — not check-runs. Check-runs on the head SHA also include bot orchestration jobs (`pull_request_target` / `issue_comment` runs like triage itself and review-pr) that can stay in flight long after CI finishes; counting those would defer an approval that nothing will ever un-defer, because the finalize workflow only fires on PR CI workflow completions. One extra cheap API call, still **no polling**; staleness is safe in this direction only (a run that completed after the fetch is merely treated as pending → defers, never mis-approves):
 
@@ -690,7 +690,7 @@ If `GUARD` is `block`: do **not** run `gh pr review --approve` no matter how cle
 
 If Stage 0 escalated the PR for maintainer awareness, do **not** approve automatically; use the "Genuinely unsure" path below.
 
-**Re-runs (manually triggered via `@qwen-code /triage`):** hygiene concerns (scope mismatch, undocumented changes, naming) that don't block the PR are not a valid reason to defer. Note them in the comment and approve. Only defer if you have genuine blocking uncertainty — something you cannot resolve from the diff, tests, and PR description.
+**Re-runs (manually triggered via `@lailatul-coder /triage`):** hygiene concerns (scope mismatch, undocumented changes, naming) that don't block the PR are not a valid reason to defer. Note them in the comment and approve. Only defer if you have genuine blocking uncertainty — something you cannot resolve from the diff, tests, and PR description.
 
 All stages genuinely clean, `GUARD` is `ok`, and no Stage 0 maintainer escalation remains — how you approve depends on the `PENDING` count computed in Step 1:
 

@@ -118,7 +118,7 @@ let configDefaultsSynced = false;
 /** Minimal config-defaults used when bundled assets aren't available (CI, standalone server). */
 const FALLBACK_CONFIG_DEFAULTS: ConfigDefaults = {
   version: '1.0',
-  description: 'Default configuration values for Qwen Code',
+  description: 'Default configuration values for LailatulCoder Ai',
   defaults: {
     notificationsEnabled: true,
     colorTheme: 'default',
@@ -1935,7 +1935,7 @@ function migrateModelDefaultsToConnections(config: StoredConfig): boolean {
 function createQwenCodeConnection(existing?: Partial<LlmConnection>): LlmConnection {
   return {
     slug: QWEN_CODE_CONNECTION_SLUG,
-    name: 'Qwen Code',
+    name: 'LailatulCoder Ai',
     providerType: 'qwen',
     authType: 'none',
     createdAt: existing?.createdAt ?? Date.now(),
@@ -1991,7 +1991,7 @@ function normalizeToQwenCodeOnly(target: StoredConfig): boolean {
 }
 
 /**
- * Collapse any legacy provider configuration to the single built-in Qwen Code backend.
+ * Collapse any legacy provider configuration to the single built-in LailatulCoder Ai backend.
  * Call this on app startup before any getLlmConnections() calls.
  */
 export function migrateLegacyLlmConnectionsConfig(): void {
@@ -2093,7 +2093,7 @@ function ensureDefaultLlmConnection(config: StoredConfig): boolean {
  *
  * Called on app startup (async operation, credentials use encrypted storage).
  *
- * Qwen Code uses the local backend runtime, so there are no app-managed
+ * LailatulCoder Ai uses the local backend runtime, so there are no app-managed
  * provider credentials to migrate.
  */
 export async function migrateLegacyCredentials(): Promise<void> {

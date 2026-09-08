@@ -266,5 +266,5 @@ session); disable via `QWEN_DEBUG_LOG_FILE=0`.
 | Progress UI for `/recap` (spinner / pendingItem) | 3-5 second wait is tolerable; adds complexity.                                                                                           |
 | Automated tests                                  | Service is small (~150 lines), end-to-end tested manually first; unit tests can land in a separate PR.                                   |
 | Localized prompts                                | The system prompt is for the model; English is the most reliable substrate. The model selects the output language from the conversation. |
-| `QWEN_CODE_ENABLE_AWAY_SUMMARY` env var          | Claude Code uses it to keep the feature on when telemetry is disabled; Qwen Code's current telemetry model doesn't need this.            |
+| `QWEN_CODE_ENABLE_AWAY_SUMMARY` env var          | Claude Code uses it to keep the feature on when telemetry is disabled; LailatulCoder Ai's current telemetry model doesn't need this.            |
 | Auto-recap on `/resume` completion               | A natural follow-up but needs a hook point in `useResumeCommand`; out of scope for this PR.                                              |

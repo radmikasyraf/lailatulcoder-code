@@ -8,7 +8,7 @@ Tools, so users cannot easily collect a complete report.
 
 ## Design
 
-Reuse the existing `Qwen Code Companion` `OutputChannel` during extension
+Reuse the existing `LailatulCoder Ai Companion` `OutputChannel` during extension
 activation and configure the logger to write in both development and production
 modes.
 
@@ -19,7 +19,7 @@ object fields, and applies the existing log-credential redactor before writing.
 The Webview bundle redirects its global `console.*` methods so logs from the
 shared Web UI are included. It sends formatted log messages through the existing
 Webview-to-Extension Host message bridge. The host validates each message and
-escapes line breaks before writing it to the same `Qwen Code Companion`
+escapes line breaks before writing it to the same `LailatulCoder Ai Companion`
 channel.
 
 Build scripts and tests keep using `console.*` because they do not run inside the
@@ -27,7 +27,7 @@ extension.
 
 ## Verification
 
-- Production activation writes to the `Qwen Code Companion` channel.
+- Production activation writes to the `LailatulCoder Ai Companion` channel.
 - Multi-argument, object, circular, and `Error` values remain readable.
 - Sensitive object fields and common credentials are redacted.
 - Webview log messages reach the Extension Host logger.

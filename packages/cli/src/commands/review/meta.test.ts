@@ -107,7 +107,7 @@ describe('runMeta', () => {
 
   it('resolves the cwd repository (upstream in a fork clone) with host from the URL', () => {
     ghMock.mockReturnValue(
-      '{"owner":{"login":"QwenLM"},"name":"qwen-code","url":"https://github.com/QwenLM/qwen-code"}',
+      '{"owner":{"login":"LailatulCoder"},"name":"lailatul-coder","url":"https://github.com/LailatulCoder/lailatul-coder"}',
     );
     const result = runMeta({});
     expect(ghMock).toHaveBeenCalledWith(
@@ -119,7 +119,7 @@ describe('runMeta', () => {
     expect(result).toEqual({
       platform: 'github',
       host: 'github.com',
-      ownerRepo: 'QwenLM/qwen-code',
+      ownerRepo: 'LailatulCoder/lailatul-coder',
     });
   });
 
@@ -132,10 +132,10 @@ describe('runMeta', () => {
     // shape). resolveRepo reads the host from the repo's own url, never
     // parent.url.
     ghMock.mockReturnValue(
-      '{"owner":{"login":"contributor"},"name":"qwen-code","url":"https://github.com/contributor/qwen-code","parent":{"owner":{"login":"QwenLM"},"name":"qwen-code"}}',
+      '{"owner":{"login":"contributor"},"name":"lailatul-coder","url":"https://github.com/contributor/lailatul-coder","parent":{"owner":{"login":"LailatulCoder"},"name":"lailatul-coder"}}',
     );
     const result = runMeta({});
-    expect(result.ownerRepo).toBe('QwenLM/qwen-code');
+    expect(result.ownerRepo).toBe('LailatulCoder/lailatul-coder');
     expect(result.host).toBe('github.com');
   });
 
@@ -204,20 +204,20 @@ describe('runMeta', () => {
 
   it('adds headSha and webUrl when a PR number is given', () => {
     ghMock.mockReturnValue(
-      '{"headRefOid":"2d71a0f851c8c18462cc85b60d90973e132274d8","url":"https://github.com/QwenLM/qwen-code/pull/8981"}',
+      '{"headRefOid":"2d71a0f851c8c18462cc85b60d90973e132274d8","url":"https://github.com/LailatulCoder/lailatul-coder/pull/8981"}',
     );
-    const result = runMeta({ prNumber: 8981, repo: 'QwenLM/qwen-code' });
+    const result = runMeta({ prNumber: 8981, repo: 'LailatulCoder/lailatul-coder' });
     expect(ghMock).toHaveBeenCalledWith(
       'pr',
       'view',
       '8981',
       '--repo',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       '--json',
       'headRefOid,url',
     );
     expect(result.headSha).toBe('2d71a0f851c8c18462cc85b60d90973e132274d8');
-    expect(result.webUrl).toBe('https://github.com/QwenLM/qwen-code/pull/8981');
+    expect(result.webUrl).toBe('https://github.com/LailatulCoder/lailatul-coder/pull/8981');
     expect(result.host).toBe('github.com');
   });
 
@@ -416,13 +416,13 @@ describe('metaCommand handler', () => {
 
   it('prints the result as one JSON object', () => {
     ghMock.mockReturnValue(
-      '{"owner":{"login":"QwenLM"},"name":"qwen-code","url":"https://github.com/QwenLM/qwen-code"}',
+      '{"owner":{"login":"LailatulCoder"},"name":"lailatul-coder","url":"https://github.com/LailatulCoder/lailatul-coder"}',
     );
     (metaCommand.handler as (a: unknown) => void)({ _: [], $0: 'qwen' });
     expect(process.exitCode).toBeUndefined();
     expect(setGhHostMock).toHaveBeenCalledWith(undefined);
     expect(writeStdoutLineMock).toHaveBeenCalledWith(
-      '{"platform":"github","host":"github.com","ownerRepo":"QwenLM/qwen-code"}',
+      '{"platform":"github","host":"github.com","ownerRepo":"LailatulCoder/lailatul-coder"}',
     );
   });
 

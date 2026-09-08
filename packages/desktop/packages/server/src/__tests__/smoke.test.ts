@@ -123,7 +123,7 @@ async function runServerExpectingStartupFailure(extraEnv: Record<string, string>
       ...extraEnv,
       CRAFT_SERVER_TOKEN: token,
       CRAFT_RPC_HOST: '127.0.0.1',
-      CRAFT_SERVER_LOCK_FILE: join(tmpdir(), `qwen-code-server-test-${crypto.randomUUID()}.lock`),
+      CRAFT_SERVER_LOCK_FILE: join(tmpdir(), `lailatul-coder-server-test-${crypto.randomUUID()}.lock`),
     },
     stdout: 'pipe',
     stderr: 'pipe',
@@ -238,7 +238,7 @@ describe('headless server smoke test', () => {
 
     expect(result.exitCode).not.toBe(0)
     expect(result.output).toContain('Invalid CRAFT_HEALTH_PORT')
-    expect(result.output).not.toContain('Qwen Code server listening')
+    expect(result.output).not.toContain('LailatulCoder Ai server listening')
     expect(result.output).not.toContain('CRAFT_SERVER_URL=')
   }, TEST_TIMEOUT)
 

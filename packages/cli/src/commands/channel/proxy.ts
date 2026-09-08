@@ -1,4 +1,4 @@
-import { normalizeProxyUrl } from '@qwen-code/qwen-code-core';
+import { normalizeProxyUrl } from '@lailatul-coder/lailatul-coder-core';
 import { loadUndici } from '../../utils/load-undici.js';
 
 /**

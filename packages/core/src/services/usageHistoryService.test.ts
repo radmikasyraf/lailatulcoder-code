@@ -440,7 +440,7 @@ describe('loadUsageHistory + persistSessionUsage (issue #4994 regression)', () =
         subtype: 'ui_telemetry',
         systemPayload: {
           uiEvent: {
-            'event.name': 'qwen-code.api_response',
+            'event.name': 'lailatul-coder.api_response',
             'event.timestamp': mid,
             response_id: 'r1',
             model: 'qwen-max',
@@ -856,7 +856,7 @@ describe('persistUsageBeforeTranscriptDeletion (issue #7384)', () => {
         subtype: 'ui_telemetry',
         systemPayload: {
           uiEvent: {
-            'event.name': 'qwen-code.api_response',
+            'event.name': 'lailatul-coder.api_response',
             'event.timestamp': mid,
             response_id: 'r1',
             model: 'qwen-max',

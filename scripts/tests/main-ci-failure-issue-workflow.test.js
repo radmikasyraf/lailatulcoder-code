@@ -19,9 +19,9 @@ describe('main CI failure issue workflow', () => {
   it('opens an autofix-ready issue only for failed main CI runs', () => {
     expect(workflow).toContain('workflow_run:');
     expect(workflow).toContain("workflows: ['E2E Tests', 'SDK Python']");
-    expect(workflow).not.toContain("'Qwen Code CI'");
+    expect(workflow).not.toContain("'LailatulCoder Ai CI'");
     expect(workflow).toContain("types: ['completed']");
-    expect(workflow).toContain("github.repository == 'QwenLM/qwen-code'");
+    expect(workflow).toContain("github.repository == 'LailatulCoder/lailatul-coder'");
     expect(workflow).toContain(
       "github.event.workflow_run.conclusion == 'failure'",
     );
@@ -35,7 +35,7 @@ describe('main CI failure issue workflow', () => {
     expect(workflow).toContain("issues: 'write'");
     expect(workflow).toContain('CI_DEV_BOT_PAT');
     expect(workflow).toContain(
-      'AUTOFIX_BOT: "${{ vars.AUTOFIX_BOT_LOGIN || \'qwen-code-dev-bot\' }}"',
+      'AUTOFIX_BOT: "${{ vars.AUTOFIX_BOT_LOGIN || \'lailatul-coder-dev-bot\' }}"',
     );
     expect(workflow).toContain("BUG_LABEL: 'type/bug'");
     expect(workflow).toContain(

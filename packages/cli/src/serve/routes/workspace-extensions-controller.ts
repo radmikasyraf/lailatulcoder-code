@@ -11,7 +11,7 @@ import {
   stripAnsiAndControl,
   type ClaudeMarketplaceConfig,
   type ExtensionSetting,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Request, Response } from 'express';
 import { loadSettings } from '../../config/settings.js';
 import { getWorkspaceTrustStatus } from '../../config/trustedFolders.js';
@@ -28,7 +28,7 @@ import {
   type ServeExtensionCapabilities,
   type ServeExtensionEntry,
   type ServeWorkspaceExtensionsStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 import type { DaemonWorkspaceService } from '../workspace-service/index.js';
 import type { WorkspaceRuntime } from '../workspace-registry.js';
 import {

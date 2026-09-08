@@ -50,7 +50,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, normalize, resolve } from 'node:path';
 import { writeStdoutLine, writeStderrLine } from '../../utils/stdioHelpers.js';
 import { gh, setGhHost } from './lib/gh.js';
-import { isGitIgnored } from '@qwen-code/qwen-code-core';
+import { isGitIgnored } from '@lailatul-coder/lailatul-coder-core';
 import { GIT_TIMEOUT_MS } from './lib/git.js';
 import { diffHashOf } from './script-lint.js';
 import {
@@ -332,7 +332,7 @@ export function extractClaims(section: string): Array<{
 
   // A slash token is claimed as a repo path only with EVIDENCE it is one: a
   // file extension on its last segment, or an explicit ./ prefix. A bare
-  // `owner/repo` is far more often a slug (`--repo QwenLM/qwen-code`), and
+  // `owner/repo` is far more often a slug (`--repo LailatulCoder/lailatul-coder`), and
   // `origin/main` a ref — this PR's own Test Plan produced two false
   // `contradicted` notes before this bar existed.
   const isPathClaim = (t: string): boolean => {

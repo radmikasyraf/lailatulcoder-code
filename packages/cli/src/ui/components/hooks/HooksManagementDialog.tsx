@@ -19,7 +19,7 @@ import {
   type SessionHookEntry,
   createDebugLogger,
   HOOKS_CONFIG_FIELDS,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   HooksManagementDialogProps,
   HookEventDisplayInfo,
@@ -586,3 +586,4 @@ export function HooksManagementDialog({
     </Box>
   );
 }
+

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 Qwen Code
+ * Copyright 2026 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -9,7 +9,7 @@ import {
   IdeClient,
   initializeTelemetry,
   type Config,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../config/settings.js';
 import { preconnectApi } from '../utils/apiPreconnect.js';
 import { AppEvent, appEvents } from '../utils/events.js';
@@ -194,7 +194,7 @@ export function startPostRenderPrefetches(
           if (hostUpdateRelaunch === 'false') {
             updateEventEmitter.emit('update-info', {
               message: `${result.info.message}\n${t(
-                'Update Qwen Code on the host, then restart the sandbox.',
+                'Update LailatulCoder Ai on the host, then restart the sandbox.',
               )}`,
             });
             return;

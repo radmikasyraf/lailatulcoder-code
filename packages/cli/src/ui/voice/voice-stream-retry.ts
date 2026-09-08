@@ -5,7 +5,7 @@
  */
 
 import type { VoiceStreamSession } from './voice-stream-session.js';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 
 const RETRY_DELAY_MS = 200;
 const debugLogger = createDebugLogger('VOICE_STREAM');

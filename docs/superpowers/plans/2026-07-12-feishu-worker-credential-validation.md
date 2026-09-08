@@ -8,7 +8,7 @@ WebSocket handshake or extending daemon startup time by a handshake timeout.
 tenant-token request as a WebSocket-only credential preflight, then preserve the
 original `WSClient.start()` semantics and SDK reconnect defaults.
 
-**Tech Stack:** TypeScript, Vitest, `@larksuiteoapi/node-sdk`, Qwen Code
+**Tech Stack:** TypeScript, Vitest, `@larksuiteoapi/node-sdk`, LailatulCoder Ai
 daemon-managed channel worker.
 
 ## Constraints

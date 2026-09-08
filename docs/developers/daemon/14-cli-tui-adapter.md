@@ -11,7 +11,7 @@
 - **Renderers** (`render.ts`, `terminal.ts`, `toolPreview.ts`): transcript blocks to HTML, terminal text, and tool preview strings. Hosts can use or replace them.
 - **Conformance** (`conformance.ts`): cross-host consistency tests used when channel, TUI, and IDE surfaces migrate to these primitives.
 
-The first production consumer is **`packages/webui/src/daemon/`** ([#4328](https://github.com/QwenLM/qwen-code/pull/4328)). Its React `DaemonSessionProvider` and transcript adapter let the web UI connect directly to daemon HTTP+SSE instead of only rendering host `postMessage` traffic. CLI TUI, channel base, and VS Code IDE can reuse the same layer later; [`../daemon-ui/MIGRATION.md`](../daemon-ui/MIGRATION.md) documents the v2 incremental migration guide.
+The first production consumer is **`packages/webui/src/daemon/`** ([#4328](https://github.com/LailatulCoder/lailatul-coder/pull/4328)). Its React `DaemonSessionProvider` and transcript adapter let the web UI connect directly to daemon HTTP+SSE instead of only rendering host `postMessage` traffic. CLI TUI, channel base, and VS Code IDE can reuse the same layer later; [`../daemon-ui/MIGRATION.md`](../daemon-ui/MIGRATION.md) documents the v2 incremental migration guide.
 
 ## Responsibilities
 
@@ -134,7 +134,7 @@ Hosts can stop at `(E)` and implement their own reducer, or consume `(G)` and th
 
 ### `packages/webui/src/daemon/`
 
-This landed in [#4328](https://github.com/QwenLM/qwen-code/pull/4328).
+This landed in [#4328](https://github.com/LailatulCoder/lailatul-coder/pull/4328).
 
 | File                        | Exports                                                                                                                                                                                                                                                                                                                        |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -179,7 +179,7 @@ The web UI can now connect directly to daemon HTTP+SSE and render a transcript. 
 - **CLI TUI, channel base, and VS Code IDE are not migrated yet**. They still maintain their own rendering logic. The `docs/developers/daemon-client-adapters/` directory still has `ide.md`, `channel-web.md`, and the historical `tui.md` draft; the newer `web-ui.md` covers the web UI adapter design.
 - **`eventId` is the primary ordering key**. `createdAt` remains as a deprecated alias (`clientReceivedAt`). New code should use `selectTranscriptBlocksOrderedByEventId(state)`. `MIGRATION.md` shows the code diff for switching from `createdAt` ordering to `eventId` ordering.
 - **Unknown wire types normalize to `debug`**. They are no longer dropped as in the old adapter. Renderers do not show `debug` by default; hosts must opt in to display it.
-- **Bundle size**: the `ui/*` subpackage is exported as an ESM subpath through `@qwen-code/sdk/daemon` and does not pull in React or DOM dependencies. React integration is only loaded when a web UI consumer uses `DaemonSessionProvider`.
+- **Bundle size**: the `ui/*` subpackage is exported as an ESM subpath through `@lailatul-coder/sdk/daemon` and does not pull in React or DOM dependencies. React integration is only loaded when a web UI consumer uses `DaemonSessionProvider`.
 
 ## References
 
@@ -190,4 +190,4 @@ The web UI can now connect directly to daemon HTTP+SSE and render a transcript. 
 - `packages/sdk-typescript/src/daemon/index.ts` (`ui/*` re-export block)
 - `packages/webui/src/daemon/DaemonSessionProvider.tsx`, `transcriptAdapter.ts`
 - Upstream docs: [`../daemon-ui/README.md`](../daemon-ui/README.md), [`../daemon-ui/MIGRATION.md`](../daemon-ui/MIGRATION.md), [`../daemon-client-adapters/web-ui.md`](../daemon-client-adapters/web-ui.md)
-- Context PRs: [#4328](https://github.com/QwenLM/qwen-code/pull/4328) (v1 transcript layer and web UI provider), [#4353](https://github.com/QwenLM/qwen-code/pull/4353) (v2 unified completeness follow-up)
+- Context PRs: [#4328](https://github.com/LailatulCoder/lailatul-coder/pull/4328) (v1 transcript layer and web UI provider), [#4353](https://github.com/LailatulCoder/lailatul-coder/pull/4353) (v2 unified completeness follow-up)

@@ -1,9 +1,9 @@
 /**
  * Centralized branding configuration.
  *
- * Supports multiple brand presets (e.g. "qwen-code", "openwork").
+ * Supports multiple brand presets (e.g. "lailatul-coder", "openwork").
  * Select at runtime via the CRAFT_BRAND environment variable.
- * Default: "qwen-code" (backward-compatible).
+ * Default: "lailatul-coder" (backward-compatible).
  */
 
 // ---------------------------------------------------------------------------
@@ -80,19 +80,19 @@ export interface BrandConfig {
 // ---------------------------------------------------------------------------
 
 const QWEN_CODE_BRAND: BrandConfig = {
-  id: 'qwen-code',
-  appName: 'Qwen Code Desktop',
-  appId: 'com.alibaba.qwen-code',
-  productName: 'Qwen Code Desktop',
-  artifactPrefix: 'Qwen-Code-Desktop',
+  id: 'lailatul-coder',
+  appName: 'LailatulCoder Ai Desktop',
+  appId: 'com.alibaba.lailatul-coder',
+  productName: 'LailatulCoder Ai Desktop',
+  artifactPrefix: 'lailatul-coder-Desktop',
   copyright: 'Copyright © 2026 Alibaba Group.',
-  coAuthorLine: 'Co-Authored-By: Qwen Code <agents-noreply@craft.do>',
-  selfReferName: 'Qwen Code',
+  coAuthorLine: 'Co-Authored-By: LailatulCoder Ai <agents-noreply@craft.do>',
+  selfReferName: 'LailatulCoder Ai',
   viewerUrl: 'https://agents.craft.do',
   updates: {
     provider: 'generic',
-    url: 'https://github.com/QwenLM/qwen-code/releases/download/desktop-latest',
-    releasePageUrl: 'https://github.com/QwenLM/qwen-code/releases',
+    url: 'https://github.com/LailatulCoder/lailatul-coder/releases/download/desktop-latest',
+    releasePageUrl: 'https://github.com/LailatulCoder/lailatul-coder/releases',
   },
   helpMenuLinks: [
     {
@@ -102,14 +102,14 @@ const QWEN_CODE_BRAND: BrandConfig = {
     },
   ],
   assets: {
-    resourceDir: 'resources/brands/qwen-code',
-    rendererSymbol: 'resources/brands/qwen-code/icon.svg',
-    macIcon: 'resources/brands/qwen-code/icon.icns',
-    winIcon: 'resources/brands/qwen-code/icon.ico',
-    linuxIcon: 'resources/brands/qwen-code/icon.png',
-    devDockIcon: 'resources/brands/qwen-code/dock.png',
-    iconSvg: 'resources/brands/qwen-code/icon.svg',
-    liquidGlassAssetsCar: 'resources/brands/qwen-code/Assets.car',
+    resourceDir: 'resources/brands/lailatul-coder',
+    rendererSymbol: 'resources/brands/lailatul-coder/icon.svg',
+    macIcon: 'resources/brands/lailatul-coder/icon.icns',
+    winIcon: 'resources/brands/lailatul-coder/icon.ico',
+    linuxIcon: 'resources/brands/lailatul-coder/icon.png',
+    devDockIcon: 'resources/brands/lailatul-coder/dock.png',
+    iconSvg: 'resources/brands/lailatul-coder/icon.svg',
+    liquidGlassAssetsCar: 'resources/brands/lailatul-coder/Assets.car',
   },
   credits: '',
   creditsShort: '',
@@ -117,7 +117,7 @@ const QWEN_CODE_BRAND: BrandConfig = {
 };
 
 const BRANDS: Record<string, BrandConfig> = {
-  'qwen-code': QWEN_CODE_BRAND,
+  'lailatul-coder': QWEN_CODE_BRAND,
   openwork: {
     id: 'openwork',
     appName: 'OpenWork',
@@ -150,13 +150,13 @@ const BRANDS: Record<string, BrandConfig> = {
       devDockIcon: 'resources/brands/openwork/dock.png',
       liquidGlassAssetsCar: 'resources/brands/openwork/Assets.car',
     },
-    credits: 'Architecture: craft-agents-oss | Agent: Qwen Code',
-    creditsShort: 'Based on craft-agents-oss & Qwen Code',
+    credits: 'Architecture: craft-agents-oss | Agent: LailatulCoder Ai',
+    creditsShort: 'Based on craft-agents-oss & LailatulCoder Ai',
     creditsEntries: [
       {
-        name: 'Qwen Code',
+        name: 'LailatulCoder Ai',
         role: 'AI Agent Engine',
-        url: 'https://github.com/QwenLM/qwen-code',
+        url: 'https://github.com/LailatulCoder/lailatul-coder',
       },
       {
         name: 'Craft Agents OSS',
@@ -167,9 +167,9 @@ const BRANDS: Record<string, BrandConfig> = {
   },
 };
 
-/** Active brand, selected by CRAFT_BRAND env var (default: "qwen-code"). */
+/** Active brand, selected by CRAFT_BRAND env var (default: "lailatul-coder"). */
 export const BRAND: BrandConfig =
-  BRANDS[process.env.CRAFT_BRAND || 'qwen-code'] ?? QWEN_CODE_BRAND;
+  BRANDS[process.env.CRAFT_BRAND || 'lailatul-coder'] ?? QWEN_CODE_BRAND;
 
 // ---------------------------------------------------------------------------
 // App version (renderer-safe — avoids the version barrel which pulls in Node deps)

@@ -26,7 +26,7 @@ describe('canonicalizeWorkspace inside a POSIX container sandbox (#7139)', () =>
   it.skipIf(process.platform === 'win32')(
     'resolves a Windows-shaped workspace to its bind-mount location',
     () => {
-      vi.stubEnv('SANDBOX', 'qwen-code-sandbox-0');
+      vi.stubEnv('SANDBOX', 'lailatul-coder-sandbox-0');
       // The mount exists (mocked), realpath on it ENOENTs on this host, so
       // the fallback returns the translated absolute path — NOT the cwd
       // concatenation `path.resolve` alone would produce.

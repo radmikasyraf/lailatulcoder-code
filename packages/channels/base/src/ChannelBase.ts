@@ -3122,7 +3122,7 @@ export abstract class ChannelBase {
         ? this.getAgentCommandsForSession(sessionId)
         : this.bridge.availableCommands;
       if (agentCommands.length > 0) {
-        lines.push('', 'Agent commands (forwarded to Qwen Code):');
+        lines.push('', 'Agent commands (forwarded to LailatulCoder Ai):');
         for (const cmd of agentCommands) {
           lines.push(`/${cmd.name} — ${cmd.description}`);
         }

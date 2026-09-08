@@ -181,7 +181,7 @@ Claude Code runs `UserPromptSubmit` at its user-submission boundary, before
 control enters the model query loop. Tool-result recursion does not cross that
 boundary, so its existing `prompt` naturally represents submitted input.
 
-Qwen Code runs the hook closer to its shared model-send pipeline and preserves
+LailatulCoder Ai runs the hook closer to its shared model-send pipeline and preserves
 legacy behavior across more send paths. Moving the event would be a broader,
 breaking semantic change. An additive provenance field gives supported TUI
 callers the missing boundary signal while preserving existing integrations.

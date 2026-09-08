@@ -2,7 +2,7 @@
 
 ## Context
 
-Qwen Code installs extensions from directories, archives, Git repositories, archive URLs, and scoped npm packages. Each source is normalized to a local directory before its manifest is loaded. The [Qoder plugin layout](https://docs.qoder.com/en/cli/sdk/plugins) uses `.qoder-plugin/plugin.json` with standard commands, agents, skills, and a root `.mcp.json` file.
+LailatulCoder Ai installs extensions from directories, archives, Git repositories, archive URLs, and scoped npm packages. Each source is normalized to a local directory before its manifest is loaded. The [Qoder plugin layout](https://docs.qoder.com/en/cli/sdk/plugins) uses `.qoder-plugin/plugin.json` with standard commands, agents, skills, and a root `.mcp.json` file.
 
 ## Design
 

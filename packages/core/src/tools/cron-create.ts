@@ -96,7 +96,7 @@ class CronCreateInvocation extends BaseToolInvocation<
 
       const where = durable
         ? `Persisted to ${CRON_TASKS_DISPLAY_PATH}`
-        : 'Session-only (not written to disk, dies when Qwen Code exits)';
+        : 'Session-only (not written to disk, dies when LailatulCoder Ai exits)';
       const maxAgeDays = this.config.getCronRecurringMaxAgeDays();
       const expiry = Number.isFinite(maxAgeDays)
         ? `Auto-expires after ${formatDays(maxAgeDays)}. Use CronDelete to cancel sooner.`
@@ -149,7 +149,7 @@ export class CronCreateTool extends BaseDeclarativeTool<
         '  "in an hour or so, remind me to..." → pick whatever minute you land on, don\'t round\n\n' +
         'Only use minute 0 or 30 when the user names that exact time and clearly means it ("at 9:00 sharp", "at half past", coordinating with a meeting). When in doubt, nudge a few minutes early or late — the user will not notice, and the fleet will.\n\n' +
         '## Durability\n\n' +
-        'By default (durable: false) the job lives only in this Qwen Code session — nothing is written to disk, and the job is gone when Qwen Code exits. ' +
+        'By default (durable: false) the job lives only in this LailatulCoder Ai session — nothing is written to disk, and the job is gone when LailatulCoder Ai exits. ' +
         `Pass durable: true to write to ${CRON_TASKS_DISPLAY_PATH} so the job survives restarts. ` +
         'Only use durable: true when the user explicitly asks for persistence ("keep doing this every day", "set this up permanently"). ' +
         'Most "remind me in 5 minutes" requests should stay session-only.\n\n' +
@@ -182,7 +182,7 @@ export class CronCreateTool extends BaseDeclarativeTool<
           },
           durable: {
             type: 'boolean',
-            description: `true = persist to ${CRON_TASKS_DISPLAY_PATH} and survive restarts. false (default) = in-memory only, dies when Qwen Code exits. Use true only when the user asks the task to survive across sessions.`,
+            description: `true = persist to ${CRON_TASKS_DISPLAY_PATH} and survive restarts. false (default) = in-memory only, dies when LailatulCoder Ai exits. Use true only when the user asks the task to survive across sessions.`,
           },
         },
         required: ['cron', 'prompt'],

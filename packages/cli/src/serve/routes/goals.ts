@@ -26,7 +26,7 @@ import type { Application } from 'express';
 import type {
   BridgeSessionGoal,
   BridgeSessionSummary,
-} from '@qwen-code/acp-bridge';
+} from '@lailatul-coder/acp-bridge';
 import { writeStderrLine } from '../../utils/stdioHelpers.js';
 import {
   sendGenerationClosedError,

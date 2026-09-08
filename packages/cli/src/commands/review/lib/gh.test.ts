@@ -395,7 +395,7 @@ describe('isOwnerRepo', () => {
     // goes red (real dash-prefixed repos must stay reviewable).
     expect(isOwnerRepo('yezhaodan/-Git')).toBe(true);
     expect(isOwnerRepo('-evil/repo')).toBe(false);
-    expect(isOwnerRepo('QwenLM/qwen-code')).toBe(true);
+    expect(isOwnerRepo('LailatulCoder/lailatul-coder')).toBe(true);
     expect(isOwnerRepo('../escape')).toBe(false);
     expect(isOwnerRepo('owner/..')).toBe(false);
   });

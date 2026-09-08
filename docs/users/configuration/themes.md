@@ -1,10 +1,10 @@
 # Themes
 
-Qwen Code supports a variety of themes to customize its color scheme and appearance. You can change the theme to suit your preferences via the `/theme` command or the `"ui.theme"` configuration setting.
+LailatulCoder Ai supports a variety of themes to customize its color scheme and appearance. You can change the theme to suit your preferences via the `/theme` command or the `"ui.theme"` configuration setting.
 
 ## Available Themes
 
-Qwen Code comes with a selection of pre-defined themes, which you can list using the `/theme` command within the CLI:
+LailatulCoder Ai comes with a selection of pre-defined themes, which you can list using the `/theme` command within the CLI:
 
 - **Dark Themes:**
   - `ANSI`
@@ -26,7 +26,7 @@ Qwen Code comes with a selection of pre-defined themes, which you can list using
 
 ### Changing Themes
 
-1.  Enter `/theme` into Qwen Code.
+1.  Enter `/theme` into LailatulCoder Ai.
 2.  A dialog or selection prompt appears, listing the available themes.
 3.  Using the arrow keys, select a theme. Some interfaces might offer a live preview or highlight as you select.
 4.  Confirm your selection to apply the theme.
@@ -35,13 +35,13 @@ Qwen Code comes with a selection of pre-defined themes, which you can list using
 
 ### Theme Persistence
 
-Selected themes are saved in Qwen Code's [configuration](../configuration/settings) so your preference is remembered across sessions.
+Selected themes are saved in LailatulCoder Ai's [configuration](../configuration/settings) so your preference is remembered across sessions.
 
 ---
 
 ## Auto Theme Detection
 
-When the theme is set to `"auto"` (or left unset), Qwen Code automatically detects whether your terminal uses a dark or light background and selects the matching Qwen theme (`Qwen Dark` or `Qwen Light`).
+When the theme is set to `"auto"` (or left unset), LailatulCoder Ai automatically detects whether your terminal uses a dark or light background and selects the matching Qwen theme (`Qwen Dark` or `Qwen Light`).
 
 ### How to enable
 
@@ -59,7 +59,7 @@ Or select **Auto** in the `/theme` dialog. This is the default behavior when no 
 
 ### Detection methods
 
-Qwen Code uses multiple detection methods in a fallback chain. At startup (async path), the order is:
+LailatulCoder Ai uses multiple detection methods in a fallback chain. At startup (async path), the order is:
 
 | Priority | Method                  | Platform   | How it works                                                                                         |
 | -------- | ----------------------- | ---------- | ---------------------------------------------------------------------------------------------------- |
@@ -80,7 +80,7 @@ The first method that returns a result wins. The detected value is cached for th
 
 ## Custom Color Themes
 
-Qwen Code allows you to create your own custom color themes by specifying them in your `settings.json` file. This gives you full control over the color palette used in the CLI.
+LailatulCoder Ai allows you to create your own custom color themes by specifying them in your `settings.json` file. This gives you full control over the color palette used in the CLI.
 
 ### How to Define a Custom Theme
 
@@ -178,7 +178,7 @@ The theme file must be a valid JSON file that follows the same structure as a cu
 }
 ```
 
-**Security Note:** For your safety, Qwen Code will only load theme files that are located within your home directory. If you attempt to load a theme from outside your home directory, a warning will be displayed and the theme will not be loaded. This is to prevent loading potentially malicious theme files from untrusted sources.
+**Security Note:** For your safety, LailatulCoder Ai will only load theme files that are located within your home directory. If you attempt to load a theme from outside your home directory, a warning will be displayed and the theme will not be loaded. This is to prevent loading potentially malicious theme files from untrusted sources.
 
 ### Example Custom Theme
 
@@ -186,7 +186,7 @@ The theme file must be a valid JSON file that follows the same structure as a cu
 
 ### Using Your Custom Theme
 
-- Select your custom theme using the `/theme` command in Qwen Code. Your custom theme will appear in the theme selection dialog.
+- Select your custom theme using the `/theme` command in LailatulCoder Ai. Your custom theme will appear in the theme selection dialog.
 - Or, set it as the default by adding `"theme": "MyCustomTheme"` to the `ui` object in your `settings.json`.
 - Custom themes can be set at the user, project, or system level, and follow the same [configuration precedence](../configuration/settings) as other settings.
 

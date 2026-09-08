@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest';
-import { InputFormat } from '@qwen-code/qwen-code-core';
+import { InputFormat } from '@lailatul-coder/lailatul-coder-core';
 import { createMinimalSettings } from '../../../config/settings.js';
 import type { StreamJsonOutputAdapter } from '../../io/StreamJsonOutputAdapter.js';
 import type { IControlContext } from '../ControlContext.js';
@@ -21,8 +21,8 @@ const { mockDebugLogger } = vi.hoisted(() => ({
   },
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@qwen-code/qwen-code-core')>()),
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
   createDebugLogger: () => mockDebugLogger,
 }));
 

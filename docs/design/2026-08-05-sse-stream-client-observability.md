@@ -51,21 +51,21 @@ Each accepted stream produces `opened` and `closed` lifecycle records. Slow
 subscriber warnings, evictions, and `state_resync_required` frames produce
 additional records. Their OTel event names are:
 
-- `qwen-code.daemon.sse.opened`
-- `qwen-code.daemon.sse.slow_client_warning`
-- `qwen-code.daemon.sse.client_evicted`
-- `qwen-code.daemon.sse.state_resync_required`
-- `qwen-code.daemon.sse.closed`
+- `lailatul-coder.daemon.sse.opened`
+- `lailatul-coder.daemon.sse.slow_client_warning`
+- `lailatul-coder.daemon.sse.client_evicted`
+- `lailatul-coder.daemon.sse.state_resync_required`
+- `lailatul-coder.daemon.sse.closed`
 
 The route captures its request telemetry context before installing the
 EventBus callback. Every lifecycle log runs under that captured context so a
 warning emitted from a model/publisher call is parented to the correct
 long-lived SSE request span.
 
-The common attributes are `session.id`, `qwen-code.client_id`,
-`qwen-code.daemon.sse.stream_id`,
-`qwen-code.daemon.sse.client_reported_connect_reason`, and
-`qwen-code.daemon.sse.client_reported_previous_stream_id`. Stream/client ids
+The common attributes are `session.id`, `lailatul-coder.client_id`,
+`lailatul-coder.daemon.sse.stream_id`,
+`lailatul-coder.daemon.sse.client_reported_connect_reason`, and
+`lailatul-coder.daemon.sse.client_reported_previous_stream_id`. Stream/client ids
 remain span and log attributes only; they are not metric labels.
 
 The close record and request span also receive stream duration, settled event
@@ -76,7 +76,7 @@ and all other close attributes are fully namespaced. In particular, duration
 must not use the special bare `duration_ms` attribute interpreted by the
 Log-to-Span bridge as a span start duration.
 
-The exact close attributes use the `qwen-code.daemon.sse.*` namespace:
+The exact close attributes use the `lailatul-coder.daemon.sse.*` namespace:
 `duration_ms`, `event_frames_write_settled`, `last_event_id_written`,
 `backpressure_count`, `max_drain_wait_ms`,
 `max_live_publish_to_write_settled_ms`, `slow_warning_count`,

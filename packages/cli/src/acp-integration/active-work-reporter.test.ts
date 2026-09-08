@@ -11,7 +11,7 @@ import {
   ACTIVE_WORK_NOTIFICATION_METHOD,
   type ActiveWorkHoldV1,
   type ActiveWorkSnapshotV1,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 import {
   ActiveWorkReporter,
   type ActiveWorkSource,

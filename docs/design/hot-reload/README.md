@@ -1,14 +1,14 @@
 # Hot Reload Overall Plan
 
 This directory tracks the design work for issue
-[#3696](https://github.com/QwenLM/qwen-code/issues/3696): a comprehensive
+[#3696](https://github.com/LailatulCoder/lailatul-coder/issues/3696): a comprehensive
 hot-reload system for skills, extensions, MCP servers, LSP servers, and runtime
 configuration.
 
 ## Goal
 
 Users should be able to update skills, extension state, MCP/LSP configuration,
-and supported settings without restarting the current Qwen Code session. The
+and supported settings without restarting the current LailatulCoder Ai session. The
 system should preserve conversation context while making runtime state changes
 predictable and visible.
 

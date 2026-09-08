@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { DaemonChannelTypeDescriptor } from '@qwen-code/sdk/daemon';
+import type { DaemonChannelTypeDescriptor } from '@lailatul-coder/sdk/daemon';
 
 export const PLATFORM_MARKS: Record<string, string> = {
   dingtalk: 'D',

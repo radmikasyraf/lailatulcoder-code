@@ -15,7 +15,7 @@ import {
   gitCommit,
   isValidRefName,
   isValidCheckoutRef,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { SendBridgeError } from '../server/error-response.js';
 import { safeBody } from '../server/request-helpers.js';
 import type {

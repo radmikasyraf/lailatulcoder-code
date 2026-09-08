@@ -313,7 +313,7 @@ For the complete route and wire protocol reference, see [`../qwen-serve-protocol
 ## 12. Embedded invocation (bypass CLI)
 
 ```ts
-import { runQwenServe } from '@qwen-code/qwen-code/serve';
+import { runQwenServe } from '@lailatul-coder/lailatul-coder/serve';
 
 const handle = await runQwenServe({
   port: 0, // ephemeral
@@ -335,7 +335,7 @@ import type { AddressInfo } from 'node:net';
 import {
   createServeApp,
   getServeAppLifecycle,
-} from '@qwen-code/qwen-code/serve';
+} from '@lailatul-coder/lailatul-coder/serve';
 
 let actualPort = 0;
 const app = createServeApp(

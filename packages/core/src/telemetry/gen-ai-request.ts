@@ -26,7 +26,7 @@ type RequestRecord = Record<string, unknown>;
 const debugLogger = createDebugLogger('GEN_AI_EXCHANGE');
 
 const requestObserverKey = createContextKey(
-  'qwen-code.gen-ai-request-observer',
+  'lailatul-coder.gen-ai-request-observer',
 );
 const DISABLED_OBSERVER = Symbol('disabled-gen-ai-exchange');
 

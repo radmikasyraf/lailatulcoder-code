@@ -1,6 +1,6 @@
-# Installation Guide for Qwen Code with Source Tracking
+# Installation Guide for LailatulCoder Ai with Source Tracking
 
-This guide describes the source-tracking installation scripts for Qwen Code.
+This guide describes the source-tracking installation scripts for LailatulCoder Ai.
 The scripts prefer standalone release archives and can fall back to npm when a
 standalone archive is not available.
 
@@ -32,11 +32,11 @@ are only required when the installer falls back to npm or when
 
 GitHub releases publish these standalone archives:
 
-- `qwen-code-darwin-arm64.tar.gz`
-- `qwen-code-darwin-x64.tar.gz`
-- `qwen-code-linux-arm64.tar.gz`
-- `qwen-code-linux-x64.tar.gz`
-- `qwen-code-win-x64.zip`
+- `lailatul-coder-darwin-arm64.tar.gz`
+- `lailatul-coder-darwin-x64.tar.gz`
+- `lailatul-coder-linux-arm64.tar.gz`
+- `lailatul-coder-linux-x64.tar.gz`
+- `lailatul-coder-win-x64.zip`
 - `SHA256SUMS`
 
 The new standalone-first installer scripts (`install-qwen-standalone.sh`,
@@ -79,7 +79,7 @@ links keep resolving without a version segment. The versioned snapshot lets you
 roll back by repointing the global objects to a previous tag if a regression is
 caught after publish. The hosted
 installers intentionally default to `latest`; on Aliyun OSS this means reading
-`releases/qwen-code/latest/VERSION` first, then downloading the matching
+`releases/lailatul-coder/latest/VERSION` first, then downloading the matching
 versioned release directory. Use `--version` or `QWEN_INSTALL_VERSION` to pin a
 standalone release directly.
 
@@ -93,15 +93,15 @@ The workflow defaults to the production OSS bucket and Hangzhou endpoint. Set
 these GitHub Actions variables only when the bucket, endpoint, or public base
 URL changes:
 
-- `ALIYUN_OSS_BUCKET` (default: `qwen-code-assets`)
+- `ALIYUN_OSS_BUCKET` (default: `lailatul-coder-assets`)
 - `ALIYUN_OSS_ENDPOINT` (default: `https://oss-cn-hangzhou.aliyuncs.com`)
 - `ALIYUN_OSS_PUBLIC_BASE_URL` (default:
-  `https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com`)
+  `https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com`)
 
 Archive layout:
 
 ```text
-qwen-code/
+lailatul-coder/
   bin/qwen
   bin/qwen.cmd
   lib/cli.js
@@ -134,7 +134,7 @@ install-qwen-standalone.bat --method npm
 ```
 
 Repair PATH for an existing standalone Windows install without downloading or
-reinstalling Qwen Code:
+reinstalling LailatulCoder Ai:
 
 ```bat
 install-qwen-standalone.bat --repair-path
@@ -143,7 +143,7 @@ install-qwen-standalone.bat --repair-path --path-scope machine
 
 ## Optional Native Modules
 
-The standalone archives bundle Qwen Code, a private Node.js runtime, and the
+The standalone archives bundle LailatulCoder Ai, a private Node.js runtime, and the
 matching `@teddyzhu/clipboard` native package for clipboard image paste. They
 do not currently install every npm optional native module, such as `node-pty`,
 so terminal pty behavior may not be identical to an npm installation.
@@ -168,12 +168,12 @@ bash install-qwen-standalone.sh --mirror aliyun
 
 # Install an offline archive
 # SHA256SUMS must be in the same directory.
-bash install-qwen-standalone.sh --archive ./qwen-code-linux-x64.tar.gz
+bash install-qwen-standalone.sh --archive ./lailatul-coder-linux-x64.tar.gz
 ```
 
 Standalone installs to:
 
-- Runtime: `~/.local/lib/qwen-code`
+- Runtime: `~/.local/lib/lailatul-coder`
 - Shim: `~/.local/bin/qwen`
 
 Override with `QWEN_INSTALL_ROOT`, `QWEN_INSTALL_LIB_PARENT`,
@@ -182,7 +182,7 @@ Override with `QWEN_INSTALL_ROOT`, `QWEN_INSTALL_LIB_PARENT`,
 Uninstall a standalone Linux/macOS install:
 
 ```bash
-curl -fsSL https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.sh | bash
+curl -fsSL https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.sh | bash
 ```
 
 The uninstaller removes only the standalone runtime, generated `qwen` wrapper,
@@ -207,13 +207,13 @@ install-qwen-standalone.bat --mirror aliyun
 
 REM Install an offline archive
 REM SHA256SUMS must be in the same directory.
-install-qwen-standalone.bat --archive qwen-code-win-x64.zip
+install-qwen-standalone.bat --archive lailatul-coder-win-x64.zip
 ```
 
 Standalone installs to:
 
-- Runtime: `%LOCALAPPDATA%\qwen-code\qwen-code`
-- Shim: `%LOCALAPPDATA%\qwen-code\bin\qwen.cmd`
+- Runtime: `%LOCALAPPDATA%\lailatul-coder\lailatul-coder`
+- Shim: `%LOCALAPPDATA%\lailatul-coder\bin\qwen.cmd`
 
 Override with `QWEN_INSTALL_ROOT`, `QWEN_INSTALL_LIB_DIR`, or
 `QWEN_INSTALL_BIN_DIR` when needed.
@@ -224,7 +224,7 @@ repair machine-level PATH without reinstalling:
 ```powershell
 $env:QWEN_INSTALL_REPAIR_PATH = '1'
 $env:QWEN_INSTALL_PATH_SCOPE = 'machine'
-irm https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.ps1 | iex
+irm https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.ps1 | iex
 ```
 
 Restart the runner service or machine after updating machine-level PATH so jobs
@@ -235,7 +235,7 @@ Restart the terminal if `qwen` is not immediately available on PATH.
 Uninstall a standalone Windows install:
 
 ```bat
-powershell -ExecutionPolicy Bypass -c "irm https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.ps1 | iex"
+powershell -ExecutionPolicy Bypass -c "irm https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/installation/uninstall-qwen-standalone.ps1 | iex"
 ```
 
 The uninstaller removes only the standalone runtime, generated `qwen.cmd`
@@ -271,12 +271,12 @@ Environment variables:
 - `QWEN_INSTALL_PATH_SCOPE`
 
 Use `--base-url` for private mirrors. The URL must contain
-`qwen-code-<target>` archives and `SHA256SUMS` in the same directory. Custom
+`lailatul-coder-<target>` archives and `SHA256SUMS` in the same directory. Custom
 base URLs must use `https://`.
 
 For Aliyun OSS/CDN, release publishing uploads byte-identical artifacts to the
-versioned directory, for example `releases/qwen-code/vX.Y.Z/`. Stable releases
-also update the small `releases/qwen-code/latest/VERSION` pointer used by the
+versioned directory, for example `releases/lailatul-coder/vX.Y.Z/`. Stable releases
+also update the small `releases/lailatul-coder/latest/VERSION` pointer used by the
 default installer path. The installer reads that pointer and then downloads the
 versioned archive plus the versioned `SHA256SUMS`; nightly and preview releases
 do not update the pointer.
@@ -314,13 +314,13 @@ unreadable source files are ignored.
 If source tracking is not needed and Node.js 22 or newer is already available:
 
 ```bash
-npm install -g @qwen-code/qwen-code@latest
+npm install -g @lailatul-coder/lailatul-coder@latest
 ```
 
-Homebrew users can also install Qwen Code with:
+Homebrew users can also install LailatulCoder Ai with:
 
 ```bash
-brew install qwen-code
+brew install lailatul-coder
 ```
 
 ## Troubleshooting
@@ -346,7 +346,7 @@ fails with a permission error, fix the npm global install location or use a
 user-owned Node.js installation, then rerun:
 
 ```bash
-npm install -g @qwen-code/qwen-code@latest --registry https://registry.npmmirror.com
+npm install -g @lailatul-coder/lailatul-coder@latest --registry https://registry.npmmirror.com
 ```
 
 ### qwen Is Not on PATH After Installation
@@ -367,5 +367,5 @@ export PATH="$(npm prefix -g)/bin:$PATH"
 On Windows standalone installs, add this directory to PATH:
 
 ```bat
-%LOCALAPPDATA%\qwen-code\bin
+%LOCALAPPDATA%\lailatul-coder\bin
 ```

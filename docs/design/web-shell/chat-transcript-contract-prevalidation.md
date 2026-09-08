@@ -101,7 +101,7 @@ ChatTranscriptModel
 
 ### 3.2 非目标
 
-- 不新增 `@qwen-code/web-shell/chat-panel` 或新的通用 ChatPanel framework；
+- 不新增 `@lailatul-coder/web-shell/chat-panel` 或新的通用 ChatPanel framework；
 - 不统一 composer、草稿、附件、队列、权限交互、会话列表或宿主导航；
 - 不要求 Web/Qwen Server 或 Tauri Desktop 新增生产 adapter；
 - 不迁移 OpenWork/Craft Electron；
@@ -154,7 +154,7 @@ flowchart LR
 ### 5.1 最小定义
 
 ```ts
-import type { DaemonTranscriptBlock } from '@qwen-code/sdk/daemon';
+import type { DaemonTranscriptBlock } from '@lailatul-coder/sdk/daemon';
 
 interface ChatTranscriptModel {
   readonly blocks: readonly DaemonTranscriptBlock[];

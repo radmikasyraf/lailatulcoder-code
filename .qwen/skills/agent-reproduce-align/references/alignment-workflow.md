@@ -1,6 +1,6 @@
 # Alignment Workflow Reference
 
-The alignment phase starts after Qwen Code has a candidate implementation. Use it to create a tight loop: run the selected reference agent and Qwen Code, compare traces, patch the target, and rerun only the failing scenario.
+The alignment phase starts after LailatulCoder Ai has a candidate implementation. Use it to create a tight loop: run the selected reference agent and LailatulCoder Ai, compare traces, patch the target, and rerun only the failing scenario.
 
 ## Trace Inputs
 
@@ -74,7 +74,7 @@ Low priority:
 ## Iteration Loop
 
 1. Pick the highest-priority unexplained mismatch.
-2. Patch only the likely owner module in Qwen Code.
+2. Patch only the likely owner module in LailatulCoder Ai.
 3. Run the focused test/smoke path.
 4. Capture only the affected scenario again.
 5. Refresh the reference state diff if the suspected mismatch involves local

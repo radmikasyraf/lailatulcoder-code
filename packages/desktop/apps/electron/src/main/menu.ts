@@ -17,7 +17,7 @@ let cachedClientResolver: ClientResolver | null = null
 
 /**
  * Creates and sets the application menu for macOS.
- * Includes only relevant items for the Qwen Code app.
+ * Includes only relevant items for the LailatulCoder Ai app.
  *
  * Call rebuildMenu() when shared menu state changes.
  */

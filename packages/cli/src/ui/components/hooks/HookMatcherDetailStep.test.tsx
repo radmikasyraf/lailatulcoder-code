@@ -10,7 +10,7 @@ import {
   HookEventName,
   HooksConfigSource,
   HookType,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { HookMatcherDetailStep } from './HookMatcherDetailStep.js';
 import type {
   HookConfigDisplayInfo,
@@ -250,3 +250,4 @@ describe('HookMatcherDetailStep', () => {
     expect(out).toContain('Esc to go back');
   });
 });
+

@@ -15,8 +15,8 @@ import {
   MCPOAuthProvider,
   MCPOAuthTokenStorage,
   getErrorMessage,
-} from '@qwen-code/qwen-code-core';
-import type { OAuthDisplayPayload } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import type { OAuthDisplayPayload } from '@lailatul-coder/lailatul-coder-core';
 import { appEvents, AppEvent } from '../../../../utils/events.js';
 import {
   osc8Hyperlink,
@@ -306,3 +306,4 @@ export const AuthenticateStep: React.FC<AuthenticateStepProps> = ({
     </Box>
   );
 };
+

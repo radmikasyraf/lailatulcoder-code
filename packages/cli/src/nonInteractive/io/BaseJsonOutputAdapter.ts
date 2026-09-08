@@ -14,7 +14,7 @@ import type {
   AgentResultDisplay,
   McpToolProgressData,
   ShellProgressData,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   formatVisionBridgeNoticeDisplay,
   GeminiEventType,
@@ -22,7 +22,7 @@ import {
   ToolErrorType,
   parseAndFormatApiError,
   toolResultBoundaryArtifact,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Part, GenerateContentResponseUsageMetadata } from '@google/genai';
 import type {
   CLIAssistantMessage,

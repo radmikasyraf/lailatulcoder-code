@@ -599,7 +599,7 @@ import * as fs from 'node:fs';
 import {
   readWorktreeSession,
   type WorktreeSession,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { useConfig } from '../contexts/ConfigContext.js';
 
 export function useWorktreeSession(): WorktreeSession | null {
@@ -639,7 +639,7 @@ export function useWorktreeSession(): WorktreeSession | null {
 }
 ```
 
-注意：`readWorktreeSession` 和 `WorktreeSession` 需要从 `@qwen-code/qwen-code-core` 导出，需要同时在 `packages/core/src/index.ts` 中新增导出：
+注意：`readWorktreeSession` 和 `WorktreeSession` 需要从 `@lailatul-coder/lailatul-coder-core` 导出，需要同时在 `packages/core/src/index.ts` 中新增导出：
 
 ```typescript
 export {
@@ -726,7 +726,7 @@ worktree?: {
 };
 ```
 
-字段名和 claude-code 保持一致，方便用户在 qwen-code 和 claude-code 之间复用 statusline 脚本。
+字段名和 claude-code 保持一致，方便用户在 lailatul-coder 和 claude-code 之间复用 statusline 脚本。
 
 找到 `doUpdate` 回调中构造 `input: StatusLineCommandInput` 对象的地方（约行 225），在 `...(ui.branchName && { git: { branch: ui.branchName } })` 之后新增：
 
@@ -865,7 +865,7 @@ if (resumedSessionData) {
 import {
   readWorktreeSession,
   clearWorktreeSession,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import * as fs from 'node:fs/promises';
 ```
 

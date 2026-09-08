@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const WEBUI_SESSION_CLIENT_ID_PREFIX = 'qwen-code-webui-client-id:session:';
+const WEBUI_SESSION_CLIENT_ID_PREFIX = 'lailatul-coder-webui-client-id:session:';
 
 export function getStableClientId(
   clientId: string | undefined,

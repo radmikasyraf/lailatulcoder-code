@@ -116,10 +116,10 @@ describe('toolFormatting', () => {
         tool({
           args: {
             file_path:
-              '/Users/ytahdn/Documents/Codes/alishu/qwen-code/README.md',
+              '/Users/ytahdn/Documents/Codes/alishu/lailatul-coder/README.md',
           },
         }),
-        '/Users/ytahdn/Documents/Codes/qwen/qwen-code',
+        '/Users/ytahdn/Documents/Codes/qwen/lailatul-coder',
       ),
     ).toBe('README.md');
   });

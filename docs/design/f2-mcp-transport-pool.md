@@ -1202,7 +1202,7 @@ Because F2 ships as one PR, all three tags advertise together. Pool consumers ma
 ### 20.2 SDK additive surface
 
 ```ts
-// @qwen-code/sdk — additive only
+// @lailatul-coder/sdk — additive only
 export interface DaemonMcpBudgetWarningData {
   // existing fields...
   scope?: 'workspace' | 'session'; // NEW — absent on old daemons (means 'session')
@@ -1344,7 +1344,7 @@ V21 locked Q1/Q3/Q4/Q6 in design defaults (single-PR delivery). Q2/Q5/Q7/Q8/Q9 r
 | Q7    | `restoreState` window vs pool drain — keep separate, align, or read from settings?                                | **Keep separate 30s default** + config knob `--mcp-pool-drain-ms`                         | commit 4               |
 | Q8    | OAuth handling — confirm F3 deferral, document workaround?                                                        | **Deferred to F3**, document `/mcp auth <name>` workaround                                | commit 4               |
 | Q9    | `entrySummary` exposure — always include, or behind verbose flag?                                                 | **Always include** (small payload, useful for ops)                                        | commit 5               |
-| Q10   | Update `codeagents/qwen-code-daemon-design/02-architectural-decisions.md` decision #3 — coordinate with @wenshao? | F2 PR description links codeagents PR; two PRs reviewed independently                     | PR open                |
+| Q10   | Update `codeagents/lailatul-coder-daemon-design/02-architectural-decisions.md` decision #3 — coordinate with @wenshao? | F2 PR description links codeagents PR; two PRs reviewed independently                     | PR open                |
 
 ---
 
@@ -1379,8 +1379,8 @@ V21 locked Q1/Q3/Q4/Q6 in design defaults (single-PR delivery). Q2/Q5/Q7/Q8/Q9 r
 
 | Doc                                                                            | Update                                                                                                                                                  | When                                                 |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `codeagents/qwen-code-daemon-design/02-architectural-decisions.md`             | Decision #3 "MCP server lifetime": currently "per-session"; update to "workspace-pooled with config-hash key under daemon mode; per-session standalone" | F2-3 merges (coordinate with @wenshao codeagents PR) |
-| `codeagents/qwen-code-daemon-design/06-roadmap.md`                             | Wave 5 PR 23 → mark as F2 series; link to PRs                                                                                                           | F2-3 merges                                          |
+| `codeagents/lailatul-coder-daemon-design/02-architectural-decisions.md`             | Decision #3 "MCP server lifetime": currently "per-session"; update to "workspace-pooled with config-hash key under daemon mode; per-session standalone" | F2-3 merges (coordinate with @wenshao codeagents PR) |
+| `codeagents/lailatul-coder-daemon-design/06-roadmap.md`                             | Wave 5 PR 23 → mark as F2 series; link to PRs                                                                                                           | F2-3 merges                                          |
 | `packages/cli/src/serve/README.md` (if exists) or new `docs/serve/mcp-pool.md` | New section: pool semantics, fingerprint key, transport opt-in, restart semantics, status snapshot interpretation                                       | F2-3b                                                |
 | `packages/sdk/README.md`                                                       | `scope?` field on guardrail events, `entryCount` on server status, helper `isWorkspaceScopedBudgetEvent`                                                | F2-4                                                 |
 | Issue #4175 body                                                               | Update F2 entry with sub-PR table, link to design v2 (this doc)                                                                                         | Before F2-1 opens                                    |

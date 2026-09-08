@@ -7,7 +7,7 @@
 import express from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { fetchGitLog, fetchGitCommitDetail } from '@qwen-code/qwen-code-core';
+import { fetchGitLog, fetchGitCommitDetail } from '@lailatul-coder/lailatul-coder-core';
 import type { AcpSessionBridge } from '../acp-session-bridge.js';
 import { sendBridgeError } from '../server/error-response.js';
 import {
@@ -20,8 +20,8 @@ import {
   registerWorkspaceQualifiedGitLogRoutes,
 } from './workspace-git-log.js';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@qwen-code/qwen-code-core')>()),
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
   fetchGitLog: vi.fn(),
   fetchGitCommitDetail: vi.fn(),
 }));

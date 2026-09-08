@@ -38,7 +38,7 @@ interface UseOnboardingReturn {
 }
 
 export const BASE_SLUG_FOR_METHOD: Record<ApiSetupMethod, string> = {
-  qwen_code: 'qwen-code',
+  qwen_code: 'lailatul-coder',
 }
 
 export function resolveSlugForMethod(
@@ -116,7 +116,7 @@ export function useOnboarding({
         ...s,
         credentialStatus: 'error',
         completionStatus: 'saving',
-        errorMessage: result.error || 'Failed to save Qwen Code configuration',
+        errorMessage: result.error || 'Failed to save LailatulCoder Ai configuration',
       }))
       return false
     }
@@ -166,7 +166,7 @@ export function useOnboarding({
         setState(s => ({
           ...s,
           credentialStatus: 'error',
-          errorMessage: testResult.error || 'Qwen Code connection test failed',
+          errorMessage: testResult.error || 'LailatulCoder Ai connection test failed',
         }))
         return
       }
@@ -176,7 +176,7 @@ export function useOnboarding({
       setState(s => ({
         ...s,
         credentialStatus: 'error',
-        errorMessage: error instanceof Error ? error.message : 'Qwen Code validation failed',
+        errorMessage: error instanceof Error ? error.message : 'LailatulCoder Ai validation failed',
       }))
     }
   }, [saveQwenConnection])

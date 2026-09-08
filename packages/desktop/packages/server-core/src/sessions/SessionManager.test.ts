@@ -7,9 +7,9 @@ type TestManagedSession = ReturnType<typeof createManagedSession>
 
 const workspace: Workspace = {
   id: 'workspace-qwen',
-  name: 'qwen-code',
-  slug: 'qwen-code',
-  rootPath: '/tmp/qwen-code',
+  name: 'lailatul-coder',
+  slug: 'lailatul-coder',
+  rootPath: '/tmp/lailatul-coder',
   createdAt: Date.parse('2026-06-17T12:00:00.000Z'),
 }
 
@@ -39,7 +39,7 @@ describe('SessionManager Qwen canonical mirror filtering', () => {
           createdAt: timestamp,
           lastUsedAt: timestamp,
           lastMessageAt: timestamp,
-          llmConnection: 'qwen-code',
+          llmConnection: 'lailatul-coder',
         },
         workspace,
       ),
@@ -63,7 +63,7 @@ describe('SessionManager Qwen canonical mirror filtering', () => {
           name: 'Investigate Windows path expansion',
           messageCount: 0,
           lastMessageAt: timestamp,
-          llmConnection: 'qwen-code',
+          llmConnection: 'lailatul-coder',
         },
         workspace,
       ),
@@ -76,7 +76,7 @@ describe('SessionManager Qwen canonical mirror filtering', () => {
           sdkSessionId: contentSessionId,
           name: '(session)',
           lastMessageAt: timestamp - 1,
-          llmConnection: 'qwen-code',
+          llmConnection: 'lailatul-coder',
         },
         workspace,
         {
@@ -115,7 +115,7 @@ describe('SessionManager Qwen canonical mirror filtering', () => {
       messageCount: 0,
       createdAt: Date.parse('2026-06-17T10:15:30.000Z'),
       lastMessageAt: Date.parse('2026-06-17T10:15:30.000Z'),
-      llmConnection: 'qwen-code',
+      llmConnection: 'lailatul-coder',
     }
 
     expect(() =>

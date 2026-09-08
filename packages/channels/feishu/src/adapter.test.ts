@@ -30,7 +30,7 @@ import type {
   ObservedChannelContactGraph,
   SessionTarget,
   UserInputSettlementReason,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 function createMockBridge(): ChannelAgentBridge {
   return {

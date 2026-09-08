@@ -7,7 +7,7 @@
 import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../../semantic-colors.js';
-import type { SkillLevel } from '@qwen-code/qwen-code-core';
+import type { SkillLevel } from '@lailatul-coder/lailatul-coder-core';
 import { type SkillDefinition } from '../../types.js';
 import { t } from '../../../i18n/index.js';
 import { levelLabel } from '../../utils/skill-level-label.js';
@@ -56,3 +56,4 @@ export const SkillsList: React.FC<SkillsListProps> = ({ skills }) => (
     )}
   </Box>
 );
+

@@ -26,7 +26,7 @@ export function query({
   options = {},
 }: {
   /**
-   * The prompt to send to the Qwen Code CLI process.
+   * The prompt to send to the LailatulCoder Ai CLI process.
    * - `string` for single-turn query,
    * - `AsyncIterable<SDKUserMessage>` for multi-turn query.
    *

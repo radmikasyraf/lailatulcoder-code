@@ -2,13 +2,13 @@
 
 ## Status
 
-Draft design for issue [#8102](https://github.com/QwenLM/qwen-code/issues/8102) and PR [#8032](https://github.com/QwenLM/qwen-code/pull/8032).
+Draft design for issue [#8102](https://github.com/LailatulCoder/lailatul-coder/issues/8102) and PR [#8032](https://github.com/LailatulCoder/lailatul-coder/pull/8032).
 
 ## Problem
 
-An in-process embedding host can evaluate a model-proposed tool call through existing permissions and hooks, but those checks may run before Qwen Code has resolved the canonical tool name or built the final invocation parameters. A host that enforces organization policy therefore cannot prove that it evaluated the same call that reached `invocation.execute()`.
+An in-process embedding host can evaluate a model-proposed tool call through existing permissions and hooks, but those checks may run before LailatulCoder Ai has resolved the canonical tool name or built the final invocation parameters. A host that enforces organization policy therefore cannot prove that it evaluated the same call that reached `invocation.execute()`.
 
-The missing primitive is a final execution-boundary decision over the effective tool call. Product-specific task state, approval workflows, policy storage, and audit transport do not belong in Qwen Code.
+The missing primitive is a final execution-boundary decision over the effective tool call. Product-specific task state, approval workflows, policy storage, and audit transport do not belong in LailatulCoder Ai.
 
 ## Goals
 
@@ -39,7 +39,7 @@ The host supplies a `ToolInvocationGuard` in `ConfigParameters`. The guard recei
 
 The decision is either `{ allowed: true }` or `{ allowed: false, reason? }`. A missing or blank denial reason uses a stable generic message. Exceptions, malformed decisions, and clone failures use a separate stable failure message and deny execution. A supplied denial reason is user-visible and may enter existing tool-result and telemetry surfaces, so it must not contain secrets or raw provider errors.
 
-The cloned arguments prevent a guard from mutating the invocation that Qwen Code will execute. The contract does not make arbitrary tool arguments secret; an embedding host must treat them as sensitive application data.
+The cloned arguments prevent a guard from mutating the invocation that LailatulCoder Ai will execute. The contract does not make arbitrary tool arguments secret; an embedding host must treat them as sensitive application data.
 
 The tool-call identifier may originate in a model response. It is useful for
 correlating the guard decision with existing lifecycle events, but it is not an
@@ -66,9 +66,9 @@ is unguarded. A future change may extend the guard to these sites.
 
 ## Default-off compatibility
 
-Qwen Code does not populate `toolInvocationGuard` in its CLI or daemon bootstrap. The field is an in-process embedding API only.
+LailatulCoder Ai does not populate `toolInvocationGuard` in its CLI or daemon bootstrap. The field is an in-process embedding API only.
 
-Each execution path reads the optional callback and enters the asynchronous evaluator only when the callback exists. When absent, Qwen Code performs no guard promise allocation, argument clone, provider call, capability advertisement, or additional asynchronous yield. Existing CLI and daemon deployments therefore retain their prior execution path.
+Each execution path reads the optional callback and enters the asynchronous evaluator only when the callback exists. When absent, LailatulCoder Ai performs no guard promise allocation, argument clone, provider call, capability advertisement, or additional asynchronous yield. Existing CLI and daemon deployments therefore retain their prior execution path.
 
 The intentionally absent in-repository production setter means this change requires maintainer agreement on the public embedding seam before merge. A future external-provider change must remain a separate PR and cannot be assumed as part of this PR's approval.
 
@@ -104,4 +104,4 @@ No E2E plan is required for this PR because it adds no CLI, setting, daemon rout
 
 A future external policy provider may extend the context with trusted runtime-owned session and prompt identity and adapt the in-process callback across the `qwen serve` to ACP child boundary. That follow-up must be default off, independently reviewed, and prove that an unconfigured CLI and daemon do not initialize a provider or change their child process environment.
 
-Result observation should reuse existing structured tool lifecycle events unless a separate issue demonstrates a concrete correlation gap. Product-specific orchestration and policy remain outside Qwen Code.
+Result observation should reuse existing structured tool lifecycle events unless a separate issue demonstrates a concrete correlation gap. Product-specific orchestration and policy remain outside LailatulCoder Ai.

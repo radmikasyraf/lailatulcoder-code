@@ -8,7 +8,7 @@ import type {
   GoalLimitKind,
   GoalSnapshotV2,
   GoalStatus,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 /** The slice of the daemon connection the Goal gate reads. */
 export interface GoalGateConnection {
@@ -43,7 +43,7 @@ export function isGoalGateBlocked(connection: GoalGateConnection): boolean {
  *
  * Duplicated from `packages/core/src/goals/goal-protocol.ts` because the Web
  * Shell client bundles for the browser and does not depend on
- * `@qwen-code/qwen-code-core`. `goalGate.drift.test.ts` reads that file and
+ * `@lailatul-coder/lailatul-coder-core`. `goalGate.drift.test.ts` reads that file and
  * fails if either string moves, so this copy cannot go stale silently.
  */
 export const GOAL_EVIDENCE_LIMIT_REASONS: readonly string[] = [

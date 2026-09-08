@@ -1,6 +1,6 @@
 # Agent Plugins v1
 
-Qwen Code natively loads portable [Agent Plugins v1](https://agent-plugins.org/)
+LailatulCoder Ai natively loads portable [Agent Plugins v1](https://agent-plugins.org/)
 packages. The package keeps its standard `plugin.json`, `mcp.json`, and
 `SKILL.md` files: installation does not generate `qwen-extension.json` or
 rewrite portable files.
@@ -41,10 +41,10 @@ An invalid skill is skipped without disabling valid sibling skills. The
 experimental `allowed-tools` field is recognized as a string but does not grant
 pre-approved Qwen tools.
 
-For stdio MCP servers, Qwen Code expands `${PLUGIN_ROOT}` and `${PLUGIN_DATA}`
+For stdio MCP servers, LailatulCoder Ai expands `${PLUGIN_ROOT}` and `${PLUGIN_DATA}`
 once in `args`, environment values, and `cwd`. `PLUGIN_DATA` is a writable
 per-installation directory whose contents persist across updates and reinstall.
 Remote MCP endpoints must use HTTPS, except for loopback HTTP endpoints.
 
 Agent Plugins v1 is a package format, not a marketplace integration. Install
-packages through Qwen Code's existing extension sources.
+packages through LailatulCoder Ai's existing extension sources.

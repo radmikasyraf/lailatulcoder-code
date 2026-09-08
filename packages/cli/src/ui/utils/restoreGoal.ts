@@ -14,7 +14,7 @@ import {
   type GoalTerminalEvent,
   type GoalTerminalKind,
   type SlashCommandRecordPayload,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   isGoalStatusKind,
   isTerminalGoalStatusKind,

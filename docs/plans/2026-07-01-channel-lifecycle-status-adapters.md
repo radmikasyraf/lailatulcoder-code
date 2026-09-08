@@ -69,7 +69,7 @@ helpers must be idempotent and must not double-append streamed Feishu content.
 
 - Consumes: P0's exported `ChannelTaskLifecycleEvent` type.
 - Produces: a working branch where adapter packages can import
-  `ChannelTaskLifecycleEvent` from `@qwen-code/channel-base`.
+  `ChannelTaskLifecycleEvent` from `@lailatul-coder/channel-base`.
 
 - [ ] **Step 1: Verify P0 lifecycle exists**
 
@@ -118,7 +118,7 @@ Expected: no source changes from this task. Do not commit if the tree is clean.
 **Interfaces:**
 
 - Consumes:
-  `type ChannelTaskLifecycleEvent` from `@qwen-code/channel-base`.
+  `type ChannelTaskLifecycleEvent` from `@lailatul-coder/channel-base`.
 - Produces:
   `TelegramChannel.onTaskLifecycle(event: ChannelTaskLifecycleEvent): void`.
 
@@ -133,7 +133,7 @@ import type {
   ChannelConfig,
   ChannelTaskLifecycleEvent,
   Envelope,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 class TestTelegramChannel extends TelegramChannel {
   startTyping(chatId: string): void {
@@ -208,7 +208,7 @@ Expected: fail because `onTaskLifecycle` is not implemented in Telegram.
 In `packages/channels/telegram/src/TelegramAdapter.ts`, update the type import:
 
 ```ts
-import type { ChannelTaskLifecycleEvent } from '@qwen-code/channel-base';
+import type { ChannelTaskLifecycleEvent } from '@lailatul-coder/channel-base';
 ```
 
 Replace the typing hook body with shared helpers:
@@ -284,7 +284,7 @@ git commit -m "feat(channels): map telegram lifecycle to typing"
 **Interfaces:**
 
 - Consumes:
-  `type ChannelTaskLifecycleEvent` from `@qwen-code/channel-base`.
+  `type ChannelTaskLifecycleEvent` from `@lailatul-coder/channel-base`.
 - Produces:
   `WeixinChannel.onTaskLifecycle(event: ChannelTaskLifecycleEvent): void`.
 
@@ -346,7 +346,7 @@ In `packages/channels/weixin/src/WeixinAdapter.ts`, import the lifecycle type an
 add a per-chat active set:
 
 ```ts
-import type { ChannelTaskLifecycleEvent } from '@qwen-code/channel-base';
+import type { ChannelTaskLifecycleEvent } from '@lailatul-coder/channel-base';
 
 private activeTypingChats = new Set<string>();
 ```
@@ -421,7 +421,7 @@ git commit -m "feat(channels): map weixin lifecycle to typing"
 **Interfaces:**
 
 - Consumes:
-  `type ChannelTaskLifecycleEvent` from `@qwen-code/channel-base`.
+  `type ChannelTaskLifecycleEvent` from `@lailatul-coder/channel-base`.
 - Produces:
   `DingtalkChannel.onTaskLifecycle(event: ChannelTaskLifecycleEvent): void`.
 
@@ -518,7 +518,7 @@ In `packages/channels/dingtalk/src/DingtalkAdapter.ts`, import the lifecycle typ
 and add a reaction key set:
 
 ```ts
-import type { ChannelTaskLifecycleEvent } from '@qwen-code/channel-base';
+import type { ChannelTaskLifecycleEvent } from '@lailatul-coder/channel-base';
 
 private activeReactionKeys = new Set<string>();
 ```
@@ -695,7 +695,7 @@ git commit -m "feat(channels): add feishu card status labels"
 **Interfaces:**
 
 - Consumes:
-  `type ChannelTaskLifecycleEvent` from `@qwen-code/channel-base`.
+  `type ChannelTaskLifecycleEvent` from `@lailatul-coder/channel-base`.
 - Consumes:
   `buildCardContent(markdown, { statusLabel?: string })` from Task 5.
 - Produces:
@@ -860,7 +860,7 @@ In `packages/channels/feishu/src/FeishuAdapter.ts`, import the lifecycle type an
 extend `CardSessionState`:
 
 ```ts
-import type { ChannelTaskLifecycleEvent } from '@qwen-code/channel-base';
+import type { ChannelTaskLifecycleEvent } from '@lailatul-coder/channel-base';
 
 type FeishuTerminalStatus = 'completed' | 'cancelled' | 'failed';
 

@@ -56,7 +56,7 @@ independent.
 
 ```ini
 [Unit]
-Description=Qwen Code daemon (loopback HTTP + SSE)
+Description=LailatulCoder Ai daemon (loopback HTTP + SSE)
 After=network.target
 
 [Service]
@@ -105,7 +105,7 @@ Without `loginctl enable-linger`, the user-level systemd instance shuts down whe
 
 > **Find your `qwen` binary first.** Same constraint as systemd — `ProgramArguments` must hold an **absolute path**. Run `which qwen` to discover it. Common locations on macOS: `/opt/homebrew/bin/qwen` (Homebrew on Apple Silicon), `/usr/local/bin/qwen` (Homebrew on Intel, manual installs), `~/.nvm/versions/node/vX.Y.Z/bin/qwen` (nvm), `~/.volta/bin/qwen` (Volta). Substitute below where the template shows `/PATH/TO/qwen`.
 
-`~/Library/LaunchAgents/com.qwenlm.qwen-serve.plist`:
+`~/Library/LaunchAgents/com.LailatulCoder.qwen-serve.plist`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -113,7 +113,7 @@ Without `loginctl enable-linger`, the user-level systemd instance shuts down whe
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.qwenlm.qwen-serve</string>
+  <string>com.LailatulCoder.qwen-serve</string>
   <key>ProgramArguments</key>
   <array>
     <!-- Run `which qwen` to find the absolute path; launchd does NOT read $PATH. -->
@@ -172,9 +172,9 @@ Manage:
 
 ```bash
 mkdir -p ~/Library/Logs/qwen-serve                                       # first time only
-chmod 600 ~/Library/LaunchAgents/com.qwenlm.qwen-serve.plist             # plist holds the inline token
-launchctl load   ~/Library/LaunchAgents/com.qwenlm.qwen-serve.plist
-launchctl unload ~/Library/LaunchAgents/com.qwenlm.qwen-serve.plist      # to stop
+chmod 600 ~/Library/LaunchAgents/com.LailatulCoder.qwen-serve.plist             # plist holds the inline token
+launchctl load   ~/Library/LaunchAgents/com.LailatulCoder.qwen-serve.plist
+launchctl unload ~/Library/LaunchAgents/com.LailatulCoder.qwen-serve.plist      # to stop
 tail -f ~/Library/Logs/qwen-serve/out.log ~/Library/Logs/qwen-serve/err.log
 ```
 
@@ -230,7 +230,7 @@ When auth is configured (i.e., the daemon was started with `--token` / `QWEN_SER
    (For the launchd / nohup / tmux templates: edit the plist's `<string>` value or re-`export QWEN_SERVER_TOKEN`. Don't forget `chmod 600` on the plist if you regenerate it.)
 2. Restart the daemon:
    - **systemd**: `systemctl --user restart qwen-serve.service`
-   - **launchd**: `launchctl unload ~/Library/LaunchAgents/com.qwenlm.qwen-serve.plist && launchctl load ~/Library/LaunchAgents/com.qwenlm.qwen-serve.plist`
+   - **launchd**: `launchctl unload ~/Library/LaunchAgents/com.LailatulCoder.qwen-serve.plist && launchctl load ~/Library/LaunchAgents/com.LailatulCoder.qwen-serve.plist`
    - **tmux / nohup**: `kill <pid>` then re-run with the new token in env
 3. Update any client SDKs / scripts. The TypeScript SDK's `DaemonClient` reads `QWEN_SERVER_TOKEN` automatically (PR 27 fallback) — re-`export` the new value in any client shell and reconstruct the client.
 
@@ -253,4 +253,4 @@ A daemon **restart** drops all in-memory sessions; clients reconnect and start f
 - **General daemon token storage** — Local Control uses revocable daemon-owned pairing tokens, but long-lived runtime token storage remains BYO-token. Persistent token-store infrastructure defers to v0.16.x.
 - **Windows native service** (`nssm`, Service Control Manager wrapper) — for now use [WSL2](https://learn.microsoft.com/en-us/windows/wsl/) and follow the systemd section above.
 
-See the [v0.16-alpha known limits](./qwen-serve.md#v016-alpha-known-limits) callout in the main user guide for the full deferred-features list, and [#4175](https://github.com/QwenLM/qwen-code/issues/4175) for the v0.16-alpha rollout tracking issue.
+See the [v0.16-alpha known limits](./qwen-serve.md#v016-alpha-known-limits) callout in the main user guide for the full deferred-features list, and [#4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) for the v0.16-alpha rollout tracking issue.

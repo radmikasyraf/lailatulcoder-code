@@ -88,7 +88,7 @@ vi.mock('node:fs', () => {
   return { ...mock, default: mock };
 });
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   Storage: {
     getGlobalQwenDir: () => mockGlobalQwenDir,
   },

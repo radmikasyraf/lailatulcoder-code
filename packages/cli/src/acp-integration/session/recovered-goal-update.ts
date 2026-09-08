@@ -12,7 +12,7 @@ import {
   type GoalRuntime,
   type GoalSnapshotV2,
   type GoalStateCause,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { HistoryItemGoalStatus } from '../../ui/types.js';
 import {
   collectGoalStatusItemsFromRecords,

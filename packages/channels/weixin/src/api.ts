@@ -364,7 +364,7 @@ export async function uploadToCdn(
       const resp = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/octet-stream' },
-        body: encryptedData,
+        body: encryptedData as unknown as BodyInit,
         signal: controller.signal,
       });
       if (!resp.ok) {
@@ -407,3 +407,4 @@ export async function uploadToCdn(
     }
   });
 }
+

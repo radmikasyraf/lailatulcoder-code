@@ -64,7 +64,7 @@ The verified code push and normal round report still succeed. Replies for findin
 - **Skip resolution after race merge:** rerunning the full deterministic gate inside the PAT-bearing publish step would duplicate expensive logic and run branch-controlled scripts with credentials in scope. A later review round can safely resolve the thread.
 - **Query live PR state immediately before mutation:** workflow concurrency cannot prevent direct contributor pushes.
 - **Keep the existing model disposition contract:** semantic judgment remains with the agent, while exact commit identity is enforced deterministically by the host.
-- **Do not add general CLI/core code:** this is Autofix workflow orchestration, not a reusable Qwen Code runtime feature.
+- **Do not add general CLI/core code:** this is Autofix workflow orchestration, not a reusable LailatulCoder Ai runtime feature.
 
 ## Files affected
 

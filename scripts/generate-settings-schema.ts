@@ -233,7 +233,7 @@ function generateJsonSchema(
   const jsonSchema: JsonSchemaProperty = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     type: 'object',
-    description: 'Qwen Code settings configuration',
+    description: 'LailatulCoder Ai settings configuration',
     properties: {},
     additionalProperties: true,
   };

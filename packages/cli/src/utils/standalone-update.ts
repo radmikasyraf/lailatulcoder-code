@@ -15,7 +15,7 @@ import type { Stats } from 'node:fs';
 import type { Response as UndiciResponse } from 'undici';
 import * as tar from 'tar';
 import type { ReadEntry } from 'tar';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import { loadUndici } from './load-undici.js';
 import { verifySignature } from './standalone-update-verify.js';
 import { updateEventEmitter } from './updateEventEmitter.js';
@@ -24,8 +24,8 @@ import { t } from '../i18n/index.js';
 const debugLogger = createDebugLogger('STANDALONE_UPDATE');
 
 const OSS_BASE =
-  'https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/releases/qwen-code';
-const GITHUB_BASE = 'https://github.com/QwenLM/qwen-code/releases/download';
+  'https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/releases/lailatul-coder';
+const GITHUB_BASE = 'https://github.com/LailatulCoder/lailatul-coder/releases/download';
 const FETCH_TIMEOUT_MS = 30_000;
 const ARCHIVE_TIMEOUT_MS = 300_000; // 5 min — archives are 50–150 MB
 
@@ -56,7 +56,7 @@ function validateTarget(target: string): void {
 
 function archiveFilename(target: string): string {
   const ext = target.startsWith('win') ? 'zip' : 'tar.gz';
-  return `qwen-code-${target}.${ext}`;
+  return `lailatul-coder-${target}.${ext}`;
 }
 
 function escapePS(s: string): string {
@@ -849,9 +849,9 @@ export function ensurePathInShellRc(binDir: string): ShellPathUpdate {
     // Use begin/end block markers matching install-qwen-standalone.sh's
     // maybe_update_shell_path, so the update codepath is idempotent with the
     // install script and does not produce duplicate PATH entries.
-    const beginMarker = '# Qwen Code PATH block begin';
-    const endMarker = '# Qwen Code PATH block end';
-    const legacyMarker = '# Added by Qwen Code standalone installer';
+    const beginMarker = '# LailatulCoder Ai PATH block begin';
+    const endMarker = '# LailatulCoder Ai PATH block end';
+    const legacyMarker = '# Added by LailatulCoder Ai standalone installer';
     if (content.includes(beginMarker) && content.includes(endMarker)) {
       return { rcFile, blockAdded: false };
     }
@@ -899,7 +899,7 @@ function cleanupShellPathBlock(rcFile: string): void {
     if (!fs.existsSync(rcFile)) return;
     const content = fs.readFileSync(rcFile, 'utf-8');
     const blockPattern =
-      /\n?# Qwen Code PATH block begin\n(?:.|\n)*?\n# Qwen Code PATH block end\n?/;
+      /\n?# LailatulCoder Ai PATH block begin\n(?:.|\n)*?\n# LailatulCoder Ai PATH block end\n?/;
     const nextContent = content.replace(blockPattern, '');
     if (nextContent !== content) {
       fs.writeFileSync(rcFile, nextContent);
@@ -962,7 +962,7 @@ export async function performStandaloneUpdate(
     // Directory exists but has no manifest — not a managed Qwen install.
     // Refuse to overwrite to avoid data loss.
     throw new Error(
-      `${standaloneDir} exists but is not a Qwen Code standalone install. Remove it manually to proceed.`,
+      `${standaloneDir} exists but is not a LailatulCoder Ai standalone install. Remove it manually to proceed.`,
     );
   } else {
     // First-time migration from npm — directory will be created after lock
@@ -1000,12 +1000,12 @@ export async function performStandaloneUpdate(
   // of standaloneDir to avoid EXDEV (cross-device rename).
   // extractDir uses mkdtempSync (random suffix) to prevent symlink
   // pre-creation attacks on predictable directory names.
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'qwen-code-update-'));
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lailatul-coder-update-'));
   let extractDir: string;
   let updateResult: 'done' | 'deferred' | undefined;
   let migrationArtifacts: BinWrapperArtifacts | undefined;
   try {
-    extractDir = fs.mkdtempSync(path.join(parentDir, '.qwen-code-update-'));
+    extractDir = fs.mkdtempSync(path.join(parentDir, '.lailatul-coder-update-'));
   } catch (err) {
     fs.rmSync(tempDir, { recursive: true, force: true });
     releaseLock(lockPath);
@@ -1030,10 +1030,10 @@ export async function performStandaloneUpdate(
     debugLogger.info('Extracting archive...');
     await extractArchive(archivePath, extractDir, target);
 
-    const newInstallDir = path.join(extractDir, 'qwen-code');
+    const newInstallDir = path.join(extractDir, 'lailatul-coder');
     if (!fs.existsSync(path.join(newInstallDir, 'manifest.json'))) {
       throw new Error(
-        'Extracted archive does not contain expected qwen-code directory',
+        'Extracted archive does not contain expected lailatul-coder directory',
       );
     }
 

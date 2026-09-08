@@ -6,9 +6,9 @@
 
 import { AsyncLocalStorage } from 'node:async_hooks';
 
-export const INVOCATION_CONTEXT_META_KEY = 'qwen-code/invocation';
+export const INVOCATION_CONTEXT_META_KEY = 'lailatul-coder/invocation';
 export const PRIVATE_PARENT_CAPABILITY_META_KEY =
-  'qwen-code/private-parent-capability';
+  'lailatul-coder/private-parent-capability';
 export const PRIVATE_ACP_CAPABILITY_ENV = 'QWEN_CODE_PRIVATE_ACP_CAPABILITY';
 
 export interface InvocationContextV1 {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { DaemonSessionTaskStatus } from '@qwen-code/sdk/daemon';
+import type { DaemonSessionTaskStatus } from '@lailatul-coder/sdk/daemon';
 import { isComposerTask } from './composerTasks';
 
 const base = {

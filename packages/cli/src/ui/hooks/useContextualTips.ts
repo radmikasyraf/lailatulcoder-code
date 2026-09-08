@@ -14,7 +14,7 @@ import {
   type Config,
   DEFAULT_TOKEN_LIMIT,
   computeThresholds,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   StreamingState,
   MessageType,

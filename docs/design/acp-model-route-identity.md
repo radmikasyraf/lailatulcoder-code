@@ -2,7 +2,7 @@
 
 ## Problem
 
-Qwen Code currently exposes ACP model IDs as `modelId(authType)`. Two configured models with the same model ID and auth type but different `baseUrl` values therefore collapse to one ACP selector. Clients cannot identify the active row or round-trip a selection to the intended endpoint.
+LailatulCoder Ai currently exposes ACP model IDs as `modelId(authType)`. Two configured models with the same model ID and auth type but different `baseUrl` values therefore collapse to one ACP selector. Clients cannot identify the active row or round-trip a selection to the intended endpoint.
 
 Core already treats `(authType, modelId, configured baseUrl)` as the registry identity. The loss happens only when that identity crosses the ACP boundary. The configured value must remain separate from the resolved endpoint because provider defaults can fill `baseUrl` after registration.
 
@@ -17,7 +17,7 @@ Build ACP model options from the existing configured-model list:
 
 Core exposes the original optional registry `baseUrl` alongside the resolved display endpoint. The same option builder supplies ACP session models, config options, live provider status, and daemon workspace provider status so every client sees the same ID while the server retains the exact registry discriminator.
 
-On `session/set_model`, Qwen Code resolves the selector against the current configured-model list before switching. It passes the resolved `baseUrl` to Core, then persists only the canonical settings values:
+On `session/set_model`, LailatulCoder Ai resolves the selector against the current configured-model list before switching. It passes the resolved `baseUrl` to Core, then persists only the canonical settings values:
 
 - `model.name`: actual model ID
 - `model.baseUrl`: configured registry endpoint, or an empty tombstone for an implicit default

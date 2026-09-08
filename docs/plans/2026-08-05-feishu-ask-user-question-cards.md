@@ -6,7 +6,7 @@
 
 **Architecture:** Add a pure Card V2 projection module and a Feishu-local one-shot question controller. `FeishuAdapter` supplies native send/patch operations, routes `card.action.trigger`, and delegates the existing `ChannelBase.presentUserInputRequest` hook without changing Core or bridge contracts.
 
-**Tech Stack:** TypeScript, Vitest, `@qwen-code/channel-base`, Feishu Card V2 JSON, Feishu IM message REST APIs.
+**Tech Stack:** TypeScript, Vitest, `@lailatul-coder/channel-base`, Feishu Card V2 JSON, Feishu IM message REST APIs.
 
 ## Global Constraints
 
@@ -28,7 +28,7 @@
 
 **Interfaces:**
 
-- Consumes: `ChannelUserInputRequestContext` and `ChannelUserQuestion` from `@qwen-code/channel-base`.
+- Consumes: `ChannelUserInputRequestContext` and `ChannelUserQuestion` from `@lailatul-coder/channel-base`.
 - Produces:
 
 ```ts
@@ -319,4 +319,4 @@ After receiving authorization for the exact changed paths, stage only those path
 feat(channels): add Feishu ask-user question cards
 ```
 
-Push `feat/feishu-ask-user-question-card` to the appropriate fork and create one Draft PR against `QwenLM/qwen-code:main` using `.github/pull_request_template.md`. Link Issue #8567 and post the E2E report as a separate PR comment when applicable.
+Push `feat/feishu-ask-user-question-card` to the appropriate fork and create one Draft PR against `LailatulCoder/lailatul-coder:main` using `.github/pull_request_template.md`. Link Issue #8567 and post the E2E report as a separate PR comment when applicable.

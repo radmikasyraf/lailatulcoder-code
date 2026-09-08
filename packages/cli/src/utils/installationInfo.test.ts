@@ -16,11 +16,11 @@ import {
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as childProcess from 'node:child_process';
-import { isGitRepository } from '@qwen-code/qwen-code-core';
+import { isGitRepository } from '@lailatul-coder/lailatul-coder-core';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     isGitRepository: vi.fn(),
@@ -170,7 +170,7 @@ describe('getInstallationInfo', () => {
 
   it('should detect standalone installs and avoid npm auto-update', () => {
     setPlatform('linux');
-    const installDir = '/Users/test/.local/lib/qwen-code';
+    const installDir = '/Users/test/.local/lib/lailatul-coder';
     const cliPath = `${installDir}/lib/cli.js`;
     process.argv[1] = cliPath;
     mockedRealPathSync.mockReturnValue(cliPath);
@@ -184,7 +184,7 @@ describe('getInstallationInfo', () => {
     mockedReadFileSync.mockImplementation((candidate) => {
       if (candidate === path.join(installDir, 'manifest.json')) {
         return JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'linux-x64',
         });
       }
@@ -215,7 +215,7 @@ describe('getInstallationInfo', () => {
 
   it('should detect Windows standalone installs and avoid npm auto-update', () => {
     setPlatform('win32');
-    const installDir = 'C:/Users/test/AppData/Local/qwen-code';
+    const installDir = 'C:/Users/test/AppData/Local/lailatul-coder';
     const cliPath = `${installDir}/lib/cli.js`;
     process.argv[1] = cliPath;
     mockedRealPathSync.mockReturnValue(cliPath);
@@ -231,7 +231,7 @@ describe('getInstallationInfo', () => {
         String(candidate).replace(/\\/g, '/') === `${installDir}/manifest.json`
       ) {
         return JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'win-x64',
         });
       }
@@ -260,7 +260,7 @@ describe('getInstallationInfo', () => {
 
   it('should detect macOS standalone installs and avoid npm auto-update', () => {
     setPlatform('darwin');
-    const installDir = '/Users/test/.local/lib/qwen-code';
+    const installDir = '/Users/test/.local/lib/lailatul-coder';
     const cliPath = `${installDir}/lib/cli.js`;
     process.argv[1] = cliPath;
     mockedRealPathSync.mockReturnValue(cliPath);
@@ -274,7 +274,7 @@ describe('getInstallationInfo', () => {
     mockedReadFileSync.mockImplementation((candidate) => {
       if (candidate === path.join(installDir, 'manifest.json')) {
         return JSON.stringify({
-          name: '@qwen-code/qwen-code',
+          name: '@lailatul-coder/lailatul-coder',
           target: 'darwin-arm64',
         });
       }
@@ -303,7 +303,7 @@ describe('getInstallationInfo', () => {
 
   it('should fall back to npm when manifest.json is malformed', () => {
     setPlatform('linux');
-    const installDir = '/Users/test/.local/lib/qwen-code';
+    const installDir = '/Users/test/.local/lib/lailatul-coder';
     const cliPath = `${installDir}/lib/cli.js`;
     process.argv[1] = cliPath;
     mockedRealPathSync.mockReturnValue(cliPath);
@@ -321,13 +321,13 @@ describe('getInstallationInfo', () => {
 
     expect(info.packageManager).toBe(PackageManager.NPM);
     expect(info.updateCommand).toBe(
-      'npm install -g @qwen-code/qwen-code@latest',
+      'npm install -g @lailatul-coder/lailatul-coder@latest',
     );
   });
 
   it('should ignore standalone-like installs for the wrong target', () => {
     setPlatform('linux');
-    const installDir = '/Users/test/.local/lib/qwen-code';
+    const installDir = '/Users/test/.local/lib/lailatul-coder';
     const cliPath = `${installDir}/lib/cli.js`;
     process.argv[1] = cliPath;
     mockedRealPathSync.mockReturnValue(cliPath);
@@ -340,7 +340,7 @@ describe('getInstallationInfo', () => {
     );
     mockedReadFileSync.mockReturnValue(
       JSON.stringify({
-        name: '@qwen-code/qwen-code',
+        name: '@lailatul-coder/lailatul-coder',
         target: 'win-x64',
       }),
     );
@@ -350,13 +350,13 @@ describe('getInstallationInfo', () => {
 
     expect(info.packageManager).toBe(PackageManager.NPM);
     expect(info.updateCommand).toBe(
-      'npm install -g @qwen-code/qwen-code@latest',
+      'npm install -g @lailatul-coder/lailatul-coder@latest',
     );
   });
 
   it('should ignore standalone-like installs with symlinked runtime files', () => {
     setPlatform('linux');
-    const installDir = '/Users/test/.local/lib/qwen-code';
+    const installDir = '/Users/test/.local/lib/lailatul-coder';
     const cliPath = `${installDir}/lib/cli.js`;
     process.argv[1] = cliPath;
     mockedRealPathSync.mockReturnValue(cliPath);
@@ -369,7 +369,7 @@ describe('getInstallationInfo', () => {
     );
     mockedReadFileSync.mockReturnValue(
       JSON.stringify({
-        name: '@qwen-code/qwen-code',
+        name: '@lailatul-coder/lailatul-coder',
         target: 'linux-x64',
       }),
     );
@@ -387,7 +387,7 @@ describe('getInstallationInfo', () => {
 
   it('should ignore Unix standalone-like installs with non-executable runtime files', () => {
     setPlatform('linux');
-    const installDir = '/Users/test/.local/lib/qwen-code';
+    const installDir = '/Users/test/.local/lib/lailatul-coder';
     const cliPath = `${installDir}/lib/cli.js`;
     process.argv[1] = cliPath;
     mockedRealPathSync.mockReturnValue(cliPath);
@@ -400,7 +400,7 @@ describe('getInstallationInfo', () => {
     );
     mockedReadFileSync.mockReturnValue(
       JSON.stringify({
-        name: '@qwen-code/qwen-code',
+        name: '@lailatul-coder/lailatul-coder',
         target: 'linux-x64',
       }),
     );
@@ -426,7 +426,7 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, false);
 
     expect(mockedExecSync).toHaveBeenCalledWith(
-      'brew list -1 | grep -q "^qwen-code$"',
+      'brew list -1 | grep -q "^lailatul-coder$"',
       { stdio: 'ignore' },
     );
     expect(info.packageManager).toBe(PackageManager.HOMEBREW);
@@ -446,7 +446,7 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, false);
 
     expect(mockedExecSync).toHaveBeenCalledWith(
-      'brew list -1 | grep -q "^qwen-code$"',
+      'brew list -1 | grep -q "^lailatul-coder$"',
       { stdio: 'ignore' },
     );
     // Should fall back to default global npm
@@ -455,7 +455,7 @@ describe('getInstallationInfo', () => {
   });
 
   it('should detect global pnpm installation', () => {
-    const pnpmPath = `/Users/test/.pnpm/global/5/node_modules/.pnpm/some-hash/node_modules/@qwen-code/qwen-code/dist/index.js`;
+    const pnpmPath = `/Users/test/.pnpm/global/5/node_modules/.pnpm/some-hash/node_modules/@lailatul-coder/lailatul-coder/dist/index.js`;
     process.argv[1] = pnpmPath;
     mockedRealPathSync.mockReturnValue(pnpmPath);
     mockedExecSync.mockImplementation(() => {
@@ -466,7 +466,7 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, true);
     expect(info.packageManager).toBe(PackageManager.PNPM);
     expect(info.isGlobal).toBe(true);
-    expect(info.updateCommand).toBe('pnpm add -g @qwen-code/qwen-code@latest');
+    expect(info.updateCommand).toBe('pnpm add -g @lailatul-coder/lailatul-coder@latest');
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
     // isAutoUpdateEnabled = false -> "Please run..."
@@ -475,7 +475,7 @@ describe('getInstallationInfo', () => {
   });
 
   it('should detect global yarn installation', () => {
-    const yarnPath = `/Users/test/.yarn/global/node_modules/@qwen-code/qwen-code/dist/index.js`;
+    const yarnPath = `/Users/test/.yarn/global/node_modules/@lailatul-coder/lailatul-coder/dist/index.js`;
     process.argv[1] = yarnPath;
     mockedRealPathSync.mockReturnValue(yarnPath);
     mockedExecSync.mockImplementation(() => {
@@ -487,7 +487,7 @@ describe('getInstallationInfo', () => {
     expect(info.packageManager).toBe(PackageManager.YARN);
     expect(info.isGlobal).toBe(true);
     expect(info.updateCommand).toBe(
-      'yarn global add @qwen-code/qwen-code@latest',
+      'yarn global add @lailatul-coder/lailatul-coder@latest',
     );
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
@@ -508,7 +508,7 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, true);
     expect(info.packageManager).toBe(PackageManager.BUN);
     expect(info.isGlobal).toBe(true);
-    expect(info.updateCommand).toBe('bun add -g @qwen-code/qwen-code@latest');
+    expect(info.updateCommand).toBe('bun add -g @lailatul-coder/lailatul-coder@latest');
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
     // isAutoUpdateEnabled = false -> "Please run..."
@@ -641,7 +641,7 @@ describe('getInstallationInfo', () => {
     expect(info.packageManager).toBe(PackageManager.NPM);
     expect(info.isGlobal).toBe(true);
     expect(info.updateCommand).toBe(
-      'npm install -g @qwen-code/qwen-code@latest',
+      'npm install -g @lailatul-coder/lailatul-coder@latest',
     );
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
@@ -651,7 +651,7 @@ describe('getInstallationInfo', () => {
   });
 
   it('should ask for sudo and NOT migrate to standalone when the npm global prefix is not writable', () => {
-    const globalPath = `/usr/lib/node_modules/@qwen-code/qwen-code/cli-entry.js`;
+    const globalPath = `/usr/lib/node_modules/@lailatul-coder/lailatul-coder/cli-entry.js`;
     process.argv[1] = globalPath;
     mockedRealPathSync.mockReturnValue(globalPath);
     mockedExecSync.mockImplementation(() => {
@@ -681,17 +681,17 @@ describe('getInstallationInfo', () => {
 describe('resolveUpdateCommand', () => {
   it('replaces @latest with the pinned stable version', () => {
     expect(
-      resolveUpdateCommand('npm i -g @qwen-code/qwen-code@latest', '1.2.3'),
-    ).toBe('npm i -g @qwen-code/qwen-code@1.2.3');
+      resolveUpdateCommand('npm i -g @lailatul-coder/lailatul-coder@latest', '1.2.3'),
+    ).toBe('npm i -g @lailatul-coder/lailatul-coder@1.2.3');
   });
 
   it('replaces @latest with @nightly for nightly versions', () => {
     expect(
       resolveUpdateCommand(
-        'npm i -g @qwen-code/qwen-code@latest',
+        'npm i -g @lailatul-coder/lailatul-coder@latest',
         '1.2.3-nightly.20250101',
       ),
-    ).toBe('npm i -g @qwen-code/qwen-code@nightly');
+    ).toBe('npm i -g @lailatul-coder/lailatul-coder@nightly');
   });
 });
 
@@ -702,13 +702,13 @@ describe('formatUpdateInstructions', () => {
         {
           packageManager: PackageManager.NPM,
           isGlobal: true,
-          updateCommand: 'npm i -g @qwen-code/qwen-code@latest',
+          updateCommand: 'npm i -g @lailatul-coder/lailatul-coder@latest',
         },
         '1.2.3',
       ),
     ).toEqual([
       'Run the following to update:',
-      '  npm i -g @qwen-code/qwen-code@1.2.3',
+      '  npm i -g @lailatul-coder/lailatul-coder@1.2.3',
     ]);
   });
 
@@ -719,13 +719,13 @@ describe('formatUpdateInstructions', () => {
           packageManager: PackageManager.NPM,
           isGlobal: true,
           updateMessage:
-            'Update requires sudo. Please run: sudo npm i -g @qwen-code/qwen-code@latest',
+            'Update requires sudo. Please run: sudo npm i -g @lailatul-coder/lailatul-coder@latest',
         },
         '1.2.3-nightly.20250101',
       ),
     ).toEqual([
       'Update requires sudo. Please run:',
-      '  sudo npm i -g @qwen-code/qwen-code@nightly',
+      '  sudo npm i -g @lailatul-coder/lailatul-coder@nightly',
     ]);
   });
 
@@ -806,7 +806,7 @@ describe('getNpmCliPath', () => {
 describe('getHomebrewLatestVersion', () => {
   const brewInfoOutput = (stable: unknown) =>
     JSON.stringify({
-      formulae: [{ name: 'qwen-code', versions: { stable } }],
+      formulae: [{ name: 'lailatul-coder', versions: { stable } }],
       casks: [],
     });
 
@@ -821,7 +821,7 @@ describe('getHomebrewLatestVersion', () => {
     );
     expect(run).toHaveBeenCalledWith(
       'brew',
-      ['info', '--json=v2', '--formula', 'qwen-code'],
+      ['info', '--json=v2', '--formula', 'lailatul-coder'],
       expect.objectContaining({ timeout: expect.any(Number) }),
     );
   });
@@ -830,7 +830,7 @@ describe('getHomebrewLatestVersion', () => {
     const run = vi.fn().mockRejectedValue(new Error('command not found'));
 
     await expect(
-      getHomebrewLatestVersion('qwen-code', run),
+      getHomebrewLatestVersion('lailatul-coder', run),
     ).resolves.toBeNull();
   });
 
@@ -838,7 +838,7 @@ describe('getHomebrewLatestVersion', () => {
     const run = vi.fn().mockResolvedValue({ stdout: 'not json', stderr: '' });
 
     await expect(
-      getHomebrewLatestVersion('qwen-code', run),
+      getHomebrewLatestVersion('lailatul-coder', run),
     ).resolves.toBeNull();
   });
 
@@ -849,7 +849,7 @@ describe('getHomebrewLatestVersion', () => {
     });
 
     await expect(
-      getHomebrewLatestVersion('qwen-code', run),
+      getHomebrewLatestVersion('lailatul-coder', run),
     ).resolves.toBeNull();
   });
 
@@ -861,7 +861,7 @@ describe('getHomebrewLatestVersion', () => {
       });
 
       await expect(
-        getHomebrewLatestVersion('qwen-code', run),
+        getHomebrewLatestVersion('lailatul-coder', run),
       ).resolves.toBeNull();
     }
   });

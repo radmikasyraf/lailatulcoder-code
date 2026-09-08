@@ -4,14 +4,14 @@ Status: accepted
 
 ## Integration contract
 
-Qwen Code WebShell owns the rendering side of the contract:
+LailatulCoder Ai WebShell owns the rendering side of the contract:
 
-- `@qwen-code/web-shell` includes the `markdown-chart` renderer and ECharts
+- `@lailatul-coder/web-shell` includes the `markdown-chart` renderer and ECharts
   runtime.
 - Hosts install the canonical
   [`markdown-chart` skill](https://github.com/datafe/markdown-chart/tree/main/skills/markdown-chart)
   so the model emits renderable chart blocks.
-- Qwen Code core does not bundle or inject the skill. A project can install it
+- LailatulCoder Ai core does not bundle or inject the skill. A project can install it
   at `.qwen/skills/markdown-chart/SKILL.md`; user-level skill installation is
   also supported.
 
@@ -19,7 +19,7 @@ For the normal `data.kind="inline"` output produced by the skill, the WebShell
 host needs no chart-specific code:
 
 ```tsx
-import { WebShellWithProviders } from '@qwen-code/web-shell';
+import { WebShellWithProviders } from '@lailatul-coder/web-shell';
 
 <WebShellWithProviders
   baseUrl="http://127.0.0.1:4170"
@@ -37,7 +37,7 @@ If the host exposes real controlled datasets to the skill and allows
 import {
   createMarkdownChartRegistry,
   WebShellWithProviders,
-} from '@qwen-code/web-shell';
+} from '@lailatul-coder/web-shell';
 
 const chartRegistry = createMarkdownChartRegistry({
   resolveDataRef: async (ref, context) =>

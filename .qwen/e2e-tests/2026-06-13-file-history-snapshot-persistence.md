@@ -37,7 +37,7 @@ Use a clean user config, or confirm local settings have not disabled
 checkpointing.
 
 ```bash
-REPO_ROOT="/Users/jinye.djy/.codex/worktrees/6393/qwen-code"
+REPO_ROOT="/Users/jinye.djy/.codex/worktrees/6393/lailatul-coder"
 TMP_PROJECT="$(mktemp -d)"
 cd "$TMP_PROJECT"
 printf 'before\n' > a.txt
@@ -45,7 +45,7 @@ printf 'before\n' > a.txt
 node "$REPO_ROOT/dist/cli.js" --chat-recording
 ```
 
-Inside the TUI, ask Qwen Code to replace `before` with `after` in `a.txt`, then
+Inside the TUI, ask LailatulCoder Ai to replace `before` with `after` in `a.txt`, then
 exit immediately after the edit tool completes. Resume the session with the same
 CLI build and run `/rewind`.
 

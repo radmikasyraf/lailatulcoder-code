@@ -5,7 +5,7 @@
  */
 
 /**
- * Bundles/copies the Qwen Code CLI into the SDK package dist/ so consumers
+ * Bundles/copies the LailatulCoder Ai CLI into the SDK package dist/ so consumers
  * don't need a separate CLI install.
  *
  * This is intentionally NOT part of the SDK "build" step; it is a packaging

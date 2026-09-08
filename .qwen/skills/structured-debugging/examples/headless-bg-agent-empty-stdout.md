@@ -1,6 +1,6 @@
 # Worked example: headless run prints empty stdout in zsh TTY
 
-A short qwen-code case to illustrate two failure modes from `SKILL.md`:
+A short lailatul-coder case to illustrate two failure modes from `SKILL.md`:
 _reproduction contradiction is data_, and _instrument the data flow, not just
 the code path_.
 
@@ -54,5 +54,5 @@ one line.
 
 ## Reference
 
-Fix commit: qwen-code `feadf052f` — `fix(cli): append newline to text-mode
+Fix commit: lailatul-coder `feadf052f` — `fix(cli): append newline to text-mode
 emitResult so zsh PROMPT_SP doesn't erase the line`

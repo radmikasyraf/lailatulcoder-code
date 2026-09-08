@@ -12,7 +12,7 @@ import {
   getSubagentSessionDir,
   Storage,
   type ChatRecord,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { WorkspaceRuntime } from './workspace-registry.js';
 import {
   createVirtualSubagentSessionId,

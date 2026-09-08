@@ -5,7 +5,7 @@
  */
 
 import type { CommandModule } from 'yargs';
-import { atomicWriteFileSync } from '@qwen-code/qwen-code-core';
+import { atomicWriteFileSync } from '@lailatul-coder/lailatul-coder-core';
 import {
   closeSync,
   existsSync,

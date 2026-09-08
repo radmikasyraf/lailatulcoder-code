@@ -133,7 +133,7 @@ describe('memoryDiagnostics', () => {
     expect(report).toContain('Status: warn');
     expect(report).toContain('Heap pressure: 85.4%');
     expect(report).toContain('V8 heap usage is high');
-    expect(report).toContain('restart Qwen Code to recover memory');
+    expect(report).toContain('restart LailatulCoder Ai to recover memory');
     expect(report).toContain('capture a heap snapshot');
   });
 
@@ -187,7 +187,7 @@ describe('memoryDiagnostics', () => {
     expect(writtenPath).toBe(
       path.join(
         outputDir,
-        `qwen-code-heap-${process.pid}-2026-05-15T12-00-00-000Z.heapsnapshot`,
+        `lailatul-coder-heap-${process.pid}-2026-05-15T12-00-00-000Z.heapsnapshot`,
       ),
     );
   });
@@ -259,11 +259,11 @@ describe('memoryDiagnostics', () => {
 
     const oldSnapshot = path.join(
       outputDir,
-      `qwen-code-heap-${process.pid}-2026-05-15T11-00-00-000Z.heapsnapshot`,
+      `lailatul-coder-heap-${process.pid}-2026-05-15T11-00-00-000Z.heapsnapshot`,
     );
     const newerSnapshot = path.join(
       outputDir,
-      `qwen-code-heap-${process.pid}-2026-05-15T11-30-00-000Z.heapsnapshot`,
+      `lailatul-coder-heap-${process.pid}-2026-05-15T11-30-00-000Z.heapsnapshot`,
     );
     fs.writeFileSync(oldSnapshot, 'old');
     fs.writeFileSync(newerSnapshot, 'newer');
@@ -297,11 +297,11 @@ describe('memoryDiagnostics', () => {
 
     const newerLowPidSnapshot = path.join(
       outputDir,
-      'qwen-code-heap-9-2026-05-15T12-30-00-000Z.heapsnapshot',
+      'lailatul-coder-heap-9-2026-05-15T12-30-00-000Z.heapsnapshot',
     );
     const olderHighPidSnapshot = path.join(
       outputDir,
-      'qwen-code-heap-12345-2026-05-15T12-00-00-000Z.heapsnapshot',
+      'lailatul-coder-heap-12345-2026-05-15T12-00-00-000Z.heapsnapshot',
     );
     fs.writeFileSync(newerLowPidSnapshot, 'newer');
     fs.writeFileSync(olderHighPidSnapshot, 'older');
@@ -345,11 +345,11 @@ describe('memoryDiagnostics', () => {
 
     const olderSnapshot = path.join(
       outputDir,
-      'qwen-code-heap-1-2026-05-15T11-00-00-000Z.heapsnapshot',
+      'lailatul-coder-heap-1-2026-05-15T11-00-00-000Z.heapsnapshot',
     );
     const newerSnapshot = path.join(
       outputDir,
-      'qwen-code-heap-1-2026-05-15T12-00-00-000Z.heapsnapshot',
+      'lailatul-coder-heap-1-2026-05-15T12-00-00-000Z.heapsnapshot',
     );
     fs.writeFileSync(olderSnapshot, 'older');
     fs.writeFileSync(newerSnapshot, 'newer');
@@ -385,7 +385,7 @@ describe('memoryDiagnostics', () => {
     fs.mkdirSync(outputDir, { recursive: true });
     const brokenSymlink = path.join(
       outputDir,
-      'qwen-code-heap-999-2026-05-15T11-00-00-000Z.heapsnapshot',
+      'lailatul-coder-heap-999-2026-05-15T11-00-00-000Z.heapsnapshot',
     );
     fs.symlinkSync('missing-target.heapsnapshot', brokenSymlink);
 

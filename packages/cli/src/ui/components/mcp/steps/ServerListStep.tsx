@@ -11,7 +11,7 @@ import { ICON } from '../../../constants.js';
 import { useKeypress } from '../../../hooks/useKeypress.js';
 import { keyMatchers, Command } from '../../../keyMatchers.js';
 import { t } from '../../../../i18n/index.js';
-import { MCPServerStatus } from '@qwen-code/qwen-code-core';
+import { MCPServerStatus } from '@lailatul-coder/lailatul-coder-core';
 import type { ServerListStepProps, MCPServerDisplayInfo } from '../types.js';
 import {
   groupServersBySource,
@@ -200,3 +200,4 @@ export const ServerListStep: React.FC<ServerListStepProps> = ({
     </Box>
   );
 };
+

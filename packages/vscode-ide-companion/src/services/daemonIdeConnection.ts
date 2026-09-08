@@ -21,7 +21,7 @@ import type {
 import {
   DaemonClient,
   DaemonSessionClient as SdkDaemonSessionClient,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 import type { AskUserQuestionRequest } from '../types/acpTypes.js';
 
 export interface DaemonIdeEvent {

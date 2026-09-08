@@ -11,11 +11,11 @@ import path from 'node:path';
 import { summaryCommand } from './summaryCommand.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import type { CommandContext } from './types.js';
-import { runSideQuery } from '@qwen-code/qwen-code-core';
+import { runSideQuery } from '@lailatul-coder/lailatul-coder-core';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   return {
     ...actual,
     getProjectSummaryPrompt: () => 'summary prompt',

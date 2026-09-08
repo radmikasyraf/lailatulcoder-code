@@ -14,7 +14,7 @@ vi.mock('../utils/stdioHelpers.js', () => ({
   writeStderrLine: mockWriteStderrLine,
 }));
 
-import { SkillManager } from '@qwen-code/qwen-code-core';
+import { SkillManager } from '@lailatul-coder/lailatul-coder-core';
 import {
   ENV_CORRUPTED_PATH,
   ENV_WAS_RECOVERED,

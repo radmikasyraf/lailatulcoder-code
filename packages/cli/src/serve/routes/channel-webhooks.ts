@@ -11,7 +11,7 @@ import type {
   ChannelWebhookConfig,
   ChannelWebhookSourceConfig,
   ChannelWebhookTask,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type {
   ChannelWebhookAccepted,
   ChannelWebhookEnqueueErrorCode,

@@ -1,10 +1,10 @@
 # Internationalization (i18n) & Language
 
-Qwen Code is built for multilingual workflows: it supports UI localization (i18n/l10n) in the CLI, lets you choose the assistant output language, and allows custom UI language packs.
+LailatulCoder Ai is built for multilingual workflows: it supports UI localization (i18n/l10n) in the CLI, lets you choose the assistant output language, and allows custom UI language packs.
 
 ## Overview
 
-From a user point of view, Qwen Code’s “internationalization” spans multiple layers:
+From a user point of view, LailatulCoder Ai’s “internationalization” spans multiple layers:
 
 | Capability / Setting     | What it controls                                                       | Where stored                 |
 | ------------------------ | ---------------------------------------------------------------------- | ---------------------------- |
@@ -46,7 +46,7 @@ Aliases are also supported:
 
 ### Auto-detection
 
-On first startup, Qwen Code detects your system locale and sets the UI language automatically.
+On first startup, LailatulCoder Ai detects your system locale and sets the UI language automatically.
 
 Detection priority:
 
@@ -65,7 +65,7 @@ The LLM output language is controlled by a rule file at `~/.qwen/output-language
 
 ### Auto-detection
 
-On first startup, if no `output-language.md` file exists, Qwen Code automatically creates one based on your system locale. For example:
+On first startup, if no `output-language.md` file exists, LailatulCoder Ai automatically creates one based on your system locale. For example:
 
 - System locale `zh` creates a rule for Chinese responses
 - System locale `en` creates a rule for English responses
@@ -91,7 +91,7 @@ Any language name works. The LLM will be instructed to respond in that language.
 
 > [!note]
 >
-> After changing the output language, restart Qwen Code for the change to take effect.
+> After changing the output language, restart LailatulCoder Ai for the change to take effect.
 
 ### File Location
 
@@ -127,7 +127,7 @@ User directory takes precedence over built-in translations.
 > [!tip]
 >
 > Contributions are welcome! If you’d like to improve built-in translations or add new languages.
-> For a concrete example, see [PR #1238: feat(i18n): add Russian language support](https://github.com/QwenLM/qwen-code/pull/1238).
+> For a concrete example, see [PR #1238: feat(i18n): add Russian language support](https://github.com/LailatulCoder/lailatul-coder/pull/1238).
 
 ### Maintaining `zh-TW` (Traditional Chinese for Taiwan)
 

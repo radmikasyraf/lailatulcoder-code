@@ -593,7 +593,7 @@ export class HookRunner {
         ...sanitizeChildEnv(process.env),
         GEMINI_PROJECT_DIR: input.cwd,
         CLAUDE_PROJECT_DIR: input.cwd, // For compatibility
-        QWEN_PROJECT_DIR: input.cwd, // For Qwen Code compatibility
+        QWEN_PROJECT_DIR: input.cwd, // For LailatulCoder Ai compatibility
         ...getShellContextEnvVars(),
         ...hookConfig.env,
       };

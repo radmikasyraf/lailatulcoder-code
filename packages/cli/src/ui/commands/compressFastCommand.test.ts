@@ -8,7 +8,7 @@ import {
   CompressionStatus,
   type ChatCompressionInfo,
   type GeminiClient,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { compressFastCommand } from './compressFastCommand.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';

@@ -39,9 +39,9 @@ This document supersedes the earlier design for these areas:
 
 ## Non-negotiable architecture
 
-WebShell Live is a normal projectless Qwen Code session with a
+WebShell Live is a normal projectless LailatulCoder Ai session with a
 Realtime-model-driven, full-duplex voice conversation attached to it. The
-Realtime model is the conversational frontend and the Qwen Code model is the
+Realtime model is the conversational frontend and the LailatulCoder Ai model is the
 execution backend. The Realtime model is not an ASR/TTS wrapper around a text
 model, and the backend is not a separate restricted Coordinator persona.
 
@@ -49,8 +49,8 @@ model, and the backend is not a separate restricted Coordinator persona.
 flowchart LR
     U["User audio"] <--> R["Qwen Omni Realtime<br/>conversation owner"]
     R -->|"direct answer for self-contained conversation"| U
-    R -->|"handoff only when backend execution is useful"| S["Same projectless Live Qwen Code session"]
-    S --> T["Normal Qwen Code tools"]
+    R -->|"handoff only when backend execution is useful"| S["Same projectless Live LailatulCoder Ai session"]
+    S --> T["Normal LailatulCoder Ai tools"]
     S --> V["Live and task tools"]
     S --> P["Normal permission pipeline"]
     S -->|"incremental agent output"| R
@@ -59,13 +59,13 @@ flowchart LR
 The following rules are mandatory:
 
 1. The Realtime model directly answers ordinary, self-contained conversation.
-   Such a turn must not start a Qwen Code backend turn.
+   Such a turn must not start a LailatulCoder Ai backend turn.
 2. The Realtime model requests a handoff only when execution, tools, task
    management, or deeper backend reasoning is useful.
-3. A handoff becomes a normal turn in the same persistent Live Qwen Code
+3. A handoff becomes a normal turn in the same persistent Live LailatulCoder Ai
    session. It must not create or route through a restricted coordinator
    session.
-4. The backend Live session retains the normal Qwen Code tool surface and adds
+4. The backend Live session retains the normal LailatulCoder Ai tool surface and adds
    the Live-specific and task-management tools. Live provenance must not hide,
    suppress, or replace normal tools or configured MCP tools.
 5. Backend agent output is streamed incrementally back into the still-active
@@ -74,7 +74,7 @@ The following rules are mandatory:
 6. The Realtime conversation remains active during a handoff. New user speech
    steers or interrupts the same backend turn and must not create an overlapping
    response, duplicate handoff, or duplicate task.
-7. Backend tools use the normal Qwen Code permission and approval pipeline.
+7. Backend tools use the normal LailatulCoder Ai permission and approval pipeline.
    Permission UI is asynchronous and must not terminate or deadlock the voice
    conversation. Raw approval, tool, and MCP protocol events are not spoken or
    injected into the Realtime conversational transcript.
@@ -184,15 +184,15 @@ bridge mirrors agent messages, not raw approval or tool-protocol events.
 
 ## Qwen target mapping
 
-The target reproduces the same ownership boundaries with existing Qwen Code
+The target reproduces the same ownership boundaries with existing LailatulCoder Ai
 infrastructure:
 
 | Codex responsibility             | Required Qwen mapping                                                                                                         |
 | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Persistent ordinary task         | One normal projectless Qwen Code session surfaced in the dedicated Live group                                                 |
+| Persistent ordinary task         | One normal projectless LailatulCoder Ai session surfaced in the dedicated Live group                                                 |
 | GPT-Live conversational frontend | `qwen3.5-omni-plus-realtime` owning ordinary dialogue, VAD, barge-in, and spoken output                                       |
 | Selective backend handoff        | One narrow Realtime handoff operation routed into a normal turn on that same Live session                                     |
-| Normal backend tool surface      | The existing Qwen Code tools, configured MCP tools, sandbox, and approval mode remain available                               |
+| Normal backend tool surface      | The existing LailatulCoder Ai tools, configured MCP tools, sandbox, and approval mode remain available                               |
 | Voice/App tools                  | Built-in Appshot and call-control capabilities attached to the backend Live session, never exposed as Realtime-provider tools |
 | Task operations                  | List/read/wait/send/create operations backed by existing WebShell session and bridge services                                 |
 | Incremental backend return       | Agent-message deltas aggregated at about 200 ms and appended as silent ordered conversation context                           |
@@ -219,7 +219,7 @@ missing handoff, task, tool, permission, or interruption behavior.
   ownership;
 - the configurable shortcut, compact overlay, mute, stop, and new-call UI;
 - the projectless Live group in WebShell;
-- the existing `~/Documents/Qwen Code/Conversations/` storage root, with one
+- the existing `~/Documents/LailatulCoder Ai/Conversations/` storage root, with one
   direct child directory per projectless Live or projectless created task;
 - authenticated daemon/Host transport;
 - existing WebShell session, event, transcript, mid-turn, and permission
@@ -275,7 +275,7 @@ The complete first-use path is:
 3. Turn on Live Voice and confirm that the signed native Host will be
    installed.
 4. The daemon downloads the architecture-matching release from the Aliyun OSS
-   mirror, with the fixed Qwen Code GitHub release feed as fallback. It verifies
+   mirror, with the fixed LailatulCoder Ai GitHub release feed as fallback. It verifies
    the manifest checksum, bundle identity, signature, and Gatekeeper acceptance,
    installs it atomically in `/Applications`, and launches it.
 5. The Host guides the user through Microphone, Accessibility, and Screen
@@ -414,7 +414,7 @@ assumption.
 
 The steering experiment qualifies the provider protocol only. Routing the
 second handoff into the same existing backend turn, preventing duplicate
-backend work, and preserving task identity remain Qwen Code implementation and
+backend work, and preserving task identity remain LailatulCoder Ai implementation and
 E2E acceptance requirements.
 
 ## Refactor sequence
@@ -451,7 +451,7 @@ because the preceding phase produced passing tests.
    audits.
 
 Any source change that would introduce behavior not confirmed in Codex or not
-confirmed compatible with Qwen Code must stop before editing and request
+confirmed compatible with LailatulCoder Ai must stop before editing and request
 approval.
 
 ## Acceptance contract
@@ -461,7 +461,7 @@ following:
 
 | Scenario                | Required evidence                                                                                                                                     |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ordinary conversation   | Natural Realtime answer with zero Qwen Code backend turns                                                                                             |
+| Ordinary conversation   | Natural Realtime answer with zero LailatulCoder Ai backend turns                                                                                             |
 | Screen question         | Exactly one handoff followed by one backend-session internal Appshot, streamed result, and natural spoken answer; Realtime itself has no Appshot tool |
 | List or inspect tasks   | Existing tasks are listed/read with no new session                                                                                                    |
 | Follow an existing task | Message reaches the selected existing session and retains its identity                                                                                |

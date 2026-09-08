@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 Qwen Code
+ * Copyright 2026 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -31,13 +31,13 @@ function writeInstallation(prefix: string, version: string): void {
   const packageRoot = path.join(
     prefix,
     'node_modules',
-    '@qwen-code',
-    'qwen-code',
+    '@lailatul-coder',
+    'lailatul-coder',
   );
   fs.mkdirSync(packageRoot, { recursive: true });
   fs.writeFileSync(
     path.join(packageRoot, 'package.json'),
-    JSON.stringify({ name: '@qwen-code/qwen-code', version }),
+    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version }),
   );
   fs.writeFileSync(path.join(packageRoot, 'cli.js'), '');
   fs.writeFileSync(
@@ -51,14 +51,14 @@ function writeBaseInstallation(root: string, version = '1.0.0'): string {
     root,
     'global',
     'node_modules',
-    '@qwen-code',
-    'qwen-code',
+    '@lailatul-coder',
+    'lailatul-coder',
   );
   const bootstrap = path.join(packageRoot, 'cli-entry.js');
   fs.mkdirSync(path.dirname(bootstrap), { recursive: true });
   fs.writeFileSync(
     path.join(packageRoot, 'package.json'),
-    JSON.stringify({ name: '@qwen-code/qwen-code', version }),
+    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version }),
   );
   fs.writeFileSync(bootstrap, 'global launcher');
   return bootstrap;
@@ -95,7 +95,7 @@ describe('managed npm update', () => {
       '--package-lock=false',
       '--no-audit',
       '--no-fund',
-      '@qwen-code/qwen-code@2.0.0',
+      '@lailatul-coder/lailatul-coder@2.0.0',
     ]);
     expect(update.versionDir).toBe(
       path.join(update.launcherRoot, 'versions', '2.0.0'),
@@ -201,7 +201,7 @@ describe('managed npm update', () => {
         '--package-lock=false',
         '--no-audit',
         '--no-fund',
-        '@qwen-code/qwen-code@2.0.0',
+        '@lailatul-coder/lailatul-coder@2.0.0',
       ],
       expect.objectContaining({
         env: expect.objectContaining({
@@ -246,8 +246,8 @@ describe('managed npm update', () => {
         path.join(
           update.stagingDir,
           'node_modules',
-          '@qwen-code',
-          'qwen-code',
+          '@lailatul-coder',
+          'lailatul-coder',
           'cli.js',
         ),
         'this is not valid JavaScript !!!\n',

@@ -13,8 +13,8 @@ import {
   detectIdeFromEnv,
   IDE_DEFINITIONS,
   type IdeInfo,
-} from '@qwen-code/qwen-code-core';
-import { redactLogCredentials } from '@qwen-code/acp-bridge/logRedaction';
+} from '@lailatul-coder/lailatul-coder-core';
+import { redactLogCredentials } from '@lailatul-coder/acp-bridge/logRedaction';
 import { WebViewProvider } from './webview/providers/WebViewProvider.js';
 import { ChatProviderRegistry } from './webview/providers/ChatProviderRegistry.js';
 import { registerChatViewProviders } from './webview/providers/chatViewRegistration.js';
@@ -26,7 +26,7 @@ import { isWindows } from './utils/platform.js';
 // into the active extension flow yet.
 export { createSdkDaemonSessionFactory as __daemonIdeSessionFactoryForBundle } from './services/daemonIdeConnection.js';
 
-const CLI_IDE_COMPANION_IDENTIFIER = 'qwenlm.qwen-code-vscode-ide-companion';
+const CLI_IDE_COMPANION_IDENTIFIER = 'LailatulCoder.lailatul-coder-vscode-ide-companion';
 const INFO_MESSAGE_SHOWN_KEY = 'qwenCodeInfoMessageShown';
 const IDE_WORKSPACE_PATH_ENV_VAR = 'QWEN_CODE_IDE_WORKSPACE_PATH';
 export const DIFF_SCHEME = 'qwen-diff';
@@ -94,7 +94,7 @@ async function checkForUpdates(
 
     if (latestVersion && semver.gt(latestVersion, currentVersion)) {
       const selection = await vscode.window.showInformationMessage(
-        `A new version (${latestVersion}) of the Qwen Code Companion extension is available.`,
+        `A new version (${latestVersion}) of the LailatulCoder Ai Companion extension is available.`,
         'Update to latest version',
       );
       if (selection === 'Update to latest version') {
@@ -112,7 +112,7 @@ async function checkForUpdates(
 }
 
 export async function activate(context: vscode.ExtensionContext) {
-  outputChannel = vscode.window.createOutputChannel('Qwen Code Companion');
+  outputChannel = vscode.window.createOutputChannel('LailatulCoder Ai Companion');
   createLogger(outputChannel, redactLogCredentials);
   logger.info('Extension activated');
 
@@ -227,13 +227,13 @@ export async function activate(context: vscode.ExtensionContext) {
     }
   };
   context.subscriptions.push(
-    vscode.commands.registerCommand('qwen-code.copyMessage', () =>
+    vscode.commands.registerCommand('lailatul-coder.copyMessage', () =>
       sendCopyToActive('copyMessage'),
     ),
-    vscode.commands.registerCommand('qwen-code.copyAllMessages', () =>
+    vscode.commands.registerCommand('lailatul-coder.copyAllMessages', () =>
       sendCopyToActive('copyAllMessages'),
     ),
-    vscode.commands.registerCommand('qwen-code.copyLastReply', () =>
+    vscode.commands.registerCommand('lailatul-coder.copyLastReply', () =>
       sendCopyToActive('copyLastReply'),
     ),
   );
@@ -314,7 +314,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   if (!context.globalState.get(INFO_MESSAGE_SHOWN_KEY) && infoMessageEnabled) {
     void vscode.window.showInformationMessage(
-      'Qwen Code Companion extension successfully installed.',
+      'LailatulCoder Ai Companion extension successfully installed.',
     );
     context.globalState.update(INFO_MESSAGE_SHOWN_KEY, true);
   }
@@ -327,7 +327,7 @@ export async function activate(context: vscode.ExtensionContext) {
       ideServer.syncEnvVars();
     }),
     vscode.commands.registerCommand(
-      'qwen-code.runQwenCode',
+      'lailatul-coder.runQwenCode',
       async (
         location?:
           | vscode.TerminalLocation
@@ -336,7 +336,7 @@ export async function activate(context: vscode.ExtensionContext) {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
           vscode.window.showInformationMessage(
-            'No folder open. Please open a folder to run Qwen Code.',
+            'No folder open. Please open a folder to run LailatulCoder Ai.',
           );
           return;
         }
@@ -346,7 +346,7 @@ export async function activate(context: vscode.ExtensionContext) {
           selectedFolder = workspaceFolders[0];
         } else {
           selectedFolder = await vscode.window.showWorkspaceFolderPick({
-            placeHolder: 'Select a folder to run Qwen Code in',
+            placeHolder: 'Select a folder to run LailatulCoder Ai in',
           });
         }
 
@@ -360,7 +360,7 @@ export async function activate(context: vscode.ExtensionContext) {
           const execPath = process.execPath;
 
           const terminalOptions: vscode.TerminalOptions = {
-            name: `Qwen Code (${selectedFolder.name})`,
+            name: `LailatulCoder Ai (${selectedFolder.name})`,
             cwd: selectedFolder.uri.fsPath,
             env: {
               [IDE_WORKSPACE_PATH_ENV_VAR]: JSON.stringify(
@@ -397,7 +397,7 @@ export async function activate(context: vscode.ExtensionContext) {
         }
       },
     ),
-    vscode.commands.registerCommand('qwen-code.showNotices', async () => {
+    vscode.commands.registerCommand('lailatul-coder.showNotices', async () => {
       const noticePath = vscode.Uri.joinPath(
         context.extensionUri,
         'NOTICES.txt',

@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import type { DaemonEvent } from '@qwen-code/sdk/daemon';
+import type { DaemonEvent } from '@lailatul-coder/sdk/daemon';
 import {
   findLiveJournalRepairSuffix,
   findLiveJournalRepairTarget,

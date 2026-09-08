@@ -7,8 +7,8 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import type { Part } from '@google/genai';
-import type { Config } from '@qwen-code/qwen-code-core';
-import { CoreToolScheduler } from '@qwen-code/qwen-code-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
+import { CoreToolScheduler } from '@lailatul-coder/lailatul-coder-core';
 import {
   mapToDisplay,
   type TrackedToolCall,
@@ -149,3 +149,4 @@ describe('useReactToolScheduler', () => {
     scheduleSpy.mockRestore();
   });
 });
+

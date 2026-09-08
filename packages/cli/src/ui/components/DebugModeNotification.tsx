@@ -9,7 +9,7 @@ import {
   Storage,
   isDebugLogFileEnabled,
   isDebugLoggingDegraded,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { useConfig } from '../contexts/ConfigContext.js';
 import { theme } from '../semantic-colors.js';
 
@@ -44,3 +44,4 @@ export const DebugModeNotification = () => {
     </Box>
   );
 };
+

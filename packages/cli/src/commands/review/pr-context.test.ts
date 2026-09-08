@@ -265,9 +265,9 @@ describe('fullCommentBody', () => {
 });
 
 describe('isReviewWorthShowing', () => {
-  const LEGACY_FOOTER = '_— qwen3.7-max via Qwen Code /review_';
+  const LEGACY_FOOTER = '_— qwen3.7-max via LailatulCoder Ai /review_';
   const VERSIONED_FOOTER =
-    '_— qwen3.8-max-preview via Qwen Code /review (v0.21.2)_';
+    '_— qwen3.8-max-preview via LailatulCoder Ai /review (v0.21.2)_';
 
   it('filters the exact canonical LGTM template, with or without either footer', () => {
     expect(isReviewWorthShowing('No issues found. LGTM! ✅')).toBe(false);
@@ -426,7 +426,7 @@ describe('buildMarkdown — truncation refs are copy-runnable with real coordina
     const issue = [{ id: 31, user: { login: 'r' }, body: 'y'.repeat(400) }];
     const md = buildMarkdown(
       '6711',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       meta,
       inline,
       issue,
@@ -437,10 +437,10 @@ describe('buildMarkdown — truncation refs are copy-runnable with real coordina
     // The full prefix is pinned too: without `"${QWEN_CODE_CLI:-qwen}" review`
     // the emitted text is an unrunnable bare subcommand name.
     expect(md).toContain(
-      '"${QWEN_CODE_CLI:-qwen}" review comment-body 21 --kind inline --repo QwenLM/qwen-code',
+      '"${QWEN_CODE_CLI:-qwen}" review comment-body 21 --kind inline --repo LailatulCoder/lailatul-coder',
     );
     expect(md).toContain(
-      'comment-body 31 --kind issue --repo QwenLM/qwen-code',
+      'comment-body 31 --kind issue --repo LailatulCoder/lailatul-coder',
     );
     expect(md).not.toContain('{owner}');
   });
@@ -448,7 +448,7 @@ describe('buildMarkdown — truncation refs are copy-runnable with real coordina
   it('a capped review body names the filled-in review fetch', () => {
     const md = buildMarkdown(
       '6711',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       meta,
       [],
       [],
@@ -462,7 +462,7 @@ describe('buildMarkdown — truncation refs are copy-runnable with real coordina
       ],
     );
     expect(md).toContain(
-      'comment-body 7 --kind review --pr 6711 --repo QwenLM/qwen-code',
+      'comment-body 7 --kind review --pr 6711 --repo LailatulCoder/lailatul-coder',
     );
   });
 
@@ -536,7 +536,7 @@ describe('buildMarkdown — a markerless maintainer blocker must not render as a
   const render = () =>
     buildMarkdown(
       '6486',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       meta,
       [],
       [
@@ -603,7 +603,7 @@ describe('buildMarkdown — a markerless maintainer blocker must not render as a
     // and each false promotion spends the read budget the real blocker needs.
     const md = buildMarkdown(
       '6486',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       meta,
       [],
       [
@@ -955,7 +955,7 @@ describe('blockerSection — both channels, and the budget', () => {
     });
     const md = buildMarkdown(
       '6486',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       meta,
       [],
       [big(1), big(2), big(3)],
@@ -968,7 +968,7 @@ describe('blockerSection — both channels, and the budget', () => {
     }
     // The one past the budget is a snippet, and it names the exact fetch.
     expect(md).toContain('section budget spent');
-    expect(md).toContain('comment-body 3 --kind issue --repo QwenLM/qwen-code');
+    expect(md).toContain('comment-body 3 --kind issue --repo LailatulCoder/lailatul-coder');
   });
 
   it('renders the bodies that fit in FULL and only degrades past the budget', () => {
@@ -982,7 +982,7 @@ describe('blockerSection — both channels, and the budget', () => {
     });
     const md = buildMarkdown(
       '6486',
-      'QwenLM/qwen-code',
+      'LailatulCoder/lailatul-coder',
       meta,
       [],
       [big(1), big(2), big(3)],
@@ -1052,16 +1052,16 @@ describe('classifyInlineThreads', () => {
     const inline: RawComment[] = [
       {
         id: 7,
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         body: 'the guard checks the wrong variable\n\n<!-- qwen-review critical -->',
       },
       {
         id: 8,
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         body: 'this reads fine but could be shorter\n\n<!-- qwen-review suggestion -->',
       },
     ];
-    const t = classifyInlineThreads(inline, 'qwen-code-ci-bot');
+    const t = classifyInlineThreads(inline, 'lailatul-coder-ci-bot');
     expect(t.openBlockerRoots.map((c) => c.id)).toEqual([7]);
     expect(t.openRoots.map((c) => c.id)).toEqual([8]);
   });
@@ -1077,7 +1077,7 @@ describe('classifyInlineThreads', () => {
         body: '<!-- qwen-review critical -->',
       },
     ];
-    const t = classifyInlineThreads(inline, 'qwen-code-ci-bot');
+    const t = classifyInlineThreads(inline, 'lailatul-coder-ci-bot');
     expect(t.openBlockerRoots).toEqual([]);
   });
 
@@ -1090,7 +1090,7 @@ describe('classifyInlineThreads', () => {
       { id: 9, user: { login: 'someone-else' }, body: '<!-- [critical] -->' },
       { id: 10, body: '<!-- [critical] -->' },
     ];
-    const t = classifyInlineThreads(inline, 'qwen-code-ci-bot');
+    const t = classifyInlineThreads(inline, 'lailatul-coder-ci-bot');
     expect(t.openBlockerRoots).toEqual([]);
     expect(t.repliedBlockerRoots).toEqual([]);
   });
@@ -1103,7 +1103,7 @@ describe('classifyInlineThreads', () => {
     const inline: RawComment[] = [
       {
         id: 7,
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         body: 'the guard checks the wrong variable\n\n<!-- qwen-review critical -->',
       },
     ];
@@ -1118,11 +1118,11 @@ describe('classifyInlineThreads', () => {
     const inline: RawComment[] = [
       {
         id: 7,
-        user: { login: 'qwen-code-ci-bot' },
+        user: { login: 'lailatul-coder-ci-bot' },
         body: 'the sample embeds <!-- qwen-review suggestion --> verbatim and the guard still dereferences null\n\n<!-- qwen-review critical -->',
       },
     ];
-    const t = classifyInlineThreads(inline, 'qwen-code-ci-bot');
+    const t = classifyInlineThreads(inline, 'lailatul-coder-ci-bot');
     expect(t.openBlockerRoots.map((c) => c.id)).toEqual([7]);
   });
 
@@ -2051,8 +2051,8 @@ describe('renderLedgerSection', () => {
       round: 2,
       findings: [{ id: 'R2-1', sev: 'C', file: 'a.ts', title: 't' }],
     };
-    const foreign = renderLedgerSection(ledger, 'm', 'qwen-code-ci-bot');
-    expect(foreign).toContain('**@qwen-code-ci-bot**');
+    const foreign = renderLedgerSection(ledger, 'm', 'lailatul-coder-ci-bot');
+    expect(foreign).toContain('**@lailatul-coder-ci-bot**');
     expect(foreign).toContain('THEIR claims');
     expect(foreign).toContain('no incremental anchor');
 
@@ -2082,7 +2082,7 @@ describe('renderLedgerSection', () => {
         dropped: 2,
       },
       'm',
-      'qwen-code-ci-bot',
+      'lailatul-coder-ci-bot',
       true,
     );
     expect(mergedSection).toContain(
@@ -2631,11 +2631,11 @@ describe('buildMarkdown host baking', () => {
       [longReview],
       ledger,
       '',
-      'qwen-code-ci-bot',
+      'lailatul-coder-ci-bot',
       false,
       'ghe.example.com',
     );
-    expect(md).toContain("**@qwen-code-ci-bot**'s last posted review");
+    expect(md).toContain("**@lailatul-coder-ci-bot**'s last posted review");
     expect(md).toContain(
       'comment-body 7 --kind review --pr 6711 --repo o/r --host ghe.example.com',
     );

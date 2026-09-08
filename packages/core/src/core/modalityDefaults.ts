@@ -52,7 +52,7 @@ const MODALITY_PATTERNS: Array<[RegExp, InputModalities]> = [
   [/^qwen-vl-/, { image: true, video: true }],
   [/^qwen3-vl-/, { image: true, video: true }],
 
-  // Qwen coder / text models: text-only
+  // LailatulCoder Air / text models: text-only
   [/^qwen3-coder-/, {}],
   // Qwen3.6-35B-A3B (local quant variants) — image + video
   [/^qwen3\.6-35b/, { image: true, video: true }],
@@ -86,7 +86,7 @@ const MODALITY_PATTERNS: Array<[RegExp, InputModalities]> = [
   // -------------------
   // ByteDance Doubao — Seed-series and *-vision / *-vl models accept image
   // input; other Doubao models (pro / lite / text) are text-only.
-  // (QwenLM/qwen-code#4876)
+  // (LailatulCoder/lailatul-coder#4876)
   // -------------------
   // seedance (text→video) and seedream (text→image) are generation models with
   // text-only input — exclude them before the multimodal Seed chat series.

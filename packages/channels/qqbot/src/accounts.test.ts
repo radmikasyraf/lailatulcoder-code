@@ -16,7 +16,7 @@ vi.mock('node:fs', () => ({
   mkdirSync: mockMkdirSync,
 }));
 
-vi.mock('@qwen-code/channel-base', () => ({
+vi.mock('@lailatul-coder/channel-base', () => ({
   getGlobalQwenDir: () => '/tmp/test-qwen',
 }));
 

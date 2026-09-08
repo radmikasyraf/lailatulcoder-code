@@ -198,7 +198,7 @@ export function buildCardContent(
 export function extractTitle(text: string): string {
   const firstLine = text.split('\n')[0] || '';
   const cleaned = firstLine.replace(/^[#*\s\->]+/, '').slice(0, 20);
-  return cleaned || 'Qwen Code';
+  return cleaned || 'LailatulCoder Ai';
 }
 
 /**

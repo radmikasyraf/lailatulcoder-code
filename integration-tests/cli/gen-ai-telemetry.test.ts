@@ -176,14 +176,14 @@ describeLocal('GenAI telemetry fields', () => {
 
     const records = parseTelemetry(rig.readFile('telemetry.log'));
     const llmSpans = records.filter(
-      (record) => record.name === 'qwen-code.llm_request',
+      (record) => record.name === 'lailatul-coder.llm_request',
     );
     expect(llmSpans).toHaveLength(2);
 
     const firstLlm = llmSpans[0]!.attributes!;
     const secondLlm = llmSpans[1]!.attributes!;
     const interactionSpans = records.filter(
-      (record) => record.name === 'qwen-code.interaction',
+      (record) => record.name === 'lailatul-coder.interaction',
     );
     expect(interactionSpans).toHaveLength(1);
     const interactionSpan = interactionSpans[0]!;
@@ -192,9 +192,9 @@ describeLocal('GenAI telemetry fields', () => {
     );
     expect(interactionSpan.attributes).toMatchObject({
       'gen_ai.operation.name': 'invoke_agent',
-      'gen_ai.agent.name': 'qwen-code',
+      'gen_ai.agent.name': 'lailatul-coder',
       'gen_ai.conversation.id': expect.any(String),
-      'qwen-code.model': 'request-model',
+      'lailatul-coder.model': 'request-model',
     });
     expect(interactionSpan.attributes).not.toHaveProperty(
       'gen_ai.request.model',
@@ -357,7 +357,7 @@ describeLocal('GenAI telemetry fields', () => {
 
     for (const attributes of [firstLlm, secondLlm]) {
       expect(attributes).not.toHaveProperty('gen_ai.agent.name');
-      expect(attributes).not.toHaveProperty('qwen-code.model');
+      expect(attributes).not.toHaveProperty('lailatul-coder.model');
       expect(attributes).not.toHaveProperty('response_id');
       expect(attributes).not.toHaveProperty('input_tokens');
       expect(attributes).not.toHaveProperty('output_tokens');
@@ -398,13 +398,13 @@ describeLocal('GenAI telemetry fields', () => {
 
     const toolSpan = records.find(
       (record) =>
-        record.name === 'qwen-code.tool' &&
+        record.name === 'lailatul-coder.tool' &&
         record.attributes?.['gen_ai.tool.name'] === 'run_shell_command',
     );
     expect(toolSpan?.attributes).toMatchObject({
       'gen_ai.user.id': 'integration-user-079458',
       'gen_ai.operation.name': 'execute_tool',
-      'gen_ai.agent.name': 'qwen-code',
+      'gen_ai.agent.name': 'lailatul-coder',
       'gen_ai.tool.name': 'run_shell_command',
       'gen_ai.tool.type': 'function',
       'gen_ai.tool.call.id': 'provider-call-123',
@@ -440,9 +440,9 @@ describeLocal('GenAI telemetry fields', () => {
     }
 
     const canonicalSpanNames = new Set([
-      'qwen-code.interaction',
-      'qwen-code.llm_request',
-      'qwen-code.tool',
+      'lailatul-coder.interaction',
+      'lailatul-coder.llm_request',
+      'lailatul-coder.tool',
     ]);
     for (const record of records) {
       const attributes = record.attributes ?? {};
@@ -511,10 +511,10 @@ describeLocal('GenAI telemetry fields', () => {
 
     const records = parseTelemetry(rig.readFile('telemetry.log'));
     const interactionSpan = records.find(
-      (record) => record.name === 'qwen-code.interaction',
+      (record) => record.name === 'lailatul-coder.interaction',
     );
     const llmSpan = records.find(
-      (record) => record.name === 'qwen-code.llm_request',
+      (record) => record.name === 'lailatul-coder.llm_request',
     );
     expect(interactionSpan?.attributes ?? {}).not.toHaveProperty(
       'gen_ai.user.id',
@@ -601,7 +601,7 @@ describeLocal('GenAI telemetry fields', () => {
 
     const records = parseTelemetry(rig.readFile('telemetry.log'));
     const interactionSpan = records.find(
-      (record) => record.name === 'qwen-code.interaction',
+      (record) => record.name === 'lailatul-coder.interaction',
     );
     expect(interactionSpan?.attributes).not.toHaveProperty(
       'gen_ai.input.messages',
@@ -610,7 +610,7 @@ describeLocal('GenAI telemetry fields', () => {
       'gen_ai.output.messages',
     );
     const llmSpans = records.filter(
-      (record) => record.name === 'qwen-code.llm_request',
+      (record) => record.name === 'lailatul-coder.llm_request',
     );
     expect(llmSpans).toHaveLength(server.requests.length);
     for (const llmSpan of llmSpans) {
@@ -626,7 +626,7 @@ describeLocal('GenAI telemetry fields', () => {
     }
     const toolSpan = records.find(
       (record) =>
-        record.name === 'qwen-code.tool' &&
+        record.name === 'lailatul-coder.tool' &&
         record.attributes?.['gen_ai.tool.name'] === 'run_shell_command',
     );
     expect(toolSpan?.attributes?.['gen_ai.tool.description']).toEqual(

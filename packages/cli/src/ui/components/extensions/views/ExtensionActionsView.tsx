@@ -16,7 +16,7 @@ import {
   type ExtensionScope,
   SettingScope,
   checkForExtensionUpdate,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { getErrorMessage } from '../../../../utils/errors.js';
 import { ExtensionUpdateState } from '../../../state/extensions.js';
 import {
@@ -394,3 +394,4 @@ export const ExtensionActionsView = ({
     />
   );
 };
+

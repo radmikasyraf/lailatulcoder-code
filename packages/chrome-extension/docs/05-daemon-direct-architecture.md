@@ -44,7 +44,7 @@ QWEN_CDP_MCP_COMMAND=/path/to/cdp-mcp-adapter \
 qwen serve --allow-origin chrome-extension://<id>
 ```
 
-The main Qwen Code package deliberately does not bundle that adapter. Clients
+The main LailatulCoder Ai package deliberately does not bundle that adapter. Clients
 must distinguish `cdp_tunnel_over_ws` from `browser_automation_mcp` in the serve
 capability list.
 

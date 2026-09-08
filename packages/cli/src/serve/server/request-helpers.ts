@@ -7,9 +7,9 @@
 import {
   MAX_WORKSPACE_PATH_LENGTH,
   translateAndCheckAbsoluteWorkspacePath,
-} from '@qwen-code/acp-bridge/workspacePaths';
+} from '@lailatul-coder/acp-bridge/workspacePaths';
 import type { Request, Response } from 'express';
-import type { AcpSessionBridge } from '@qwen-code/acp-bridge/bridgeTypes';
+import type { AcpSessionBridge } from '@lailatul-coder/acp-bridge/bridgeTypes';
 import { normalizeSessionIdForLookup } from '../../config/session-id.js';
 import { writeStderrLine } from '../../utils/stdioHelpers.js';
 import type { WorkspaceRequestContext } from '../workspace-service/index.js';

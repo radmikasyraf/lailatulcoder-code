@@ -58,7 +58,7 @@ export const lspCommand: SlashCommand = {
         context,
         'info',
         t(
-          'LSP is not enabled. Start Qwen Code with `--experimental-lsp` to enable LSP support.',
+          'LSP is not enabled. Start LailatulCoder Ai with `--experimental-lsp` to enable LSP support.',
         ),
       );
     }

@@ -1,11 +1,26 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "declarationMap": true,
-    "outDir": "dist",
-    "rootDir": "src"
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "src/**/*.test.ts"],
-  "references": [{ "path": "../base" }]
+    "extends":  "../../../tsconfig.json",
+    "compilerOptions":  {
+                            "declarationMap":  true,
+                            "outDir":  "dist",
+                            "rootDir":  "src",
+                            "lib":  [
+                                        "DOM",
+                                        "DOM.Iterable",
+                                        "ES2023"
+                                    ]
+                        },
+    "include":  [
+                    "src/**/*.ts"
+                ],
+    "exclude":  [
+                    "node_modules",
+                    "dist",
+                    "src/**/*.test.ts"
+                ],
+    "references":  [
+                       {
+                           "path":  "../base"
+                       }
+                   ]
 }

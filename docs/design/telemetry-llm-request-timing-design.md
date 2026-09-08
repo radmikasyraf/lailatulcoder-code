@@ -5,27 +5,27 @@
 > this document's `gen_ai.usage.cached_tokens`,
 > `gen_ai.server.time_to_first_token`, and
 > `gen_ai.usage.reasoning_tokens` aliases, and replaces the LLM Span's
-> `qwen-code.model`, `input_tokens`, `output_tokens`, and
+> `lailatul-coder.model`, `input_tokens`, `output_tokens`, and
 > `cached_input_tokens` aliases with standard GenAI attributes. The private
 > `ttft_ms` Span attribute, `ApiResponseEvent.ttft_ms`, `sampling_ms`,
 > throughput, `/stats`, and API request breakdown metrics described here remain
 > valid. The alignment doc adds the independent standard
 > `gen_ai.response.time_to_first_chunk` attribute alongside `ttft_ms`.
 
-> Issue #3731 — Phase 4 of hierarchical session tracing. Adds time-to-first-token, request-setup duration, sampling duration, and per-attempt retry telemetry to the `qwen-code.llm_request` span so operators can answer "why was this LLM call slow?" without guessing.
+> Issue #3731 — Phase 4 of hierarchical session tracing. Adds time-to-first-token, request-setup duration, sampling duration, and per-attempt retry telemetry to the `lailatul-coder.llm_request` span so operators can answer "why was this LLM call slow?" without guessing.
 >
 > Builds on Phase 1 (#4126), Phase 1.5 (#4302), Phase 2 (#4321). Independent of Phase 3 (#4410, in review) — recommended to land Phase 3 first so Phase 4's per-attempt fields aggregate cleanly under subagent subtrees.
 
 ## Problem
 
-`qwen-code.llm_request` spans today carry only `model`, `prompt_id`, `input_tokens`, `output_tokens`, `success`, `error`, `duration_ms`. Operators reading a single trace cannot tell:
+`lailatul-coder.llm_request` spans today carry only `model`, `prompt_id`, `input_tokens`, `output_tokens`, `success`, `error`, `duration_ms`. Operators reading a single trace cannot tell:
 
 1. **How much of `duration_ms` was the model thinking vs the network setup.** A 12-second `duration_ms` could be 11s of retries followed by 1s of fast generation, or 100ms of setup followed by 12s of slow streaming — the trace doesn't say.
 2. **When the user saw the first token.** TTFT (time-to-first-token) is the standard latency SLO for chat UIs. We can't compute it; we don't capture it.
 3. **What happened during retries.** `retryWithBackoff` (`utils/retry.ts:285`) only calls `debugLogger.warn` — no OTel event, no span attribute. The 4 LLM call sites that go through it (`client.ts:1540`, `baseLlmClient.ts:193,282`, `geminiChat.ts:1039`) have zero retry visibility in traces or metrics. `ContentRetryEvent` exists for content-recovery retries inside `geminiChat.ts:806,830` but not for the more common rate-limit / 5xx retries.
 4. **That `api.request.breakdown` is dead code.** The metric is defined at `metrics.ts:242-251` with 4 `ApiRequestPhase` values, exported from `index.ts:117`, tested in `metrics.test.ts:646-675` — but `recordApiRequestBreakdown()` has zero callers in production code. The metric infrastructure is paid for; the data flow was never connected.
 
-These gaps make `qwen-code.llm_request` the least informative span in the trace tree. Tool spans (#4126/#4321) and subagent spans (#4410) both surface lifecycle phases; LLM spans collapse the entire request into one opaque duration.
+These gaps make `lailatul-coder.llm_request` the least informative span in the trace tree. Tool spans (#4126/#4321) and subagent spans (#4410) both surface lifecycle phases; LLM spans collapse the entire request into one opaque duration.
 
 ## Existing surface (no change)
 
@@ -47,7 +47,7 @@ These gaps make `qwen-code.llm_request` the least informative span in the trace 
 - **Separate TTFT for reasoning/thinking blocks.** "First token" includes thinking content (see D1). A future enhancement could split `ttft_to_reasoning_ms` vs `ttft_to_answer_ms`, but only after we know there's demand.
 - **Sampling phase as a dedicated child span.** Computable from `duration_ms - ttft_ms - request_setup_ms`; child span adds nothing for OTel-only backends (claude-code uses one for Perfetto only). Stored as a span attribute instead — see D6.
 - **Persistent retry mode (`QWEN_CODE_UNATTENDED_RETRY`) event-level rate limiting.** A single LLM request can produce 50+ `ContentRetryEvent` / `ApiRetryEvent` records under persistent retry. Capping emission is a follow-up — Phase 4 emits all events; if production volumes prove unbearable, add a per-span emission cap with a "+N more attempts (truncated)" summary event in a follow-up PR.
-- **`TOKEN_PROCESSING` breakdown phase.** Enum value exists but qwen-code has no real post-stream local processing worth measuring (<10ms typical). Skipped in production callers; enum value retained for future use or for callers we don't control.
+- **`TOKEN_PROCESSING` breakdown phase.** Enum value exists but lailatul-coder has no real post-stream local processing worth measuring (<10ms typical). Skipped in production callers; enum value retained for future use or for callers we don't control.
 - **Migrating `ContentRetryEvent` onto LLM span as span events.** Same reasoning as Phase 3's `subagent_execution` LogRecord: existing consumers (qwen-logger RUM, future metrics) are tightly coupled to the LogRecord. Bridge-span coverage is good enough.
 
 ## References (decision evidence)
@@ -55,12 +55,12 @@ These gaps make `qwen-code.llm_request` the least informative span in the trace 
 | Source                                                                                                                      | Key takeaway                                                                                                                                                                                                                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | claude-code (Anthropic) `claude.ts:1762, 1789, 1982, 2882`                                                                  | TTFT captured as `Date.now() - start` on `message_start` SSE event; `start` reset per retry attempt. `requestSetupMs = start - startIncludingRetries`. `attemptStartTimes` array preserved per attempt. Confirms feasibility of the approach; their TTFT semantic is "first stream event" (we diverge to "first content" — see D1) |
-| claude-code `perfettoTracing.ts:549-671`                                                                                    | Renders Request Setup → Attempt N (retry) → First Token → Sampling as nested B/E pairs. Demonstrates the visual decomposition; qwen-code does the same decomposition with OTel attributes since we have no Perfetto                                                                                                                |
+| claude-code `perfettoTracing.ts:549-671`                                                                                    | Renders Request Setup → Attempt N (retry) → First Token → Sampling as nested B/E pairs. Demonstrates the visual decomposition; lailatul-coder does the same decomposition with OTel attributes since we have no Perfetto                                                                                                                |
 | claude-code `sessionTracing.ts:447`                                                                                         | Only `ttft_ms` makes it onto the OTel span (not `requestSetupMs`, not `samplingMs`, not per-attempt timing). We deliberately put more on the span — claude-code has Perfetto for visualization; we don't                                                                                                                           |
 | opencode (sst/opencode) `session/llm.ts`, `route/client.ts`                                                                 | No TTFT measurement. Single `LLM.run` Effect span covers everything. Validates that the gap exists across competing tools; not a reference for what to do                                                                                                                                                                          |
 | [OTel GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) (status: Development / Experimental) | `gen_ai.usage.input_tokens` (Stable), `gen_ai.usage.output_tokens` (Stable), `gen_ai.usage.cached_tokens` (Experimental), `gen_ai.request.model` (Stable), `gen_ai.server.time_to_first_token` (Experimental, seconds as double). Dual-emit pattern follows #4410 precedent                                                        |
 | [OTel Trace Spec — Span Events](https://opentelemetry.io/docs/specs/otel/trace/api/#add-events)                             | "Events SHOULD NOT be used to record information that's better captured as Span Attributes." Confirms per-attempt info belongs on the LLM span attributes + log-bridge spans, not as Span Events on the parent                                                                                                                     |
-| Phase 3 design doc (`telemetry-subagent-spans-design.md`)                                                                   | Established the dual-emit pattern (`qwen-code.subagent.id` + `gen_ai.agent.id`) and the "private name is authoritative" rule. Phase 4 follows the same convention for TTFT and token fields                                                                                                                                        |
+| Phase 3 design doc (`telemetry-subagent-spans-design.md`)                                                                   | Established the dual-emit pattern (`lailatul-coder.subagent.id` + `gen_ai.agent.id`) and the "private name is authoritative" rule. Phase 4 follows the same convention for TTFT and token fields                                                                                                                                        |
 
 ## Design — seven decisions, each justified
 
@@ -76,13 +76,13 @@ TTFT measures wall-clock from the **successful attempt's** request dispatch to t
 
 Chunks containing only `role` metadata or only `usageMetadata` (final usage-summary chunk) do not trigger TTFT.
 
-**Why not "first stream event of any kind" (claude-code's choice)**: claude-code measures TTFT at `message_start`, an Anthropic-specific metadata event that fires 50–300ms before any actual content. Their internal `headlessProfiler.ts` already separates `time_to_first_response_ms` for the "user saw something" semantic, acknowledging the distinction. qwen-code spans multiple providers (Anthropic, OpenAI, Gemini, Qwen) — picking the metadata-event semantic means TTFT for Anthropic is fundamentally different from TTFT for OpenAI (which has no analogous metadata-only first event). The user-visible-content semantic is uniform across all 4 providers and matches "time-to-first-token" literally.
+**Why not "first stream event of any kind" (claude-code's choice)**: claude-code measures TTFT at `message_start`, an Anthropic-specific metadata event that fires 50–300ms before any actual content. Their internal `headlessProfiler.ts` already separates `time_to_first_response_ms` for the "user saw something" semantic, acknowledging the distinction. lailatul-coder spans multiple providers (Anthropic, OpenAI, Gemini, Qwen) — picking the metadata-event semantic means TTFT for Anthropic is fundamentally different from TTFT for OpenAI (which has no analogous metadata-only first event). The user-visible-content semantic is uniform across all 4 providers and matches "time-to-first-token" literally.
 
 **Why include `thought` / reasoning**: from the operator's perspective, reasoning chunks are still "the model produced output." Excluding them would understate TTFT for reasoning-heavy models (o1, Qwen thinking variants). Future split into `ttft_to_reasoning_ms` vs `ttft_to_answer_ms` is possible; not Phase 4.
 
-**Why include tool-call-only chunks**: agent tool-decision LLM calls (one `tool_use`, no text) are common in qwen-code's workflow. Excluding them means TTFT is undefined for these requests. The `functionCall` Part is meaningful output.
+**Why include tool-call-only chunks**: agent tool-decision LLM calls (one `tool_use`, no text) are common in lailatul-coder's workflow. Excluding them means TTFT is undefined for these requests. The `functionCall` Part is meaningful output.
 
-**Cross-product comparison note**: design doc explicitly states `qwen-code.ttft_ms ≈ claude-code.time_to_first_response_ms ≠ claude-code.ttft_ms`. Operators comparing across products should align on the user-visible-content semantic.
+**Cross-product comparison note**: design doc explicitly states `lailatul-coder.ttft_ms ≈ claude-code.time_to_first_response_ms ≠ claude-code.ttft_ms`. Operators comparing across products should align on the user-visible-content semantic.
 
 ### D2 — TTFT measurement site: method-local variables in `LoggingContentGenerator.generateContentStream`
 
@@ -134,13 +134,13 @@ When `attempt === 1` and no retries happened, `request_setup_ms` is small (just 
 
 **Putting it on the OTel span (diverges from claude-code, which puts it only on Perfetto)**: rationale at three levels:
 
-1. **No Perfetto** — qwen-code has no out-of-band visualization layer. OTel attributes are the only channel.
+1. **No Perfetto** — lailatul-coder has no out-of-band visualization layer. OTel attributes are the only channel.
 2. **Single-trace debug** — operator sees `duration_ms=12000, request_setup_ms=11500, ttft_ms=200, sampling_ms=300` → instantly diagnoses "retries ate 11.5s, model itself was fast." Computing `request_setup_ms` from other fields requires also exposing `sampling_ms`, which we do anyway (D6).
 3. **Negligible cost** — 1 INT64 attribute. Same order of magnitude as the existing `input_tokens`, `output_tokens` attributes. Backend ingest cost is not material.
 
 ### D4 — Retry telemetry: `onRetry` callback option on `retryWithBackoff` + `ApiRetryEvent` + AsyncLocalStorage propagation
 
-> **Phase 4b update (post-design discovery)**: this section was originally written assuming claude-code's "one LLM span owns the retry loop" pattern. While implementing Phase 4b, we discovered that qwen-code's 4 `retryWithBackoff` call sites (`client.ts:2109`, `baseLlmClient.ts:235,333`, `geminiChat.ts:2035` — line numbers as of merge) all wrap `apiCall = () => contentGenerator.generateContent(...)`. The retry layer sits **above** LoggingContentGenerator. Each retry attempt invokes `apiCall()` fresh → fresh `qwen-code.llm_request` span. There is no single shared span across attempts. An in-`LoggingContentGenerator` accumulator wouldn't work.
+> **Phase 4b update (post-design discovery)**: this section was originally written assuming claude-code's "one LLM span owns the retry loop" pattern. While implementing Phase 4b, we discovered that lailatul-coder's 4 `retryWithBackoff` call sites (`client.ts:2109`, `baseLlmClient.ts:235,333`, `geminiChat.ts:2035` — line numbers as of merge) all wrap `apiCall = () => contentGenerator.generateContent(...)`. The retry layer sits **above** LoggingContentGenerator. Each retry attempt invokes `apiCall()` fresh → fresh `lailatul-coder.llm_request` span. There is no single shared span across attempts. An in-`LoggingContentGenerator` accumulator wouldn't work.
 >
 > **Resolution**: propagate retry state via `AsyncLocalStorage` (`retryContext` in `packages/core/src/utils/retryContext.ts`). `retryWithBackoff` wraps each `await fn()` in `retryContext.run({ attempt, requestSetupMs, retryTotalDelayMs }, fn)`. `LoggingContentGenerator` reads the ALS in its synchronous prelude and forwards the values to `endLLMRequestSpan`. This actually gives **richer** observability than the original plan — each per-attempt span has its own `duration_ms` / `ttft_ms` / error details AND knows where in the retry budget it sits via the per-attempt `attempt` / `requestSetupMs` / `retryTotalDelayMs` attributes.
 >
@@ -231,7 +231,7 @@ recordApiRequestBreakdown(config, model, [
 ]);
 ```
 
-**Why skip `TOKEN_PROCESSING`**: qwen-code does stream chunk processing inline (consolidation happens in the wrapper at `loggingContentGenerator.ts:644`); the post-stream wrap-up phase is <10ms and not architecturally distinct. Filling it with a meaningless value pollutes the histogram. Leaving the enum value unused is safe — `apiRequestBreakdownHistogram.record(value, {model, phase})` is just a histogram with `phase` as a label; missing labels are simply absent in queries.
+**Why skip `TOKEN_PROCESSING`**: lailatul-coder does stream chunk processing inline (consolidation happens in the wrapper at `loggingContentGenerator.ts:644`); the post-stream wrap-up phase is <10ms and not architecturally distinct. Filling it with a meaningless value pollutes the histogram. Leaving the enum value unused is safe — `apiRequestBreakdownHistogram.record(value, {model, phase})` is just a histogram with `phase` as a label; missing labels are simply absent in queries.
 
 **Why not redefine `NETWORK_LATENCY`**: the spec name is slightly misleading (it's network + first-token-generation, not pure network latency), but:
 
@@ -270,25 +270,25 @@ This guarantees metric is recorded **exactly once** per LLM request, matching th
 
 Each Phase 4 attribute that corresponds to an OTel GenAI semconv attribute is written twice on the span:
 
-| qwen-code private (authoritative)          | GenAI semconv (compat layer)                    | Unit conversion | Spec status  |
+| lailatul-coder private (authoritative)          | GenAI semconv (compat layer)                    | Unit conversion | Spec status  |
 | ------------------------------------------ | ----------------------------------------------- | --------------- | ------------ |
 | `ttft_ms` (ms, int)                        | `gen_ai.server.time_to_first_token` (s, double) | `ttftMs / 1000` | Experimental |
 | `input_tokens` (int)                       | `gen_ai.usage.input_tokens` (int)               | identical       | Stable       |
 | `output_tokens` (int)                      | `gen_ai.usage.output_tokens` (int)              | identical       | Stable       |
 | `cached_input_tokens` (int) (when present) | `gen_ai.usage.cached_tokens` (int)              | identical       | Experimental |
-| `qwen-code.model` (string)                 | `gen_ai.request.model` (string)                 | identical       | Stable       |
+| `lailatul-coder.model` (string)                 | `gen_ai.request.model` (string)                 | identical       | Stable       |
 
-**Existing token attribute names** on the LLM span (set in `endLLMRequestSpan` before Phase 4): qwen-code uses bare `input_tokens` and `output_tokens` already. Phase 4 adds the `gen_ai.usage.*` siblings to match #4410's pattern. The bare names stay; **don't rename**.
+**Existing token attribute names** on the LLM span (set in `endLLMRequestSpan` before Phase 4): lailatul-coder uses bare `input_tokens` and `output_tokens` already. Phase 4 adds the `gen_ai.usage.*` siblings to match #4410's pattern. The bare names stay; **don't rename**.
 
-Fields with no GenAI semconv equivalent — `request_setup_ms`, `sampling_ms`, `retry_total_delay_ms`, `attempt`, `output_tokens_per_second` — are emitted only under the qwen-code namespace.
+Fields with no GenAI semconv equivalent — `request_setup_ms`, `sampling_ms`, `retry_total_delay_ms`, `attempt`, `output_tokens_per_second` — are emitted only under the lailatul-coder namespace.
 
 **Why "private authoritative, semconv as compat"**:
 
 - Internal dashboards, SLOs, debugLogger output, qwen-logger RUM, ARMS queries — all reference `ttft_ms` etc. Treating those as canonical avoids a flag-day migration.
-- The Experimental GenAI semconv may rename `gen_ai.server.time_to_first_token` before reaching Stable. If/when it does, we update the semconv emission; the qwen-code names don't move.
+- The Experimental GenAI semconv may rename `gen_ai.server.time_to_first_token` before reaching Stable. If/when it does, we update the semconv emission; the lailatul-coder names don't move.
 - Future spec-aware backends (Datadog AI views, Honeycomb AI, ARMS GenAI dashboards) auto-pick up the `gen_ai.*` attributes without our involvement.
 
-**Why dual-emit unit conversion** (ms ↔ seconds): GenAI semconv chose seconds-as-double for latency; qwen-code chose ms-as-int (matches `duration_ms` already on the span). Both representations have value; the conversion is cheap.
+**Why dual-emit unit conversion** (ms ↔ seconds): GenAI semconv chose seconds-as-double for latency; lailatul-coder chose ms-as-int (matches `duration_ms` already on the span). Both representations have value; the conversion is cheap.
 
 ## Helper API (additive to `session-tracing.ts`)
 
@@ -331,7 +331,7 @@ export class ApiRetryEvent implements BaseTelemetryEvent {
 }
 
 // constants.ts
-export const EVENT_API_RETRY = 'qwen-code.api_retry';
+export const EVENT_API_RETRY = 'lailatul-coder.api_retry';
 
 // loggers.ts
 export function logApiRetry(config: Config, event: ApiRetryEvent): void { ... }
@@ -524,9 +524,9 @@ If review pushes back on size: split into **Phase 4a + 4b + 4c**:
 | OpenAI first chunk with empty `delta.content` but `role` only           | `hasUserVisibleContent` returns false; TTFT not triggered until first chunk with non-empty delta                                                                                                                         |
 | Tool-call-only response (no text)                                       | First chunk with `functionCall` Part triggers TTFT; `output_tokens_per_second` computed against tool-call token count                                                                                                    |
 | Concurrent subagents (3 calls in flight)                                | Each call's closure has its own `attemptStart`, `ttftMs`, `attemptStartTimes`. Per-call span receives its own metadata at `endLLMRequestSpan`. No interleaving (D2)                                                      |
-| SDK-level retries inside openai-sdk (`maxRetries=3`)                    | Invisible to qwen-code telemetry — happens entirely inside SDK before retryWithBackoff sees the request. `attempt` reflects retryWithBackoff attempts only. Out of scope (see Out-of-scope)                              |
-| `gen_ai.server.time_to_first_token` spec renames before reaching Stable | Single-file update: `session-tracing.ts:endLLMRequestSpan`. The qwen-code-native `ttft_ms` stays authoritative — no downstream impact                                                                                    |
-| Subagent's LLM request                                                  | Parent is the subagent span (Phase 3). Phase 4 fields nest correctly. Aggregations grouped by `qwen-code.subagent.id` give per-subagent LLM perf — design-doc-future, easy follow-up                                     |
+| SDK-level retries inside openai-sdk (`maxRetries=3`)                    | Invisible to lailatul-coder telemetry — happens entirely inside SDK before retryWithBackoff sees the request. `attempt` reflects retryWithBackoff attempts only. Out of scope (see Out-of-scope)                              |
+| `gen_ai.server.time_to_first_token` spec renames before reaching Stable | Single-file update: `session-tracing.ts:endLLMRequestSpan`. The lailatul-coder-native `ttft_ms` stays authoritative — no downstream impact                                                                                    |
+| Subagent's LLM request                                                  | Parent is the subagent span (Phase 3). Phase 4 fields nest correctly. Aggregations grouped by `lailatul-coder.subagent.id` give per-subagent LLM perf — design-doc-future, easy follow-up                                     |
 | Reasoning model with long thought blocks                                | First `thought` Part triggers TTFT; `sampling_ms` includes both thinking + answer phases. Split into separate metrics deferred                                                                                           |
 
 ## Rollback
@@ -536,15 +536,15 @@ The change is additive at the OTel and metric level — every new attribute is o
 Behavior-affecting changes:
 
 - New `ApiRetryEvent` LogRecord starts flowing → log volume increases proportional to retry rate (typically <1% of requests retry). Mitigate by sampling LogRecord at the SDK layer if needed.
-- New breakdown metric `qwen-code.api.request.breakdown` starts producing time series → mild Prometheus cardinality bump (`{model, phase}` — bounded).
+- New breakdown metric `lailatul-coder.api.request.breakdown` starts producing time series → mild Prometheus cardinality bump (`{model, phase}` — bounded).
 - `output_tokens_per_second` derived attribute may appear unusual on dashboards filtering "all attributes" — document.
 
 Rollback path: revert the single PR (or each of 4a/4b/4c independently). All new fields use defensive defaults (undefined / 0) and don't change span structure.
 
 ## Sequencing
 
-- **After Phase 3 (#4410, in review)**: not a hard dependency. Phase 4 attributes attach to `qwen-code.llm_request` spans regardless of whether they're under a `qwen-code.subagent` (Phase 3) or `qwen-code.interaction` (Phase 1) parent. Recommend Phase 3 land first so per-attempt aggregation under subagent subtrees works naturally.
-- **Independent of #4384** (`traceparent` + `X-Qwen-Code-Session-Id` outbound propagation). They touch the HTTP layer; Phase 4 touches the stream/retry/metric layer.
+- **After Phase 3 (#4410, in review)**: not a hard dependency. Phase 4 attributes attach to `lailatul-coder.llm_request` spans regardless of whether they're under a `lailatul-coder.subagent` (Phase 3) or `lailatul-coder.interaction` (Phase 1) parent. Recommend Phase 3 land first so per-attempt aggregation under subagent subtrees works naturally.
+- **Independent of #4384** (`traceparent` + `X-lailatul-coder-Session-Id` outbound propagation). They touch the HTTP layer; Phase 4 touches the stream/retry/metric layer.
 - **Independent of GenAI content capture**. Chat compression no longer resets
   process-global sensitive-attribute hash state because that state was removed;
   request timing remains a separate surface.

@@ -138,7 +138,7 @@ describe('LiveDaemonConnection', () => {
     ) as HostControlMessage;
     assert.equal(hello.type, 'host.hello');
     assert.equal(hello.protocolVersion, LIVE_PROTOCOL_VERSION);
-    assert.equal(hello.bundleId, 'com.alibaba.qwen-code.live-host');
+    assert.equal(hello.bundleId, 'com.alibaba.lailatul-coder.live-host');
 
     const requiredActions: HostAction[] = [
       { type: 'host.action', action: 'stop', epoch: 0 },

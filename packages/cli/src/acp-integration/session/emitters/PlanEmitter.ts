@@ -9,7 +9,7 @@ import type { TodoPlanSnapshot } from '../types.js';
 import {
   createTranscriptPlanUpdate,
   extractTranscriptTodoPlan,
-} from '@qwen-code/acp-bridge/transcriptReplay';
+} from '@lailatul-coder/acp-bridge/transcriptReplay';
 
 /**
  * Handles emission of plan/todo updates.

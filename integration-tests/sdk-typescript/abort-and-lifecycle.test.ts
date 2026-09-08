@@ -16,7 +16,7 @@ import {
   type SDKMessage,
   type TextBlock,
   type SDKUserMessage,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 import {
   SDKTestHelper,
   createSharedTestOptions,

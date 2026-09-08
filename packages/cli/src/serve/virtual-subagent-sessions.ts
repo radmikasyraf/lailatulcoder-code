@@ -16,13 +16,13 @@ import {
   type ChatRecord,
   type SessionTranscriptCursorState,
   type SessionTranscriptRecordPage,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   EventBus,
   type BridgeEvent,
   type EventBusSubscriberDiagnostic,
-} from '@qwen-code/acp-bridge/eventBus';
-import { createTranscriptMessageUpdate } from '@qwen-code/acp-bridge/transcriptReplay';
+} from '@lailatul-coder/acp-bridge/eventBus';
+import { createTranscriptMessageUpdate } from '@lailatul-coder/acp-bridge/transcriptReplay';
 import { replayTranscriptRecordPage } from '../acp-integration/session/history-replay-page.js';
 import type { WorkspaceRuntime } from './workspace-registry.js';
 

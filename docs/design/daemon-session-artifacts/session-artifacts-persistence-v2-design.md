@@ -1,4 +1,4 @@
-# Qwen Code Daemon Session Artifacts V2 持久化设计
+# LailatulCoder Ai Daemon Session Artifacts V2 持久化设计
 
 本文延续 PR #5895 的 V1 session artifact API，设计 V2 持久化能力。V1 设计见同目录下的 [session-artifacts-daemon-api-implementation-design.md](./session-artifacts-daemon-api-implementation-design.md)。
 

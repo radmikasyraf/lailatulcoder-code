@@ -46,7 +46,7 @@ export function getLinterTempDir({
   if (runId) {
     return join(
       baseDir,
-      'qwen-code-linters',
+      'lailatul-coder-linters',
       [
         sanitizePathPart(runId),
         sanitizePathPart(env.GITHUB_RUN_ATTEMPT || '1'),
@@ -59,7 +59,7 @@ export function getLinterTempDir({
     .update(cwd)
     .digest('hex')
     .slice(0, 16);
-  return join(baseDir, 'qwen-code-linters', `local-${workspaceHash}`);
+  return join(baseDir, 'lailatul-coder-linters', `local-${workspaceHash}`);
 }
 
 export function getLinterCacheDir({
@@ -68,7 +68,7 @@ export function getLinterCacheDir({
 } = {}) {
   return join(
     env.XDG_CACHE_HOME || join(homeDir, '.cache'),
-    'qwen-code',
+    'lailatul-coder',
     'linters',
   );
 }

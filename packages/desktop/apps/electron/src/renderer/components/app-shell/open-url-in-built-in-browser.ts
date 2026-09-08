@@ -43,7 +43,7 @@ function normalizeExternalUrl(trimmedUrl: string): string {
 /**
  * Open a URL in the docked built-in browser, falling back to the system
  * default browser on any failure so link clicks never no-op silently
- * (https://github.com/QwenLM/qwen-code/issues/8593).
+ * (https://github.com/LailatulCoder/lailatul-coder/issues/8593).
  */
 export async function openUrlInBuiltInBrowser(
   url: string,

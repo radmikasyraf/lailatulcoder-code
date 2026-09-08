@@ -2,13 +2,13 @@
 
 ## Goal
 
-Add a maintainer-triggered `@qwen-code /resolve` command for pull requests that are blocked by merge conflicts with the default branch.
+Add a maintainer-triggered `@lailatul-coder /resolve` command for pull requests that are blocked by merge conflicts with the default branch.
 
 ## Scope
 
 The first version is intentionally conservative:
 
-- The command only runs in `QwenLM/qwen-code`.
+- The command only runs in `LailatulCoder/lailatul-coder`.
 - The requester must have `write`, `maintain`, or `admin` permission.
 - The target must be an open pull request.
 - The pull request branch must live in the base repository.
@@ -23,7 +23,7 @@ The first version is intentionally conservative:
 3. The resolve job acknowledges comment triggers with an `eyes` reaction.
 4. The job reads pull request metadata and rejects closed, draft, non-conflicting, or fork pull requests.
 5. For eligible pull requests, the job checks out the pull request branch with persisted credentials disabled, fetches the base branch, and verifies the branch still points at the expected head SHA.
-6. Qwen Code runs without GitHub credentials, merges `origin/<base>`, resolves conflicts, verifies the result, commits, and writes a summary artifact.
+6. LailatulCoder Ai runs without GitHub credentials, merges `origin/<base>`, resolves conflicts, verifies the result, commits, and writes a summary artifact.
 7. A deterministic verification step fails on unresolved conflicts, missing summary, or failed checks.
 8. The publish step pushes with `--force-with-lease` against the original head SHA and comments with the conflict-resolution summary.
 

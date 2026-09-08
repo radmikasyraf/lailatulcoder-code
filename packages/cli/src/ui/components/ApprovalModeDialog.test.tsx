@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest';
-import { ApprovalMode } from '@qwen-code/qwen-code-core';
+import { ApprovalMode } from '@lailatul-coder/lailatul-coder-core';
 import { LoadedSettings } from '../../config/settings.js';
 import type { SettingScope } from '../../config/settings.js';
 import { renderWithProviders } from '../../test-utils/render.js';
@@ -143,3 +143,4 @@ describe('ApprovalModeDialog', () => {
     expect(frame).not.toContain('Use Enter to select');
   });
 });
+

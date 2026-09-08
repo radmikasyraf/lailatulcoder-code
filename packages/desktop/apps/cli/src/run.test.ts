@@ -380,16 +380,16 @@ describe('run command', () => {
     expect(connections).toEqual([])
 
     await client.invoke('LLM_Connection:save', {
-      slug: 'qwen-code',
-      name: 'Qwen Code',
+      slug: 'lailatul-coder',
+      name: 'LailatulCoder Ai',
       providerType: 'qwen',
       authType: 'none',
       createdAt: 123,
     })
     await client.invoke('settings:setupLlmConnection', {
-      slug: 'qwen-code',
+      slug: 'lailatul-coder',
     })
-    await client.invoke('LLM_Connection:setDefault', 'qwen-code')
+    await client.invoke('LLM_Connection:setDefault', 'lailatul-coder')
 
     expect(mockWsServer!.invokedChannels).toEqual([
       'LLM_Connection:list',

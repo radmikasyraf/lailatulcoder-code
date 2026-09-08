@@ -11,7 +11,7 @@ import {
   apiActivityTracker,
   type Config,
   type GoalSnapshotV2,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 describe('MessageEmitter', () => {
   let mockContext: SessionContext;

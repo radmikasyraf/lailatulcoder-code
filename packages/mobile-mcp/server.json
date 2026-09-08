@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.qwenlm/mobile-mcp",
-  "description": "MCP server for iOS and Android Mobile Development, Automation and Testing (qwen-code fork with relative coordinate support)",
+  "name": "io.github.LailatulCoder/mobile-mcp",
+  "description": "MCP server for iOS and Android Mobile Development, Automation and Testing (lailatul-coder fork with relative coordinate support)",
   "repository": {
-    "url": "https://github.com/QwenLM/qwen-code",
+    "url": "https://github.com/LailatulCoder/lailatul-coder",
     "source": "github"
   },
   "version": "{{VERSION}}",
@@ -11,7 +11,7 @@
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "@qwen-code/mobile-mcp",
+      "identifier": "@lailatul-coder/mobile-mcp",
       "version": "{{VERSION}}",
       "transport": {
         "type": "stdio"

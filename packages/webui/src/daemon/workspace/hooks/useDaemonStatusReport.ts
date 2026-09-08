@@ -5,7 +5,7 @@
  */
 
 import { useCallback } from 'react';
-import type { DaemonStatusReportDetail } from '@qwen-code/sdk/daemon';
+import type { DaemonStatusReportDetail } from '@lailatul-coder/sdk/daemon';
 import { useDaemonWorkspaceActions } from '../DaemonWorkspaceProvider.js';
 import type { DaemonResourceOptions } from '../types.js';
 import { useDaemonResource } from './useDaemonResource.js';

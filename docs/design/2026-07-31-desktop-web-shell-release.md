@@ -4,7 +4,7 @@
 
 当前桌面 PoC 已证明 Tauri 可以复用 daemon 提供的 Web Shell，而不需要维护第二套 UI。但 PoC 仍缺少公开发布所需的用户流程、故障恢复、签名更新、安全边界和三平台安装产物。
 
-本设计把 `packages/desktop-shell` 完善为薄桌面壳：桌面壳只负责生命周期与平台集成，产品功能继续由 `qwen serve` 和 `@qwen-code/web-shell` 提供。
+本设计把 `packages/desktop-shell` 完善为薄桌面壳：桌面壳只负责生命周期与平台集成，产品功能继续由 `qwen serve` 和 `@lailatul-coder/web-shell` 提供。
 
 ## 目标
 
@@ -41,14 +41,14 @@ flowchart LR
 | --------------- | ------------------------------------------------------------------ |
 | bootstrap 页面  | 启动状态、工作区选择、失败恢复、版本与日志入口                     |
 | Rust 桌面状态   | 设置持久化、窗口状态、runtime 生命周期、单实例、更新状态           |
-| bundled runtime | 当前平台 Node.js、Qwen Code bundle、Web Shell 静态资源             |
+| bundled runtime | 当前平台 Node.js、LailatulCoder Ai bundle、Web Shell 静态资源             |
 | 发布 CI         | 三平台构建、签名、公证、smoke、校验和、latest.json、GitHub Release |
 
 ## 启动状态机
 
 | 状态              | 用户看到的内容                   | 可用操作                        |
 | ----------------- | -------------------------------- | ------------------------------- |
-| `starting`        | Qwen Code 品牌启动页和当前工作区 | 等待                            |
+| `starting`        | LailatulCoder Ai 品牌启动页和当前工作区 | 等待                            |
 | `needs_workspace` | 首次启动工作区选择               | 选择目录                        |
 | `ready`           | daemon-served Web Shell          | 正常使用                        |
 | `failed`          | 精简错误摘要                     | 重试、选择其他目录、打开日志    |
@@ -113,7 +113,7 @@ flowchart LR
 
 `prepare-runtime.js` 生成：
 
-- `manifest.json`：桌面版本、Qwen Code 版本、Qwen Code commit、Node 版本、target、构建时间。
+- `manifest.json`：桌面版本、LailatulCoder Ai 版本、LailatulCoder Ai commit、Node 版本、target、构建时间。
 - `checksums.json`：所有 bundled runtime 文件的 SHA-256。
 - 根 `LICENSE` 和桌面 `NOTICE`。
 - Node.js `LICENSE`。
@@ -142,7 +142,7 @@ Windows WebView2 使用 download bootstrapper；系统离线且缺失 WebView2 �
 
 ## 发布流程
 
-1. 输入 desktop 版本和需要 vendor 的 Qwen Code ref。
+1. 输入 desktop 版本和需要 vendor 的 LailatulCoder Ai ref。
 2. 校验 ref 可追溯到允许发布的提交。
 3. 同步 desktop-shell package、Cargo 和 Tauri 版本。版本仅在每次构建时由 CI 瞬时设置，不会提交回仓库；`main` 分支有意保持开发占位版本（`0.0.1`），已发布版本以 git tag 为准。
 4. 每个平台准备 runtime，运行 checksum/runtime smoke 和 Rust 测试。

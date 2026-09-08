@@ -28,7 +28,7 @@ This is the first bot you will interact with when you create an issue. Its job i
 - **What you should do**:
   - Fill out the issue template as completely as possible. The more detail you provide, the more accurate the triage will be.
   - If the `status/need-information` label is added, please provide the requested details in a comment.
-  - Maintainers can comment `@qwen-code /triage` to run triage again.
+  - Maintainers can comment `@lailatul-coder /triage` to run triage again.
 
 ### 2. When you open a Pull Request: `Continuous Integration (CI)`
 
@@ -46,7 +46,7 @@ This workflow ensures that all changes meet our quality standards before they ca
 
 ### 3. Release Automation
 
-This workflow handles the process of packaging and publishing new versions of Qwen Code.
+This workflow handles the process of packaging and publishing new versions of LailatulCoder Ai.
 
 - **Workflow File**: `.github/workflows/release.yml`
 - **When it runs**: On a daily schedule for "nightly" releases, and manually for official patch/minor releases.

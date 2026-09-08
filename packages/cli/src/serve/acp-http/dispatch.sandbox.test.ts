@@ -5,7 +5,7 @@
  */
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { _setSandboxMountExistsForTest } from '@qwen-code/acp-bridge/workspacePaths';
+import { _setSandboxMountExistsForTest } from '@lailatul-coder/acp-bridge/workspacePaths';
 import { parseOptionalWorkspaceCwd } from './dispatch.js';
 
 // #7139 wiring: the ACP JSON-RPC `cwd` entry point must translate a
@@ -20,7 +20,7 @@ describe('ACP dispatch parseOptionalWorkspaceCwd inside a POSIX container sandbo
   it.skipIf(process.platform === 'win32')(
     'accepts a Windows-shaped cwd and returns its bind-mount location',
     () => {
-      vi.stubEnv('SANDBOX', 'qwen-code-sandbox-0');
+      vi.stubEnv('SANDBOX', 'lailatul-coder-sandbox-0');
       _setSandboxMountExistsForTest((p) => p === '/c/qwen-repro');
       expect(
         parseOptionalWorkspaceCwd({ cwd: 'C:\\qwen-repro' }, '/c/qwen-repro'),

@@ -1,6 +1,6 @@
 # Mermaid Diagram Syntax Reference
 
-Qwen Code renders Mermaid diagrams natively as beautiful themed SVGs. Use this reference for syntax details.
+LailatulCoder Ai renders Mermaid diagrams natively as beautiful themed SVGs. Use this reference for syntax details.
 
 ## Flowcharts
 

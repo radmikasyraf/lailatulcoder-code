@@ -22,7 +22,7 @@ import {
   type ExtensionGitCredential,
   ExtensionNotUpdatableError,
   isSupportedArchiveUrl,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import express, {
   type Application,
   type Request,

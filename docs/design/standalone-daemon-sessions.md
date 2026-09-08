@@ -3,12 +3,12 @@
 ## Status
 
 This document is the versioned architecture companion to
-[Issue #8908](https://github.com/QwenLM/qwen-code/issues/8908), which is the
+[Issue #8908](https://github.com/LailatulCoder/lailatul-coder/issues/8908), which is the
 source of truth for the standalone-session design and delivery plan.
-[PR #8890](https://github.com/QwenLM/qwen-code/pull/8890) is implementation PR0,
+[PR #8890](https://github.com/LailatulCoder/lailatul-coder/pull/8890) is implementation PR0,
 not a documentation-only gate: it keeps this document synchronized while
 delivering the Conversations runtime foundation.
-[PR #9181](https://github.com/QwenLM/qwen-code/pull/9181) is the merged PR1
+[PR #9181](https://github.com/LailatulCoder/lailatul-coder/pull/9181) is the merged PR1
 implementation of runtime ownership and ordinary-workspace isolation. The
 remaining standalone core, capability, SDK, WebUI, and WebShell work is
 delivered in PR2 through PR6 below.
@@ -30,7 +30,7 @@ the directory is moved or removed, the client can only report that the current
 working directory no longer exists.
 
 Live Voice already owns a secure projectless storage root at
-`~/Documents/Qwen Code/Conversations`, publishes one daemon-owned runtime for
+`~/Documents/LailatulCoder Ai/Conversations`, publishes one daemon-owned runtime for
 that root, and relocates each Live session into a deterministic private child
 directory. Standalone sessions generalize that substrate into a normal text-chat
 product surface while preserving Live-specific behavior.
@@ -42,7 +42,7 @@ product surface while preserving Live-specific behavior.
 - Make top-level **New Chat** create a standalone session while keeping
   project-local **New Chat** project-bound.
 - Give every standalone session a durable private working directory with normal
-  Qwen Code tools and approvals.
+  LailatulCoder Ai tools and approvals.
 - Support creation, listing, exact lookup, load, resume, rename, export, archive,
   unarchive, repair, and deletion across daemon restarts.
 - Keep standalone, workspace, and Live contexts explicit throughout the SDK and
@@ -261,7 +261,7 @@ The existing conversation workspace creates a deterministic direct child for
 each session:
 
 ```text
-~/Documents/Qwen Code/Conversations/conversation-<sha256(session-id)>
+~/Documents/LailatulCoder Ai/Conversations/conversation-<sha256(session-id)>
 ```
 
 The root and child must be real directories owned by the daemon user. On POSIX,
@@ -1025,7 +1025,7 @@ does not occupy a documentation-only stage.
 
 ### PR0: Conversations runtime foundation
 
-Implementation PR: [#8890](https://github.com/QwenLM/qwen-code/pull/8890)
+Implementation PR: [#8890](https://github.com/LailatulCoder/lailatul-coder/pull/8890)
 
 Suggested title: `refactor(cli): Generalize the Conversations runtime foundation`
 
@@ -1054,7 +1054,7 @@ lazily ensured without enabling Live or starting the ACP child.
 
 ### PR1: Runtime ownership and isolation
 
-Implementation PR: [#9181](https://github.com/QwenLM/qwen-code/pull/9181)
+Implementation PR: [#9181](https://github.com/LailatulCoder/lailatul-coder/pull/9181)
 
 Suggested title: `fix(cli): Harden the Conversations runtime boundary`
 
@@ -1178,7 +1178,7 @@ routes or supplying internal cwd.
 
 Suggested title: `feat(webui): Add explicit daemon session contexts`
 
-Dependency: PR4. [PR #8882](https://github.com/QwenLM/qwen-code/pull/8882) is
+Dependency: PR4. [PR #8882](https://github.com/LailatulCoder/lailatul-coder/pull/8882) is
 merged; re-audit its final API and extend its transaction rather than
 duplicating it.
 

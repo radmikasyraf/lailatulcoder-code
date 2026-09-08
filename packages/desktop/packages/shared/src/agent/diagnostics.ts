@@ -1,7 +1,7 @@
 /**
  * Error diagnostics for backend failures.
  *
- * Qwen Code is the only built-in backend, so diagnostics focus on captured
+ * LailatulCoder Ai is the only built-in backend, so diagnostics focus on captured
  * HTTP failures and the raw process error text.
  */
 
@@ -96,7 +96,7 @@ async function checkCapturedApiError(providerLabel: string): Promise<CheckResult
 }
 
 export async function runErrorDiagnostics(config: DiagnosticConfig): Promise<DiagnosticResult> {
-  const providerLabel = config.providerType === 'qwen' ? 'Qwen Code' : 'Backend';
+  const providerLabel = config.providerType === 'qwen' ? 'LailatulCoder Ai' : 'Backend';
   const details: string[] = [];
   const defaultResult: CheckResult = { ok: true, detail: 'Check timed out' };
 
@@ -116,7 +116,7 @@ export async function runErrorDiagnostics(config: DiagnosticConfig): Promise<Dia
   return {
     code: 'service_unavailable',
     title: 'Backend Unavailable',
-    message: `${providerLabel} is unavailable. Check the Qwen Code CLI installation and try again.`,
+    message: `${providerLabel} is unavailable. Check the LailatulCoder Ai CLI installation and try again.`,
     details,
   };
 }

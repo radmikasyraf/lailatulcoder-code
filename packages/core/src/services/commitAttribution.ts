@@ -254,7 +254,7 @@ const INTERNAL_MODEL_PATTERNS = [
   /qwen[-_]?turbo/i,
 ];
 
-const SANITIZED_GENERATOR_NAME = 'Qwen-Coder';
+const SANITIZED_GENERATOR_NAME = 'lailatul-coderr';
 
 function sanitizeModelName(name: string): string {
   for (const pattern of INTERNAL_MODEL_PATTERNS) {
@@ -291,7 +291,7 @@ function sanitiseAttribution(v: unknown): FileAttribution {
 
 /**
  * Surface label embedded in the git-notes payload. Defaults to `'cli'`
- * for the qwen-code CLI; embedders (IDE extensions, SDK consumers) can
+ * for the lailatul-coder CLI; embedders (IDE extensions, SDK consumers) can
  * override by setting `QWEN_CODE_ENTRYPOINT` before construction so the
  * note records where the contribution was authored.
  */

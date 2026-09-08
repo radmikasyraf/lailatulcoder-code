@@ -3,7 +3,7 @@ import type {
   ChannelOutputSegmentContext,
   ChannelUserInputRequestContext,
   UserInputSettlementReason,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import {
   QUESTION_CARD_TEMPLATE_ID,
   STATUS_CARD_TEMPLATE_ID,

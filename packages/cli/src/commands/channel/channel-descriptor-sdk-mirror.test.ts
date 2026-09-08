@@ -9,13 +9,13 @@ import type {
   ChannelConfigFieldDescriptor,
   ChannelConfigFieldKind,
   ChannelConfigNestedFieldDescriptor,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import type {
   DaemonChannelConfigFieldDescriptor,
   DaemonChannelConfigFieldKind,
   DaemonChannelConfigNestedFieldDescriptor,
   DaemonChannelTypeDescriptor,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import { supportedChannelCatalog } from './channel-registry.js';
 import type { ChannelTypeDescriptor } from './channel-registry.js';
 

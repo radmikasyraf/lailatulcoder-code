@@ -8,7 +8,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 const mockListSessions = vi.fn();
 
-vi.mock('@qwen-code/qwen-code-core', async (orig) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (orig) => {
   const actual = (await orig()) as Record<string, unknown>;
   return {
     ...actual,

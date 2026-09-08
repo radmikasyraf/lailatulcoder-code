@@ -24,7 +24,7 @@ export function parseTestConnectionError(msg: string): string {
   if (lower.includes('econnrefused') || lower.includes('enotfound') || lower.includes('fetch failed')) {
     return 'Cannot connect to API server. Check the URL and ensure the server is running.'
   }
-  if (lower.includes('no api key found for')) return 'Qwen Code is not configured correctly.'
+  if (lower.includes('no api key found for')) return 'LailatulCoder Ai is not configured correctly.'
   if (lower.includes('401') || lower.includes('unauthorized') || lower.includes('authentication')) {
     return 'Invalid API key'
   }
@@ -93,7 +93,7 @@ export const BUILT_IN_CONNECTION_TEMPLATES: Record<string, {
   authType: LlmConnection['authType'] | ((hasCustomEndpoint: boolean) => LlmConnection['authType'])
 }> = {
   [QWEN_CODE_CONNECTION_SLUG]: {
-    name: 'Qwen Code',
+    name: 'LailatulCoder Ai',
     providerType: 'qwen',
     authType: 'none',
   },

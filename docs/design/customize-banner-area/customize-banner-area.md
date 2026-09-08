@@ -2,18 +2,18 @@
 
 > Allow users to replace the QWEN ASCII art, replace the brand title, and
 > hide the banner entirely — without letting them suppress the operational
-> data (version, auth, model, working directory) that makes Qwen Code
+> data (version, auth, model, working directory) that makes LailatulCoder Ai
 > debuggable and trustworthy.
 
 ## Overview
 
-The Qwen Code CLI prints a banner at startup containing a QWEN ASCII logo
+The LailatulCoder Ai CLI prints a banner at startup containing a QWEN ASCII logo
 and a bordered info panel. Several real-world use cases want some control
 over this surface:
 
 - **White-label / third-party brand integration**: enterprises and teams
-  embedding Qwen Code into their own products want to display their brand
-  identity rather than the default "Qwen Code".
+  embedding LailatulCoder Ai into their own products want to display their brand
+  identity rather than the default "LailatulCoder Ai".
 - **Personalization**: individuals want to match the terminal banner to a
   team standard or their own taste.
 - **Multi-tenant / multi-instance distinction**: in shared environments,
@@ -26,7 +26,7 @@ top, not let them silence the information that makes a session
 debuggable. That stance drives every "what can change vs. what is locked"
 decision in the rest of this document.
 
-This is tracked by [issue #3005](https://github.com/QwenLM/qwen-code/issues/3005).
+This is tracked by [issue #3005](https://github.com/LailatulCoder/lailatul-coder/issues/3005).
 
 ## Banner region taxonomy
 
@@ -41,7 +41,7 @@ breaks into the following regions:
 │                                                                             │
 │   ┌──── Logo Column ─────┐  gap=2  ┌──── Info Panel (bordered) ──────────┐  │
 │   │                      │         │                                     │  │
-│   │  ███ QWEN ASCII ███  │         │  ① Title:    >_ Qwen Code (vX.Y.Z)  │  │
+│   │  ███ QWEN ASCII ███  │         │  ① Title:    >_ LailatulCoder Ai (vX.Y.Z)  │  │
 │   │  ███   ART ART  ███  │         │  ② Subtitle: «blank, or override»   │  │
 │   │  ███ QWEN ASCII ███  │         │  ③ Status:   Qwen OAuth | qwen-…    │  │
 │   │                      │         │  ④ Path:     ~/projects/example     │  │
@@ -60,7 +60,7 @@ The two top-level boxes are:
 - **B. Info panel** — a bordered box containing four rows. The second
   row is a blank visual spacer by default, optionally swapped for a
   caller-supplied subtitle:
-  - **B①** Title: `>_ Qwen Code (vX.Y.Z)` — brand text + version suffix.
+  - **B①** Title: `>_ LailatulCoder Ai (vX.Y.Z)` — brand text + version suffix.
   - **B②** Subtitle / spacer: blank single-space row by default. When
     `ui.customBannerSubtitle` is set, that string takes this row (e.g.
     a fork might use `Built-in DataWorks Official Skills`).
@@ -76,7 +76,7 @@ falls back to plain output).
 | Region                                      | Today's source                      | Customization category          | Rationale                                                                                                                                                                                                    |
 | ------------------------------------------- | ----------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **A. Logo column**                          | `shortAsciiLogo` (`AsciiArt.ts`)    | **Replaceable + auto-hideable** | Pure brand surface. White-label needs full control over the visual. The existing "auto-hide on narrow terminals" fallback is preserved.                                                                      |
-| **B①. Title — brand text** (`>_ Qwen Code`) | Hard-coded in `Header.tsx`          | **Replaceable**                 | Brand surface. The leading `>_` glyph is part of the existing brand; if a user wants it gone, they simply omit it from `customBannerTitle`.                                                                  |
+| **B①. Title — brand text** (`>_ LailatulCoder Ai`) | Hard-coded in `Header.tsx`          | **Replaceable**                 | Brand surface. The leading `>_` glyph is part of the existing brand; if a user wants it gone, they simply omit it from `customBannerTitle`.                                                                  |
 | **B①. Title — version suffix** (`(vX.Y.Z)`) | `version` prop                      | **Locked**                      | Critical for bug reports. Hiding it makes "what version are you on?" answerable only via `--version`, which is a real cost in support workflows. We trade a small white-label loss for support tractability. |
 | **B②. Subtitle / spacer row**               | blank by default                    | **Replaceable**                 | Pure brand / context surface. Used by white-label forks to label the build (e.g. "Built-in DataWorks Official Skills"). Sanitized like the title; one line only — no layout-breaking newlines.               |
 | **B③. Status line** (auth + model)          | `formattedAuthType`, `model` props  | **Locked**                      | Operational and security signal. Users must always see which credential is in use and which model will spend their tokens. Suppressing it is a footgun even for white-label scenarios.                       |
@@ -194,7 +194,7 @@ auth/model line:
 ┌─────────────────────────────────────────────────────────┐
 │ DataWorks DataAgent (vX.Y.Z)                            │  ← B① title
 │ Built-in DataWorks Official Skills                      │  ← B② subtitle
-│ Qwen OAuth | qwen-coder ( /model to change)             │  ← B③ status
+│ Qwen OAuth | lailatul-coderr ( /model to change)             │  ← B③ status
 │ ~/projects/example                                      │  ← B④ path
 └─────────────────────────────────────────────────────────┘
 ```
@@ -385,7 +385,7 @@ Where `banner-large.txt` contains the stacked-words ANSI Shadow output
    │      ≤ 64 KB            │         render Logo Column
    │ 3. sanitize art:        │         render Info Panel:
    │    stripControlSeqs     │           Title    = customBannerTitle
-   │    ≤ 200 lines × 200    │                   ?? '>_ Qwen Code'
+   │    ≤ 200 lines × 200    │                   ?? '>_ LailatulCoder Ai'
    │    cols                 │           Subtitle = customBannerSubtitle
    │ 4. sanitize title +     │                   ?? blank spacer row
    │    subtitle (single-    │           Status   = locked
@@ -475,7 +475,7 @@ customBannerTitle: {
   requiresRestart: false,
   default: '' as string,
   description:
-    'Replace the default ">_ Qwen Code" title shown in the banner info panel. The version suffix is always appended.',
+    'Replace the default ">_ LailatulCoder Ai" title shown in the banner info panel. The version suffix is always appended.',
   showInDialog: false,
 },
 customBannerSubtitle: {
@@ -571,7 +571,7 @@ when set:
 
 ```tsx
 <Text bold color={theme.text.accent}>
-  {customBannerTitle ? customBannerTitle : '>_ Qwen Code'}
+  {customBannerTitle ? customBannerTitle : '>_ LailatulCoder Ai'}
 </Text>
 …
 {customBannerSubtitle ? (
@@ -732,7 +732,7 @@ follow-up if user demand surfaces.
 
 | Item                                                               | Why not                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Text-to-ASCII rendering (`{ text: "xxxCode" }` form)               | Considered and rejected for v1. Adding this would require either a `figlet` runtime dependency (~2–3 MB unpacked once a usable set of fonts is included) or a vendored single-font renderer (~200 lines + a `.flf` font file we'd own). Both options bring ongoing surface area: font selection, font-license tracking, "my font doesn't render right on terminal X" issues, and CJK / wide-character handling. The driving use case for this feature (white-label / multi-tenant) almost always has a designer producing intentional ASCII art, not relying on a default figlet font. Users who want one-line generation can already get it with `npx figlet "xxxCode" > brand.txt` + `customAsciiArt: { "path": "./brand.txt" }` — same outcome, no added dependency, no support burden inside Qwen Code. If demand surfaces later this form is purely additive: extend `AsciiArtSource` to `string \| {path} \| {text, font?}` without breaking any existing config. |
+| Text-to-ASCII rendering (`{ text: "xxxCode" }` form)               | Considered and rejected for v1. Adding this would require either a `figlet` runtime dependency (~2–3 MB unpacked once a usable set of fonts is included) or a vendored single-font renderer (~200 lines + a `.flf` font file we'd own). Both options bring ongoing surface area: font selection, font-license tracking, "my font doesn't render right on terminal X" issues, and CJK / wide-character handling. The driving use case for this feature (white-label / multi-tenant) almost always has a designer producing intentional ASCII art, not relying on a default figlet font. Users who want one-line generation can already get it with `npx figlet "xxxCode" > brand.txt` + `customAsciiArt: { "path": "./brand.txt" }` — same outcome, no added dependency, no support burden inside LailatulCoder Ai. If demand surfaces later this form is purely additive: extend `AsciiArtSource` to `string \| {path} \| {text, font?}` without breaking any existing config. |
 | `/banner` slash command for live editing                           | The settings UI is the canonical edit surface. A live editor for multi-line ASCII art is its own project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | Custom gradient colors / per-line color overrides                  | Theme owns colors. A separate proposal can extend the theme contract; banner customization should not duplicate that surface.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | URL-loaded ASCII art                                               | Network fetch at startup is its own can of worms — failure modes, caching, security review. The file-path form is the lower-risk equivalent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |

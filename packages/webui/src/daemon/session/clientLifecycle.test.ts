@@ -27,12 +27,12 @@ describe('getStableClientId', () => {
     const id = getStableClientId(undefined);
     expect(id).toMatch(/^webui_/);
     expect(
-      window.sessionStorage.getItem('qwen-code-webui-client-id'),
+      window.sessionStorage.getItem('lailatul-coder-webui-client-id'),
     ).toBeNull();
   });
 
   it('does not reuse the old tab-level client ID key', () => {
-    window.sessionStorage.setItem('qwen-code-webui-client-id', 'old-client');
+    window.sessionStorage.setItem('lailatul-coder-webui-client-id', 'old-client');
 
     const id1 = getStableClientId(undefined);
 
@@ -49,7 +49,7 @@ describe('getStableClientId', () => {
 
   it('does not use localStorage (multi-tab isolation)', () => {
     getStableClientId(undefined);
-    expect(window.localStorage.getItem('qwen-code-webui-client-id')).toBeNull();
+    expect(window.localStorage.getItem('lailatul-coder-webui-client-id')).toBeNull();
   });
 });
 
@@ -62,7 +62,7 @@ describe('persistStableClientId', () => {
     persistStableClientId('client-daemon');
 
     expect(
-      window.sessionStorage.getItem('qwen-code-webui-client-id'),
+      window.sessionStorage.getItem('lailatul-coder-webui-client-id'),
     ).toBeNull();
     expect(getStableClientId(undefined)).toMatch(/^webui_/);
   });
@@ -79,7 +79,7 @@ describe('persistStableClientId', () => {
   it('ignores missing client ID', () => {
     persistStableClientId(undefined);
     expect(
-      window.sessionStorage.getItem('qwen-code-webui-client-id'),
+      window.sessionStorage.getItem('lailatul-coder-webui-client-id'),
     ).toBeNull();
   });
 });

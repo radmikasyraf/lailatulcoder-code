@@ -7,7 +7,7 @@
 import type React from 'react';
 import { Text } from 'ink';
 import { theme } from '../semantic-colors.js';
-import { ApprovalMode } from '@qwen-code/qwen-code-core';
+import { ApprovalMode } from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../i18n/index.js';
 import { getApprovalModeIndicatorColor } from './approvalModeVisuals.js';
 
@@ -59,3 +59,4 @@ export const AutoAcceptIndicator: React.FC<AutoAcceptIndicatorProps> = ({
     </Text>
   );
 };
+

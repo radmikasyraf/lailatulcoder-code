@@ -83,8 +83,8 @@ describe('parseAssetsRepo', () => {
   });
 
   it('accepts owner/repo and nothing fancier', () => {
-    expect(parseAssetsRepo('QwenLM/qwen-code')).toEqual({
-      repo: 'QwenLM/qwen-code',
+    expect(parseAssetsRepo('LailatulCoder/lailatul-coder')).toEqual({
+      repo: 'LailatulCoder/lailatul-coder',
     });
     for (const bad of [
       'just-a-name',

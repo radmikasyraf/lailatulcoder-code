@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { projectUserTranscriptForDisplay } from '@qwen-code/qwen-code-core';
+import { projectUserTranscriptForDisplay } from '@lailatul-coder/lailatul-coder-core';
 
 type QwenTextRecord = {
   type?: unknown;

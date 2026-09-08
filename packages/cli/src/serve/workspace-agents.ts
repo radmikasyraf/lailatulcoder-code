@@ -16,7 +16,7 @@ import {
   type Config,
   type SubagentConfig,
   type SubagentLevel,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   redactMcpServersSetting,
   restoreRedactedMcpServersSetting,
@@ -107,7 +107,7 @@ import {
   type ServeWorkspaceAgentDetail,
   type ServeWorkspaceAgentSummary,
   type ServeWorkspaceAgentsStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 
 /**
  * Workspace subagent CRUD routes.

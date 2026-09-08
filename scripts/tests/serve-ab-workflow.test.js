@@ -77,7 +77,7 @@ describe('serve-ab pre-checkout workspace wipe', () => {
     // Before the port this step had NO guard: under a mangled env even
     // `/home` or an empty string reached `find … -exec rm -rf {} +`.
     // Pin each ported layer textually, mirroring the reference guard in
-    // qwen-code-pr-review.yml; the exec tests below prove the behavior.
+    // lailatul-coder-pr-review.yml; the exec tests below prove the behavior.
     expect(wipe.run).toContain('GITHUB_WORKSPACE:?');
     expect(wipe.run).toContain('realpath -m');
     expect(wipe.run).toContain('realpath -m -- "$RWS"');

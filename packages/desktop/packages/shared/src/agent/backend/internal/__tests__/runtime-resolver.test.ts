@@ -146,11 +146,11 @@ describe('resolveBackendRuntimePaths', () => {
       'apps',
       'electron',
       'vendor',
-      'qwen-code',
+      'lailatul-coder',
       'dist',
       'cli.js',
     );
-    mkdirSync(join(root, 'apps', 'electron', 'vendor', 'qwen-code', 'dist'), {
+    mkdirSync(join(root, 'apps', 'electron', 'vendor', 'lailatul-coder', 'dist'), {
       recursive: true,
     });
     writeFileSync(cliPath, '');

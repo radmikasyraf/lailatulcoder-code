@@ -252,8 +252,8 @@ Expected: all Feishu adapter tests pass with no unexpected output from the new f
 
 **Interfaces:**
 
-- Links: GitHub issue `QwenLM/qwen-code#8566`.
-- Produces: one draft pull request from `BenGuanRan:feat/feishu-observed-contact-labels` to `QwenLM/qwen-code:main`.
+- Links: GitHub issue `LailatulCoder/lailatul-coder#8566`.
+- Produces: one draft pull request from `BenGuanRan:feat/feishu-observed-contact-labels` to `LailatulCoder/lailatul-coder:main`.
 
 - [ ] **Step 1: Run focused verification**
 
@@ -287,4 +287,4 @@ git push -u fork feat/feishu-observed-contact-labels
 
 - [ ] **Step 6: Create the authorized draft PR with the repository template**
 
-Create exactly one draft PR with title `feat(feishu): enrich observed contact labels`, base `QwenLM/qwen-code:main`, head `BenGuanRan:feat/feishu-observed-contact-labels`, and `Closes #8566`. Fill every English template section and provide a complete paragraph-for-paragraph Chinese translation in the `<details>` block.
+Create exactly one draft PR with title `feat(feishu): enrich observed contact labels`, base `LailatulCoder/lailatul-coder:main`, head `BenGuanRan:feat/feishu-observed-contact-labels`, and `Closes #8566`. Fill every English template section and provide a complete paragraph-for-paragraph Chinese translation in the `<details>` block.

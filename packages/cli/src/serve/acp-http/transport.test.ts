@@ -15,15 +15,15 @@ import WebSocket from 'ws';
 import type {
   BridgeSessionSummary,
   HttpAcpBridge,
-} from '@qwen-code/acp-bridge/bridgeTypes';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
 import type {
   BridgeEvent,
   SessionReplaySnapshot,
-} from '@qwen-code/acp-bridge/eventBus';
+} from '@lailatul-coder/acp-bridge/eventBus';
 import {
   SessionArtifactAuthorizationError,
   SessionArtifactValidationError,
-} from '@qwen-code/acp-bridge/sessionArtifacts';
+} from '@lailatul-coder/acp-bridge/sessionArtifacts';
 import {
   CancelSentinelCollisionError,
   InvalidClientIdError,
@@ -36,13 +36,13 @@ import {
   SessionShellClientRequiredError,
   SessionShellDisabledError,
   TotalSessionLimitExceededError,
-} from '@qwen-code/acp-bridge/bridgeErrors';
+} from '@lailatul-coder/acp-bridge/bridgeErrors';
 import {
   SessionOrganizationService,
   SessionIdCaseConflictError,
   SessionService,
   Storage,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   resetHomeEnvBootstrapForTesting,
   SettingScope,
@@ -943,7 +943,7 @@ describe('ACP Streamable HTTP transport (over the wire)', () => {
       workspaceCwd: TEST_WORKSPACE,
       gitRepoRoot: TEST_WORKSPACE,
       releaseTag: 'v1.2.3',
-      readmeUrl: 'https://github.com/QwenLM/qwen-code-action',
+      readmeUrl: 'https://github.com/LailatulCoder/lailatul-coder-action',
       workflows: [],
       gitignore: { path: '.gitignore', status: 'unchanged' },
       warnings: [],
@@ -6212,7 +6212,7 @@ describe('ACP Streamable HTTP transport (over the wire)', () => {
       method: 'session/new',
       params: {
         _meta: {
-          'qwen-code/sessionId': '550E8400-E29B-41D4-A716-446655440000',
+          'lailatul-coder/sessionId': '550E8400-E29B-41D4-A716-446655440000',
         },
       },
     });
@@ -6243,7 +6243,7 @@ describe('ACP Streamable HTTP transport (over the wire)', () => {
         id: 443,
         method: 'session/new',
         params: {
-          _meta: { 'qwen-code/sessionId': sessionId },
+          _meta: { 'lailatul-coder/sessionId': sessionId },
         },
       });
 
@@ -6273,7 +6273,7 @@ describe('ACP Streamable HTTP transport (over the wire)', () => {
       jsonrpc: '2.0',
       id: 441,
       method: 'session/new',
-      params: { _meta: { 'qwen-code/sessionId': '../../escape' } },
+      params: { _meta: { 'lailatul-coder/sessionId': '../../escape' } },
     });
 
     const [frame] = (await got) as Array<{
@@ -6298,7 +6298,7 @@ describe('ACP Streamable HTTP transport (over the wire)', () => {
       method: 'session/new',
       params: {
         _meta: {
-          'qwen-code/sessionId': '550e8400-e29b-41d4-a716-446655440000',
+          'lailatul-coder/sessionId': '550e8400-e29b-41d4-a716-446655440000',
         },
       },
     });
@@ -6326,7 +6326,7 @@ describe('ACP Streamable HTTP transport (over the wire)', () => {
       method: 'session/new',
       params: {
         _meta: {
-          'qwen-code/sessionId': '550e8400-e29b-41d4-a716-446655440000',
+          'lailatul-coder/sessionId': '550e8400-e29b-41d4-a716-446655440000',
         },
       },
     });
@@ -7247,7 +7247,7 @@ describe('ACP Streamable HTTP transport (over the wire)', () => {
       workspaceCwd: TEST_WORKSPACE,
       gitRepoRoot: TEST_WORKSPACE,
       releaseTag: 'v1.2.3',
-      readmeUrl: 'https://github.com/QwenLM/qwen-code-action',
+      readmeUrl: 'https://github.com/LailatulCoder/lailatul-coder-action',
       workflows: [
         {
           sourcePath: 'qwen-invoke.yml',

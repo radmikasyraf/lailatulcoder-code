@@ -70,7 +70,7 @@ Table showing top 5 projects:
 
 ```
   Project         Sessions   Tokens    Duration
-  qwen-code       28         1.8m      12h
+  lailatul-coder       28         1.8m      12h
   web-app         10         420k       4h
   infra            4         180k       2h
 ```

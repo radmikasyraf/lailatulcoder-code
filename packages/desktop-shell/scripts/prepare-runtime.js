@@ -13,11 +13,11 @@ const packageDir = path.resolve(
   '..',
 );
 const repoRoot = path.resolve(packageDir, '../..');
-const sourceRoot = process.env.QWEN_CODE_ROOT
-  ? path.resolve(process.env.QWEN_CODE_ROOT)
+const sourceRoot = process.env.lailatulcoder_CODE_ROOT
+  ? path.resolve(process.env.lailatulcoder_CODE_ROOT)
   : repoRoot;
 const runtimeDir = path.join(packageDir, 'runtime');
-const finalPackageRoot = path.join(runtimeDir, 'qwen-code');
+const finalPackageRoot = path.join(runtimeDir, 'lailatul-coder');
 const refreshChecksums = process.argv.indexOf('--refresh-checksums');
 if (refreshChecksums !== -1) {
   const root = process.argv[refreshChecksums + 1]
@@ -30,7 +30,7 @@ if (refreshChecksums !== -1) {
 fs.mkdirSync(runtimeDir, { recursive: true });
 recoverInterruptedRuntime();
 const stagingRoot = fs.mkdtempSync(path.join(runtimeDir, '.prepare-'));
-const packageRoot = path.join(stagingRoot, 'qwen-code');
+const packageRoot = path.join(stagingRoot, 'lailatul-coder');
 const libDir = path.join(packageRoot, 'lib');
 const nodeDir = path.join(packageRoot, 'node');
 const qwenCodeVersion = JSON.parse(
@@ -42,7 +42,7 @@ const desktopVersion = JSON.parse(
 const binDir = path.join(packageRoot, 'bin');
 
 const target = desktopTarget();
-const skipBuild = process.env.QWEN_DESKTOP_SKIP_BUILD === '1';
+const skipBuild = process.env.lailatulcoder_DESKTOP_SKIP_BUILD === '1';
 
 const npm = process.env.npm_execpath;
 if (!npm) throw new Error('npm_execpath is unavailable. Run through npm.');
@@ -114,10 +114,10 @@ try {
     path.join(packageRoot, 'manifest.json'),
     `${JSON.stringify(
       {
-        name: '@qwen-code/qwen-code',
+        name: '@lailatul-coder/lailatul-coder',
         desktopVersion,
         qwenCodeVersion,
-        qwenCodeCommit: process.env.QWEN_CODE_COMMIT || gitCommit(sourceRoot),
+        qwenCodeCommit: process.env.lailatulcoder_CODE_COMMIT || gitCommit(sourceRoot),
         target,
         node: `v${process.versions.node}`,
         builtAt: new Date().toISOString(),
@@ -146,8 +146,8 @@ async function installNodeRuntime(destination, desktopTarget) {
   }
   const archiveName = nodeArchiveName(nodeVersion, desktopTarget);
   const downloadRoot = `https://nodejs.org/dist/v${nodeVersion}`;
-  const cacheRoot = process.env.QWEN_DESKTOP_NODE_CACHE_DIR
-    ? path.resolve(process.env.QWEN_DESKTOP_NODE_CACHE_DIR)
+  const cacheRoot = process.env.lailatulcoder_DESKTOP_NODE_CACHE_DIR
+    ? path.resolve(process.env.lailatulcoder_DESKTOP_NODE_CACHE_DIR)
     : path.join(os.tmpdir(), 'qwen-desktop-node-cache');
   const cacheDir = path.join(cacheRoot, `v${nodeVersion}`);
   const cachedArchivePath = path.join(cacheDir, archiveName);
@@ -215,7 +215,7 @@ function copyValidCachedArchive(
 
 function desktopTarget() {
   const target =
-    process.env.QWEN_DESKTOP_TARGET || `${process.platform}-${process.arch}`;
+    process.env.lailatulcoder_DESKTOP_TARGET || `${process.platform}-${process.arch}`;
   const aliases = {
     'aarch64-apple-darwin': 'darwin-arm64',
     'x86_64-apple-darwin': 'darwin-x64',

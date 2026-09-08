@@ -208,7 +208,7 @@ export async function startTelemetrySdk(
   if (attrWarnings.length > 0) {
     // eslint-disable-next-line no-console
     console.warn(
-      `[qwen-code telemetry] ${attrWarnings.length} resource attribute issue(s):`,
+      `[lailatul-coder telemetry] ${attrWarnings.length} resource attribute issue(s):`,
     );
     for (const w of attrWarnings) {
       // eslint-disable-next-line no-console
@@ -429,7 +429,7 @@ export async function startTelemetrySdk(
         ? [logToSpanProcessor]
         : [],
     // In 0.221, omitting both metrics fields enables constructor-time env
-    // fallback. An explicit empty array keeps metrics disabled when qwen-code
+    // fallback. An explicit empty array keeps metrics disabled when lailatul-coder
     // has no configured reader, before the start() env scrub can take effect.
     metricReaders: metricReader ? [metricReader] : [],
     instrumentations: [
@@ -490,7 +490,7 @@ export async function startTelemetrySdk(
       // Modern fetch (`globalThis.fetch` / undici) is the HTTP layer used by
       // `openai`, `@google/genai`, and `@anthropic-ai/sdk`. Without this
       // instrumentation, outbound LLM requests carry no `traceparent` header
-      // and the trace tree terminates at the qwen-code process boundary.
+      // and the trace tree terminates at the lailatul-coder process boundary.
       new UndiciInstrumentation({
         ignoreRequestHook: (request) => {
           if (otlpUrlPrefixes.length === 0) return false;

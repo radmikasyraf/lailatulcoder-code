@@ -1,10 +1,10 @@
 {
-  "name": "@qwen-code/qwen-code-core",
+  "name": "@lailatul-coder/lailatul-coder-core",
   "version": "0.21.14",
-  "description": "Qwen Code Core",
+  "description": "LailatulCoder Ai Core",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git"
+    "url": "git+https://github.com/LailatulCoder/lailatul-coder.git"
   },
   "type": "module",
   "main": "dist/index.js",

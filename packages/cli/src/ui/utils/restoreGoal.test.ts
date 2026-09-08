@@ -15,7 +15,7 @@ import {
   setGoalTerminalObserver,
   type ChatRecord,
   type Config,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { HistoryItem } from '../types.js';
 import {
   collectGoalStatusItemsFromRecords,

@@ -8,7 +8,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import type { GoalRecord } from '@qwen-code/sdk/daemon';
+import type { GoalRecord } from '@lailatul-coder/sdk/daemon';
 import {
   GOAL_EVIDENCE_LIMIT_REASONS,
   canResumeGoal,
@@ -133,7 +133,7 @@ describe('canResumeGoal', () => {
 
 describe('core is the authority on the evidence-limit sentinels', () => {
   // The Web Shell client bundles for the browser and does not depend on
-  // `@qwen-code/qwen-code-core`, so these strings cannot simply be imported
+  // `@lailatul-coder/lailatul-coder-core`, so these strings cannot simply be imported
   // from the package that writes them. They are duplicated, and a comment
   // asking the next person to "keep in sync" is not a mechanism. Drift here is
   // silent and user-visible: the UI would offer a Resume button on a Goal the

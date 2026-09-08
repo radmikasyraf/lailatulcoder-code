@@ -1,7 +1,7 @@
 # Lazy undici loading (lazy startup phase 3)
 
 - Status: implemented
-- Issue: QwenLM/qwen-code#7264 (candidate 4), follow-up to #4748
+- Issue: LailatulCoder/lailatul-coder#7264 (candidate 4), follow-up to #4748
 - Predecessors: `2026-07-19-lazy-telemetry-sdk-loading.md`,
   `2026-07-19-telemetry-protocol-split.md`
 

@@ -34,7 +34,7 @@ import {
   tryAppendDegradedStepSummary,
 } from '../generate-release-notes.js';
 
-const PR = (number) => `https://github.com/QwenLM/qwen-code/pull/${number}`;
+const PR = (number) => `https://github.com/LailatulCoder/lailatul-coder/pull/${number}`;
 
 const entry = (number, title, labels = []) => ({
   number,
@@ -53,7 +53,7 @@ describe('parseGeneratedEntries', () => {
       `* fix(core): preserve tool results by @bob in ${PR(8)}`,
       `* fix(ci): retry publishing by @carol with @Copilot in ${PR(6574)}`,
       '',
-      '**Full Changelog**: https://github.com/QwenLM/qwen-code/compare/v1...v2',
+      '**Full Changelog**: https://github.com/LailatulCoder/lailatul-coder/compare/v1...v2',
     ].join('\n');
 
     expect(parseGeneratedEntries(body)).toEqual([
@@ -182,7 +182,7 @@ describe('renderReleaseNotes', () => {
       ],
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(markdown).toContain('<!-- qwen-release-notes:v1 -->');
@@ -203,7 +203,7 @@ describe('renderReleaseNotes', () => {
       );
     }
     expect(markdown).toContain(
-      '**Full Changelog**: https://github.com/QwenLM/qwen-code/compare/v1.0.0...v1.1.0',
+      '**Full Changelog**: https://github.com/LailatulCoder/lailatul-coder/compare/v1.0.0...v1.1.0',
     );
   });
 });
@@ -213,7 +213,7 @@ describe('isAllowedImageUrl', () => {
     'https://github.com/user-attachments/assets/abc-123',
     'https://user-images.githubusercontent.com/1/x.png',
     'https://private-user-images.githubusercontent.com/1/x.png',
-    'https://raw.githubusercontent.com/QwenLM/qwen-code/0123456789abcdef0123456789abcdef01234567/docs/x.png',
+    'https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/0123456789abcdef0123456789abcdef01234567/docs/x.png',
   ])('accepts %s', (url) => {
     expect(isAllowedImageUrl(url)).toBe(true);
   });
@@ -224,14 +224,14 @@ describe('isAllowedImageUrl', () => {
     'https://camo.githubusercontent.com/dead/beef',
     // Branch refs are mutable: the repo owner can swap the image in an
     // already-published release.
-    'https://raw.githubusercontent.com/QwenLM/qwen-code/main/docs/x.png',
+    'https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/main/docs/x.png',
     // GitHub's fetchers normalize before serving: empty path segments and
     // %2F shift the validated position, dot segments resolve away, and
     // CommonMark strips backslash escapes at render time.
     'https://raw.githubusercontent.com/attacker//0123456789abcdef0123456789abcdef01234567/main/payload.png',
     'https://raw.githubusercontent.com/attacker/repo%2Fsub/0123456789abcdef0123456789abcdef01234567/main/payload.png',
-    'https://raw.githubusercontent.com/QwenLM/qwen-code/0123456789abcdef0123456789abcdef01234567/../../other/repo/main/payload.png',
-    'https://raw.githubusercontent.com/QwenLM/qwen-code/%2e%2e/main/payload.png',
+    'https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/0123456789abcdef0123456789abcdef01234567/../../other/repo/main/payload.png',
+    'https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/%2e%2e/main/payload.png',
     'https://github.com/user-attachments/../../attacker/repo/raw/main/payload.png',
     'https://github.com/user-attachments/assets/..\\..\\attacker/payload.png',
     'http://github.com/user-attachments/assets/abc',
@@ -253,7 +253,7 @@ describe('extractImages', () => {
       '### Evidence (Before & After)',
       `![Before](${ATTACHMENT})`,
       '<img src="https://user-images.githubusercontent.com/9/shot.png" width="400">',
-      `Bare link: https://raw.githubusercontent.com/QwenLM/qwen-code/0123456789abcdef0123456789abcdef01234567/docs/after.png`,
+      `Bare link: https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/0123456789abcdef0123456789abcdef01234567/docs/after.png`,
     ].join('\n');
 
     expect(extractImages(body, { maxPerEntry: 3 })).toEqual([
@@ -263,7 +263,7 @@ describe('extractImages', () => {
         alt: '',
       },
       {
-        url: 'https://raw.githubusercontent.com/QwenLM/qwen-code/0123456789abcdef0123456789abcdef01234567/docs/after.png',
+        url: 'https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/0123456789abcdef0123456789abcdef01234567/docs/after.png',
         alt: '',
       },
     ]);
@@ -340,7 +340,7 @@ describe('extractImages', () => {
 
   it('does not treat ordinary links as images', () => {
     const body =
-      '[design doc](https://raw.githubusercontent.com/QwenLM/qwen-code/main/docs/design.md)\n' +
+      '[design doc](https://raw.githubusercontent.com/LailatulCoder/lailatul-coder/main/docs/design.md)\n' +
       'see https://example.com/page.html';
 
     expect(extractImages(body)).toEqual([]);
@@ -454,7 +454,7 @@ describe('renderReleaseNotesV2', () => {
     ],
     previousTag: 'v1.0.0',
     tag: 'v1.1.0',
-    repo: 'QwenLM/qwen-code',
+    repo: 'LailatulCoder/lailatul-coder',
   };
 
   it('renders PR titles in the appendix without live links', () => {
@@ -464,7 +464,7 @@ describe('renderReleaseNotesV2', () => {
       themes: [],
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(markdown).not.toContain('[docs]');
@@ -536,7 +536,7 @@ describe('renderReleaseNotesV2', () => {
     expect(markdown).not.toContain('v1 endpoint ([#4]');
     expect(markdown).toContain('</details>');
     expect(markdown).toContain(
-      '**Full Changelog**: https://github.com/QwenLM/qwen-code/compare/v1.0.0...v1.1.0',
+      '**Full Changelog**: https://github.com/LailatulCoder/lailatul-coder/compare/v1.0.0...v1.1.0',
     );
   });
 
@@ -749,7 +749,7 @@ describe('renderReleaseNotesV2', () => {
       ],
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(markdown).toContain('  - 移除旧版 v1 API 端点。');
@@ -1234,7 +1234,7 @@ describe('generateAiContent', () => {
             { pr: 1, summary: 'A safe summary.', summaryZh: '安全的摘要。' },
             {
               pr: 2,
-              summary: '@QwenLM/security should review this.',
+              summary: '@LailatulCoder/security should review this.',
               summaryZh: '安全审查。',
             },
           ],
@@ -1530,7 +1530,7 @@ describe('generateReleaseNotes', () => {
       },
       previousTag: 'v1.0.0',
       tag: 'v1.0.1',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(result.markdown).toBe(generatedBody);
@@ -1552,7 +1552,7 @@ describe('generateReleaseNotes', () => {
       complete: null,
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(result.markdown).toContain('### Features');
@@ -1615,7 +1615,7 @@ describe('generateReleaseNotes', () => {
       complete,
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(result.markdown).toContain('<!-- qwen-release-notes:v2 -->');
@@ -1653,7 +1653,7 @@ describe('generateReleaseNotes', () => {
       complete,
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(result.markdown).toContain('<!-- qwen-release-notes:v2 -->');
@@ -1690,7 +1690,7 @@ describe('generateReleaseNotes', () => {
       complete,
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(result.markdown).toContain('## 中文摘要');
@@ -1727,7 +1727,7 @@ describe('generateReleaseNotes', () => {
       complete,
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(result.markdown).toContain('<!-- qwen-release-notes:v1 -->');
@@ -1774,7 +1774,7 @@ describe('generateReleaseNotes', () => {
       complete,
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(result.markdown).toContain(
@@ -1810,7 +1810,7 @@ describe('generateReleaseNotes', () => {
       complete,
       previousTag: 'v1.0.0',
       tag: 'v1.1.0',
-      repo: 'QwenLM/qwen-code',
+      repo: 'LailatulCoder/lailatul-coder',
     });
 
     expect(result.markdown).toContain('<!-- qwen-release-notes:v1 -->');
@@ -1833,8 +1833,8 @@ describe('generateReleaseNotes', () => {
           [
             '#!/usr/bin/env node',
             'const args = process.argv.slice(2);',
-            "if (args[0] === 'api' && args.includes('repos/QwenLM/qwen-code/releases/generate-notes')) {",
-            "  process.stdout.write([\"## What's Changed\", '* feat: add cli path by @alice in https://github.com/QwenLM/qwen-code/pull/1'].join('\\n'));",
+            "if (args[0] === 'api' && args.includes('repos/LailatulCoder/lailatul-coder/releases/generate-notes')) {",
+            "  process.stdout.write([\"## What's Changed\", '* feat: add cli path by @alice in https://github.com/LailatulCoder/lailatul-coder/pull/1'].join('\\n'));",
             '  process.exit(0);',
             '}',
             "if (args[0] === 'api' && args[1] === 'graphql') {",
@@ -1860,7 +1860,7 @@ describe('generateReleaseNotes', () => {
               ...process.env,
               PATH: `${dir}:${process.env.PATH}`,
               GITHUB_STEP_SUMMARY: summaryPath,
-              GITHUB_REPOSITORY: 'QwenLM/qwen-code',
+              GITHUB_REPOSITORY: 'LailatulCoder/lailatul-coder',
               OPENAI_API_KEY: '',
               OPENAI_BASE_URL: '',
               OPENAI_MODEL: '',

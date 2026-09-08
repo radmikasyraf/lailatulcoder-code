@@ -9,7 +9,7 @@ import { randomUUID } from 'node:crypto';
 import {
   CHANNEL_DELIVERY_ERROR_CODES,
   type ChannelDeliveryErrorCode,
-} from '@qwen-code/acp-bridge/bridgeOptions';
+} from '@lailatul-coder/acp-bridge/bridgeOptions';
 
 export { CHANNEL_DELIVERY_ERROR_CODES, type ChannelDeliveryErrorCode };
 

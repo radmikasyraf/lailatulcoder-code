@@ -9,7 +9,7 @@ import {
   HookEventName,
   HooksConfigSource,
   HookType,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { HookEventDisplayInfo } from './types.js';
 import {
   addConfigToMatcherGroup,

@@ -1,7 +1,7 @@
 # Daemon multi-workspace hardening baseline
 
 Status: current implementation baseline and review contract for issue
-[#6378](https://github.com/QwenLM/qwen-code/issues/6378). This document closes
+[#6378](https://github.com/LailatulCoder/lailatul-coder/issues/6378). This document closes
 the hardening phase; it is not a roadmap for adding new daemon features.
 
 ## Ownership model
@@ -66,7 +66,7 @@ fallback when resolution fails.
   aggregates active and draining runtimes, returns a reason-bearing `503` for
   bootstrap or aggregation failure, and never exposes workspace paths. See
   [daemon-global deep health](./daemon-global-deep-health.md), implemented by
-  [PR #6961](https://github.com/QwenLM/qwen-code/pull/6961).
+  [PR #6961](https://github.com/LailatulCoder/lailatul-coder/pull/6961).
 
 ## Review contract
 

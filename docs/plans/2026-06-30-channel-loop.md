@@ -6,9 +6,9 @@
 
 **Architecture:** Channel loops are stored by the channel gateway in a JSON file under Qwen home, scanned by a small channel-owned cron scheduler, and executed through `ChannelBase` using the existing `SessionRouter` and per-session queue. This iteration shares core cron parsing but does not reuse core `CronScheduler`; the channel layer needs chat target scoping, proactive-send capability checks, and lifecycle fields.
 
-**Tech Stack:** TypeScript ESM, Vitest, `@qwen-code/qwen-code-core` cron utilities, channel packages, CLI channel start command.
+**Tech Stack:** TypeScript ESM, Vitest, `@lailatul-coder/lailatul-coder-core` cron utilities, channel packages, CLI channel start command.
 
-**Issue:** https://github.com/QwenLM/qwen-code/issues/6068
+**Issue:** https://github.com/LailatulCoder/lailatul-coder/issues/6068
 
 ---
 
@@ -746,7 +746,7 @@ Expected: all adapter tests pass.
 
 - [ ] **Step 1: Write failing CLI tests**
 
-Update the mocked `@qwen-code/channel-base` module to include `ChannelLoopStore` and `ChannelLoopScheduler`, then assert:
+Update the mocked `@lailatul-coder/channel-base` module to include `ChannelLoopStore` and `ChannelLoopScheduler`, then assert:
 
 - `startSingle` creates one store and scheduler.
 - `createChannel` receives `{ loopController }`.
@@ -774,8 +774,8 @@ import {
   ChannelLoopScheduler,
   ChannelLoopStore,
   SessionRouter,
-} from '@qwen-code/channel-base';
-import { nextFireTime, parseCron } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/channel-base';
+import { nextFireTime, parseCron } from '@lailatul-coder/lailatul-coder-core';
 ```
 
 Create a controller:
@@ -864,10 +864,10 @@ Run:
 git add packages/channels/base packages/channels/telegram packages/channels/feishu packages/cli packages/core .qwen/pr-drafts docs/superpowers/plans/2026-06-30-channel-loop.md
 git commit -m "feat(channel): add channel loop support"
 git push -u origin feat/channel-loop
-gh pr create --repo QwenLM/qwen-code --draft --title "feat(channel): add channel loop support" --body-file .qwen/pr-drafts/channel-loop.md
+gh pr create --repo LailatulCoder/lailatul-coder --draft --title "feat(channel): add channel loop support" --body-file .qwen/pr-drafts/channel-loop.md
 ```
 
-Expected: draft PR opened against `QwenLM/qwen-code:main`.
+Expected: draft PR opened against `LailatulCoder/lailatul-coder:main`.
 
 ## Self-Review
 

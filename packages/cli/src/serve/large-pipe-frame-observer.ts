@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { LOAD_REPLAY_META_KEY } from '@qwen-code/acp-bridge/bridgeTypes';
+import { LOAD_REPLAY_META_KEY } from '@lailatul-coder/acp-bridge/bridgeTypes';
 import type { DaemonLogger } from './daemon-logger.js';
 
 export const LARGE_PIPE_FRAME_THRESHOLD_BYTES = 256 * 1024;
 export const LARGE_PIPE_FRAME_LOG_LIMIT = 50;
 export const LARGE_PIPE_FRAME_LOG_WINDOW_MS = 60_000;
-export const LARGE_PIPE_FRAME_EVENT_NAME = 'qwen-code.daemon.pipe.large_frame';
+export const LARGE_PIPE_FRAME_EVENT_NAME = 'lailatul-coder.daemon.pipe.large_frame';
 
 type PipeDirection = 'inbound' | 'outbound';
 type MessageKind = 'request' | 'notification' | 'response' | 'unknown';

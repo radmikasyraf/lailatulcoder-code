@@ -1,5 +1,5 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test';
-import type { DaemonEvent } from '@qwen-code/sdk/daemon';
+import type { DaemonEvent } from '@lailatul-coder/sdk/daemon';
 import {
   assistantTextEvent,
   createWebShellDaemonScenario,

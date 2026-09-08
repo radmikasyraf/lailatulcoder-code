@@ -61,8 +61,8 @@ export function connectionAuthTypeToBackendAuthType(_authType?: LlmAuthType): Ll
 
 function qwenConnectionFallback(): LlmConnection {
   return {
-    slug: 'qwen-code',
-    name: 'Qwen Code',
+    slug: 'lailatul-coder',
+    name: 'LailatulCoder Ai',
     providerType: 'qwen',
     authType: 'none',
     createdAt: 0,

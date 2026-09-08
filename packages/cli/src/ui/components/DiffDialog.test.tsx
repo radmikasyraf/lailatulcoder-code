@@ -9,7 +9,7 @@ import { EventEmitter } from 'node:events';
 import { afterEach, describe, it, expect, vi } from 'vitest';
 import { waitFor } from '@testing-library/react';
 import type { Hunk } from 'diff';
-import type { GitDiffResult } from '@qwen-code/qwen-code-core';
+import type { GitDiffResult } from '@lailatul-coder/lailatul-coder-core';
 import { DiffDialog } from './DiffDialog.js';
 import { KeypressProvider } from '../contexts/KeypressContext.js';
 import { ShellFocusContext } from '../contexts/ShellFocusContext.js';
@@ -171,3 +171,4 @@ describe('DiffDialog', () => {
     });
   });
 });
+

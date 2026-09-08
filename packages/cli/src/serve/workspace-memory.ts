@@ -13,7 +13,7 @@ import {
   WorkspaceMemoryWriteTimeoutError,
   getAllGeminiMdFilenames,
   writeWorkspaceContextFile,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { writeStderrLine } from '../utils/stdioHelpers.js';
 import { isServeDebugMode } from './debug-mode.js';
 import type { AcpSessionBridge } from './acp-session-bridge.js';
@@ -23,7 +23,7 @@ import {
   type ServeContextFileScope,
   type ServeWorkspaceMemoryFile,
   type ServeWorkspaceMemoryStatus,
-} from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
 import {
   requireTrustedWorkspaceRuntime,
   resolveWorkspaceRuntimeFromParam,

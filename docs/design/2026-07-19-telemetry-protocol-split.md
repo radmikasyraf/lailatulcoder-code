@@ -1,7 +1,7 @@
 # Telemetry exporter protocol split (lazy SDK phase 2)
 
 - Status: implemented
-- Issue: QwenLM/qwen-code#7264 (candidate 1), follow-up to #4748
+- Issue: LailatulCoder/lailatul-coder#7264 (candidate 1), follow-up to #4748
 - Predecessor: `2026-07-19-lazy-telemetry-sdk-loading.md` (facade / impl split)
 
 ## Problem
@@ -25,7 +25,7 @@ exporter packages themselves:
 2. `@opentelemetry/sdk-node` itself — its `utils.js`/`sdk.js` eagerly
    `require()` every exporter package (otlp proto/http/grpc × 3 signals,
    zipkin, prometheus) to support `OTEL_*_EXPORTER` env-based
-   auto-configuration. qwen-code never reaches those code paths: it always
+   auto-configuration. lailatul-coder never reaches those code paths: it always
    passes explicit `spanProcessors` / `logRecordProcessors` (an empty array
    still short-circuits the env fallback). Handled by a bundle-time stub,
    see below.
@@ -75,12 +75,12 @@ Two new modules own exporter construction, loaded via dynamic `import()` from
 the importer is `@opentelemetry/sdk-node`, the exporter packages resolve to a
 stub whose constructors throw. Our protocol modules keep resolving the real
 packages. sdk-node only touches these bindings inside its env-driven
-configuration functions, which qwen-code's explicit processor arguments make
+configuration functions, which lailatul-coder's explicit processor arguments make
 unreachable for traces and logs; the one reachable path
 (`OTEL_METRICS_EXPORTER=otlp` etc.) now throws inside `NodeSDK.start()` —
 caught by the facade's existing try/catch — instead of silently exporting to
 a default localhost endpoint. Env-based exporter selection was never a
-supported qwen-code configuration surface.
+supported lailatul-coder configuration surface.
 
 What each configuration loads after the split (measured static closure of
 each bundled entry chunk):

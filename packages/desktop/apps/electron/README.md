@@ -1,12 +1,12 @@
-# Qwen Code Electron App
+# LailatulCoder Ai Electron App
 
-Electron + React desktop interface for Qwen Code.
+Electron + React desktop interface for LailatulCoder Ai.
 
 The desktop app provides:
 
 - Qwen-backed multi-session chat
 - Workspace and source management
-- Onboarding for local Qwen Code setup
+- Onboarding for local LailatulCoder Ai setup
 - Permission modes and plan approval flow
 - File previews, diffs, browser panes, and automations
 

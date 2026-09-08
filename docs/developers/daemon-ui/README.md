@@ -1,6 +1,6 @@
 # Daemon UI SDK — Developer Guide
 
-The `@qwen-code/sdk/daemon` subpath ships shared UI primitives for daemon
+The `@lailatul-coder/sdk/daemon` subpath ships shared UI primitives for daemon
 clients. The current adoption target is web chat and web terminal; native local
 TUI, channel, and IDE integrations keep their existing default paths while the
 daemon UI contract stabilizes. This guide covers the API surface introduced by
@@ -36,7 +36,7 @@ import {
   daemonBlockToMarkdown,
   selectCurrentTool,
   selectApprovalMode,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 const session = await DaemonSessionClient.createOrAttach(client, {
   workspaceCwd,
@@ -106,7 +106,7 @@ store.subscribe(() => {
 `auth.device_flow.{started,throttled,authorized,failed,cancelled}`
 
 Each carries the daemon's `deviceFlowId`. Failed events carry a closed-enum
-`errorKind` (closed enum — see `KNOWN_DEVICE_FLOW_ERROR_KINDS` exported from `@qwen-code/sdk/daemon` for the canonical list, currently: `expired_token` / `access_denied` / `invalid_grant` / `upstream_error` / `persist_failed` / `not_found_or_evicted`).
+`errorKind` (closed enum — see `KNOWN_DEVICE_FLOW_ERROR_KINDS` exported from `@lailatul-coder/sdk/daemon` for the canonical list, currently: `expired_token` / `access_denied` / `invalid_grant` / `upstream_error` / `persist_failed` / `not_found_or_evicted`).
 
 ## Render contract (PR-D)
 
@@ -237,7 +237,7 @@ would no longer resolve via `blockIndexById`).
 import {
   selectSubagentChildBlocks,
   isSubagentChildBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 // Render a parent tool block, then walk children:
 function renderToolBlock(state, block) {
@@ -287,7 +287,7 @@ fallback to `clientReceivedAt`). Multiple clients viewing the same session
 see the same "5 minutes ago" only when both read from the daemon clock.
 
 ```ts
-import { formatBlockTimestamp } from '@qwen-code/sdk/daemon';
+import { formatBlockTimestamp } from '@lailatul-coder/sdk/daemon';
 
 const label = formatBlockTimestamp(block, {
   locale: 'zh-CN',
@@ -302,7 +302,7 @@ Validate your adapter projects the SDK's reference corpus to semantically
 equivalent output:
 
 ```ts
-import { runAdapterConformanceSuite } from '@qwen-code/sdk/daemon';
+import { runAdapterConformanceSuite } from '@lailatul-coder/sdk/daemon';
 
 it('my adapter conforms to daemon UI corpus', () => {
   const result = runAdapterConformanceSuite({
@@ -329,7 +329,7 @@ JSX; the framework only checks semantic content via `expectedContains` and
 daemon's typed-error taxonomy (when the daemon stamps it):
 
 ```ts
-import type { DaemonErrorKind } from '@qwen-code/sdk/daemon';
+import type { DaemonErrorKind } from '@lailatul-coder/sdk/daemon';
 // 'missing_binary' | 'blocked_egress' | 'auth_env_error' | 'init_timeout' | 'restore_timeout'
 // | 'protocol_error' | 'missing_file' | 'parse_error' | 'budget_exhausted'
 ```
@@ -373,7 +373,7 @@ when daemon doesn't explicitly stamp provenance, MCP tools are detectable.
 when it projects a `debug` event instead of a typed event:
 
 ```ts
-import type { DaemonUiDebugReason } from '@qwen-code/sdk/daemon';
+import type { DaemonUiDebugReason } from '@lailatul-coder/sdk/daemon';
 // 'unrecognized_event' | 'unrecognized_session_update' | 'malformed_payload'
 ```
 
@@ -430,7 +430,7 @@ sends; safe when it doesn't."
 
 ## Cross-references
 
-- [PR #4328](https://github.com/QwenLM/qwen-code/pull/4328) — base PR with the shared UI transcript layer
-- [PR #4353](https://github.com/QwenLM/qwen-code/pull/4353) — this PR (unified completeness follow-up)
-- [Issue #3803](https://github.com/QwenLM/qwen-code/issues/3803) — daemon mode proposal
-- [Issue #4175](https://github.com/QwenLM/qwen-code/issues/4175) — Mode B v0.16 implementation tracker
+- [PR #4328](https://github.com/LailatulCoder/lailatul-coder/pull/4328) — base PR with the shared UI transcript layer
+- [PR #4353](https://github.com/LailatulCoder/lailatul-coder/pull/4353) — this PR (unified completeness follow-up)
+- [Issue #3803](https://github.com/LailatulCoder/lailatul-coder/issues/3803) — daemon mode proposal
+- [Issue #4175](https://github.com/LailatulCoder/lailatul-coder/issues/4175) — Mode B v0.16 implementation tracker

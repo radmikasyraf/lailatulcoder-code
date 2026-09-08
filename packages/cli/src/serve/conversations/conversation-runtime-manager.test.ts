@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { AcpSessionBridge } from '@qwen-code/acp-bridge/bridgeTypes';
+import type { AcpSessionBridge } from '@lailatul-coder/acp-bridge/bridgeTypes';
 import { describe, expect, it, vi } from 'vitest';
 import type { WorkspaceFileSystemFactory } from '../fs/index.js';
 import type { DaemonWorkspaceService } from '../workspace-service/types.js';

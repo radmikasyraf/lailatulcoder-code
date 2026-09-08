@@ -23,8 +23,8 @@ import type {
   PermissionManager,
   RuleWithSource,
   RuleType,
-} from '@qwen-code/qwen-code-core';
-import { isPathWithinRoot, parseRule } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import { isPathWithinRoot, parseRule } from '@lailatul-coder/lailatul-coder-core';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -1002,3 +1002,4 @@ function FooterHint({ view }: { view: DialogView }): React.JSX.Element {
     </Box>
   );
 }
+

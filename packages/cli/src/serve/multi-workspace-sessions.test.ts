@@ -16,7 +16,7 @@ import {
   createDebugLogger,
   resetDebugLoggingState,
   setDebugLogSession,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   InvalidRewindTargetError,
   SessionBusyError,
@@ -4401,7 +4401,7 @@ describe('multi-workspace session dispatch', () => {
       expect(secondary.headers['cache-control']).toBe('no-store');
       expect(secondary.headers['x-content-type-options']).toBe('nosniff');
       expect(secondary.headers['content-disposition']).toMatch(
-        /^attachment; filename="qwen-code-export-.+\.html"$/,
+        /^attachment; filename="lailatul-coder-export-.+\.html"$/,
       );
       expect(secondary.text).toContain('secondary export marker');
       expect(secondary.text).not.toContain('primary export marker');

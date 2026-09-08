@@ -16,7 +16,7 @@ import { Footer } from './Footer.js';
 import {
   ApprovalMode,
   type BackgroundApproval,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import * as useTerminalSize from '../hooks/useTerminalSize.js';
 import * as useStatusLineModule from '../hooks/useStatusLine.js';
 import * as useMCPHealthModule from '../hooks/useMCPHealth.js';
@@ -42,9 +42,9 @@ const useStatusLineMock = vi.mocked(useStatusLineModule.useStatusLine);
 vi.mock('../hooks/useMCPHealth.js');
 const useMCPHealthMock = vi.mocked(useMCPHealthModule.useMCPHealth);
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
   const registry = {
     list: vi.fn(() => []),
     subscribe: vi.fn(() => () => {}),
@@ -755,3 +755,4 @@ describe('<Footer />', () => {
     });
   });
 });
+

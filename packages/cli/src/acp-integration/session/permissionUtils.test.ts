@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest';
-import { ToolConfirmationOutcome } from '@qwen-code/qwen-code-core';
+import { ToolConfirmationOutcome } from '@lailatul-coder/lailatul-coder-core';
 import {
   buildPermissionRequestContent,
   interactionMetaFields,

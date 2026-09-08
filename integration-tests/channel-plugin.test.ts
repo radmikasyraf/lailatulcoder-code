@@ -7,7 +7,7 @@
 /**
  * Channel Plugin Integration Test — Real E2E with WebSocket
  *
- * Tests the actual MockPluginChannel (from @qwen-code/channel-plugin-example) connected
+ * Tests the actual MockPluginChannel (from @lailatul-coder/channel-plugin-example) connected
  * to an in-process mock server via WebSocket. The full message flow is:
  *
  *   server.sendMessage("What is 2+2?")
@@ -16,7 +16,7 @@
  *         → SenderGate (open policy)
  *         → SessionRouter (creates/reuses session)
  *         → AcpBridge.prompt(sessionId, text)
- *           → qwen-code --acp (REAL model request)
+ *           → lailatul-coder --acp (REAL model request)
  *       → MockPluginChannel.sendMessage(chatId, response)
  *         → WebSocket response to mock server
  *     → server resolves promise with agent text
@@ -31,7 +31,7 @@ import { fileURLToPath } from 'node:url';
 import { mkdirSync } from 'node:fs';
 
 // Import from the monorepo channel packages
-import { AcpBridge, SessionRouter } from '@qwen-code/channel-base';
+import { AcpBridge, SessionRouter } from '@lailatul-coder/channel-base';
 import {
   MockPluginChannel,
   createMockServer,
@@ -65,7 +65,7 @@ describe('Channel Plugin (Mock WebSocket E2E)', () => {
     // 1. Start mock server on random ports (no port conflicts)
     server = await createMockServer({ httpPort: 0, wsPort: 0 });
 
-    // 2. Start AcpBridge (spawns real qwen-code --acp)
+    // 2. Start AcpBridge (spawns real lailatul-coder --acp)
     bridge = new AcpBridge({
       cliEntryPath: CLI_PATH,
       cwd: testDir,

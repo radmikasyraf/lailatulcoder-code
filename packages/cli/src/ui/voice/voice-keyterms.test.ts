@@ -57,7 +57,7 @@ describe('buildVoiceKeyterms', () => {
 
   it('does not include project- or branch-derived terms (no metadata sent)', () => {
     const terms = buildVoiceKeyterms();
-    expect(terms).not.toContain('qwen-code');
+    expect(terms).not.toContain('lailatul-coder');
     expect(terms).not.toContain('mvp');
   });
 

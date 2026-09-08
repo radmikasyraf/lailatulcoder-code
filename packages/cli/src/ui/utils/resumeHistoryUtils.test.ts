@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -18,7 +18,7 @@ import type {
   ConversationRecord,
   GoalSnapshotV2,
   ResumedSessionData,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Part } from '@google/genai';
 import type { HistoryItem } from '../types.js';
 import { MAX_INLINE_IMAGES_PER_ITEM } from './inline-image-parts.js';

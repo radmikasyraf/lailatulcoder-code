@@ -109,7 +109,7 @@ describe('isGoalClearCommand', () => {
 
 describe('the CLI is the authority on the clear keywords', () => {
   // The Web Shell client bundles for the browser and does not depend on
-  // `@qwen-code/qwen-code-core`, so this set cannot simply be imported from the
+  // `@lailatul-coder/lailatul-coder-core`, so this set cannot simply be imported from the
   // package that enforces it. It is duplicated, and a comment asking the next
   // person to "keep in sync" is not a mechanism. Read the CLI source and
   // compare. Drift here is silent and user-visible: the form would accept a

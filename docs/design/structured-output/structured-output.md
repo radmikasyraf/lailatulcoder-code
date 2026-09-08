@@ -397,7 +397,7 @@ points users at "schema is unsatisfiable" as a likely cause.
   in `--json-schema` arguments.
 - SDK protocol additions (Python / TypeScript / Java SDKs exposing a
   typed `structured_result` field) — track separately;
-  [PR #4001](https://github.com/QwenLM/qwen-code/pull/4001) (closed
+  [PR #4001](https://github.com/LailatulCoder/lailatul-coder/pull/4001) (closed
   unmerged on 2026-05-11) covered that scope before the cli/core work
   landed and was superseded.
 

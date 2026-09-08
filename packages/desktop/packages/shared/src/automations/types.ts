@@ -53,7 +53,7 @@ export const AGENT_EVENTS: AgentEvent[] = [
 // Action Definitions
 // ============================================================================
 
-/** A prompt action - sends a prompt to Qwen Code */
+/** A prompt action - sends a prompt to LailatulCoder Ai */
 export interface PromptAction {
   type: 'prompt';
   prompt: string;
@@ -242,7 +242,7 @@ export interface AutomationResult {
   event: string;
   matched: number;
   results: ActionExecutionResult[];
-  /** Prompts that should be executed by Qwen Code (with metadata) */
+  /** Prompts that should be executed by LailatulCoder Ai (with metadata) */
   pendingPrompts: PendingPrompt[];
 }
 

@@ -5,8 +5,8 @@
  */
 
 /**
- * Run-level budget enforcement for headless / non-interactive Qwen Code
- * sessions. See issue QwenLM/qwen-code#4103.
+ * Run-level budget enforcement for headless / non-interactive LailatulCoder Ai
+ * sessions. See issue LailatulCoder/lailatul-coder#4103.
  *
  * Two budgets are enforced today:
  *  - `--max-wall-time` / `model.maxWallTimeSeconds` — clock-time guardrail

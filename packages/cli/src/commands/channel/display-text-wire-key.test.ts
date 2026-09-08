@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { CHANNEL_PROMPT_DISPLAY_TEXT_META_KEY } from '@qwen-code/channel-base';
-import { DAEMON_PROMPT_DISPLAY_TEXT_META_KEY } from '@qwen-code/acp-bridge/bridgeTypes';
+import { CHANNEL_PROMPT_DISPLAY_TEXT_META_KEY } from '@lailatul-coder/channel-base';
+import { DAEMON_PROMPT_DISPLAY_TEXT_META_KEY } from '@lailatul-coder/acp-bridge/bridgeTypes';
 
 // The channel bridges write the display projection under the channel-base key
 // and the daemon-side Session reads it under the acp-bridge key; the packages

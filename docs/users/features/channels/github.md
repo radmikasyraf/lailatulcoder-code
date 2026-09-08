@@ -1,17 +1,17 @@
 # GitHub
 
-This guide covers setting up a Qwen Code channel that monitors GitHub notifications and responds to mentions, review requests, assignments, and followed-thread activity.
+This guide covers setting up a LailatulCoder Ai channel that monitors GitHub notifications and responds to mentions, review requests, assignments, and followed-thread activity.
 
 ## Prerequisites
 
 - A GitHub account authenticated with the permissions needed to read notifications and post comments
-- The [GitHub CLI](https://cli.github.com/) installed on the host running Qwen Code when using local `gh` authentication
+- The [GitHub CLI](https://cli.github.com/) installed on the host running LailatulCoder Ai when using local `gh` authentication
 
 Use a dedicated bot account when the authenticated account also needs to operate the channel. GitHub does not generate a usable notification for the account's own activity, and the adapter ignores its own comments to prevent reply loops.
 
 ## Authentication
 
-To reuse the GitHub CLI login on the Qwen Code host, authenticate `gh` and explicitly set `useLocalGh: true` in the channel configuration:
+To reuse the GitHub CLI login on the LailatulCoder Ai host, authenticate `gh` and explicitly set `useLocalGh: true` in the channel configuration:
 
 ```bash
 gh auth login
@@ -56,7 +56,7 @@ Add the channel to `~/.qwen/settings.json`:
 }
 ```
 
-To override local `gh` authentication with a PAT, add `"token": "$GITHUB_TOKEN"` to the channel and set the environment variable before starting Qwen Code:
+To override local `gh` authentication with a PAT, add `"token": "$GITHUB_TOKEN"` to the channel and set the environment variable before starting LailatulCoder Ai:
 
 ```bash
 export GITHUB_TOKEN="ghp_your_token_here"

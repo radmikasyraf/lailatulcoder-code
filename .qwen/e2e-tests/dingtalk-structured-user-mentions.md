@@ -4,7 +4,7 @@ Date: 2026-07-22
 
 ## Baseline reproduction
 
-Using Qwen Code 0.20.1 with a DingTalk Stream channel, send a group message that mentions the bot and one other member. DingTalk delivers two entries in `atUsers`, removes both visible names from `text.content`, and the current adapter forwards only the remaining text to the model. With debug payload logging enabled, the nested `dingtalkId` and `staffId` values are also logged without redaction.
+Using LailatulCoder Ai 0.20.1 with a DingTalk Stream channel, send a group message that mentions the bot and one other member. DingTalk delivers two entries in `atUsers`, removes both visible names from `text.content`, and the current adapter forwards only the remaining text to the model. With debug payload logging enabled, the nested `dingtalkId` and `staffId` values are also logged without redaction.
 
 Use anonymized identifiers in all captured evidence. Do not commit real group, user, staff, message, webhook, or application identifiers.
 

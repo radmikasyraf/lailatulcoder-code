@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { asKnownDaemonEvent, type DaemonEvent } from '@qwen-code/sdk/daemon';
+import { asKnownDaemonEvent, type DaemonEvent } from '@lailatul-coder/sdk/daemon';
 import { isRecord } from './httpErrors.js';
 
 export interface LiveJournalRepairTarget {

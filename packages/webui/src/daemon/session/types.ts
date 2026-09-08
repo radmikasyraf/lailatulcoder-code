@@ -48,7 +48,7 @@ import type {
   PromptResult,
   SessionMetadataResult,
   SetModelResult,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 export type DaemonConnectionStatus =
   | 'idle'

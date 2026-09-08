@@ -184,7 +184,7 @@ export type ContentGeneratorConfig = {
   // reject anything else (HTTP 400 "Invalid 'messages' in payload"), so an image
   // read via read_file never reaches the model. Default: true (spec-compliant
   // and safe for permissive providers); set false to restore the legacy
-  // embed-in-tool-message behavior. See QwenLM/qwen-code#4876, #3616.
+  // embed-in-tool-message behavior. See LailatulCoder/lailatul-coder#4876, #3616.
   splitToolMedia?: boolean;
   // OpenAI Chat Completions accepts tool result content as either a plain
   // string or an array of text content parts. Some older OpenAI-compatible
@@ -393,8 +393,8 @@ function wrapProviderLoadError(error: unknown, authType: AuthType): unknown {
   }
 
   return new Error(
-    `Qwen Code was updated in the background and needs to be restarted.\n` +
-      `Please exit and restart Qwen Code to use the '${authType}' provider.`,
+    `LailatulCoder Ai was updated in the background and needs to be restarted.\n` +
+      `Please exit and restart LailatulCoder Ai to use the '${authType}' provider.`,
     { cause: moduleNotFoundError },
   );
 }

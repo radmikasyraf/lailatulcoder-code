@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { createDebugLogger, runSideQuery } from '@qwen-code/qwen-code-core';
-import type { Config } from '@qwen-code/qwen-code-core';
+import { createDebugLogger, runSideQuery } from '@lailatul-coder/lailatul-coder-core';
+import type { Config } from '@lailatul-coder/lailatul-coder-core';
 
 const debugLogger = createDebugLogger('VOICE_REFINE');
 

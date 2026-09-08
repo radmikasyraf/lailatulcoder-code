@@ -1,6 +1,6 @@
 # Channel Plugin Developer Guide
 
-A channel plugin connects Qwen Code to a messaging platform. It's packaged as an [extension](../users/extension/introduction) and loaded at startup. For user-facing docs on installing and configuring plugins, see [Plugins](../users/features/channels/plugins).
+A channel plugin connects LailatulCoder Ai to a messaging platform. It's packaged as an [extension](../users/extension/introduction) and loaded at startup. For user-facing docs on installing and configuring plugins, see [Plugins](../users/features/channels/plugins).
 
 ## How It Fits Together
 
@@ -30,7 +30,7 @@ Daemon-managed channels inherit the daemon's lifecycle and status reporting. The
 Your extension entry point exports a `plugin` conforming to `ChannelPlugin`:
 
 ```typescript
-import type { ChannelPlugin } from '@qwen-code/channel-base';
+import type { ChannelPlugin } from '@lailatul-coder/channel-base';
 import { MyChannel } from './MyChannel.js';
 
 export const plugin: ChannelPlugin = {
@@ -47,14 +47,14 @@ export const plugin: ChannelPlugin = {
 Extend `ChannelBase` and implement three methods:
 
 ```typescript
-import { ChannelBase } from '@qwen-code/channel-base';
+import { ChannelBase } from '@lailatul-coder/channel-base';
 import type {
   ChannelBaseOptions,
   ChannelAgentBridge,
   ChannelConfig,
   Envelope,
   SessionTarget,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 
 export class MyChannel extends ChannelBase {
   constructor(

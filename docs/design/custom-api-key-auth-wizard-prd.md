@@ -4,7 +4,7 @@
 
 Improve the `/auth -> API Key -> Custom API Key` experience by replacing the current documentation-only screen with an in-terminal setup wizard for custom API providers.
 
-Qwen Code supports multiple API protocols through `authType` / `modelProviders` keys, including `openai`, `anthropic`, and `gemini`. Therefore, the custom setup wizard should start by asking users to select the protocol, then collect endpoint, key, and model information for that protocol.
+LailatulCoder Ai supports multiple API protocols through `authType` / `modelProviders` keys, including `openai`, `anthropic`, and `gemini`. Therefore, the custom setup wizard should start by asking users to select the protocol, then collect endpoint, key, and model information for that protocol.
 
 The wizard guides users through:
 
@@ -12,7 +12,7 @@ The wizard guides users through:
 Select Protocol -> Enter Base URL -> Enter API Key -> Enter Model IDs -> Review JSON -> Save + authenticate
 ```
 
-This keeps the custom API key setup inside Qwen Code, reduces the need to manually edit `settings.json`, and makes the final configuration transparent by showing the generated JSON before saving.
+This keeps the custom API key setup inside LailatulCoder Ai, reduces the need to manually edit `settings.json`, and makes the final configuration transparent by showing the generated JSON before saving.
 
 ## Background
 
@@ -24,12 +24,12 @@ Custom Configuration
 You can configure your API key and models in settings.json
 
 Refer to the documentation for setup instructions
-https://qwenlm.github.io/qwen-code-docs/en/users/configuration/model-providers/
+https://LailatulCoder.github.io/lailatul-coder-docs/en/users/configuration/model-providers/
 
 Esc to go back
 ```
 
-This requires users to leave the CLI, read documentation, understand `settings.json`, manually configure `modelProviders`, choose an `envKey`, add API keys, and then return to Qwen Code. Users have reported that this flow is difficult and disconnected from the rest of the `/auth` experience.
+This requires users to leave the CLI, read documentation, understand `settings.json`, manually configure `modelProviders`, choose an `envKey`, add API keys, and then return to LailatulCoder Ai. Users have reported that this flow is difficult and disconnected from the rest of the `/auth` experience.
 
 The current ModelStudio Standard API key path already provides a guided setup flow:
 
@@ -41,7 +41,7 @@ Alibaba Cloud ModelStudio Standard API Key
          └─ Save + authenticate
 ```
 
-Custom API key setup should offer a similar guided experience, while also respecting that Qwen Code supports multiple provider protocols.
+Custom API key setup should offer a similar guided experience, while also respecting that LailatulCoder Ai supports multiple provider protocols.
 
 ## Problem Statement
 
@@ -76,7 +76,7 @@ This causes several usability issues:
 ## Goals
 
 1. Let users configure a custom API provider completely inside `/auth`.
-2. Support the main protocols Qwen Code supports in `modelProviders`: `openai`, `anthropic`, and `gemini`.
+2. Support the main protocols LailatulCoder Ai supports in `modelProviders`: `openai`, `anthropic`, and `gemini`.
 3. Keep the flow close to the existing ModelStudio Standard flow.
 4. Treat `baseUrl` as the custom-provider equivalent of `region`.
 5. Automatically generate a Qwen-managed private `envKey` from the selected protocol and input `baseUrl`.
@@ -733,7 +733,7 @@ Suggested copy:
 
 ```text
 Need advanced generationConfig or capabilities? See:
-https://qwenlm.github.io/qwen-code-docs/en/users/configuration/model-providers/
+https://LailatulCoder.github.io/lailatul-coder-docs/en/users/configuration/model-providers/
 ```
 
 ## Implementation Notes

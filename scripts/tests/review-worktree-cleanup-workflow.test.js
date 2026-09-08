@@ -15,7 +15,7 @@ import {
   worktreePath,
 } from '../../packages/cli/src/commands/review/lib/paths.js';
 
-// The cleanup steps in ci.yml and qwen-code-pr-review.yml hard-code the
+// The cleanup steps in ci.yml and lailatul-coder-pr-review.yml hard-code the
 // review-artifact layout owned by paths.ts: worktreePath()/reviewBranch()
 // and LEASE_PREFIX. Derive the expected patterns from that module so
 // renaming the layout there fails the build here instead of silently
@@ -57,7 +57,7 @@ const ciCleanSteps = Object.entries(ciYaml.jobs)
       ?.run,
   }));
 const reviewYaml = parse(
-  readFileSync('.github/workflows/qwen-code-pr-review.yml', 'utf8'),
+  readFileSync('.github/workflows/lailatul-coder-pr-review.yml', 'utf8'),
 );
 const reviewCleanSteps = reviewYaml.jobs['review-pr'].steps;
 const reviewCleanIndex = reviewCleanSteps.findIndex(
@@ -203,7 +203,7 @@ describe('review worktree cleanup steps', () => {
     'filter selects review worktrees only, never the main checkout',
     () => {
       const filter = reviewCleanStep.match(/awk '([^']+)'/)?.[1];
-      const main = '/home/runner/work/qwen-code/qwen-code';
+      const main = '/home/runner/work/lailatul-coder/lailatul-coder';
       const review = `${main}/.qwen/tmp/review-pr-42`;
       const out = spawnSync('awk', [filter], {
         input: [

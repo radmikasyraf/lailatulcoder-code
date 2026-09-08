@@ -1,4 +1,4 @@
-import type { DaemonTranscriptBlock } from '@qwen-code/webui/daemon-react-sdk';
+import type { DaemonTranscriptBlock } from '@lailatul-coder/webui/daemon-react-sdk';
 import type {
   ContentBlock,
   PermissionRequest,

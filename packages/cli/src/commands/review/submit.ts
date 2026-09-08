@@ -45,7 +45,7 @@
 
 import type { CommandModule } from 'yargs';
 import { roundModelIdFrom } from './lib/round-model.js';
-import { atomicWriteFileSync } from '@qwen-code/qwen-code-core';
+import { atomicWriteFileSync } from '@lailatul-coder/lailatul-coder-core';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { writeStdoutLine, writeStderrLine } from '../../utils/stdioHelpers.js';
 import { getCliVersion } from '../../utils/version.js';

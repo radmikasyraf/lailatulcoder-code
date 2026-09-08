@@ -12,7 +12,7 @@ This release adds the Java 11 daemon transport to the existing `com.alibaba:qwen
 - Java 8 users must remain on `0.0.3-alpha`
 - Applications now select their own SLF4J provider; Logback is test-only
 - Fastjson2 and Jackson Core remain implementation dependencies and are absent from daemon public API signatures
-- Use the qwen-code build released from the same source revision as the SDK; the daemon must contain [#7386](https://github.com/QwenLM/qwen-code/pull/7386), [#7400](https://github.com/QwenLM/qwen-code/pull/7400), and this release's acknowledged admission cancellation plus FIFO cancel-drain fence
+- Use the lailatul-coder build released from the same source revision as the SDK; the daemon must contain [#7386](https://github.com/LailatulCoder/lailatul-coder/pull/7386), [#7400](https://github.com/LailatulCoder/lailatul-coder/pull/7400), and this release's acknowledged admission cancellation plus FIFO cancel-drain fence
 
 ### Reliability contract
 
@@ -73,7 +73,7 @@ January 14, 2026
 
 ### Summary
 
-This release includes updates to the Qwen Code Java SDK with improved session management, enhanced transport options, and better error handling capabilities.
+This release includes updates to the LailatulCoder Ai Java SDK with improved session management, enhanced transport options, and better error handling capabilities.
 
 ### Maven Configuration
 
@@ -175,7 +175,7 @@ Planned improvements for upcoming releases:
 
 1. **Enhanced Security**: Additional authentication mechanisms and secure credential handling
 2. **Performance Optimization**: Improved memory usage and faster response times
-3. **Extended API Coverage**: More comprehensive coverage of Qwen Code CLI features
+3. **Extended API Coverage**: More comprehensive coverage of LailatulCoder Ai CLI features
 4. **Better Documentation**: Expanded examples and API reference materials
 5. **Improved Error Recovery**: More robust handling of connection failures and retries
 
@@ -183,7 +183,7 @@ Planned improvements for upcoming releases:
 
 For support, bug reports, or contributions:
 
-- Issue Tracker: https://github.com/QwenLM/qwen-code/issues
+- Issue Tracker: https://github.com/LailatulCoder/lailatul-coder/issues
 - Documentation: Refer to README.md and Javadoc
 - Contributions: Pull requests are welcome following the project's contribution guidelines
 

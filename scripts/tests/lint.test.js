@@ -38,7 +38,7 @@ describe('linter directories', () => {
     const { getLinterTempDir } = await import('../lint.js');
 
     const first = getLinterTempDir({
-      cwd: '/runner/_work/qwen-code/qwen-code',
+      cwd: '/runner/_work/lailatul-coder/lailatul-coder',
       env: {
         RUNNER_TEMP: '/runner/_work/_temp',
         GITHUB_RUN_ID: '28501834362',
@@ -47,7 +47,7 @@ describe('linter directories', () => {
       },
     });
     const second = getLinterTempDir({
-      cwd: '/runner/_work/qwen-code/qwen-code',
+      cwd: '/runner/_work/lailatul-coder/lailatul-coder',
       env: {
         RUNNER_TEMP: '/runner/_work/_temp',
         GITHUB_RUN_ID: '28501834363',
@@ -57,10 +57,10 @@ describe('linter directories', () => {
     });
 
     expect(toPosix(first)).toBe(
-      '/runner/_work/_temp/qwen-code-linters/28501834362-1-test',
+      '/runner/_work/_temp/lailatul-coder-linters/28501834362-1-test',
     );
     expect(toPosix(second)).toBe(
-      '/runner/_work/_temp/qwen-code-linters/28501834363-1-integration_cli',
+      '/runner/_work/_temp/lailatul-coder-linters/28501834363-1-integration_cli',
     );
     expect(first).not.toBe(second);
   });
@@ -69,16 +69,16 @@ describe('linter directories', () => {
     const { getLinterTempDir } = await import('../lint.js');
 
     const first = getLinterTempDir({
-      cwd: '/tmp/qwen-code-a',
+      cwd: '/tmp/lailatul-coder-a',
       env: {},
     });
     const second = getLinterTempDir({
-      cwd: '/tmp/qwen-code-b',
+      cwd: '/tmp/lailatul-coder-b',
       env: {},
     });
 
-    expect(toPosix(first)).toMatch(/\/qwen-code-linters\/local-[a-f0-9]{16}$/);
-    expect(toPosix(second)).toMatch(/\/qwen-code-linters\/local-[a-f0-9]{16}$/);
+    expect(toPosix(first)).toMatch(/\/lailatul-coder-linters\/local-[a-f0-9]{16}$/);
+    expect(toPosix(second)).toMatch(/\/lailatul-coder-linters\/local-[a-f0-9]{16}$/);
     expect(first).not.toBe(second);
   });
 
@@ -98,11 +98,11 @@ describe('linter directories', () => {
       },
     });
 
-    expect(toPosix(first)).toBe('/runner/cache/qwen-code/linters');
+    expect(toPosix(first)).toBe('/runner/cache/lailatul-coder/linters');
     expect(second).toBe(first);
     expect(
       toPosix(getLinterCacheDir({ env: {}, homeDir: '/home/runner' })),
-    ).toBe('/home/runner/.cache/qwen-code/linters');
+    ).toBe('/home/runner/.cache/lailatul-coder/linters');
   });
 
   it.skipIf(process.platform === 'win32')(

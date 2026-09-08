@@ -43,7 +43,7 @@ export default defineConfig({
   root: resolve(__dirname, 'src/renderer'),
   base: './',
   define: {
-    'process.env.CRAFT_BRAND': JSON.stringify(process.env.CRAFT_BRAND || 'qwen-code'),
+    'process.env.CRAFT_BRAND': JSON.stringify(process.env.CRAFT_BRAND || 'lailatul-coder'),
   },
   build: {
     outDir: resolve(__dirname, 'dist/renderer'),

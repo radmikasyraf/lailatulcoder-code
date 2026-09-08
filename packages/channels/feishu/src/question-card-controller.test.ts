@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type {
   ChannelUserInputRequestContext,
   UserInputSettlementReason,
-} from '@qwen-code/channel-base';
+} from '@lailatul-coder/channel-base';
 import { FeishuQuestionCardController } from './question-card-controller.js';
 
 function deferred<T>() {

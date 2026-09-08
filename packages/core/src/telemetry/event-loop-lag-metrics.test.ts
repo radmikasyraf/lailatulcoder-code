@@ -71,11 +71,11 @@ describe('event loop lag metrics', () => {
     }));
 
     expect(mockCreateObservableGaugeFn).toHaveBeenCalledWith(
-      'qwen-code.daemon.event_loop.lag',
+      'lailatul-coder.daemon.event_loop.lag',
       expect.objectContaining({ unit: 'ms' }),
     );
     expect(mockCreateObservableGaugeFn).toHaveBeenCalledWith(
-      'qwen-code.acp.event_loop.lag',
+      'lailatul-coder.acp.event_loop.lag',
       expect.objectContaining({ unit: 'ms' }),
     );
   });

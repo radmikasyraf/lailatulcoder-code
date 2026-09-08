@@ -10,7 +10,7 @@ import { ExtensionUpdateState } from '../../state/extensions.js';
 import {
   createDebugLogger,
   getExtensionDisplayName,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { getCurrentLanguage } from '../../../i18n/index.js';
 
 const debugLogger = createDebugLogger('EXTENSIONS_LIST');
@@ -83,3 +83,4 @@ export const ExtensionsList = () => {
     </Box>
   );
 };
+

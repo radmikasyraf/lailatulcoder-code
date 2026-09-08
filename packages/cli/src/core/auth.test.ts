@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Qwen Code
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -8,7 +8,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { performInitialAuth } from './auth.js';
 
 const mockLogAuth = vi.fn();
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@lailatul-coder/lailatul-coder-core', () => ({
   getErrorMessage: (e: unknown) => (e instanceof Error ? e.message : String(e)),
   logAuth: (...args: unknown[]) => mockLogAuth(...args),
   AuthEvent: vi.fn().mockImplementation((type, method, status, message?) => ({

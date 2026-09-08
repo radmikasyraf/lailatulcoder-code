@@ -3,7 +3,7 @@
 ## Problem
 
 Virtualized History enables terminal-wide mouse tracking, so the terminal cannot
-provide native text selection. Qwen Code's application-level selection currently
+provide native text selection. LailatulCoder Ai's application-level selection currently
 accepts presses only inside the history viewport, leaving the footer/statusline
 unselectable.
 

@@ -842,7 +842,7 @@ function trayIconPath(): string {
         'electron',
         'resources',
         'brands',
-        'qwen-code',
+        'lailatul-coder',
         'icon.png',
       );
 }

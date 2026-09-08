@@ -18,7 +18,7 @@ export function sanitizeWindowTitle(title: string): string {
 }
 
 /**
- * Computes the window title for the Qwen Code application.
+ * Computes the window title for the LailatulCoder Ai application.
  *
  * Priority chain:
  *  1. CLI_TITLE environment variable (if set)

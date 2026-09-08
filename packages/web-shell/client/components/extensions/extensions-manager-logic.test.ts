@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { DaemonExtensionEntry } from '@qwen-code/sdk/daemon';
+import type { DaemonExtensionEntry } from '@lailatul-coder/sdk/daemon';
 import {
   filterExtensions,
   preserveSelectedExtensionName,

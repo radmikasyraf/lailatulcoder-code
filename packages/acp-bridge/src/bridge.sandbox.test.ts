@@ -22,7 +22,7 @@ describe('bridge spawnOrAttach inside a POSIX container sandbox (#7139)', () => 
   it.skipIf(process.platform === 'win32')(
     'accepts a Windows-shaped workspaceCwd bound to its mount location',
     async () => {
-      vi.stubEnv('SANDBOX', 'qwen-code-sandbox-0');
+      vi.stubEnv('SANDBOX', 'lailatul-coder-sandbox-0');
       _setSandboxMountExistsForTest((p) => p === '/c/qwen-repro');
       const handle = makeChannel();
       const bridge = makeBridge({

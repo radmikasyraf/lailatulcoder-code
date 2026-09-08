@@ -8,7 +8,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type {
   DaemonWorkspaceFileUploadRequest,
   DaemonWorkspaceFileUploadResult,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 
 /**
  * Minimal structural client for uploads. Both `DaemonClient`

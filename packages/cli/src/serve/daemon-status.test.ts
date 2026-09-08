@@ -25,8 +25,8 @@ import type { ChannelWorkerSnapshot } from './channel-worker-supervisor.js';
 import type { RateLimiterInstance, RateLimitTier } from './rate-limit.js';
 import type { DaemonWorkspaceService } from './workspace-service/index.js';
 import type { DaemonLogger } from './daemon-logger.js';
-import { createChildHeapPolicy } from '@qwen-code/acp-bridge/childHeapPolicy';
-import { resolveDaemonMemoryBudget } from '@qwen-code/acp-bridge/daemonMemoryBudget';
+import { createChildHeapPolicy } from '@lailatul-coder/acp-bridge/childHeapPolicy';
+import { resolveDaemonMemoryBudget } from '@lailatul-coder/acp-bridge/daemonMemoryBudget';
 
 const BASE_WORKSPACE = '/work/status';
 

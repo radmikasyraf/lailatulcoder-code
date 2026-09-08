@@ -18,7 +18,7 @@ import {
   isSDKResultMessage,
   type SDKMessage,
   type SDKUserMessage,
-} from '@qwen-code/sdk';
+} from '@lailatul-coder/sdk';
 import { fakeToolCall, startFakeOpenAIServer } from '../fake-openai-server.js';
 import {
   IS_CONTAINER_SANDBOX,

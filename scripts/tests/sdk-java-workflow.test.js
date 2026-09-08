@@ -12,7 +12,7 @@ describe('SDK Java self-hosted workflow guards', () => {
   it.each(['test', 'daemon-e2e'])('protects the %s job', (name) => {
     const block = job(name);
     for (const fragment of [
-      "github.repository == ''QwenLM/qwen-code''",
+      "github.repository == ''LailatulCoder/lailatul-coder''",
       'github.event.pull_request.head.repo.full_name == github.repository',
       "vars.MAINTAINER_ECS_RUNNER_DISABLED != ''true''",
       // Write-access fork authors route to ECS too; the association list is

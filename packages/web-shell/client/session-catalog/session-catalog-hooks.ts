@@ -6,12 +6,12 @@ import {
   useState,
   useSyncExternalStore,
 } from 'react';
-import { useSessions, useWorkspace } from '@qwen-code/webui/daemon-react-sdk';
+import { useSessions, useWorkspace } from '@lailatul-coder/webui/daemon-react-sdk';
 import type {
   DaemonClient,
   DaemonSessionArchiveState,
   DaemonSessionListPageOptions,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import {
   getSessionCatalogQueryKey,
   getSessionCatalogStore,

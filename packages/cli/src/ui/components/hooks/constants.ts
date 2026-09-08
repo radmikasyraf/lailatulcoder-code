@@ -8,7 +8,7 @@ import {
   HooksConfigSource,
   HookEventName,
   hookEventSupportsMatcher,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type { HookExitCode, HookEventDisplayInfo } from './types.js';
 import { t } from '../../../i18n/index.js';
 
@@ -191,7 +191,7 @@ export function getHookShortDescription(eventName: string): string {
     [HookEventName.MessageDisplay]: t(
       'Repeatedly, as the assistant reply streams',
     ),
-    [HookEventName.Stop]: t('Right before Qwen Code concludes its response'),
+    [HookEventName.Stop]: t('Right before LailatulCoder Ai concludes its response'),
     [HookEventName.SubagentStart]: t(
       'When a subagent (Agent tool call) is started',
     ),

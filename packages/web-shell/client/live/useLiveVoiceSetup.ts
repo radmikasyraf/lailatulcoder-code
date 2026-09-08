@@ -8,8 +8,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type {
   DaemonLiveSetupStatus,
   DaemonLiveSetupUpdate,
-} from '@qwen-code/sdk';
-import { useWorkspace } from '@qwen-code/webui/daemon-react-sdk';
+} from '@lailatul-coder/sdk';
+import { useWorkspace } from '@lailatul-coder/webui/daemon-react-sdk';
 
 const POLL_INTERVAL_MS = 1_000;
 

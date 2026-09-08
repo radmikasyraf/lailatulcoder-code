@@ -20,7 +20,7 @@ import {
   redactUrlCredentials,
   createDebugLogger,
   isExtensionCommittedWithWarningsError,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { getErrorMessage } from '../../../../utils/errors.js';
 import type { StatusMessage } from '../ExtensionsManagerDialog.js';
 
@@ -718,3 +718,4 @@ export const DiscoverTab = ({
     </Box>
   );
 };
+

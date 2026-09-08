@@ -352,7 +352,7 @@ export class FatalToolExecutionError extends FatalError {
  * (`--max-wall-time`, `--max-tool-calls`). Distinct exit code from
  * `FatalTurnLimitedError` (53) so CI scripts can branch on
  * "run exhausted its budget" vs. "run hit the turn cap." See issue
- * QwenLM/qwen-code#4103.
+ * LailatulCoder/lailatul-coder#4103.
  */
 export class FatalBudgetExceededError extends FatalError {
   constructor(message: string) {

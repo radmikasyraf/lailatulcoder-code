@@ -42,7 +42,7 @@ describe('registerChatViewProviders', () => {
       ]
     >;
 
-    expect(calls[0]?.[0]).toBe('qwen-code.chatView.sidebar');
+    expect(calls[0]?.[0]).toBe('lailatul-coder.chatView.sidebar');
     expect(calls[0]?.[2]).toEqual({
       webviewOptions: { retainContextWhenHidden: true },
     });

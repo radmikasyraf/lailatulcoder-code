@@ -189,7 +189,7 @@ export interface DaemonUiAssistantUsageEvent extends DaemonUiEventBase {
  * Where a tool originated. Closed enum so UI dispatch (icon, MCP server
  * badge, subagent header) doesn't depend on string-matching `toolName`.
  *
- * - `builtin`: ships with qwen-code (Bash, Edit, Read, etc.)
+ * - `builtin`: ships with lailatul-coder (Bash, Edit, Read, etc.)
  * - `mcp`: provided by an MCP server (cross-reference `serverId`)
  * - `subagent`: invoked by a sub-agent delegation
  * - `unknown`: daemon did not stamp provenance — treat as unspecified

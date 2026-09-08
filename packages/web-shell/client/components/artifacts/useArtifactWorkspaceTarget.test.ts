@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type {
   DaemonCapabilities,
   DaemonWorkspaceCapability,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import { resolveArtifactWorkspaceOwner } from './useArtifactWorkspaceTarget';
 
 function capabilities(

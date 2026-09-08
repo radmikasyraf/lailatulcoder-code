@@ -10,15 +10,15 @@ import {
   createDebugLogger,
   ModelsConfig,
   tokenLimit,
-} from '@qwen-code/qwen-code-core';
-import type { AuthType } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import type { AuthType } from '@lailatul-coder/lailatul-coder-core';
 import type {
   ServeWorkspaceProviderCurrent,
   ServeWorkspaceProviderModel,
   ServeWorkspaceProviderStatus,
   ServeWorkspaceProvidersStatus,
-} from '@qwen-code/acp-bridge/status';
-import { STATUS_SCHEMA_VERSION } from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/status';
+import { STATUS_SCHEMA_VERSION } from '@lailatul-coder/acp-bridge/status';
 import { loadSettings } from '../config/settings.js';
 import type { Settings } from '../config/settings.js';
 import {

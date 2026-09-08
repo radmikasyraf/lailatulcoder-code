@@ -12,7 +12,7 @@ import {
   readWorktreeSession,
   type SessionArchiveState,
   type SessionGroupPresetColor,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   AcpSessionBridge,
   BridgeSessionSummary,
@@ -538,20 +538,20 @@ async function listAllPersistedSummaries(
     { signal },
   );
   addDaemonRequestAttribute(
-    'qwen-code.daemon.session_list.cache_status',
+    'lailatul-coder.daemon.session_list.cache_status',
     lookup.status,
   );
   addDaemonRequestAttribute(
-    'qwen-code.daemon.session_list.archive_state',
+    'lailatul-coder.daemon.session_list.archive_state',
     archiveState,
   );
   addDaemonRequestAttribute(
-    'qwen-code.daemon.session_list.query_kind',
+    'lailatul-coder.daemon.session_list.query_kind',
     queryKind,
   );
   if (lookup.cacheAgeMs !== undefined) {
     addDaemonRequestAttribute(
-      'qwen-code.daemon.session_list.cache_age_ms',
+      'lailatul-coder.daemon.session_list.cache_age_ms',
       lookup.cacheAgeMs,
     );
   }
@@ -559,20 +559,20 @@ async function listAllPersistedSummaries(
   const snapshot = await lookup.promise;
   signal?.throwIfAborted();
   addDaemonRequestAttribute(
-    'qwen-code.daemon.session_list.persisted_sessions',
+    'lailatul-coder.daemon.session_list.persisted_sessions',
     snapshot.sessions.length,
   );
   addDaemonRequestAttribute(
-    'qwen-code.daemon.session_list.scan_pages',
+    'lailatul-coder.daemon.session_list.scan_pages',
     snapshot.scanPages,
   );
   addDaemonRequestAttribute(
-    'qwen-code.daemon.session_list.truncated',
+    'lailatul-coder.daemon.session_list.truncated',
     snapshot.truncated,
   );
   if (lookup.status !== 'cache_hit') {
     addDaemonRequestAttribute(
-      'qwen-code.daemon.session_list.scan_duration_ms',
+      'lailatul-coder.daemon.session_list.scan_duration_ms',
       snapshot.scanDurationMs,
     );
   }

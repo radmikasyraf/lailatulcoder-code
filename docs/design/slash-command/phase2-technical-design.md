@@ -237,7 +237,7 @@ action: async (context) => {
 
   if (context.executionMode !== 'interactive') {
     const lines = [
-      `Qwen Code v${systemInfo.cliVersion}`,
+      `LailatulCoder Ai v${systemInfo.cliVersion}`,
       `Model: ${systemInfo.modelVersion}`,
       `Fast Model: ${systemInfo.fastModel ?? 'not set'}`,
       `Auth: ${systemInfo.selectedAuthType}`,
@@ -361,14 +361,14 @@ if (context.executionMode === 'acp') {
 ```typescript
 action: async (context) => {
   const langPath = getCurrentLanguage()?.startsWith('zh') ? 'zh' : 'en';
-  const docsUrl = `https://qwenlm.github.io/qwen-code-docs/${langPath}`;
+  const docsUrl = `https://LailatulCoder.github.io/lailatul-coder-docs/${langPath}`;
 
   if (context.executionMode !== 'interactive') {
     // 非交互/ACP：直接返回 URL，不打开浏览器，不调用 addItem
     return {
       type: 'message',
       messageType: 'info',
-      content: `Qwen Code documentation: ${docsUrl}`,
+      content: `LailatulCoder Ai documentation: ${docsUrl}`,
     };
   }
 
@@ -579,7 +579,7 @@ Phase 2.2 的工作是将 `SkillTool` 从只消费 `SkillManager.listSkills()` �
 
 - `handleSlashCommand('/about', ...)` 在 non-interactive 模式下返回 `{ type: 'message', content: 包含版本号 }`
 - `handleSlashCommand('/stats', ...)` 在 non-interactive 模式下返回 `{ type: 'message', content: 包含 'Session duration' }`
-- `handleSlashCommand('/docs', ...)` 在 non-interactive 模式下返回 `{ type: 'message', content: 包含 'qwenlm.github.io' }`
+- `handleSlashCommand('/docs', ...)` 在 non-interactive 模式下返回 `{ type: 'message', content: 包含 'LailatulCoder.github.io' }`
 - `handleSlashCommand('/clear', ...)` 在 non-interactive 模式下返回 `{ type: 'message', content: 'Context cleared.' }`
 - `handleSlashCommand('/plan', ...)` 在 non-interactive 模式下返回 `unsupported`（仅交互命令）
 - 现有 non-interactive 命令（`btw`、`bug` 等）行为无退化

@@ -253,7 +253,7 @@ describe('parseLearnVideoInput', () => {
     'https://example.com/tutorial',
     'https://notyoutube.com/watch?v=abc123',
     'https://www.youtube.com/',
-    'https://www.youtube.com/@QwenLM',
+    'https://www.youtube.com/@LailatulCoder',
     'https://www.youtube.com/playlist?list=abc123',
     'https://youtu.be/',
     'https://youtu.be//',

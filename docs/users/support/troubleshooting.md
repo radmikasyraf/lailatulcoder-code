@@ -21,13 +21,13 @@ This guide provides solutions to common issues and debugging tips, including top
     - Example: `export NODE_EXTRA_CA_CERTS=/path/to/your/corporate-ca.crt`
 
 - **Error: `Connection error. (cause: fetch failed)` against a self-signed endpoint**
-  - **Cause:** You are pointing Qwen Code at a self-hosted server (for example a local model behind `https://`) whose TLS certificate is self-signed, so Node.js rejects it.
+  - **Cause:** You are pointing LailatulCoder Ai at a self-hosted server (for example a local model behind `https://`) whose TLS certificate is self-signed, so Node.js rejects it.
   - **Solution:** Prefer trusting the certificate via `NODE_EXTRA_CA_CERTS` (above). If that is not practical in a trusted lab/private network, skip verification with the `--insecure` flag (or `QWEN_TLS_INSECURE=1`):
     - Example: `qwen --insecure --openaiBaseUrl https://192.168.1.10:8080 ...`
     - **Warning:** Disabling verification removes protection against man-in-the-middle attacks. Only use it for endpoints you fully trust.
 
 - **Error: `Device authorization flow failed: fetch failed`**
-  - **Cause:** Node.js could not reach Qwen OAuth endpoints (often a proxy or SSL/TLS trust issue). When available, Qwen Code will also print the underlying error cause (for example: `UNABLE_TO_VERIFY_LEAF_SIGNATURE`). Note: this error is specific to the legacy Qwen OAuth flow.
+  - **Cause:** Node.js could not reach Qwen OAuth endpoints (often a proxy or SSL/TLS trust issue). When available, LailatulCoder Ai will also print the underlying error cause (for example: `UNABLE_TO_VERIFY_LEAF_SIGNATURE`). Note: this error is specific to the legacy Qwen OAuth flow.
   - **Solution:**
     - If you are still using Qwen OAuth, switch to API Key or Coding Plan via `/auth`.
     - If you are behind a proxy, set it via `qwen --proxy <url>` (or the `proxy` setting in `settings.json`).
@@ -42,21 +42,21 @@ This guide provides solutions to common issues and debugging tips, including top
 
 ## Frequently asked questions (FAQs)
 
-- **Q: How do I update Qwen Code to the latest version?**
-  - A: If you installed Qwen Code with the standalone installer, rerun the standalone install command. If you installed it globally via `npm`, update it using the command `npm install -g @qwen-code/qwen-code@latest`. If you compiled it from source, pull the latest changes from the repository, and then rebuild using the command `npm run build`.
+- **Q: How do I update LailatulCoder Ai to the latest version?**
+  - A: If you installed LailatulCoder Ai with the standalone installer, rerun the standalone install command. If you installed it globally via `npm`, update it using the command `npm install -g @lailatul-coder/lailatul-coder@latest`. If you compiled it from source, pull the latest changes from the repository, and then rebuild using the command `npm run build`.
 
-- **Q: Where are the Qwen Code configuration or settings files stored?**
-  - A: The Qwen Code configuration is stored in two `settings.json` files:
+- **Q: Where are the LailatulCoder Ai configuration or settings files stored?**
+  - A: The LailatulCoder Ai configuration is stored in two `settings.json` files:
     1. In your home directory: `~/.qwen/settings.json`.
     2. In your project's root directory: `./.qwen/settings.json`.
 
-    Refer to [Qwen Code Configuration](../configuration/settings) for more details.
+    Refer to [LailatulCoder Ai Configuration](../configuration/settings) for more details.
 
 - **Q: Why don't I see cached token counts in my stats output?**
   - A: Cached token information is only displayed when cached tokens are being used. This feature is available for API key users (e.g., Alibaba Cloud Model Studio API key or Google Cloud Vertex AI). You can still view your total token usage using the `/stats` command.
 
-- **Q: A customization (extension, hook, skill, MCP server, or subagent) seems to be breaking Qwen Code. How do I isolate it?**
-  - A: Start Qwen Code with the `--safe-mode` flag to disable all customizations — context files, hooks, extensions, skills, MCP servers, custom subagents (only built-in subagents load), permission rules, settings-sourced approval mode overrides, memory features, and sandbox settings — for the session. Note: the CLI flags `--yolo` and `--approval-mode` still take effect in safe mode. If the problem disappears in safe mode, re-enable your customizations one at a time to find the culprit.
+- **Q: A customization (extension, hook, skill, MCP server, or subagent) seems to be breaking LailatulCoder Ai. How do I isolate it?**
+  - A: Start LailatulCoder Ai with the `--safe-mode` flag to disable all customizations — context files, hooks, extensions, skills, MCP servers, custom subagents (only built-in subagents load), permission rules, settings-sourced approval mode overrides, memory features, and sandbox settings — for the session. Note: the CLI flags `--yolo` and `--approval-mode` still take effect in safe mode. If the problem disappears in safe mode, re-enable your customizations one at a time to find the culprit.
     - Example: `qwen --safe-mode`
     - Alternative: set the environment variable `QWEN_CODE_SAFE_MODE=true` if the CLI cannot accept flags.
     - Note: "MCP servers" here means servers configured in `settings.json` / project `.mcp.json` — local, ambient state that safe mode is meant to isolate against. MCP servers you explicitly supply for the current invocation (an embedding ACP client's `session/new` `mcpServers`, or `--mcp-config`) are not local/ambient state and are still honored under safe mode.
@@ -68,12 +68,12 @@ This guide provides solutions to common issues and debugging tips, including top
   - **Solution:**
     Either stop the other process that is using the port or configure the MCP server to use a different port.
 
-- **Error: Command not found (when attempting to run Qwen Code with `qwen`).**
+- **Error: Command not found (when attempting to run LailatulCoder Ai with `qwen`).**
   - **Cause:** The CLI is not correctly installed or it is not in your system's `PATH`.
   - **Solution:**
-    The update depends on how you installed Qwen Code:
+    The update depends on how you installed LailatulCoder Ai:
     - If you installed `qwen` with the standalone installer, rerun the standalone install command and then open a new terminal.
-    - If you installed `qwen` globally, check that your `npm` global binary directory is in your `PATH`. You can update using the command `npm install -g @qwen-code/qwen-code@latest`.
+    - If you installed `qwen` globally, check that your `npm` global binary directory is in your `PATH`. You can update using the command `npm install -g @lailatul-coder/lailatul-coder@latest`.
     - If you are running `qwen` from source, ensure you are using the correct command to invoke it (e.g. `node packages/cli/dist/index.js ...`). To update, pull the latest changes from the repository, and then rebuild using the command `npm run build`.
 
 - **Error: `MODULE_NOT_FOUND` or import errors.**
@@ -84,11 +84,11 @@ This guide provides solutions to common issues and debugging tips, including top
     3.  Verify that the build completed successfully with `npm run start`.
 
 - **Error: "Operation not permitted", "Permission denied", or similar.**
-  - **Cause:** When sandboxing is enabled, Qwen Code may attempt operations that are restricted by your sandbox configuration, such as writing outside the project directory or system temp directory.
+  - **Cause:** When sandboxing is enabled, LailatulCoder Ai may attempt operations that are restricted by your sandbox configuration, such as writing outside the project directory or system temp directory.
   - **Solution:** Refer to the [Configuration: Sandboxing](../features/sandbox) documentation for more information, including how to customize your sandbox configuration.
 
-- **Qwen Code is not running in interactive mode in "CI" environments**
-  - **Issue:** Qwen Code does not enter interactive mode (no prompt appears) if an environment variable starting with `CI_` (e.g. `CI_TOKEN`) is set. This is because the `is-in-ci` package, used by the underlying UI framework, detects these variables and assumes a non-interactive CI environment.
+- **LailatulCoder Ai is not running in interactive mode in "CI" environments**
+  - **Issue:** LailatulCoder Ai does not enter interactive mode (no prompt appears) if an environment variable starting with `CI_` (e.g. `CI_TOKEN`) is set. This is because the `is-in-ci` package, used by the underlying UI framework, detects these variables and assumes a non-interactive CI environment.
   - **Cause:** The `is-in-ci` package checks for the presence of `CI`, `CONTINUOUS_INTEGRATION`, or any environment variable with a `CI_` prefix. When any of these are found, it signals that the environment is non-interactive, which prevents the CLI from starting in its interactive mode.
   - **Solution:** If the `CI_` prefixed variable is not needed for the CLI to function, you can temporarily unset it for the command. e.g. `env -u CI_TOKEN qwen`
 
@@ -99,12 +99,12 @@ This guide provides solutions to common issues and debugging tips, including top
 
 - **Trackpad scrolling in tmux changes prompt history instead of scrolling the conversation**
   - **Issue:** In a tmux session, trackpad or wheel scrolling may cycle through previous prompts, similar to pressing `Up Arrow` or `Down Arrow`.
-  - **Cause:** tmux can translate wheel gestures into plain arrow-key sequences. Those sequences are indistinguishable from real arrow-key presses by the time qwen-code receives them.
+  - **Cause:** tmux can translate wheel gestures into plain arrow-key sequences. Those sequences are indistinguishable from real arrow-key presses by the time lailatul-coder receives them.
   - **Solution:** If screen reader mode is disabled, make sure `ui.useTerminalBuffer` is enabled; then use `Shift+Up` / `Shift+Down`, or the mouse wheel when tmux forwards wheel events to the app (requires `ui.mouseTracking`). If you prefer host scrollback, adjust your tmux mouse bindings for wheel events.
 
 - **Right-click does nothing, links do not open, or text cannot be selected in the terminal**
-  - **Issue:** Native right-click context menus, OSC 8 hyperlink clicks (Ctrl+Click or plain click on URLs), and terminal-native text selection stop working while Qwen Code is running.
-  - **Cause:** When `ui.mouseTracking` is enabled (the default), Qwen Code captures all mouse events via SGR mouse tracking to power in-app text selection, click-to-position, row hover, and viewport scrolling. The terminal forwards every mouse event to the app instead of handling it natively.
+  - **Issue:** Native right-click context menus, OSC 8 hyperlink clicks (Ctrl+Click or plain click on URLs), and terminal-native text selection stop working while LailatulCoder Ai is running.
+  - **Cause:** When `ui.mouseTracking` is enabled (the default), LailatulCoder Ai captures all mouse events via SGR mouse tracking to power in-app text selection, click-to-position, row hover, and viewport scrolling. The terminal forwards every mouse event to the app instead of handling it natively.
   - **Solution:** Set `"ui.mouseTracking": false` in your `settings.json` to restore native right-click menus and clickable URL links. This turns off all in-app mouse interaction. In Virtualized History (`ui.useTerminalBuffer: true`, the default), the wheel will no longer scroll the transcript — use `Shift+↑/↓`, `PgUp/PgDn`, or `Ctrl+Home/End` instead. To also restore native terminal scrollback, set `"ui.useTerminalBuffer": false`. Requires restart.
 
 ## IDE Companion not connecting
@@ -114,11 +114,11 @@ This guide provides solutions to common issues and debugging tips, including top
   - `QWEN_CODE_IDE_WORKSPACE_PATH`
   - `QWEN_CODE_IDE_SERVER_PORT`
 - If running in a container, verify `host.docker.internal` resolves. Otherwise, map the host appropriately.
-- Reinstall the companion with `/ide install` and use “Qwen Code: Run” in the Command Palette to verify it launches.
+- Reinstall the companion with `/ide install` and use “LailatulCoder Ai: Run” in the Command Palette to verify it launches.
 
 ## Exit Codes
 
-The Qwen Code uses specific exit codes to indicate the reason for termination. This is especially useful for scripting and automation.
+The LailatulCoder Ai uses specific exit codes to indicate the reason for termination. This is especially useful for scripting and automation.
 
 | Exit Code | Error Type                 | Description                                                                                         |
 | --------- | -------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -149,4 +149,4 @@ The Qwen Code uses specific exit codes to indicate the reason for termination. T
 
 ## Existing GitHub Issues similar to yours or creating new Issues
 
-If you encounter an issue that was not covered here in this _Troubleshooting guide_, consider searching the Qwen Code [Issue tracker on GitHub](https://github.com/QwenLM/qwen-code/issues). If you can't find an issue similar to yours, consider creating a new GitHub Issue with a detailed description. Pull requests are also welcome!
+If you encounter an issue that was not covered here in this _Troubleshooting guide_, consider searching the LailatulCoder Ai [Issue tracker on GitHub](https://github.com/LailatulCoder/lailatul-coder/issues). If you can't find an issue similar to yours, consider creating a new GitHub Issue with a detailed description. Pull requests are also welcome!

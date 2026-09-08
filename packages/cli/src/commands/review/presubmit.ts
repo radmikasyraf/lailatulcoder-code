@@ -6,7 +6,7 @@
 
 // Pre-submission checks for /review Step 7. Runs three deterministic
 // gh-API queries and emits a single JSON report describing self-PR status,
-// CI / build status, existing Qwen Code comment classification, and the
+// CI / build status, existing LailatulCoder Ai comment classification, and the
 // downgrade decisions the LLM should apply when constructing the review
 // event. On an Aone target the command routes at the `a1` CLI instead and
 // emits the SAME report shape with only the backed slice filled in:
@@ -781,7 +781,7 @@ async function runPresubmit(args: PresubmitArgs): Promise<void> {
   ) as CommitStatus[];
   const ciStatus = classifyCi(checkRuns, statuses);
 
-  // --- Existing Qwen Code comments --------------------------------------
+  // --- Existing LailatulCoder Ai comments --------------------------------------
   // Paginate: PRs can have >30 inline comments and the latest pages carry
   // the most recent (and most likely to overlap with new findings).
   const allComments = ghApiAll(
@@ -809,7 +809,7 @@ async function runPresubmit(args: PresubmitArgs): Promise<void> {
   // authorship signal — and the setting's description says so.
   const qwenComments = allComments.filter(
     (c) =>
-      /via Qwen Code \/review/.test(c.body ?? '') ||
+      /via LailatulCoder Ai \/review/.test(c.body ?? '') ||
       (!c.in_reply_to_id &&
         me !== '' &&
         (c.user?.login ?? '').toLowerCase() === me.toLowerCase() &&

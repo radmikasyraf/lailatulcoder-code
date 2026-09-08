@@ -5,7 +5,7 @@
  */
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ideContextStore } from '@qwen-code/qwen-code-core';
+import { ideContextStore } from '@lailatul-coder/lailatul-coder-core';
 import { createDaemonTrustPolicyMonitor } from './daemon-trust-policy-monitor.js';
 import type { DaemonTrustPolicySnapshot } from './daemon-trust-policy.js';
 

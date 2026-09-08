@@ -5,7 +5,7 @@
  */
 
 import { GenerateContentResponse } from '@google/genai';
-import { setToolCallPreparations } from '@qwen-code/qwen-code-core';
+import { setToolCallPreparations } from '@lailatul-coder/lailatul-coder-core';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ToolCallEmitter } from './emitters/tool-call-emitter.js';
 import { ToolCallPreparationTracker } from './tool-call-preparation-tracker.js';

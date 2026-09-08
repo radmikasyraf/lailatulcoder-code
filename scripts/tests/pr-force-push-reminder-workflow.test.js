@@ -29,7 +29,7 @@ describe('pr force-push reminder workflow', () => {
   });
 
   it('only runs on the upstream repo', () => {
-    expect(workflow).toContain("github.repository == 'QwenLM/qwen-code'");
+    expect(workflow).toContain("github.repository == 'LailatulCoder/lailatul-coder'");
   });
 
   it('grants the permissions the comment endpoints need', () => {
@@ -64,8 +64,8 @@ describe('pr force-push reminder workflow', () => {
       "sender?.type === 'Bot' || KNOWN_AUTOMATION.has(sender?.login)",
     );
     for (const login of [
-      'qwen-code-ci-bot',
-      'qwen-code-dev-bot',
+      'lailatul-coder-ci-bot',
+      'lailatul-coder-dev-bot',
       'github-actions',
       'github-actions[bot]',
       'gemini-cli-robot',

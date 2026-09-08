@@ -11,7 +11,7 @@ import {
   SessionService,
   type Config,
   type SessionListItem,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { KeypressProvider } from '../contexts/KeypressContext.js';
 import { ConfigContext } from '../contexts/ConfigContext.js';
 import { SettingsContext } from '../contexts/SettingsContext.js';
@@ -170,3 +170,4 @@ export async function showResumeSessionPicker(
     });
   });
 }
+

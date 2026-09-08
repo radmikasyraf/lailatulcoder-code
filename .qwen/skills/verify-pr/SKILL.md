@@ -1,6 +1,6 @@
 ---
 name: verify-pr
-description: This skill should be used to run a sandboxed deep verification of a qwen-code PR — "/verify-pr <n>", "深度验证这个 PR", A/B load-bearing proof against the base build, mock-free harnesses with wire oracles, and targeted gates — producing tmp/pr<n>-verify-<ts>/report.md plus a machine-readable verdict. Designed for the token-free CI verify job; also usable locally.
+description: This skill should be used to run a sandboxed deep verification of a lailatul-coder PR — "/verify-pr <n>", "深度验证这个 PR", A/B load-bearing proof against the base build, mock-free harnesses with wire oracles, and targeted gates — producing tmp/pr<n>-verify-<ts>/report.md plus a machine-readable verdict. Designed for the token-free CI verify job; also usable locally.
 ---
 
 # PR Deep Verification
@@ -86,7 +86,7 @@ untrusted PR code, so it needs the same isolation CI provides**: a
 credential-free container or VM with no access to the host's SSH keys, cloud
 profiles, or `gh` token. Do not run it in an ordinary working copy on a
 maintainer's machine; if that isolation is unavailable, ask the maintainer to
-trigger the sandboxed `@qwen-code /verify` lane instead.
+trigger the sandboxed `@lailatul-coder /verify` lane instead.
 
 ⚠️ That isolation and `gh` are mutually exclusive: `gh` refuses even
 public-repository queries without authentication, so the metadata **cannot
@@ -162,11 +162,11 @@ differs only by the change under test; the verdict is the pair of counts.
   explicitly in the report instead of presenting the cells as a pure code
   A/B.
 - ⚠️ **Internal workspace links defeat a naive base control even with an
-  unchanged lockfile**: in a monorepo, `node_modules/@qwen-code/*` are
+  unchanged lockfile**: in a monorepo, `node_modules/@lailatul-coder/*` are
   symlinks into the _head_ tree, so a "base" harness can quietly load
   changed head code and both cells pass. Before trusting any control,
   **assert the realpath** of every internal dependency the code under test
-  resolves — `readlink -f node_modules/@qwen-code/qwen-code-core` from
+  resolves — `readlink -f node_modules/@lailatul-coder/lailatul-coder-core` from
   inside the base worktree — and confirm it points into the base tree.
   (Do NOT reach for `require.resolve`: these packages are ESM-only with
   `import`-only exports, so it throws `ERR_PACKAGE_PATH_NOT_EXPORTED`,

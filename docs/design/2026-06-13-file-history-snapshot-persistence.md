@@ -54,7 +54,7 @@ This is A+C only.
 
 B1 simulated `sed -i` coverage is left for a separate PR. Generic shell edit
 tracking, `getDiffStats` concurrency limiting, and per-file failure reasons are
-also deferred. Claude Code does not support those behaviors today, so qwen-code
+also deferred. Claude Code does not support those behaviors today, so lailatul-coder
 should not add them as part of this compatibility pass.
 
 No migration is required because the persisted record shape is unchanged.

@@ -153,7 +153,7 @@ export class IdeClient {
     if (!this.currentIde) {
       this.setState(
         IDEConnectionStatus.Disconnected,
-        `IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks`,
+        `IDE integration is not supported in your current environment. To use this feature, run LailatulCoder Ai in one of these supported IDEs: VS Code or VS Code forks`,
         false,
       );
       return;
@@ -221,7 +221,7 @@ export class IdeClient {
     if (this.workspaceRejectedPorts.size > 0) {
       this.setState(
         IDEConnectionStatus.Disconnected,
-        `Found IDE companion extension, but its workspace does not match the current directory. Run Qwen Code from the workspace open in your IDE, or switch the IDE to this project.`,
+        `Found IDE companion extension, but its workspace does not match the current directory. Run LailatulCoder Ai from the workspace open in your IDE, or switch the IDE to this project.`,
         true,
       );
       return;
@@ -550,7 +550,7 @@ export class IdeClient {
     if (!isWithinWorkspace) {
       return {
         isValid: false,
-        error: `Directory mismatch. Qwen Code is running in a different location than the open workspace in the IDE. Please run the CLI from one of the following directories: ${ideWorkspacePaths.join(
+        error: `Directory mismatch. LailatulCoder Ai is running in a different location than the open workspace in the IDE. Please run the CLI from one of the following directories: ${ideWorkspacePaths.join(
           ', ',
         )}`,
       };
@@ -699,7 +699,7 @@ export class IdeClient {
       try {
         const portFile = path.join(
           os.tmpdir(),
-          `qwen-code-ide-server-${this.ideProcessInfo.pid}.json`,
+          `lailatul-coder-ide-server-${this.ideProcessInfo.pid}.json`,
         );
         const portFileContents = await fs.promises.readFile(portFile, 'utf8');
         return {
@@ -708,7 +708,7 @@ export class IdeClient {
         };
       } catch (_) {
         // For older/newer extension versions, the file name matches the pattern
-        // /^qwen-code-ide-server-${pid}-\d+\.json$/. If multiple IDE
+        // /^lailatul-coder-ide-server-${pid}-\d+\.json$/. If multiple IDE
         // windows are open, multiple files matching the pattern are expected to
         // exist.
       }
@@ -718,7 +718,7 @@ export class IdeClient {
       try {
         const portFile = path.join(
           os.tmpdir(),
-          `qwen-code-ide-server-${portFromEnv}.json`,
+          `lailatul-coder-ide-server-${portFromEnv}.json`,
         );
         const portFileContents = await fs.promises.readFile(portFile, 'utf8');
         return {

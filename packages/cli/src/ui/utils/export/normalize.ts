@@ -9,8 +9,8 @@ import {
   formatVisionBridgeNoticeDisplay,
   isVisionBridgeNoticeDisplay,
   ToolNames,
-} from '@qwen-code/qwen-code-core';
-import type { ChatRecord, Kind } from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
+import type { ChatRecord, Kind } from '@lailatul-coder/lailatul-coder-core';
 import { buildTruncatedDiffPreviewText } from '../../../utils/truncatedDiffPreview.js';
 import { getToolResultCallId } from '../../../utils/chat-record-tool-call-id.js';
 import { sanitizeTerminalText } from '../textUtils.js';

@@ -25,7 +25,7 @@ describe('qwen-triage-finalize workflow', () => {
     // must be listed — and none without one (a dead entry just adds skipped
     // firings; E2E Tests has no pull_request trigger).
     expect(workflow.on.workflow_run.workflows).toEqual([
-      'Qwen Code CI',
+      'LailatulCoder Ai CI',
       'Qwen Autofix',
       'SDK Java',
       'SDK Python',
@@ -39,7 +39,7 @@ describe('qwen-triage-finalize workflow', () => {
     );
     // House convention for bot workflows: forks opt in by editing the guard.
     expect(workflow.jobs.finalize.if).toContain(
-      "github.repository == 'QwenLM/qwen-code'",
+      "github.repository == 'LailatulCoder/lailatul-coder'",
     );
   });
 

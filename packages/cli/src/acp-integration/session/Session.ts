@@ -53,7 +53,7 @@ import type {
   TurnResultRecordPayload,
   WorkflowApproval,
   BranchPoint,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   AuthType,
   ApprovalMode,
@@ -199,9 +199,9 @@ import {
   buildBackgroundEntryLabel,
   collectSessionTurnState,
   computeInitialTurnFromHistory as computeInitialTurnFromHistoryCore,
-} from '@qwen-code/qwen-code-core';
-import { NOT_CURRENTLY_GENERATING_CANCEL_MESSAGE } from '@qwen-code/acp-bridge/bridgeErrors';
-import { CHANNEL_PROMPT_META_KEY } from '@qwen-code/channel-base';
+} from '@lailatul-coder/lailatul-coder-core';
+import { NOT_CURRENTLY_GENERATING_CANCEL_MESSAGE } from '@lailatul-coder/acp-bridge/bridgeErrors';
+import { CHANNEL_PROMPT_META_KEY } from '@lailatul-coder/channel-base';
 import { ENV_ACP_REPEATED_TOOL_FAILURE_GUARD } from '../../config/shared-env-keys.js';
 // Single source of truth shared with the daemon-side answerer (BridgeClient),
 // so a rename can't desync caller and answerer into a silent -32601 latch.
@@ -213,9 +213,9 @@ import {
   MID_TURN_QUEUE_DRAIN_METHOD,
   isValidTrustedModelPrompt,
   TODO_STOP_GUARD_CONTINUATION_CLAIM_METHOD,
-} from '@qwen-code/acp-bridge/bridgeTypes';
-import type { SessionAttachmentReference } from '@qwen-code/acp-bridge/sessionAttachments';
-import { SERVE_CONTROL_EXT_METHODS } from '@qwen-code/acp-bridge/status';
+} from '@lailatul-coder/acp-bridge/bridgeTypes';
+import type { SessionAttachmentReference } from '@lailatul-coder/acp-bridge/sessionAttachments';
+import { SERVE_CONTROL_EXT_METHODS } from '@lailatul-coder/acp-bridge/status';
 import { getCommandSubcommandNames } from '../../services/commandMetadata.js';
 import { cleanupReviewWorktreeLeases } from '../../services/review-worktree-lease.js';
 import { getEffectiveSupportedModes } from '../../services/commandUtils.js';
@@ -10514,7 +10514,7 @@ export class Session implements SessionContext {
               if (hooksEnabled && messageBus) {
                 this.fireNotificationHookWithTerminalSequence(
                   messageBus,
-                  `Qwen Code needs your permission to use ${toolName}`,
+                  `LailatulCoder Ai needs your permission to use ${toolName}`,
                   NotificationType.PermissionPrompt,
                   'Permission needed',
                 );
@@ -10973,7 +10973,7 @@ export class Session implements SessionContext {
           let settledPersistedOutputFiles: string[] | undefined;
           const sleepInhibitorHandle = acquireSleepInhibitor(
             this.config,
-            `Qwen Code is executing tool ${toolName}`,
+            `LailatulCoder Ai is executing tool ${toolName}`,
           );
           try {
             try {

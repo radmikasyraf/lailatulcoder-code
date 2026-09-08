@@ -5,12 +5,12 @@
  */
 
 import * as fs from 'node:fs/promises';
-import type { Extension } from '@qwen-code/qwen-code-core';
+import type { Extension } from '@lailatul-coder/lailatul-coder-core';
 import {
   getErrorMessage,
   isSubpath,
   stripTerminalControlSequences,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 
 export const EXTENSION_REF_PREFIX = 'ext:';
 export const EXTENSION_CONTEXT_BUDGET = 200_000;

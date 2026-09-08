@@ -1,6 +1,6 @@
 # Monitor Tool (`monitor`)
 
-This document describes the `monitor` tool for Qwen Code.
+This document describes the `monitor` tool for LailatulCoder Ai.
 
 ## Description
 
@@ -31,9 +31,9 @@ to throttling.
 - `directory` (string, optional): An absolute path to run the command in. Must
   resolve (after symlink canonicalization) inside one of the registered
   workspace directories, and must not be inside the user-skills directory. If
-  omitted, Qwen Code uses the project root.
+  omitted, LailatulCoder Ai uses the project root.
 
-## How to use `monitor` with Qwen Code
+## How to use `monitor` with LailatulCoder Ai
 
 The model chooses the `monitor` tool when it needs to observe a process over
 time instead of collecting a single command result. A successful invocation
@@ -123,13 +123,13 @@ commands without backgrounding instead.
   `completed`, a non-zero exit code becomes `failed` with message
   `Exit code N`, and termination by signal becomes `failed` with message
   `Killed by signal SIG`. Commands cannot be interactive because stdin is
-  closed. When a monitor stops, Qwen Code sends `SIGTERM` to the command's
+  closed. When a monitor stops, LailatulCoder Ai sends `SIGTERM` to the command's
   process group and escalates to `SIGKILL` after about 200 ms. On Windows, it
-  uses `taskkill /f /t`. If the Qwen Code process itself is hard-killed,
+  uses `taskkill /f /t`. If the LailatulCoder Ai process itself is hard-killed,
   crashes, or runs out of memory, the detached process group is not cleaned up
   automatically; recover by stopping the monitor with `task_stop` before exit
   or by terminating the process group manually.
-- **Concurrency limit:** Qwen Code allows up to 16 running monitors per CLI
+- **Concurrency limit:** LailatulCoder Ai allows up to 16 running monitors per CLI
   session as a single shared pool. Monitors started by subagents count against
   the same cap as monitors started by the main agent. Stop an existing monitor
   before starting another if the limit is reached.

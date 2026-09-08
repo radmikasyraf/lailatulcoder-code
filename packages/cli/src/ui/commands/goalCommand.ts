@@ -9,11 +9,11 @@ import type {
   GoalRuntime,
   GoalStateResponse,
   GoalStateCause,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   emptyGoalSnapshot,
   GoalPersistenceUnavailableError,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   CommandKind,
   type CommandContext,

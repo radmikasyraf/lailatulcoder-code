@@ -13,7 +13,7 @@ import {
   getLatestGitHubRelease,
   isGitHubRepositoryAsync,
 } from '../utils/gitUtils.js';
-import { createDebugLogger } from '@qwen-code/qwen-code-core';
+import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 import { loadUndici } from '../utils/load-undici.js';
 import { writeStderrLine } from '../utils/stdioHelpers.js';
 
@@ -203,22 +203,22 @@ export async function setupGithub(
     releaseTag = await getLatestGitHubRelease(options.proxy);
   } catch (error) {
     writeStderrLine(
-      `qwen setup-github: failed to determine latest qwen-code-action release: ${
+      `qwen setup-github: failed to determine latest lailatul-coder-action release: ${
         error instanceof Error ? error.message : String(error)
       }`,
     );
     debugLogger.debug(
-      'Failed to determine latest qwen-code-action release:',
+      'Failed to determine latest lailatul-coder-action release:',
       error,
     );
     throw new SetupGithubError(
       'github_release_lookup_failed',
-      'Unable to determine the latest qwen-code-action release on GitHub.',
+      'Unable to determine the latest lailatul-coder-action release on GitHub.',
       502,
     );
   }
 
-  const readmeUrl = `https://github.com/QwenLM/qwen-code-action/blob/${releaseTag}/README.md#quick-start`;
+  const readmeUrl = `https://github.com/LailatulCoder/lailatul-coder-action/blob/${releaseTag}/README.md#quick-start`;
   const secretsUrl = await resolveSecretsUrl(cwd);
   const downloads = await downloadWorkflows({
     releaseTag,
@@ -358,7 +358,7 @@ async function downloadWorkflows(options: {
       : undefined;
     return await Promise.all(
       GITHUB_WORKFLOW_PATHS.map(async (workflow) => {
-        const endpoint = `https://raw.githubusercontent.com/QwenLM/qwen-code-action/refs/tags/${options.releaseTag}/examples/workflows/${workflow}`;
+        const endpoint = `https://raw.githubusercontent.com/LailatulCoder/lailatul-coder-action/refs/tags/${options.releaseTag}/examples/workflows/${workflow}`;
         const response = await options.fetchImpl(endpoint, {
           method: 'GET',
           dispatcher,
@@ -383,10 +383,10 @@ async function downloadWorkflows(options: {
   } catch (error) {
     internalAbort.abort();
     const message = error instanceof Error ? error.message : String(error);
-    debugLogger.debug('Failed to download qwen-code-action workflows:', error);
+    debugLogger.debug('Failed to download lailatul-coder-action workflows:', error);
     throw new SetupGithubError(
       'github_workflow_download_failed',
-      `Unable to download qwen-code-action workflows from GitHub. ${message}`,
+      `Unable to download lailatul-coder-action workflows from GitHub. ${message}`,
       502,
     );
   }

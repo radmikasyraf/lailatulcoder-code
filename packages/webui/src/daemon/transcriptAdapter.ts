@@ -12,7 +12,7 @@ import {
   type DaemonTranscriptBlock,
   type DaemonStatusTranscriptBlock,
   type DaemonToolTranscriptBlock,
-} from '@qwen-code/sdk/daemon';
+} from '@lailatul-coder/sdk/daemon';
 import type { UnifiedMessage } from '../adapters/types.js';
 import type {
   ToolCallData,

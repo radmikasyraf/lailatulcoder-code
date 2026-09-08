@@ -9,7 +9,7 @@ import {
   type Config,
   type AvailableModel as CoreAvailableModel,
   QWEN_OAUTH_MODELS,
-} from '@qwen-code/qwen-code-core';
+} from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../../i18n/index.js';
 
 export type AvailableModel = {

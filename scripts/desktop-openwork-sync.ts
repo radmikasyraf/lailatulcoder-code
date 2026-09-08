@@ -73,18 +73,18 @@ function defaultBranch(mode: Exclude<SyncMode, 'auto'>): string {
 function printHelp(): void {
   console.log(`Usage: bun run desktop-openwork-sync --openwork-dir /path/to/openwork [options]
 
-Commit-migrate changes between qwen-code packages/desktop and OpenWork.
+Commit-migrate changes between lailatul-coder packages/desktop and OpenWork.
 
 Modes:
   --mode auto      Refuse if direction is ambiguous
-  --mode export    Apply qwen-code packages/desktop commits to OpenWork
-  --mode import    Apply OpenWork commits to qwen-code packages/desktop
+  --mode export    Apply lailatul-coder packages/desktop commits to OpenWork
+  --mode import    Apply OpenWork commits to lailatul-coder packages/desktop
 
 Options:
   --openwork-dir <path>      Path to a clean OpenWork checkout
   --openwork-ref <ref>       OpenWork ref to read or branch from (default: main)
   --base <ref>               Alias for --openwork-ref
-  --qwen-base <ref>          qwen-code base for import branches (default: HEAD)
+  --qwen-base <ref>          lailatul-coder base for import branches (default: HEAD)
   --source-base <ref>        Source-side base ref for the commit range
   --branch <name>            Target branch name in the repo being changed
   --overlay <path[,path]>    Do not migrate these source paths (repeatable)
@@ -494,9 +494,9 @@ async function shouldSkipSyncedCommit(
 
   if (
     mode === 'import' &&
-    (syncMode === 'export' || findTrailer(body, 'Qwen-Code-Commit'))
+    (syncMode === 'export' || findTrailer(body, 'lailatul-coder-Commit'))
   ) {
-    return 'already came from qwen-code';
+    return 'already came from lailatul-coder';
   }
 
   if (
@@ -644,7 +644,7 @@ async function migrateCommits(params: {
   let count = 0;
   const handledCommits = new Set<string>();
   const targetTrailer =
-    params.mode === 'import' ? 'OpenWork-Commit' : 'Qwen-Code-Commit';
+    params.mode === 'import' ? 'OpenWork-Commit' : 'lailatul-coder-Commit';
   const targetSyncedCommits = await findTrailerValues(
     params.targetRepo,
     'HEAD',
@@ -732,12 +732,12 @@ async function runExport(options: Options): Promise<void> {
     options.sourceBase,
     openworkRoot,
     options.openworkRef,
-    'Qwen-Code-Commit',
+    'lailatul-coder-Commit',
   );
   const pathspecs = exportPathspecs(options.overlayPaths);
   const commits = await getSourceCommits(repoRoot, base, source, pathspecs);
   if (commits.length === 0) {
-    console.log('No qwen-code source changes to export.');
+    console.log('No lailatul-coder source changes to export.');
     return;
   }
 
@@ -754,8 +754,8 @@ async function runExport(options: Options): Promise<void> {
       createExportPatch(parent, commit, options.overlayPaths),
     trailers: (parent, commit) => [
       'OpenWork-Sync-Mode: export',
-      `Qwen-Code-Base: ${parent}`,
-      `Qwen-Code-Commit: ${commit}`,
+      `lailatul-coder-Base: ${parent}`,
+      `lailatul-coder-Commit: ${commit}`,
       `OpenWork-Base: ${openworkBase}`,
     ],
   });
@@ -770,7 +770,7 @@ async function runImport(options: Options): Promise<void> {
   const branch = options.branch || defaultBranch('import');
 
   await ensureCleanWorktree(openworkRoot, 'OpenWork checkout');
-  await ensureCleanWorktree(repoRoot, 'qwen-code checkout');
+  await ensureCleanWorktree(repoRoot, 'lailatul-coder checkout');
 
   const source = await revParse(openworkRoot, options.openworkRef);
   const base = await resolveSourceBase(
@@ -802,7 +802,7 @@ async function runImport(options: Options): Promise<void> {
       'OpenWork-Sync-Mode: import',
       `OpenWork-Base: ${parent}`,
       `OpenWork-Commit: ${commit}`,
-      `Qwen-Code-Base: ${qwenBase}`,
+      `lailatul-coder-Base: ${qwenBase}`,
     ],
   });
   if (count === 0) return;

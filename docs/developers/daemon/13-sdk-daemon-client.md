@@ -293,9 +293,9 @@ auth provider when one is available.
 
 - `globalThis.fetch` (Node 18+ built-in, browser, undici, etc.). Injectable per `DaemonClient` for tests.
 - Native `AbortController` / `AbortSignal.any` / `setTimeout`.
-- No transitive dependencies on `@qwen-code/qwen-code-core` or `@qwen-code/acp-bridge` — the SDK package is fully decoupled so external consumers do not pull in the daemon's internals.
+- No transitive dependencies on `@lailatul-coder/lailatul-coder-core` or `@lailatul-coder/acp-bridge` — the SDK package is fully decoupled so external consumers do not pull in the daemon's internals.
 
-## `ui/*` subpackage ([#4328](https://github.com/QwenLM/qwen-code/pull/4328) + [#4353](https://github.com/QwenLM/qwen-code/pull/4353))
+## `ui/*` subpackage ([#4328](https://github.com/LailatulCoder/lailatul-coder/pull/4328) + [#4353](https://github.com/LailatulCoder/lailatul-coder/pull/4353))
 
 The SDK also exports `packages/sdk-typescript/src/daemon/ui/`, a host-neutral
 set of primitives that turn daemon events into transcript blocks:
@@ -313,7 +313,7 @@ The first production consumer is `packages/webui/src/daemon/` through React's
 for the detailed architecture, glossary, selector table, and relationship to
 the legacy `DaemonTuiAdapter`.
 
-The subpackage is exported from the `@qwen-code/sdk/daemon` subpath. Existing
+The subpackage is exported from the `@lailatul-coder/sdk/daemon` subpath. Existing
 code that does `import { DaemonClient }` is unaffected.
 
 ## `Last-Event-ID` Reconnect with the SDK
@@ -323,7 +323,7 @@ code that does `import { DaemonClient }` is unaffected.
 `DaemonSessionClient` tracks `lastSeenEventId` internally. Each yielded event with a numeric `id` bumps the cursor. Subsequent `events()` calls automatically pass the tracked id as `Last-Event-ID`, so reconnect-with-replay works without extra caller state:
 
 ```ts
-import { DaemonClient, DaemonSessionClient } from '@qwen-code/sdk/daemon';
+import { DaemonClient, DaemonSessionClient } from '@lailatul-coder/sdk/daemon';
 
 const client = new DaemonClient({ baseUrl: 'http://127.0.0.1:4170', token });
 const session = await DaemonSessionClient.createOrAttach(client);
