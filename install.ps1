@@ -52,30 +52,32 @@ Write-Host "Extracted" -ForegroundColor Green
 Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Yellow
 Push-Location $INSTALL_DIR
 cmd /c "npm install --ignore-scripts > nul 2>&1"
+Pop-Location
 Write-Host "Dependencies installed" -ForegroundColor Green
 
-# Link workspace packages manually
-Write-Host "Linking workspace packages..." -ForegroundColor Yellow
-$workspaces = @('packages/core', 'packages/web-templates', 'packages/channels/base', 'packages/acp-bridge')
-foreach ($ws in $workspaces) {
-    $wsPath = "$INSTALL_DIR\$($ws -replace '/', '\')"
-    if (Test-Path $wsPath) {
-        Push-Location $wsPath
-        cmd /c "npm link > nul 2>&1"
-        Pop-Location
-    }
+# Copy workspace packages to node_modules
+Write-Host "Setting up workspace packages..." -ForegroundColor Yellow
+$lailatulDir = "$INSTALL_DIR\node_modules\@lailatul-coder"
+New-Item -ItemType Directory -Path $lailatulDir -Force | Out-Null
+
+# Map: package folder -> node_modules name
+$workspaceMap = @{
+    'packages\core' = 'lailatul-coder-core'
+    'packages\web-templates' = 'web-templates'
+    'packages\channels\base' = 'channel-base'
+    'packages\acp-bridge' = 'acp-bridge'
 }
 
-# Link core in cli
-Push-Location "$INSTALL_DIR\packages\cli"
-cmd /c "npm link @lailatul-coder/lailatul-coder-core > nul 2>&1"
-cmd /c "npm link @lailatul-coder/web-templates > nul 2>&1"
-cmd /c "npm link @lailatul-coder/channel-base > nul 2>&1"
-cmd /c "npm link @lailatul-coder/acp-bridge > nul 2>&1"
-Pop-Location
-
-Pop-Location
-Write-Host "Workspace packages linked" -ForegroundColor Green
+foreach ($ws in $workspaceMap.GetEnumerator()) {
+    $src = "$INSTALL_DIR\$($ws.Key)"
+    $dest = "$lailatulDir\$($ws.Value)"
+    if (Test-Path $src) {
+        if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }
+        Copy-Item -Recurse -Force $src $dest
+        Write-Host "  Linked: @lailatul-coder/$($ws.Value)" -ForegroundColor Gray
+    }
+}
+Write-Host "Workspace packages ready" -ForegroundColor Green
 
 # Link CLI command
 Write-Host "Setting up lailatulcoder command..." -ForegroundColor Yellow
