@@ -16,10 +16,7 @@ export interface AttachmentPreviewRequest {
 }
 
 export type DaemonMessageToolCallStatus =
-  | 'pending'
-  | 'in_progress'
-  | 'completed'
-  | 'failed';
+  'pending' | 'in_progress' | 'completed' | 'failed';
 
 export type DaemonMessageToolKind =
   | 'read'

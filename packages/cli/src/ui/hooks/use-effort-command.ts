@@ -5,7 +5,10 @@
  */
 
 import { useState, useCallback } from 'react';
-import type { Config, ReasoningEffort } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  ReasoningEffort,
+} from '@lailatul-coder/lailatul-coder-core';
 import { applyReasoningEffort } from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../../config/settings.js';
 import { getPersistScopeForModelSelection } from '../../config/modelProvidersScope.js';

@@ -6,7 +6,9 @@
 
 import { createContextKey, type Context } from '@opentelemetry/api';
 
-const sessionIdContextKey = createContextKey('lailatul-coder.telemetry.session-id');
+const sessionIdContextKey = createContextKey(
+  'lailatul-coder.telemetry.session-id',
+);
 
 let sessionRootContext: Context | undefined;
 let currentSessionId: string | undefined;

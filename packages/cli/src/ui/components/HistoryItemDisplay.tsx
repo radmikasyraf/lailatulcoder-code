@@ -547,4 +547,3 @@ const HistoryItemDisplay = memo(HistoryItemDisplayComponent);
 HistoryItemDisplay.displayName = 'HistoryItemDisplay';
 
 export { HistoryItemDisplay };
-

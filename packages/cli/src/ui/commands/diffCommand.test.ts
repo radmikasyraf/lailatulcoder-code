@@ -9,7 +9,10 @@ import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { computeDiffColumnWidths, diffCommand } from './diffCommand.js';
 import { type CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
-import { fetchGitDiff, type GitDiffResult } from '@lailatul-coder/lailatul-coder-core';
+import {
+  fetchGitDiff,
+  type GitDiffResult,
+} from '@lailatul-coder/lailatul-coder-core';
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async () => {
   const actual = await vi.importActual<

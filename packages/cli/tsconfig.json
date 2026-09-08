@@ -29,7 +29,9 @@
       "@lailatul-coder/sdk/daemon/ui/transcript": [
         "../sdk-typescript/src/daemon/ui/transcript.ts"
       ],
-      "@lailatul-coder/sdk/daemon/types": ["../sdk-typescript/src/daemon/types.ts"],
+      "@lailatul-coder/sdk/daemon/types": [
+        "../sdk-typescript/src/daemon/types.ts"
+      ],
       "@lailatul-coder/sdk/*": ["../sdk-typescript/src/*"]
     }
   },
@@ -109,7 +111,24 @@
     "src/ui/themes/theme.test.ts",
     "src/validateNonInterActiveAuth.test.ts",
     "src/services/prompt-processors/shellProcessor.test.ts",
-    "src/commands/extensions/examples/**","src/ui/selection/**","src/serve/routes/session.ts","src/serve/routes/permission.ts","src/serve/routes/channel-webhooks.ts","src/serve/routes/workspace-auth.ts","src/serve/routes/workspace-channel-management.ts","src/serve/routes/workspace-extensions.ts","src/serve/routes/workspace-skills.ts","src/serve/server/request-helpers.ts","src/serve/workspace-agents.ts","src/serve/workspace-remember.ts","src/serve/workspace-route-runtime.ts","src/ui/components/shared/MaxSizedBox.test.tsx","src/ui/components/messages/DiffRenderer.tsx","src/ui/components/shared/VirtualizedList.tsx","src/ui/utils/CodeColorizer.tsx","src/agent-view/pty-host-process.ts"
+    "src/commands/extensions/examples/**",
+    "src/ui/selection/**",
+    "src/serve/routes/session.ts",
+    "src/serve/routes/permission.ts",
+    "src/serve/routes/channel-webhooks.ts",
+    "src/serve/routes/workspace-auth.ts",
+    "src/serve/routes/workspace-channel-management.ts",
+    "src/serve/routes/workspace-extensions.ts",
+    "src/serve/routes/workspace-skills.ts",
+    "src/serve/server/request-helpers.ts",
+    "src/serve/workspace-agents.ts",
+    "src/serve/workspace-remember.ts",
+    "src/serve/workspace-route-runtime.ts",
+    "src/ui/components/shared/MaxSizedBox.test.tsx",
+    "src/ui/components/messages/DiffRenderer.tsx",
+    "src/ui/components/shared/VirtualizedList.tsx",
+    "src/ui/utils/CodeColorizer.tsx",
+    "src/agent-view/pty-host-process.ts"
   ],
   "references": [
     { "path": "../core" },
@@ -125,6 +144,3 @@
     { "path": "../channels/gitlab" }
   ]
 }
-
-
-

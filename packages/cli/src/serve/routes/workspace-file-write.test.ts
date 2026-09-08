@@ -1249,9 +1249,8 @@ describe('POST /file/upload', () => {
 
 describe('upload concurrency gate', () => {
   it('admits up to the cap and rejects the next until a slot frees', async () => {
-    const { createUploadConcurrencyGate } = await import(
-      './workspace-file-write.js'
-    );
+    const { createUploadConcurrencyGate } =
+      await import('./workspace-file-write.js');
     const gate = createUploadConcurrencyGate(2);
     expect(gate.tryAcquire()).toBe(true);
     expect(gate.tryAcquire()).toBe(true);

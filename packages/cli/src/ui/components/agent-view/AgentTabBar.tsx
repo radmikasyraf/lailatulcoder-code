@@ -24,7 +24,10 @@
 
 import { Box, Text } from 'ink';
 import { useState, useEffect, useCallback } from 'react';
-import { AgentStatus, AgentEventType } from '@lailatul-coder/lailatul-coder-core';
+import {
+  AgentStatus,
+  AgentEventType,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   useAgentViewState,
   useAgentViewActions,
@@ -197,4 +200,3 @@ export const AgentTabBar: React.FC = () => {
     </Box>
   );
 };
-

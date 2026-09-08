@@ -361,8 +361,7 @@ describe('startCommand.handler', () => {
     );
 
     const options = mockCreateChannel.mock.calls[0]?.[3] as
-      | ChannelBaseOptions
-      | undefined;
+      ChannelBaseOptions | undefined;
     const input = {
       channelName: 'telegram',
       target: {
@@ -421,8 +420,7 @@ describe('startCommand.handler', () => {
     }
 
     const options = mockCreateChannel.mock.calls[0]?.[3] as
-      | ChannelBaseOptions
-      | undefined;
+      ChannelBaseOptions | undefined;
     expect(() => options?.loopController?.validateCron('0 0 31 2 *')).toThrow();
   });
 
@@ -444,8 +442,7 @@ describe('startCommand.handler', () => {
     }
 
     const options = mockCreateChannel.mock.calls[0]?.[3] as
-      | ChannelBaseOptions
-      | undefined;
+      ChannelBaseOptions | undefined;
     expect(options?.loopController).toBeUndefined();
     expect(mockChannelLoopStore).not.toHaveBeenCalled();
     expect(mockChannelLoopScheduler).not.toHaveBeenCalled();
@@ -496,8 +493,7 @@ describe('startCommand.handler', () => {
     }
 
     const options = mockCreateChannel.mock.calls[0]?.[3] as
-      | ChannelBaseOptions
-      | undefined;
+      ChannelBaseOptions | undefined;
     expect(options?.loopController).toBeUndefined();
     expect(mockChannelLoopStore).not.toHaveBeenCalled();
     expect(mockChannelLoopScheduler).not.toHaveBeenCalled();
@@ -656,8 +652,7 @@ describe('startCommand.handler', () => {
     const sessionDiedListener = mockBridgeOn.mock.calls.find(
       ([eventName]) => eventName === 'sessionDied',
     )?.[1] as
-      | ((event: { sessionId: string; reason?: string }) => void)
-      | undefined;
+      ((event: { sessionId: string; reason?: string }) => void) | undefined;
     expect(sessionDiedListener).toBeDefined();
 
     sessionDiedListener!({
@@ -871,11 +866,9 @@ describe('startCommand.handler', () => {
   it('keeps the readiness gate blocked and coalesces replacement disconnects', async () => {
     mockChannelConnect.mockResolvedValue(undefined);
     let resolveFirstRestore:
-      | ((value: { failed: number; restored: number }) => void)
-      | undefined;
+      ((value: { failed: number; restored: number }) => void) | undefined;
     let resolveSecondRestore:
-      | ((value: { failed: number; restored: number }) => void)
-      | undefined;
+      ((value: { failed: number; restored: number }) => void) | undefined;
     mockRouterRestoreSessions
       .mockImplementationOnce(
         () =>
@@ -899,8 +892,7 @@ describe('startCommand.handler', () => {
       void invokeStartHandler({ name: 'telegram' });
       await new Promise((resolve) => setImmediate(resolve));
       const options = mockCreateChannel.mock.calls[0]?.[3] as
-        | ChannelBaseOptions
-        | undefined;
+        ChannelBaseOptions | undefined;
       const firstDisconnect = mockBridgeOn.mock.calls.find(
         ([eventName]) => eventName === 'disconnected',
       )?.[1] as (() => void) | undefined;
@@ -1249,8 +1241,7 @@ describe('startCommand.handler', () => {
     }
 
     const schedulerOptions = mockChannelLoopScheduler.mock.calls[0]?.[0] as
-      | { channels: Map<string, unknown> }
-      | undefined;
+      { channels: Map<string, unknown> } | undefined;
     expect([...schedulerOptions!.channels.keys()]).toEqual(['second']);
     expect(mockChannelLoopSchedulerStart).toHaveBeenCalledOnce();
   });

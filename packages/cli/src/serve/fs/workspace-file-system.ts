@@ -490,9 +490,9 @@ export function createWorkspaceFileSystemFactory(
         );
         deps.generationGuard?.assertOpen();
       } catch (err) {
-        if (
-          !(err instanceof FsError && err.kind === 'path_outside_workspace')
-        ) {
+        if (!(
+          err instanceof FsError && err.kind === 'path_outside_workspace'
+        )) {
           throw recordSameHostToolWriteDenied(audit, ctx, request.path, err);
         }
         try {

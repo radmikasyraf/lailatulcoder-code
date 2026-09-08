@@ -28,8 +28,7 @@ const MAX_TRUSTED_FOLDERS_BYTES = 1024 * 1024;
 const MAX_SETTINGS_BYTES = 4 * 1024 * 1024;
 
 export type DaemonTrustPolicyErrorCode =
-  | 'trust_policy_invalid'
-  | 'trust_policy_unreadable';
+  'trust_policy_invalid' | 'trust_policy_unreadable';
 
 export interface DaemonTrustPolicyError {
   readonly code: DaemonTrustPolicyErrorCode;

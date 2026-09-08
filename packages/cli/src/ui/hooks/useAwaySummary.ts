@@ -5,7 +5,10 @@
  */
 
 import { useEffect, useRef } from 'react';
-import { generateSessionRecap, type Config } from '@lailatul-coder/lailatul-coder-core';
+import {
+  generateSessionRecap,
+  type Config,
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   HistoryItem,
   HistoryItemAwayRecap,

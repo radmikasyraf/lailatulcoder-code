@@ -119,12 +119,7 @@ const DEFAULT_RESTART_POLICY: ChannelWorkerRestartPolicy = {
 };
 
 export type ChannelWorkerState =
-  | 'disabled'
-  | 'starting'
-  | 'running'
-  | 'exited'
-  | 'failed'
-  | 'stopped';
+  'disabled' | 'starting' | 'running' | 'exited' | 'failed' | 'stopped';
 
 export interface ChannelWorkerSnapshot {
   enabled: boolean;

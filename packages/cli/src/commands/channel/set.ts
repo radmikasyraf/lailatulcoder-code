@@ -106,7 +106,8 @@ export const setCommand: CommandModule<unknown, SetArgs> = {
         : ({ mode: 'names', names } as const);
     let sdk: DaemonSdkLike;
     try {
-      sdk = (await import('@lailatul-coder/sdk/daemon')) as unknown as DaemonSdkLike;
+      sdk =
+        (await import('@lailatul-coder/sdk/daemon')) as unknown as DaemonSdkLike;
     } catch (error) {
       writeStderrLine(
         `[Channel] Failed to load daemon SDK: ${safeChannelCommandErrorMessage(error)}`,

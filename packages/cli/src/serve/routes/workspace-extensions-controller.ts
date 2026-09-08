@@ -251,8 +251,7 @@ export interface ExtensionsController {
       createManager?: (operationId: string) => ExtensionManager;
       onSettled?: (operationId: string) => void;
       refreshRuntimes?:
-        | readonly WorkspaceRuntime[]
-        | (() => readonly WorkspaceRuntime[]);
+        readonly WorkspaceRuntime[] | (() => readonly WorkspaceRuntime[]);
       reserveRuntimeReconciliation?: ReserveRuntimeReconciliation;
       operationBasePath?: string;
       skipRefresh?: boolean;
@@ -467,8 +466,7 @@ export function createExtensionsController(
       createManager?: (operationId: string) => ExtensionManager;
       onSettled?: (operationId: string) => void;
       refreshRuntimes?:
-        | readonly WorkspaceRuntime[]
-        | (() => readonly WorkspaceRuntime[]);
+        readonly WorkspaceRuntime[] | (() => readonly WorkspaceRuntime[]);
       reserveRuntimeReconciliation?: ReserveRuntimeReconciliation;
       operationBasePath?: string;
       skipRefresh?: boolean;
@@ -516,8 +514,7 @@ export function createExtensionsController(
       let deadline: ReturnType<typeof setTimeout> | undefined;
       let committedGeneration: number | undefined;
       let reconciliationReservation:
-        | RuntimeReconciliationReservation
-        | undefined;
+        RuntimeReconciliationReservation | undefined;
       let mutationEvent: ExtensionMutationEvent | undefined;
       const commitWarnings: NonNullable<ExtensionOperationStatus['warnings']> =
         [];

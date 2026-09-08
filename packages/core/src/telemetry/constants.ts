@@ -42,7 +42,8 @@ export const EVENT_PROTOCOL_TAG_SANITIZED =
 // which is fired by geminiChat for InvalidStreamError retries on a separate
 // retry budget. See docs/design/telemetry-llm-request-timing-design.md.
 export const EVENT_API_RETRY = 'lailatul-coder.api_retry';
-export const EVENT_CONVERSATION_FINISHED = 'lailatul-coder.conversation_finished';
+export const EVENT_CONVERSATION_FINISHED =
+  'lailatul-coder.conversation_finished';
 export const EVENT_MALFORMED_JSON_RESPONSE =
   'lailatul-coder.malformed_json_response';
 export const EVENT_FILE_OPERATION = 'lailatul-coder.file_operation';
@@ -51,7 +52,8 @@ export const EVENT_SUBAGENT_EXECUTION = 'lailatul-coder.subagent_execution';
 export const EVENT_SKILL_LAUNCH = 'lailatul-coder.skill_launch';
 export const EVENT_AUTH = 'lailatul-coder.auth';
 export const EVENT_USER_FEEDBACK = 'lailatul-coder.user_feedback';
-export const EVENT_TOOL_OUTPUT_TRUNCATED = 'lailatul-coder.tool_output_truncated';
+export const EVENT_TOOL_OUTPUT_TRUNCATED =
+  'lailatul-coder.tool_output_truncated';
 
 export const DEFAULT_SENSITIVE_SPAN_ATTRIBUTE_MAX_LENGTH = 1024 * 1024;
 export const SENSITIVE_SPAN_ATTRIBUTE_MAX_LENGTH_LIMIT = 100 * 1024 * 1024;
@@ -73,21 +75,25 @@ export const EVENT_WORKFLOW_KEYWORD = 'lailatul-coder.workflow_keyword';
 export const EVENT_WORKFLOW_RUN = 'lailatul-coder.workflow_run';
 
 // Arena Events
-export const EVENT_ARENA_SESSION_STARTED = 'lailatul-coder.arena_session_started';
-export const EVENT_ARENA_AGENT_COMPLETED = 'lailatul-coder.arena_agent_completed';
+export const EVENT_ARENA_SESSION_STARTED =
+  'lailatul-coder.arena_session_started';
+export const EVENT_ARENA_AGENT_COMPLETED =
+  'lailatul-coder.arena_agent_completed';
 export const EVENT_ARENA_SESSION_ENDED = 'lailatul-coder.arena_session_ended';
 
 // Performance Events
 export const EVENT_STARTUP_PERFORMANCE = 'lailatul-coder.startup.performance';
 export const EVENT_MEMORY_USAGE = 'lailatul-coder.memory.usage';
 export const EVENT_PERFORMANCE_BASELINE = 'lailatul-coder.performance.baseline';
-export const EVENT_PERFORMANCE_REGRESSION = 'lailatul-coder.performance.regression';
+export const EVENT_PERFORMANCE_REGRESSION =
+  'lailatul-coder.performance.regression';
 
 // Managed Auto-Memory Events
 export const EVENT_MEMORY_EXTRACT = 'lailatul-coder.memory.extract';
 export const EVENT_MEMORY_DREAM = 'lailatul-coder.memory.dream';
 export const EVENT_MEMORY_RECALL = 'lailatul-coder.memory.recall';
-export const EVENT_MEMORY_RECALL_DELIVERY = 'lailatul-coder.memory.recall.delivery';
+export const EVENT_MEMORY_RECALL_DELIVERY =
+  'lailatul-coder.memory.recall.delivery';
 
 // Session Tracing Span Names
 export const SPAN_INTERACTION = 'lailatul-coder.interaction';

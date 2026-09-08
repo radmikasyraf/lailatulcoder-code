@@ -922,14 +922,11 @@ describe('createDaemonSessionActions', () => {
       DaemonHttpError,
     );
 
-    expect(addNotice).toHaveBeenCalledOnce();
-    expect(addNotice).toHaveBeenCalledWith(
-      expect.objectContaining({
+    expect(addNotice).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({
         code: 'daemon.load_tasks.failed',
         message: 'Get tasks failed: Forbidden',
         operation: 'load_tasks',
-      }),
-    );
+      }));
   });
 
   it('reports silent hard getTasks failures once', async () => {
@@ -945,14 +942,11 @@ describe('createDaemonSessionActions', () => {
       'Malformed response',
     );
 
-    expect(addNotice).toHaveBeenCalledOnce();
-    expect(addNotice).toHaveBeenCalledWith(
-      expect.objectContaining({
+    expect(addNotice).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({
         code: 'daemon.load_tasks.failed',
         message: 'Get tasks failed: Malformed response',
         operation: 'load_tasks',
-      }),
-    );
+      }));
   });
 
   it('resets silent hard getTasks failure dedupe when clearing the session', async () => {
@@ -1168,8 +1162,7 @@ describe('createDaemonSessionActions', () => {
     // goal created while it was in flight would clear that goal outright.
     const session = createMockSession('session-a');
     let resolveRead:
-      | ((value: { snapshot: GoalSnapshotV2 }) => void)
-      | undefined;
+      ((value: { snapshot: GoalSnapshotV2 }) => void) | undefined;
     session.goal.mockReturnValue(
       new Promise<{ snapshot: GoalSnapshotV2 }>((resolve) => {
         resolveRead = resolve;

@@ -3595,8 +3595,7 @@ describe('LoggingContentGenerator — Phase 4b retry context propagation', () =>
     } as unknown as GenerateContentParameters;
     let iterator: AsyncGenerator<GenerateContentResponse> | undefined;
     let pendingNext:
-      | Promise<IteratorResult<GenerateContentResponse>>
-      | undefined;
+      Promise<IteratorResult<GenerateContentResponse>> | undefined;
 
     // Start the stream inside a retry context. The generator creation
     // (generateContentStream) runs synchronously enough to capture the
@@ -3630,7 +3629,8 @@ describe('LoggingContentGenerator — Phase 4b retry context propagation', () =>
 
     // Find the span that was ended by the idle timeout
     const records = loggingSpanRecords.filter(
-      (r) => r.name === 'lailatul-coder.llm_request' && r.endMetadata !== undefined,
+      (r) =>
+        r.name === 'lailatul-coder.llm_request' && r.endMetadata !== undefined,
     );
     const timeoutRecord = records.find(
       (r) => r.endMetadata?.error === 'Stream span timed out (idle)',

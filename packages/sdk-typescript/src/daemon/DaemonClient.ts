@@ -6760,4 +6760,3 @@ export function isNonBlockingAccepted(
 ): result is NonBlockingPromptAccepted {
   return 'promptId' in result && 'lastEventId' in result;
 }
-

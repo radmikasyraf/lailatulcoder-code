@@ -1600,8 +1600,7 @@ export class QQChannel extends ChannelBase {
       for (const [key, sid] of tm) {
         if (sid) continue;
         const entry = raw[key] as
-          | { sessionId?: string; target?: unknown; cwd?: string }
-          | undefined;
+          { sessionId?: string; target?: unknown; cwd?: string } | undefined;
         if (!entry?.sessionId) continue;
         const correctId: string = entry.sessionId;
         const target = entry.target;

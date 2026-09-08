@@ -51,11 +51,7 @@ import type {
 } from '@lailatul-coder/sdk/daemon';
 
 export type DaemonConnectionStatus =
-  | 'idle'
-  | 'connecting'
-  | 'connected'
-  | 'disconnected'
-  | 'error';
+  'idle' | 'connecting' | 'connected' | 'disconnected' | 'error';
 
 export interface DaemonSessionOwnerSnapshot {
   isCurrent(): boolean;

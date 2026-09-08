@@ -718,4 +718,3 @@ export const DiscoverTab = ({
     </Box>
   );
 };
-

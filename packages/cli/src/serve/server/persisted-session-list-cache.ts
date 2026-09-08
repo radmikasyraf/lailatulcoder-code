@@ -22,9 +22,7 @@ export interface PersistedSessionListSnapshot {
 }
 
 export type PersistedSessionListCacheStatus =
-  | 'scan'
-  | 'cache_hit'
-  | 'single_flight';
+  'scan' | 'cache_hit' | 'single_flight';
 
 export interface PersistedSessionListLookup {
   status: PersistedSessionListCacheStatus;
@@ -198,8 +196,7 @@ export class PersistedSessionListCache {
       this.maxRetainedSummaries
     ) {
       let oldest:
-        | { key: string; slot: CacheSlot; completedAt: number }
-        | undefined;
+        { key: string; slot: CacheSlot; completedAt: number } | undefined;
       for (const [key, slot] of this.slots) {
         if (
           slot.value &&

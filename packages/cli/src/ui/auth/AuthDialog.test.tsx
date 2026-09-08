@@ -1769,4 +1769,3 @@ describe('AuthDialog Custom API Key Wizard', { timeout: 15000 }, () => {
     },
   );
 });
-

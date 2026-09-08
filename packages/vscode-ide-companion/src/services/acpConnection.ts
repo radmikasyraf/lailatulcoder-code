@@ -228,8 +228,7 @@ export class AcpConnection {
           try {
             // Check if this is an ask_user_question request by inspecting rawInput
             const rawInput = permissionData.toolCall?.rawInput as
-              | Record<string, unknown>
-              | undefined;
+              Record<string, unknown> | undefined;
             const isAskUserQuestion = Array.isArray(rawInput?.questions);
 
             if (isAskUserQuestion) {

@@ -387,17 +387,17 @@ Current gaps:
 Issue/PR evidence points to several different OOM shapes, not one single
 failure mode:
 
-| Source                                                                                                                 | Evidence summary                                                                                                                                      | Hypothesis to test                                                                                                               |
-| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| [`#4309`](https://github.com/LailatulCoder/lailatul-coder/issues/4309)                                                             | User reports 5.84 GiB memory usage / 7.02 GiB warning with YOLO mode and DeepSeek backend; increasing Node memory to 8 GiB did not remove the symptom | Long autonomous tool loops can retain enough state that simply raising old-space limit is not a root fix                         |
-| [`#4149`](https://github.com/LailatulCoder/lailatul-coder/issues/4149)                                                             | Multiple reports show `Ineffective mark-compacts near heap limit`, including 4 GiB and much larger heap-limit cases                                   | A large fraction of heap is reachable application state, not immediately collectible garbage                                     |
-| [`#4116`](https://github.com/LailatulCoder/lailatul-coder/issues/4116)                                                             | OOM occurred while context display was around 9.5%; analysis points to `structuredClone`, UI history, Ink static tree, and large context windows      | Token usage can be low while JS heap pressure is high; token threshold alone is not a reliable memory guard                      |
-| [`#4167`](https://github.com/LailatulCoder/lailatul-coder/issues/4167)                                                             | User says the crash happened while compressing; analysis identifies compression peak memory as a distinct shape                                       | Compression can itself create a peak when heap is already high, especially if history is cloned/stringified around the same time |
-| [`#2128`](https://github.com/LailatulCoder/lailatul-coder/issues/2128)                                                             | Report identifies unbounded UI history, retained file diffs / terminal output, string-width caches, and checkpoint serialization                      | Interactive TUI long sessions may retain memory outside model history and outside non-interactive benchmarks                     |
-| [`#2562`](https://github.com/LailatulCoder/lailatul-coder/issues/2562)                                                             | Report focuses on `GeminiChat.getHistory()` deep-cloning full history in long sessions                                                                | Full-history cloning can amplify memory peaks and should be measured separately from retained steady-state size                  |
-| [`#4185`](https://github.com/LailatulCoder/lailatul-coder/issues/4185)                                                             | Tracks V8 heap pressure exceeding limit before token-based compaction runs                                                                            | Heap-pressure guard is necessary, but it only mitigates symptoms if retained data remains large                                  |
-| [`#4184`](https://github.com/LailatulCoder/lailatul-coder/issues/4184)                                                             | Proposes diagnostics and offload/preview for large retained tool results                                                                              | Large tool output may be bounded for model requests while still retained in local hot memory                                     |
-| [`#4186`](https://github.com/LailatulCoder/lailatul-coder/pull/4186)                                                               | Merged heap-pressure auto-compaction safety net and O(1) last-history access for `nextSpeakerChecker`                                                 | Covers part of heap-pressure and clone amplification, but does not claim to solve all OOM classes                                |
+| Source                                                                                                                                         | Evidence summary                                                                                                                                      | Hypothesis to test                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| [`#4309`](https://github.com/LailatulCoder/lailatul-coder/issues/4309)                                                                         | User reports 5.84 GiB memory usage / 7.02 GiB warning with YOLO mode and DeepSeek backend; increasing Node memory to 8 GiB did not remove the symptom | Long autonomous tool loops can retain enough state that simply raising old-space limit is not a root fix                         |
+| [`#4149`](https://github.com/LailatulCoder/lailatul-coder/issues/4149)                                                                         | Multiple reports show `Ineffective mark-compacts near heap limit`, including 4 GiB and much larger heap-limit cases                                   | A large fraction of heap is reachable application state, not immediately collectible garbage                                     |
+| [`#4116`](https://github.com/LailatulCoder/lailatul-coder/issues/4116)                                                                         | OOM occurred while context display was around 9.5%; analysis points to `structuredClone`, UI history, Ink static tree, and large context windows      | Token usage can be low while JS heap pressure is high; token threshold alone is not a reliable memory guard                      |
+| [`#4167`](https://github.com/LailatulCoder/lailatul-coder/issues/4167)                                                                         | User says the crash happened while compressing; analysis identifies compression peak memory as a distinct shape                                       | Compression can itself create a peak when heap is already high, especially if history is cloned/stringified around the same time |
+| [`#2128`](https://github.com/LailatulCoder/lailatul-coder/issues/2128)                                                                         | Report identifies unbounded UI history, retained file diffs / terminal output, string-width caches, and checkpoint serialization                      | Interactive TUI long sessions may retain memory outside model history and outside non-interactive benchmarks                     |
+| [`#2562`](https://github.com/LailatulCoder/lailatul-coder/issues/2562)                                                                         | Report focuses on `GeminiChat.getHistory()` deep-cloning full history in long sessions                                                                | Full-history cloning can amplify memory peaks and should be measured separately from retained steady-state size                  |
+| [`#4185`](https://github.com/LailatulCoder/lailatul-coder/issues/4185)                                                                         | Tracks V8 heap pressure exceeding limit before token-based compaction runs                                                                            | Heap-pressure guard is necessary, but it only mitigates symptoms if retained data remains large                                  |
+| [`#4184`](https://github.com/LailatulCoder/lailatul-coder/issues/4184)                                                                         | Proposes diagnostics and offload/preview for large retained tool results                                                                              | Large tool output may be bounded for model requests while still retained in local hot memory                                     |
+| [`#4186`](https://github.com/LailatulCoder/lailatul-coder/pull/4186)                                                                           | Merged heap-pressure auto-compaction safety net and O(1) last-history access for `nextSpeakerChecker`                                                 | Covers part of heap-pressure and clone amplification, but does not claim to solve all OOM classes                                |
 | [`#4127`](https://github.com/LailatulCoder/lailatul-coder/pull/4127), [`#4168`](https://github.com/LailatulCoder/lailatul-coder/pull/4168)     | Open compaction-threshold PRs; one uses fixed heap thresholds, the other redesigns token thresholds and compression behavior                          | Useful related work, but long-task testing must verify whether heap, token, and compression signals line up in real runs         |
 | [`#3000`](https://github.com/LailatulCoder/lailatul-coder/issues/3000), [`#4183`](https://github.com/LailatulCoder/lailatul-coder/issues/4183) | Diagnostic roadmap calls out `/doctor memory`, heap snapshot, and bounded memory timeline                                                             | Snapshot/timeline support is needed to move from RSS attribution to retained-object attribution                                  |
 
@@ -713,19 +713,19 @@ A recent long PR-review chat record was analyzed as a post-mortem shape for
 the reported OOM class. The raw JSONL is not included here because it contains
 prompt and tool output text. The aggregate shape is:
 
-| Signal                  | Value                         |
-| ----------------------- | ----------------------------- |
-| Duration                | 87.0 min                      |
-| LailatulCoder Ai version       | 0.15.10                       |
-| Model                   | qwen-latest-series beta model |
-| API responses           | 380                           |
-| Tool-call telemetry     | 507 events                    |
-| MCP tool-call telemetry | 4 events                      |
-| Subagent API responses  | 313                           |
-| Root API responses      | 67                            |
-| Root prompt growth      | 38,622 -> 168,555 tokens      |
-| Max prompt tokens       | 168,555                       |
-| Total response tokens   | 31.28M                        |
+| Signal                   | Value                         |
+| ------------------------ | ----------------------------- |
+| Duration                 | 87.0 min                      |
+| LailatulCoder Ai version | 0.15.10                       |
+| Model                    | qwen-latest-series beta model |
+| API responses            | 380                           |
+| Tool-call telemetry      | 507 events                    |
+| MCP tool-call telemetry  | 4 events                      |
+| Subagent API responses   | 313                           |
+| Root API responses       | 67                            |
+| Root prompt growth       | 38,622 -> 168,555 tokens      |
+| Max prompt tokens        | 168,555                       |
+| Total response tokens    | 31.28M                        |
 
 This shape does not support MCP as the primary OOM cause for this case. Only
 4 of 507 tool-call telemetry events were MCP, and all four recorded

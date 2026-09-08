@@ -114,7 +114,9 @@ async function handlePs(argv: PsArgs): Promise<void> {
   }
 
   if (records.length === 0) {
-    writeStdoutLine('No other interactive LailatulCoder Ai sessions are running.');
+    writeStdoutLine(
+      'No other interactive LailatulCoder Ai sessions are running.',
+    );
     return;
   }
 

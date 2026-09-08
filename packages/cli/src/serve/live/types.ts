@@ -5,7 +5,8 @@
  */
 
 export const LIVE_HOST_PROTOCOL_VERSION = 6 as const;
-export const LIVE_HOST_BUNDLE_ID = 'com.alibaba.lailatul-coder.live-host' as const;
+export const LIVE_HOST_BUNDLE_ID =
+  'com.alibaba.lailatul-coder.live-host' as const;
 export const LIVE_INPUT_AUDIO_EPOCH_BYTES = 8;
 
 export type LiveState =
@@ -33,11 +34,7 @@ export type LiveBlocker =
   | 'provider_unreachable';
 
 export type LiveRequirementState =
-  | 'ready'
-  | 'missing'
-  | 'denied'
-  | 'unavailable'
-  | 'checking';
+  'ready' | 'missing' | 'denied' | 'unavailable' | 'checking';
 
 export interface LiveSessionLocator {
   workspaceCwd: string;

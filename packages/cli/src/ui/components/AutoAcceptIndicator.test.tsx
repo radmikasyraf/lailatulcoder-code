@@ -62,4 +62,3 @@ describe('<AutoAcceptIndicator />', () => {
     expect(lastFrame()).toContain('YOLO mode');
   });
 });
-

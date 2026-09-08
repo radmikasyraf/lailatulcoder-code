@@ -32,11 +32,7 @@ export const OSC = {
 // ── Terminal type detection ─────────────────────────────────────────
 
 export type TerminalType =
-  | 'iTerm.app'
-  | 'kitty'
-  | 'ghostty'
-  | 'Apple_Terminal'
-  | 'unknown';
+  'iTerm.app' | 'kitty' | 'ghostty' | 'Apple_Terminal' | 'unknown';
 
 /**
  * Detect the current terminal emulator from environment variables.

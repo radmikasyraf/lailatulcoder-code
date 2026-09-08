@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config, MCPServerConfig } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  MCPServerConfig,
+} from '@lailatul-coder/lailatul-coder-core';
 
 export const MCP_SERVER_REF_PREFIX = 'mcp:';
 

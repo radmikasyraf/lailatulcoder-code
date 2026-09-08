@@ -60,7 +60,9 @@ vi.mock('node:fs', async (importOriginal) => {
 // Mock Storage from core
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     Storage: {

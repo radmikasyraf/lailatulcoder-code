@@ -56,7 +56,7 @@ interface WebShellSidebarBranding {
 
 | Value                            | Effect                                            |
 | -------------------------------- | ------------------------------------------------- |
-| `undefined` (default)            | Qwen logo + "LailatulCoder Ai" text                      |
+| `undefined` (default)            | Qwen logo + "LailatulCoder Ai" text               |
 | `false`                          | Branding row hidden entirely                      |
 | `{ render: () => <MyHeader /> }` | Full replacement with custom content              |
 | `{ hideWhenCompact: false }`     | Keep branding visible in collapsed icon-rail mode |
@@ -211,11 +211,7 @@ type WebShellSidebarSessionActionItem =
 
 /** Subset with working inline (hover-button) handlers. */
 type WebShellSidebarSessionInlineActionItem =
-  | 'pin'
-  | 'archive'
-  | 'rename'
-  | 'export'
-  | 'delete';
+  'pin' | 'archive' | 'rename' | 'export' | 'delete';
 
 interface WebShellSidebarSessionActionsOptions {
   items?: readonly WebShellSidebarSessionActionItem[]; // which actions to show (default: all)

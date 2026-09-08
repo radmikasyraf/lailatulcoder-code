@@ -355,11 +355,7 @@ export class WebViewProvider {
     this.agentManager.onModeInfo((info) => {
       try {
         const current = (info?.currentModeId || null) as
-          | 'plan'
-          | 'default'
-          | 'auto-edit'
-          | 'yolo'
-          | null;
+          'plan' | 'default' | 'auto-edit' | 'yolo' | null;
         this.currentModeId = current;
       } catch (_error) {
         // Ignore error when parsing mode info
@@ -575,8 +571,7 @@ export class WebViewProvider {
             const isWorkflowApproval =
               (
                 request.toolCall as
-                  | { _meta?: { workflowApproval?: unknown } }
-                  | undefined
+                  { _meta?: { workflowApproval?: unknown } } | undefined
               )?._meta?.workflowApproval === true;
 
             // Always close open qwen-diff editors after any permission decision
@@ -964,7 +959,9 @@ export class WebViewProvider {
           ).trim();
           const panelRef = this.panelManager.getPanel();
           if (panelRef) {
-            panelRef.title = title ? truncatePanelTitle(title) : 'LailatulCoder Ai';
+            panelRef.title = title
+              ? truncatePanelTitle(title)
+              : 'LailatulCoder Ai';
           }
           return;
         }
@@ -1861,8 +1858,7 @@ export class WebViewProvider {
   ): Promise<boolean> {
     if (message.type === 'log') {
       const data = message.data as
-        | { level?: unknown; message?: unknown }
-        | undefined;
+        { level?: unknown; message?: unknown } | undefined;
       if (isLogLevel(data?.level) && typeof data.message === 'string') {
         const logMessage =
           data.message.length > MAX_WEBVIEW_LOG_LENGTH
@@ -2135,8 +2131,7 @@ export class WebViewProvider {
     }
 
     const payload = data as
-      | { paths?: string[]; requestId?: number }
-      | undefined;
+      { paths?: string[]; requestId?: number } | undefined;
     const paths = Array.isArray(payload?.paths) ? (payload?.paths ?? []) : [];
 
     const workspaceFolders = vscode.workspace.workspaceFolders ?? [];
@@ -2308,7 +2303,9 @@ export class WebViewProvider {
           ).trim();
           const panelRef = this.panelManager.getPanel();
           if (panelRef) {
-            panelRef.title = title ? truncatePanelTitle(title) : 'LailatulCoder Ai';
+            panelRef.title = title
+              ? truncatePanelTitle(title)
+              : 'LailatulCoder Ai';
           }
           return;
         }

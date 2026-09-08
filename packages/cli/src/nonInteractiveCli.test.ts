@@ -79,7 +79,9 @@ const interactionSpan = vi.hoisted(() => ({}));
 vi.mock('./ui/hooks/atCommandProcessor.js');
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
 
   class MockChatRecordingService {
     initialize = vi.fn();
@@ -421,9 +423,8 @@ describe('runNonInteractive', () => {
       computeMergedSettings: vi.fn(),
     } as unknown as LoadedSettings;
 
-    const { handleAtCommand } = await import(
-      './ui/hooks/atCommandProcessor.js'
-    );
+    const { handleAtCommand } =
+      await import('./ui/hooks/atCommandProcessor.js');
     vi.mocked(handleAtCommand).mockImplementation(async ({ query }) => ({
       processedQuery: [{ text: query }],
       shouldProceed: true,
@@ -1375,9 +1376,8 @@ describe('runNonInteractive', () => {
   ];
 
   async function mockHeadlessImageInput(): Promise<void> {
-    const { handleAtCommand } = await import(
-      './ui/hooks/atCommandProcessor.js'
-    );
+    const { handleAtCommand } =
+      await import('./ui/hooks/atCommandProcessor.js');
     vi.mocked(handleAtCommand).mockResolvedValue({
       processedQuery: headlessImageParts,
       shouldProceed: true,
@@ -1455,8 +1455,7 @@ describe('runNonInteractive', () => {
     mockGeminiClient.sendMessageStream.mockImplementation(
       async function* (): AsyncGenerator<ServerGeminiStreamEvent> {
         const callback = setApprovalRequestCallback.mock.calls[0]?.[0] as
-          | WorkflowApprovalRequestCallback
-          | undefined;
+          WorkflowApprovalRequestCallback | undefined;
         expect(callback).toBeTypeOf('function');
         await callback?.(
           { runId: 'wf_stream' } as never,
@@ -2152,8 +2151,7 @@ describe('runNonInteractive', () => {
     );
     const order: string[] = [];
     let recordingFailureListener:
-      | ((event: { sessionId: string; error: Error }) => void)
-      | undefined;
+      ((event: { sessionId: string; error: Error }) => void) | undefined;
     (
       mockConfig as unknown as {
         onChatRecordingFailure: (
@@ -3770,9 +3768,8 @@ describe('runNonInteractive', () => {
   it('should preprocess @include commands before sending to the model', async () => {
     setupMetricsMock();
     // 1. Mock the imported atCommandProcessor
-    const { handleAtCommand } = await import(
-      './ui/hooks/atCommandProcessor.js'
-    );
+    const { handleAtCommand } =
+      await import('./ui/hooks/atCommandProcessor.js');
     const mockHandleAtCommand = vi.mocked(handleAtCommand);
 
     // 2. Define the raw input and the expected processed output
@@ -6338,16 +6335,10 @@ describe('runNonInteractive', () => {
       'prompt-id-dup',
     );
 
-    expect(mockCoreExecuteToolCall).toHaveBeenCalledOnce();
-    expect(mockCoreExecuteToolCall).toHaveBeenCalledWith(
-      mockConfig,
-      expect.objectContaining({
+    expect(mockCoreExecuteToolCall).toHaveBeenCalledExactlyOnceWith(mockConfig, expect.objectContaining({
         callId: 'dup_id_0001',
         args: { file_path: 'a.ts' },
-      }),
-      expect.any(AbortSignal),
-      expect.any(Object),
-    );
+      }), expect.any(AbortSignal), expect.any(Object));
 
     const toolResultParts = mockGeminiClient.sendMessageStream.mock.calls[1][0];
     expect(toolResultParts).toHaveLength(2);

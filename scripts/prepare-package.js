@@ -302,7 +302,8 @@ function writeDistPackageJson(rootDir, distDir) {
     name: rootPackageJson.name,
     version: rootPackageJson.version,
     description:
-      rootPackageJson.description || 'LailatulCoder Ai - AI-powered coding assistant',
+      rootPackageJson.description ||
+      'LailatulCoder Ai - AI-powered coding assistant',
     repository: rootPackageJson.repository,
     type: 'module',
     main: 'cli.js',

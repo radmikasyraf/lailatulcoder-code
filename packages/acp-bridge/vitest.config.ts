@@ -22,10 +22,11 @@ export default defineConfig({
         __dirname,
         '../core/src/utils/transcript-records.ts',
       ),
-      '@lailatul-coder/lailatul-coder-core/userPromptSubmitContext': path.resolve(
-        __dirname,
-        '../core/src/hooks/user-prompt-submit-context.ts',
-      ),
+      '@lailatul-coder/lailatul-coder-core/userPromptSubmitContext':
+        path.resolve(
+          __dirname,
+          '../core/src/hooks/user-prompt-submit-context.ts',
+        ),
     },
   },
   test: {

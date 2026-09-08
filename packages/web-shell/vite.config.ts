@@ -58,7 +58,10 @@ export default defineConfig(({ command }) => ({
               __dirname,
               '../webui/src/daemon-react-sdk.ts',
             ),
-            '@lailatul-coder/webui': resolve(__dirname, '../webui/src/index.ts'),
+            '@lailatul-coder/webui': resolve(
+              __dirname,
+              '../webui/src/index.ts',
+            ),
             '@lailatul-coder/sdk/daemon': resolve(
               __dirname,
               '../sdk-typescript/src/daemon/index.ts',
@@ -70,7 +73,12 @@ export default defineConfig(({ command }) => ({
           }
         : {}),
     },
-    dedupe: ['react', 'react-dom', '@lailatul-coder/webui', '@lailatul-coder/sdk'],
+    dedupe: [
+      'react',
+      'react-dom',
+      '@lailatul-coder/webui',
+      '@lailatul-coder/sdk',
+    ],
   },
   build: {
     outDir: '../dist',

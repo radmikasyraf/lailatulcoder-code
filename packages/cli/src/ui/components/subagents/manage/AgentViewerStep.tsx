@@ -71,4 +71,3 @@ export const AgentViewerStep = ({ selectedAgent }: AgentViewerStepProps) => {
     </Box>
   );
 };
-

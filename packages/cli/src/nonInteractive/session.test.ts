@@ -5,7 +5,10 @@
  */
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { SendMessageType, type Config } from '@lailatul-coder/lailatul-coder-core';
+import {
+  SendMessageType,
+  type Config,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Content } from '@google/genai';
 import { runNonInteractiveStreamJson } from './session.js';
 import type {
@@ -663,8 +666,7 @@ describe('runNonInteractiveStreamJson', () => {
     ]);
     const order: string[] = [];
     let failureListener:
-      | ((event: { sessionId: string; error: Error }) => void)
-      | undefined;
+      ((event: { sessionId: string; error: Error }) => void) | undefined;
     let flushCount = 0;
     config = createConfig({
       getGeminiClient: vi.fn().mockReturnValue(config.getGeminiClient()),

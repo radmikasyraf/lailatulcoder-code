@@ -344,4 +344,3 @@ export const getPlainTextLength = (
     .replace(/.*\[(.*?)\]\(.*\)/g, '$1');
   return stringWidth(cleanText);
 };
-

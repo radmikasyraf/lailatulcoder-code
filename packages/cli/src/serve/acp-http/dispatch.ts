@@ -979,8 +979,7 @@ export class AcpDispatcher {
     private readonly archiveCoordinator: SessionArchiveCoordinator = new SessionArchiveCoordinator(),
     private readonly isWorkspaceTrusted: () => boolean = () => true,
     private readonly captureGenerationAssertion: () =>
-      | (() => void)
-      | undefined = () => undefined,
+      (() => void) | undefined = () => undefined,
     private readonly liveSessionIsolation?: LiveSessionIsolation,
     private readonly sessionRuntimeBaseDir: string = Storage.getRuntimeBaseDir(),
     private readonly getSessionRuntimeContext: () => AcpSessionRuntimeContext = () => ({

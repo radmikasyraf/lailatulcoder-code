@@ -1872,4 +1872,3 @@ describe('<ToolMessage /> localized badge', () => {
     expect(lastFrame() ?? '').toContain('ReadFile');
   }, 15000);
 });
-

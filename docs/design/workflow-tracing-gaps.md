@@ -209,7 +209,7 @@ session-root
 
 ##### 1. 双 ALS + 显式 parent 解析 — 可复用，是核心修复
 
-| 维度         | claude-code                                           | lailatul-coder                                    |
+| 维度         | claude-code                                           | lailatul-coder                               |
 | ------------ | ----------------------------------------------------- | -------------------------------------------- |
 | ALS 数量     | 2 (`interactionContext` + `toolContext`)              | 1 (`interactionContext`，无 `toolContext`)   |
 | parent 解析  | 每种 span 类型显式指定从哪个 ALS 取 parent            | `withSpan` 统一走 `context.active()`         |
@@ -241,7 +241,7 @@ export function startLLMRequestSpan(model, promptId): Span {
 
 ##### 2. tool.blocked_on_user — 需要适配审批流差异
 
-| 维度          | claude-code                                | lailatul-coder                                                                  |
+| 维度          | claude-code                                | lailatul-coder                                                             |
 | ------------- | ------------------------------------------ | -------------------------------------------------------------------------- |
 | 审批位置      | 在 `toolExecution.ts` 内，tool span 内部   | 在 `coreToolScheduler._schedule()` 内，tool span 之前                      |
 | 审批模式      | 同步等待 `resolveHookPermissionDecision()` | 状态机驱动：`validating` → `awaiting_approval` → `scheduled` → `executing` |
@@ -280,7 +280,7 @@ executeSingleToolCall():
 
 ##### 3. hook span — 可直接复用
 
-| 维度          | claude-code                         | lailatul-coder                                                            |
+| 维度          | claude-code                         | lailatul-coder                                                       |
 | ------------- | ----------------------------------- | -------------------------------------------------------------------- |
 | hook 执行入口 | `executeHooks()` in `hooks.ts`      | `firePreToolUseHook`/`firePostToolUseHook` via `hookEventHandler.ts` |
 | 现有记录方式  | OTel span + Perfetto span           | `HookCallEvent` → `QwenLogger` (无 OTel)                             |
@@ -317,7 +317,7 @@ endToolSpan(toolSpan);
 
 ##### 5. subagent trace tree — 双方都不完整，不建议直接复用
 
-| 维度            | claude-code                                                             | lailatul-coder                                            |
+| 维度            | claude-code                                                             | lailatul-coder                                       |
 | --------------- | ----------------------------------------------------------------------- | ---------------------------------------------------- |
 | OTel trace 传播 | **无** — subagent 的 interaction 是新 root                              | **无** — subagent 无显式 trace 传播                  |
 | 身份关联        | Perfetto metadata（agent process/thread）+ `teammateContextStorage` ALS | `subagentNameContext` ALS + `SubagentExecutionEvent` |

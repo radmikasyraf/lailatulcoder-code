@@ -76,15 +76,15 @@ See the [Authentication Guide](https://LailatulCoder.github.io/lailatul-coder-do
 
 ## How to Use LailatulCoder Ai
 
-| Mode            | Command         | Use Case                                                                                                                                                                                                                                        |
-| --------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Interactive** | `qwen`          | Terminal UI with rich rendering, `@file` references, slash commands                                                                                                                                                                             |
-| **Headless**    | `qwen -p "..."` | Scripts, CI/CD, batch processing — no UI                                                                                                                                                                                                        |
+| Mode            | Command         | Use Case                                                                                                                                                                                                                                                                            |
+| --------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Interactive** | `qwen`          | Terminal UI with rich rendering, `@file` references, slash commands                                                                                                                                                                                                                 |
+| **Headless**    | `qwen -p "..."` | Scripts, CI/CD, batch processing — no UI                                                                                                                                                                                                                                            |
 | **IDE**         | —               | [VS Code](https://LailatulCoder.github.io/lailatul-coder-docs/en/users/integration-vscode/), [Zed](https://LailatulCoder.github.io/lailatul-coder-docs/en/users/integration-zed/), [JetBrains](https://LailatulCoder.github.io/lailatul-coder-docs/en/users/integration-jetbrains/) |
-| **Desktop**     | —               | [LailatulCoder Ai Desktop](https://github.com/LailatulCoder/lailatul-coder/releases/tag/desktop-latest) — GUI for macOS, Windows, Linux                                                                                                                            |
-| **Daemon**      | `qwen serve`    | Shared agent session over HTTP+SSE (ACP). Multiple clients, one agent. _(experimental)_ [Docs](https://LailatulCoder.github.io/lailatul-coder-docs/en/users/qwen-serve)                                                                                     |
-| **SDK**         | —               | [TypeScript](./packages/sdk-typescript/README.md), [Python](./packages/sdk-python/README.md), [Java](./packages/sdk-java/qwencode/README.md)                                                                                                    |
-| **IM Bot**      | `qwen channel`  | Connect to Telegram, DingTalk, WeChat, or Feishu                                                                                                                                                                                                |
+| **Desktop**     | —               | [LailatulCoder Ai Desktop](https://github.com/LailatulCoder/lailatul-coder/releases/tag/desktop-latest) — GUI for macOS, Windows, Linux                                                                                                                                             |
+| **Daemon**      | `qwen serve`    | Shared agent session over HTTP+SSE (ACP). Multiple clients, one agent. _(experimental)_ [Docs](https://LailatulCoder.github.io/lailatul-coder-docs/en/users/qwen-serve)                                                                                                             |
+| **SDK**         | —               | [TypeScript](./packages/sdk-typescript/README.md), [Python](./packages/sdk-python/README.md), [Java](./packages/sdk-java/qwencode/README.md)                                                                                                                                        |
+| **IM Bot**      | `qwen channel`  | Connect to Telegram, DingTalk, WeChat, or Feishu                                                                                                                                                                                                                                    |
 
 <details>
 <summary>SDK example (Python)</summary>
@@ -119,21 +119,21 @@ asyncio.run(main())
 If you know Claude Code, you already know LailatulCoder Ai — and then some. We've put significant effort into [bringing LailatulCoder Ai to feature parity with Claude Code](https://github.com/wenshao/codeagents/blob/main/docs/comparison/lailatul-coder-improvement-report.md), improving both breadth and reliability across the board.
 
 | Feature                                                            | LailatulCoder Ai | Claude Code |
-| ------------------------------------------------------------------ | :-------: | :---------: |
-| SubAgents, Agent Teams, Dynamic Workflows                          |     ✓     |      ✓      |
-| Auto-Memory, Auto-Skills, Hooks                                    |     ✓     |      ✓      |
-| Built-in Skills (/review, /batch, /loop, /bugfix…)                 |     ✓     |      ✓      |
-| MCP, Plan Mode, LSP Integration                                    |     ✓     |      ✓      |
-| Auto Mode, Sandbox, Git Worktrees                                  |     ✓     |      ✓      |
-| Computer Use (desktop automation)                                  |     ✓     |      ✓      |
-| IDE Plugins (VS Code / JetBrains / Zed)                            |     ✓     |      ✓      |
-| SDK                                                                |     ✓     |      ✓      |
-| Headless Mode, Session Management                                  |     ✓     |      ✓      |
-| Open-source — model and framework                                  |     ✓     |      —      |
-| Multi-protocol (OpenAI / Anthropic / Gemini / Qwen + any provider) |     ✓     |      —      |
-| Agent Arena (multi-model head-to-head on same task)                |     ✓     |      —      |
-| Daemon Mode — `qwen serve` (multi-client shared agent)             |     ✓     |      —      |
-| IM Channels (Telegram / DingTalk / WeChat / Feishu)                |     ✓     |      —      |
+| ------------------------------------------------------------------ | :--------------: | :---------: |
+| SubAgents, Agent Teams, Dynamic Workflows                          |        ✓         |      ✓      |
+| Auto-Memory, Auto-Skills, Hooks                                    |        ✓         |      ✓      |
+| Built-in Skills (/review, /batch, /loop, /bugfix…)                 |        ✓         |      ✓      |
+| MCP, Plan Mode, LSP Integration                                    |        ✓         |      ✓      |
+| Auto Mode, Sandbox, Git Worktrees                                  |        ✓         |      ✓      |
+| Computer Use (desktop automation)                                  |        ✓         |      ✓      |
+| IDE Plugins (VS Code / JetBrains / Zed)                            |        ✓         |      ✓      |
+| SDK                                                                |        ✓         |      ✓      |
+| Headless Mode, Session Management                                  |        ✓         |      ✓      |
+| Open-source — model and framework                                  |        ✓         |      —      |
+| Multi-protocol (OpenAI / Anthropic / Gemini / Qwen + any provider) |        ✓         |      —      |
+| Agent Arena (multi-model head-to-head on same task)                |        ✓         |      —      |
+| Daemon Mode — `qwen serve` (multi-client shared agent)             |        ✓         |      —      |
+| IM Channels (Telegram / DingTalk / WeChat / Feishu)                |        ✓         |      —      |
 
 ## Ecosystem
 

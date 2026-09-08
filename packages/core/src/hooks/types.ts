@@ -204,10 +204,7 @@ export interface PromptHookConfig {
 export type MessagesProvider = () => Array<Record<string, unknown>> | undefined;
 
 export type HookConfig =
-  | CommandHookConfig
-  | HttpHookConfig
-  | FunctionHookConfig
-  | PromptHookConfig;
+  CommandHookConfig | HttpHookConfig | FunctionHookConfig | PromptHookConfig;
 
 /**
  * Hook definition with matcher

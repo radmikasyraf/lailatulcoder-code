@@ -7,11 +7,16 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as vscode from 'vscode';
 import { activate } from './extension.js';
-import { IDE_DEFINITIONS, detectIdeFromEnv } from '@lailatul-coder/lailatul-coder-core';
+import {
+  IDE_DEFINITIONS,
+  detectIdeFromEnv,
+} from '@lailatul-coder/lailatul-coder-core';
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     detectIdeFromEnv: vi.fn(() => actual.IDE_DEFINITIONS.vscode),
@@ -167,8 +172,7 @@ describe('activate', () => {
     const command = vi
       .mocked(vscode.commands.registerCommand)
       .mock.calls.find(([id]) => id === 'lailatul-coder.runQwenCode')?.[1] as
-      | (() => Promise<void>)
-      | undefined;
+      (() => Promise<void>) | undefined;
     expect(command).toBeDefined();
     await command!();
 

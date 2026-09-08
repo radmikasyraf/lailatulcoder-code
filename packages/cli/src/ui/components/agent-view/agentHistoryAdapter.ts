@@ -111,17 +111,14 @@ export function agentMessagesToHistoryItems(
             resultDisplay: undefined,
             outputFile: undefined,
             renderOutputAsMarkdown: m.metadata?.['renderOutputAsMarkdown'] as
-              | boolean
-              | undefined,
+              boolean | undefined,
             success: undefined,
           });
         } else {
           // tool_result — attach to existing call entry
           const entry = callMap.get(callId);
           const resultDisplay = m.metadata?.['resultDisplay'] as
-            | ToolResultDisplay
-            | string
-            | undefined;
+            ToolResultDisplay | string | undefined;
           const outputFile = m.metadata?.['outputFile'] as string | undefined;
           const success = m.metadata?.['success'] as boolean;
 

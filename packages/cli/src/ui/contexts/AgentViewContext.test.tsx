@@ -170,4 +170,3 @@ describe('AgentViewProvider in-process bridges', () => {
     expect(lastFrame()).toContain('main:false');
   });
 });
-

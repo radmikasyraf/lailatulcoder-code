@@ -45,4 +45,3 @@ export const renderWithProviders = (
       </ConfigContext.Provider>
     </SettingsContext.Provider>,
   );
-

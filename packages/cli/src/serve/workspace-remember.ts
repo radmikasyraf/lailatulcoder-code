@@ -31,10 +31,7 @@ import {
 const debugLogger = createDebugLogger('WORKSPACE_REMEMBER');
 
 export type WorkspaceMemoryTaskStatus =
-  | 'queued'
-  | 'running'
-  | 'completed'
-  | 'failed';
+  'queued' | 'running' | 'completed' | 'failed';
 
 /** @deprecated Use WorkspaceMemoryTaskStatus. */
 export type WorkspaceMemoryRememberTaskStatus = WorkspaceMemoryTaskStatus;
@@ -53,19 +50,16 @@ interface WorkspaceMemoryTaskBaseSnapshot {
   };
 }
 
-export interface WorkspaceMemoryRememberTaskSnapshot
-  extends WorkspaceMemoryTaskBaseSnapshot {
+export interface WorkspaceMemoryRememberTaskSnapshot extends WorkspaceMemoryTaskBaseSnapshot {
   contextMode: BridgeWorkspaceMemoryRememberContextMode;
   result?: BridgeWorkspaceMemoryRememberResult;
 }
 
-export interface WorkspaceMemoryForgetTaskSnapshot
-  extends WorkspaceMemoryTaskBaseSnapshot {
+export interface WorkspaceMemoryForgetTaskSnapshot extends WorkspaceMemoryTaskBaseSnapshot {
   result?: BridgeWorkspaceMemoryForgetResult;
 }
 
-export interface WorkspaceMemoryDreamTaskSnapshot
-  extends WorkspaceMemoryTaskBaseSnapshot {
+export interface WorkspaceMemoryDreamTaskSnapshot extends WorkspaceMemoryTaskBaseSnapshot {
   result?: BridgeWorkspaceMemoryDreamResult;
 }
 

@@ -29,7 +29,9 @@ describe('pr force-push reminder workflow', () => {
   });
 
   it('only runs on the upstream repo', () => {
-    expect(workflow).toContain("github.repository == 'LailatulCoder/lailatul-coder'");
+    expect(workflow).toContain(
+      "github.repository == 'LailatulCoder/lailatul-coder'",
+    );
   });
 
   it('grants the permissions the comment endpoints need', () => {

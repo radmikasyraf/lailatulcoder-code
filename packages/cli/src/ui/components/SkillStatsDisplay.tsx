@@ -150,4 +150,3 @@ export const SkillStatsDisplay: React.FC<SkillStatsDisplayProps> = ({
     </Box>
   );
 };
-

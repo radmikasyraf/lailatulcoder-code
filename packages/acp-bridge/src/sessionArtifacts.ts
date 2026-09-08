@@ -47,10 +47,7 @@ export type DaemonSessionArtifactKind =
   | 'other';
 
 export type DaemonSessionArtifactStorage =
-  | 'workspace'
-  | 'external_url'
-  | 'managed'
-  | 'published';
+  'workspace' | 'external_url' | 'managed' | 'published';
 
 export type DaemonSessionArtifactSource = 'tool' | 'hook' | 'client';
 
@@ -140,9 +137,7 @@ export interface DaemonSessionArtifact {
 }
 
 export type SessionArtifactRemovalReason =
-  | 'eviction'
-  | 'explicit'
-  | 'unpin_to_ephemeral';
+  'eviction' | 'explicit' | 'unpin_to_ephemeral';
 
 export interface SessionArtifactChange {
   action: 'created' | 'updated' | 'removed';

@@ -35,11 +35,10 @@ import { isSameFile } from './lib/same-file.js';
 import { volumeOf } from './lib/ledger.js';
 import { writeStderrLine, writeStdoutLine } from '../../utils/stdioHelpers.js';
 
-interface PersistedVerdict
-  extends Omit<
-    ComposeReviewResult,
-    'postedInline' | 'postedFresh' | 'prevPostedInline'
-  > {
+interface PersistedVerdict extends Omit<
+  ComposeReviewResult,
+  'postedInline' | 'postedFresh' | 'prevPostedInline'
+> {
   verdictLine: string;
   /**
    * Optional HERE, required on the composed result it is otherwise a copy

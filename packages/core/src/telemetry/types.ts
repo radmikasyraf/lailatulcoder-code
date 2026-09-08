@@ -105,16 +105,14 @@ export class StartSessionEvent implements BaseTelemetryEvent {
         .join(',');
 
       const skillTool = toolRegistry.getTool(ToolNames.SKILL) as
-        | SkillTool
-        | undefined;
+        SkillTool | undefined;
       const skillNames = skillTool?.getAvailableSkillNames?.();
       if (skillNames && skillNames.length > 0) {
         this.skills = skillNames.join(',');
       }
 
       const agentTool = toolRegistry.getTool(ToolNames.AGENT) as
-        | AgentTool
-        | undefined;
+        AgentTool | undefined;
       const subagentNames = agentTool?.getAvailableSubagentNames?.();
       if (subagentNames && subagentNames.length > 0) {
         this.subagents = subagentNames.join(',');
@@ -506,27 +504,13 @@ export class LoopDetectedEvent implements BaseTelemetryEvent {
 }
 
 export type RepeatedToolFailureGuardTelemetryMode =
-  | 'shadow'
-  | 'warn'
-  | 'enforce';
+  'shadow' | 'warn' | 'enforce';
 export type RepeatedToolFailureGuardTelemetryPhase =
-  | 'idle'
-  | 'tracking'
-  | 'warned'
-  | 'latched';
+  'idle' | 'tracking' | 'warned' | 'latched';
 export type RepeatedToolFailureGuardTelemetryDecision =
-  | 'reset'
-  | 'tracked'
-  | 'would_warn'
-  | 'warned'
-  | 'would_stop'
-  | 'stopped';
+  'reset' | 'tracked' | 'would_warn' | 'warned' | 'would_stop' | 'stopped';
 export type RepeatedToolFailureGuardCountBucket =
-  | '0'
-  | '1-2'
-  | '3-4'
-  | '5-7'
-  | '8+';
+  '0' | '1-2' | '3-4' | '5-7' | '8+';
 export type RepeatedToolFailureGuardBatchBucket = '0' | '1' | '2' | '3+';
 export type RepeatedToolFailureGuardResetReason =
   | 'success'
@@ -1332,10 +1316,7 @@ export function makeArenaAgentCompletedEvent({
 }
 
 export type ArenaSessionEndedStatus =
-  | 'selected'
-  | 'discarded'
-  | 'failed'
-  | 'cancelled';
+  'selected' | 'discarded' | 'failed' | 'cancelled';
 
 export interface ArenaSessionEndedEvent extends BaseTelemetryEvent {
   'event.name': 'arena_session_ended';
@@ -1518,10 +1499,7 @@ export class MemoryExtractEvent implements BaseTelemetryEvent {
   trigger: 'auto' | 'manual';
   status: 'completed' | 'skipped' | 'failed';
   skipped_reason?:
-    | 'already_running'
-    | 'queued'
-    | 'memory_tool'
-    | 'memory_pressure';
+    'already_running' | 'queued' | 'memory_tool' | 'memory_pressure';
   patches_count: number;
   touched_topics: string;
   duration_ms: number;
@@ -1530,10 +1508,7 @@ export class MemoryExtractEvent implements BaseTelemetryEvent {
     trigger: 'auto' | 'manual';
     status: 'completed' | 'skipped' | 'failed';
     skipped_reason?:
-      | 'already_running'
-      | 'queued'
-      | 'memory_tool'
-      | 'memory_pressure';
+      'already_running' | 'queued' | 'memory_tool' | 'memory_pressure';
     patches_count: number;
     touched_topics: string[];
     duration_ms: number;

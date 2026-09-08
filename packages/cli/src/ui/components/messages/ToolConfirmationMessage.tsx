@@ -65,8 +65,7 @@ export const ToolConfirmationMessage: React.FC<
 
   const settings = useSettings();
   const preferredEditor = settings.merged.general?.preferredEditor as
-    | EditorType
-    | undefined;
+    EditorType | undefined;
 
   const [ideClient, setIdeClient] = useState<IdeClient | null>(null);
   const [isDiffingEnabled, setIsDiffingEnabled] = useState(false);
@@ -687,9 +686,7 @@ export const ToolConfirmationMessage: React.FC<
     bodyContent = (
       <Box flexDirection="column">
         <Box paddingX={1} marginLeft={1} marginBottom={1}>
-          <Text color={theme.status.warning}>
-            ⚠ {autoModeFallback.message}
-          </Text>
+          <Text color={theme.status.warning}>⚠ {autoModeFallback.message}</Text>
         </Box>
         {bodyContent}
       </Box>
@@ -779,4 +776,3 @@ export const ToolConfirmationMessage: React.FC<
     </Box>
   );
 };
-

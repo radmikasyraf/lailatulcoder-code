@@ -1459,9 +1459,8 @@ describe('AgentTool', () => {
         // AgentTool execute() in a unit test would require mocking
         // most of the agent runtime; the isolation check itself is
         // what the test is guarding.)
-        const { GitWorktreeService } = await import(
-          '../../services/gitWorktreeService.js'
-        );
+        const { GitWorktreeService } =
+          await import('../../services/gitWorktreeService.js');
         const svc = new GitWorktreeService(repo);
         const dirty = await svc.hasWorktreeChanges(repo);
         expect(dirty).toBe(true);
@@ -1492,9 +1491,8 @@ describe('AgentTool', () => {
         execFileSync('git', ['commit', '-q', '-m', 'init', '--no-verify'], {
           cwd: repo,
         });
-        const { GitWorktreeService } = await import(
-          '../../services/gitWorktreeService.js'
-        );
+        const { GitWorktreeService } =
+          await import('../../services/gitWorktreeService.js');
         const svc = new GitWorktreeService(repo);
         expect(await svc.hasWorktreeChanges(repo)).toBe(false);
       } finally {
@@ -1715,9 +1713,8 @@ describe('AgentTool', () => {
     });
 
     it('pins a named teammate to a validated caller-owned worktree', async () => {
-      const { GitWorktreeService } = await import(
-        '../../services/gitWorktreeService.js'
-      );
+      const { GitWorktreeService } =
+        await import('../../services/gitWorktreeService.js');
       const spies = [
         vi
           .spyOn(GitWorktreeService.prototype, 'checkGitAvailable')
@@ -1767,9 +1764,8 @@ describe('AgentTool', () => {
     });
 
     it('aborts a named teammate after working_dir validation', async () => {
-      const { GitWorktreeService } = await import(
-        '../../services/gitWorktreeService.js'
-      );
+      const { GitWorktreeService } =
+        await import('../../services/gitWorktreeService.js');
       const controller = new AbortController();
       const spies = [
         vi
@@ -5575,8 +5571,7 @@ describe('AgentTool', () => {
 
     it('should clear pendingConfirmation via onConfirm callback (terminal UI path)', async () => {
       let capturedOnConfirm:
-        | ((outcome: ToolConfirmationOutcome) => Promise<void>)
-        | undefined;
+        ((outcome: ToolConfirmationOutcome) => Promise<void>) | undefined;
       const snapshots: Array<{ hasPendingConfirmation: boolean }> = [];
 
       const invocation = createInvocationWithEventDrivenAgent((emitter) => {
@@ -5952,8 +5947,7 @@ describe('AgentTool', () => {
         monitorRegistry.setAgentNotificationCallback.mock.calls.find(
           ([id, cb]) => id === agentId && typeof cb === 'function',
         )?.[1] as
-          | ((displayText: string, modelText: string) => void)
-          | undefined;
+          ((displayText: string, modelText: string) => void) | undefined;
       expect(callback).toBeDefined();
 
       callback?.('Monitor "logs" event #1: ready', '<task-notification />');
@@ -6004,8 +5998,7 @@ describe('AgentTool', () => {
       expect(mockSubagentDispose).not.toHaveBeenCalled();
 
       const resident = mockRegistry.registerResidentAgent.mock.calls[0]?.[1] as
-        | { dispose: () => void }
-        | undefined;
+        { dispose: () => void } | undefined;
       expect(resident).toBeDefined();
       resident?.dispose();
 
@@ -6040,8 +6033,7 @@ describe('AgentTool', () => {
       });
 
       const resident = mockRegistry.registerResidentAgent.mock.calls[0]?.[1] as
-        | { continue: (message: string) => boolean }
-        | undefined;
+        { continue: (message: string) => boolean } | undefined;
       expect(resident).toBeDefined();
       expect(resident?.continue('Now inspect the helper')).toBe(true);
 
@@ -6194,8 +6186,7 @@ describe('AgentTool', () => {
         expect(mockRegistry.complete).toHaveBeenCalled();
       });
       const resident = mockRegistry.registerResidentAgent.mock.calls[0]?.[1] as
-        | { continue: (message: string) => boolean }
-        | undefined;
+        { continue: (message: string) => boolean } | undefined;
       expect(resident).toBeDefined();
       expect(mockSubagentDispose).not.toHaveBeenCalled();
 
@@ -6474,8 +6465,7 @@ describe('AgentTool', () => {
 
     it('waits for a background slot before hooks and subagent setup', async () => {
       let releaseSlot:
-        | ((reservation: { readonly id: symbol }) => void)
-        | undefined;
+        ((reservation: { readonly id: symbol }) => void) | undefined;
       const slotReservation = { id: Symbol('background-slot') };
       mockRegistry.canStartBackgroundAgent.mockReturnValue(false);
       mockRegistry.tryReserveBackgroundSlot.mockReturnValue(undefined);
@@ -6708,8 +6698,7 @@ describe('AgentTool', () => {
         monitorRegistry.setAgentNotificationCallback.mock.calls.find(
           ([id, cb]) => id === agentId && typeof cb === 'function',
         )?.[1] as
-          | ((displayText: string, modelText: string) => void)
-          | undefined;
+          ((displayText: string, modelText: string) => void) | undefined;
       expect(callback).toBeDefined();
 
       callback?.('Monitor "logs" event #1: ready', '<task-notification />');

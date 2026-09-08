@@ -32,7 +32,10 @@ describe('getStableClientId', () => {
   });
 
   it('does not reuse the old tab-level client ID key', () => {
-    window.sessionStorage.setItem('lailatul-coder-webui-client-id', 'old-client');
+    window.sessionStorage.setItem(
+      'lailatul-coder-webui-client-id',
+      'old-client',
+    );
 
     const id1 = getStableClientId(undefined);
 
@@ -49,7 +52,9 @@ describe('getStableClientId', () => {
 
   it('does not use localStorage (multi-tab isolation)', () => {
     getStableClientId(undefined);
-    expect(window.localStorage.getItem('lailatul-coder-webui-client-id')).toBeNull();
+    expect(
+      window.localStorage.getItem('lailatul-coder-webui-client-id'),
+    ).toBeNull();
   });
 });
 

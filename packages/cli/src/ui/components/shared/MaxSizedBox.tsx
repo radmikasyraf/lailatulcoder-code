@@ -313,10 +313,7 @@ function visitBoxRow(element: React.ReactNode): Row {
     const boxProps = element.props as {
       children?: React.ReactNode;
       readonly flexDirection?:
-        | 'row'
-        | 'column'
-        | 'row-reverse'
-        | 'column-reverse';
+        'row' | 'column' | 'row-reverse' | 'column-reverse';
     };
     // Ensure the Box has no props other than the default ones and key.
     let maxExpectedProps = 4;
@@ -430,8 +427,7 @@ function layoutInkElementAsStyledText(
   lineMetadata: Map<StyledText[], LineMetadata>,
   flowKey: string,
   nextSourceBoundary: () =>
-    | { kind: 'soft' | 'hard'; joiner: string }
-    | undefined,
+    { kind: 'soft' | 'hard'; joiner: string } | undefined,
 ) {
   const pushOutput = (
     line: StyledText[],
@@ -693,4 +689,3 @@ function layoutInkElementAsStyledText(
     output.push(line);
   }
 }
-

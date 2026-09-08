@@ -137,12 +137,7 @@ export interface ScopeSelectStepProps extends StepNavigationProps {
  * Available actions for an extension.
  */
 export type ExtensionAction =
-  | 'view'
-  | 'update'
-  | 'disable'
-  | 'enable'
-  | 'uninstall'
-  | 'back';
+  'view' | 'update' | 'disable' | 'enable' | 'uninstall' | 'back';
 
 /**
  * Props for the ExtensionsManagerDialog component.

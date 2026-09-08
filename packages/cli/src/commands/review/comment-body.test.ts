@@ -95,7 +95,11 @@ describe('runCommentBody', () => {
   it('returns an empty string for a null body', () => {
     ghApiMock.mockReturnValue({ body: null });
     expect(
-      runCommentBody({ id: 1, kind: 'inline', repo: 'LailatulCoder/lailatul-coder' }).body,
+      runCommentBody({
+        id: 1,
+        kind: 'inline',
+        repo: 'LailatulCoder/lailatul-coder',
+      }).body,
     ).toBe('');
   });
 
@@ -113,7 +117,11 @@ describe('runCommentBody', () => {
 
   it('addresses review bodies per-PR and refuses without one', () => {
     expect(() =>
-      runCommentBody({ id: 1, kind: 'review', repo: 'LailatulCoder/lailatul-coder' }),
+      runCommentBody({
+        id: 1,
+        kind: 'review',
+        repo: 'LailatulCoder/lailatul-coder',
+      }),
     ).toThrow(TypeError);
     ghApiMock.mockReturnValue({ body: 'review body' });
     runCommentBody({

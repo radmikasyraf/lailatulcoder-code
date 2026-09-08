@@ -34,8 +34,8 @@ unknown, and what diagnostics should be added next.
 | --------------------------------------------- | ------------------------------------------ |
 | Date                                          | 2026-05-18                                 |
 | Platform                                      | macOS local development machine            |
-| LailatulCoder Ai version                             | `0.15.11`                                  |
-| LailatulCoder Ai binary                              | PATH-resolved `qwen` binary                |
+| LailatulCoder Ai version                      | `0.15.11`                                  |
+| LailatulCoder Ai binary                       | PATH-resolved `qwen` binary                |
 | Claude Code version used in the latest matrix | `2.1.129`                                  |
 | Claude Code binary used in the latest matrix  | PATH-resolved `claude` binary              |
 | Node.js version                               | v22.x (default system install)             |
@@ -226,12 +226,12 @@ rather than only repeat the external RSS benchmark.
 An earlier strict PR review benchmark used PR `#4186` and showed the same broad
 shape:
 
-| Model          | CLI         | Process-tree RSS peak |
-| -------------- | ----------- | --------------------: |
-| `pai/glm-5`    | LailatulCoder Ai   |            1000.7 MiB |
-| `pai/glm-5`    | Claude Code |             349.0 MiB |
-| `qwen3.6-plus` | LailatulCoder Ai   |            1095.8 MiB |
-| `qwen3.6-plus` | Claude Code |             341.1 MiB |
+| Model          | CLI              | Process-tree RSS peak |
+| -------------- | ---------------- | --------------------: |
+| `pai/glm-5`    | LailatulCoder Ai |            1000.7 MiB |
+| `pai/glm-5`    | Claude Code      |             349.0 MiB |
+| `qwen3.6-plus` | LailatulCoder Ai |            1095.8 MiB |
+| `qwen3.6-plus` | Claude Code      |             341.1 MiB |
 
 That earlier run was not enough by itself because a large PR can trigger unusual
 tool-output and saved-output paths. The latest five-case matrix makes the

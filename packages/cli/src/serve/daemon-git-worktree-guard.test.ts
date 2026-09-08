@@ -9,7 +9,10 @@ import { mkdir, rm, symlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it, vi } from 'vitest';
-import { GitWorktreeService, ToolNames } from '@lailatul-coder/lailatul-coder-core';
+import {
+  GitWorktreeService,
+  ToolNames,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { ExternalToolGuardPrepareRequest } from '@lailatul-coder/acp-bridge/bridgeOptions';
 import { SHELL_EXECUTING_TOOL_NAMES } from '@lailatul-coder/acp-bridge/externalToolGuard';
 import { createDaemonToolGuard } from './daemon-git-worktree-guard.js';

@@ -29,7 +29,9 @@ vi.mock('fs/promises', () => ({
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     Storage: { getGlobalTempDir: () => '/mock/tmp' },

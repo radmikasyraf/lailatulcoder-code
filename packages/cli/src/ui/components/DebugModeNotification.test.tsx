@@ -76,4 +76,3 @@ describe('DebugModeNotification', () => {
     expect(lastFrame()).not.toContain('Logging to:');
   });
 });
-

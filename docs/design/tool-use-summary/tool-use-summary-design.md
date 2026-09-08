@@ -8,7 +8,7 @@
 
 After each tool batch completes, LailatulCoder Ai fires a short fast-model call that returns a git-commit-subject-style label summarizing the batch. The label shows as an inline dim `● <label>` line in full mode and replaces the generic `Tool × N` header in compact mode. Generation runs fire-and-forget in parallel with the next turn's API stream, so its ~1s latency is hidden behind main-model streaming.
 
-| Dimension             | Claude Code                                                           | LailatulCoder Ai                                                                                  |
+| Dimension             | Claude Code                                                           | LailatulCoder Ai                                                                           |
 | --------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Trigger point         | `query.ts` — after a tool batch finalizes                             | `useGeminiStream.ts` → `handleCompletedTools` — same lifecycle point                       |
 | Generation model      | Haiku via `queryHaiku`                                                | Configured `fastModel` via `GeminiClient.generateContent`                                  |
@@ -154,12 +154,12 @@ The summary generation call sets `promptId: 'tool_use_summary_generation'` so it
 
 | Deviation                                                                | Why                                                                                                                                                                                     |
 | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Settings layer in addition to env gate                                   | LailatulCoder Ai renders the label in the CLI; users need a persistent switch, not a per-shell env export.                                                                                     |
+| Settings layer in addition to env gate                                   | LailatulCoder Ai renders the label in the CLI; users need a persistent switch, not a per-shell env export.                                                                              |
 | Default **on** instead of off                                            | Label is immediately user-visible in both display modes; users configuring `fastModel` are opting into fast-model features already.                                                     |
-| Dedicated `cleanSummary` post-processing                                 | LailatulCoder Ai supports more heterogeneous providers than CC; some models prepend `Label:` or wrap in quotes. Normalizing at the boundary keeps the UI consistent.                           |
+| Dedicated `cleanSummary` post-processing                                 | LailatulCoder Ai supports more heterogeneous providers than CC; some models prepend `Label:` or wrap in quotes. Normalizing at the boundary keeps the UI consistent.                    |
 | Stores `HistoryItemToolUseSummary` rather than emitting a stream message | CLI-first implementation; the SDK-stream route is a future PR. The `ToolUseSummaryMessage` factory is already exported for that work.                                                   |
 | Prompt caching not yet wired                                             | The fast model is often the same as the main model for users who haven't configured a separate one. Adding cache sharing requires routing via `forkedAgent.ts`; tracked as a follow-up. |
-| Dual render paths (full-mode inline + compact-mode header)               | LailatulCoder Ai's default is `ui.compactMode: false`; without the inline full-mode render, the feature would be invisible to most users.                                                      |
+| Dual render paths (full-mode inline + compact-mode header)               | LailatulCoder Ai's default is `ui.compactMode: false`; without the inline full-mode render, the feature would be invisible to most users.                                               |
 
 ## 5. Known limitations
 

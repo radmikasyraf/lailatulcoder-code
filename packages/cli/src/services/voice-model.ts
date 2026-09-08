@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AuthType, type AvailableModel } from '@lailatul-coder/lailatul-coder-core';
+import {
+  AuthType,
+  type AvailableModel,
+} from '@lailatul-coder/lailatul-coder-core';
 import { t } from '../i18n/index.js';
 
 export type VoiceTransport =

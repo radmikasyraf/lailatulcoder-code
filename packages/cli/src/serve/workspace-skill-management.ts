@@ -4,7 +4,11 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { promisify } from 'node:util';
 
-import { SkillManager, Storage, type Config } from '@lailatul-coder/lailatul-coder-core';
+import {
+  SkillManager,
+  Storage,
+  type Config,
+} from '@lailatul-coder/lailatul-coder-core';
 import { fromBuffer, type Entry, type ZipFile } from 'yauzl';
 
 export type WorkspaceSkillScope = 'workspace' | 'global';

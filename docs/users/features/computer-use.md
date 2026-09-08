@@ -66,7 +66,7 @@ All Computer Use settings live under `tools.computerUse` in `settings.json`. See
 | ------------------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tools.computerUse.enabled`           | boolean | `true`   | Register the `computer_use__*` tools. When `false`, the driver is never downloaded or spawned.                                                                                                                                                            |
 | `tools.computerUse.maxImageDimension` | number  | `-1`     | Longest-edge pixel cap for screenshots. `-1` keeps the driver's default (1568); `0` disables resizing (full resolution); a positive value caps the longest edge. Lower caps cut vision-token cost. Env override: `QWEN_COMPUTER_USE_MAX_IMAGE_DIMENSION`. |
-| `tools.computerUse.idleTimeoutMs`     | number  | `300000` | Milliseconds to keep the driver process alive after the last `computer_use__*` call (default 5 minutes). `0` keeps it running until LailatulCoder Ai exits.                                                                                                      |
+| `tools.computerUse.idleTimeoutMs`     | number  | `300000` | Milliseconds to keep the driver process alive after the last `computer_use__*` call (default 5 minutes). `0` keeps it running until LailatulCoder Ai exits.                                                                                               |
 
 All three settings require a restart to take effect.
 

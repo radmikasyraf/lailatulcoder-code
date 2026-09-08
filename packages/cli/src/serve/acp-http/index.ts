@@ -1507,8 +1507,7 @@ export function mountAcpHttp(
   // ── WebSocket upgrade (ACP RFD) ────────────────────────────────────
   let wss: WebSocketServer | undefined;
   let upgradeListener:
-    | ((req: IncomingMessage, socket: Duplex, head: Buffer) => void)
-    | undefined;
+    ((req: IncomingMessage, socket: Duplex, head: Buffer) => void) | undefined;
   // A Set, not a single server: while Local Control is on, the same app is
   // served by both the primary listener and the LAN listener, and each needs
   // its own `'upgrade'` registration. The `ExtraWsRoute` invariant is

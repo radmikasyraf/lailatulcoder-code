@@ -679,4 +679,3 @@ export function SkillsManagerDialog({
     </Box>
   );
 }
-

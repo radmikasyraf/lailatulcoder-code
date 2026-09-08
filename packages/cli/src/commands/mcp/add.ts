@@ -75,11 +75,11 @@ async function addMcpServer(
 
   const hasOAuth = Boolean(
     oauthClientId ||
-      oauthClientSecret ||
-      oauthRedirectUri ||
-      oauthAuthorizationUrl ||
-      oauthTokenUrl ||
-      (scopes && scopes.length > 0),
+    oauthClientSecret ||
+    oauthRedirectUri ||
+    oauthAuthorizationUrl ||
+    oauthTokenUrl ||
+    (scopes && scopes.length > 0),
   );
 
   // OAuth only applies to remote HTTP/SSE transports. Reject mixing with stdio
@@ -328,8 +328,7 @@ export const addCommand: CommandModule = {
         oauthClientSecret: argv['oauthClientSecret'] as string | undefined,
         oauthRedirectUri: argv['oauthRedirectUri'] as string | undefined,
         oauthAuthorizationUrl: argv['oauthAuthorizationUrl'] as
-          | string
-          | undefined,
+          string | undefined,
         oauthTokenUrl: argv['oauthTokenUrl'] as string | undefined,
         oauthScopes: argv['oauthScopes'] as string[] | undefined,
       },

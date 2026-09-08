@@ -68,8 +68,7 @@ vi.mock('../../config/settings.js', async (importOriginal) => {
     // bypass the handler.
     loadSettings: vi.fn((...callArgs: unknown[]) => {
       const opts = callArgs[1] as
-        | { skipWorkspaceSettings?: boolean }
-        | undefined;
+        { skipWorkspaceSettings?: boolean } | undefined;
       return {
         merged: {
           review: opts?.skipWorkspaceSettings
@@ -81,9 +80,8 @@ vi.mock('../../config/settings.js', async (importOriginal) => {
   };
 });
 
-const { runPublishAssets, publishAssetsCommand } = await import(
-  './publish-assets.js'
-);
+const { runPublishAssets, publishAssetsCommand } =
+  await import('./publish-assets.js');
 
 // A 1x1 PNG, enough bytes to be a plausible file and stable to hash.
 const PNG = Buffer.from(

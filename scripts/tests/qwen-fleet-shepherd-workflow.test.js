@@ -58,7 +58,9 @@ describe('fleet shepherd workflow', () => {
   });
 
   it('is scoped, killable, and never self-cancels mid-action', () => {
-    expect(workflow).toContain("github.repository == 'LailatulCoder/lailatul-coder'");
+    expect(workflow).toContain(
+      "github.repository == 'LailatulCoder/lailatul-coder'",
+    );
     // Global kill switch: flipping one repository variable stops all writes.
     expect(workflow).toContain("vars.FLEET_SHEPHERD_DISABLED != 'true'");
     // A tick performs real writes; a newer tick must queue, not cancel it.
@@ -1088,10 +1090,14 @@ exit 1`;
     expect(resumeJq).toBeTruthy();
     expect(reasonJq).toBeTruthy();
     const run = (program, comments) =>
-      execFileSync('jq', ['-r', '--arg', 'ab', 'lailatul-coder-dev-bot', program], {
-        encoding: 'utf8',
-        input: JSON.stringify(comments),
-      }).trim();
+      execFileSync(
+        'jq',
+        ['-r', '--arg', 'ab', 'lailatul-coder-dev-bot', program],
+        {
+          encoding: 'utf8',
+          input: JSON.stringify(comments),
+        },
+      ).trim();
     const bot = (created_at, body) => ({
       user: { login: 'lailatul-coder-dev-bot' },
       created_at,

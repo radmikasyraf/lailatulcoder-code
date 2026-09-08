@@ -71,7 +71,9 @@
         "../packages/sdk-typescript/src/daemon/ui/transcript.ts"
       ],
       "@lailatul-coder/acp-bridge": ["../packages/acp-bridge/src/index.ts"],
-      "@lailatul-coder/acp-bridge/bridge": ["../packages/acp-bridge/src/bridge.ts"],
+      "@lailatul-coder/acp-bridge/bridge": [
+        "../packages/acp-bridge/src/bridge.ts"
+      ],
       "@lailatul-coder/acp-bridge/bridgeClient": [
         "../packages/acp-bridge/src/bridgeClient.ts"
       ],
@@ -117,7 +119,9 @@
       "@lailatul-coder/acp-bridge/spawnChannel": [
         "../packages/acp-bridge/src/spawnChannel.ts"
       ],
-      "@lailatul-coder/acp-bridge/status": ["../packages/acp-bridge/src/status.ts"],
+      "@lailatul-coder/acp-bridge/status": [
+        "../packages/acp-bridge/src/status.ts"
+      ],
       "@lailatul-coder/acp-bridge/transcriptReplay": [
         "../packages/acp-bridge/src/transcript-replay.ts"
       ],
@@ -134,7 +138,9 @@
       // typecheck does not depend on channel-base's dist and both import
       // sites share one declaration — mixing src and dist declarations
       // produces duplicate-private-class errors.
-      "@lailatul-coder/channel-base": ["../packages/channels/base/src/index.ts"],
+      "@lailatul-coder/channel-base": [
+        "../packages/channels/base/src/index.ts"
+      ],
       // cli's channel-registry.ts imports the eight builtin channel
       // adapters and html.ts imports web-templates; without entries they
       // resolve through their exports maps to dist, leaving the typecheck
@@ -142,16 +148,30 @@
       "@lailatul-coder/channel-telegram": [
         "../packages/channels/telegram/src/index.ts"
       ],
-      "@lailatul-coder/channel-weixin": ["../packages/channels/weixin/src/index.ts"],
+      "@lailatul-coder/channel-weixin": [
+        "../packages/channels/weixin/src/index.ts"
+      ],
       "@lailatul-coder/channel-dingtalk": [
         "../packages/channels/dingtalk/src/index.ts"
       ],
-      "@lailatul-coder/channel-wecom": ["../packages/channels/wecom/src/index.ts"],
-      "@lailatul-coder/channel-feishu": ["../packages/channels/feishu/src/index.ts"],
-      "@lailatul-coder/channel-qqbot": ["../packages/channels/qqbot/src/index.ts"],
-      "@lailatul-coder/channel-github": ["../packages/channels/github/src/index.ts"],
-      "@lailatul-coder/channel-gitlab": ["../packages/channels/gitlab/src/index.ts"],
-      "@lailatul-coder/web-templates": ["../packages/web-templates/src/index.ts"],
+      "@lailatul-coder/channel-wecom": [
+        "../packages/channels/wecom/src/index.ts"
+      ],
+      "@lailatul-coder/channel-feishu": [
+        "../packages/channels/feishu/src/index.ts"
+      ],
+      "@lailatul-coder/channel-qqbot": [
+        "../packages/channels/qqbot/src/index.ts"
+      ],
+      "@lailatul-coder/channel-github": [
+        "../packages/channels/github/src/index.ts"
+      ],
+      "@lailatul-coder/channel-gitlab": [
+        "../packages/channels/gitlab/src/index.ts"
+      ],
+      "@lailatul-coder/web-templates": [
+        "../packages/web-templates/src/index.ts"
+      ],
       // node-pty declares `types` at the top level but its `exports` map is a
       // bare string with no `types` condition, so nodenext resolution never
       // reaches the declarations and every pty handle degrades to `any` —

@@ -273,4 +273,3 @@ export const ActivityTab: React.FC<{
     </Box>
   );
 };
-

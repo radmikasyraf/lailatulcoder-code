@@ -101,4 +101,3 @@ export const TableRow: React.FC<{
     ))}
   </Box>
 );
-

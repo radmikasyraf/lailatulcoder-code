@@ -375,8 +375,7 @@ export function resolveCliGenerationConfig(
       apiKey: settings.security?.auth?.apiKey,
       baseUrl: settings.security?.auth?.baseUrl,
       generationConfig: settings.model?.generationConfig as
-        | Partial<ContentGeneratorConfig>
-        | undefined,
+        Partial<ContentGeneratorConfig> | undefined,
     },
     modelProvider,
     env: filteredEnv,
@@ -398,8 +397,7 @@ export function resolveCliGenerationConfig(
           modelProvider,
           getIgnoredTopLevelGenerationConfigFields(
             settings.model?.generationConfig as
-              | Partial<ContentGeneratorConfig>
-              | undefined,
+              Partial<ContentGeneratorConfig> | undefined,
             modelProvider,
           ),
         )

@@ -12,7 +12,9 @@ import { getErrorMessage } from '@lailatul-coder/lailatul-coder-core';
 vi.mock('node:fs/promises', { spy: true });
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     getErrorMessage: vi.fn(),

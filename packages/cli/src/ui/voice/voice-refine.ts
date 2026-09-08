@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { createDebugLogger, runSideQuery } from '@lailatul-coder/lailatul-coder-core';
+import {
+  createDebugLogger,
+  runSideQuery,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Config } from '@lailatul-coder/lailatul-coder-core';
 
 const debugLogger = createDebugLogger('VOICE_REFINE');

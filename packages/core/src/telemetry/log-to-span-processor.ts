@@ -534,5 +534,3 @@ function hrTimeDiff(start: HrTime, end: HrTime): HrTime {
   }
   return [secs, nanos] as HrTime;
 }
-
-

@@ -61,4 +61,3 @@ export const ShellInputPrompt: React.FC<ShellInputPromptProps> = ({
 
   return null;
 };
-

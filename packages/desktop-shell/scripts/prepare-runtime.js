@@ -117,7 +117,8 @@ try {
         name: '@lailatul-coder/lailatul-coder',
         desktopVersion,
         qwenCodeVersion,
-        qwenCodeCommit: process.env.lailatulcoder_CODE_COMMIT || gitCommit(sourceRoot),
+        qwenCodeCommit:
+          process.env.lailatulcoder_CODE_COMMIT || gitCommit(sourceRoot),
         target,
         node: `v${process.versions.node}`,
         builtAt: new Date().toISOString(),
@@ -215,7 +216,8 @@ function copyValidCachedArchive(
 
 function desktopTarget() {
   const target =
-    process.env.lailatulcoder_DESKTOP_TARGET || `${process.platform}-${process.arch}`;
+    process.env.lailatulcoder_DESKTOP_TARGET ||
+    `${process.platform}-${process.arch}`;
   const aliases = {
     'aarch64-apple-darwin': 'darwin-arm64',
     'x86_64-apple-darwin': 'darwin-x64',

@@ -286,4 +286,3 @@ export function ArenaStatusDialog({
     </Box>
   );
 }
-

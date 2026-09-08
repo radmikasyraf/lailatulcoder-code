@@ -11,7 +11,10 @@ import { randomUUID } from 'node:crypto';
 import express, { type Response } from 'express';
 import request from 'supertest';
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { SessionService, type ChatRecord } from '@lailatul-coder/lailatul-coder-core';
+import {
+  SessionService,
+  type ChatRecord,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   appendPromptLedgerRecord,
   readPromptLedgerRecords,

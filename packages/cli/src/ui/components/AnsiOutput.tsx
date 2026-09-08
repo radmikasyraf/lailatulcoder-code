@@ -88,4 +88,3 @@ export const ShellStatsBar: React.FC<ShellStatsBarProps> = ({
     </Box>
   );
 };
-

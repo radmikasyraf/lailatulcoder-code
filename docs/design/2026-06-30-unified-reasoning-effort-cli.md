@@ -183,7 +183,7 @@ nested `reasoning: { effort }` object; `buildReasoningConfig()`
 provider whose wire field differs must reshape it in its `buildRequest` hook.
 Known shapes:
 
-| Wire shape                           | Providers                                             | lailatul-coder handling                                                                                       |
+| Wire shape                           | Providers                                             | lailatul-coder handling                                                                                  |
 | ------------------------------------ | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | nested `reasoning: { effort }`       | OpenAI Responses, OpenRouter, gpt-5.x                 | passthrough (default) ✅                                                                                 |
 | flat top-level `reasoning_effort`    | DeepSeek, **GLM/z.ai**, OpenAI Chat Completions, Groq | DeepSeek adapter flattens ✅; **GLM has no adapter → currently ships the nested shape, likely wrong ❌** |

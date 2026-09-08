@@ -1052,8 +1052,7 @@ describe('convertClaudePluginStandalone', () => {
     // MCP server folded in from .mcp.json and remapped to Qwen's transport
     // shape: Claude `type: 'http'` + `url` becomes `httpUrl` (streamable HTTP).
     const mcp = result.config.mcpServers?.['clickhouse'] as
-      | { httpUrl?: string; url?: string; type?: string }
-      | undefined;
+      { httpUrl?: string; url?: string; type?: string } | undefined;
     expect(mcp?.httpUrl).toBe('https://mcp.clickhouse.cloud/mcp');
     expect(mcp?.url).toBeUndefined();
     expect(mcp?.type).toBeUndefined();
@@ -1155,8 +1154,7 @@ describe('convertClaudePluginStandalone', () => {
 
     const result = await convertClaudePluginStandalone(testDir);
     const servers = result.config.mcpServers as
-      | Record<string, unknown>
-      | undefined;
+      Record<string, unknown> | undefined;
     expect(servers?.['leaked']).toBeUndefined();
 
     fs.rmSync(result.convertedDir, { recursive: true, force: true });

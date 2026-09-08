@@ -357,7 +357,9 @@ describe('BundledSkillLoader', () => {
 
     expect(result).toEqual({
       type: 'submit_prompt',
-      content: [{ text: makeSkillPrompt('via LailatulCoder Ai /review (v0.21.2)') }],
+      content: [
+        { text: makeSkillPrompt('via LailatulCoder Ai /review (v0.21.2)') },
+      ],
     });
   });
 

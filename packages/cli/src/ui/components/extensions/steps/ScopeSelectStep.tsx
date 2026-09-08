@@ -56,10 +56,16 @@ export function ScopeSelectStep({
   const title =
     mode === 'disable'
       ? t('Disable "{{name}}" - Select Scope', {
-          name: getExtensionDisplayName(selectedExtension, getCurrentLanguage()),
+          name: getExtensionDisplayName(
+            selectedExtension,
+            getCurrentLanguage(),
+          ),
         })
       : t('Enable "{{name}}" - Select Scope', {
-          name: getExtensionDisplayName(selectedExtension, getCurrentLanguage()),
+          name: getExtensionDisplayName(
+            selectedExtension,
+            getCurrentLanguage(),
+          ),
         });
 
   return (
@@ -75,4 +81,3 @@ export function ScopeSelectStep({
     </Box>
   );
 }
-

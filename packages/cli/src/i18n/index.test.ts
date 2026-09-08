@@ -38,9 +38,8 @@ describe('bundled locale fallback', () => {
     });
 
     const { setLanguageAsync, t } = await import('./index.js');
-    const { languageCommand } = await import(
-      '../ui/commands/languageCommand.js'
-    );
+    const { languageCommand } =
+      await import('../ui/commands/languageCommand.js');
 
     await setLanguageAsync('zh');
 
@@ -115,9 +114,8 @@ describe('language normalization', () => {
   });
 
   it('normalizes explicit locale IDs before loading translations', async () => {
-    const { setLanguageAsync, getCurrentLanguage, t } = await import(
-      './index.js'
-    );
+    const { setLanguageAsync, getCurrentLanguage, t } =
+      await import('./index.js');
 
     await setLanguageAsync('zh-CN');
 
@@ -126,9 +124,8 @@ describe('language normalization', () => {
   });
 
   it('normalizes explicit POSIX locale strings before loading translations', async () => {
-    const { initializeI18n, getCurrentLanguage, t } = await import(
-      './index.js'
-    );
+    const { initializeI18n, getCurrentLanguage, t } =
+      await import('./index.js');
 
     await initializeI18n('pt_BR.UTF-8');
 
@@ -160,9 +157,8 @@ describe('localizeToolDisplayName', () => {
   });
 
   it('translates tool badges without colliding with generic UI strings', async () => {
-    const { setLanguageAsync, localizeToolDisplayName, t } = await import(
-      './index.js'
-    );
+    const { setLanguageAsync, localizeToolDisplayName, t } =
+      await import('./index.js');
     await setLanguageAsync('zh');
 
     // The namespaced `toolDisplayName.*` key translates the badge...
@@ -178,9 +174,8 @@ describe('localizeToolDisplayName', () => {
   });
 
   it('falls back to the English display name for untranslated tools', async () => {
-    const { setLanguageAsync, localizeToolDisplayName } = await import(
-      './index.js'
-    );
+    const { setLanguageAsync, localizeToolDisplayName } =
+      await import('./index.js');
     await setLanguageAsync('en');
 
     expect(localizeToolDisplayName('TodoList')).toBe('TodoList');
@@ -190,10 +185,10 @@ describe('localizeToolDisplayName', () => {
   });
 
   it('has a zh translation for every core tool display name', async () => {
-    const { setLanguageAsync, localizeToolDisplayName } = await import(
-      './index.js'
-    );
-    const { ToolDisplayNames } = await import('@lailatul-coder/lailatul-coder-core');
+    const { setLanguageAsync, localizeToolDisplayName } =
+      await import('./index.js');
+    const { ToolDisplayNames } =
+      await import('@lailatul-coder/lailatul-coder-core');
     await setLanguageAsync('zh');
 
     // Guards against a new tool landing without a `toolDisplayName.*` entry:

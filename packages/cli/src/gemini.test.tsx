@@ -35,7 +35,10 @@ import type { CliArgs } from './config/config.js';
 import { type LoadedSettings } from './config/settings.js';
 import { appEvents, AppEvent } from './utils/events.js';
 import type { Config } from '@lailatul-coder/lailatul-coder-core';
-import { ApprovalMode, OutputFormat } from '@lailatul-coder/lailatul-coder-core';
+import {
+  ApprovalMode,
+  OutputFormat,
+} from '@lailatul-coder/lailatul-coder-core';
 import { EXTERNAL_TOOL_GUARD_REQUIRED_VALUE } from '@lailatul-coder/acp-bridge/externalToolGuard';
 
 const mockWriteStderrLine = vi.hoisted(() => vi.fn());
@@ -117,7 +120,9 @@ vi.mock('./config/settings.js', async (importOriginal) => {
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     registerSession: (...args: unknown[]) => mockRegisterSession(...args),
@@ -363,9 +368,8 @@ describe('gemini.tsx main function', () => {
         throw new MockProcessExitError(code);
       });
     const { relaunchAppInChildProcess } = await import('./utils/relaunch.js');
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const { loadSandboxConfig } = await import('./config/sandboxConfig.js');
     vi.mocked(loadSandboxConfig).mockResolvedValue(undefined);
@@ -476,9 +480,8 @@ describe('gemini.tsx main function', () => {
         throw new MockProcessExitError(code);
       });
 
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const { loadSandboxConfig } = await import('./config/sandboxConfig.js');
 
@@ -612,9 +615,8 @@ describe('gemini.tsx main function', () => {
         vi.stubEnv('QWEN_CODE_SERVE', daemonMarker);
       }
 
-      const { parseArguments, loadCliConfig } = await import(
-        './config/config.js'
-      );
+      const { parseArguments, loadCliConfig } =
+        await import('./config/config.js');
       const { loadSettings } = await import('./config/settings.js');
       vi.mocked(parseArguments).mockResolvedValue(argv);
       vi.mocked(loadSettings).mockReturnValue({
@@ -710,9 +712,8 @@ describe('gemini.tsx main function', () => {
     vi.stubEnv('QWEN_CODE_NO_RELAUNCH', '');
     vi.stubEnv('QWEN_CODE_SERVE', '1');
 
-    const { parseArguments, loadCliConfig } = await import(
-      './config/config.js'
-    );
+    const { parseArguments, loadCliConfig } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     vi.mocked(parseArguments).mockResolvedValue({ acp: true } as CliArgs);
     vi.mocked(loadSettings).mockReturnValue({
@@ -771,12 +772,10 @@ describe('gemini.tsx main function', () => {
     const originalArgv = process.argv;
     process.argv = ['node', 'script.js', '--bare'];
 
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
-    const { loadSettings, createMinimalSettings } = await import(
-      './config/settings.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
+    const { loadSettings, createMinimalSettings } =
+      await import('./config/settings.js');
     const { loadSandboxConfig } = await import('./config/sandboxConfig.js');
     const { relaunchAppInChildProcess } = await import('./utils/relaunch.js');
     const nonInteractiveModule = await import('./nonInteractiveCli.js');
@@ -1054,18 +1053,16 @@ describe('gemini.tsx main function', () => {
       .mockImplementation((code) => {
         throw new MockProcessExitError(code);
       });
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const cleanupModule = await import('./utils/cleanup.js');
     const validatorModule = await import('./validateNonInterActiveAuth.js');
     const nonInteractiveModule = await import('./nonInteractiveCli.js');
     const initializerModule = await import('./core/initializer.js');
     const startupWarningsModule = await import('./utils/startupWarnings.js');
-    const userStartupWarningsModule = await import(
-      './utils/userStartupWarnings.js'
-    );
+    const userStartupWarningsModule =
+      await import('./utils/userStartupWarnings.js');
 
     mockWriteStderrLine.mockClear();
     const runExitCleanupMock = vi.mocked(cleanupModule.runExitCleanup);
@@ -1227,9 +1224,8 @@ describe('gemini.tsx main function', () => {
         throw new MockProcessExitError(code);
       });
 
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const { loadSandboxConfig } = await import('./config/sandboxConfig.js');
     const { start_sandbox } = await import('./utils/sandbox.js');
@@ -1452,18 +1448,16 @@ describe('gemini.tsx main function', () => {
         throw new MockProcessExitError(code);
       });
 
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const cleanupModule = await import('./utils/cleanup.js');
     const validatorModule = await import('./validateNonInterActiveAuth.js');
     const streamJsonModule = await import('./nonInteractive/session.js');
     const initializerModule = await import('./core/initializer.js');
     const startupWarningsModule = await import('./utils/startupWarnings.js');
-    const userStartupWarningsModule = await import(
-      './utils/userStartupWarnings.js'
-    );
+    const userStartupWarningsModule =
+      await import('./utils/userStartupWarnings.js');
 
     vi.mocked(cleanupModule.cleanupCheckpoints).mockResolvedValue(undefined);
     vi.mocked(cleanupModule.registerCleanup).mockImplementation(() => () => {});
@@ -1689,12 +1683,10 @@ describe('gemini.tsx main function kitty protocol', () => {
   });
 
   it('should call setRawMode and detectAndEnableKittyProtocol when isInteractive is true', async () => {
-    const { detectAndEnableKittyProtocol } = await import(
-      './ui/utils/kittyProtocolDetector.js'
-    );
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { detectAndEnableKittyProtocol } =
+      await import('./ui/utils/kittyProtocolDetector.js');
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const initializerModule = await import('./core/initializer.js');
     const initializeAppSpy = vi
@@ -1818,9 +1810,8 @@ describe('gemini.tsx main function kitty protocol', () => {
   });
 
   it('should await IDE connection when interactive mode has an initial prompt', async () => {
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const initializerModule = await import('./core/initializer.js');
     const initializeAppSpy = vi
@@ -1942,9 +1933,8 @@ describe('gemini.tsx main function kitty protocol', () => {
   });
 
   it('should await IDE connection when interactive mode has an input file', async () => {
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const initializerModule = await import('./core/initializer.js');
     const initializeAppSpy = vi
@@ -2064,9 +2054,8 @@ describe('gemini.tsx main function kitty protocol', () => {
   });
 
   it('should not defer IDE connection when Zed integration is enabled', async () => {
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const cleanupModule = await import('./utils/cleanup.js');
     const initializerModule = await import('./core/initializer.js');
@@ -2263,9 +2252,8 @@ describe('gemini.tsx main function kitty protocol', () => {
   }
 
   it('exits on interactive SIGINT only after a second press inside the confirm window', async () => {
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const cleanupModule = await import('./utils/cleanup.js');
     const signalHandlers = new Map<string, (...args: unknown[]) => void>();
@@ -2350,9 +2338,8 @@ describe('gemini.tsx main function kitty protocol', () => {
   });
 
   it('re-arms the SIGINT confirm window after it expires', async () => {
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const cleanupModule = await import('./utils/cleanup.js');
     const signalHandlers = new Map<string, (...args: unknown[]) => void>();
@@ -2411,9 +2398,8 @@ describe('gemini.tsx main function kitty protocol', () => {
   });
 
   it('still exits on the first SIGTERM with code 143', async () => {
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const cleanupModule = await import('./utils/cleanup.js');
     const signalHandlers = new Map<string, (...args: unknown[]) => void>();
@@ -2456,9 +2442,8 @@ describe('gemini.tsx main function kitty protocol', () => {
   });
 
   it('still exits on SIGHUP with code 129', async () => {
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const cleanupModule = await import('./utils/cleanup.js');
     const signalHandlers = new Map<string, (...args: unknown[]) => void>();
@@ -2511,9 +2496,8 @@ describe('gemini.tsx main function kitty protocol', () => {
     // gemini.tsx must reject this combination at runtime (parse-time
     // gating can't catch the no-prompt-on-TTY case because stdin
     // availability isn't probed yet at parse time).
-    const { loadCliConfig, parseArguments } = await import(
-      './config/config.js'
-    );
+    const { loadCliConfig, parseArguments } =
+      await import('./config/config.js');
     const { loadSettings } = await import('./config/settings.js');
     const cleanupModule = await import('./utils/cleanup.js');
 
@@ -3039,9 +3023,8 @@ describe('startInteractiveUI', () => {
     const unmount = vi.fn();
     const { render } = await import('ink');
     vi.mocked(render).mockReturnValue({ unmount } as never);
-    const { disableKittyProtocol } = await import(
-      './ui/utils/kittyProtocolDetector.js'
-    );
+    const { disableKittyProtocol } =
+      await import('./ui/utils/kittyProtocolDetector.js');
 
     await startInteractiveUI(
       mockConfig,
@@ -3058,8 +3041,7 @@ describe('startInteractiveUI', () => {
 
     const { registerCleanup } = await import('./utils/cleanup.js');
     const cleanupFn = vi.mocked(registerCleanup).mock.calls[0]?.[0] as
-      | (() => Promise<void> | void)
-      | undefined;
+      (() => Promise<void> | void) | undefined;
     expect(cleanupFn).toBeTypeOf('function');
     await cleanupFn?.();
 
@@ -3092,8 +3074,7 @@ describe('startInteractiveUI', () => {
 
     const { registerCleanup } = await import('./utils/cleanup.js');
     const cleanupFn = vi.mocked(registerCleanup).mock.calls[0]?.[0] as
-      | (() => Promise<void> | void)
-      | undefined;
+      (() => Promise<void> | void) | undefined;
     expect(cleanupFn).toBeTypeOf('function');
     await cleanupFn?.();
 
@@ -3125,8 +3106,7 @@ describe('startInteractiveUI', () => {
 
     const { registerCleanup } = await import('./utils/cleanup.js');
     const cleanupFn = vi.mocked(registerCleanup).mock.calls[0]?.[0] as
-      | (() => Promise<void> | void)
-      | undefined;
+      (() => Promise<void> | void) | undefined;
     await cleanupFn?.();
 
     expect(mockWriteStderrLine).not.toHaveBeenCalledWith(
@@ -3159,8 +3139,7 @@ describe('startInteractiveUI', () => {
 
       const { registerCleanup } = await import('./utils/cleanup.js');
       const cleanupFn = vi.mocked(registerCleanup).mock.calls[0]?.[0] as
-        | (() => Promise<void> | void)
-        | undefined;
+        (() => Promise<void> | void) | undefined;
       expect(cleanupFn).toBeTypeOf('function');
       await cleanupFn?.();
     }
@@ -3381,8 +3360,7 @@ describe('startInteractiveUI', () => {
 
       const { registerCleanup } = await import('./utils/cleanup.js');
       const cleanupFn = vi.mocked(registerCleanup).mock.calls[0]?.[0] as
-        | (() => Promise<void> | void)
-        | undefined;
+        (() => Promise<void> | void) | undefined;
       expect(cleanupFn).toBeTypeOf('function');
       await cleanupFn?.();
 
@@ -3396,4 +3374,3 @@ describe('startInteractiveUI', () => {
     });
   });
 });
-

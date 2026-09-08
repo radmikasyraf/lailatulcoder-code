@@ -31,8 +31,7 @@ type ProfilerState = 'idle' | 'recording' | 'stopping';
 export type CpuProfileStartResult = { ok: true } | { ok: false; error: string };
 
 export type CpuProfileStopResult =
-  | { ok: true; filePath: string }
-  | { ok: false; error: string };
+  { ok: true; filePath: string } | { ok: false; error: string };
 
 // Custom interface rather than importing from node:inspector/promises because
 // the official Session.post() generic overload returns Promise<void>, making
@@ -412,7 +411,8 @@ function cleanupOldProfiles(outputDir: string, maxProfiles: number): void {
       .readdirSync(outputDir)
       .filter(
         (name) =>
-          name.startsWith('lailatul-coder-cpu-') && name.endsWith('.cpuprofile'),
+          name.startsWith('lailatul-coder-cpu-') &&
+          name.endsWith('.cpuprofile'),
       )
       .map((name) => path.join(outputDir, name))
       .sort((a, b) => {

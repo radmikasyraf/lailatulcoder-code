@@ -380,12 +380,10 @@ function readConnectErrorMessage(error: unknown): string {
 }
 
 function readConnectErrorCode(error: unknown): string | undefined {
-  if (
-    !(
-      (typeof error === 'object' && error !== null) ||
-      typeof error === 'function'
-    )
-  ) {
+  if (!(
+    (typeof error === 'object' && error !== null) ||
+    typeof error === 'function'
+  )) {
     return undefined;
   }
   try {

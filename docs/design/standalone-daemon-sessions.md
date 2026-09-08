@@ -610,12 +610,10 @@ interface DaemonStandaloneFields {
 }
 
 interface DaemonStandaloneSession
-  extends DaemonSession,
-    DaemonStandaloneFields {}
+  extends DaemonSession, DaemonStandaloneFields {}
 
 interface DaemonRestoredStandaloneSession
-  extends DaemonRestoredSession,
-    DaemonStandaloneFields {}
+  extends DaemonRestoredSession, DaemonStandaloneFields {}
 
 interface DaemonStandaloneSessionSummary extends DaemonSessionSummary {
   sourceType: 'standalone';

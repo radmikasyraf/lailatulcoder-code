@@ -6123,8 +6123,7 @@ describe('ShellTool', () => {
         // Capture the promote AC the foreground path exposes.
         await Promise.resolve();
         const promoteAc = setPromoteAc.mock.calls[0]?.[0] as
-          | AbortController
-          | undefined;
+          AbortController | undefined;
         expect(promoteAc).toBeInstanceOf(AbortController);
         // Fire promote AFTER the child supposedly terminated — the
         // service refuses with `aborted: true, promoted: false`.

@@ -15,7 +15,10 @@ import {
   type Client,
 } from '@modelcontextprotocol/sdk/client/index.js';
 import type { JSONRPCMessage } from '@modelcontextprotocol/sdk/types.js';
-import { SdkControlClientTransport, Storage } from '@lailatul-coder/lailatul-coder-core';
+import {
+  SdkControlClientTransport,
+  Storage,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { DaemonWorkspaceService } from '../workspace-service/types.js';
 import { mountAcpHttp } from './index.js';
 import type { ClientMcpServerProvider } from './client-mcp-ws.js';

@@ -220,8 +220,7 @@ export class IDEServer {
 
       app.post('/mcp', async (req: Request, res: Response) => {
         const sessionId = req.headers[MCP_SESSION_ID_HEADER] as
-          | string
-          | undefined;
+          string | undefined;
         let transport: StreamableHTTPServerTransport;
 
         if (sessionId && this.transports[sessionId]) {
@@ -293,8 +292,7 @@ export class IDEServer {
 
       const handleSessionRequest = async (req: Request, res: Response) => {
         const sessionId = req.headers[MCP_SESSION_ID_HEADER] as
-          | string
-          | undefined;
+          string | undefined;
         if (!sessionId || !this.transports[sessionId]) {
           this.log('Invalid or missing session ID');
           res.status(400).send('Invalid or missing session ID');

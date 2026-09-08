@@ -53,7 +53,7 @@ Open the Web Shell's DevTools from the running window with `Cmd+Option+I` (macOS
 | `QWEN_DESKTOP_WORKSPACE`     | Override the initial workspace path                                 |
 | `QWEN_DEFAULT_WORKSPACE_DIR` | Relocate the first-launch default workspace directory               |
 | `QWEN_DESKTOP_SKIP_BUILD`    | Set to `1` to skip the CLI/Web Shell rebuild during `build:runtime` |
-| `QWEN_CODE_ROOT`             | Point to a local lailatul-coder checkout for the runtime bundle          |
+| `QWEN_CODE_ROOT`             | Point to a local lailatul-coder checkout for the runtime bundle     |
 
 ### Rust tests
 

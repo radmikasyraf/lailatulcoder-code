@@ -78,8 +78,7 @@ function collectFailedCallIds(history: Content[]): Set<string> {
   for (const content of history) {
     for (const part of content.parts ?? []) {
       const fr = part.functionResponse as
-        | { id?: string; response?: Record<string, unknown> }
-        | undefined;
+        { id?: string; response?: Record<string, unknown> } | undefined;
       if (fr?.id && fr.response && 'error' in fr.response) {
         failed.add(fr.id);
       }

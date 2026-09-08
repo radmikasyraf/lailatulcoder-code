@@ -34,11 +34,7 @@ const debugLogger = createDebugLogger('SOURCES_TAB');
 const INSTALLED_PREVIEW_LIMIT = 5;
 
 type SourcesView =
-  | 'list'
-  | 'install-extension'
-  | 'add'
-  | 'detail'
-  | 'remove-confirm';
+  'list' | 'install-extension' | 'add' | 'detail' | 'remove-confirm';
 type SourceDetailAction = 'browse' | 'update' | 'remove';
 
 // Flat, navigable entries shown on the Marketplaces tab list. Installed
@@ -705,4 +701,3 @@ export const SourcesTab = ({
     </Box>
   );
 };
-

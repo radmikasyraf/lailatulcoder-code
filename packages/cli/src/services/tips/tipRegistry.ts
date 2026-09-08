@@ -84,7 +84,8 @@ export const tipRegistry: ContextualTip[] = [
   },
   {
     id: 'new-user-qwenmd',
-    content: 'Add a QWEN.md file to give LailatulCoder Ai persistent project context.',
+    content:
+      'Add a QWEN.md file to give LailatulCoder Ai persistent project context.',
     trigger: 'startup',
     isRelevant: (ctx) => ctx.sessionCount < 10,
     cooldownPrompts: 0,

@@ -5580,8 +5580,8 @@ describe('ContentGenerationPipeline', () => {
     // stream under fake timers.
     function gatedStream() {
       let resolveNext:
-        | ((r: IteratorResult<OpenAI.Chat.ChatCompletionChunk>) => void)
-        | null = null;
+        ((r: IteratorResult<OpenAI.Chat.ChatCompletionChunk>) => void) | null =
+        null;
       let rejectNext: ((err: unknown) => void) | null = null;
       const buffered: OpenAI.Chat.ChatCompletionChunk[] = [];
       let ended = false;

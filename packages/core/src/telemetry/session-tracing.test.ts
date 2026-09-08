@@ -288,8 +288,12 @@ describe('session-tracing', () => {
       expect(mockSpans[0]!.name).toBe('lailatul-coder.interaction');
       expect(mockSpans[0]!.attributes['session.id']).toBe('test-session-id');
       expect(mockSpans[0]!.attributes['gen_ai.user.id']).toBe('user-1');
-      expect(mockSpans[0]!.attributes['lailatul-coder.prompt_id']).toBe('prompt-1');
-      expect(mockSpans[0]!.attributes['lailatul-coder.model']).toBe('test-model');
+      expect(mockSpans[0]!.attributes['lailatul-coder.prompt_id']).toBe(
+        'prompt-1',
+      );
+      expect(mockSpans[0]!.attributes['lailatul-coder.model']).toBe(
+        'test-model',
+      );
       expect(mockSpans[0]!.attributes).toMatchObject({
         'gen_ai.operation.name': 'invoke_agent',
         'gen_ai.agent.name': 'lailatul-coder',
@@ -316,7 +320,9 @@ describe('session-tracing', () => {
         async () => {},
       );
 
-      const span = mockSpans.find((s) => s.name === 'lailatul-coder.interaction');
+      const span = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.interaction',
+      );
       expect(span?.parentContext).toBe(ROOT_CONTEXT);
     });
 
@@ -373,7 +379,9 @@ describe('session-tracing', () => {
         () => 'error',
       );
 
-      const span = mockSpans.find((s) => s.name === 'lailatul-coder.interaction');
+      const span = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.interaction',
+      );
       expect(span?.attributes['lailatul-coder.turn_status']).toBe('error');
       expect(span?.statuses.at(-1)?.code).toBe(SpanStatusCode.ERROR);
       expect(span?.attributes['error.type']).toBe('interaction_error');
@@ -391,7 +399,9 @@ describe('session-tracing', () => {
         ),
       ).rejects.toThrow('boom from fn');
 
-      const span = mockSpans.find((s) => s.name === 'lailatul-coder.interaction');
+      const span = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.interaction',
+      );
       expect(span?.statuses.at(-1)?.code).toBe(SpanStatusCode.ERROR);
       expect(span?.statuses.at(-1)?.message).toBe('boom from fn');
       expect(span?.attributes['error.type']).toBe('Error');
@@ -640,7 +650,9 @@ describe('session-tracing', () => {
         messageType: 'userQuery',
       });
 
-      const span = mockSpans.find((s) => s.name === 'lailatul-coder.interaction');
+      const span = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.interaction',
+      );
       expect(span?.parentContext).toBe(ROOT_CONTEXT);
     });
 
@@ -653,7 +665,9 @@ describe('session-tracing', () => {
         messageType: 'userQuery',
       });
 
-      const span = mockSpans.find((s) => s.name === 'lailatul-coder.interaction');
+      const span = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.interaction',
+      );
       expect(span?.parentContext).toBe(ROOT_CONTEXT);
     });
 
@@ -664,7 +678,9 @@ describe('session-tracing', () => {
         messageType: 'userQuery',
       });
 
-      const span = mockSpans.find((s) => s.name === 'lailatul-coder.interaction');
+      const span = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.interaction',
+      );
       expect(span?.attributes['session.id']).toBe('my-session');
     });
   });
@@ -742,7 +758,9 @@ describe('session-tracing', () => {
       endInteractionSpan('ok');
 
       // The LLM span should have a parent context
-      const llmSpan = mockSpans.find((s) => s.name === 'lailatul-coder.llm_request');
+      const llmSpan = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.llm_request',
+      );
       expect(llmSpan?.parentContext).toBeDefined();
       expect(llmSpan?.attributes['llm_request.context']).toBe('interaction');
     });
@@ -899,7 +917,9 @@ describe('session-tracing', () => {
       const span = startLLMRequestSpan('m', 'p');
       endLLMRequestSpan(span, { success: true });
 
-      const llmSpan = mockSpans.find((s) => s.name === 'lailatul-coder.llm_request');
+      const llmSpan = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.llm_request',
+      );
       expect(llmSpan?.parentContext).toMatchObject({
         __activeSpan: fakeActive,
       });
@@ -1528,7 +1548,9 @@ describe('session-tracing', () => {
         undefined,
         'main-prompt',
       );
-      const tool = mockSpans.find((record) => record.name === 'lailatul-coder.tool');
+      const tool = mockSpans.find(
+        (record) => record.name === 'lailatul-coder.tool',
+      );
 
       expect(tool?.attributes['gen_ai.agent.name']).toBe('lailatul-coder');
       endToolSpan(span, { success: true });
@@ -1642,7 +1664,9 @@ describe('session-tracing', () => {
       endToolSpan(span1, { success: false, error: 'timeout' });
 
       // Find tool spans
-      const toolSpans = mockSpans.filter((s) => s.name === 'lailatul-coder.tool');
+      const toolSpans = mockSpans.filter(
+        (s) => s.name === 'lailatul-coder.tool',
+      );
       expect(toolSpans).toHaveLength(2);
 
       const readSpan = toolSpans.find(
@@ -1708,7 +1732,9 @@ describe('session-tracing', () => {
       const span = startLLMRequestSpan('m', 'p-a');
       endLLMRequestSpan(span, { success: true });
 
-      const llmSpan = mockSpans.find((s) => s.name === 'lailatul-coder.llm_request');
+      const llmSpan = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.llm_request',
+      );
       expect(llmSpan?.attributes['session.id']).toBe('session-A');
     });
 
@@ -1728,7 +1754,9 @@ describe('session-tracing', () => {
       endToolExecutionSpan(execSpan, { success: true });
       endToolSpan(toolSpan, { success: true });
 
-      const exec = mockSpans.find((s) => s.name === 'lailatul-coder.tool.execution');
+      const exec = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.tool.execution',
+      );
       expect(exec?.attributes['session.id']).toBe('session-A');
     });
 
@@ -1840,9 +1868,8 @@ describe('session-tracing', () => {
           ?.attributes['gen_ai.user.id'],
       ).toBe('user-A');
       expect(
-        mockSpans.find((span) => span.name === 'lailatul-coder.tool')?.attributes[
-          'gen_ai.user.id'
-        ],
+        mockSpans.find((span) => span.name === 'lailatul-coder.tool')
+          ?.attributes['gen_ai.user.id'],
       ).toBe('user-A');
 
       endLLMRequestSpan(llmSpan, { success: true });
@@ -1860,7 +1887,9 @@ describe('session-tracing', () => {
       const toolSpan = startToolSpan('Read', {
         'gen_ai.user.id': 'spoofed-user',
       });
-      const record = mockSpans.find((span) => span.name === 'lailatul-coder.tool');
+      const record = mockSpans.find(
+        (span) => span.name === 'lailatul-coder.tool',
+      );
 
       expect(record?.attributes['gen_ai.user.id']).toBe('canonical-user');
       endToolSpan(toolSpan, { success: true });
@@ -2075,7 +2104,9 @@ describe('session-tracing', () => {
       const execSpan = startToolExecutionSpan();
       endToolExecutionSpan(execSpan, { success: true });
 
-      const span = mockSpans.find((s) => s.name === 'lailatul-coder.tool.execution');
+      const span = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.tool.execution',
+      );
       expect(span?.parentContext).toMatchObject({
         __activeSpan: fakeActive,
       });
@@ -2296,7 +2327,9 @@ describe('session-tracing', () => {
         });
       });
 
-      const hookRecord = mockSpans.find((s) => s.name === 'lailatul-coder.hook');
+      const hookRecord = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.hook',
+      );
       expect(hookRecord).toBeDefined();
       expect(hookRecord?.parentContext).toBeDefined();
       expect(hookRecord?.attributes['hook_event']).toBe('PreToolUse');
@@ -2322,7 +2355,9 @@ describe('session-tracing', () => {
         blockType: 'denied',
       });
 
-      const hookRecord = mockSpans.find((s) => s.name === 'lailatul-coder.hook');
+      const hookRecord = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.hook',
+      );
       expect(hookRecord?.attributes['should_proceed']).toBe(false);
       expect(hookRecord?.attributes['block_type']).toBe('denied');
       // Blocking is intentional, not an error — status must stay UNSET.
@@ -2346,7 +2381,9 @@ describe('session-tracing', () => {
         hasAdditionalContext: true,
       });
 
-      const hookRecord = mockSpans.find((s) => s.name === 'lailatul-coder.hook');
+      const hookRecord = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.hook',
+      );
       expect(hookRecord?.attributes['should_stop']).toBe(true);
       expect(hookRecord?.attributes['has_additional_context']).toBe(true);
       expect(hookRecord?.statuses).toHaveLength(0);
@@ -2367,7 +2404,9 @@ describe('session-tracing', () => {
         postBatchStopReason: 'policy halt',
       });
 
-      const hookRecord = mockSpans.find((s) => s.name === 'lailatul-coder.hook');
+      const hookRecord = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.hook',
+      );
       expect(hookRecord?.attributes['hook_event']).toBe('PostToolBatch');
       expect(hookRecord?.attributes['should_stop']).toBe(true);
       expect(hookRecord?.attributes['has_additional_context']).toBe(true);
@@ -2390,7 +2429,9 @@ describe('session-tracing', () => {
       });
       endHookSpan(hookSpan, { success: false, error: 'hook crashed' });
 
-      const hookRecord = mockSpans.find((s) => s.name === 'lailatul-coder.hook');
+      const hookRecord = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.hook',
+      );
       expect(hookRecord?.statuses[0]?.code).toBe(SpanStatusCode.ERROR);
       expect(hookRecord?.statuses[0]?.message).toBe('hook crashed');
       expect(hookRecord?.attributes['error.type']).toBe('hook_error');
@@ -2456,7 +2497,9 @@ describe('session-tracing', () => {
       endToolSpan(toolSpan);
 
       // endToolSpan should NOT have added another status
-      const toolRecord = mockSpans.find((s) => s.name === 'lailatul-coder.tool');
+      const toolRecord = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.tool',
+      );
       expect(toolRecord!.statuses).toHaveLength(1);
       expect(toolRecord!.statuses[0]!.code).toBe(SpanStatusCode.ERROR);
     });
@@ -2534,7 +2577,9 @@ describe('session-tracing', () => {
   describe('OTel error resilience — span.end() must run on attribute/status failure', () => {
     it('endLLMRequestSpan: end() runs and activeSpans is cleared when setStatus throws', () => {
       const span = startLLMRequestSpan('test-model', 'prompt-x');
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.llm_request')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.llm_request',
+      )!;
 
       mockState.throwOnSetStatus = true;
       endLLMRequestSpan(span, { success: true });
@@ -2548,7 +2593,9 @@ describe('session-tracing', () => {
 
     it('endLLMRequestSpan: end() runs when setAttributes throws', () => {
       const span = startLLMRequestSpan('test-model', 'prompt-x');
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.llm_request')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.llm_request',
+      )!;
 
       mockState.throwOnSetAttributes = true;
       endLLMRequestSpan(span, { success: true });
@@ -2594,7 +2641,9 @@ describe('session-tracing', () => {
         depth: 0,
         sessionId: 'session-uuid',
       });
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
 
       mockState.throwOnSetAttributes = true;
       endSubagentSpan(span, { status: 'completed' });
@@ -2623,7 +2672,9 @@ describe('session-tracing', () => {
       runTTLSweepForTesting(Date.now() + 31 * 60 * 1000);
 
       expect(mockSpans[0]!.ended).toBe(true);
-      expect(mockSpans[0]!.attributes['lailatul-coder.span.ttl_expired']).toBe(true);
+      expect(mockSpans[0]!.attributes['lailatul-coder.span.ttl_expired']).toBe(
+        true,
+      );
       expect(getActiveInteractionSpan('stale-interaction')).toBeUndefined();
     });
 
@@ -2682,7 +2733,9 @@ describe('session-tracing', () => {
 
       expect(getActiveInteractionSpan('idle-interaction')).toBeUndefined();
       expect(mockSpans[0]!.ended).toBe(true);
-      expect(mockSpans[0]!.attributes['lailatul-coder.span.ttl_expired']).toBe(true);
+      expect(mockSpans[0]!.attributes['lailatul-coder.span.ttl_expired']).toBe(
+        true,
+      );
     });
 
     it('does not let an old child refresh a replacement interaction', () => {
@@ -2767,7 +2820,9 @@ describe('session-tracing', () => {
       endToolSpan(toolSpan, { success: true });
       runTTLSweepForTesting(Date.now() + 31 * 60 * 1000);
 
-      expect(record.attributes['lailatul-coder.span.ttl_expired']).toBeUndefined();
+      expect(
+        record.attributes['lailatul-coder.span.ttl_expired'],
+      ).toBeUndefined();
     });
 
     it('stamps decision=aborted/source=system on TTL-expired blocked_on_user spans', () => {
@@ -2785,7 +2840,9 @@ describe('session-tracing', () => {
       runTTLSweepForTesting(Date.now() + 31 * 60 * 1000);
 
       expect(blockedRecord.ended).toBe(true);
-      expect(blockedRecord.attributes['lailatul-coder.span.ttl_expired']).toBe(true);
+      expect(blockedRecord.attributes['lailatul-coder.span.ttl_expired']).toBe(
+        true,
+      );
       expect(blockedRecord.attributes['decision']).toBe('aborted');
       expect(blockedRecord.attributes['source']).toBe('system');
 
@@ -2894,7 +2951,9 @@ describe('session-tracing', () => {
         ...baseOpts,
         invocationKind: 'foreground',
       });
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent');
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      );
 
       expect(record).toBeDefined();
       expect(record!.root).toBeUndefined();
@@ -2907,17 +2966,21 @@ describe('session-tracing', () => {
       expect(record!.attributes['lailatul-coder.subagent.id']).toBe(
         'Explore-abc123',
       );
-      expect(record!.attributes['lailatul-coder.subagent.name']).toBe('Explore');
+      expect(record!.attributes['lailatul-coder.subagent.name']).toBe(
+        'Explore',
+      );
       // Required spec attrs.
       expect(record!.attributes['gen_ai.operation.name']).toBe('invoke_agent');
       expect(record!.attributes['gen_ai.provider.name']).toBeUndefined();
       expect(record!.attributes['gen_ai.conversation.id']).toBe('session-uuid');
       expect(record!.attributes['session.id']).toBe('session-uuid');
       // Vendor concept attrs.
-      expect(record!.attributes['lailatul-coder.subagent.invocation_kind']).toBe(
-        'foreground',
+      expect(
+        record!.attributes['lailatul-coder.subagent.invocation_kind'],
+      ).toBe('foreground');
+      expect(record!.attributes['lailatul-coder.subagent.is_built_in']).toBe(
+        true,
       );
-      expect(record!.attributes['lailatul-coder.subagent.is_built_in']).toBe(true);
       expect(record!.attributes['lailatul-coder.subagent.depth']).toBe(0);
 
       endSubagentSpan(span, { status: 'completed' });
@@ -2951,7 +3014,9 @@ describe('session-tracing', () => {
         invokerSpanContext:
           fakeInvokerSpanContext as unknown as import('@opentelemetry/api').SpanContext,
       });
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent');
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      );
 
       expect(record!.root).toBe(true);
       expect(record!.links).toBeDefined();
@@ -2960,9 +3025,9 @@ describe('session-tracing', () => {
       expect(record!.links![0].attributes?.['lailatul-coder.link.kind']).toBe(
         'invoker',
       );
-      expect(record!.attributes['lailatul-coder.subagent.invocation_kind']).toBe(
-        'fork',
-      );
+      expect(
+        record!.attributes['lailatul-coder.subagent.invocation_kind'],
+      ).toBe('fork');
 
       endSubagentSpan(span, { status: 'completed' });
     });
@@ -2972,12 +3037,14 @@ describe('session-tracing', () => {
         ...baseOpts,
         invocationKind: 'background',
       });
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent');
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      );
       expect(record!.root).toBe(true);
       // No links because invokerSpanContext was omitted — still root.
-      expect(record!.attributes['lailatul-coder.subagent.invocation_kind']).toBe(
-        'background',
-      );
+      expect(
+        record!.attributes['lailatul-coder.subagent.invocation_kind'],
+      ).toBe('background');
       endSubagentSpan(span, { status: 'completed' });
     });
 
@@ -3057,14 +3124,18 @@ describe('session-tracing', () => {
         modelOverride: 'lailatul-coderr-7b',
         depth: 2,
       });
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
       expect(record.attributes['lailatul-coder.subagent.parent_agent_id']).toBe(
         'parent-agent-456',
       );
-      expect(record.attributes['lailatul-coder.subagent.invoking_request_id']).toBe(
-        'req-789',
+      expect(
+        record.attributes['lailatul-coder.subagent.invoking_request_id'],
+      ).toBe('req-789');
+      expect(record.attributes['gen_ai.request.model']).toBe(
+        'lailatul-coderr-7b',
       );
-      expect(record.attributes['gen_ai.request.model']).toBe('lailatul-coderr-7b');
       expect(record.attributes['lailatul-coder.subagent.depth']).toBe(2);
       endSubagentSpan(span, { status: 'completed' });
     });
@@ -3076,10 +3147,14 @@ describe('session-tracing', () => {
       });
       endSubagentSpan(span, { status: 'completed' });
 
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
       expect(record.ended).toBe(true);
       expect(record.statuses).toHaveLength(0);
-      expect(record.attributes['lailatul-coder.subagent.status']).toBe('completed');
+      expect(record.attributes['lailatul-coder.subagent.status']).toBe(
+        'completed',
+      );
       expect(
         record.attributes['lailatul-coder.subagent.duration_ms'] as number,
       ).toBeGreaterThanOrEqual(0);
@@ -3096,12 +3171,16 @@ describe('session-tracing', () => {
         errorType: 'TypeError',
       });
 
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
       expect(record.statuses[0].code).toBe(SpanStatusCode.ERROR);
       expect(record.statuses[0].message).toBe('something broke');
       expect(record.attributes['exception.message']).toBe('something broke');
       expect(record.attributes['error.type']).toBe('TypeError');
-      expect(record.attributes['lailatul-coder.subagent.status']).toBe('failed');
+      expect(record.attributes['lailatul-coder.subagent.status']).toBe(
+        'failed',
+      );
     });
 
     it('endSubagentSpan: failed without explicit error → generic "subagent failed" SpanStatus message', () => {
@@ -3116,7 +3195,9 @@ describe('session-tracing', () => {
       });
       endSubagentSpan(span, { status: 'failed' });
 
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
       expect(record.statuses[0].code).toBe(SpanStatusCode.ERROR);
       expect(record.statuses[0].message).toBe('subagent failed');
       expect(record.attributes['exception.message']).toBeUndefined();
@@ -3135,10 +3216,14 @@ describe('session-tracing', () => {
           error: 'abort detail',
           errorType: 'AbortError',
         });
-        const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+        const record = mockSpans.find(
+          (s) => s.name === 'lailatul-coder.subagent',
+        )!;
         // No SpanStatus calls means UNSET stays UNSET.
         expect(record.statuses).toHaveLength(0);
-        expect(record.attributes['lailatul-coder.subagent.status']).toBe(status);
+        expect(record.attributes['lailatul-coder.subagent.status']).toBe(
+          status,
+        );
         expect(record.attributes['exception.message']).toBeUndefined();
         expect(record.attributes['error.type']).toBeUndefined();
       },
@@ -3152,10 +3237,14 @@ describe('session-tracing', () => {
       endSubagentSpan(span, { status: 'completed' });
       endSubagentSpan(span, { status: 'failed', error: 'should not record' });
 
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
       // Only the first end ran — status is still UNSET, not ERROR.
       expect(record.statuses).toHaveLength(0);
-      expect(record.attributes['lailatul-coder.subagent.status']).toBe('completed');
+      expect(record.attributes['lailatul-coder.subagent.status']).toBe(
+        'completed',
+      );
     });
 
     it('runInSubagentSpanContext wraps fn in context.with', async () => {
@@ -3196,7 +3285,9 @@ describe('session-tracing', () => {
       const oversized = 'a'.repeat(2000);
       endSubagentSpan(span, { status: 'failed', error: oversized });
 
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
       const recorded = record.attributes['exception.message'] as string;
       expect(recorded.length).toBeLessThan(oversized.length);
       expect(recorded.endsWith('…[truncated]')).toBe(true);
@@ -3204,7 +3295,9 @@ describe('session-tracing', () => {
 
     it('TTL: fork subagent at 30 min stays alive (4h window)', () => {
       startSubagentSpan({ ...baseOpts, invocationKind: 'fork' });
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
 
       // 31 min — past default TTL, well within fork's 4h.
       runTTLSweepForTesting(Date.now() + 31 * 60 * 1000);
@@ -3214,10 +3307,12 @@ describe('session-tracing', () => {
       runTTLSweepForTesting(Date.now() + (4 * 60 + 1) * 60 * 1000);
       expect(record.ended).toBe(true);
       expect(record.attributes['lailatul-coder.span.ttl_expired']).toBe(true);
-      expect(record.attributes['lailatul-coder.subagent.status']).toBe('aborted');
-      expect(record.attributes['lailatul-coder.subagent.terminate_reason']).toBe(
-        'ttl_swept',
+      expect(record.attributes['lailatul-coder.subagent.status']).toBe(
+        'aborted',
       );
+      expect(
+        record.attributes['lailatul-coder.subagent.terminate_reason'],
+      ).toBe('ttl_swept');
       // TTL sweep stamps the subagent-namespaced duration_ms key so
       // dashboards querying that namespace include swept spans (the
       // generic lailatul-coder.span.duration_ms is asserted above).
@@ -3232,17 +3327,21 @@ describe('session-tracing', () => {
       // Catches the regression where someone trims
       // LONG_TTL_SUBAGENT_KINDS and drops `'background'` silently.
       startSubagentSpan({ ...baseOpts, invocationKind: 'background' });
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
 
       runTTLSweepForTesting(Date.now() + 31 * 60 * 1000);
       expect(record.ended).toBe(false);
 
       runTTLSweepForTesting(Date.now() + (4 * 60 + 1) * 60 * 1000);
       expect(record.ended).toBe(true);
-      expect(record.attributes['lailatul-coder.subagent.status']).toBe('aborted');
-      expect(record.attributes['lailatul-coder.subagent.terminate_reason']).toBe(
-        'ttl_swept',
+      expect(record.attributes['lailatul-coder.subagent.status']).toBe(
+        'aborted',
       );
+      expect(
+        record.attributes['lailatul-coder.subagent.terminate_reason'],
+      ).toBe('ttl_swept');
     });
 
     it('TTL: foreground subagent at 31 min IS swept (default 30 min TTL)', () => {
@@ -3250,7 +3349,9 @@ describe('session-tracing', () => {
         ...baseOpts,
         invocationKind: 'foreground',
       });
-      const record = mockSpans.find((s) => s.name === 'lailatul-coder.subagent')!;
+      const record = mockSpans.find(
+        (s) => s.name === 'lailatul-coder.subagent',
+      )!;
 
       runTTLSweepForTesting(Date.now() + 31 * 60 * 1000);
       expect(record.ended).toBe(true);
@@ -3326,7 +3427,9 @@ describe('session-tracing', () => {
           startToolSpan('read_file');
         });
 
-        const toolRecord = mockSpans.find((s) => s.name === 'lailatul-coder.tool');
+        const toolRecord = mockSpans.find(
+          (s) => s.name === 'lailatul-coder.tool',
+        );
         expect(toolRecord).toBeDefined();
         const parentSpan = (
           toolRecord!.parentContext as { __parentSpan?: unknown } | undefined
@@ -3363,7 +3466,9 @@ describe('session-tracing', () => {
           });
         });
 
-        const hookRecord = mockSpans.find((s) => s.name === 'lailatul-coder.hook');
+        const hookRecord = mockSpans.find(
+          (s) => s.name === 'lailatul-coder.hook',
+        );
         expect(hookRecord).toBeDefined();
         const parentSpan = (
           hookRecord!.parentContext as { __parentSpan?: unknown } | undefined
@@ -3410,7 +3515,9 @@ describe('session-tracing', () => {
           });
         });
 
-        const hookRecord = mockSpans.find((s) => s.name === 'lailatul-coder.hook');
+        const hookRecord = mockSpans.find(
+          (s) => s.name === 'lailatul-coder.hook',
+        );
         expect(hookRecord).toBeDefined();
         const parentSpan = (
           hookRecord!.parentContext as { __parentSpan?: unknown } | undefined

@@ -42,8 +42,7 @@ export function useLaunchEditor() {
   const launchEditor = useCallback(
     async (filePath: string): Promise<void> => {
       const preferredEditor = settings.merged.general?.preferredEditor as
-        | EditorType
-        | undefined;
+        EditorType | undefined;
       const editor = getEditorCommand(preferredEditor);
 
       // Handle different editor command formats

@@ -25,7 +25,9 @@ describe('externalOpen', () => {
   it('routes opens through the Tauri opener plugin in desktop', async () => {
     const invoke = vi.fn().mockResolvedValue(undefined);
     (window as TauriWindow).__TAURI__ = { core: { invoke } };
-    await openExternalUrl('https://github.com/LailatulCoder/lailatul-coder/issues/9060');
+    await openExternalUrl(
+      'https://github.com/LailatulCoder/lailatul-coder/issues/9060',
+    );
     expect(invoke).toHaveBeenCalledWith('plugin:opener|open_url', {
       url: 'https://github.com/LailatulCoder/lailatul-coder/issues/9060',
     });
@@ -34,7 +36,9 @@ describe('externalOpen', () => {
   it('normalizes schemes for the Tauri allowlist', async () => {
     const invoke = vi.fn().mockResolvedValue(undefined);
     (window as TauriWindow).__TAURI__ = { core: { invoke } };
-    await openExternalUrl('HTTPS://github.com/LailatulCoder/lailatul-coder/issues/9060');
+    await openExternalUrl(
+      'HTTPS://github.com/LailatulCoder/lailatul-coder/issues/9060',
+    );
     expect(invoke).toHaveBeenCalledWith('plugin:opener|open_url', {
       url: 'https://github.com/LailatulCoder/lailatul-coder/issues/9060',
     });

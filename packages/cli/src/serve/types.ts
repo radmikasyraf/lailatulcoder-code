@@ -45,8 +45,7 @@ import type {
 export type ServeMode = 'http-bridge' | 'native';
 
 export type ServeChannelSelection =
-  | { mode: 'all' }
-  | { mode: 'names'; names: string[] };
+  { mode: 'all' } | { mode: 'names'; names: string[] };
 
 export interface ChannelWebhookConfigSource {
   workspaceCwd: string;

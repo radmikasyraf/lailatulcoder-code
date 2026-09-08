@@ -8,7 +8,7 @@ lailatul-coder 目前仅有面向 Arena 多模型对比场景的内部 worktree 
 
 ## 现状对比
 
-| 功能                              | lailatul-coder       | claude-code | 阶段    |
+| 功能                              | lailatul-coder  | claude-code | 阶段    |
 | --------------------------------- | --------------- | ----------- | ------- |
 | `EnterWorktree` 工具              | ✅（Phase A）   | ✅          | —       |
 | `ExitWorktree` 工具               | ✅（Phase A）   | ✅          | —       |

@@ -19,15 +19,10 @@ export const REPEATED_TOOL_FAILURE_STOP_MESSAGE =
   'Automatic continuation stopped because the same tool execution failure continued after a corrective reminder. New user input is required to continue.';
 
 export type RepeatedToolFailureGuardMode =
-  | 'off'
-  | 'shadow'
-  | 'warn'
-  | 'enforce';
+  'off' | 'shadow' | 'warn' | 'enforce';
 
 export type RepeatedToolFailureTerminalStatus =
-  | 'success'
-  | 'error'
-  | 'cancelled';
+  'success' | 'error' | 'cancelled';
 
 export type RepeatedToolFailureObservation = {
   callId: string;
@@ -50,10 +45,7 @@ type FailureKey = {
 };
 
 export type RepeatedToolFailureGuardPhase =
-  | 'idle'
-  | 'tracking'
-  | 'warned'
-  | 'latched';
+  'idle' | 'tracking' | 'warned' | 'latched';
 
 export type RepeatedToolFailureGuardState = {
   phase: RepeatedToolFailureGuardPhase;

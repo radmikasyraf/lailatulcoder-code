@@ -598,4 +598,3 @@ describe('<StatsDisplay />', () => {
     });
   });
 });
-

@@ -81,8 +81,7 @@ vi.mock('../../config/settings.js', async (importOriginal) => {
     // not control them.
     loadSettings: vi.fn((...callArgs: unknown[]) => {
       const opts = callArgs[1] as
-        | { skipWorkspaceSettings?: boolean }
-        | undefined;
+        { skipWorkspaceSettings?: boolean } | undefined;
       return {
         merged: {
           review: opts?.skipWorkspaceSettings
@@ -265,7 +264,9 @@ const CASES: Case[] = [
     raw: 'https://github.com/LailatulCoder/lailatul-coder/pull/42oops',
     expect: {
       targetType: 'local',
-      extraTokens: ['https://github.com/LailatulCoder/lailatul-coder/pull/42oops'],
+      extraTokens: [
+        'https://github.com/LailatulCoder/lailatul-coder/pull/42oops',
+      ],
       warningCount: 1,
     },
   },
@@ -294,7 +295,9 @@ describe('parseReviewArgs', () => {
   });
 
   it('extracts host/owner/repo/number from a PR URL', () => {
-    const got = parseReviewArgs('https://github.com/LailatulCoder/lailatul-coder/pull/42');
+    const got = parseReviewArgs(
+      'https://github.com/LailatulCoder/lailatul-coder/pull/42',
+    );
     expect(got.target).toEqual({
       type: 'pr-url',
       url: 'https://github.com/LailatulCoder/lailatul-coder/pull/42',

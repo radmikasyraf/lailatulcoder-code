@@ -883,8 +883,7 @@ describe('WorkflowTool', () => {
     // triggered externally (simulating the dialog cancel's abort
     // cascading through dispatchController into the dispatch).
     let dispatchInflight:
-      | { reject: (err: Error) => void; prompt: string }
-      | undefined;
+      { reject: (err: Error) => void; prompt: string } | undefined;
     const dispatch = async (prompt: string): Promise<string> =>
       new Promise<string>((_resolve, reject) => {
         dispatchInflight = { reject, prompt };

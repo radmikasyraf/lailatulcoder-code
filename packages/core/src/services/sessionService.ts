@@ -156,8 +156,7 @@ export class SessionIdCaseConflictError extends Error {
     readonly sessionId: string,
     readonly candidateSessionId?: string,
     readonly reason:
-      | 'case_conflict'
-      | 'unreadable_transcript' = 'case_conflict',
+      'case_conflict' | 'unreadable_transcript' = 'case_conflict',
   ) {
     super(
       reason === 'unreadable_transcript'
@@ -1100,8 +1099,7 @@ export class SessionService {
     for (const record of records) {
       if (record.type === 'system' && record.subtype === 'parent_session') {
         const payload = record.systemPayload as
-          | { parentSessionId?: unknown }
-          | undefined;
+          { parentSessionId?: unknown } | undefined;
         if (
           parentSessionId === undefined &&
           typeof payload?.parentSessionId === 'string'
@@ -1111,8 +1109,7 @@ export class SessionService {
       }
       if (record.type === 'system' && record.subtype === 'session_source') {
         const payload = record.systemPayload as
-          | { sourceType?: unknown; sourceId?: unknown }
-          | undefined;
+          { sourceType?: unknown; sourceId?: unknown } | undefined;
         if (
           sourceType === undefined &&
           typeof payload?.sourceType === 'string'
@@ -1248,8 +1245,7 @@ export class SessionService {
     for (const record of records) {
       if (record.type !== 'user' || record.subtype !== undefined) continue;
       const payload = record.systemPayload as
-        | UserPromptRecordPayload
-        | undefined;
+        UserPromptRecordPayload | undefined;
       if (payload?.displayText !== undefined) {
         const displayText = payload.displayText;
         if (displayText) {
@@ -2919,8 +2915,7 @@ export function replayUiTelemetryFromConversation(
       continue;
     }
     const payload = record.systemPayload as
-      | UiTelemetryRecordPayload
-      | undefined;
+      UiTelemetryRecordPayload | undefined;
     const uiEvent = payload?.uiEvent;
     if (uiEvent) {
       uiTelemetryService.addEvent(uiEvent, sessionId);

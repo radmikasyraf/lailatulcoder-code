@@ -291,4 +291,3 @@ describe('hasPendingApproval', () => {
     ).toBe(false);
   });
 });
-

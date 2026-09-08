@@ -551,7 +551,8 @@ export default {
     '系統提示超過 {{length}} 個字符',
   'Step {{n}}: Choose Location': '步驟 {{n}}: 選擇位置',
   'Step {{n}}: Choose Generation Method': '步驟 {{n}}: 選擇生成方式',
-  'Generate with LailatulCoder Ai (Recommended)': '使用 LailatulCoder Ai 生成（推薦）',
+  'Generate with LailatulCoder Ai (Recommended)':
+    '使用 LailatulCoder Ai 生成（推薦）',
   'Manual Creation': '手動創建',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     '描述此子智能體應該做什麼以及何時使用它。（為了獲得最佳效果，請全面描述）',
@@ -1043,7 +1044,8 @@ export default {
   'When the user submits a prompt': '用戶提交提示時',
   'When a slash command expands into a prompt': '斜線命令展開為提示時',
   'When a new session is started': '新會話開始時',
-  'Right before LailatulCoder Ai concludes its response': 'LailatulCoder Ai 結束響應之前',
+  'Right before LailatulCoder Ai concludes its response':
+    'LailatulCoder Ai 結束響應之前',
   'When a subagent (Agent tool call) is started':
     '子智能體（Agent 工具調用）啟動時',
   'Right before a subagent concludes its response': '子智能體結束響應之前',
@@ -1602,9 +1604,11 @@ export default {
   'From project settings': '來自項目設置',
   'From session': '來自會話',
   'Project settings': '項目設置',
-  'Checked in at .lailatulcoder/settings.json': '保存在 .lailatulcoder/settings.json',
+  'Checked in at .lailatulcoder/settings.json':
+    '保存在 .lailatulcoder/settings.json',
   'User settings': '用戶設置',
-  'Saved in at ~/.lailatulcoder/settings.json': '保存在 ~/.lailatulcoder/settings.json',
+  'Saved in at ~/.lailatulcoder/settings.json':
+    '保存在 ~/.lailatulcoder/settings.json',
   'Add a new rule…': '添加新規則…',
   'Add {{type}} permission rule': '添加 {{type}} permission rule',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':
@@ -2265,7 +2269,8 @@ export default {
     'LailatulCoder Ai 有可用更新！{{current}} → {{latest}}',
   'A new version of LailatulCoder Ai is available! {{current}} → {{latest}}':
     'LailatulCoder Ai 有新版本可用！{{current}} → {{latest}}',
-  'LailatulCoder Ai {{version}} is up to date!': 'LailatulCoder Ai {{version}} 已是最新！',
+  'LailatulCoder Ai {{version}} is up to date!':
+    'LailatulCoder Ai {{version}} 已是最新！',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     '檢查更新失敗（{{reason}}）。請檢查網路或 registry 設定。',
   'Update check skipped ({{reason}}) — run /update to retry.':

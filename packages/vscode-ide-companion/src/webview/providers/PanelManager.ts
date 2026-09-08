@@ -163,8 +163,7 @@ export class PanelManager {
    * @returns The found group and view column, or undefined if not found
    */
   private findExistingQwenCodeGroup():
-    | { group: vscode.TabGroup; viewColumn: vscode.ViewColumn }
-    | undefined {
+    { group: vscode.TabGroup; viewColumn: vscode.ViewColumn } | undefined {
     for (const group of vscode.window.tabGroups.all) {
       for (const tab of group.tabs) {
         const input: unknown = (tab as { input?: unknown }).input;

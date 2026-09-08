@@ -184,11 +184,11 @@ sequenceDiagram
 
 ## Dependencies
 
-| Upstream                                                                                     | Downstream                                     |
-| -------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| `@agentclientprotocol/sdk` — `ClientSideConnection`, `PROTOCOL_VERSION`, ACP types           | `packages/cli/src/serve/` (the daemon)         |
+| Upstream                                                                                               | Downstream                                     |
+| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
+| `@agentclientprotocol/sdk` — `ClientSideConnection`, `PROTOCOL_VERSION`, ACP types                     | `packages/cli/src/serve/` (the daemon)         |
 | `@lailatul-coder/lailatul-coder-core` — `ApprovalMode`, `TrustGateError`, `getCurrentGeminiMdFilename` | `packages/channels/base/` (planned, F4)        |
-| `node:crypto`, `node:fs`, `node:path`                                                        | `packages/vscode-ide-companion/` (planned, F4) |
+| `node:crypto`, `node:fs`, `node:path`                                                                  | `packages/vscode-ide-companion/` (planned, F4) |
 
 ## Configuration
 

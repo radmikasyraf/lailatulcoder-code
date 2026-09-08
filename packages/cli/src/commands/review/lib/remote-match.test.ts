@@ -150,7 +150,9 @@ describe('normalizeSegment', () => {
     // Uppercase .GIT pins the lowercase-THEN-strip order: strip-before-
     // lowercase would leave the suffix behind and fail every comparison.
     expect(normalizeSegment('lailatul-coder.GIT')).toBe('lailatul-coder');
-    expect(normalizeSegment('lailatul-coder.git.git')).toBe('lailatul-coder.git');
+    expect(normalizeSegment('lailatul-coder.git.git')).toBe(
+      'lailatul-coder.git',
+    );
   });
 });
 
@@ -247,7 +249,8 @@ describe('matchRemotes', () => {
       }).matched,
     ).toEqual(['ghe']);
     expect(
-      matchRemotes(remotes, { owner: 'LailatulCoder', repo: 'lailatul-coder' }).matched,
+      matchRemotes(remotes, { owner: 'LailatulCoder', repo: 'lailatul-coder' })
+        .matched,
     ).toEqual(['origin']);
   });
 

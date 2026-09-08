@@ -11,12 +11,17 @@ import { render } from 'ink-testing-library';
 vi.mock('../../hooks/useKeypress.js', () => ({ useKeypress: vi.fn() }));
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return { ...actual, saveWorkflowScript: vi.fn() };
 });
 
 import { useKeypress, type Key } from '../../hooks/useKeypress.js';
-import { saveWorkflowScript, type Config } from '@lailatul-coder/lailatul-coder-core';
+import {
+  saveWorkflowScript,
+  type Config,
+} from '@lailatul-coder/lailatul-coder-core';
 import { WorkflowSaveOverlay } from './workflow-save-overlay.js';
 
 const mockedUseKeypress = vi.mocked(useKeypress);
@@ -163,4 +168,3 @@ describe('WorkflowSaveOverlay', () => {
     );
   });
 });
-

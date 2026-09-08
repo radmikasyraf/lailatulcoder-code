@@ -12,11 +12,7 @@ import {
 import { onTrustedFoldersChanged } from './trustedFolders.js';
 
 export type DaemonTrustPolicyChangeReason =
-  | 'initial'
-  | 'poll'
-  | 'ide'
-  | 'trusted_folders'
-  | 'manual';
+  'initial' | 'poll' | 'ide' | 'trusted_folders' | 'manual';
 
 export interface DaemonTrustPolicyMonitor {
   start(): Promise<void>;

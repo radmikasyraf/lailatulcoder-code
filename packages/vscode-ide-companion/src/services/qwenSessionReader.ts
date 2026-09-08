@@ -9,7 +9,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as readline from 'readline';
 import * as crypto from 'crypto';
-import { getGitBranch, getProjectHash } from '@lailatul-coder/lailatul-coder-core';
+import {
+  getGitBranch,
+  getProjectHash,
+} from '@lailatul-coder/lailatul-coder-core';
 import { getRuntimeBaseDir } from '../utils/paths.js';
 import { truncatePanelTitle } from '../webview/utils/panelTitleUtils.js';
 import { qwenContentToText, qwenRecordToText } from './qwenTranscriptText.js';

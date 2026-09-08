@@ -14,7 +14,10 @@ import { ConfigContext } from '../contexts/ConfigContext.js';
 import { SettingsContext } from '../contexts/SettingsContext.js';
 import { UIStateContext, type UIState } from '../contexts/UIStateContext.js';
 import type { Config } from '@lailatul-coder/lailatul-coder-core';
-import { AuthType, DEFAULT_QWEN_MODEL } from '@lailatul-coder/lailatul-coder-core';
+import {
+  AuthType,
+  DEFAULT_QWEN_MODEL,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../../config/settings.js';
 import { SettingScope } from '../../config/settings.js';
 import { getFilteredQwenModels } from '../models/availableModels.js';
@@ -1881,4 +1884,3 @@ describe('encodeAuxModelSelector', () => {
     expect(encodeAuxModelSelector('$runtime|openai')).toBe('$runtime|openai');
   });
 });
-

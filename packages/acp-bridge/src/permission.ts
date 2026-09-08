@@ -37,10 +37,7 @@
  * block above that method scoped this contract.
  */
 export type PermissionPolicy =
-  | 'first-responder'
-  | 'designated'
-  | 'consensus'
-  | 'local-only';
+  'first-responder' | 'designated' | 'consensus' | 'local-only';
 
 /**
  * One pending permission tracked by a `PermissionMediator`. The

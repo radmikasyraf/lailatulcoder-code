@@ -307,4 +307,3 @@ export const AgentComposer: React.FC<AgentComposerProps> = ({ agentId }) => {
     </StreamingContext.Provider>
   );
 };
-

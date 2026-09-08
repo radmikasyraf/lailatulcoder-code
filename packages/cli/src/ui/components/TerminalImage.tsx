@@ -7,7 +7,10 @@
 import path from 'node:path';
 import React from 'react';
 import { Box, Text, useIsScreenReaderEnabled } from 'ink';
-import type { Config, TerminalImageDisplay } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  TerminalImageDisplay,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { InlineImageData } from '../types.js';
 import { MaxSizedBox } from './shared/MaxSizedBox.js';
 import { useTerminalOutput } from '../contexts/TerminalOutputContext.js';
@@ -189,4 +192,3 @@ export const TerminalImage: React.FC<TerminalImageProps> = (props) =>
   ) : (
     <FileTerminalImage {...props} />
   );
-

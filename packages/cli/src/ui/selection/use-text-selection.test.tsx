@@ -28,7 +28,9 @@ vi.mock('ink', async (importOriginal) => {
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     createDebugLogger: () => ({ warn: mocks.warn }),
@@ -799,4 +801,3 @@ describe('TextSelectionController', () => {
     });
   });
 });
-

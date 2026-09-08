@@ -10,7 +10,10 @@ import type {
   Config,
   ServerGeminiStreamEvent,
 } from '@lailatul-coder/lailatul-coder-core';
-import { GeminiEventType, OutputFormat } from '@lailatul-coder/lailatul-coder-core';
+import {
+  GeminiEventType,
+  OutputFormat,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Part } from '@google/genai';
 import { JsonOutputAdapter } from './JsonOutputAdapter.js';
 import {

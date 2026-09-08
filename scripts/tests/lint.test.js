@@ -77,8 +77,12 @@ describe('linter directories', () => {
       env: {},
     });
 
-    expect(toPosix(first)).toMatch(/\/lailatul-coder-linters\/local-[a-f0-9]{16}$/);
-    expect(toPosix(second)).toMatch(/\/lailatul-coder-linters\/local-[a-f0-9]{16}$/);
+    expect(toPosix(first)).toMatch(
+      /\/lailatul-coder-linters\/local-[a-f0-9]{16}$/,
+    );
+    expect(toPosix(second)).toMatch(
+      /\/lailatul-coder-linters\/local-[a-f0-9]{16}$/,
+    );
     expect(first).not.toBe(second);
   });
 

@@ -73,8 +73,7 @@ export interface ChannelPairingRequestsSnapshot {
   requests: PairingRequest[];
 }
 
-export interface ChannelPairingApprovalResult
-  extends ChannelPairingRequestsSnapshot {
+export interface ChannelPairingApprovalResult extends ChannelPairingRequestsSnapshot {
   approved: PairingRequest;
 }
 
@@ -88,8 +87,7 @@ export interface ChannelPairingApprovalSubject {
   id: string;
 }
 
-export interface ChannelPairingRevocationResult
-  extends ChannelPairingApprovalsSnapshot {
+export interface ChannelPairingRevocationResult extends ChannelPairingApprovalsSnapshot {
   revoked: string;
 }
 

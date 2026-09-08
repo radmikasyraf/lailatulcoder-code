@@ -34,7 +34,8 @@ import {
   tryAppendDegradedStepSummary,
 } from '../generate-release-notes.js';
 
-const PR = (number) => `https://github.com/LailatulCoder/lailatul-coder/pull/${number}`;
+const PR = (number) =>
+  `https://github.com/LailatulCoder/lailatul-coder/pull/${number}`;
 
 const entry = (number, title, labels = []) => ({
   number,

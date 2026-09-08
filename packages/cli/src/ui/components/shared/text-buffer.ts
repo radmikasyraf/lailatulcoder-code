@@ -29,14 +29,7 @@ import { handleVimAction } from './vim-buffer-actions.js';
 const debugLogger = createDebugLogger('TEXT_BUFFER');
 
 export type Direction =
-  | 'left'
-  | 'right'
-  | 'up'
-  | 'down'
-  | 'wordLeft'
-  | 'wordRight'
-  | 'home'
-  | 'end';
+  'left' | 'right' | 'up' | 'down' | 'wordLeft' | 'wordRight' | 'home' | 'end';
 
 // Helper functions for line-based word navigation
 export const isWordCharStrict = (char: string): boolean =>

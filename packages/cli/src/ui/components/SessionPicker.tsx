@@ -475,4 +475,3 @@ export function SessionPicker(props: SessionPickerProps) {
     </Box>
   );
 }
-

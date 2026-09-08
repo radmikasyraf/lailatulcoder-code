@@ -14,7 +14,10 @@ import { keyMatchers, Command } from '../keyMatchers.js';
 import { truncateText } from '../utils/sessionPickerUtils.js';
 import { isRealUserTurn } from '../utils/historyMapping.js';
 import { t } from '../../i18n/index.js';
-import type { FileHistoryService, DiffStats } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  FileHistoryService,
+  DiffStats,
+} from '@lailatul-coder/lailatul-coder-core';
 
 export type RestoreOption = 'both' | 'conversation' | 'code' | 'cancel';
 
@@ -586,4 +589,3 @@ export function RewindSelector({
     </Box>
   );
 }
-

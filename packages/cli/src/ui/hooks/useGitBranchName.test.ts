@@ -15,7 +15,10 @@ import {
 } from 'vitest';
 import { act } from 'react';
 import { renderHook } from '@testing-library/react';
-import { resolveBranchName, watchRepoBranch } from '@lailatul-coder/lailatul-coder-core';
+import {
+  resolveBranchName,
+  watchRepoBranch,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   useGitBranchName,
   BRANCH_POLL_INTERVAL_MS,

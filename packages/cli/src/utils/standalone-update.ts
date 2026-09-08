@@ -25,7 +25,8 @@ const debugLogger = createDebugLogger('STANDALONE_UPDATE');
 
 const OSS_BASE =
   'https://lailatul-coder-assets.oss-cn-hangzhou.aliyuncs.com/releases/lailatul-coder';
-const GITHUB_BASE = 'https://github.com/LailatulCoder/lailatul-coder/releases/download';
+const GITHUB_BASE =
+  'https://github.com/LailatulCoder/lailatul-coder/releases/download';
 const FETCH_TIMEOUT_MS = 30_000;
 const ARCHIVE_TIMEOUT_MS = 300_000; // 5 min — archives are 50–150 MB
 
@@ -1000,12 +1001,16 @@ export async function performStandaloneUpdate(
   // of standaloneDir to avoid EXDEV (cross-device rename).
   // extractDir uses mkdtempSync (random suffix) to prevent symlink
   // pre-creation attacks on predictable directory names.
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lailatul-coder-update-'));
+  const tempDir = fs.mkdtempSync(
+    path.join(os.tmpdir(), 'lailatul-coder-update-'),
+  );
   let extractDir: string;
   let updateResult: 'done' | 'deferred' | undefined;
   let migrationArtifacts: BinWrapperArtifacts | undefined;
   try {
-    extractDir = fs.mkdtempSync(path.join(parentDir, '.lailatul-coder-update-'));
+    extractDir = fs.mkdtempSync(
+      path.join(parentDir, '.lailatul-coder-update-'),
+    );
   } catch (err) {
     fs.rmSync(tempDir, { recursive: true, force: true });
     releaseLock(lockPath);

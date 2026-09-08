@@ -17,7 +17,10 @@
  * discovered entries into `SlashCommand` objects.
  */
 
-import type { Config, SavedWorkflowEntry } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  SavedWorkflowEntry,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   listSavedWorkflows,
   ToolNames,

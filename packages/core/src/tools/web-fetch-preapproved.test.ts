@@ -47,20 +47,30 @@ describe('isPreapprovedHost', () => {
 
   it('matches path-scoped entries only within the path prefix', () => {
     expect(isPreapprovedHost('github.com', '/LailatulCoder')).toBe(true);
-    expect(isPreapprovedHost('github.com', '/LailatulCoder/lailatul-coder')).toBe(true);
+    expect(
+      isPreapprovedHost('github.com', '/LailatulCoder/lailatul-coder'),
+    ).toBe(true);
     expect(isPreapprovedHost('github.com', '/other-org/repo')).toBe(false);
   });
 
   it('enforces path segment boundaries', () => {
-    expect(isPreapprovedHost('github.com', '/LailatulCoder-evil/malware')).toBe(false);
+    expect(isPreapprovedHost('github.com', '/LailatulCoder-evil/malware')).toBe(
+      false,
+    );
   });
 
   it('matches path prefixes case-insensitively', () => {
     // GitHub owner names are case-insensitive and unique regardless of case,
     // so /LailatulCoder/... is the same owner as the /LailatulCoder entry.
-    expect(isPreapprovedHost('github.com', '/LailatulCoder/lailatul-coder')).toBe(true);
-    expect(isPreapprovedHost('github.com', '/LailatulCoder/lailatul-coder')).toBe(true);
-    expect(isPreapprovedHost('github.com', '/LailatulCoder-evil/malware')).toBe(false);
+    expect(
+      isPreapprovedHost('github.com', '/LailatulCoder/lailatul-coder'),
+    ).toBe(true);
+    expect(
+      isPreapprovedHost('github.com', '/LailatulCoder/lailatul-coder'),
+    ).toBe(true);
+    expect(isPreapprovedHost('github.com', '/LailatulCoder-evil/malware')).toBe(
+      false,
+    );
   });
 });
 

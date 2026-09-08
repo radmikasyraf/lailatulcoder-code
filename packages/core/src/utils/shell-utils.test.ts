@@ -716,7 +716,9 @@ describe('detectSelfKillCommand', () => {
   it('detects broad Windows taskkill patterns that target lailatul-coder hosts', () => {
     expect(detectSelfKillCommand('taskkill /F /IM node.exe 2>nul')).toBe(true);
     expect(
-      detectSelfKillCommand('taskkill /FI "IMAGENAME eq lailatul-coder.exe" /F'),
+      detectSelfKillCommand(
+        'taskkill /FI "IMAGENAME eq lailatul-coder.exe" /F',
+      ),
     ).toBe(true);
   });
 
@@ -735,7 +737,9 @@ describe('detectSelfKillCommand', () => {
       true,
     );
     expect(detectSelfKillCommand('sudo killall node')).toBe(true);
-    expect(detectSelfKillCommand('env FOO=bar pkill -f lailatul-coder')).toBe(true);
+    expect(detectSelfKillCommand('env FOO=bar pkill -f lailatul-coder')).toBe(
+      true,
+    );
     expect(detectSelfKillCommand('command -p killall node')).toBe(true);
   });
 
@@ -754,7 +758,9 @@ describe('detectSelfKillCommand', () => {
   it('detects taskkill inline and dash-prefixed image options', () => {
     expect(detectSelfKillCommand('taskkill /IM:node.exe /F')).toBe(true);
     expect(
-      detectSelfKillCommand('taskkill /FI:"IMAGENAME eq lailatul-coder.exe" /F'),
+      detectSelfKillCommand(
+        'taskkill /FI:"IMAGENAME eq lailatul-coder.exe" /F',
+      ),
     ).toBe(true);
     expect(detectSelfKillCommand('taskkill -IM node.exe -F')).toBe(true);
   });
@@ -797,7 +803,9 @@ describe('detectSelfKillCommand', () => {
     expect(detectSelfKillCommand('kill -9 $(pgrep -f "node server.js")')).toBe(
       false,
     );
-    expect(detectSelfKillCommand('pkill -F lailatul-coder.pid vite')).toBe(false);
+    expect(detectSelfKillCommand('pkill -F lailatul-coder.pid vite')).toBe(
+      false,
+    );
     expect(detectSelfKillCommand('taskkill /IM notepad.exe')).toBe(false);
   });
 });

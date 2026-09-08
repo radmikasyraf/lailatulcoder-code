@@ -102,8 +102,7 @@ export interface ChildHeapReport {
 }
 
 export type BridgePromptContentBlock =
-  | ContentBlock
-  | SessionAttachmentReference;
+  ContentBlock | SessionAttachmentReference;
 
 export type BridgePromptRequest = Omit<PromptRequest, 'prompt'> & {
   prompt: BridgePromptContentBlock[];
@@ -420,8 +419,7 @@ export interface BridgeLoadReplayEnvelope {
 }
 
 export type BridgeSessionState = (
-  | LoadSessionResponse
-  | ResumeSessionResponse
+  LoadSessionResponse | ResumeSessionResponse
 ) & {
   artifactSnapshot?: unknown;
   artifactSnapshotUnavailable?: unknown;
@@ -505,12 +503,10 @@ export interface BridgePersistedBranchedSession {
 }
 
 export interface BridgeBranchedSession
-  extends BridgeRestoredSession,
-    BridgePersistedBranchedSession {}
+  extends BridgeRestoredSession, BridgePersistedBranchedSession {}
 
 export type BridgeBranchSessionResult =
-  | BridgeBranchedSession
-  | BridgePersistedBranchedSession;
+  BridgeBranchedSession | BridgePersistedBranchedSession;
 
 export interface BridgeSideTaskSessionRequest {
   name?: string;
@@ -554,10 +550,7 @@ export interface ChangeSessionCwdResult {
 
 export type BridgeWorkspaceMemoryRememberContextMode = 'workspace' | 'clean';
 export type BridgeAutoMemoryTopic =
-  | 'user'
-  | 'feedback'
-  | 'project'
-  | 'reference';
+  'user' | 'feedback' | 'project' | 'reference';
 
 export interface BridgeWorkspaceMemoryRememberRequest {
   content: string;
@@ -638,8 +631,7 @@ export interface BridgePendingUserQuestionInteraction {
 }
 
 export type BridgePendingInteraction =
-  | BridgePendingPermissionInteraction
-  | BridgePendingUserQuestionInteraction;
+  BridgePendingPermissionInteraction | BridgePendingUserQuestionInteraction;
 
 /** Wire-format mirror of the SDK's `DaemonSessionSummary`; keep fields synchronized. */
 export interface BridgeSessionSummary {
@@ -1114,12 +1106,7 @@ export interface BridgeExtensionsChangedData {
   refreshed: number;
   failed: number;
   status?:
-    | 'installed'
-    | 'enabled'
-    | 'disabled'
-    | 'updated'
-    | 'uninstalled'
-    | 'failed';
+    'installed' | 'enabled' | 'disabled' | 'updated' | 'uninstalled' | 'failed';
   source?: string;
   name?: string;
   version?: string;
@@ -1235,15 +1222,13 @@ export interface AcpSessionBridge {
    */
   setLiveScreenContextCaptureHandler?(
     handler:
-      | import('./bridgeOptions.js').LiveScreenContextCaptureHandler
-      | undefined,
+      import('./bridgeOptions.js').LiveScreenContextCaptureHandler | undefined,
   ): void;
 
   /** Installs the daemon-owned handler for the five Codex-parity Live task tools. */
   setLiveTaskToolRequestHandler?(
     handler:
-      | import('./bridgeOptions.js').LiveTaskToolRequestHandler
-      | undefined,
+      import('./bridgeOptions.js').LiveTaskToolRequestHandler | undefined,
   ): void;
 
   /** Installs the daemon-owned handler for the backend-only Live speech tool. */

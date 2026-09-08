@@ -52,7 +52,7 @@ lailatul-coder 当前把 **Ctrl+O 绑定为 `TOGGLE_COMPACT_MODE`**：一个**�
 
 ## 2. 三家行为对比（调研结论）
 
-| 维度        | lailatul-coder（现状/#5661 底座）                                 | Claude Code（真实）                          | gemini-cli（上游）                      |
+| 维度        | lailatul-coder（现状/#5661 底座）                            | Claude Code（真实）                          | gemini-cli（上游）                      |
 | ----------- | ------------------------------------------------------------ | -------------------------------------------- | --------------------------------------- |
 | Ctrl+O 绑定 | `TOGGLE_COMPACT_MODE`                                        | `app:toggleTranscript`                       | `SHOW_MORE_LINES` + `EXPAND_PASTE`      |
 | 核心模型    | **全局精简/详细二态**（持久化）+ #5661 的 partition 自动折叠 | **全局 transcript 屏** + 块级 per-block 展开 | 全局 `constrainHeight` + per-tool 展开  |

@@ -144,7 +144,9 @@ describe('cpuProfiler', () => {
 
       expect(result.ok).toBe(true);
       if (result.ok) {
-        expect(result.filePath).toMatch(/lailatul-coder-cpu-\d+-.*\.cpuprofile$/);
+        expect(result.filePath).toMatch(
+          /lailatul-coder-cpu-\d+-.*\.cpuprofile$/,
+        );
         expect(fs.existsSync(result.filePath)).toBe(true);
 
         const content = JSON.parse(fs.readFileSync(result.filePath, 'utf8'));

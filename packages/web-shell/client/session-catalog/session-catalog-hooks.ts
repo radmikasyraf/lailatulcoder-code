@@ -6,7 +6,10 @@ import {
   useState,
   useSyncExternalStore,
 } from 'react';
-import { useSessions, useWorkspace } from '@lailatul-coder/webui/daemon-react-sdk';
+import {
+  useSessions,
+  useWorkspace,
+} from '@lailatul-coder/webui/daemon-react-sdk';
 import type {
   DaemonClient,
   DaemonSessionArchiveState,
@@ -196,8 +199,8 @@ export function useSessionHasActivePrompt(
     setCatalogFallbackArmed(
       Boolean(
         workspaceCwd &&
-          !hasLiveSessions &&
-          !store.isWorkspaceLiveStateEnabled(workspaceCwd),
+        !hasLiveSessions &&
+        !store.isWorkspaceLiveStateEnabled(workspaceCwd),
       ),
     );
   }, [store, workspaceCwd, hasLiveSessions]);

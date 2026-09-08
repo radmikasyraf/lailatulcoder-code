@@ -521,7 +521,9 @@ import type { UsageSummaryRecord } from '@lailatul-coder/lailatul-coder-core';
 // Mock loadUsageHistory to return controlled data
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const orig =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...orig,
     loadUsageHistory: vi.fn(),

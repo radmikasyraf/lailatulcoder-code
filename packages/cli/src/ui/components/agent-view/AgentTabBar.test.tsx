@@ -197,4 +197,3 @@ describe('AgentTabBar', () => {
     expect(setAgentTabBarFocused).not.toHaveBeenCalled();
   });
 });
-

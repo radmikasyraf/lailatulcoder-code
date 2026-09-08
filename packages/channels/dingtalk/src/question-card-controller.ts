@@ -14,10 +14,7 @@ import type {
 
 type QuestionState = 'reserved' | 'pending' | 'claimed' | 'terminal';
 type QuestionTerminalState =
-  | 'submitted'
-  | 'cancelled'
-  | 'expired'
-  | 'resolved_outside_presenter';
+  'submitted' | 'cancelled' | 'expired' | 'resolved_outside_presenter';
 
 const OTHER_OPTION_VALUE = '__qwen_other__';
 

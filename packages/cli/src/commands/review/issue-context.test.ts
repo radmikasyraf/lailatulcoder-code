@@ -66,7 +66,10 @@ const ARGS = {
 
 /** Same-repo extra requests, in the subcommand's RequestedIssue shape. */
 function ex(...numbers: number[]) {
-  return numbers.map((number) => ({ number, ownerRepo: 'LailatulCoder/lailatul-coder' }));
+  return numbers.map((number) => ({
+    number,
+    ownerRepo: 'LailatulCoder/lailatul-coder',
+  }));
 }
 
 function mockClosing(refs: unknown[]): void {
@@ -87,7 +90,10 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 9078,
-        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
+        repository: {
+          name: 'lailatul-coder',
+          owner: { login: 'LailatulCoder' },
+        },
       },
     ]);
     ghMock.mockReturnValueOnce(
@@ -137,14 +143,20 @@ describe('runIssueContext', () => {
       resolve('/tmp/issue-context.md'),
     );
     expect(written).toContain('untrusted user input');
-    expect(written).toContain('## Issue #9078 of LailatulCoder/lailatul-coder: the bug');
+    expect(written).toContain(
+      '## Issue #9078 of LailatulCoder/lailatul-coder: the bug',
+    );
     expect(written).toContain('repro steps');
     expect(written).toContain('**maintainer** (2026-08-01):');
     expect(written).toContain('confirmed');
     // The placeholder never accompanies a rendered thread.
     expect(written).not.toContain('_(no comments)_');
     expect(result.closingIssues).toEqual([
-      { number: 9078, ownerRepo: 'LailatulCoder/lailatul-coder', title: 'the bug' },
+      {
+        number: 9078,
+        ownerRepo: 'LailatulCoder/lailatul-coder',
+        title: 'the bug',
+      },
     ]);
     expect(result.unfetchable).toEqual([]);
     expect(result.outPath).toBe(resolve('/tmp/issue-context.md'));
@@ -191,7 +203,10 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 9,
-        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
+        repository: {
+          name: 'lailatul-coder',
+          owner: { login: 'LailatulCoder' },
+        },
       },
     ]);
     ghMock.mockReturnValueOnce(
@@ -265,7 +280,10 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 9078,
-        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
+        repository: {
+          name: 'lailatul-coder',
+          owner: { login: 'LailatulCoder' },
+        },
       },
     ]);
     mockIssue('closing one');
@@ -323,7 +341,9 @@ describe('runIssueContext', () => {
     );
     const written = writeFileSyncMock.mock.calls[0][1] as string;
     expect(written).toContain('## Issue #42 of acme/other: closing elsewhere');
-    expect(written).toContain('## Issue #42 of LailatulCoder/lailatul-coder: our own 42');
+    expect(written).toContain(
+      '## Issue #42 of LailatulCoder/lailatul-coder: our own 42',
+    );
   });
 
   it('dedups repeated --issue values', () => {
@@ -379,7 +399,10 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 1,
-        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
+        repository: {
+          name: 'lailatul-coder',
+          owner: { login: 'LailatulCoder' },
+        },
       },
       {
         number: 2,
@@ -394,13 +417,19 @@ describe('runIssueContext', () => {
     const result = runIssueContext(ARGS);
 
     const written = writeFileSyncMock.mock.calls[0][1] as string;
-    expect(written).toContain('## Issue #1 of LailatulCoder/lailatul-coder: readable');
+    expect(written).toContain(
+      '## Issue #1 of LailatulCoder/lailatul-coder: readable',
+    );
     expect(written).toContain(
       '## Issue #2 of acme/restricted — could not be fetched',
     );
     expect(written).toContain('HTTP 404');
     expect(result.closingIssues).toEqual([
-      { number: 1, ownerRepo: 'LailatulCoder/lailatul-coder', title: 'readable' },
+      {
+        number: 1,
+        ownerRepo: 'LailatulCoder/lailatul-coder',
+        title: 'readable',
+      },
     ]);
     expect(result.unfetchable).toEqual([
       {
@@ -435,7 +464,9 @@ describe('runIssueContext', () => {
     const result = runIssueContext({ ...ARGS, extraIssues: ex(555) });
     expect(result.discoveryError).toBe('HTTP 403: secondary rate limit');
     const written = writeFileSyncMock.mock.calls[0][1] as string;
-    expect(written).toContain('## Issue #555 of LailatulCoder/lailatul-coder: five');
+    expect(written).toContain(
+      '## Issue #555 of LailatulCoder/lailatul-coder: five',
+    );
     expect(result.closingIssues).toEqual([]);
   });
 
@@ -443,7 +474,10 @@ describe('runIssueContext', () => {
     mockClosing([
       {
         number: 9078,
-        repository: { name: 'lailatul-coder', owner: { login: 'LailatulCoder' } },
+        repository: {
+          name: 'lailatul-coder',
+          owner: { login: 'LailatulCoder' },
+        },
       },
     ]);
     mockIssue('closing one');
@@ -454,7 +488,9 @@ describe('runIssueContext', () => {
     runIssueContext({
       ...ARGS,
       repo: 'LailatulCoder/lailatul-coder',
-      extraIssues: [{ number: 9078, ownerRepo: 'LailatulCoder/lailatul-coder' }],
+      extraIssues: [
+        { number: 9078, ownerRepo: 'LailatulCoder/lailatul-coder' },
+      ],
     });
     // one discovery call + one issue fetch — no duplicate section
     expect(ghMock).toHaveBeenCalledTimes(2);

@@ -1586,4 +1586,3 @@ describe('<ToolGroupMessage />', () => {
     });
   });
 });
-

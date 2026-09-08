@@ -377,4 +377,3 @@ describe('StatusLineDialog', () => {
     expect(lastFrame()).not.toContain('> mk');
   });
 });
-

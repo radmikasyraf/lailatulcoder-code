@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Storage, createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
+import {
+  Storage,
+  createDebugLogger,
+} from '@lailatul-coder/lailatul-coder-core';
 import { execFile, execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import * as fs from 'node:fs';
@@ -142,7 +145,9 @@ function readBaseInstallation(bootstrapPath: string): {
     ),
   ) as { name?: unknown; version?: unknown };
   if (manifest.name !== PACKAGE_NAME || typeof manifest.version !== 'string') {
-    throw new Error('Unable to identify the base LailatulCoder Ai npm installation');
+    throw new Error(
+      'Unable to identify the base LailatulCoder Ai npm installation',
+    );
   }
   return {
     version: manifest.version,

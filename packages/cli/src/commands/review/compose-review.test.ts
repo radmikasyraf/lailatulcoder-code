@@ -77,8 +77,7 @@ vi.mock('../../config/settings.js', async (importOriginal) => {
     // must not control it.
     loadSettings: vi.fn((...callArgs: unknown[]) => {
       const opts = callArgs[1] as
-        | { skipWorkspaceSettings?: boolean }
-        | undefined;
+        { skipWorkspaceSettings?: boolean } | undefined;
       return {
         merged: {
           review: opts?.skipWorkspaceSettings
@@ -717,7 +716,9 @@ describe('composeReview — the C/S table', () => {
     // it to nothing, and posts an empty bullet.
     expect(() =>
       composeReview(
-        base({ cannotTellCriticals: ['_— m\n\nvia LailatulCoder Ai /review (v1)_'] }),
+        base({
+          cannotTellCriticals: ['_— m\n\nvia LailatulCoder Ai /review (v1)_'],
+        }),
         '0.21.2',
         false,
       ),
@@ -2435,7 +2436,9 @@ describe('composeReviewCommand handler (the CLI glue)', () => {
     expect(written.event).toBe('COMMENT');
     expect(written.body).toContain('Suggestions are inline.');
     expect(
-      written.body.endsWith(`_— ${MODEL} via LailatulCoder Ai /review (v0.21.2)_`),
+      written.body.endsWith(
+        `_— ${MODEL} via LailatulCoder Ai /review (v0.21.2)_`,
+      ),
     ).toBe(true);
   });
 
@@ -2917,7 +2920,9 @@ describe('composeReviewCommand handler (the CLI glue)', () => {
         readFileSync(outPath, 'utf8'),
       ) as ComposeReviewResult;
       expect(
-        written.body.endsWith(`_— ${MODEL} via LailatulCoder Ai /review (v0.21.1)_`),
+        written.body.endsWith(
+          `_— ${MODEL} via LailatulCoder Ai /review (v0.21.1)_`,
+        ),
       ).toBe(true);
     } finally {
       if (inherited === undefined)

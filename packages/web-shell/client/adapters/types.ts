@@ -89,10 +89,7 @@ export interface ContentBlock {
 }
 
 export type PermissionOptionKind =
-  | 'allow_once'
-  | 'allow_always'
-  | 'reject_once'
-  | 'reject_always';
+  'allow_once' | 'allow_always' | 'reject_once' | 'reject_always';
 
 export interface PermissionOption {
   id: string;

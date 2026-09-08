@@ -316,8 +316,7 @@ type PrimaryOnlyLiveSessionRoute =
 type PrimaryOrInternalLiveSessionRoute =
   (typeof PRIMARY_OR_INTERNAL_LIVE_SESSION_ROUTES)[number];
 type RestrictedLiveSessionRoute =
-  | PrimaryOnlyLiveSessionRoute
-  | PrimaryOrInternalLiveSessionRoute;
+  PrimaryOnlyLiveSessionRoute | PrimaryOrInternalLiveSessionRoute;
 
 function isPrimaryOnlyLiveSessionRoute(
   route: string,
@@ -2390,8 +2389,7 @@ export function registerSessionRoutes(
     let branchMeta: { name: string; baseBranch: string } | undefined;
     let branchBaseCommit: string | undefined;
     let worktreeMeta:
-      | { slug: string; path: string; branch: string }
-      | undefined;
+      { slug: string; path: string; branch: string } | undefined;
 
     try {
       // ── Branch creation ────────────────────────────────────────────
@@ -3061,8 +3059,7 @@ export function registerSessionRoutes(
       const body = safeBody(req);
       const route = `POST /session/:id/${action}`;
       let resolvedRuntime:
-        | { runtime: WorkspaceRuntime; workspaceCwd: string }
-        | undefined;
+        { runtime: WorkspaceRuntime; workspaceCwd: string } | undefined;
       try {
         resolvedRuntime = await resolveRuntimeForSessionRestore(
           body,

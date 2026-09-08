@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { SubagentLevel, Config } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  SubagentLevel,
+  Config,
+} from '@lailatul-coder/lailatul-coder-core';
 
 /**
  * State management for the subagent creation wizard.

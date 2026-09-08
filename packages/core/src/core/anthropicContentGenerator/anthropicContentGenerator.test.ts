@@ -100,9 +100,8 @@ describe('AnthropicContentGenerator', () => {
     // The generator's constructor builds undici-backed fetch options
     // synchronously; production code preloads undici in
     // createContentGenerator, and resetModules() clears that state.
-    const { preloadRuntimeFetchModule } = await import(
-      '../../utils/runtimeFetchOptions.js'
-    );
+    const { preloadRuntimeFetchModule } =
+      await import('../../utils/runtimeFetchOptions.js');
     await preloadRuntimeFetchModule();
     savedMaxOutputTokensEnv = process.env[MAX_OUTPUT_TOKENS_ENV];
     delete process.env[MAX_OUTPUT_TOKENS_ENV];
@@ -3360,9 +3359,8 @@ describe('AnthropicContentGenerator', () => {
   describe('generateContentStream', () => {
     it('emits tool preparation metadata before the complete function call', async () => {
       const { AnthropicContentGenerator } = await importGenerator();
-      const { getToolCallPreparations } = await import(
-        '../tool-call-preparation.js'
-      );
+      const { getToolCallPreparations } =
+        await import('../tool-call-preparation.js');
       let stopEventReached = false;
       anthropicState.createImpl.mockResolvedValue(
         (async function* toolUseStream() {
@@ -3458,9 +3456,8 @@ describe('AnthropicContentGenerator', () => {
 
     it('emits preparations before both function calls in a multi-tool stream', async () => {
       const { AnthropicContentGenerator } = await importGenerator();
-      const { getToolCallPreparations } = await import(
-        '../tool-call-preparation.js'
-      );
+      const { getToolCallPreparations } =
+        await import('../tool-call-preparation.js');
       anthropicState.createImpl.mockResolvedValue(
         (async function* multiToolStream() {
           yield {
@@ -3579,9 +3576,8 @@ describe('AnthropicContentGenerator', () => {
       'does not emit tool preparation metadata when $label',
       async ({ contentBlock }) => {
         const { AnthropicContentGenerator } = await importGenerator();
-        const { getToolCallPreparations } = await import(
-          '../tool-call-preparation.js'
-        );
+        const { getToolCallPreparations } =
+          await import('../tool-call-preparation.js');
         anthropicState.createImpl.mockResolvedValue(
           (async function* toolUseStream() {
             yield {
@@ -3753,9 +3749,8 @@ describe('AnthropicContentGenerator', () => {
 
     it('preserves message_start usage when the stream fails after content', async () => {
       const { AnthropicContentGenerator } = await importGenerator();
-      const { getGenAiUsageProvenance } = await import(
-        '../../telemetry/gen-ai-usage.js'
-      );
+      const { getGenAiUsageProvenance } =
+        await import('../../telemetry/gen-ai-usage.js');
       anthropicState.createImpl.mockResolvedValue(
         (async function* () {
           yield {
@@ -3813,9 +3808,8 @@ describe('AnthropicContentGenerator', () => {
 
     it('requests stream=true and converts streamed events into Gemini chunks', async () => {
       const { AnthropicContentGenerator } = await importGenerator();
-      const { getGenAiUsageProvenance } = await import(
-        '../../telemetry/gen-ai-usage.js'
-      );
+      const { getGenAiUsageProvenance } =
+        await import('../../telemetry/gen-ai-usage.js');
       anthropicState.createImpl.mockResolvedValue(
         (async function* () {
           yield {
@@ -3970,9 +3964,8 @@ describe('AnthropicContentGenerator', () => {
       // dropped from the displayed total and the Footer under-reports by
       // exactly that many tokens.
       const { AnthropicContentGenerator } = await importGenerator();
-      const { getGenAiUsageProvenance } = await import(
-        '../../telemetry/gen-ai-usage.js'
-      );
+      const { getGenAiUsageProvenance } =
+        await import('../../telemetry/gen-ai-usage.js');
       anthropicState.createImpl.mockResolvedValue(
         (async function* () {
           yield {

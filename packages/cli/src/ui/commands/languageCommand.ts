@@ -395,39 +395,37 @@ export const languageCommand: SlashCommand = {
       },
 
       // Nested subcommands for each supported language (e.g., /language ui zh-CN)
-      subCommands: SUPPORTED_LANGUAGES.map(
-        (lang): SlashCommand => ({
-          name: lang.id,
-          get description() {
-            return t('Set UI language to {{name}}', {
-              name: lang.nativeName || lang.fullName,
-            });
-          },
-          kind: CommandKind.BUILT_IN,
-          supportedModes: ['interactive', 'non_interactive', 'acp'] as const,
-          action: async (context, args) => {
-            // The web-shell settings panel switches language through
-            // `/language ui <id> --global|--project`, and the command router
-            // descends into this nested subcommand — so scope flags must be
-            // accepted here exactly like in the `ui` action above.
-            const parsed = parseUiScopeFlags(args.trim());
-            const scopeError = validateUiScopeFlags(context, parsed);
-            if (scopeError) {
-              return scopeError;
-            }
-            if (parsed.remaining) {
-              return {
-                type: 'message',
-                messageType: 'error',
-                content: t(
-                  'Language subcommands do not accept additional arguments.',
-                ),
-              };
-            }
-            return setUiLanguage(context, lang.code, parsed.scope);
-          },
-        }),
-      ),
+      subCommands: SUPPORTED_LANGUAGES.map((lang): SlashCommand => ({
+        name: lang.id,
+        get description() {
+          return t('Set UI language to {{name}}', {
+            name: lang.nativeName || lang.fullName,
+          });
+        },
+        kind: CommandKind.BUILT_IN,
+        supportedModes: ['interactive', 'non_interactive', 'acp'] as const,
+        action: async (context, args) => {
+          // The web-shell settings panel switches language through
+          // `/language ui <id> --global|--project`, and the command router
+          // descends into this nested subcommand — so scope flags must be
+          // accepted here exactly like in the `ui` action above.
+          const parsed = parseUiScopeFlags(args.trim());
+          const scopeError = validateUiScopeFlags(context, parsed);
+          if (scopeError) {
+            return scopeError;
+          }
+          if (parsed.remaining) {
+            return {
+              type: 'message',
+              messageType: 'error',
+              content: t(
+                'Language subcommands do not accept additional arguments.',
+              ),
+            };
+          }
+          return setUiLanguage(context, lang.code, parsed.scope);
+        },
+      })),
     },
 
     // /language output subcommand

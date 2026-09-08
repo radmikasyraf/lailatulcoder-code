@@ -50,12 +50,12 @@ export function parseYaml(input: string): unknown {
 
 ### Why `yaml` rather than `js-yaml`
 
-| Dimension                | `js-yaml` 4.x                                                                              | `yaml` (eemeli) 2.x                                  |
-| ------------------------ | ------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
-| Default schema           | `DEFAULT_SAFE_SCHEMA` (since 4.x) — safe; older versions had `DEFAULT_FULL_SCHEMA` with JS | `core` (YAML 1.2 spec) — JSON types only             |
-| `!!js/function` tag      | NOT supported in 4.x (was in 3.x)                                                          | Never supported                                      |
-| Billion-laughs guard     | None (manual responsibility)                                                               | Built-in `maxAliasCount: 100` default                |
-| Merge keys (`<<`)        | Supported (must opt-out via `MERGE_SCHEMA` or filtering)                                   | Disabled by default, opt-in via `{ merge: true }`    |
+| Dimension                     | `js-yaml` 4.x                                                                              | `yaml` (eemeli) 2.x                                  |
+| ----------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| Default schema                | `DEFAULT_SAFE_SCHEMA` (since 4.x) — safe; older versions had `DEFAULT_FULL_SCHEMA` with JS | `core` (YAML 1.2 spec) — JSON types only             |
+| `!!js/function` tag           | NOT supported in 4.x (was in 3.x)                                                          | Never supported                                      |
+| Billion-laughs guard          | None (manual responsibility)                                                               | Built-in `maxAliasCount: 100` default                |
+| Merge keys (`<<`)             | Supported (must opt-out via `MERGE_SCHEMA` or filtering)                                   | Disabled by default, opt-in via `{ merge: true }`    |
 | Already a lailatul-coder dep? | `js-yaml@4.1.1` ✓                                                                          | `yaml@2.8.1` ✓ (already imported by `skill-manager`) |
 
 Both are reasonable choices in 2026, but **the original task brief
@@ -125,7 +125,7 @@ mcpServers: z.union([
 | `"stdio"`          | `command: string`, `args?: string[]` | Plus `env?: Record<string,string>`, `cwd?: string` |
 | `"sse"`            | `url: string`                        | Plus `headers?: Record<string,string>`             |
 | `"http"`           | `url: string`                        | Plus `headers?`, `method?`                         |
-| `"websocket"`      | `url: string`                        | lailatul-coder parity unknown — defer until needed      |
+| `"websocket"`      | `url: string`                        | lailatul-coder parity unknown — defer until needed |
 | `"sdk"`            | varies                               | Internal CC use; we do NOT need to support         |
 | `"claudeai-proxy"` | varies                               | Internal CC use; we do NOT need to support         |
 
@@ -235,7 +235,7 @@ object/array. **C**
 
 ### Safety summary
 
-| Vector                         | `yaml@2.8.1` default              | Action needed in lailatul-coder                             |
+| Vector                         | `yaml@2.8.1` default              | Action needed in lailatul-coder                        |
 | ------------------------------ | --------------------------------- | ------------------------------------------------------ |
 | Arbitrary JS execution         | Impossible — no eval              | None                                                   |
 | `!!js/function` tag            | Becomes literal string + warning  | None                                                   |
@@ -473,13 +473,13 @@ from the existing test suites in `packages/core/src/subagents/`,
 
 ## Open questions
 
-| #   | Question                                                                                                                                              | Blocking?                                                               | Resolution path                                                                                                                                                         |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Q1  | Does `yaml.parse` need an explicit logger to redirect `YAMLWarning` (e.g., `Unresolved tag`) to lailatul-coder's logger instead of `process.emitWarning`?  | No — defer                                                              | If logs get noisy in CI, plumb `{ logLevel: 'silent' }` or a custom `onWarning` callback. Not load-bearing for v1.                                                      |
-| Q2  | Should `parse()` continue to return `{}` for empty-string / null-document YAML, or throw?                                                             | No — preserve current behavior                                          | Current hand-rolled returns `{}`; we keep that. Add a regression test pinning the choice.                                                                               |
-| Q3  | When `mcpServers` is malformed at the top level (e.g., `mcpServers: "string"`), should the whole agent fail to load, or load with that field dropped? | Yes — drives the warn-and-drop posture in Phase 3 of the implementation | **Resolution**: drop the field, emit a console warning (parity with CC `DL7` per Phase 3 of `docs/design/declarative-agents-port.md`).                                  |
-| Q4  | Same as Q3 but for `hooks`: drop the field, the event, or just the individual matcher?                                                                | Yes — drives the warn-and-drop posture                                  | **Resolution**: drop the whole `hooks` field on top-level shape failure. Per-event / per-matcher granularity is deferred to a future PR if a real user surfaces a need. |
-| Q5  | Does the `Bun.YAML.parse` shortcut from CC's helper apply to lailatul-coder?                                                                               | No                                                                      | lailatul-coder does not target Bun runtime. Skip.                                                                                                                            |
+| #   | Question                                                                                                                                                  | Blocking?                                                               | Resolution path                                                                                                                                                         |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Q1  | Does `yaml.parse` need an explicit logger to redirect `YAMLWarning` (e.g., `Unresolved tag`) to lailatul-coder's logger instead of `process.emitWarning`? | No — defer                                                              | If logs get noisy in CI, plumb `{ logLevel: 'silent' }` or a custom `onWarning` callback. Not load-bearing for v1.                                                      |
+| Q2  | Should `parse()` continue to return `{}` for empty-string / null-document YAML, or throw?                                                                 | No — preserve current behavior                                          | Current hand-rolled returns `{}`; we keep that. Add a regression test pinning the choice.                                                                               |
+| Q3  | When `mcpServers` is malformed at the top level (e.g., `mcpServers: "string"`), should the whole agent fail to load, or load with that field dropped?     | Yes — drives the warn-and-drop posture in Phase 3 of the implementation | **Resolution**: drop the field, emit a console warning (parity with CC `DL7` per Phase 3 of `docs/design/declarative-agents-port.md`).                                  |
+| Q4  | Same as Q3 but for `hooks`: drop the field, the event, or just the individual matcher?                                                                    | Yes — drives the warn-and-drop posture                                  | **Resolution**: drop the whole `hooks` field on top-level shape failure. Per-event / per-matcher granularity is deferred to a future PR if a real user surfaces a need. |
+| Q5  | Does the `Bun.YAML.parse` shortcut from CC's helper apply to lailatul-coder?                                                                              | No                                                                      | lailatul-coder does not target Bun runtime. Skip.                                                                                                                       |
 
 ---
 

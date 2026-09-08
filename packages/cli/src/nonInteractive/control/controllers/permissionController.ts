@@ -644,8 +644,7 @@ export class PermissionController extends BaseController {
         );
       } else if (['edit', 'exec', 'mcp'].includes(confirmationType)) {
         const execOrMcpDetails = toolCall.confirmationDetails as
-          | ToolExecuteConfirmationDetails
-          | ToolMcpConfirmationDetails;
+          ToolExecuteConfirmationDetails | ToolMcpConfirmationDetails;
         await execOrMcpDetails.onConfirm(ToolConfirmationOutcome.Cancel, {
           cancelMessage: `Error: ${errorMessage}`,
         });

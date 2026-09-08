@@ -139,7 +139,10 @@ describe('modifyWithEditor', () => {
     });
 
     it('should create temp directory if it does not exist', async () => {
-      const diffDir = path.join(os.tmpdir(), 'lailatul-coder-tool-modify-diffs');
+      const diffDir = path.join(
+        os.tmpdir(),
+        'lailatul-coder-tool-modify-diffs',
+      );
       await fsp.rm(diffDir, { recursive: true, force: true }).catch(() => {});
 
       await modifyWithEditor(
@@ -155,7 +158,10 @@ describe('modifyWithEditor', () => {
     });
 
     it('should not create temp directory if it already exists', async () => {
-      const diffDir = path.join(os.tmpdir(), 'lailatul-coder-tool-modify-diffs');
+      const diffDir = path.join(
+        os.tmpdir(),
+        'lailatul-coder-tool-modify-diffs',
+      );
       await fsp.mkdir(diffDir, { recursive: true });
 
       const mkdirSpy = vi.spyOn(fs, 'mkdirSync');
@@ -284,8 +290,12 @@ describe('modifyWithEditor', () => {
 
     expect(mockOpenDiff).toHaveBeenCalledOnce();
     const [oldFilePath, newFilePath] = mockOpenDiff.mock.calls[0];
-    expect(oldFilePath).toMatch(/lailatul-coder-modify-test-file-old-\d+\.txt$/);
-    expect(newFilePath).toMatch(/lailatul-coder-modify-test-file-new-\d+\.txt$/);
+    expect(oldFilePath).toMatch(
+      /lailatul-coder-modify-test-file-old-\d+\.txt$/,
+    );
+    expect(newFilePath).toMatch(
+      /lailatul-coder-modify-test-file-new-\d+\.txt$/,
+    );
 
     const diffDir = path.join(os.tmpdir(), 'lailatul-coder-tool-modify-diffs');
     expect(path.dirname(oldFilePath)).toBe(diffDir);

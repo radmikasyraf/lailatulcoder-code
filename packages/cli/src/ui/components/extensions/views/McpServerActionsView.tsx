@@ -433,4 +433,3 @@ export const McpServerActionsView = ({
     />
   );
 };
-

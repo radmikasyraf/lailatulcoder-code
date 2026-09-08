@@ -22,9 +22,8 @@ vi.mock('../../utils/stdioHelpers.js', () => ({
   writeStderrLine: (line: string) => stderr.push(line),
 }));
 
-const { psCommand, formatAge, NAME_COL, PID_COL, AGE_COL } = await import(
-  './ps.js'
-);
+const { psCommand, formatAge, NAME_COL, PID_COL, AGE_COL } =
+  await import('./ps.js');
 
 function record(
   over: Partial<SessionRegistryRecord> = {},

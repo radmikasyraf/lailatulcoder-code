@@ -100,7 +100,9 @@ vi.mock('./useTerminalSize.js', () => ({
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...original,
     createDebugLogger: () => debugLogMock,

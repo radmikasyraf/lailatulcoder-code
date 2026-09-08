@@ -141,7 +141,8 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ navegar · Backspace edita a pesquisa',
   Bundled: 'Integrada',
-  'Available LailatulCoder Ai CLI tools:': 'Ferramentas CLI do LailatulCoder Ai disponíveis:',
+  'Available LailatulCoder Ai CLI tools:':
+    'Ferramentas CLI do LailatulCoder Ai disponíveis:',
   'No tools available': 'Nenhuma ferramenta disponível',
   'View or change the approval mode for tool usage':
     'Ver ou alterar o modo de aprovação para uso de ferramentas',
@@ -319,8 +320,10 @@ export default {
   // ============================================================================
   // Agents - Creation Wizard
   // ============================================================================
-  'Project Level (.lailatulcoder/agents/)': 'Nível de Projeto (.lailatulcoder/agents/)',
-  'User Level (~/.lailatulcoder/agents/)': 'Nível de Usuário (~/.lailatulcoder/agents/)',
+  'Project Level (.lailatulcoder/agents/)':
+    'Nível de Projeto (.lailatulcoder/agents/)',
+  'User Level (~/.lailatulcoder/agents/)':
+    'Nível de Usuário (~/.lailatulcoder/agents/)',
   '✓ Subagent Created Successfully!': '✓ Subagente criado com sucesso!',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     'O subagente "{{name}}" foi salvo no nível {{level}}.',
@@ -345,7 +348,8 @@ export default {
   'Step {{n}}: Choose Location': 'Etapa {{n}}: Escolher Localização',
   'Step {{n}}: Choose Generation Method':
     'Etapa {{n}}: Escolher Método de Geração',
-  'Generate with LailatulCoder Ai (Recommended)': 'Gerar com LailatulCoder Ai (Recomendado)',
+  'Generate with LailatulCoder Ai (Recommended)':
+    'Gerar com LailatulCoder Ai (Recomendado)',
   'Manual Creation': 'Criação Manual',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     'Descreva o que este subagente deve fazer e quando deve ser usado. (Seja abrangente para melhores resultados)',
@@ -410,7 +414,8 @@ export default {
   // ============================================================================
   // Commands - General (continued)
   // ============================================================================
-  'View and edit LailatulCoder Ai settings': 'Ver e editar configurações do LailatulCoder Ai',
+  'View and edit LailatulCoder Ai settings':
+    'Ver e editar configurações do LailatulCoder Ai',
   Settings: 'Configurações',
   'To see changes, LailatulCoder Ai must be restarted. Press r to exit and apply changes now.':
     'Para ver as alterações, o LailatulCoder Ai deve ser reiniciado. Pressione r para sair e aplicar as alterações agora.',
@@ -1329,9 +1334,11 @@ export default {
   'From project settings': 'Das configurações do projeto',
   'From session': 'Da sessão',
   'Project settings': 'Configurações do projeto',
-  'Checked in at .lailatulcoder/settings.json': 'Registrado em .lailatulcoder/settings.json',
+  'Checked in at .lailatulcoder/settings.json':
+    'Registrado em .lailatulcoder/settings.json',
   'User settings': 'Configurações do usuário',
-  'Saved in at ~/.lailatulcoder/settings.json': 'Salvo em ~/.lailatulcoder/settings.json',
+  'Saved in at ~/.lailatulcoder/settings.json':
+    'Salvo em ~/.lailatulcoder/settings.json',
   'Add a new rule…': 'Adicionar nova regra…',
   'Add {{type}} permission rule': 'Adicionar {{type}} permission rule',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':

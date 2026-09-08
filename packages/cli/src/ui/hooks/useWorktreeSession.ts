@@ -8,7 +8,10 @@ import { useState, useEffect } from 'react';
 import fs from 'node:fs';
 import fsPromises from 'node:fs/promises';
 import path from 'node:path';
-import type { Config, WorktreeSession } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  WorktreeSession,
+} from '@lailatul-coder/lailatul-coder-core';
 import { readWorktreeSession } from '@lailatul-coder/lailatul-coder-core';
 
 /**

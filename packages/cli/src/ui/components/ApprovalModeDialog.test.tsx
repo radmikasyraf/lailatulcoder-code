@@ -143,4 +143,3 @@ describe('ApprovalModeDialog', () => {
     expect(frame).not.toContain('Use Enter to select');
   });
 });
-

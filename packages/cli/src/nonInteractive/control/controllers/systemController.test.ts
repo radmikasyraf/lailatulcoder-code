@@ -22,7 +22,9 @@ const { mockDebugLogger } = vi.hoisted(() => ({
 }));
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
+  ...(await importOriginal<
+    typeof import('@lailatul-coder/lailatul-coder-core')
+  >()),
   createDebugLogger: () => mockDebugLogger,
 }));
 

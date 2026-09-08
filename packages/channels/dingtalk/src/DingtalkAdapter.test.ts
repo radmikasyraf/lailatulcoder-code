@@ -115,9 +115,9 @@ vi.mock('@lailatul-coder/channel-base', async () => {
   // exercised against the shared helper, not a stub that could mask drift. The
   // vitest config aliases @lailatul-coder/channel-base to its SOURCE, so this resolves
   // with no prior channel-base build (dist may be absent/stale package-locally).
-  const real = await vi.importActual<typeof import('@lailatul-coder/channel-base')>(
-    '@lailatul-coder/channel-base',
-  );
+  const real = await vi.importActual<
+    typeof import('@lailatul-coder/channel-base')
+  >('@lailatul-coder/channel-base');
   return {
     ChannelBase: class {
       protected config: Record<string, unknown>;
@@ -195,8 +195,7 @@ function createChannel(
 
 function latestMockClient(): Record<string, unknown> {
   const client = dingtalkSdkMock.instances.at(-1) as
-    | Record<string, unknown>
-    | undefined;
+    Record<string, unknown> | undefined;
   if (!client) throw new Error('No mock DingTalk client created');
   return client;
 }
@@ -212,8 +211,7 @@ interface MockDingtalkClient {
 
 function mockClientAt(index: number): MockDingtalkClient {
   const client = dingtalkSdkMock.instances[index] as
-    | MockDingtalkClient
-    | undefined;
+    MockDingtalkClient | undefined;
   if (!client) throw new Error(`No mock DingTalk client at index ${index}`);
   return client;
 }
@@ -4044,9 +4042,8 @@ describe('DingtalkChannel mention target lifecycle', () => {
   it('does not retain a preflight-rejected group candidate', async () => {
     vi.doUnmock('@lailatul-coder/channel-base');
     vi.resetModules();
-    const { DingtalkChannel: RealDingtalkChannel } = await import(
-      './DingtalkAdapter.js'
-    );
+    const { DingtalkChannel: RealDingtalkChannel } =
+      await import('./DingtalkAdapter.js');
     const bridge = Object.assign(new EventEmitter(), {
       availableCommands: [],
       newSession: vi.fn().mockResolvedValue('session-1'),
@@ -4120,9 +4117,8 @@ describe('DingtalkChannel mention target lifecycle', () => {
   it('does not retain a local-command candidate', async () => {
     vi.doUnmock('@lailatul-coder/channel-base');
     vi.resetModules();
-    const { DingtalkChannel: RealDingtalkChannel } = await import(
-      './DingtalkAdapter.js'
-    );
+    const { DingtalkChannel: RealDingtalkChannel } =
+      await import('./DingtalkAdapter.js');
     const bridge = Object.assign(new EventEmitter(), {
       availableCommands: [],
       newSession: vi.fn().mockResolvedValue('session-1'),
@@ -4186,9 +4182,8 @@ describe('DingtalkChannel mention target lifecycle', () => {
   it('clears the final buffered command target after synthetic collect re-entry', async () => {
     vi.doUnmock('@lailatul-coder/channel-base');
     vi.resetModules();
-    const { DingtalkChannel: RealDingtalkChannel } = await import(
-      './DingtalkAdapter.js'
-    );
+    const { DingtalkChannel: RealDingtalkChannel } =
+      await import('./DingtalkAdapter.js');
     const firstPrompt = deferredPromise<string>();
     const bridge = Object.assign(new EventEmitter(), {
       availableCommands: [],
@@ -4260,9 +4255,8 @@ describe('DingtalkChannel mention target lifecycle', () => {
   it('clears buffered mention targets for a dead session only', async () => {
     vi.doUnmock('@lailatul-coder/channel-base');
     vi.resetModules();
-    const { DingtalkChannel: RealDingtalkChannel } = await import(
-      './DingtalkAdapter.js'
-    );
+    const { DingtalkChannel: RealDingtalkChannel } =
+      await import('./DingtalkAdapter.js');
     const bridge = Object.assign(new EventEmitter(), {
       availableCommands: [],
       newSession: vi.fn(),

@@ -21,7 +21,9 @@ describe('main CI failure issue workflow', () => {
     expect(workflow).toContain("workflows: ['E2E Tests', 'SDK Python']");
     expect(workflow).not.toContain("'LailatulCoder Ai CI'");
     expect(workflow).toContain("types: ['completed']");
-    expect(workflow).toContain("github.repository == 'LailatulCoder/lailatul-coder'");
+    expect(workflow).toContain(
+      "github.repository == 'LailatulCoder/lailatul-coder'",
+    );
     expect(workflow).toContain(
       "github.event.workflow_run.conclusion == 'failure'",
     );

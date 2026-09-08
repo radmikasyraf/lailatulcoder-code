@@ -20,10 +20,7 @@ import {
 } from './geminiChat.js';
 
 export type SessionRecoveryKind =
-  | 'clean'
-  | 'interrupted_prompt'
-  | 'interrupted_turn'
-  | 'degraded_history';
+  'clean' | 'interrupted_prompt' | 'interrupted_turn' | 'degraded_history';
 
 export type RecoveryRepair =
   | { type: 'synthesized_tool_result'; callId: string; name: string }

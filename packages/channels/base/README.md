@@ -99,15 +99,15 @@ Everything between `handleInbound()` and `sendMessage()` is handled by the base 
 
 ### Classes
 
-| Class           | Purpose                                                                              |
-| --------------- | ------------------------------------------------------------------------------------ |
-| `ChannelBase`   | Abstract base class — extend this to build a channel adapter                         |
+| Class           | Purpose                                                                                   |
+| --------------- | ----------------------------------------------------------------------------------------- |
+| `ChannelBase`   | Abstract base class — extend this to build a channel adapter                              |
 | `AcpBridge`     | Current standalone `qwen channel start` bridge implementation over `lailatul-coder --acp` |
-| `BlockStreamer` | Progressive multi-message delivery for block streaming                               |
-| `SessionRouter` | Maps senders to agent sessions with configurable scoping                             |
-| `SenderGate`    | DM access control (allowlist / pairing / open)                                       |
-| `GroupGate`     | Group chat policy and @mention gating                                                |
-| `PairingStore`  | Pairing code generation, approval, and allowlist persistence                         |
+| `BlockStreamer` | Progressive multi-message delivery for block streaming                                    |
+| `SessionRouter` | Maps senders to agent sessions with configurable scoping                                  |
+| `SenderGate`    | DM access control (allowlist / pairing / open)                                            |
+| `GroupGate`     | Group chat policy and @mention gating                                                     |
+| `PairingStore`  | Pairing code generation, approval, and allowlist persistence                              |
 
 ### Types
 

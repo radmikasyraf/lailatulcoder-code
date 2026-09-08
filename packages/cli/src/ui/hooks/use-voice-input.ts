@@ -48,10 +48,7 @@ export type VoiceTranscriber = (
 ) => Promise<string>;
 
 export type VoiceInputStatus =
-  | 'idle'
-  | 'recording'
-  | 'transcribing'
-  | 'refining';
+  'idle' | 'recording' | 'transcribing' | 'refining';
 
 /** hold = hold-to-talk (release stops, dictation only). tap = tap to start, tap/silence to stop+submit. */
 export type VoiceInputMode = 'hold' | 'tap';

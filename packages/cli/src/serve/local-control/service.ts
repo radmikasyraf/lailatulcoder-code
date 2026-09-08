@@ -229,7 +229,9 @@ export class LocalControlService {
     // SSH sessions and on hosts without a usable backend. A phone losing its
     // session to a sleeping laptop should be explainable from the status, so
     // `sleepInhibited` reflects what actually happened rather than intent.
-    this.#sleep = sleepInhibitor.acquire('LailatulCoder Ai Local Control is active');
+    this.#sleep = sleepInhibitor.acquire(
+      'LailatulCoder Ai Local Control is active',
+    );
     return this.status();
   }
 

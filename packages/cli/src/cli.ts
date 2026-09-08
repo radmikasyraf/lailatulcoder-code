@@ -356,9 +356,8 @@ export async function runCliEntry(
   if (managedUpdateVersion) {
     delete process.env['QWEN_CODE_MANAGED_NPM_UPDATE_VERSION'];
     delete process.env['QWEN_CODE_EXTERNAL_TOOL_GUARD_TOKEN'];
-    const { installManagedNpmUpdate } = await import(
-      './utils/managed-npm-update.js'
-    );
+    const { installManagedNpmUpdate } =
+      await import('./utils/managed-npm-update.js');
     await installManagedNpmUpdate(managedUpdateVersion);
     return;
   }

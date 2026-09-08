@@ -409,4 +409,3 @@ function setWindowTitle(settings: LoadedSettings, folderName?: string) {
     }
   });
 }
-

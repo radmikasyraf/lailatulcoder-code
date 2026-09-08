@@ -68,8 +68,7 @@ export function createDefaultFsAuditEmit(): (event: BridgeEvent) => void {
     droppedCount += 1;
     if (droppedCount === 1 || droppedCount % WARN_EVERY === 0) {
       const data = event.data as
-        | { errorKind?: string; pathHash?: string; intent?: string }
-        | undefined;
+        { errorKind?: string; pathHash?: string; intent?: string } | undefined;
       const ctx: string[] = [];
       if (data?.errorKind) ctx.push(`errorKind=${data.errorKind}`);
       if (data?.intent) ctx.push(`intent=${data.intent}`);

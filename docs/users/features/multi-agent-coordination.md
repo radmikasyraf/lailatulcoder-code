@@ -25,6 +25,6 @@ If Agent Team is disabled, `/coordinate` can still use ordinary foreground agent
 | `/coordinate` with Agent Team | Different workstreams contributing to one result                | Shared tasks and teammate messages | Enforced read-only workers; optional single worktree writer |
 | Subagents                     | Small delegated tasks                                           | Worker reports to parent           | Depends on the selected agent                               |
 | Arena                         | Several models competing on the same task                       | Agents do not collaborate          | Isolated worktrees; one winner is selected                  |
-| Herdr                         | Coordinating different CLI products or remote terminal sessions | External terminal-level control    | Managed outside LailatulCoder Ai                                   |
+| Herdr                         | Coordinating different CLI products or remote terminal sessions | External terminal-level control    | Managed outside LailatulCoder Ai                            |
 
 The current workflow deliberately reuses the in-process Agent Team runtime and Agent View UI. Teammates normally inherit the session model, although an agent definition can override it. Persistent independent PTY sessions, cross-vendor workers, and remote attach are separate product concerns and are not implemented by `/coordinate`.

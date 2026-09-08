@@ -23,4 +23,3 @@ export const hooksCommand: CommandModule = {
     process.exit(0);
   },
 };
-

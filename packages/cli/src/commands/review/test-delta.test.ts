@@ -59,7 +59,8 @@ describe('failingFilesOf', () => {
     // Dropping it collapsed same-named files across workspaces, so a PR-caused
     // failure in one package could read as pre-existing because another package
     // has a file by the same name.
-    const out = ' FAIL  |@lailatul-coder/lailatul-coder| src/commands/x.test.ts > case';
+    const out =
+      ' FAIL  |@lailatul-coder/lailatul-coder| src/commands/x.test.ts > case';
     expect(failingFilesOf(out)).toEqual([
       '@lailatul-coder/lailatul-coder::src/commands/x.test.ts',
     ]);

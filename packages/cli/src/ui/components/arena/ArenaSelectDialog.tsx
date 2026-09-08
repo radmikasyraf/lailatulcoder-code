@@ -408,4 +408,3 @@ function getDiffLineColor(line: string): string {
   }
   return theme.text.secondary;
 }
-

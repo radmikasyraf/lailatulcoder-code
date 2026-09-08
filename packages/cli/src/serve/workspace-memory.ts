@@ -547,14 +547,12 @@ export async function collectWorkspaceMemoryStatus(
     v: STATUS_SCHEMA_VERSION,
     workspaceCwd: boundWorkspace,
     initialized: true,
-    files: files.map(
-      (f): ServeWorkspaceMemoryFile => ({
-        kind: 'memory_file',
-        path: f.absolutePath,
-        scope: f.scope,
-        bytes: f.bytes,
-      }),
-    ),
+    files: files.map((f): ServeWorkspaceMemoryFile => ({
+      kind: 'memory_file',
+      path: f.absolutePath,
+      scope: f.scope,
+      bytes: f.bytes,
+    })),
     totalBytes,
     fileCount: files.length,
     ruleCount: 0,

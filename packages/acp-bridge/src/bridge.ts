@@ -2502,8 +2502,7 @@ const DEFAULT_SESSION_IDLE_TIMEOUT_MS = 30 * 60_000;
 
 export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
   let liveScreenContextCaptureHandler:
-    | LiveScreenContextCaptureHandler
-    | undefined;
+    LiveScreenContextCaptureHandler | undefined;
   let liveTaskToolRequestHandler: LiveTaskToolRequestHandler | undefined;
   let liveSpeakToUserHandler: LiveSpeakToUserHandler | undefined;
   const defaultSessionScope = opts.sessionScope ?? 'single';
@@ -3391,7 +3390,8 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
       );
       telemetry.event('session.restore.settlement_overdue', {
         'lailatul-coder.daemon.session_restore.action': action,
-        'lailatul-coder.daemon.session_restore.timeout_ms': sessionRestoreTimeoutMs,
+        'lailatul-coder.daemon.session_restore.timeout_ms':
+          sessionRestoreTimeoutMs,
         'lailatul-coder.daemon.session_restore.settlement_grace_ms':
           restoreSettlementGraceMs,
         'lailatul-coder.daemon.acp_channel.id': ci.id,
@@ -4195,7 +4195,8 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
           telemetry.event('channel.exited', {
             'lailatul-coder.daemon.channel.exit_code': exitInfo?.exitCode ?? -1,
             'lailatul-coder.daemon.channel.session_count': sessions.length,
-            'lailatul-coder.daemon.channel.transport_failed': info.transportFailed,
+            'lailatul-coder.daemon.channel.transport_failed':
+              info.transportFailed,
             'lailatul-coder.daemon.channel.transport_failure_initiated_teardown':
               info.transportFailureInitiatedTeardown,
             ...(info.transportFailureCode
@@ -6827,7 +6828,8 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
       telemetry.event('session.restore.late_result', {
         'lailatul-coder.daemon.session_restore.action': action,
         'lailatul-coder.daemon.session_restore.result': lateResult,
-        'lailatul-coder.daemon.session_restore.timeout_ms': sessionRestoreTimeoutMs,
+        'lailatul-coder.daemon.session_restore.timeout_ms':
+          sessionRestoreTimeoutMs,
         'lailatul-coder.daemon.acp_channel.id': channel.id,
         'session.id': req.sessionId,
       });
@@ -6844,7 +6846,8 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
         );
         telemetry.event('session.restore.cleanup', {
           'lailatul-coder.daemon.session_restore.action': action,
-          'lailatul-coder.daemon.session_restore.cleanup_result': 'id_reclaimed',
+          'lailatul-coder.daemon.session_restore.cleanup_result':
+            'id_reclaimed',
           'lailatul-coder.daemon.session_restore.timeout_ms':
             sessionRestoreTimeoutMs,
           'lailatul-coder.daemon.acp_channel.id': channel.id,
@@ -6906,7 +6909,8 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
           if (isAcpSessionResourceNotFound(error, req.sessionId)) {
             telemetry.event('session.restore.cleanup', {
               'lailatul-coder.daemon.session_restore.action': action,
-              'lailatul-coder.daemon.session_restore.cleanup_result': 'not_found',
+              'lailatul-coder.daemon.session_restore.cleanup_result':
+                'not_found',
               'lailatul-coder.daemon.session_restore.timeout_ms':
                 sessionRestoreTimeoutMs,
               'lailatul-coder.daemon.acp_channel.id': channel.id,
@@ -6935,7 +6939,8 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
           );
           telemetry.event('session.restore.cleanup', {
             'lailatul-coder.daemon.session_restore.action': action,
-            'lailatul-coder.daemon.session_restore.cleanup_result': 'quarantined',
+            'lailatul-coder.daemon.session_restore.cleanup_result':
+              'quarantined',
             'lailatul-coder.daemon.session_restore.timeout_ms':
               sessionRestoreTimeoutMs,
             'lailatul-coder.daemon.acp_channel.id': channel.id,
@@ -11779,11 +11784,7 @@ export function createAcpSessionBridge(opts: BridgeOptions): AcpSessionBridge {
           ])) as {
             serverName: string;
             action:
-              | 'approve'
-              | 'enable'
-              | 'disable'
-              | 'authenticate'
-              | 'clear-auth';
+              'approve' | 'enable' | 'disable' | 'authenticate' | 'clear-auth';
             ok: true;
             changed?: boolean;
             messages?: string[];

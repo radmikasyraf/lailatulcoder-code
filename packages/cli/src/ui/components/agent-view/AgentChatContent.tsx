@@ -282,4 +282,3 @@ export const AgentChatMissing = ({ label }: { label: string }) => (
     <Text color={theme.status.error}>{label}</Text>
   </Box>
 );
-

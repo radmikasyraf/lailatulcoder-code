@@ -1031,16 +1031,18 @@ describe('CoreToolScheduler', () => {
       returnDisplay: 'read',
     });
     const messageBus = {
-      request: vi.fn().mockImplementation(
-        async (request: {
-          eventName: string;
-        }): Promise<HookExecutionResponse> => ({
-          type: MessageBusType.HOOK_EXECUTION_RESPONSE,
-          correlationId: `${request.eventName}-hook`,
-          success: true,
-          output: { decision: 'allow' },
-        }),
-      ),
+      request: vi
+        .fn()
+        .mockImplementation(
+          async (request: {
+            eventName: string;
+          }): Promise<HookExecutionResponse> => ({
+            type: MessageBusType.HOOK_EXECUTION_RESPONSE,
+            correlationId: `${request.eventName}-hook`,
+            success: true,
+            output: { decision: 'allow' },
+          }),
+        ),
     };
     const toolsByName = new Map<string, MockTool>([
       [
@@ -1376,26 +1378,28 @@ describe('CoreToolScheduler', () => {
       execute,
     });
     const messageBus = {
-      request: vi.fn().mockImplementation(
-        async (request: {
-          eventName: string;
-        }): Promise<HookExecutionResponse> => ({
-          type: MessageBusType.HOOK_EXECUTION_RESPONSE,
-          correlationId: `${request.eventName}-hook`,
-          success: true,
-          output:
-            request.eventName === 'PermissionRequest'
-              ? {
-                  hookSpecificOutput: {
-                    decision: {
-                      behavior: 'allow',
-                      updatedInput: { plan: 'Hook-replaced plan' },
+      request: vi
+        .fn()
+        .mockImplementation(
+          async (request: {
+            eventName: string;
+          }): Promise<HookExecutionResponse> => ({
+            type: MessageBusType.HOOK_EXECUTION_RESPONSE,
+            correlationId: `${request.eventName}-hook`,
+            success: true,
+            output:
+              request.eventName === 'PermissionRequest'
+                ? {
+                    hookSpecificOutput: {
+                      decision: {
+                        behavior: 'allow',
+                        updatedInput: { plan: 'Hook-replaced plan' },
+                      },
                     },
-                  },
-                }
-              : { decision: 'allow' },
-        }),
-      ),
+                  }
+                : { decision: 'allow' },
+          }),
+        ),
     };
     const onToolCallsUpdate = vi.fn();
     const { scheduler, onAllToolCallsComplete } =
@@ -1873,9 +1877,8 @@ describe('CoreToolScheduler', () => {
       llmContent: 'first executed',
       returnDisplay: 'first executed',
     });
-    const siblingPermission = vi.fn(
-      async (): Promise<PermissionDecision> =>
-        siblingWouldOtherwiseAllow ? 'allow' : 'ask',
+    const siblingPermission = vi.fn(async (): Promise<PermissionDecision> =>
+      siblingWouldOtherwiseAllow ? 'allow' : 'ask',
     );
     const siblingExecute = vi.fn().mockResolvedValue({
       llmContent: 'sibling executed',
@@ -3718,26 +3721,28 @@ describe('CoreToolScheduler', () => {
       return build(params);
     });
     const messageBus = {
-      request: vi.fn().mockImplementation(
-        async (request: {
-          eventName: string;
-        }): Promise<HookExecutionResponse> => ({
-          type: MessageBusType.HOOK_EXECUTION_RESPONSE,
-          correlationId: `${request.eventName}-hook`,
-          success: true,
-          output:
-            request.eventName === 'PermissionRequest'
-              ? {
-                  hookSpecificOutput: {
-                    decision: {
-                      behavior: 'allow',
-                      updatedInput: { unexpected: true },
+      request: vi
+        .fn()
+        .mockImplementation(
+          async (request: {
+            eventName: string;
+          }): Promise<HookExecutionResponse> => ({
+            type: MessageBusType.HOOK_EXECUTION_RESPONSE,
+            correlationId: `${request.eventName}-hook`,
+            success: true,
+            output:
+              request.eventName === 'PermissionRequest'
+                ? {
+                    hookSpecificOutput: {
+                      decision: {
+                        behavior: 'allow',
+                        updatedInput: { unexpected: true },
+                      },
                     },
-                  },
-                }
-              : { decision: 'allow' },
-        }),
-      ),
+                  }
+                : { decision: 'allow' },
+          }),
+        ),
     };
     const { scheduler, onAllToolCallsComplete } =
       createSchedulerForLegacyToolTests({
@@ -4155,25 +4160,27 @@ describe('CoreToolScheduler', () => {
       ],
     ]);
     const messageBus = {
-      request: vi.fn().mockImplementation(
-        async (request: {
-          eventName: string;
-        }): Promise<HookExecutionResponse> => ({
-          type: MessageBusType.HOOK_EXECUTION_RESPONSE,
-          correlationId: `${request.eventName}-hook`,
-          success: true,
-          output:
-            request.eventName === 'PermissionRequest'
-              ? {
-                  hookSpecificOutput: {
-                    decision: {
-                      behavior: 'allow',
+      request: vi
+        .fn()
+        .mockImplementation(
+          async (request: {
+            eventName: string;
+          }): Promise<HookExecutionResponse> => ({
+            type: MessageBusType.HOOK_EXECUTION_RESPONSE,
+            correlationId: `${request.eventName}-hook`,
+            success: true,
+            output:
+              request.eventName === 'PermissionRequest'
+                ? {
+                    hookSpecificOutput: {
+                      decision: {
+                        behavior: 'allow',
+                      },
                     },
-                  },
-                }
-              : { decision: 'allow' },
-        }),
-      ),
+                  }
+                : { decision: 'allow' },
+          }),
+        ),
     };
     const { scheduler, onAllToolCallsComplete } =
       createSchedulerForLegacyToolTests({
@@ -4404,8 +4411,7 @@ describe('CoreToolScheduler', () => {
       returnDisplay: 'alpha output',
     });
     let releasePostToolBatch:
-      | ((response: HookExecutionResponse) => void)
-      | undefined;
+      ((response: HookExecutionResponse) => void) | undefined;
     const messageBus = {
       request: vi
         .fn()
@@ -4965,16 +4971,18 @@ describe('CoreToolScheduler', () => {
       ],
     ]);
     const messageBus = {
-      request: vi.fn().mockImplementation(
-        async (request: {
-          eventName: string;
-        }): Promise<HookExecutionResponse> => ({
-          type: MessageBusType.HOOK_EXECUTION_RESPONSE,
-          correlationId: `${request.eventName}-hook`,
-          success: true,
-          output: { decision: 'allow' },
-        }),
-      ),
+      request: vi
+        .fn()
+        .mockImplementation(
+          async (request: {
+            eventName: string;
+          }): Promise<HookExecutionResponse> => ({
+            type: MessageBusType.HOOK_EXECUTION_RESPONSE,
+            correlationId: `${request.eventName}-hook`,
+            success: true,
+            output: { decision: 'allow' },
+          }),
+        ),
     };
     const onAllToolCallsComplete = vi.fn();
     const recordToolResult = vi.fn();
@@ -5504,26 +5512,28 @@ describe('CoreToolScheduler', () => {
       ],
     ]);
     const messageBus = {
-      request: vi.fn().mockImplementation(
-        async (request: {
-          eventName: string;
-        }): Promise<HookExecutionResponse> => ({
-          type: MessageBusType.HOOK_EXECUTION_RESPONSE,
-          correlationId: `${request.eventName}-hook`,
-          success: true,
-          output:
-            request.eventName === 'PostToolBatch'
-              ? {
-                  continue: false,
-                  stopReason: 'halt',
-                  hookSpecificOutput: {
-                    hookEventName: 'PostToolBatch',
-                    additionalContext: 'batch context',
-                  },
-                }
-              : { decision: 'allow' },
-        }),
-      ),
+      request: vi
+        .fn()
+        .mockImplementation(
+          async (request: {
+            eventName: string;
+          }): Promise<HookExecutionResponse> => ({
+            type: MessageBusType.HOOK_EXECUTION_RESPONSE,
+            correlationId: `${request.eventName}-hook`,
+            success: true,
+            output:
+              request.eventName === 'PostToolBatch'
+                ? {
+                    continue: false,
+                    stopReason: 'halt',
+                    hookSpecificOutput: {
+                      hookEventName: 'PostToolBatch',
+                      additionalContext: 'batch context',
+                    },
+                  }
+                : { decision: 'allow' },
+          }),
+        ),
     };
     const onAllToolCallsComplete = vi.fn();
     const { scheduler } = createSchedulerForLegacyToolTests({
@@ -5725,23 +5735,25 @@ describe('CoreToolScheduler', () => {
       ],
     ]);
     const messageBus = {
-      request: vi.fn().mockImplementation(
-        async (request: {
-          eventName: string;
-        }): Promise<HookExecutionResponse> => ({
-          type: MessageBusType.HOOK_EXECUTION_RESPONSE,
-          correlationId: `${request.eventName}-hook`,
-          success: request.eventName !== 'PostToolBatch',
-          output:
-            request.eventName === 'PostToolBatch'
-              ? undefined
-              : { decision: 'allow' },
-          error:
-            request.eventName === 'PostToolBatch'
-              ? new Error('bus timeout')
-              : undefined,
-        }),
-      ),
+      request: vi
+        .fn()
+        .mockImplementation(
+          async (request: {
+            eventName: string;
+          }): Promise<HookExecutionResponse> => ({
+            type: MessageBusType.HOOK_EXECUTION_RESPONSE,
+            correlationId: `${request.eventName}-hook`,
+            success: request.eventName !== 'PostToolBatch',
+            output:
+              request.eventName === 'PostToolBatch'
+                ? undefined
+                : { decision: 'allow' },
+            error:
+              request.eventName === 'PostToolBatch'
+                ? new Error('bus timeout')
+                : undefined,
+          }),
+        ),
     };
     const onAllToolCallsComplete = vi.fn();
     const { scheduler } = createSchedulerForLegacyToolTests({
@@ -8542,8 +8554,7 @@ describe('CoreToolScheduler request queueing', () => {
     const cancelledCall = onToolCallsUpdate.mock.calls
       .flatMap((call) => call[0] as ToolCall[])
       .find((call) => call.status === 'cancelled') as
-      | CompletedToolCall
-      | undefined;
+      CompletedToolCall | undefined;
     expect(cancelledCall?.response.executionStatus).toBe('not_started');
     expect(hookSystem.firePermissionDeniedEvent).not.toHaveBeenCalled();
   });
@@ -8886,8 +8897,7 @@ describe('CoreToolScheduler truncated output protection', () => {
       });
 
       const completedCalls = onAllToolCallsComplete.mock.calls.at(-1)?.[0] as
-        | ToolCall[]
-        | undefined;
+        ToolCall[] | undefined;
       const completedCall = completedCalls?.[0];
       expect(completedCall?.status).toBe('error');
       if (completedCall?.status === 'error') {
@@ -11256,8 +11266,7 @@ describe('CoreToolScheduler telemetry spans', () => {
 
     expect(execute).not.toHaveBeenCalled();
     const completedCalls = onAllToolCallsComplete.mock.calls.at(-1)?.[0] as
-      | CompletedToolCall[]
-      | undefined;
+      CompletedToolCall[] | undefined;
     expect(completedCalls).toHaveLength(1);
     expect(completedCalls?.[0]).toMatchObject({
       status: 'cancelled',
@@ -11692,8 +11701,7 @@ describe('CoreToolScheduler telemetry spans', () => {
 
       const spanRecord = getLastToolSpan();
       const completedCalls = onAllToolCallsComplete.mock.calls.at(-1)?.[0] as
-        | ToolCall[]
-        | undefined;
+        ToolCall[] | undefined;
       expect(completedCalls?.[0].status).toBe('error');
       expect(spanRecord.spanAttributes['tool.failure_kind']).toBe('timeout');
       expect(spanRecord.ended).toBe(true);
@@ -15142,7 +15150,9 @@ describe('CoreToolScheduler telemetry spans', () => {
       (r) => r.name === 'tool.mockEditTool',
     );
     expect(
-      toolSpan?.spanAttributes['lailatul-coder.tool.modify_with_editor_unavailable'],
+      toolSpan?.spanAttributes[
+        'lailatul-coder.tool.modify_with_editor_unavailable'
+      ],
     ).toBe(true);
     // Span stays open — user can recover via Cancel/Proceed.
     expect(toolSpan?.ended).toBe(false);
@@ -15476,9 +15486,8 @@ describe('Fire hook functions integration', () => {
 
   describe('firePostToolUseFailureHook', () => {
     it('should return additional context when hook provides it', async () => {
-      const { firePostToolUseFailureHook } = await import(
-        './toolHookTriggers.js'
-      );
+      const { firePostToolUseFailureHook } =
+        await import('./toolHookTriggers.js');
 
       const mockResponse: HookExecutionResponse = {
         type: MessageBusType.HOOK_EXECUTION_RESPONSE,
@@ -15507,9 +15516,8 @@ describe('Fire hook functions integration', () => {
     });
 
     it('should return empty object when no message bus is provided', async () => {
-      const { firePostToolUseFailureHook } = await import(
-        './toolHookTriggers.js'
-      );
+      const { firePostToolUseFailureHook } =
+        await import('./toolHookTriggers.js');
 
       const result = await firePostToolUseFailureHook(
         undefined,
@@ -15580,9 +15588,8 @@ describe('Fire hook functions integration', () => {
 
   describe('firePermissionRequestHook', () => {
     it('should return hasDecision: false when hook makes no decision', async () => {
-      const { firePermissionRequestHook } = await import(
-        './toolHookTriggers.js'
-      );
+      const { firePermissionRequestHook } =
+        await import('./toolHookTriggers.js');
 
       const mockResponse: HookExecutionResponse = {
         type: MessageBusType.HOOK_EXECUTION_RESPONSE,
@@ -15606,9 +15613,8 @@ describe('Fire hook functions integration', () => {
     });
 
     it('should return hasDecision: true with allow decision when hook allows', async () => {
-      const { firePermissionRequestHook } = await import(
-        './toolHookTriggers.js'
-      );
+      const { firePermissionRequestHook } =
+        await import('./toolHookTriggers.js');
 
       const mockResponse: HookExecutionResponse = {
         type: MessageBusType.HOOK_EXECUTION_RESPONSE,
@@ -15639,9 +15645,8 @@ describe('Fire hook functions integration', () => {
     });
 
     it('should return hasDecision: true with deny decision when hook denies', async () => {
-      const { firePermissionRequestHook } = await import(
-        './toolHookTriggers.js'
-      );
+      const { firePermissionRequestHook } =
+        await import('./toolHookTriggers.js');
 
       const mockResponse: HookExecutionResponse = {
         type: MessageBusType.HOOK_EXECUTION_RESPONSE,
@@ -15674,9 +15679,8 @@ describe('Fire hook functions integration', () => {
     });
 
     it('should return hasDecision: false when no message bus is provided', async () => {
-      const { firePermissionRequestHook } = await import(
-        './toolHookTriggers.js'
-      );
+      const { firePermissionRequestHook } =
+        await import('./toolHookTriggers.js');
 
       const result = await firePermissionRequestHook(
         undefined,

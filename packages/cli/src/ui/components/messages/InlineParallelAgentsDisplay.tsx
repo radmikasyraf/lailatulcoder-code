@@ -381,4 +381,3 @@ const AgentRow: React.FC<{ row: RowData; now: number }> = ({ row, now }) => {
     </Box>
   );
 };
-

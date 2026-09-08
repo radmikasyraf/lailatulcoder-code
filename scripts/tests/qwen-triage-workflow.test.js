@@ -115,7 +115,8 @@ function makeGhHarness(label) {
     ].join('\n'),
     { mode: 0o755 },
   );
-  const RUN_URL = 'https://github.com/LailatulCoder/lailatul-coder/actions/runs/77';
+  const RUN_URL =
+    'https://github.com/LailatulCoder/lailatul-coder/actions/runs/77';
   const bashArgs = ['--noprofile', '--norc', '-eo', 'pipefail', '-c'];
   const run = (script, env) => {
     rmSync(bodyOut, { force: true });
@@ -1398,7 +1399,9 @@ describe('qwen-triage verify workflow', () => {
     try {
       // Drive-by commenter without write cannot spend the sandbox budget,
       // whoever the author is.
-      expect(gate('@lailatul-coder /verify', 'alice', 'mallory').run).toBe('false');
+      expect(gate('@lailatul-coder /verify', 'alice', 'mallory').run).toBe(
+        'false',
+      );
       // Write-access author -> trusted, no snapshot needed.
       const trusted = gate('@lailatul-coder /verify', 'alice', 'bob');
       expect(trusted.run).toBe('true');
@@ -1415,7 +1418,9 @@ describe('qwen-triage verify workflow', () => {
         'trusted',
       );
       // Author permission unreadable -> deny; routing must not guess.
-      expect(gate('@lailatul-coder /verify', 'charlie', 'bob').run).toBe('false');
+      expect(gate('@lailatul-coder /verify', 'charlie', 'bob').run).toBe(
+        'false',
+      );
       // Deleted author (empty login) -> deny, same reason.
       expect(gate('@lailatul-coder /verify', '', 'bob').run).toBe('false');
       // Head OID snapshot failure -> deny: a sponsored run without a
@@ -1424,9 +1429,13 @@ describe('qwen-triage verify workflow', () => {
         'false',
       );
       // /tmux keeps its author-only gate; /triage keeps the commenter gate.
-      expect(gate('@lailatul-coder /tmux', 'alice', 'mallory').run).toBe('true');
+      expect(gate('@lailatul-coder /tmux', 'alice', 'mallory').run).toBe(
+        'true',
+      );
       expect(gate('@lailatul-coder /tmux', 'mallory', 'bob').run).toBe('false');
-      expect(gate('@lailatul-coder /triage', 'mallory', 'bob').run).toBe('true');
+      expect(gate('@lailatul-coder /triage', 'mallory', 'bob').run).toBe(
+        'true',
+      );
 
       // /triage on a PR ALSO starts the verify lane, in parallel — and the
       // point of routing it through the same classifier is that an external
@@ -1439,7 +1448,9 @@ describe('qwen-triage verify workflow', () => {
       expect(triagePr.lane).toBe('true');
       expect(triagePr.trust).toBe('external');
       expect(triagePr.oid).toBe('deadbeefcafe');
-      expect(gate('@lailatul-coder /triage', 'alice', 'bob').trust).toBe('trusted');
+      expect(gate('@lailatul-coder /triage', 'alice', 'bob').trust).toBe(
+        'trusted',
+      );
 
       // The lane fails closed DIFFERENTLY from an explicit /verify. An
       // unreadable author permission denies `/verify` outright, because the
@@ -1453,14 +1464,22 @@ describe('qwen-triage verify workflow', () => {
       const oidFail = gate('@lailatul-coder /triage', 'mallory', 'bob', '99');
       expect(oidFail.run).toBe('true');
       expect(oidFail.lane).toBe('false');
-      expect(gate('@lailatul-coder /verify', 'charlie', 'bob').run).toBe('false');
+      expect(gate('@lailatul-coder /verify', 'charlie', 'bob').run).toBe(
+        'false',
+      );
 
       // On a plain ISSUE there is nothing to build, so the lane stays off
       // and no author lookup is spent. This assertion used to be written as
       // "/triage emits no trust outputs" with a fixture that never set
       // IS_PR — true for the wrong reason, and it would have stayed green
       // through the change above.
-      const triageIssue = gate('@lailatul-coder /triage', 'mallory', 'bob', '1', '');
+      const triageIssue = gate(
+        '@lailatul-coder /triage',
+        'mallory',
+        'bob',
+        '1',
+        '',
+      );
       expect(triageIssue.run).toBe('true');
       expect(triageIssue.lane).toBeUndefined();
       expect(triageIssue.trust).toBeUndefined();
@@ -1545,7 +1564,9 @@ describe('qwen-triage verify workflow', () => {
     // same output; an unguarded group would let non-runnable triggers share
     // the per-PR group and cancel a real run.
     expect(ifBlock).not.toContain("comment.body == '@lailatul-coder /verify'");
-    expect(concBlock).not.toContain("comment.body == '@lailatul-coder /verify'");
+    expect(concBlock).not.toContain(
+      "comment.body == '@lailatul-coder /verify'",
+    );
 
     // And the authorize job has to actually publish it.
     expect(job('authorize')).toContain(

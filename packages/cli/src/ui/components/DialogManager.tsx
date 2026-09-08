@@ -596,4 +596,3 @@ export const DialogManager = ({
 
   return null;
 };
-

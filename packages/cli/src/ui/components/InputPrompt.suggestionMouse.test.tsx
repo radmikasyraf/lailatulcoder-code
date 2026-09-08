@@ -352,4 +352,3 @@ describe('InputPrompt suggestion mouse routing', () => {
     unmount();
   });
 });
-

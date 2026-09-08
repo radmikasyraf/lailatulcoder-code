@@ -225,7 +225,8 @@ export function registerSseEventsRoutes(
         'lailatul-coder.daemon.sse.queued_bytes': common.queuedBytes,
         'lailatul-coder.daemon.sse.max_queued_bytes': common.maxQueuedBytes,
         'lailatul-coder.daemon.sse.trigger_event_type': common.triggerEventType,
-        'lailatul-coder.daemon.sse.trigger_event_bytes': common.triggerEventBytes,
+        'lailatul-coder.daemon.sse.trigger_event_bytes':
+          common.triggerEventBytes,
       };
       let handled = false;
       if (diagnostic.type === 'slow_client_warning') {
@@ -258,7 +259,8 @@ export function registerSseEventsRoutes(
           {
             ...telemetryCommon,
             'lailatul-coder.daemon.sse.threshold': diagnostic.data.threshold,
-            'lailatul-coder.daemon.sse.last_event_id': diagnostic.data.lastEventId,
+            'lailatul-coder.daemon.sse.last_event_id':
+              diagnostic.data.lastEventId,
           },
         );
       } else {
@@ -455,7 +457,8 @@ export function registerSseEventsRoutes(
         'lailatul-coder.daemon.sse.close_reason': resolvedCloseReason,
         ...(lastEventIdWritten !== undefined
           ? {
-              'lailatul-coder.daemon.sse.last_event_id_written': lastEventIdWritten,
+              'lailatul-coder.daemon.sse.last_event_id_written':
+                lastEventIdWritten,
             }
           : {}),
         ...(eventBusEvictionReason
@@ -466,7 +469,8 @@ export function registerSseEventsRoutes(
           : {}),
         ...(terminalEventType
           ? {
-              'lailatul-coder.daemon.sse.terminal_event_type': terminalEventType,
+              'lailatul-coder.daemon.sse.terminal_event_type':
+                terminalEventType,
             }
           : {}),
       };

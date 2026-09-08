@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { createDebugLogger, isGitRepository } from '@lailatul-coder/lailatul-coder-core';
+import {
+  createDebugLogger,
+  isGitRepository,
+} from '@lailatul-coder/lailatul-coder-core';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as childProcess from 'node:child_process';
@@ -269,7 +272,8 @@ export function getInstallationInfo(
 
     // Check for yarn
     if (realPath.includes('/.yarn/global')) {
-      const updateCommand = 'yarn global add @lailatul-coder/lailatul-coder@latest';
+      const updateCommand =
+        'yarn global add @lailatul-coder/lailatul-coder@latest';
       return {
         packageManager: PackageManager.YARN,
         isGlobal: true,
@@ -347,7 +351,8 @@ export function getInstallationInfo(
       };
     }
 
-    const updateCommand = 'npm install -g @lailatul-coder/lailatul-coder@latest';
+    const updateCommand =
+      'npm install -g @lailatul-coder/lailatul-coder@latest';
     return {
       packageManager: PackageManager.NPM,
       isGlobal: true,

@@ -26,7 +26,9 @@ const coreMock = vi.hoisted(() => ({
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   class TestModelsConfig extends actual.ModelsConfig {
     constructor(options: ConstructorParameters<typeof actual.ModelsConfig>[0]) {
       if (coreMock.throwModelsConfigError) {

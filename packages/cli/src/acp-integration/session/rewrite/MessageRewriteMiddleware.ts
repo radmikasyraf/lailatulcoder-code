@@ -81,8 +81,7 @@ export class MessageRewriteMiddleware {
     }
 
     const content = updateRecord['content'] as
-      | Record<string, string>
-      | undefined;
+      Record<string, string> | undefined;
     const text = content?.['text'] ?? '';
 
     // Always send original message as-is

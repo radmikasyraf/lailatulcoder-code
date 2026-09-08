@@ -120,12 +120,7 @@ function makeConfig(opts: {
 
 type StatusOverride = {
   status?:
-    | 'running'
-    | 'pausing'
-    | 'paused'
-    | 'completed'
-    | 'failed'
-    | 'cancelled';
+    'running' | 'pausing' | 'paused' | 'completed' | 'failed' | 'cancelled';
   endTime?: number;
 };
 
@@ -207,12 +202,7 @@ const dream = (
   startTimeMs: number,
   overrides: Partial<{
     status:
-      | 'pending'
-      | 'running'
-      | 'completed'
-      | 'failed'
-      | 'cancelled'
-      | 'skipped';
+      'pending' | 'running' | 'completed' | 'failed' | 'cancelled' | 'skipped';
     progressText: string;
     error: string;
     metadata: Record<string, unknown>;

@@ -228,12 +228,7 @@ export const SERVE_CONTROL_EXT_METHODS = {
 } as const;
 
 export type ServeStatus =
-  | 'ok'
-  | 'warning'
-  | 'error'
-  | 'disabled'
-  | 'not_started'
-  | 'unknown';
+  'ok' | 'warning' | 'error' | 'disabled' | 'not_started' | 'unknown';
 
 export interface ServeStatusCell {
   kind: string;
@@ -244,22 +239,13 @@ export interface ServeStatusCell {
 }
 
 export type ServeMcpDiscoveryState =
-  | 'not_started'
-  | 'in_progress'
-  | 'completed';
+  'not_started' | 'in_progress' | 'completed';
 
 export type ServeMcpServerRuntimeStatus =
-  | 'connected'
-  | 'connecting'
-  | 'disconnected';
+  'connected' | 'connecting' | 'disconnected';
 
 export type ServeMcpTransport =
-  | 'stdio'
-  | 'sse'
-  | 'http'
-  | 'websocket'
-  | 'sdk'
-  | 'unknown';
+  'stdio' | 'sse' | 'http' | 'websocket' | 'sdk' | 'unknown';
 
 export interface ServeWorkspaceMcpServerStatus extends ServeStatusCell {
   kind: 'mcp_server';
@@ -631,17 +617,10 @@ export interface ServeSessionLspStatus {
 }
 
 export type ServeSessionTaskLifecycleStatus =
-  | 'running'
-  | 'paused'
-  | 'completed'
-  | 'failed'
-  | 'cancelled';
+  'running' | 'paused' | 'completed' | 'failed' | 'cancelled';
 
 export type ServeSessionProcessTaskLifecycleStatus =
-  | 'running'
-  | 'completed'
-  | 'failed'
-  | 'cancelled';
+  'running' | 'completed' | 'failed' | 'cancelled';
 
 export interface ServeSessionAgentTaskStatus {
   kind: 'agent';
@@ -841,11 +820,7 @@ export interface ServeWorkspaceMemoryStatus {
  * consumers see the same forward-compat union.
  */
 export type ServeAgentLevel =
-  | 'project'
-  | 'user'
-  | 'builtin'
-  | 'extension'
-  | 'session';
+  'project' | 'user' | 'builtin' | 'extension' | 'session';
 
 export interface ServeWorkspaceAgentSummary {
   kind: 'agent';
@@ -964,11 +939,7 @@ export type ServeHookConfig =
   | ServeUnknownHookConfig;
 
 export type ServeHookSource =
-  | 'project'
-  | 'user'
-  | 'system'
-  | 'extensions'
-  | 'session';
+  'project' | 'user' | 'system' | 'extensions' | 'session';
 
 export interface ServeHookEntry {
   kind: 'hook';
@@ -1083,11 +1054,7 @@ export type ServeExtensionInstallType =
   | 'snapshot';
 
 export type ServeExtensionOriginSource =
-  | 'QwenCode'
-  | 'Claude'
-  | 'Gemini'
-  | 'Qoder'
-  | 'AgentPlugins';
+  'QwenCode' | 'Claude' | 'Gemini' | 'Qoder' | 'AgentPlugins';
 
 export interface ServeExtensionCapabilities {
   mcpServerCount: number;
@@ -1275,12 +1242,7 @@ export function createIdleEnvStatus(
  * runtime tag, platform, redacted proxy host, and sandbox profile name.
  */
 export type ServeEnvKind =
-  | 'runtime'
-  | 'platform'
-  | 'sandbox'
-  | 'proxy'
-  | 'env_var'
-  | 'memory';
+  'runtime' | 'platform' | 'sandbox' | 'proxy' | 'env_var' | 'memory';
 
 export interface ServeEnvCell extends ServeStatusCell {
   kind: ServeEnvKind;

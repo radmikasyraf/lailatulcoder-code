@@ -52,11 +52,7 @@ export type TaskKind = 'agent' | 'shell' | 'monitor' | 'workflow';
  * never `paused`, for example).
  */
 export type TaskStatus =
-  | 'running'
-  | 'paused'
-  | 'completed'
-  | 'failed'
-  | 'cancelled';
+  'running' | 'paused' | 'completed' | 'failed' | 'cancelled';
 
 /**
  * Common envelope every task carries regardless of kind. Per-kind

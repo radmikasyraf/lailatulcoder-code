@@ -5,7 +5,10 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
-import { resolveBranchName, watchRepoBranch } from '@lailatul-coder/lailatul-coder-core';
+import {
+  resolveBranchName,
+  watchRepoBranch,
+} from '@lailatul-coder/lailatul-coder-core';
 
 /**
  * Polling interval (ms) for the branch-name fallback. `fs.watch` on the

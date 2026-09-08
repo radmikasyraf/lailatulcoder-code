@@ -318,11 +318,7 @@ interface TranscriptRenderedItemEvidence {
   readonly sourceBlockIds: readonly string[];
   readonly sourceToolCallIds: readonly string[];
   readonly capabilities: readonly (
-    | 'copy'
-    | 'copy-all'
-    | 'copy-last-reply'
-    | 'edit-user-message'
-    | 'open-file'
+    'copy' | 'copy-all' | 'copy-last-reply' | 'edit-user-message' | 'open-file'
   )[];
 }
 ```

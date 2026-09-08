@@ -62,4 +62,3 @@ export const AgentHeader: React.FC<AgentHeaderProps> = ({
     </Box>
   );
 };
-

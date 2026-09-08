@@ -97,9 +97,9 @@ describe('channel startup profile parsing', () => {
       10_000,
     );
 
-    expect(attributes?.['lailatul-coder.daemon.acp_startup.profile.complete']).toBe(
-      false,
-    );
+    expect(
+      attributes?.['lailatul-coder.daemon.acp_startup.profile.complete'],
+    ).toBe(false);
     expect(attributes).not.toHaveProperty(
       'lailatul-coder.daemon.acp_startup.phase.gemini_import_ms',
     );

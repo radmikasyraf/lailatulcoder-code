@@ -15,7 +15,10 @@ import {
   logPromptSuggestion,
   PromptSuggestionEvent,
 } from '@lailatul-coder/lailatul-coder-core';
-import type { FollowupState, Config } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  FollowupState,
+  Config,
+} from '@lailatul-coder/lailatul-coder-core';
 
 // Re-export for consumers that import from here
 export type { FollowupState } from '@lailatul-coder/lailatul-coder-core';
@@ -169,4 +172,3 @@ export function useFollowupSuggestionsCLI(
     [state, controller, recordKeystroke],
   );
 }
-

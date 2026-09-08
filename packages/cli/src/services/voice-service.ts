@@ -144,8 +144,7 @@ export function createVoiceModelSource(
 ): VoiceModelSource {
   return new ModelsConfig({
     modelProvidersConfig: settings.merged.modelProviders as
-      | ModelProvidersConfig
-      | undefined,
+      ModelProvidersConfig | undefined,
     providerProtocolConfig: settings.merged.providerProtocol,
   });
 }

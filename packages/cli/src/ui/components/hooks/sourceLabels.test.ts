@@ -5,7 +5,10 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { HooksConfigSource, HookType } from '@lailatul-coder/lailatul-coder-core';
+import {
+  HooksConfigSource,
+  HookType,
+} from '@lailatul-coder/lailatul-coder-core';
 
 vi.mock('../../../i18n/index.js', () => ({
   t: vi.fn((key: string) => key),

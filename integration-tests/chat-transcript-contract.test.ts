@@ -199,13 +199,11 @@ function reduceAcpUpdates(
   updates: readonly unknown[],
 ): readonly DaemonTranscriptBlock[] {
   return reduceDaemonEvents(
-    updates.map(
-      (update): DaemonEvent => ({
-        v: 1,
-        type: 'session_update',
-        data: { update },
-      }),
-    ),
+    updates.map((update): DaemonEvent => ({
+      v: 1,
+      type: 'session_update',
+      data: { update },
+    })),
   );
 }
 

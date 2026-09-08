@@ -641,7 +641,9 @@ describe('daemon-tracing', () => {
       }
     ).attributes;
     expect(attrs).not.toHaveProperty('lailatul-coder.client_id');
-    expect(attrs).not.toHaveProperty('lailatul-coder.daemon.permission.request_id');
+    expect(attrs).not.toHaveProperty(
+      'lailatul-coder.daemon.permission.request_id',
+    );
     expect(attrs).not.toHaveProperty('lailatul-coder.daemon.runtime.wait_ms');
     expect(attrs).not.toHaveProperty('lailatul-coder.daemon.runtime.path');
   });

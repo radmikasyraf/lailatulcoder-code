@@ -75,8 +75,7 @@ function getProviderMetadata(
 ): ProviderMetadata {
   const mergedSettings = settings.merged as Record<string, unknown>;
   const ns = mergedSettings[PROVIDER_METADATA_NS] as
-    | Record<string, unknown>
-    | undefined;
+    Record<string, unknown> | undefined;
   if (!ns) return {};
   const metadata = ns[metadataKey];
   return metadata && typeof metadata === 'object'
@@ -169,8 +168,7 @@ function readInstalledOwnedIds(
   if (!protocol) return [];
   const mergedSettings = settings.merged as Record<string, unknown>;
   const modelProviders = mergedSettings['modelProviders'] as
-    | Record<string, ProviderModelConfig[]>
-    | undefined;
+    Record<string, ProviderModelConfig[]> | undefined;
   if (!modelProviders) return [];
   const allModels: ProviderModelConfig[] = modelProviders[protocol] ?? [];
   const ownsFn = resolveOwnsModel(provider);

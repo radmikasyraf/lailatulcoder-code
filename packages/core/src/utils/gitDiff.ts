@@ -1148,11 +1148,7 @@ async function runGit(args: string[], cwd: string): Promise<string | null> {
 
 /** An in-progress git operation that the status indicator should surface. */
 export type GitOperation =
-  | 'merge'
-  | 'rebase'
-  | 'cherry-pick'
-  | 'revert'
-  | 'bisect';
+  'merge' | 'rebase' | 'cherry-pick' | 'revert' | 'bisect';
 
 /**
  * Working-tree summary for the status line / Web Shell git chip: branch,

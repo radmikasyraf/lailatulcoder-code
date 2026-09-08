@@ -24,7 +24,10 @@ import type {
   RuleWithSource,
   RuleType,
 } from '@lailatul-coder/lailatul-coder-core';
-import { isPathWithinRoot, parseRule } from '@lailatul-coder/lailatul-coder-core';
+import {
+  isPathWithinRoot,
+  parseRule,
+} from '@lailatul-coder/lailatul-coder-core';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -1002,4 +1005,3 @@ function FooterHint({ view }: { view: DialogView }): React.JSX.Element {
     </Box>
   );
 }
-

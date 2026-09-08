@@ -465,7 +465,9 @@ describe('CLI entry import boundary', () => {
       /from ['"]@lailatul-coder\/acp-bridge\/spawnChannel['"]/,
     );
     expect(runServeSource).toContain("import('./server.js')");
-    expect(runServeSource).toContain("import('@lailatul-coder/acp-bridge/bridge')");
+    expect(runServeSource).toContain(
+      "import('@lailatul-coder/acp-bridge/bridge')",
+    );
   });
 
   it('keeps request helpers from value-importing the ACP compatibility shim', () => {
@@ -486,7 +488,9 @@ describe('CLI entry import boundary', () => {
     expect(requestHelpersSource).toMatch(
       /import \{[^}]*\bMAX_WORKSPACE_PATH_LENGTH\b[^}]*\} from '@lailatul-coder\/acp-bridge\/workspacePaths';/,
     );
-    expect(requestHelpersSource).not.toMatch(/from '@lailatul-coder\/acp-bridge';/);
+    expect(requestHelpersSource).not.toMatch(
+      /from '@lailatul-coder\/acp-bridge';/,
+    );
   });
 
   it('keeps the runQwenServe static source graph free of ACP runtime modules', () => {
@@ -1499,9 +1503,8 @@ describe('serve fast path environment bootstrap', () => {
       mkdtempSync(join(os.tmpdir(), 'qws-fast-path-settings-parity-')),
     );
     mkdirSync(join(tempWorkspace, '.qwen'));
-    const { SETTINGS_VERSION, loadSettings } = await import(
-      '../config/settings.js'
-    );
+    const { SETTINGS_VERSION, loadSettings } =
+      await import('../config/settings.js');
     const versioned = (settings: Record<string, unknown>) => ({
       $version: SETTINGS_VERSION,
       ...settings,

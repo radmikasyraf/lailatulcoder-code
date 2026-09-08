@@ -98,7 +98,9 @@ const vscodeMock = vi.hoisted(() => {
 vi.mock('vscode', () => vscodeMock);
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     FileDiscoveryService: class {

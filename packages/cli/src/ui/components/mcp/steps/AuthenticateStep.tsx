@@ -306,4 +306,3 @@ export const AuthenticateStep: React.FC<AuthenticateStepProps> = ({
     </Box>
   );
 };
-

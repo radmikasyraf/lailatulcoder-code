@@ -53,10 +53,7 @@ interface PermissionMediator {
 
 ```ts
 type PermissionPolicy =
-  | 'first-responder'
-  | 'designated'
-  | 'consensus'
-  | 'local-only';
+  'first-responder' | 'designated' | 'consensus' | 'local-only';
 
 type PermissionVoteOutcome =
   | { kind: 'resolved'; resolvedOptionId: string }

@@ -2393,7 +2393,9 @@ describe('HookEventHandler', () => {
         title?: string;
       };
 
-      expect(input.message).toBe('LailatulCoder Ai needs your permission to use Bash');
+      expect(input.message).toBe(
+        'LailatulCoder Ai needs your permission to use Bash',
+      );
       expect(input.notification_type).toBe('permission_prompt');
       expect(input.title).toBe('Permission needed');
     });

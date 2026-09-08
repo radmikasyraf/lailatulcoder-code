@@ -412,9 +412,7 @@ interface EndpointReadOversized {
 }
 
 type EndpointRead =
-  | EndpointReadOk
-  | EndpointReadUnreadable
-  | EndpointReadOversized;
+  EndpointReadOk | EndpointReadUnreadable | EndpointReadOversized;
 
 /**
  * Read one endpoint of a turn diff (either a snapshot backup or, when the

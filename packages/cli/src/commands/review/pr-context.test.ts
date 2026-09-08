@@ -968,7 +968,9 @@ describe('blockerSection — both channels, and the budget', () => {
     }
     // The one past the budget is a snippet, and it names the exact fetch.
     expect(md).toContain('section budget spent');
-    expect(md).toContain('comment-body 3 --kind issue --repo LailatulCoder/lailatul-coder');
+    expect(md).toContain(
+      'comment-body 3 --kind issue --repo LailatulCoder/lailatul-coder',
+    );
   });
 
   it('renders the bodies that fit in FULL and only degrades past the budget', () => {

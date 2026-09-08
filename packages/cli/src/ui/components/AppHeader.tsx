@@ -88,4 +88,3 @@ export const AppHeader = ({ version }: AppHeaderProps) => {
     </Box>
   );
 };
-

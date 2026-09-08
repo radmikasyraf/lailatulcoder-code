@@ -298,8 +298,7 @@ function validateMeta(value: unknown): WorkflowMeta {
     throw new Error('meta.whenToUse must be a string');
   }
   let phases:
-    | Array<{ title: string; detail?: string; model?: string }>
-    | undefined;
+    Array<{ title: string; detail?: string; model?: string }> | undefined;
   if (obj['phases'] !== undefined) {
     if (!Array.isArray(obj['phases'])) {
       throw new Error('meta.phases must be an array');

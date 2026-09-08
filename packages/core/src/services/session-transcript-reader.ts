@@ -414,11 +414,9 @@ let cooperativeReadByteBudgetForTest: number | undefined;
 let cooperativeReadTimeBudgetMsForTest: number | undefined;
 let cooperativeYieldHookForTest: (() => void) | undefined;
 let selectedLineReadHookForTest:
-  | ((offset: number, length: number) => void)
-  | undefined;
+  ((offset: number, length: number) => void) | undefined;
 let indexBuildCompleteHookForTest:
-  | ((filePath: string) => void | Promise<void>)
-  | undefined;
+  ((filePath: string) => void | Promise<void>) | undefined;
 
 class CooperativeReadScheduler {
   private processedBytes = 0;
@@ -2203,8 +2201,7 @@ export class SessionTranscriptReader {
     let firstRecord: ChatRecord | undefined;
     let firstRecordSeen = false;
     let goalCheckpointAccumulator:
-      | GoalEvidenceCheckpointAccumulator
-      | undefined;
+      GoalEvidenceCheckpointAccumulator | undefined;
     let goalEvidenceSet = new Set<string>();
     const deferredPreReadRecords = new Map<string, ChatRecord>();
     const dispatchRecord = (record: ChatRecord): void => {
@@ -2230,8 +2227,7 @@ export class SessionTranscriptReader {
         )?.parentSessionId;
       } else if (record.uuid === sessionSourceUuid) {
         const payload = record.systemPayload as
-          | SessionSourceRecordPayload
-          | undefined;
+          SessionSourceRecordPayload | undefined;
         sourceType = payload?.sourceType;
         sourceId = payload?.sourceId;
       }

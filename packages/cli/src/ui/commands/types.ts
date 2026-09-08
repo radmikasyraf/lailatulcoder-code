@@ -328,11 +328,7 @@ export type CommandSource =
 // | 'dynamic-skill'
 
 export type CommandSourceDetail =
-  | 'user'
-  | 'project'
-  | 'custom'
-  | 'extension'
-  | 'plugin';
+  'user' | 'project' | 'custom' | 'extension' | 'plugin';
 
 export interface CommandCompletionItem {
   value: string;
@@ -466,9 +462,7 @@ export interface SlashCommand {
     context: CommandContext,
     args: string, // TODO: Remove args. CommandContext now contains the complete invocation.
   ) =>
-    | void
-    | SlashCommandActionReturn
-    | Promise<void | SlashCommandActionReturn>;
+    void | SlashCommandActionReturn | Promise<void | SlashCommandActionReturn>;
 
   // Provides argument completion
   completion?: (

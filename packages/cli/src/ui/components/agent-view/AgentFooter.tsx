@@ -63,4 +63,3 @@ export const AgentFooter: React.FC<AgentFooterProps> = ({
     </Box>
   );
 };
-

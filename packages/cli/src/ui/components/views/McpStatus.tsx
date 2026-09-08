@@ -295,4 +295,3 @@ export const McpStatus: React.FC<McpStatusProps> = ({
     </Box>
   );
 };
-

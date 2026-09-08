@@ -139,11 +139,7 @@ rg --threads 4
 
 ```typescript
 type RipgrepFailureKind =
-  | 'eagain'
-  | 'timeout'
-  | 'max_buffer'
-  | 'exit'
-  | 'spawn';
+  'eagain' | 'timeout' | 'max_buffer' | 'exit' | 'spawn';
 ```
 
 取消操作不属于运行时失败 telemetry，也不得触发重试。

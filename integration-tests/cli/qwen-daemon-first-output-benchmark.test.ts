@@ -2200,7 +2200,7 @@ function buildFatalArtifact(
   const hasSingle = Boolean(process.env['BENCHMARK_CLI_PATH']?.trim());
   const hasPaired = Boolean(
     process.env['BENCHMARK_CONTROL_CLI_PATH']?.trim() ||
-      process.env['BENCHMARK_CANDIDATE_CLI_PATH']?.trim(),
+    process.env['BENCHMARK_CANDIDATE_CLI_PATH']?.trim(),
   );
   return {
     ...commonArtifactFields(),

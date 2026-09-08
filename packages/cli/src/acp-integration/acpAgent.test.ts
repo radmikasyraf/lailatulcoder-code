@@ -202,10 +202,14 @@ vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
   },
   INVOCATION_CONTEXT_META_KEY: 'lailatul-coder/invocation',
   PRIVATE_ACP_CAPABILITY_ENV: 'QWEN_CODE_PRIVATE_ACP_CAPABILITY',
-  PRIVATE_PARENT_CAPABILITY_META_KEY: 'lailatul-coder/private-parent-capability',
+  PRIVATE_PARENT_CAPABILITY_META_KEY:
+    'lailatul-coder/private-parent-capability',
   parseInvocationContext: vi.fn(
-    (await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>())
-      .parseInvocationContext,
+    (
+      await importOriginal<
+        typeof import('@lailatul-coder/lailatul-coder-core')
+      >()
+    ).parseInvocationContext,
   ),
   isTurnResultRecordPayload: (
     await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()
@@ -533,8 +537,7 @@ vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
     async (config: {
       refreshHierarchicalMemory?: () => Promise<void>;
       getGeminiClient?: () =>
-        | { refreshSystemInstruction?: () => Promise<void> }
-        | undefined;
+        { refreshSystemInstruction?: () => Promise<void> } | undefined;
     }) => {
       try {
         await config.refreshHierarchicalMemory?.();
@@ -920,7 +923,10 @@ import {
   createManagedExternalToolGuard,
 } from './acpAgent.js';
 import { gzipSync } from 'node:zlib';
-import type { Config, GoalSnapshotV2 } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  GoalSnapshotV2,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { LoadedSettings } from '../config/settings.js';
 import type { CliArgs } from '../config/config.js';
 import {
@@ -1069,8 +1075,7 @@ describe('runAcpAgent shutdown cleanup', () => {
     let agent: PreloadTestAgent | undefined;
     if (instantiateAgent) {
       const createAgent = vi.mocked(AgentSideConnection).mock.calls[0]?.[0] as
-        | ((connection: AgentSideConnection) => unknown)
-        | undefined;
+        ((connection: AgentSideConnection) => unknown) | undefined;
       if (!createAgent) throw new Error('Expected ACP agent factory');
       agent = createAgent({} as AgentSideConnection) as PreloadTestAgent;
     }
@@ -1981,8 +1986,7 @@ describe('toHttpServer', () => {
 describe('QwenAgent MCP SSE/HTTP support', () => {
   // We need to capture the agent factory from AgentSideConnection constructor
   let capturedAgentFactory:
-    | ((conn: AgentSideConnectionLike) => AgentLike)
-    | undefined;
+    ((conn: AgentSideConnectionLike) => AgentLike) | undefined;
 
   type AgentSideConnectionLike = {
     closed: Promise<void>;
@@ -3504,9 +3508,9 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
       'session_register',
       'response_build',
     ]) {
-      expect(attributes[`lailatul-coder.daemon.session_start.${stage}_ms`]).toEqual(
-        expect.any(Number),
-      );
+      expect(
+        attributes[`lailatul-coder.daemon.session_start.${stage}_ms`],
+      ).toEqual(expect.any(Number));
     }
     expect(attributes['session.id']).toBe('test-session-id');
     expect(mockStartNonInteractiveOpenAILogHousekeeping).toHaveBeenCalledWith(
@@ -3525,7 +3529,9 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     await agent.newSession({
       cwd: '/tmp',
       mcpServers: [],
-      _meta: { 'lailatul-coder/sessionId': '550e8400-e29b-41d4-a716-446655440000' },
+      _meta: {
+        'lailatul-coder/sessionId': '550e8400-e29b-41d4-a716-446655440000',
+      },
     });
 
     const argv = vi.mocked(loadCliConfig).mock.calls[0]![1];
@@ -4222,7 +4228,8 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
       ...(privateParentCapability
         ? {
             _meta: {
-              'lailatul-coder/private-parent-capability': privateParentCapability,
+              'lailatul-coder/private-parent-capability':
+                privateParentCapability,
             },
           }
         : {}),
@@ -4462,8 +4469,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
 
     await vi.waitFor(() => expect(lastSessionMock?.prompt).toHaveBeenCalled());
     const cancellationSignal = lastSessionMock?.prompt.mock.calls[0]?.[2] as
-      | AbortSignal
-      | undefined;
+      AbortSignal | undefined;
 
     let cancellationSettled = false;
     const cancellation = agent
@@ -4526,8 +4532,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     const prompt = agent.prompt({ sessionId: callerSessionId, prompt: [] });
     await vi.waitFor(() => expect(lastSessionMock?.prompt).toHaveBeenCalled());
     const admissionSignal = lastSessionMock?.prompt.mock.calls[0]?.[2] as
-      | AbortSignal
-      | undefined;
+      AbortSignal | undefined;
 
     await agent.cancel({ sessionId: callerSessionId });
     expect(admissionSignal?.aborted).toBe(true);
@@ -14658,8 +14663,7 @@ describe('QwenAgent MCP SSE/HTTP support', () => {
     // captures the callback at the Config boundary and verifies the
     // ordering vs `initialize()`.
     let capturedCallback:
-      | ((event: Record<string, unknown>) => void)
-      | undefined;
+      ((event: Record<string, unknown>) => void) | undefined;
     const callOrder: string[] = [];
     (innerConfig as unknown as Record<string, unknown>)[
       'setMcpBudgetEventCallback'
@@ -14898,8 +14902,7 @@ describe('QwenAgent extMethod renameSession routing', () => {
   };
 
   let capturedAgentFactory:
-    | ((conn: AgentSideConnectionLike) => AgentLike)
-    | undefined;
+    ((conn: AgentSideConnectionLike) => AgentLike) | undefined;
   let mockConfig: Config;
   let liveCancelPendingPrompt: ReturnType<typeof vi.fn>;
   let liveWaitForActiveTurnsToSettle: ReturnType<typeof vi.fn>;
@@ -16948,7 +16951,9 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
           attributes['lailatul-coder.daemon.session_restore.response_build_ms'],
         ).toEqual(expect.any(Number));
         expect(
-          attributes['lailatul-coder.daemon.session_restore.existence_check_ms'],
+          attributes[
+            'lailatul-coder.daemon.session_restore.existence_check_ms'
+          ],
         ).toBeUndefined();
       } finally {
         mockConnectionState.resolve();
@@ -17013,8 +17018,7 @@ describe('QwenAgent loadSession / unstable_resumeSession', () => {
         }
 
         const argv = vi.mocked(loadCliConfig).mock.calls.at(-1)?.[1] as
-          | CliArgs
-          | undefined;
+          CliArgs | undefined;
         expect(argv?.resume).toBe(storageSessionId);
 
         // The in-memory session map key is normalized, so caller-case

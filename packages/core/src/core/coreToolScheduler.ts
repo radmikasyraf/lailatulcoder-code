@@ -518,9 +518,7 @@ export type ToolCall =
   | WaitingToolCall;
 
 export type CompletedToolCall =
-  | SuccessfulToolCall
-  | CancelledToolCall
-  | ErroredToolCall;
+  SuccessfulToolCall | CancelledToolCall | ErroredToolCall;
 
 /**
  * Closed allowlist of tool names whose inputs name actual filesystem
@@ -3254,8 +3252,7 @@ export class CoreToolScheduler {
             // Hooks run before the background-agent auto-deny so they can
             // override the denial with policy-based decisions.
             const messageBus = this.config.getMessageBus() as
-              | MessageBus
-              | undefined;
+              MessageBus | undefined;
             const hooksEnabled = !this.config.getDisableAllHooks();
 
             if (hooksEnabled && messageBus) {

@@ -182,4 +182,3 @@ export const ShellConfirmationDialog: React.FC<
     </Box>
   );
 };
-

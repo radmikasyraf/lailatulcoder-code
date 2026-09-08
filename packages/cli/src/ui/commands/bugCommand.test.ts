@@ -16,7 +16,9 @@ const mockOpenBrowserSecurely = vi.hoisted(() => vi.fn());
 // Mock dependencies
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     openBrowserSecurely: mockOpenBrowserSecurely,

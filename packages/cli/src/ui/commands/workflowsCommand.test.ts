@@ -11,7 +11,10 @@ import path from 'node:path';
 import { workflowsCommand, snapshotToTask } from './workflowsCommand.js';
 import { type CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
-import type { WorkflowTask, WorkflowSnapshot } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  WorkflowTask,
+  WorkflowSnapshot,
+} from '@lailatul-coder/lailatul-coder-core';
 
 function entry(overrides: Partial<WorkflowTask> = {}): WorkflowTask {
   return {

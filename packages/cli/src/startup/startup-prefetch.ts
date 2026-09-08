@@ -272,9 +272,8 @@ export function startPostRenderPrefetches(
 
   if (config.isInteractive()) {
     runDeferredTask('background_housekeeping', async () => {
-      const { startBackgroundHousekeeping } = await import(
-        '../utils/housekeeping/scheduler.js'
-      );
+      const { startBackgroundHousekeeping } =
+        await import('../utils/housekeeping/scheduler.js');
       startBackgroundHousekeeping(config, settings);
     });
   }

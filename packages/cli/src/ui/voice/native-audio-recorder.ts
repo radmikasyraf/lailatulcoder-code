@@ -19,8 +19,7 @@ const AUDIO_CAPTURE_PACKAGE = '@lailatul-coder/audio-capture';
 
 interface NativeAudioRecorderOptions {
   loadBackend?: () =>
-    | NativeAudioCaptureBackend
-    | Promise<NativeAudioCaptureBackend>;
+    NativeAudioCaptureBackend | Promise<NativeAudioCaptureBackend>;
 }
 
 class NativeAudioRecorder implements VoiceRecorder {
@@ -30,8 +29,7 @@ class NativeAudioRecorder implements VoiceRecorder {
 
   constructor(
     private readonly loadBackend: () =>
-      | NativeAudioCaptureBackend
-      | Promise<NativeAudioCaptureBackend>,
+      NativeAudioCaptureBackend | Promise<NativeAudioCaptureBackend>,
   ) {}
 
   private clearSilencePoll(): void {
@@ -129,9 +127,8 @@ class NativeAudioRecorder implements VoiceRecorder {
 }
 
 async function loadDefaultBackend(): Promise<NativeAudioCaptureBackend> {
-  const { createNativeAudioCaptureBackend } = await import(
-    '@lailatul-coder/audio-capture'
-  );
+  const { createNativeAudioCaptureBackend } =
+    await import('@lailatul-coder/audio-capture');
   return createNativeAudioCaptureBackend();
 }
 

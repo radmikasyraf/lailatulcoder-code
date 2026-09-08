@@ -763,4 +763,3 @@ describe('<LiveAgentPanel />', () => {
     });
   });
 });
-

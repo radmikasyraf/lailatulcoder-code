@@ -31,11 +31,7 @@ const GITIGNORE_ENTRIES = ['.qwen/', 'gha-creds-*.json'];
 export const MAX_WORKFLOW_DOWNLOAD_BYTES = 5 * 1024 * 1024;
 
 export type GithubSetupGitignoreStatus =
-  | 'created'
-  | 'updated'
-  | 'unchanged'
-  | 'failed'
-  | 'skipped';
+  'created' | 'updated' | 'unchanged' | 'failed' | 'skipped';
 
 export interface GithubSetupWriteMetadata {
   sizeBytes: number;
@@ -116,9 +112,9 @@ export class SetupGithubError extends Error {
 function isWorkspaceGenerationClosed(error: unknown): boolean {
   return Boolean(
     error &&
-      typeof error === 'object' &&
-      'code' in error &&
-      error.code === 'workspace_generation_closed',
+    typeof error === 'object' &&
+    'code' in error &&
+    error.code === 'workspace_generation_closed',
   );
 }
 
@@ -383,7 +379,10 @@ async function downloadWorkflows(options: {
   } catch (error) {
     internalAbort.abort();
     const message = error instanceof Error ? error.message : String(error);
-    debugLogger.debug('Failed to download lailatul-coder-action workflows:', error);
+    debugLogger.debug(
+      'Failed to download lailatul-coder-action workflows:',
+      error,
+    );
     throw new SetupGithubError(
       'github_workflow_download_failed',
       `Unable to download lailatul-coder-action workflows from GitHub. ${message}`,

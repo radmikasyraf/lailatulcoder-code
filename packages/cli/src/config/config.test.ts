@@ -1786,8 +1786,7 @@ describe('loadCliConfig', () => {
       sourceSessionId,
       forkedSessionId,
     );
-    expect(projectionSource).toHaveBeenCalledOnce();
-    expect(projectionSource).toHaveBeenCalledWith(forkedSessionId);
+    expect(projectionSource).toHaveBeenCalledExactlyOnceWith(forkedSessionId);
     expect(mockSessionServiceInstance.loadSession).not.toHaveBeenCalled();
     const configParams = mockConfigConstructorParams.mock.calls.at(-1)?.[0];
     expect(configParams).toEqual(
@@ -1839,8 +1838,7 @@ describe('loadCliConfig', () => {
       { sessionRestore: { projectionSource } },
     );
 
-    expect(projectionSource).toHaveBeenCalledOnce();
-    expect(projectionSource).toHaveBeenCalledWith(sourceSessionId);
+    expect(projectionSource).toHaveBeenCalledExactlyOnceWith(sourceSessionId);
     expect(mockConfigConstructorParams).toHaveBeenLastCalledWith(
       expect.objectContaining({
         experimentalZedIntegration: false,

@@ -314,11 +314,7 @@ interface PendingFinalDelivery {
 }
 
 type InboundTaskState =
-  | 'accepted'
-  | 'running'
-  | 'reply_pending'
-  | 'failed'
-  | 'cancelled';
+  'accepted' | 'running' | 'reply_pending' | 'failed' | 'cancelled';
 
 const MAX_INBOUND_TASK_ATTEMPTS = 3;
 

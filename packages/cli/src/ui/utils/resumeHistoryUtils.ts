@@ -325,8 +325,7 @@ function convertToHistoryItems(
           currentToolGroup = [];
         }
         const payload = record.systemPayload as
-          | SlashCommandRecordPayload
-          | undefined;
+          SlashCommandRecordPayload | undefined;
         if (!payload) continue;
         if (
           payload.phase === 'invocation' &&
@@ -355,8 +354,7 @@ function convertToHistoryItems(
       }
       if (record.subtype === 'at_command') {
         const payload = record.systemPayload as
-          | AtCommandRecordPayload
-          | undefined;
+          AtCommandRecordPayload | undefined;
         if (!payload) continue;
         pendingAtCommands.push(payload);
       }
@@ -371,8 +369,7 @@ function convertToHistoryItems(
         // Restore notification items (background agent completions and cron fires)
         if (record.subtype === 'notification' || record.subtype === 'cron') {
           const payload = record.systemPayload as
-            | { displayText?: string }
-            | undefined;
+            { displayText?: string } | undefined;
           const fallback =
             record.subtype === 'cron'
               ? 'Cron job fired'
@@ -440,8 +437,7 @@ function convertToHistoryItems(
 
         const projection = projectUserTranscriptForDisplay(record);
         const payload = record.systemPayload as
-          | { attachmentReferences?: unknown[] }
-          | undefined;
+          { attachmentReferences?: unknown[] } | undefined;
         const hasAttachmentReferences =
           Array.isArray(payload?.attachmentReferences) &&
           payload.attachmentReferences.length > 0;

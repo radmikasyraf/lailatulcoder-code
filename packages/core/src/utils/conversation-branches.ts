@@ -21,10 +21,7 @@ const NEUTRAL_TAIL_SUBTYPES = new Set([
 ]);
 
 export type ConversationBranchClassification =
-  | 'ordinary'
-  | 'rewind-descendant'
-  | 'rewind-sibling'
-  | 'mixed-rewind';
+  'ordinary' | 'rewind-descendant' | 'rewind-sibling' | 'mixed-rewind';
 
 export interface ConversationBranchSummary {
   leafUuid: string;

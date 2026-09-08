@@ -124,8 +124,7 @@ export function daemonTranscriptToUnifiedMessages(
               title: sanitizeDisplayText(block.title),
               status: normalizePermissionStatus(block.resolved),
               rawInput: sanitizeDaemonValue(block.toolCall) as
-                | object
-                | undefined,
+                object | undefined,
             },
             isFirst,
             isLast,
@@ -236,9 +235,7 @@ function daemonToolBlockToToolCallData(
     title: sanitizeDisplayText(block.title),
     status: normalizeToolStatus(block.status),
     rawInput: sanitizeDaemonValue(block.rawInput) as
-      | object
-      | string
-      | undefined,
+      object | string | undefined,
     rawOutput: sanitizeDaemonValue(block.rawOutput),
     ...(previewMarkdown !== undefined ? { previewMarkdown } : {}),
     ...(block.content !== undefined

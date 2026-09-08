@@ -2095,8 +2095,7 @@ export async function createTransport(
   ) {
     const provider = new ServiceAccountImpersonationProvider(mcpServerConfig);
     const transportOptions:
-      | StreamableHTTPClientTransportOptions
-      | SSEClientTransportOptions = {
+      StreamableHTTPClientTransportOptions | SSEClientTransportOptions = {
       authProvider: provider,
     };
 
@@ -2124,8 +2123,7 @@ export async function createTransport(
   ) {
     const provider = new GoogleCredentialProvider(mcpServerConfig);
     const transportOptions:
-      | StreamableHTTPClientTransportOptions
-      | SSEClientTransportOptions = {
+      StreamableHTTPClientTransportOptions | SSEClientTransportOptions = {
       authProvider: provider,
     };
     if (mcpServerConfig.httpUrl) {

@@ -434,12 +434,8 @@ export const modelCommand: SlashCommand = {
       const trimmed = partialArg.trim();
       if (trimmed) {
         let mode:
-          | 'main'
-          | 'fast'
-          | 'voice'
-          | 'vision'
-          | 'compaction'
-          | 'image' = 'main';
+          'main' | 'fast' | 'voice' | 'vision' | 'compaction' | 'image' =
+          'main';
         // Strip all known flags to isolate the model prefix for completion
         const modelPrefix = trimmed
           .replace(/(?:^|\s)--fast(?:\s|$)/, ' ')

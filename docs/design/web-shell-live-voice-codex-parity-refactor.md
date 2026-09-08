@@ -189,10 +189,10 @@ infrastructure:
 
 | Codex responsibility             | Required Qwen mapping                                                                                                         |
 | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Persistent ordinary task         | One normal projectless LailatulCoder Ai session surfaced in the dedicated Live group                                                 |
+| Persistent ordinary task         | One normal projectless LailatulCoder Ai session surfaced in the dedicated Live group                                          |
 | GPT-Live conversational frontend | `qwen3.5-omni-plus-realtime` owning ordinary dialogue, VAD, barge-in, and spoken output                                       |
 | Selective backend handoff        | One narrow Realtime handoff operation routed into a normal turn on that same Live session                                     |
-| Normal backend tool surface      | The existing LailatulCoder Ai tools, configured MCP tools, sandbox, and approval mode remain available                               |
+| Normal backend tool surface      | The existing LailatulCoder Ai tools, configured MCP tools, sandbox, and approval mode remain available                        |
 | Voice/App tools                  | Built-in Appshot and call-control capabilities attached to the backend Live session, never exposed as Realtime-provider tools |
 | Task operations                  | List/read/wait/send/create operations backed by existing WebShell session and bridge services                                 |
 | Incremental backend return       | Agent-message deltas aggregated at about 200 ms and appended as silent ordered conversation context                           |
@@ -461,7 +461,7 @@ following:
 
 | Scenario                | Required evidence                                                                                                                                     |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ordinary conversation   | Natural Realtime answer with zero LailatulCoder Ai backend turns                                                                                             |
+| Ordinary conversation   | Natural Realtime answer with zero LailatulCoder Ai backend turns                                                                                      |
 | Screen question         | Exactly one handoff followed by one backend-session internal Appshot, streamed result, and natural spoken answer; Realtime itself has no Appshot tool |
 | List or inspect tasks   | Existing tasks are listed/read with no new session                                                                                                    |
 | Follow an existing task | Message reaches the selected existing session and retains its identity                                                                                |

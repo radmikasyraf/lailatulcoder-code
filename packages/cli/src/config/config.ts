@@ -637,7 +637,8 @@ export async function parseArguments(): Promise<CliArgs> {
     })
     .option('proxy', {
       type: 'string',
-      description: 'Proxy for LailatulCoder Ai, like schema://user:password@host:port',
+      description:
+        'Proxy for LailatulCoder Ai, like schema://user:password@host:port',
     })
     .deprecateOption(
       'proxy',
@@ -654,429 +655,432 @@ export async function parseArguments(): Promise<CliArgs> {
       description:
         'Enable chat recording to disk. If false, chat history is not saved and --continue/--resume will not work.',
     })
-    .command('$0 [query..]', 'Launch LailatulCoder Ai CLI', (yargsInstance: Argv) =>
-      yargsInstance
-        .positional('query', {
-          description:
-            'Positional prompt. Defaults to one-shot; use -i/--prompt-interactive for interactive.',
-        })
-        .option('model', {
-          alias: 'm',
-          type: 'string',
-          description: `Model`,
-        })
-        .option('fallback-model', {
-          type: 'array',
-          string: true,
-          description:
-            'Fallback model(s) for capacity errors (429/503/529), repeatable or comma-separated (max 3)',
-          coerce: (models: string[]) =>
-            models
-              .flatMap((m) => m.split(',').map((s) => s.trim()))
-              .filter(Boolean),
-        })
-        .option('prompt', {
-          alias: 'p',
-          type: 'string',
-          description: 'Prompt. Appended to input on stdin (if any).',
-        })
-        .option('prompt-interactive', {
-          alias: 'i',
-          type: 'string',
-          description:
-            'Execute the provided prompt and continue in interactive mode',
-        })
-        .option('system-prompt', {
-          type: 'string',
-          description:
-            'Override the main session system prompt for this run. Can be combined with --append-system-prompt.',
-        })
-        .option('append-system-prompt', {
-          type: 'string',
-          description:
-            'Append instructions to the main session system prompt for this run. Can be combined with --system-prompt.',
-        })
-        .option('sandbox', {
-          alias: 's',
-          type: 'boolean',
-          description: 'Run in sandbox?',
-        })
-        .option('sandbox-image', {
-          type: 'string',
-          description: 'Sandbox image URI.',
-        })
-        .option('yolo', {
-          alias: 'y',
-          type: 'boolean',
-          description:
-            'Automatically accept all actions (aka YOLO mode, see https://www.youtube.com/watch?v=xvFZjo5PgG0 for more details)?',
-          default: false,
-        })
-        .option('approval-mode', {
-          type: 'string',
-          choices: ['plan', 'default', 'auto-edit', 'auto', 'yolo'],
-          description:
-            'Set the approval mode: plan (plan only), default (prompt for approval), auto-edit (auto-approve edit tools), auto (LLM classifier auto-approves safe actions, blocks risky ones), yolo (auto-approve all tools)',
-        })
-        .option('acp', {
-          type: 'boolean',
-          description: 'Starts the agent in ACP mode',
-        })
-        .option('experimental-acp', {
-          type: 'boolean',
-          description:
-            'Starts the agent in ACP mode (deprecated, use --acp instead)',
-          hidden: true,
-        })
-        .option('experimental-skills', {
-          type: 'boolean',
-          description:
-            'Deprecated: Skills are now enabled by default. This flag is ignored.',
-          hidden: true,
-        })
-        .option('experimental-lsp', {
-          type: 'boolean',
-          description:
-            'Enable experimental LSP (Language Server Protocol) feature for code intelligence',
-          default: false,
-        })
-        .option('channel', {
-          type: 'string',
-          choices: ['VSCode', 'ACP', 'SDK', 'CI', 'desktop', 'daemon'],
-          description:
-            'Channel identifier (VSCode, ACP, SDK, CI, desktop, daemon)',
-        })
-        .option('allowed-mcp-server-names', {
-          type: 'array',
-          string: true,
-          description: 'Allowed MCP server names',
-          coerce: (mcpServerNames: string[]) =>
-            // Handle comma-separated values
-            mcpServerNames.flatMap((mcpServerName) =>
-              mcpServerName.split(',').map((m) => m.trim()),
-            ),
-        })
-        .option('mcp-config', {
-          type: 'string',
-          description:
-            'MCP server configuration as JSON string or file path. Can be a path to a JSON file or inline JSON with {"mcpServers": {...}} format.',
-        })
-        .option('allowed-tools', {
-          type: 'array',
-          string: true,
-          description: 'Tools that are allowed to run without confirmation',
-          coerce: (tools: string[]) =>
-            // Handle comma-separated values
-            tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
-        })
-        .option('extensions', {
-          alias: 'e',
-          type: 'array',
-          string: true,
-          description:
-            'A list of extensions to use. If not provided, all extensions are used.',
-          coerce: (extensions: string[]) =>
-            // Handle comma-separated values
-            extensions.flatMap((extension) =>
-              extension.split(',').map((e) => e.trim()),
-            ),
-        })
-        .option('list-extensions', {
-          alias: 'l',
-          type: 'boolean',
-          description: 'List all available extensions and exit.',
-        })
-        .option('include-directories', {
-          alias: 'add-dir',
-          type: 'array',
-          string: true,
-          description:
-            'Additional directories to include in the workspace (comma-separated or multiple --include-directories)',
-          coerce: (dirs: string[]) =>
-            // Handle comma-separated values
-            dirs.flatMap((dir) => dir.split(',').map((d) => d.trim())),
-        })
-        .option('openai-logging', {
-          type: 'boolean',
-          description:
-            'Enable logging of OpenAI API calls for debugging and analysis',
-        })
-        .option('openai-logging-dir', {
-          type: 'string',
-          description:
-            'Custom directory path for OpenAI API logs. Overrides settings files.',
-        })
-        .option('openai-api-key', {
-          type: 'string',
-          description: 'OpenAI API key to use for authentication',
-        })
-        .option('openai-base-url', {
-          type: 'string',
-          description: 'OpenAI base URL (for custom endpoints)',
-        })
-        .option('screen-reader', {
-          type: 'boolean',
-          description: 'Enable screen reader mode for accessibility.',
-        })
-        .option('input-format', {
-          type: 'string',
-          choices: ['text', 'stream-json'],
-          description: 'The format consumed from standard input.',
-          default: 'text',
-        })
-        .option('output-format', {
-          alias: 'o',
-          type: 'string',
-          description: 'The format of the CLI output.',
-          choices: ['text', 'json', 'stream-json'],
-        })
-        .option('include-partial-messages', {
-          type: 'boolean',
-          description:
-            'Include partial assistant messages when using stream-json output.',
-          default: false,
-        })
-        .option('json-fd', {
-          type: 'number',
-          description:
-            'File descriptor for structured JSON event output (dual output mode). ' +
-            'The TUI renders normally on stdout while JSON events are written to this fd. ' +
-            'The caller must provide this fd via spawn stdio configuration.',
-        })
-        .option('json-file', {
-          type: 'string',
-          description:
-            'File path for structured JSON event output (dual output mode). ' +
-            'Can be a regular file, FIFO (named pipe), or /dev/fd/N.',
-        })
-        .option('json-schema', {
-          type: 'string',
-          description:
-            "JSON Schema that the model's final output must conform to " +
-            '(headless mode only). Accepts a JSON literal or "@path/to/schema.json". ' +
-            'Registers a synthetic `structured_output` tool; the session ends on ' +
-            'the first valid call.',
-        })
-        .option('input-file', {
-          type: 'string',
-          description:
-            'File path for receiving remote input commands (bidirectional sync). ' +
-            'An external process writes JSONL commands; the TUI watches and processes them.',
-        })
-        .option('continue', {
-          alias: 'c',
-          type: 'boolean',
-          description:
-            'Resume the most recent session for the current project.',
-          default: false,
-        })
-        .option('resume', {
-          alias: 'r',
-          type: 'string',
-          description:
-            'Resume a specific session by its ID. Use without an ID to show session picker.',
-        })
-        .option('session-id', {
-          type: 'string',
-          description: 'Specify a session ID for this run.',
-        })
-        .option('fork-session', {
-          type: 'boolean',
-          description:
-            'Create a new forked session from the resumed session. Must be used with --resume or --continue.',
-          default: false,
-        })
-        .option('sandbox-session-id', {
-          type: 'string',
-          hidden: true,
-        })
-        .option('worktree', {
-          type: 'string',
-          description:
-            'Start the session inside a git worktree at <repoRoot>/.qwen/worktrees/<slug>/. ' +
-            'Pass a slug (`--worktree my-feature`), a PR reference (`--worktree=#123` or a full ' +
-            'GitHub pull-request URL), or use bare `--worktree` to auto-generate a slug. ' +
-            'On exit, the WorktreeExitDialog prompts to keep or remove the worktree.',
-        })
-        .option('max-session-turns', {
-          type: 'number',
-          description: 'Maximum number of session turns (must be an integer)',
-        })
-        .option('max-wall-time', {
-          type: 'string',
-          description:
-            'Run-level wall-clock budget for headless / unattended runs. Accepts seconds (e.g. `90`), or a duration string with unit (e.g. `30s`, `5m`, `1h`, `1.5h`). Minimum 1s — sub-second values (`500ms`, `0.5`) are rejected as typos; max ~24 days. Aborts the run with exit code 55 when exceeded.',
-        })
-        .option('max-tool-calls', {
-          type: 'number',
-          description:
-            'Maximum cumulative tool calls executed during the run (success or failure; `structured_output` under --json-schema is exempt). Aborts with exit code 55 when exceeded. -1 / unset means no limit; 0 means "no tool calls allowed" (first call aborts). Capped at 1,000,000 to catch typos.',
-        })
-        .option('max-subagent-depth', {
-          type: 'number',
-          description:
-            'Maximum sub-agent nesting depth (1-based levels). 1 keeps sub-agents available but disables nesting; capped at 100. Overrides model.maxSubagentDepth from settings. Defaults to 5.',
-        })
-        .option('core-tools', {
-          type: 'array',
-          string: true,
-          description: 'Core tool paths',
-          coerce: (tools: string[]) =>
-            tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
-        })
-        .option('exclude-tools', {
-          type: 'array',
-          string: true,
-          description: 'Tools to exclude',
-          coerce: (tools: string[]) =>
-            tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
-        })
-        .option('disabled-slash-commands', {
-          type: 'array',
-          string: true,
-          description:
-            'Slash command names to hide/disable (comma-separated or ' +
-            'repeated). Merged with the `slashCommands.disabled` setting ' +
-            'and QWEN_DISABLED_SLASH_COMMANDS. Matched case-insensitively ' +
-            'against the final command name.',
-          coerce: (names: string[]) =>
-            names.flatMap((n) => n.split(',').map((t) => t.trim())),
-        })
-        .option('allowed-tools', {
-          type: 'array',
-          string: true,
-          description: 'Tools to allow, will bypass confirmation',
-          coerce: (tools: string[]) =>
-            tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
-        })
-        .option('auth-type', {
-          type: 'string',
-          choices: [
-            AuthType.USE_OPENAI,
-            AuthType.USE_ANTHROPIC,
-            AuthType.QWEN_OAUTH,
-            AuthType.USE_GEMINI,
-            AuthType.USE_VERTEX_AI,
-          ],
-          description: 'Authentication type',
-        })
-        .deprecateOption(
-          'sandbox-image',
-          'Use the "tools.sandboxImage" setting in settings.json instead. This flag will be removed in a future version.',
-        )
-        .deprecateOption(
-          'prompt',
-          'Use the positional prompt instead. This flag will be removed in a future version.',
-        )
-        // Ensure validation flows through .fail() for clean UX
-        .fail((msg: string, err: Error | undefined, yargs: Argv) => {
-          writeStderrLine(msg || err?.message || 'Unknown error');
-          yargs.showHelp();
-          process.exit(1);
-        })
-        .check((argv: { [x: string]: unknown }) => {
-          // The 'query' positional can be a string (for one arg) or string[] (for multiple).
-          // This guard safely checks if any positional argument was provided.
-          const query = argv['query'] as string | string[] | undefined;
-          const hasPositionalQuery = Array.isArray(query)
-            ? query.length > 0
-            : !!query;
-
-          if (argv['prompt'] && hasPositionalQuery) {
-            return 'Cannot use both a positional prompt and the --prompt (-p) flag together';
-          }
-          if (argv['prompt'] && argv['promptInteractive']) {
-            return 'Cannot use both --prompt (-p) and --prompt-interactive (-i) together';
-          }
-          if (argv['yolo'] && argv['approvalMode']) {
-            return 'Cannot use both --yolo (-y) and --approval-mode together. Use --approval-mode=yolo instead.';
-          }
-          if (
-            argv['includePartialMessages'] &&
-            argv['outputFormat'] !== OutputFormat.STREAM_JSON
-          ) {
-            return '--include-partial-messages requires --output-format stream-json';
-          }
-          if (
-            argv['inputFormat'] === 'stream-json' &&
-            argv['outputFormat'] !== OutputFormat.STREAM_JSON
-          ) {
-            return '--input-format stream-json requires --output-format stream-json';
-          }
-          if (argv['continue'] && argv['resume']) {
-            return 'Cannot use both --continue and --resume together. Use --continue to resume the latest session, or --resume <sessionId> to resume a specific session.';
-          }
-          const hasResume = argv['resume'] !== undefined;
-          if (argv['sessionId'] && (argv['continue'] || hasResume)) {
-            return 'Cannot use --session-id with --continue or --resume. Use --session-id to start a new session with a specific ID, or use --continue/--resume to resume an existing session.';
-          }
-          if (argv['forkSession'] && !(argv['continue'] || hasResume)) {
-            return '--fork-session must be used with --resume or --continue.';
-          }
-          if (
-            argv['sandboxSessionId'] &&
-            (argv['sessionId'] || argv['continue'] || argv['resume'])
-          ) {
-            return 'Cannot use internal --sandbox-session-id with --session-id, --continue, or --resume.';
-          }
-          if (
-            argv['sessionId'] &&
-            !isValidSessionId(argv['sessionId'] as string)
-          ) {
-            return `Invalid --session-id: "${argv['sessionId']}". Must be a valid UUID (e.g., "123e4567-e89b-12d3-a456-426614174000").`;
-          }
-          if (
-            argv['sandboxSessionId'] &&
-            !isValidSessionId(argv['sandboxSessionId'] as string)
-          ) {
-            return `Invalid --sandbox-session-id: "${argv['sandboxSessionId']}". Must be a valid UUID (e.g., "123e4567-e89b-12d3-a456-426614174000").`;
-          }
-          // --resume accepts either a session UUID or a custom title
-          if (argv['jsonFd'] != null && argv['jsonFile'] != null) {
-            return '--json-fd and --json-file are mutually exclusive. Use one or the other.';
-          }
-          if (argv['jsonSchema']) {
-            if (argv['promptInteractive']) {
-              return '--json-schema cannot be used with --prompt-interactive (-i); structured output only terminates the non-interactive flow.';
-            }
-            if (argv['inputFormat'] === 'stream-json') {
-              // The "first valid structured_output call ends the session"
-              // contract assumes a single one-shot prompt. Stream-json
-              // input keeps the process open waiting for more protocol
-              // messages, so terminating on the first call would silently
-              // drop subsequent prompts. Refuse the combination here
-              // rather than letting the run race to whichever message
-              // wins.
-              return '--json-schema cannot be used with --input-format stream-json; the "first structured_output call ends the session" contract is incompatible with the long-lived stream-json input protocol.';
-            }
-            if (argv['acp'] || argv['experimentalAcp']) {
-              // ACP runs an external IDE/Zed protocol on its own turn loop
-              // (runAcpAgent), which doesn't honour the synthetic
-              // structured_output contract. Without this check the tool
-              // would register but its "session ends now" llmContent would
-              // just be relayed back into the ACP chat, leaving the run
-              // open and silently ignoring --json-schema.
-              return '--json-schema cannot be used with --acp; structured output is only honoured by the headless non-interactive flow.';
-            }
-            const hasPrompt = !!argv['prompt'];
+    .command(
+      '$0 [query..]',
+      'Launch LailatulCoder Ai CLI',
+      (yargsInstance: Argv) =>
+        yargsInstance
+          .positional('query', {
+            description:
+              'Positional prompt. Defaults to one-shot; use -i/--prompt-interactive for interactive.',
+          })
+          .option('model', {
+            alias: 'm',
+            type: 'string',
+            description: `Model`,
+          })
+          .option('fallback-model', {
+            type: 'array',
+            string: true,
+            description:
+              'Fallback model(s) for capacity errors (429/503/529), repeatable or comma-separated (max 3)',
+            coerce: (models: string[]) =>
+              models
+                .flatMap((m) => m.split(',').map((s) => s.trim()))
+                .filter(Boolean),
+          })
+          .option('prompt', {
+            alias: 'p',
+            type: 'string',
+            description: 'Prompt. Appended to input on stdin (if any).',
+          })
+          .option('prompt-interactive', {
+            alias: 'i',
+            type: 'string',
+            description:
+              'Execute the provided prompt and continue in interactive mode',
+          })
+          .option('system-prompt', {
+            type: 'string',
+            description:
+              'Override the main session system prompt for this run. Can be combined with --append-system-prompt.',
+          })
+          .option('append-system-prompt', {
+            type: 'string',
+            description:
+              'Append instructions to the main session system prompt for this run. Can be combined with --system-prompt.',
+          })
+          .option('sandbox', {
+            alias: 's',
+            type: 'boolean',
+            description: 'Run in sandbox?',
+          })
+          .option('sandbox-image', {
+            type: 'string',
+            description: 'Sandbox image URI.',
+          })
+          .option('yolo', {
+            alias: 'y',
+            type: 'boolean',
+            description:
+              'Automatically accept all actions (aka YOLO mode, see https://www.youtube.com/watch?v=xvFZjo5PgG0 for more details)?',
+            default: false,
+          })
+          .option('approval-mode', {
+            type: 'string',
+            choices: ['plan', 'default', 'auto-edit', 'auto', 'yolo'],
+            description:
+              'Set the approval mode: plan (plan only), default (prompt for approval), auto-edit (auto-approve edit tools), auto (LLM classifier auto-approves safe actions, blocks risky ones), yolo (auto-approve all tools)',
+          })
+          .option('acp', {
+            type: 'boolean',
+            description: 'Starts the agent in ACP mode',
+          })
+          .option('experimental-acp', {
+            type: 'boolean',
+            description:
+              'Starts the agent in ACP mode (deprecated, use --acp instead)',
+            hidden: true,
+          })
+          .option('experimental-skills', {
+            type: 'boolean',
+            description:
+              'Deprecated: Skills are now enabled by default. This flag is ignored.',
+            hidden: true,
+          })
+          .option('experimental-lsp', {
+            type: 'boolean',
+            description:
+              'Enable experimental LSP (Language Server Protocol) feature for code intelligence',
+            default: false,
+          })
+          .option('channel', {
+            type: 'string',
+            choices: ['VSCode', 'ACP', 'SDK', 'CI', 'desktop', 'daemon'],
+            description:
+              'Channel identifier (VSCode, ACP, SDK, CI, desktop, daemon)',
+          })
+          .option('allowed-mcp-server-names', {
+            type: 'array',
+            string: true,
+            description: 'Allowed MCP server names',
+            coerce: (mcpServerNames: string[]) =>
+              // Handle comma-separated values
+              mcpServerNames.flatMap((mcpServerName) =>
+                mcpServerName.split(',').map((m) => m.trim()),
+              ),
+          })
+          .option('mcp-config', {
+            type: 'string',
+            description:
+              'MCP server configuration as JSON string or file path. Can be a path to a JSON file or inline JSON with {"mcpServers": {...}} format.',
+          })
+          .option('allowed-tools', {
+            type: 'array',
+            string: true,
+            description: 'Tools that are allowed to run without confirmation',
+            coerce: (tools: string[]) =>
+              // Handle comma-separated values
+              tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
+          })
+          .option('extensions', {
+            alias: 'e',
+            type: 'array',
+            string: true,
+            description:
+              'A list of extensions to use. If not provided, all extensions are used.',
+            coerce: (extensions: string[]) =>
+              // Handle comma-separated values
+              extensions.flatMap((extension) =>
+                extension.split(',').map((e) => e.trim()),
+              ),
+          })
+          .option('list-extensions', {
+            alias: 'l',
+            type: 'boolean',
+            description: 'List all available extensions and exit.',
+          })
+          .option('include-directories', {
+            alias: 'add-dir',
+            type: 'array',
+            string: true,
+            description:
+              'Additional directories to include in the workspace (comma-separated or multiple --include-directories)',
+            coerce: (dirs: string[]) =>
+              // Handle comma-separated values
+              dirs.flatMap((dir) => dir.split(',').map((d) => d.trim())),
+          })
+          .option('openai-logging', {
+            type: 'boolean',
+            description:
+              'Enable logging of OpenAI API calls for debugging and analysis',
+          })
+          .option('openai-logging-dir', {
+            type: 'string',
+            description:
+              'Custom directory path for OpenAI API logs. Overrides settings files.',
+          })
+          .option('openai-api-key', {
+            type: 'string',
+            description: 'OpenAI API key to use for authentication',
+          })
+          .option('openai-base-url', {
+            type: 'string',
+            description: 'OpenAI base URL (for custom endpoints)',
+          })
+          .option('screen-reader', {
+            type: 'boolean',
+            description: 'Enable screen reader mode for accessibility.',
+          })
+          .option('input-format', {
+            type: 'string',
+            choices: ['text', 'stream-json'],
+            description: 'The format consumed from standard input.',
+            default: 'text',
+          })
+          .option('output-format', {
+            alias: 'o',
+            type: 'string',
+            description: 'The format of the CLI output.',
+            choices: ['text', 'json', 'stream-json'],
+          })
+          .option('include-partial-messages', {
+            type: 'boolean',
+            description:
+              'Include partial assistant messages when using stream-json output.',
+            default: false,
+          })
+          .option('json-fd', {
+            type: 'number',
+            description:
+              'File descriptor for structured JSON event output (dual output mode). ' +
+              'The TUI renders normally on stdout while JSON events are written to this fd. ' +
+              'The caller must provide this fd via spawn stdio configuration.',
+          })
+          .option('json-file', {
+            type: 'string',
+            description:
+              'File path for structured JSON event output (dual output mode). ' +
+              'Can be a regular file, FIFO (named pipe), or /dev/fd/N.',
+          })
+          .option('json-schema', {
+            type: 'string',
+            description:
+              "JSON Schema that the model's final output must conform to " +
+              '(headless mode only). Accepts a JSON literal or "@path/to/schema.json". ' +
+              'Registers a synthetic `structured_output` tool; the session ends on ' +
+              'the first valid call.',
+          })
+          .option('input-file', {
+            type: 'string',
+            description:
+              'File path for receiving remote input commands (bidirectional sync). ' +
+              'An external process writes JSONL commands; the TUI watches and processes them.',
+          })
+          .option('continue', {
+            alias: 'c',
+            type: 'boolean',
+            description:
+              'Resume the most recent session for the current project.',
+            default: false,
+          })
+          .option('resume', {
+            alias: 'r',
+            type: 'string',
+            description:
+              'Resume a specific session by its ID. Use without an ID to show session picker.',
+          })
+          .option('session-id', {
+            type: 'string',
+            description: 'Specify a session ID for this run.',
+          })
+          .option('fork-session', {
+            type: 'boolean',
+            description:
+              'Create a new forked session from the resumed session. Must be used with --resume or --continue.',
+            default: false,
+          })
+          .option('sandbox-session-id', {
+            type: 'string',
+            hidden: true,
+          })
+          .option('worktree', {
+            type: 'string',
+            description:
+              'Start the session inside a git worktree at <repoRoot>/.qwen/worktrees/<slug>/. ' +
+              'Pass a slug (`--worktree my-feature`), a PR reference (`--worktree=#123` or a full ' +
+              'GitHub pull-request URL), or use bare `--worktree` to auto-generate a slug. ' +
+              'On exit, the WorktreeExitDialog prompts to keep or remove the worktree.',
+          })
+          .option('max-session-turns', {
+            type: 'number',
+            description: 'Maximum number of session turns (must be an integer)',
+          })
+          .option('max-wall-time', {
+            type: 'string',
+            description:
+              'Run-level wall-clock budget for headless / unattended runs. Accepts seconds (e.g. `90`), or a duration string with unit (e.g. `30s`, `5m`, `1h`, `1.5h`). Minimum 1s — sub-second values (`500ms`, `0.5`) are rejected as typos; max ~24 days. Aborts the run with exit code 55 when exceeded.',
+          })
+          .option('max-tool-calls', {
+            type: 'number',
+            description:
+              'Maximum cumulative tool calls executed during the run (success or failure; `structured_output` under --json-schema is exempt). Aborts with exit code 55 when exceeded. -1 / unset means no limit; 0 means "no tool calls allowed" (first call aborts). Capped at 1,000,000 to catch typos.',
+          })
+          .option('max-subagent-depth', {
+            type: 'number',
+            description:
+              'Maximum sub-agent nesting depth (1-based levels). 1 keeps sub-agents available but disables nesting; capped at 100. Overrides model.maxSubagentDepth from settings. Defaults to 5.',
+          })
+          .option('core-tools', {
+            type: 'array',
+            string: true,
+            description: 'Core tool paths',
+            coerce: (tools: string[]) =>
+              tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
+          })
+          .option('exclude-tools', {
+            type: 'array',
+            string: true,
+            description: 'Tools to exclude',
+            coerce: (tools: string[]) =>
+              tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
+          })
+          .option('disabled-slash-commands', {
+            type: 'array',
+            string: true,
+            description:
+              'Slash command names to hide/disable (comma-separated or ' +
+              'repeated). Merged with the `slashCommands.disabled` setting ' +
+              'and QWEN_DISABLED_SLASH_COMMANDS. Matched case-insensitively ' +
+              'against the final command name.',
+            coerce: (names: string[]) =>
+              names.flatMap((n) => n.split(',').map((t) => t.trim())),
+          })
+          .option('allowed-tools', {
+            type: 'array',
+            string: true,
+            description: 'Tools to allow, will bypass confirmation',
+            coerce: (tools: string[]) =>
+              tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
+          })
+          .option('auth-type', {
+            type: 'string',
+            choices: [
+              AuthType.USE_OPENAI,
+              AuthType.USE_ANTHROPIC,
+              AuthType.QWEN_OAUTH,
+              AuthType.USE_GEMINI,
+              AuthType.USE_VERTEX_AI,
+            ],
+            description: 'Authentication type',
+          })
+          .deprecateOption(
+            'sandbox-image',
+            'Use the "tools.sandboxImage" setting in settings.json instead. This flag will be removed in a future version.',
+          )
+          .deprecateOption(
+            'prompt',
+            'Use the positional prompt instead. This flag will be removed in a future version.',
+          )
+          // Ensure validation flows through .fail() for clean UX
+          .fail((msg: string, err: Error | undefined, yargs: Argv) => {
+            writeStderrLine(msg || err?.message || 'Unknown error');
+            yargs.showHelp();
+            process.exit(1);
+          })
+          .check((argv: { [x: string]: unknown }) => {
+            // The 'query' positional can be a string (for one arg) or string[] (for multiple).
+            // This guard safely checks if any positional argument was provided.
             const query = argv['query'] as string | string[] | undefined;
             const hasPositionalQuery = Array.isArray(query)
               ? query.length > 0
               : !!query;
-            // Allow stdin piping (`echo "..." | qwen --json-schema ...`):
-            // when stdin is not a TTY, the prompt is supplied via the pipe
-            // and headless mode runs normally. Only reject true interactive
-            // invocations with neither flag nor positional nor pipe — the
-            // synthetic tool's "session ends now" llmContent has no
-            // termination handler in the TUI loop, so silently launching
-            // the TUI would strand the run.
-            const stdinIsPiped = !process.stdin.isTTY;
-            if (!hasPrompt && !hasPositionalQuery && !stdinIsPiped) {
-              return '--json-schema only applies to non-interactive mode; pass a prompt via -p, as a positional argument, or piped via stdin.';
+
+            if (argv['prompt'] && hasPositionalQuery) {
+              return 'Cannot use both a positional prompt and the --prompt (-p) flag together';
             }
-          }
-          return true;
-        }),
+            if (argv['prompt'] && argv['promptInteractive']) {
+              return 'Cannot use both --prompt (-p) and --prompt-interactive (-i) together';
+            }
+            if (argv['yolo'] && argv['approvalMode']) {
+              return 'Cannot use both --yolo (-y) and --approval-mode together. Use --approval-mode=yolo instead.';
+            }
+            if (
+              argv['includePartialMessages'] &&
+              argv['outputFormat'] !== OutputFormat.STREAM_JSON
+            ) {
+              return '--include-partial-messages requires --output-format stream-json';
+            }
+            if (
+              argv['inputFormat'] === 'stream-json' &&
+              argv['outputFormat'] !== OutputFormat.STREAM_JSON
+            ) {
+              return '--input-format stream-json requires --output-format stream-json';
+            }
+            if (argv['continue'] && argv['resume']) {
+              return 'Cannot use both --continue and --resume together. Use --continue to resume the latest session, or --resume <sessionId> to resume a specific session.';
+            }
+            const hasResume = argv['resume'] !== undefined;
+            if (argv['sessionId'] && (argv['continue'] || hasResume)) {
+              return 'Cannot use --session-id with --continue or --resume. Use --session-id to start a new session with a specific ID, or use --continue/--resume to resume an existing session.';
+            }
+            if (argv['forkSession'] && !(argv['continue'] || hasResume)) {
+              return '--fork-session must be used with --resume or --continue.';
+            }
+            if (
+              argv['sandboxSessionId'] &&
+              (argv['sessionId'] || argv['continue'] || argv['resume'])
+            ) {
+              return 'Cannot use internal --sandbox-session-id with --session-id, --continue, or --resume.';
+            }
+            if (
+              argv['sessionId'] &&
+              !isValidSessionId(argv['sessionId'] as string)
+            ) {
+              return `Invalid --session-id: "${argv['sessionId']}". Must be a valid UUID (e.g., "123e4567-e89b-12d3-a456-426614174000").`;
+            }
+            if (
+              argv['sandboxSessionId'] &&
+              !isValidSessionId(argv['sandboxSessionId'] as string)
+            ) {
+              return `Invalid --sandbox-session-id: "${argv['sandboxSessionId']}". Must be a valid UUID (e.g., "123e4567-e89b-12d3-a456-426614174000").`;
+            }
+            // --resume accepts either a session UUID or a custom title
+            if (argv['jsonFd'] != null && argv['jsonFile'] != null) {
+              return '--json-fd and --json-file are mutually exclusive. Use one or the other.';
+            }
+            if (argv['jsonSchema']) {
+              if (argv['promptInteractive']) {
+                return '--json-schema cannot be used with --prompt-interactive (-i); structured output only terminates the non-interactive flow.';
+              }
+              if (argv['inputFormat'] === 'stream-json') {
+                // The "first valid structured_output call ends the session"
+                // contract assumes a single one-shot prompt. Stream-json
+                // input keeps the process open waiting for more protocol
+                // messages, so terminating on the first call would silently
+                // drop subsequent prompts. Refuse the combination here
+                // rather than letting the run race to whichever message
+                // wins.
+                return '--json-schema cannot be used with --input-format stream-json; the "first structured_output call ends the session" contract is incompatible with the long-lived stream-json input protocol.';
+              }
+              if (argv['acp'] || argv['experimentalAcp']) {
+                // ACP runs an external IDE/Zed protocol on its own turn loop
+                // (runAcpAgent), which doesn't honour the synthetic
+                // structured_output contract. Without this check the tool
+                // would register but its "session ends now" llmContent would
+                // just be relayed back into the ACP chat, leaving the run
+                // open and silently ignoring --json-schema.
+                return '--json-schema cannot be used with --acp; structured output is only honoured by the headless non-interactive flow.';
+              }
+              const hasPrompt = !!argv['prompt'];
+              const query = argv['query'] as string | string[] | undefined;
+              const hasPositionalQuery = Array.isArray(query)
+                ? query.length > 0
+                : !!query;
+              // Allow stdin piping (`echo "..." | qwen --json-schema ...`):
+              // when stdin is not a TTY, the prompt is supplied via the pipe
+              // and headless mode runs normally. Only reject true interactive
+              // invocations with neither flag nor positional nor pipe — the
+              // synthetic tool's "session ends now" llmContent has no
+              // termination handler in the TUI loop, so silently launching
+              // the TUI would strand the run.
+              const stdinIsPiped = !process.stdin.isTTY;
+              if (!hasPrompt && !hasPositionalQuery && !stdinIsPiped) {
+                return '--json-schema only applies to non-interactive mode; pass a prompt via -p, as a positional argument, or piped via stdin.';
+              }
+            }
+            return true;
+          }),
     )
     // Register MCP subcommands
     .command(mcpCommand)
@@ -2172,9 +2176,8 @@ export async function loadCliConfig(
       bareMode || safeMode ? undefined : disabledSkillNamesProvider,
     terminalImageRenderSupportProvider: interactive
       ? async () => {
-          const { getTerminalImageRenderSupport } = await import(
-            '../ui/utils/terminal-image-renderer.js'
-          );
+          const { getTerminalImageRenderSupport } =
+            await import('../ui/utils/terminal-image-renderer.js');
           return getTerminalImageRenderSupport();
         }
       : undefined,

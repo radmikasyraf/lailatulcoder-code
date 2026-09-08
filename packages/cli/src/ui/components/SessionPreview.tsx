@@ -210,4 +210,3 @@ export function SessionPreview(props: SessionPreviewProps) {
     </Box>
   );
 }
-

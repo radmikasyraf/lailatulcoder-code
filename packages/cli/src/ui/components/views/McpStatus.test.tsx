@@ -166,4 +166,3 @@ describe('McpStatus', () => {
     expect(lastFrame()).toMatchSnapshot();
   });
 });
-

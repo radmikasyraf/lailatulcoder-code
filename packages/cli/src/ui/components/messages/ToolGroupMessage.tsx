@@ -544,4 +544,3 @@ export const ToolGroupMessage: React.FC<ToolGroupMessageProps> = ({
     </Box>
   );
 };
-

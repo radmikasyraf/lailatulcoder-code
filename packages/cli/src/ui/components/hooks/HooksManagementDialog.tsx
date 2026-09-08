@@ -586,4 +586,3 @@ export function HooksManagementDialog({
     </Box>
   );
 }
-

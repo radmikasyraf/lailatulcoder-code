@@ -361,7 +361,7 @@ Chart/Data 控件、无数据提示和错误提示默认跟随 WebShell 语言�
 | `/compress`      | ACP 透传            | 通过摘要替换来压缩上下文。                                                                                              |
 | `/context`       | ACP 透传            | 显示上下文窗口使用情况，包含 `detail` 子命令。                                                                          |
 | `/diff`          | ACP 透传            | 显示工作区相对 `HEAD` 的变更统计。                                                                                      |
-| `/docs`          | ACP 透传            | 打开 LailatulCoder Ai 文档。                                                                                                   |
+| `/docs`          | ACP 透传            | 打开 LailatulCoder Ai 文档。                                                                                            |
 | `/doctor`        | ACP 透传            | 执行安装与环境诊断，包含 `memory` 子命令。                                                                              |
 | `/export`        | ACP 透传            | 导出当前会话记录，包含 `html`、`md`、`json`、`jsonl` 子命令。                                                           |
 | `/goal`          | ACP 透传            | 设置目标，并持续工作直到条件满足。                                                                                      |

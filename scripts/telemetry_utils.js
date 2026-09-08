@@ -77,7 +77,14 @@ export function getJson(url) {
   try {
     const result = spawnSync(
       'curl',
-      ['-sL', '-H', 'User-Agent: lailatul-coder-dev-script', '-o', tmpFile, url],
+      [
+        '-sL',
+        '-H',
+        'User-Agent: lailatul-coder-dev-script',
+        '-o',
+        tmpFile,
+        url,
+      ],
       { stdio: 'pipe', encoding: 'utf-8' },
     );
     if (result.status !== 0) {
@@ -281,7 +288,9 @@ export async function ensureBinary(
   }
 
   const downloadUrl = asset.browser_download_url;
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lailatul-coder-telemetry-'));
+  const tmpDir = fs.mkdtempSync(
+    path.join(os.tmpdir(), 'lailatul-coder-telemetry-'),
+  );
   const archivePath = path.join(tmpDir, asset.name);
 
   try {

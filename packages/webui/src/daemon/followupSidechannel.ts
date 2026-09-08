@@ -10,8 +10,7 @@ const listeners = new Set<() => void>();
 let lastFollowupSuggestion: DaemonFollowupSuggestionData | undefined;
 
 export function getSidechannelFollowupSuggestion():
-  | DaemonFollowupSuggestionData
-  | undefined {
+  DaemonFollowupSuggestionData | undefined {
   return lastFollowupSuggestion;
 }
 

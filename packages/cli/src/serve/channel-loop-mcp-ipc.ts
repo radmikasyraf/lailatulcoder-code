@@ -50,8 +50,7 @@ export interface ChannelLoopMcpResultMessage {
 }
 
 export type ChannelLoopMcpControlMessage =
-  | ChannelLoopMcpRegisterMessage
-  | ChannelLoopMcpUnregisterMessage;
+  ChannelLoopMcpRegisterMessage | ChannelLoopMcpUnregisterMessage;
 
 export type ChannelLoopMcpIpcSend = (
   message: unknown,
@@ -275,8 +274,7 @@ export class ChannelLoopMcpWorkerHost implements DaemonChannelLoopMcpHost {
   private sendResult(
     id: string,
     result:
-      | { ok: true; payload: JsonRpcMessage }
-      | { ok: false; error: string },
+      { ok: true; payload: JsonRpcMessage } | { ok: false; error: string },
   ): void {
     try {
       this.send({

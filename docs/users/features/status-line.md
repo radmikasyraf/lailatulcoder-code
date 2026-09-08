@@ -96,7 +96,7 @@ Add a `statusLine` object under the `ui` key in `~/.qwen/settings.json`:
 | `branch-changes`       |         | Session file change stats (e.g. `+120 -30`)                        |
 | `context-used`         | Yes     | Percentage of context window used (e.g. `Context 34.3% used`)      |
 | `run-state`            |         | Compact session state (`Ready`, `Working`, or `Confirm`)           |
-| `qwen-version`         |         | LailatulCoder Ai version (e.g. `v0.14.1`)                                 |
+| `qwen-version`         |         | LailatulCoder Ai version (e.g. `v0.14.1`)                          |
 | `context-window-size`  |         | Total context window size (e.g. `131.1k window`)                   |
 | `used-tokens`          |         | Current prompt token count (e.g. `45.0k used`)                     |
 | `session-id`           |         | Current session identifier                                         |
@@ -240,7 +240,7 @@ The command receives a JSON object via stdin with the following fields:
 | Field                                 | Type             | Description                                                                        |
 | ------------------------------------- | ---------------- | ---------------------------------------------------------------------------------- |
 | `session_id`                          | string           | Unique session identifier                                                          |
-| `version`                             | string           | LailatulCoder Ai version                                                                  |
+| `version`                             | string           | LailatulCoder Ai version                                                           |
 | `model.display_name`                  | string           | Current model name                                                                 |
 | `context_window.context_window_size`  | number           | Total context window size in tokens                                                |
 | `context_window.used_percentage`      | number           | Context window usage as percentage (0–100)                                         |

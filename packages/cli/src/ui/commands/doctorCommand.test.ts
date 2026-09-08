@@ -19,7 +19,9 @@ vi.mock('../../utils/doctorChecks.js');
 vi.mock('../../utils/memoryDiagnostics.js');
 vi.mock('../../utils/cpuProfiler.js');
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
+  ...(await importOriginal<
+    typeof import('@lailatul-coder/lailatul-coder-core')
+  >()),
   collectMemoryDiagnostics: vi.fn(),
 }));
 

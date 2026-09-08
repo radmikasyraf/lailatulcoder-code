@@ -98,14 +98,7 @@ function getElapsedTimeReservedWidth(
 }
 
 type ToolCategory =
-  | 'read'
-  | 'edit'
-  | 'write'
-  | 'search'
-  | 'list'
-  | 'command'
-  | 'agent'
-  | 'other';
+  'read' | 'edit' | 'write' | 'search' | 'list' | 'command' | 'agent' | 'other';
 
 const TOOL_NAME_TO_CATEGORY: Record<string, ToolCategory> = {
   [ToolDisplayNames.READ_FILE]: 'read',
@@ -506,4 +499,3 @@ export const CompactToolGroupDisplay: React.FC<
     </Box>
   );
 };
-

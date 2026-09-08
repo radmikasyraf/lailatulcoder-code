@@ -25,12 +25,7 @@ import { normalizeModelIds, maskApiKey } from './useAuth.js';
 // ---------------------------------------------------------------------------
 
 export type SetupStep =
-  | 'protocol'
-  | 'baseUrl'
-  | 'apiKey'
-  | 'models'
-  | 'advancedConfig'
-  | 'review';
+  'protocol' | 'baseUrl' | 'apiKey' | 'models' | 'advancedConfig' | 'review';
 
 const STEP_ORDER: SetupStep[] = [
   'protocol',

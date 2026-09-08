@@ -15,12 +15,7 @@ import {
 export interface QwenAuthState {
   deviceAuth: DeviceAuthorizationData | null;
   authStatus:
-    | 'idle'
-    | 'polling'
-    | 'success'
-    | 'error'
-    | 'timeout'
-    | 'rate_limit';
+    'idle' | 'polling' | 'success' | 'error' | 'timeout' | 'rate_limit';
   authMessage: string | null;
 }
 

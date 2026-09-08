@@ -107,4 +107,3 @@ describe('ActionSelectionStep Snapshots', () => {
     expect(lastFrame()).toMatchSnapshot();
   });
 });
-

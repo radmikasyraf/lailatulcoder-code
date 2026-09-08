@@ -346,9 +346,7 @@ const app = createServeApp(
     maxSessions: 20,
   },
   () => actualPort,
-  {
-    /* deps: bridge, fsFactory, ... */
-  },
+  {/* deps: bridge, fsFactory, ... */},
 );
 
 const lifecycle = getServeAppLifecycle(app);

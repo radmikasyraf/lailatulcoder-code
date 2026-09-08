@@ -27,11 +27,9 @@ const mockSettings = {
 
 const resumeMocks = vi.hoisted(() => {
   let resolveLoadSession:
-    | ((value: { conversation: unknown } | undefined) => void)
-    | undefined;
+    ((value: { conversation: unknown } | undefined) => void) | undefined;
   let pendingLoadSession:
-    | Promise<{ conversation: unknown } | undefined>
-    | undefined;
+    Promise<{ conversation: unknown } | undefined> | undefined;
 
   return {
     makeConversation(messages: Content[]) {
@@ -84,7 +82,9 @@ vi.mock('../utils/resumeHistoryUtils.js', async (importOriginal) => {
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   class SessionService {
     constructor(_cwd: string) {}
     async loadSession(_sessionId: string) {

@@ -6,7 +6,10 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { atomicWriteFileSync, Storage } from '@lailatul-coder/lailatul-coder-core';
+import {
+  atomicWriteFileSync,
+  Storage,
+} from '@lailatul-coder/lailatul-coder-core';
 
 const PROMPT_STASH_FILE = 'prompt-stash.json';
 

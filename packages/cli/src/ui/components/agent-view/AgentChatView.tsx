@@ -92,4 +92,3 @@ export const AgentChatView = ({ agentId }: AgentChatViewProps) => {
     </ErrorBoundary>
   );
 };
-

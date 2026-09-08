@@ -589,8 +589,7 @@ export function registerWorkspaceExtensionRoutes(
       : {};
   const mutationClientBridges = (
     runtimes?:
-      | readonly WorkspaceRuntime[]
-      | (() => readonly WorkspaceRuntime[]),
+      readonly WorkspaceRuntime[] | (() => readonly WorkspaceRuntime[]),
   ): readonly AcpSessionBridge[] =>
     (typeof runtimes === 'function'
       ? runtimes()
@@ -1667,8 +1666,7 @@ export function registerWorkspaceExtensionRoutes(
     ) => Promise<ExtensionMutationEvent>,
     options: {
       refreshRuntimes?:
-        | readonly WorkspaceRuntime[]
-        | (() => readonly WorkspaceRuntime[]);
+        readonly WorkspaceRuntime[] | (() => readonly WorkspaceRuntime[]);
       skipRefresh?: boolean;
       deadlineMs?: number;
       assertGenerationOpen?: () => void;
@@ -1907,8 +1905,7 @@ export function registerWorkspaceExtensionRoutes(
     }
     const activationRecord = activation as Record<string, unknown>;
     let initialActivation:
-      | { scope: 'user' }
-      | { scope: 'workspace'; workspacePath: string };
+      { scope: 'user' } | { scope: 'workspace'; workspacePath: string };
     if (activationRecord['scope'] === 'user') {
       initialActivation = { scope: 'user' };
     } else if (

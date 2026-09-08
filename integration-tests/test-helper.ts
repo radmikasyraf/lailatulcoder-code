@@ -275,8 +275,7 @@ export class TestRig {
 
   run(
     promptOrOptions:
-      | string
-      | { prompt?: string; stdin?: string; stdinDoesNotEnd?: boolean },
+      string | { prompt?: string; stdin?: string; stdinDoesNotEnd?: boolean },
     ...args: string[]
   ): Promise<string> {
     const { command, initialArgs } = this._getCommandAndArgs(['--yolo']);

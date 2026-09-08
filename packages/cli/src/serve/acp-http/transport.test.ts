@@ -522,8 +522,7 @@ class FakeBridge {
     | undefined;
   lastArtifactListSessionId: string | undefined;
   lastArtifactListContext:
-    | Parameters<HttpAcpBridge['getSessionArtifacts']>[1]
-    | undefined;
+    Parameters<HttpAcpBridge['getSessionArtifacts']>[1] | undefined;
   lastRemovedArtifact:
     | {
         sessionId: string;
@@ -8156,8 +8155,7 @@ describe('ACP Streamable HTTP transport (over the wire)', () => {
         clientRetained: false,
       });
       const artifact = bridge.lastAddedArtifact?.artifact as
-        | Record<string, unknown>
-        | undefined;
+        Record<string, unknown> | undefined;
       expect(artifact).not.toHaveProperty('sessionId');
       expect(artifact).not.toHaveProperty('source');
       expect(artifact).not.toHaveProperty('trustedPublisher');

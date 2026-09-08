@@ -758,4 +758,3 @@ function emptyMessage(
   }
   return t('No file changes were captured in this turn.');
 }
-

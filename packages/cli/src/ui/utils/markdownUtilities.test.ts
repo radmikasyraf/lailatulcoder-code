@@ -108,7 +108,9 @@ describe('markdownUtilities', () => {
       const { before, after } = splitFencedMarkdown(content, splitPoint);
       // Head shows line1,line2,blank (3 lines), so the tail continues at line 4.
       expect(before).toBe('```python\nline1\nline2\n\n```\n');
-      expect(after).toBe('```python lailatul-coder:start-line=4\nline3\nline4\n');
+      expect(after).toBe(
+        '```python lailatul-coder:start-line=4\nline3\nline4\n',
+      );
       // Each half is now a self-contained, valid fenced block.
       expect(before.match(/```/g)).toHaveLength(2);
       expect(after.startsWith('```python ')).toBe(true);
@@ -125,9 +127,9 @@ describe('markdownUtilities', () => {
       const { before, after } = splitFencedMarkdown(content, splitPoint);
       expect(before.endsWith('~~~~\n')).toBe(true); // closing carries no info string
       // Re-open keeps the delimiter run and full info string, plus the directive.
-      expect(after.startsWith('~~~~ts extra lailatul-coder:start-line=2\n')).toBe(
-        true,
-      );
+      expect(
+        after.startsWith('~~~~ts extra lailatul-coder:start-line=2\n'),
+      ).toBe(true);
     });
 
     it('inserts a newline before the closing fence when the head does not end with one', () => {
@@ -139,7 +141,9 @@ describe('markdownUtilities', () => {
       // so the tail is the remainder of line 1 and its gutter must still say
       // 1. This previously read `start-line=2`, counting the unfinished line
       // as though it had been completed in the head.
-      expect(after).toBe('```ts lailatul-coder:start-line=1\n' + content.slice(40));
+      expect(after).toBe(
+        '```ts lailatul-coder:start-line=1\n' + content.slice(40),
+      );
     });
 
     it('keeps the tail on the same source line when split mid-line', () => {
@@ -178,7 +182,9 @@ describe('markdownUtilities', () => {
       const splitPoint = tail.indexOf('line6');
       const { after } = splitFencedMarkdown(tail, splitPoint);
       // Head of this tail shows line4,line5,blank (3 lines) from start 4 → next 7.
-      expect(after.startsWith('```python lailatul-coder:start-line=7\n')).toBe(true);
+      expect(after.startsWith('```python lailatul-coder:start-line=7\n')).toBe(
+        true,
+      );
       // No duplicated directive on the re-opened fence.
       expect(after.match(/lailatul-coder:start-line=/g)).toHaveLength(1);
     });

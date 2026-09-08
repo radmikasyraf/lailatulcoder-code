@@ -161,4 +161,3 @@ describe('<SessionSummaryDisplay />', () => {
     expect(output).not.toContain('qwen --resume');
   });
 });
-

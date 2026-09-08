@@ -621,8 +621,7 @@ export function readQwenSettingsForVSCode(): QwenSettingsForVSCode | null {
 
   const env = (settings.env ?? {}) as Record<string, string>;
   const modelProviders = settings.modelProviders as
-    | Record<string, unknown>
-    | undefined;
+    Record<string, unknown> | undefined;
   const openaiModels = findOpenaiModels(modelProviders);
   const subscriptionPlan = openaiModels
     .map((model) =>

@@ -429,8 +429,7 @@ describe('createDaemonWorkspaceService', () => {
           cause: expect.objectContaining({ message: 'disk full' }),
         });
 
-        expect(publishWorkspaceEvent).toHaveBeenCalledOnce();
-        expect(publishWorkspaceEvent).toHaveBeenCalledWith({
+        expect(publishWorkspaceEvent).toHaveBeenCalledExactlyOnceWith({
           type: 'settings_changed',
           data: {
             key: 'general.voice.mode',
@@ -1163,8 +1162,7 @@ describe('createDaemonWorkspaceService', () => {
       const result = await svc.getWorkspaceSkillsStatus(makeCtx());
       const cached = await svc.getWorkspaceSkillsStatus(makeCtx());
 
-      expect(workspaceSkillsStatusProvider).toHaveBeenCalledWith('/ws');
-      expect(workspaceSkillsStatusProvider).toHaveBeenCalledOnce();
+      expect(workspaceSkillsStatusProvider).toHaveBeenCalledExactlyOnceWith('/ws');
       expect(result.initialized).toBe(true);
       expect(result.skills.map((s) => s.name)).toEqual(['review']);
       expect(cached).toEqual(result);
@@ -2253,18 +2251,8 @@ describe('createDaemonWorkspaceService', () => {
       );
 
       expect(queryWorkspaceStatus).toHaveBeenCalledOnce();
-      expect(persistDisabledSkillsBatch).toHaveBeenCalledOnce();
-      expect(persistDisabledSkillsBatch).toHaveBeenCalledWith(
-        '/workspace',
-        ['review', 'missing', 'locked', 'deploy'],
-        false,
-        undefined,
-      );
-      expect(invokeWorkspaceCommand).toHaveBeenCalledOnce();
-      expect(invokeWorkspaceCommand).toHaveBeenCalledWith(
-        'qwen/control/workspace/skills/refresh',
-        { cwd: '/workspace', reason: 'settings' },
-      );
+      expect(persistDisabledSkillsBatch).toHaveBeenCalledExactlyOnceWith('/workspace', ['review', 'missing', 'locked', 'deploy'], false, undefined);
+      expect(invokeWorkspaceCommand).toHaveBeenCalledExactlyOnceWith('qwen/control/workspace/skills/refresh', { cwd: '/workspace', reason: 'settings' });
       expect(result).toEqual({
         enabled: false,
         activation: 'applied',
@@ -2297,9 +2285,7 @@ describe('createDaemonWorkspaceService', () => {
           },
         ],
       });
-      expect(publishWorkspaceEvent).toHaveBeenCalledOnce();
-      expect(publishWorkspaceEvent).toHaveBeenCalledWith(
-        skillToggleSettingsChanged({
+      expect(publishWorkspaceEvent).toHaveBeenCalledExactlyOnceWith(skillToggleSettingsChanged({
           key: 'skills.disabled',
           value: ['review', 'missing', 'deploy'],
           skills: [
@@ -2310,8 +2296,7 @@ describe('createDaemonWorkspaceService', () => {
           activation: 'applied',
           sessionsRefreshed: 2,
           sessionsFailed: 0,
-        }),
-      );
+        }));
     });
 
     it('orders results and errors by request targets, not persist outcomes', async () => {
@@ -2560,17 +2545,14 @@ describe('createDaemonWorkspaceService', () => {
         enabled: true,
         results: [{ skillName: 'review', enabled: true, changed: true }],
       });
-      expect(publishWorkspaceEvent).toHaveBeenCalledOnce();
-      expect(publishWorkspaceEvent).toHaveBeenCalledWith(
-        skillToggleSettingsChanged({
+      expect(publishWorkspaceEvent).toHaveBeenCalledExactlyOnceWith(skillToggleSettingsChanged({
           key: 'skills.disabled',
           value: undefined,
           skills: [{ name: 'review', enabled: true }],
           activation: 'deferred',
           sessionsRefreshed: 0,
           sessionsFailed: 0,
-        }),
-      );
+        }));
     });
 
     it('publishes one settings_changed event per settingsChanges entry in order', async () => {
@@ -2852,17 +2834,14 @@ describe('createDaemonWorkspaceService', () => {
         ],
       });
       expect(invokeWorkspaceCommand).toHaveBeenCalledOnce();
-      expect(publishWorkspaceEvent).toHaveBeenCalledOnce();
-      expect(publishWorkspaceEvent).toHaveBeenCalledWith(
-        skillToggleSettingsChanged({
+      expect(publishWorkspaceEvent).toHaveBeenCalledExactlyOnceWith(skillToggleSettingsChanged({
           key: 'skills.disabled',
           value: ['deploy'],
           skills: [{ name: 'deploy', enabled: false }],
           activation: 'applied',
           sessionsRefreshed: 1,
           sessionsFailed: 0,
-        }),
-      );
+        }));
     });
 
     it('drops the cached skill snapshot after a changed batch like the single-toggle path', async () => {

@@ -5,7 +5,10 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { AuthType, type AvailableModel } from '@lailatul-coder/lailatul-coder-core';
+import {
+  AuthType,
+  type AvailableModel,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   isSelectableVoiceModel,
   isTranscribableVoiceModel,

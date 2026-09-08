@@ -949,4 +949,3 @@ export const MCPManagementDialog: React.FC<MCPManagementDialogProps> = ({
     </Box>
   );
 };
-

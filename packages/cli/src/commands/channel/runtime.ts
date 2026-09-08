@@ -1,7 +1,10 @@
 import { createHash } from 'node:crypto';
 import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hashDaemonWorkspace, Storage } from '@lailatul-coder/lailatul-coder-core';
+import {
+  hashDaemonWorkspace,
+  Storage,
+} from '@lailatul-coder/lailatul-coder-core';
 import type {
   SessionRouter,
   ChannelAgentBridge,

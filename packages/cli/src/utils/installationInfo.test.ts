@@ -20,7 +20,9 @@ import { isGitRepository } from '@lailatul-coder/lailatul-coder-core';
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     isGitRepository: vi.fn(),
@@ -466,7 +468,9 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, true);
     expect(info.packageManager).toBe(PackageManager.PNPM);
     expect(info.isGlobal).toBe(true);
-    expect(info.updateCommand).toBe('pnpm add -g @lailatul-coder/lailatul-coder@latest');
+    expect(info.updateCommand).toBe(
+      'pnpm add -g @lailatul-coder/lailatul-coder@latest',
+    );
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
     // isAutoUpdateEnabled = false -> "Please run..."
@@ -508,7 +512,9 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, true);
     expect(info.packageManager).toBe(PackageManager.BUN);
     expect(info.isGlobal).toBe(true);
-    expect(info.updateCommand).toBe('bun add -g @lailatul-coder/lailatul-coder@latest');
+    expect(info.updateCommand).toBe(
+      'bun add -g @lailatul-coder/lailatul-coder@latest',
+    );
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
     // isAutoUpdateEnabled = false -> "Please run..."
@@ -681,7 +687,10 @@ describe('getInstallationInfo', () => {
 describe('resolveUpdateCommand', () => {
   it('replaces @latest with the pinned stable version', () => {
     expect(
-      resolveUpdateCommand('npm i -g @lailatul-coder/lailatul-coder@latest', '1.2.3'),
+      resolveUpdateCommand(
+        'npm i -g @lailatul-coder/lailatul-coder@latest',
+        '1.2.3',
+      ),
     ).toBe('npm i -g @lailatul-coder/lailatul-coder@1.2.3');
   });
 

@@ -47,7 +47,7 @@ payload built inside `chatCompressionService`.
 
 ## Current State vs Target
 
-| Concern                          | lailatul-coder today                                      | claude-code reference                                            | Target after this change                                            |
+| Concern                          | lailatul-coder today                                 | claude-code reference                                            | Target after this change                                            |
 | -------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------- |
 | Image/document in compact prompt | Sent verbatim                                        | `stripImagesFromMessages` replaces with `[image]` / `[document]` | Sent as `[image: mime]` / `[document: mime]` placeholder            |
 | Binary part token estimation     | `JSON.stringify().length` (wildly off)               | Treated as fixed budget                                          | Configurable constant (default 1,600 tokens / ~6,400 chars)         |

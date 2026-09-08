@@ -148,7 +148,8 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ navega · Retrocés edita la cerca',
   Bundled: 'Integrada',
-  'Available LailatulCoder Ai CLI tools:': 'Eines del CLI de LailatulCoder Ai disponibles:',
+  'Available LailatulCoder Ai CLI tools:':
+    'Eines del CLI de LailatulCoder Ai disponibles:',
   'No tools available': 'No hi ha eines disponibles',
   'View or change the approval mode for tool usage':
     "Mostra o canvia el mode d'aprovació per a l'ús d'eines",
@@ -323,8 +324,10 @@ export default {
   // ============================================================================
   // Agents - Assistent de creació
   // ============================================================================
-  'Project Level (.lailatulcoder/agents/)': 'Nivell de projecte (.lailatulcoder/agents/)',
-  'User Level (~/.lailatulcoder/agents/)': "Nivell d'usuari (~/.lailatulcoder/agents/)",
+  'Project Level (.lailatulcoder/agents/)':
+    'Nivell de projecte (.lailatulcoder/agents/)',
+  'User Level (~/.lailatulcoder/agents/)':
+    "Nivell d'usuari (~/.lailatulcoder/agents/)",
   '✓ Subagent Created Successfully!': '✓ Subagent creat correctament!',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     'El subagent "{{name}}" s\'ha desat al nivell {{level}}.',
@@ -345,7 +348,8 @@ export default {
   'Step {{n}}: Choose Location': 'Pas {{n}}: Triar ubicació',
   'Step {{n}}: Choose Generation Method':
     'Pas {{n}}: Triar mètode de generació',
-  'Generate with LailatulCoder Ai (Recommended)': 'Generar amb LailatulCoder Ai (Recomanat)',
+  'Generate with LailatulCoder Ai (Recommended)':
+    'Generar amb LailatulCoder Ai (Recomanat)',
   'Manual Creation': 'Creació manual',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     "Descriviu què ha de fer aquest subagent i quan s'ha d'usar. (Sigueu exhaustiu per obtenir els millors resultats)",
@@ -1359,9 +1363,11 @@ export default {
   'From project settings': 'Des de la configuració del projecte',
   'From session': 'Des de la sessió',
   'Project settings': 'Configuració del projecte',
-  'Checked in at .lailatulcoder/settings.json': 'Registrat a .lailatulcoder/settings.json',
+  'Checked in at .lailatulcoder/settings.json':
+    'Registrat a .lailatulcoder/settings.json',
   'User settings': "Configuració d'usuari",
-  'Saved in at ~/.lailatulcoder/settings.json': 'Desat a ~/.lailatulcoder/settings.json',
+  'Saved in at ~/.lailatulcoder/settings.json':
+    'Desat a ~/.lailatulcoder/settings.json',
   'Add a new rule…': 'Afegeix una nova regla…',
   'Add {{type}} permission rule': 'Afegeix la regla de permís {{type}}',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':

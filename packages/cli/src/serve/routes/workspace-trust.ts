@@ -37,8 +37,7 @@ export interface WorkspaceTrustRouteDeps {
   workspaceRegistry?: WorkspaceRegistry;
   workspaceTrustHotReloadAvailable?: boolean;
   getWorkspaceTrustPolicySnapshot?: () =>
-    | DaemonTrustPolicySnapshot
-    | Promise<DaemonTrustPolicySnapshot>;
+    DaemonTrustPolicySnapshot | Promise<DaemonTrustPolicySnapshot>;
 }
 
 function unavailableRuntime(res: Response): void {

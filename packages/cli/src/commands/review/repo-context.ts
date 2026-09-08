@@ -91,9 +91,7 @@ function recordedWorktreeMatches(
  * taken one step.
  */
 type MergeBaseResolution =
-  | { kind: 'local' }
-  | { kind: 'base'; sha: string }
-  | { kind: 'none' };
+  { kind: 'local' } | { kind: 'base'; sha: string } | { kind: 'none' };
 
 function trustedMergeBase(
   plan: MutablePlan,

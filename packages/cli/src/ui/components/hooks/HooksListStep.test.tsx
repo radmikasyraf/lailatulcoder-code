@@ -198,4 +198,3 @@ describe('HooksListStep', () => {
     expect(output).toContain('10.');
   });
 });
-

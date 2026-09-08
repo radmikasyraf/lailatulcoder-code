@@ -206,7 +206,10 @@ describe('runMeta', () => {
     ghMock.mockReturnValue(
       '{"headRefOid":"2d71a0f851c8c18462cc85b60d90973e132274d8","url":"https://github.com/LailatulCoder/lailatul-coder/pull/8981"}',
     );
-    const result = runMeta({ prNumber: 8981, repo: 'LailatulCoder/lailatul-coder' });
+    const result = runMeta({
+      prNumber: 8981,
+      repo: 'LailatulCoder/lailatul-coder',
+    });
     expect(ghMock).toHaveBeenCalledWith(
       'pr',
       'view',
@@ -217,7 +220,9 @@ describe('runMeta', () => {
       'headRefOid,url',
     );
     expect(result.headSha).toBe('2d71a0f851c8c18462cc85b60d90973e132274d8');
-    expect(result.webUrl).toBe('https://github.com/LailatulCoder/lailatul-coder/pull/8981');
+    expect(result.webUrl).toBe(
+      'https://github.com/LailatulCoder/lailatul-coder/pull/8981',
+    );
     expect(result.host).toBe('github.com');
   });
 

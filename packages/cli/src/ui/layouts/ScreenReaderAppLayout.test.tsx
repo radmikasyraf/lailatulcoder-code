@@ -229,4 +229,3 @@ describe('ScreenReaderAppLayout', () => {
     expect(output).toContain('Composer');
   });
 });
-

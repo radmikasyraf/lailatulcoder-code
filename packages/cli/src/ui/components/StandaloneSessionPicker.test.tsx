@@ -939,4 +939,3 @@ describe('SessionPicker', () => {
     });
   });
 });
-

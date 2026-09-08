@@ -5965,4 +5965,3 @@ describe('classifyPastedImagePaths', () => {
     ).toBe(false);
   });
 });
-

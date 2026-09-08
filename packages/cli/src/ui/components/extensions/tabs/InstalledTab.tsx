@@ -822,4 +822,3 @@ export const InstalledTab = ({
     </Box>
   );
 };
-

@@ -849,8 +849,7 @@ export function createSubSessionLauncher(
         void (async () => {
           try {
             let notification:
-              | ReturnType<typeof buildSentCompletionNotification>
-              | undefined;
+              ReturnType<typeof buildSentCompletionNotification> | undefined;
             try {
               const turnError: Promise<never> = turn.then(
                 () => new Promise<never>(() => {}),

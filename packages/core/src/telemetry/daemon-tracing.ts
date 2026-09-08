@@ -149,7 +149,9 @@ export async function withDaemonRequestSpan<T>(
         ? { 'lailatul-coder.workspace.hash': options.workspaceHash }
         : {}),
       ...(options.sessionId ? { 'session.id': options.sessionId } : {}),
-      ...(options.clientId ? { 'lailatul-coder.client_id': options.clientId } : {}),
+      ...(options.clientId
+        ? { 'lailatul-coder.client_id': options.clientId }
+        : {}),
       ...(options.permissionRequestId
         ? {
             'lailatul-coder.daemon.permission.request_id':
@@ -158,7 +160,8 @@ export async function withDaemonRequestSpan<T>(
         : {}),
       ...(options.deferredRuntimeWaitMs !== undefined
         ? {
-            'lailatul-coder.daemon.runtime.wait_ms': options.deferredRuntimeWaitMs,
+            'lailatul-coder.daemon.runtime.wait_ms':
+              options.deferredRuntimeWaitMs,
           }
         : {}),
       ...(options.deferredRuntimePath

@@ -10,7 +10,10 @@ import { loadSettings } from '../../config/settings.js';
 import { isWorkspaceTrusted } from '../../config/trustedFolders.js';
 import { assembleMcpServers } from '../../config/mcpServers.js';
 import { loadMcpApprovals } from '../../config/mcpApprovals.js';
-import { createTransport, ExtensionManager } from '@lailatul-coder/lailatul-coder-core';
+import {
+  createTransport,
+  ExtensionManager,
+} from '@lailatul-coder/lailatul-coder-core';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 
 const mockWriteStdoutLine = vi.hoisted(() => vi.fn());

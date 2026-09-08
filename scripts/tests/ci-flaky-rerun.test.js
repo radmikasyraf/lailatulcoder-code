@@ -33,7 +33,8 @@ function run(overrides = {}) {
     conclusion: 'FAILURE',
     startedAt: '2026-07-12T07:10:00.000Z',
     completedAt: '2026-07-12T07:20:00.000Z',
-    detailsUrl: 'https://github.com/LailatulCoder/lailatul-coder/actions/runs/123/job/1',
+    detailsUrl:
+      'https://github.com/LailatulCoder/lailatul-coder/actions/runs/123/job/1',
     ...overrides,
   };
 }

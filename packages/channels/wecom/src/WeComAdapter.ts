@@ -1488,7 +1488,7 @@ function splitMarkdownChunks(text: string): string[] {
     }
 
     let needsLineBreak = Boolean(current);
-    for (let index = 0; index < line.length; ) {
+    for (let index = 0; index < line.length;) {
       const codePoint = line.codePointAt(index);
       const token = line.startsWith('```', index)
         ? '```'
@@ -1599,8 +1599,7 @@ function isInsideDir(filePath: string, dir: string): boolean {
 }
 
 type SafeInboundMediaUrlResult =
-  | { safe: true }
-  | { safe: false; reason: string };
+  { safe: true } | { safe: false; reason: string };
 
 async function isSafeInboundMediaUrl(
   rawUrl: string,

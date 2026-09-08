@@ -449,4 +449,3 @@ export function TextSelectionController(
 
   return null;
 }
-

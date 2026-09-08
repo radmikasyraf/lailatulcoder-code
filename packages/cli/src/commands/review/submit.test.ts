@@ -94,8 +94,7 @@ vi.mock('../../config/settings.js', async (importOriginal) => {
     // control them.
     loadSettings: vi.fn((...callArgs: unknown[]) => {
       const opts = callArgs[1] as
-        | { skipWorkspaceSettings?: boolean }
-        | undefined;
+        { skipWorkspaceSettings?: boolean } | undefined;
       return {
         merged: {
           review: opts?.skipWorkspaceSettings
@@ -1396,7 +1395,9 @@ describe('the posting gate', () => {
     // pathname `gh` would re-open (the TOCTOU a review found).
     expect(JSON.parse(call[0]).event).toBe('COMMENT');
     expect(call).toContain('api');
-    expect(call).toContain('repos/LailatulCoder/lailatul-coder/pulls/6771/reviews');
+    expect(call).toContain(
+      'repos/LailatulCoder/lailatul-coder/pulls/6771/reviews',
+    );
     // `--input -` (stdin), never `-f body=` which re-escapes newlines.
     expect(call).toContain('--input');
     expect(call).toContain('-');
@@ -1643,7 +1644,9 @@ describe('payload consistency — refuse before GitHub sees it', () => {
 
     expect(posted().body).toContain('via LailatulCoder Ai /review');
     expect(
-      posted().body.endsWith('_— qwen3.7-max via LailatulCoder Ai /review (v0.21.2)_'),
+      posted().body.endsWith(
+        '_— qwen3.7-max via LailatulCoder Ai /review (v0.21.2)_',
+      ),
     ).toBe(true);
   });
 

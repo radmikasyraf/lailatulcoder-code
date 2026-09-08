@@ -4,10 +4,7 @@ import type {
 } from '@lailatul-coder/channel-base';
 
 export type FeishuQuestionTerminalState =
-  | 'processing'
-  | 'submitted'
-  | 'cancelled'
-  | 'expired';
+  'processing' | 'submitted' | 'cancelled' | 'expired';
 
 export type FeishuQuestionAction =
   | {

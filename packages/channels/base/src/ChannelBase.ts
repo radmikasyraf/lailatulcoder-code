@@ -190,11 +190,7 @@ interface ChannelMemoryRecallCacheEntry {
 
 export type ChannelMemoryRecallCacheStatus = 'hit' | 'miss' | 'bypass';
 export type ChannelMemoryRecallResult =
-  | 'selected'
-  | 'empty'
-  | 'stale'
-  | 'read_error'
-  | 'revision_unstable';
+  'selected' | 'empty' | 'stale' | 'read_error' | 'revision_unstable';
 
 export interface ChannelMemoryRecallObservation {
   durationMs: number;
@@ -2722,8 +2718,7 @@ export abstract class ChannelBase {
 
   private denialResponse(pending: PendingPermission): {
     outcome:
-      | { outcome: 'selected'; optionId: string }
-      | { outcome: 'cancelled' };
+      { outcome: 'selected'; optionId: string } | { outcome: 'cancelled' };
   } {
     const option =
       pending.request.options.find(
@@ -4992,8 +4987,7 @@ export abstract class ChannelBase {
    * not reverted to raw IDs by the next initial write.
    */
   protected persistedObservedContacts():
-    | ObservedChannelContactGraph
-    | undefined {
+    ObservedChannelContactGraph | undefined {
     const list = this.observedContacts?.list;
     if (!list) return undefined;
     try {

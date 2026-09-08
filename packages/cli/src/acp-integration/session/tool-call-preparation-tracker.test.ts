@@ -82,11 +82,7 @@ describe('ToolCallPreparationTracker', () => {
     ]);
     await tracker.discard(true);
 
-    expect(emitPreparationDiscarded).toHaveBeenCalledOnce();
-    expect(emitPreparationDiscarded).toHaveBeenCalledWith(
-      'call-1',
-      'read_file',
-    );
+    expect(emitPreparationDiscarded).toHaveBeenCalledExactlyOnceWith('call-1', 'read_file');
   });
 
   it('keeps preparations unresolved for missing or empty function call IDs', async () => {
@@ -103,11 +99,7 @@ describe('ToolCallPreparationTracker', () => {
     ]);
     await tracker.discard();
 
-    expect(emitPreparationDiscarded).toHaveBeenCalledOnce();
-    expect(emitPreparationDiscarded).toHaveBeenCalledWith(
-      'call-1',
-      'read_file',
-    );
+    expect(emitPreparationDiscarded).toHaveBeenCalledExactlyOnceWith('call-1', 'read_file');
   });
 
   it('attempts every unresolved discard before surfacing the first cleanup error', async () => {

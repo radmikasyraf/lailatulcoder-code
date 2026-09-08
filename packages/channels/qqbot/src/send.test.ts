@@ -83,9 +83,9 @@ vi.mock('./login.js', () => ({
 }));
 
 vi.mock('@lailatul-coder/channel-base', async () => {
-  const real = await vi.importActual<typeof import('@lailatul-coder/channel-base')>(
-    '@lailatul-coder/channel-base',
-  );
+  const real = await vi.importActual<
+    typeof import('@lailatul-coder/channel-base')
+  >('@lailatul-coder/channel-base');
   return {
     ChannelBase: class {
       protected config: Record<string, unknown> = {};

@@ -39,9 +39,9 @@ Seamlessly integrate [LailatulCoder Ai](https://github.com/LailatulCoder/lailatu
 
 ## Commands
 
-| Command                          | Description                                            |
-| -------------------------------- | ------------------------------------------------------ |
-| `LailatulCoder Ai: Open`                | Open the LailatulCoder Ai Chat panel                          |
+| Command                                 | Description                                            |
+| --------------------------------------- | ------------------------------------------------------ |
+| `LailatulCoder Ai: Open`                | Open the LailatulCoder Ai Chat panel                   |
 | `LailatulCoder Ai: Run`                 | Launch a classic terminal session with the bundled CLI |
 | `LailatulCoder Ai: Accept Current Diff` | Accept the currently displayed diff                    |
 | `LailatulCoder Ai: Close Diff Editor`   | Close/reject the current diff                          |

@@ -2161,8 +2161,7 @@ export class GeminiClient {
         if (schedResult.status === 'scheduled' && schedResult.promise) {
           return schedResult.promise.then((state) => {
             const topics = state.metadata?.['touchedTopics'] as
-              | string[]
-              | undefined;
+              string[] | undefined;
             return topics ? topics.length : 0;
           });
         }

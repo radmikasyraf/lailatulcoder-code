@@ -73,7 +73,9 @@ describe('useExternalLinkOpener', () => {
   it('opens external links through the desktop opener', () => {
     const invoke = vi.fn().mockResolvedValue(undefined);
     (window as TauriWindow).__TAURI__ = { core: { invoke } };
-    const anchor = render('https://github.com/LailatulCoder/lailatul-coder/issues/9108');
+    const anchor = render(
+      'https://github.com/LailatulCoder/lailatul-coder/issues/9108',
+    );
     const event = click(anchor);
     expect(event.defaultPrevented).toBe(true);
     expect(invoke).toHaveBeenCalledWith('plugin:opener|open_url', {

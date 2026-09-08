@@ -218,8 +218,7 @@ function returnTextOf(rec: Record<string, unknown>): string {
  */
 function isErrorPart(part: FunctionResponsePart): boolean {
   const resp = part.functionResponse?.response as
-    | Record<string, unknown>
-    | undefined;
+    Record<string, unknown> | undefined;
   return !!resp && resp['error'] !== undefined && resp['error'] !== null;
 }
 
@@ -679,8 +678,7 @@ export function readRunTranscripts(
   } catch (err) {
     const code = (
       (err as { cause?: NodeJS.ErrnoException } | undefined)?.cause as
-        | NodeJS.ErrnoException
-        | undefined
+        NodeJS.ErrnoException | undefined
     )?.code;
     if (
       !(err instanceof TranscriptsUnavailableError) ||

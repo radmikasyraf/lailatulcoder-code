@@ -59,4 +59,3 @@ export const AutoAcceptIndicator: React.FC<AutoAcceptIndicatorProps> = ({
     </Text>
   );
 };
-

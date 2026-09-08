@@ -148,4 +148,3 @@ describe('ArenaSessionCard', () => {
     expect(output).not.toContain('only qwen2.5:14b: none');
   });
 });
-

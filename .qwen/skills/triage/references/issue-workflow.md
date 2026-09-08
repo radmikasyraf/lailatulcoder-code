@@ -21,6 +21,7 @@ Key points only — no verbose prose.
 - **类型**: bug
 - **标签**: `type/bug`, `scope/cli`, `priority/medium`
 - **下一步**: <一句话动作>
+
 </details>
 
 --- LailatulCoder Ai

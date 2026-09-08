@@ -229,10 +229,7 @@ export function mergeRestoredPromptText(current: string, text: string): string {
 }
 
 type RefreshPendingPromptsResult =
-  | 'refreshed'
-  | 'skipped'
-  | 'superseded'
-  | 'failed';
+  'refreshed' | 'skipped' | 'superseded' | 'failed';
 
 function areQueuedPromptsEqual(
   left: readonly QueuedPrompt[],

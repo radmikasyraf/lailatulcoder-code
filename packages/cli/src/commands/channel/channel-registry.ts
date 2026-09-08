@@ -285,9 +285,15 @@ function ensureBuiltins(): Promise<void> {
   if (!builtinsPromise) {
     builtinsPromise = (async () => {
       const labelled = [
-        { name: 'telegram', promise: import('@lailatul-coder/channel-telegram') },
+        {
+          name: 'telegram',
+          promise: import('@lailatul-coder/channel-telegram'),
+        },
         { name: 'weixin', promise: import('@lailatul-coder/channel-weixin') },
-        { name: 'dingtalk', promise: import('@lailatul-coder/channel-dingtalk') },
+        {
+          name: 'dingtalk',
+          promise: import('@lailatul-coder/channel-dingtalk'),
+        },
         { name: 'wecom', promise: import('@lailatul-coder/channel-wecom') },
         { name: 'feishu', promise: import('@lailatul-coder/channel-feishu') },
         { name: 'qqbot', promise: import('@lailatul-coder/channel-qqbot') },

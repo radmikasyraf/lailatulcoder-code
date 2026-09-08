@@ -3209,15 +3209,15 @@ export class Session implements SessionContext {
   #hasActiveTurn(): boolean {
     return Boolean(
       this.pendingPrompt ||
-        this.historyMutationActive ||
-        this.pendingPromptCompletion ||
-        this.goalProcessing ||
-        this.cronProcessing ||
-        this.cronAbortController ||
-        this.cronCompletion ||
-        this.notificationProcessing ||
-        this.notificationAbortController ||
-        this.notificationCompletion,
+      this.historyMutationActive ||
+      this.pendingPromptCompletion ||
+      this.goalProcessing ||
+      this.cronProcessing ||
+      this.cronAbortController ||
+      this.cronCompletion ||
+      this.notificationProcessing ||
+      this.notificationAbortController ||
+      this.notificationCompletion,
     );
   }
 
@@ -4845,8 +4845,7 @@ export class Session implements SessionContext {
                   pendingSend.signal,
                 );
                 let channelDeliveryResponseBlock:
-                  | ChannelDeliveryResponseBlock
-                  | undefined;
+                  ChannelDeliveryResponseBlock | undefined;
                 let channelDeliveryCheckpoint = 0;
 
                 try {
@@ -5595,8 +5594,7 @@ export class Session implements SessionContext {
         pendingSend.signal,
       );
       let channelDeliveryResponseBlock:
-        | ChannelDeliveryResponseBlock
-        | undefined;
+        ChannelDeliveryResponseBlock | undefined;
       let channelDeliveryCheckpoint = 0;
       let providerSendChat: GeminiChat | undefined;
       let userContentPushCountBeforeSend = 0;
@@ -7562,8 +7560,7 @@ export class Session implements SessionContext {
                 }
                 const responseStream = sendResult.responseStream;
                 const channelDeliveryResponseBlock:
-                  | ChannelDeliveryResponseBlock
-                  | undefined =
+                  ChannelDeliveryResponseBlock | undefined =
                   beginChannelDeliveryResponseBlock(responseCapture);
                 const channelDeliveryCheckpoint =
                   channelDeliveryResponseBlock?.parts.length ?? 0;

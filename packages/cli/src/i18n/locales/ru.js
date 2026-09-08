@@ -148,7 +148,8 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ навигация · Backspace редактирует поиск',
   Bundled: 'Встроенный',
-  'Available LailatulCoder Ai CLI tools:': 'Доступные инструменты LailatulCoder Ai CLI:',
+  'Available LailatulCoder Ai CLI tools:':
+    'Доступные инструменты LailatulCoder Ai CLI:',
   'No tools available': 'Нет доступных инструментов',
   'View or change the approval mode for tool usage':
     'Просмотр или изменение режима подтверждения для использования инструментов',
@@ -325,8 +326,10 @@ export default {
   // ============================================================================
   // Агенты - Мастер создания
   // ============================================================================
-  'Project Level (.lailatulcoder/agents/)': 'Уровень проекта (.lailatulcoder/agents/)',
-  'User Level (~/.lailatulcoder/agents/)': 'Уровень пользователя (~/.lailatulcoder/agents/)',
+  'Project Level (.lailatulcoder/agents/)':
+    'Уровень проекта (.lailatulcoder/agents/)',
+  'User Level (~/.lailatulcoder/agents/)':
+    'Уровень пользователя (~/.lailatulcoder/agents/)',
   '✓ Subagent Created Successfully!': '✓ Подагент успешно создан!',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     'Подагент "{{name}}" сохранен на уровне {{level}}.',
@@ -408,7 +411,8 @@ export default {
   // ============================================================================
   // Команды - Общие (продолжение)
   // ============================================================================
-  'View and edit LailatulCoder Ai settings': 'Просмотр и изменение настроек LailatulCoder Ai',
+  'View and edit LailatulCoder Ai settings':
+    'Просмотр и изменение настроек LailatulCoder Ai',
   Settings: 'Настройки',
   'To see changes, LailatulCoder Ai must be restarted. Press r to exit and apply changes now.':
     'Для применения изменений необходимо перезапустить LailatulCoder Ai. Нажмите r для выхода и применения изменений.',
@@ -1275,9 +1279,11 @@ export default {
   'From project settings': 'Из настроек проекта',
   'From session': 'Из сессии',
   'Project settings': 'Настройки проекта',
-  'Checked in at .lailatulcoder/settings.json': 'Зафиксировано в .lailatulcoder/settings.json',
+  'Checked in at .lailatulcoder/settings.json':
+    'Зафиксировано в .lailatulcoder/settings.json',
   'User settings': 'Пользовательские настройки',
-  'Saved in at ~/.lailatulcoder/settings.json': 'Сохранено в ~/.lailatulcoder/settings.json',
+  'Saved in at ~/.lailatulcoder/settings.json':
+    'Сохранено в ~/.lailatulcoder/settings.json',
   'Add a new rule…': 'Добавить новое правило…',
   'Add {{type}} permission rule': 'Добавить {{type}} permission rule',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':
@@ -2151,7 +2157,8 @@ export default {
     'Доступно обновление LailatulCoder Ai! {{current}} → {{latest}}',
   'A new version of LailatulCoder Ai is available! {{current}} → {{latest}}':
     'Доступна новая версия LailatulCoder Ai! {{current}} → {{latest}}',
-  'LailatulCoder Ai {{version}} is up to date!': 'LailatulCoder Ai {{version}} актуален!',
+  'LailatulCoder Ai {{version}} is up to date!':
+    'LailatulCoder Ai {{version}} актуален!',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     'Не удалось проверить обновления ({{reason}}). Проверьте сеть или настройки registry.',
   'Update check skipped ({{reason}}) — run /update to retry.':

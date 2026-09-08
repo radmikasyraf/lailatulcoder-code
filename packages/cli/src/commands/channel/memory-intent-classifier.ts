@@ -3,7 +3,10 @@ import type {
   ChannelMemoryIntentClassifier,
   ChannelMemoryIntentClassifierResult,
 } from '@lailatul-coder/channel-base';
-import { sanitizeLogText, sanitizePromptText } from '@lailatul-coder/channel-base';
+import {
+  sanitizeLogText,
+  sanitizePromptText,
+} from '@lailatul-coder/channel-base';
 
 type ChannelMemoryEntries = NonNullable<
   Parameters<ChannelMemoryIntentClassifier['classifyChannelMemoryIntent']>[1]
@@ -201,9 +204,7 @@ function normalizeClassifierResult(
   return { intent, targetIds, confidence };
 }
 
-export class BridgeChannelMemoryIntentClassifier
-  implements ChannelMemoryIntentClassifier
-{
+export class BridgeChannelMemoryIntentClassifier implements ChannelMemoryIntentClassifier {
   private readonly getBridge: () => ChannelAgentBridge;
 
   constructor(

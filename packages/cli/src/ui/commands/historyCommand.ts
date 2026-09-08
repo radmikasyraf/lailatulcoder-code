@@ -76,9 +76,8 @@ const expandNowCommand: SlashCommand = {
     }
 
     // Remove suppressOnRestore from all items and drop collapse summary items.
-    const { expandCollapsedHistory } = await import(
-      '../utils/resumeHistoryUtils.js'
-    );
+    const { expandCollapsedHistory } =
+      await import('../utils/resumeHistoryUtils.js');
     const updated = expandCollapsedHistory(history);
     loadHistory(updated);
     refreshStatic();

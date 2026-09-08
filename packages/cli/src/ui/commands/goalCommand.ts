@@ -38,8 +38,7 @@ const CLEAR_KEYWORDS = new Set([
 ]);
 
 export type ParsedGoalCommand =
-  | GoalCommandOperation
-  | { kind: 'error'; message: string };
+  GoalCommandOperation | { kind: 'error'; message: string };
 
 export function parseGoalCommand(args: string): ParsedGoalCommand {
   let input = args.trim();

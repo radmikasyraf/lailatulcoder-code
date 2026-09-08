@@ -64,7 +64,9 @@ async function testBootstrapWorkspaceVisibility() {
   );
   assert.match(bootstrapHtml, /class="mark" src="lailatul-coder-logo\.svg"/);
   assert.ok(
-    fs.existsSync(path.join(packageDir, 'bootstrap', 'lailatul-coder-logo.svg')),
+    fs.existsSync(
+      path.join(packageDir, 'bootstrap', 'lailatul-coder-logo.svg'),
+    ),
     'The bootstrap splash mark must ship with the frontendDist directory.',
   );
   assert.doesNotMatch(bootstrapHtml, /class="mark">Q</);

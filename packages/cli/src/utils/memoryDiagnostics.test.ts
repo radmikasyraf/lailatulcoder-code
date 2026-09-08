@@ -476,9 +476,8 @@ describe('memoryDiagnostics', () => {
       const actual = await importOriginal<typeof import('node:fs')>();
       return { ...actual, statfsSync };
     });
-    const { writeMemoryHeapSnapshot: writeWithMockedFs } = await import(
-      './memoryDiagnostics.js'
-    );
+    const { writeMemoryHeapSnapshot: writeWithMockedFs } =
+      await import('./memoryDiagnostics.js');
 
     try {
       expect(() =>
@@ -513,9 +512,8 @@ describe('memoryDiagnostics', () => {
       const actual = await importOriginal<typeof import('node:v8')>();
       return { ...actual, getHeapStatistics };
     });
-    const { writeMemoryHeapSnapshot: writeWithMockedV8 } = await import(
-      './memoryDiagnostics.js'
-    );
+    const { writeMemoryHeapSnapshot: writeWithMockedV8 } =
+      await import('./memoryDiagnostics.js');
     vi.spyOn(process, 'memoryUsage').mockReturnValue({
       rss: 40,
       heapTotal: 100,

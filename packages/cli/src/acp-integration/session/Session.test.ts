@@ -95,7 +95,9 @@ const loopTickResolverDepsSpy = vi.hoisted(() => vi.fn());
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     createDebugLogger: () => ({
@@ -1439,11 +1441,9 @@ describe('Session', () => {
 
   it('serializes concurrent workflow approvals for single-flight ACP clients', async () => {
     let resolveFirst:
-      | ((response: RequestPermissionResponse) => void)
-      | undefined;
+      ((response: RequestPermissionResponse) => void) | undefined;
     let resolveSecond:
-      | ((response: RequestPermissionResponse) => void)
-      | undefined;
+      ((response: RequestPermissionResponse) => void) | undefined;
     vi.mocked(mockClient.requestPermission)
       .mockImplementationOnce(
         () =>
@@ -1524,8 +1524,7 @@ describe('Session', () => {
 
   it('serializes permissions across sessions sharing one ACP connection', async () => {
     let resolveFirst:
-      | ((response: RequestPermissionResponse) => void)
-      | undefined;
+      ((response: RequestPermissionResponse) => void) | undefined;
     vi.mocked(mockClient.requestPermission)
       .mockImplementationOnce(
         () =>
@@ -1614,8 +1613,7 @@ describe('Session', () => {
 
   it('advances the permission queue when a request is aborted without waiting for the orphaned RPC', async () => {
     let settleFirstTransport:
-      | ((response: RequestPermissionResponse) => void)
-      | undefined;
+      ((response: RequestPermissionResponse) => void) | undefined;
     vi.mocked(mockClient.requestPermission)
       .mockImplementationOnce(
         () =>
@@ -2021,8 +2019,7 @@ describe('Session', () => {
   it('attributes a delayed title notification to the persisted record session', () => {
     const callback = mockChatRecordingService.setTitleRecordedCallback.mock
       .calls[0]?.[0] as
-      | ((title: string, source: string, sessionId: string) => void)
-      | undefined;
+      ((title: string, source: string, sessionId: string) => void) | undefined;
 
     callback?.('Durable title', 'auto', 'persisted-session-id');
 
@@ -15260,8 +15257,7 @@ describe('Session', () => {
         mockConfig.getWorkingDir = vi.fn(() => currentRoot);
 
         let fire:
-          | ((job: { prompt: string; cronExpr?: string }) => void)
-          | undefined;
+          ((job: { prompt: string; cronExpr?: string }) => void) | undefined;
         const scheduler = {
           size: 1,
           hasPendingWork: true,
@@ -17510,8 +17506,7 @@ describe('Session', () => {
           subscribe: vi.fn().mockReturnValue(() => {}),
         };
         let capturedHooks:
-          | { startNewSession?: (sessionId: string) => void }
-          | undefined;
+          { startNewSession?: (sessionId: string) => void } | undefined;
         vi.mocked(
           nonInteractiveCliCommands.handleSlashCommand,
         ).mockImplementationOnce(

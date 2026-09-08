@@ -281,8 +281,7 @@ export class FeishuChannel extends ChannelBase {
     const feishuConfig = this.config as unknown as Record<string, unknown>;
     const webhookPort = feishuConfig['webhookPort'] as number | undefined;
     const verificationToken = feishuConfig['verificationToken'] as
-      | string
-      | undefined;
+      string | undefined;
     const encryptKey = feishuConfig['encryptKey'] as string | undefined;
 
     if (webhookPort) {
@@ -616,8 +615,7 @@ export class FeishuChannel extends ChannelBase {
 
     // Try v2 format: { body: { elements: [...] } }
     const body = card['body'] as
-      | { elements?: Array<Record<string, unknown>> }
-      | undefined;
+      { elements?: Array<Record<string, unknown>> } | undefined;
     if (body?.elements) {
       for (const element of body.elements) {
         if (
@@ -627,8 +625,7 @@ export class FeishuChannel extends ChannelBase {
           lines.push(element['content']);
         } else if (element['tag'] === 'collapsible_panel') {
           const nested = element['elements'] as
-            | Array<Record<string, unknown>>
-            | undefined;
+            Array<Record<string, unknown>> | undefined;
           if (nested) {
             for (const el of nested) {
               if (
@@ -2133,11 +2130,9 @@ export class FeishuChannel extends ChannelBase {
     try {
       // Extract action value and message context
       const action = data['action'] as
-        | { value?: { action?: string } }
-        | undefined;
+        { value?: { action?: string } } | undefined;
       const context = data['context'] as
-        | { open_message_id?: string; open_chat_id?: string }
-        | undefined;
+        { open_message_id?: string; open_chat_id?: string } | undefined;
       const messageId =
         context?.open_message_id || (data['open_message_id'] as string);
       const chatId = context?.open_chat_id;

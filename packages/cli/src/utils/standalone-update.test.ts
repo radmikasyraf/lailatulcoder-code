@@ -113,7 +113,10 @@ describe('standalone-update', () => {
 
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
-        JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version: '0.17.0' }),
+        JSON.stringify({
+          name: '@lailatul-coder/lailatul-coder',
+          version: '0.17.0',
+        }),
       );
       fs.writeFileSync(path.join(oldDir, 'manifest.json'), '{}');
 
@@ -384,8 +387,12 @@ describe('standalone-update', () => {
     it('rejects parent-directory segments and absolute paths', () => {
       expect(isSafeTarEntryPath('../lailatul-coder/manifest.json')).toBe(false);
       expect(isSafeTarEntryPath('lailatul-coder/../manifest.json')).toBe(false);
-      expect(isSafeTarEntryPath('lailatul-coder\\..\\manifest.json')).toBe(false);
-      expect(isSafeTarEntryPath('/tmp/lailatul-coder/manifest.json')).toBe(false);
+      expect(isSafeTarEntryPath('lailatul-coder\\..\\manifest.json')).toBe(
+        false,
+      );
+      expect(isSafeTarEntryPath('/tmp/lailatul-coder/manifest.json')).toBe(
+        false,
+      );
       expect(isSafeTarEntryPath('C:\\tmp\\lailatul-coder\\manifest.json')).toBe(
         false,
       );
@@ -399,22 +406,30 @@ describe('standalone-update', () => {
       expect(
         isSafeTarLinkTarget('lailatul-coder/bin/qwen', '../lib/cli.js', dest),
       ).toBe(true);
-      expect(isSafeTarLinkTarget('lailatul-coder/bin/qwen', './qwen', dest)).toBe(
-        true,
-      );
+      expect(
+        isSafeTarLinkTarget('lailatul-coder/bin/qwen', './qwen', dest),
+      ).toBe(true);
     });
 
     it('allows symlink targets in child directories starting with two dots', () => {
       const dest = path.join(tempDir, 'extract');
       expect(
-        isSafeTarLinkTarget('lailatul-coder/bin/qwen', '../..hidden/tool', dest),
+        isSafeTarLinkTarget(
+          'lailatul-coder/bin/qwen',
+          '../..hidden/tool',
+          dest,
+        ),
       ).toBe(true);
     });
 
     it('rejects symlink targets outside the extraction directory', () => {
       const dest = path.join(tempDir, 'extract');
       expect(
-        isSafeTarLinkTarget('lailatul-coder/bin/qwen', '../../../etc/passwd', dest),
+        isSafeTarLinkTarget(
+          'lailatul-coder/bin/qwen',
+          '../../../etc/passwd',
+          dest,
+        ),
       ).toBe(false);
       expect(
         isSafeTarLinkTarget('lailatul-coder/bin/qwen', '/etc/passwd', dest),
@@ -431,10 +446,18 @@ describe('standalone-update', () => {
     it('rejects symlink targets outside the archive root that will be installed', () => {
       const dest = path.join(tempDir, 'extract');
       expect(
-        isSafeTarLinkTarget('lailatul-coder/bin/qwen', '../../shared/node', dest),
+        isSafeTarLinkTarget(
+          'lailatul-coder/bin/qwen',
+          '../../shared/node',
+          dest,
+        ),
       ).toBe(false);
       expect(
-        isSafeTarLinkTarget('./lailatul-coder/bin/qwen', '../../shared/node', dest),
+        isSafeTarLinkTarget(
+          './lailatul-coder/bin/qwen',
+          '../../shared/node',
+          dest,
+        ),
       ).toBe(false);
     });
   });
@@ -453,12 +476,12 @@ describe('standalone-update', () => {
 
     it('allows safe regular entries and safe symlinks', () => {
       const dest = path.join(tempDir, 'extract');
-      expect(isSafeTarEntry('lailatul-coder/bin/qwen', { type: 'File' }, dest)).toBe(
-        true,
-      );
-      expect(isSafeTarEntry('lailatul-coder/lib', { type: 'Directory' }, dest)).toBe(
-        true,
-      );
+      expect(
+        isSafeTarEntry('lailatul-coder/bin/qwen', { type: 'File' }, dest),
+      ).toBe(true);
+      expect(
+        isSafeTarEntry('lailatul-coder/lib', { type: 'Directory' }, dest),
+      ).toBe(true);
       expect(
         isSafeTarEntry(
           'lailatul-coder/bin/qwen',
@@ -504,7 +527,12 @@ describe('standalone-update', () => {
         process.env['SHELL'] = '/bin/bash';
 
         try {
-          const standaloneDir = path.join(home, '.local', 'lib', 'lailatul-coder');
+          const standaloneDir = path.join(
+            home,
+            '.local',
+            'lib',
+            'lailatul-coder',
+          );
           const artifacts = ensureBinWrapper(standaloneDir, 'linux-x64');
           const wrapperPath = path.join(home, '.local', 'bin', 'qwen');
           const bashrc = path.join(home, '.bashrc');
@@ -554,11 +582,17 @@ describe('standalone-update', () => {
       fs.mkdirSync(oldDir);
       fs.writeFileSync(
         path.join(standaloneDir, 'manifest.json'),
-        JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version: '0.17.0' }),
+        JSON.stringify({
+          name: '@lailatul-coder/lailatul-coder',
+          version: '0.17.0',
+        }),
       );
       fs.writeFileSync(
         path.join(oldDir, 'manifest.json'),
-        JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version: '0.16.0' }),
+        JSON.stringify({
+          name: '@lailatul-coder/lailatul-coder',
+          version: '0.16.0',
+        }),
       );
       fs.writeFileSync(lockPath, '999999999');
       const result = rollbackStandaloneUpdate(standaloneDir);

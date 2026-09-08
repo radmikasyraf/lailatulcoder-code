@@ -292,9 +292,9 @@ describe('isContainerPathWithinWorkdir', () => {
 
 describe('parseSandboxImageName', () => {
   it('uses the image basename and tag for container names', () => {
-    expect(parseSandboxImageName('ghcr.io/LailatulCoder/lailatul-coder:0.18.3')).toBe(
-      'lailatul-coder-0.18.3',
-    );
+    expect(
+      parseSandboxImageName('ghcr.io/LailatulCoder/lailatul-coder:0.18.3'),
+    ).toBe('lailatul-coder-0.18.3');
   });
 
   it('handles registry ports without treating them as tags', () => {
@@ -304,9 +304,9 @@ describe('parseSandboxImageName', () => {
   });
 
   it('handles registry ports when the image is untagged', () => {
-    expect(parseSandboxImageName('localhost:5000/team/lailatul-coder-sandbox')).toBe(
-      'lailatul-coder-sandbox',
-    );
+    expect(
+      parseSandboxImageName('localhost:5000/team/lailatul-coder-sandbox'),
+    ).toBe('lailatul-coder-sandbox');
   });
 
   it('drops digests from generated container names', () => {

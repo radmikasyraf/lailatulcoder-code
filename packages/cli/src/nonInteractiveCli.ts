@@ -843,9 +843,8 @@ export async function runNonInteractive(
     const isCancelledMonitorEvent = (item: LocalQueueItem) =>
       Boolean(
         item.monitorId &&
-          item.sdkNotification?.status === 'running' &&
-          config.getMonitorRegistry().get(item.monitorId)?.status ===
-            'cancelled',
+        item.sdkNotification?.status === 'running' &&
+        config.getMonitorRegistry().get(item.monitorId)?.status === 'cancelled',
       );
     const emitNotificationToSdk = (item: LocalQueueItem) => {
       if (item.sendMessageType !== SendMessageType.Notification) return;
@@ -906,8 +905,8 @@ export async function runNonInteractive(
     // a new manager is installed (or in `finally`). Without
     // this, a reused stream-json session could leave callbacks
     // attached to a stale TeamManager.
-    let boundManager: import('@lailatul-coder/lailatul-coder-core').TeamManager | null =
-      null;
+    let boundManager:
+      import('@lailatul-coder/lailatul-coder-core').TeamManager | null = null;
     let approvalListener:
       | ((
           event: import('@lailatul-coder/lailatul-coder-core').TeammateApprovalRequestEvent,

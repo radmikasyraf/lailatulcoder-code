@@ -147,7 +147,8 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ naviguer · Retour modifie la recherche',
   Bundled: 'Intégrée',
-  'Available LailatulCoder Ai CLI tools:': 'Outils LailatulCoder Ai CLI disponibles :',
+  'Available LailatulCoder Ai CLI tools:':
+    'Outils LailatulCoder Ai CLI disponibles :',
   'No tools available': 'Aucun outil disponible',
   'View or change the approval mode for tool usage':
     "Voir ou modifier le mode d'approbation pour l'utilisation des outils",
@@ -327,8 +328,10 @@ export default {
   // ============================================================================
   // Agents - Assistant de création
   // ============================================================================
-  'Project Level (.lailatulcoder/agents/)': 'Niveau projet (.lailatulcoder/agents/)',
-  'User Level (~/.lailatulcoder/agents/)': 'Niveau utilisateur (~/.lailatulcoder/agents/)',
+  'Project Level (.lailatulcoder/agents/)':
+    'Niveau projet (.lailatulcoder/agents/)',
+  'User Level (~/.lailatulcoder/agents/)':
+    'Niveau utilisateur (~/.lailatulcoder/agents/)',
   '✓ Subagent Created Successfully!': '✓ Sous-agent créé avec succès !',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     'Le sous-agent "{{name}}" a été enregistré au niveau {{level}}.',
@@ -1378,9 +1381,11 @@ export default {
   'From project settings': 'Depuis les paramètres du projet',
   'From session': 'Depuis la session',
   'Project settings': 'Paramètres du projet',
-  'Checked in at .lailatulcoder/settings.json': 'Validé dans .lailatulcoder/settings.json',
+  'Checked in at .lailatulcoder/settings.json':
+    'Validé dans .lailatulcoder/settings.json',
   'User settings': 'Paramètres utilisateur',
-  'Saved in at ~/.lailatulcoder/settings.json': 'Enregistré dans ~/.lailatulcoder/settings.json',
+  'Saved in at ~/.lailatulcoder/settings.json':
+    'Enregistré dans ~/.lailatulcoder/settings.json',
   'Add a new rule…': 'Ajouter une nouvelle règle…',
   'Add {{type}} permission rule': 'Ajouter {{type}} permission rule',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':
@@ -2180,7 +2185,8 @@ export default {
     'Mise à jour de LailatulCoder Ai disponible ! {{current}} → {{latest}}',
   'A new version of LailatulCoder Ai is available! {{current}} → {{latest}}':
     'Une nouvelle version de LailatulCoder Ai est disponible ! {{current}} → {{latest}}',
-  'LailatulCoder Ai {{version}} is up to date!': 'LailatulCoder Ai {{version}} est à jour !',
+  'LailatulCoder Ai {{version}} is up to date!':
+    'LailatulCoder Ai {{version}} est à jour !',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     'Échec de la vérification des mises à jour ({{reason}}). Vérifiez votre réseau ou la configuration du registre.',
   'Update check skipped ({{reason}}) — run /update to retry.':

@@ -140,4 +140,3 @@ export const GoalPill: React.FC<GoalPillProps> = ({ snapshot }) => {
     </Text>
   );
 };
-

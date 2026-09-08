@@ -140,10 +140,10 @@ The simplest way to get started with API Key authentication is to put everything
 
 What each field does:
 
-| Field                        | Description                                                                                                                                     |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `modelProviders`             | Declares which models are available and how to connect to them. Keys (`openai`, `anthropic`, `gemini`) represent the API protocol.              |
-| `env`                        | Stores API keys directly in `settings.json` as a fallback (lowest priority — shell `export` and `.env` files take precedence).                  |
+| Field                        | Description                                                                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `modelProviders`             | Declares which models are available and how to connect to them. Keys (`openai`, `anthropic`, `gemini`) represent the API protocol.                     |
+| `env`                        | Stores API keys directly in `settings.json` as a fallback (lowest priority — shell `export` and `.env` files take precedence).                         |
 | `security.auth.selectedType` | Tells LailatulCoder Ai which protocol to use on startup (e.g. `openai`, `anthropic`, `gemini`). Without this, you'd need to run `/auth` interactively. |
 | `model.name`                 | The default model to activate when LailatulCoder Ai starts. Must match one of the `id` values in your `modelProviders`.                                |
 
@@ -322,7 +322,7 @@ The standalone `qwen auth` CLI command has been removed. Use these replacements 
 | OpenRouter setup                 | Use `/auth`, or set `OPENROUTER_API_KEY` and `OPENAI_BASE_URL=https://openrouter.ai/api/v1` |
 | Requesty setup                   | Use `/auth`, or set `REQUESTY_API_KEY` and `OPENAI_BASE_URL=https://router.requesty.ai/v1`  |
 | API-key or custom provider setup | Configure `~/.qwen/settings.json`, `.env`, or provider-specific environment variables       |
-| Check current authentication     | Run `/doctor` inside LailatulCoder Ai                                                              |
+| Check current authentication     | Run `/doctor` inside LailatulCoder Ai                                                       |
 | OAuth browser flow               | Run `qwen` interactively and use `/auth`; OAuth cannot be configured with env vars alone    |
 
 Legacy invocations such as `qwen auth status` now print a removal notice with these migration paths.

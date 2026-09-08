@@ -28,8 +28,7 @@ export interface ChannelSettingsMutationOptions {
   expectedRevision: string;
 }
 
-export interface ChannelSettingsUpsertOptions
-  extends ChannelSettingsMutationOptions {
+export interface ChannelSettingsUpsertOptions extends ChannelSettingsMutationOptions {
   config: Record<string, unknown> & { type: string };
   secrets?: Record<string, ChannelSecretUpdate>;
 }

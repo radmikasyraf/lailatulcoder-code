@@ -23,7 +23,9 @@ import {
 import { registerWorkspaceQualifiedGitHubPrsRoutes } from './workspace-github-prs.js';
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
+  ...(await importOriginal<
+    typeof import('@lailatul-coder/lailatul-coder-core')
+  >()),
   createGitHubPullRequest: vi.fn(),
   fetchGitHubPullRequests: vi.fn(),
   getDefaultBranch: vi.fn(),

@@ -11,7 +11,9 @@ const mockDaemonClient = vi.hoisted(() =>
   vi.fn(() => ({ stopChannelWorker: mockStopChannelWorker })),
 );
 
-vi.mock('@lailatul-coder/sdk/daemon', () => ({ DaemonClient: mockDaemonClient }));
+vi.mock('@lailatul-coder/sdk/daemon', () => ({
+  DaemonClient: mockDaemonClient,
+}));
 
 vi.mock('./pidfile.js', () => ({
   readServiceInfo: mockReadServiceInfo,

@@ -2296,7 +2296,9 @@ describe('createAcpSessionBridge', () => {
       'lailatul-coder.client_id': session.clientId,
     });
     const channelId =
-      spanAttributes.get('channel.spawn')?.['lailatul-coder.daemon.acp_channel.id'];
+      spanAttributes.get('channel.spawn')?.[
+        'lailatul-coder.daemon.acp_channel.id'
+      ];
     expect(channelId).toMatch(
       /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
     );
@@ -2410,7 +2412,9 @@ describe('createAcpSessionBridge', () => {
     expect(
       spans
         .filter(({ operation }) => operation === 'channel.wait')
-        .map(({ attributes }) => attributes['lailatul-coder.daemon.channel.path']),
+        .map(
+          ({ attributes }) => attributes['lailatul-coder.daemon.channel.path'],
+        ),
     ).toEqual(['joined', 'reused']);
     expect(spans.some(({ operation }) => operation === 'channel.preheat')).toBe(
       true,
@@ -3442,10 +3446,7 @@ describe('createAcpSessionBridge', () => {
       await vi.waitFor(() => expect(renderedResponseErrors).toHaveLength(1));
       expect(renderedResponseErrors[0]).toContain('payloadOmitted: true');
       expect(renderedResponseErrors[0]).not.toContain(secret);
-      expect(reservePreparedResponse).toHaveBeenCalledOnce();
-      expect(reservePreparedResponse).toHaveBeenCalledWith(
-        expect.objectContaining({ code: -32602 }),
-      );
+      expect(reservePreparedResponse).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ code: -32602 }));
     } finally {
       stderr.mockRestore();
       await bridge.shutdown();
@@ -3570,10 +3571,7 @@ describe('createAcpSessionBridge', () => {
           },
         ),
       ).rejects.toMatchObject({ code: -32603, message: 'Internal error' });
-      expect(fail).toHaveBeenCalledOnce();
-      expect(fail).toHaveBeenCalledWith(
-        expect.objectContaining({ code: 'acp_handler_limit_exceeded' }),
-      );
+      expect(fail).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ code: 'acp_handler_limit_exceeded' }));
       expect(send).not.toHaveBeenCalled();
     } finally {
       await bridge.shutdown();

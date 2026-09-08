@@ -861,4 +861,3 @@ describe('ExtensionsManagerDialog (tabbed)', () => {
     expect(lastFrame()).not.toContain('Discover extensions');
   });
 });
-

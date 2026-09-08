@@ -1,6 +1,7 @@
 ---
 name: memory-leak-debug
-description: Diagnose memory leaks in the LailatulCoder Ai CLI using heap snapshots and
+description:
+  Diagnose memory leaks in the LailatulCoder Ai CLI using heap snapshots and
   the chrome-devtools CLI. Use when investigating high memory usage, unbounded
   growth, or suspected object retention issues.
 ---

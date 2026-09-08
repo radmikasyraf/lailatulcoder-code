@@ -82,4 +82,3 @@ describe('ServerDetailStep — View resources action gating', () => {
     expect(lastFrame()).not.toContain('View resources');
   });
 });
-

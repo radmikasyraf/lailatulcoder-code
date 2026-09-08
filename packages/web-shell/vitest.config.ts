@@ -11,7 +11,10 @@ export default defineConfig({
   test: {
     setupFiles: ['./test/setup.ts'],
     exclude: [...configDefaults.exclude, 'e2e/**'],
-    reporters: ['default', ['junit', { suiteName: '@lailatul-coder/web-shell' }]],
+    reporters: [
+      'default',
+      ['junit', { suiteName: '@lailatul-coder/web-shell' }],
+    ],
     outputFile: {
       junit: '../junit.xml',
     },

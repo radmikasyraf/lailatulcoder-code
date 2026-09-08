@@ -6,7 +6,10 @@
 
 import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { Config, PromptSuggestionEvent } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  PromptSuggestionEvent,
+} from '@lailatul-coder/lailatul-coder-core';
 
 const { mockLogPromptSuggestion } = vi.hoisted(() => ({
   mockLogPromptSuggestion: vi.fn(),
@@ -14,7 +17,9 @@ const { mockLogPromptSuggestion } = vi.hoisted(() => ({
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     logPromptSuggestion: mockLogPromptSuggestion,
@@ -102,4 +107,3 @@ describe('useFollowupSuggestionsCLI telemetry', () => {
     expect(event?.time_to_first_keystroke_ms).toBe(50);
   });
 });
-

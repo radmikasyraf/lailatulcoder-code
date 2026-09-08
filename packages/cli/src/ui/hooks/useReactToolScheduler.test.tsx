@@ -149,4 +149,3 @@ describe('useReactToolScheduler', () => {
     scheduleSpy.mockRestore();
   });
 });
-

@@ -29,11 +29,9 @@ export class MessageRouter {
   private fileHandler: FileMessageHandler;
   private currentConversationId: string | null = null;
   private permissionHandler:
-    | ((message: PermissionResponseMessage) => void)
-    | null = null;
+    ((message: PermissionResponseMessage) => void) | null = null;
   private askUserQuestionHandler:
-    | ((message: AskUserQuestionResponseMessage) => void)
-    | null = null;
+    ((message: AskUserQuestionResponseMessage) => void) | null = null;
 
   constructor(
     agentManager: QwenAgentManager,

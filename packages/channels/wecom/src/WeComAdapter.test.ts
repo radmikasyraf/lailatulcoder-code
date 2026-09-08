@@ -1950,8 +1950,7 @@ describe('WeComChannel', () => {
     const inspectable = channel as unknown as { disconnectGeneration: number };
     const client = lastClient();
     let releaseLookup:
-      | ((value: Array<{ address: string; family: number }>) => void)
-      | undefined;
+      ((value: Array<{ address: string; family: number }>) => void) | undefined;
     mocks.lookup.mockImplementationOnce(
       async () =>
         await new Promise<Array<{ address: string; family: number }>>(

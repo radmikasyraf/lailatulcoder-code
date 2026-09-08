@@ -29,7 +29,7 @@
 | `packages/cli/src/serve/workspace-service/__tests__/agentsService.test.ts` | AgentsService unit tests                                                      |
 | `packages/cli/src/serve/workspace-service/__tests__/memoryService.test.ts` | MemoryService unit tests                                                      |
 | `packages/cli/src/serve/workspace-service/__tests__/facade.test.ts`        | Facade + workspace-scoped methods (status/tool/init/restart) unit tests       |
-| `packages/cli/src/serve/workspace-service/__tests__/e2e.test.ts`           | REST ↔ /acp equivalence e2e tests                                            |
+| `packages/cli/src/serve/workspace-service/__tests__/e2e.test.ts`           | REST ↔ /acp equivalence e2e tests                                             |
 
 ### Modified Files
 
@@ -1422,9 +1422,7 @@ describe('REST ↔ /acp equivalence', () => {
 
   beforeAll(() => {
     // Create app with both REST and /acp wired to same workspace service
-    app = createServeApp({
-      /* ... test deps */
-    });
+    app = createServeApp({/* ... test deps */});
   });
 
   describe('file read', () => {

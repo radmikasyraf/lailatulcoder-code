@@ -475,8 +475,8 @@ without the diff is green and worthless, and no amount of reading the diff
 settles a claim about behaviour. Two isolated, token-free jobs close exactly
 that gap, and a maintainer triggers them by comment:
 
-| trigger              | what it produces                                                                                                                               |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| trigger                   | what it produces                                                                                                                               |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `@lailatul-coder /verify` | A/B load-bearing proof against the base build, mock-free wire-oracle harnesses, targeted gates, counted assertions (see the `verify-pr` skill) |
 | `@lailatul-coder /tmux`   | drives the TUI as a real user and captures the terminal                                                                                        |
 

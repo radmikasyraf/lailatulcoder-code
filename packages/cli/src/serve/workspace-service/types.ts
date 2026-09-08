@@ -350,9 +350,7 @@ export interface WorkspaceSkillToggleResult {
 }
 
 export type WorkspaceSkillToggleErrorCode =
-  | 'skill_not_found'
-  | 'skill_not_toggleable'
-  | 'skill_inactive_extension';
+  'skill_not_found' | 'skill_not_toggleable' | 'skill_inactive_extension';
 
 export interface WorkspaceSkillToggleError {
   skillName: string;
@@ -399,9 +397,7 @@ export interface PersistDisabledSkillsBatchResult {
 }
 
 export type WorkspaceSkillNotToggleableReason =
-  | 'not_user_invocable'
-  | 'inactive_extension'
-  | 'locked';
+  'not_user_invocable' | 'inactive_extension' | 'locked';
 
 export class WorkspaceSkillNotFoundError extends Error {
   constructor(readonly skillName: string) {

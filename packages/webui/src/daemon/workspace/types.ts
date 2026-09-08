@@ -135,10 +135,7 @@ export interface DaemonWorkspaceProviderProps {
 }
 
 export type DaemonWorkspaceStatus =
-  | 'idle'
-  | 'connecting'
-  | 'connected'
-  | 'error';
+  'idle' | 'connecting' | 'connected' | 'error';
 
 export interface DaemonWorkspaceContextValue {
   client: DaemonClient;

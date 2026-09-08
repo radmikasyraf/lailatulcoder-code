@@ -186,8 +186,7 @@ export function collectGoalStatusItemsFromRecords(
       continue;
     }
     const payload = record.systemPayload as
-      | SlashCommandRecordPayload
-      | undefined;
+      SlashCommandRecordPayload | undefined;
     if (payload?.phase !== 'result') continue;
     // The type says `outputHistoryItems?: Record<string, unknown>[]`, but the
     // value came off disk. A hand-edited record that made it a plain object

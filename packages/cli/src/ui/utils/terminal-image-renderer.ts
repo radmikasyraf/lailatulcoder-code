@@ -126,8 +126,8 @@ export function supportsKittyImageProtocol(
 
   return Boolean(
     env['KITTY_WINDOW_ID'] ||
-      term.includes('kitty') ||
-      termProgram.includes('ghostty'),
+    term.includes('kitty') ||
+    termProgram.includes('ghostty'),
   );
 }
 

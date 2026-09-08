@@ -10,10 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { getPlatformBackendName } from './platform.js';
 
 export type MicrophoneAuthorizationStatus =
-  | 'granted'
-  | 'denied'
-  | 'prompt'
-  | 'unknown';
+  'granted' | 'denied' | 'prompt' | 'unknown';
 
 export interface AudioCaptureOptions {
   sampleRate: number;

@@ -30,7 +30,10 @@
  * outside the child) — those still surface once a session exists.
  */
 
-import { SkillManager, isSafeModeEnv } from '@lailatul-coder/lailatul-coder-core';
+import {
+  SkillManager,
+  isSafeModeEnv,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Config, SkillLevel } from '@lailatul-coder/lailatul-coder-core';
 import type { ServeWorkspaceSkillsStatus } from '@lailatul-coder/acp-bridge/status';
 import { STATUS_SCHEMA_VERSION } from '@lailatul-coder/acp-bridge/status';

@@ -1,6 +1,7 @@
 ---
 name: lailatul-coder-claw
-description: Use LailatulCoder Ai as a Code Agent for code understanding, project
+description:
+  Use LailatulCoder Ai as a Code Agent for code understanding, project
   generation, features, bug fixes, refactoring, and various programming tasks
 ---
 
@@ -169,7 +170,7 @@ exits with permission denied.
 | `/compress` | Compress history to save tokens |
 | `/stats`    | Show session info               |
 | `/auth`     | Configure authentication        |
-| `/exit`     | Exit LailatulCoder Ai                  |
+| `/exit`     | Exit LailatulCoder Ai           |
 
 Full reference: `docs/users/features/commands.md`.
 

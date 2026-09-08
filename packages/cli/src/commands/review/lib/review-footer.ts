@@ -575,9 +575,9 @@ function scanLines(body: string): ScannedLine[] {
     if (open !== null) {
       // A backtick in a BACKTICK fence's info string is no fence at all —
       // the line is ordinary text; tilde fences may carry one.
-      if (
-        !(open[1]![0] === '`' && content.slice(open[0].length).includes('`'))
-      ) {
+      if (!(
+        open[1]![0] === '`' && content.slice(open[0].length).includes('`')
+      )) {
         fence = { char: open[1]![0]!, len: open[1]!.length, depth };
         out.push({ line, kind: 'fenceEdge', depth, content });
         continue;

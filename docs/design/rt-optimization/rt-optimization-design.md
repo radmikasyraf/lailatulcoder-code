@@ -1166,11 +1166,11 @@ TTL 滑动窗口意味着 agent loop 内 summary 轮**几乎 100% 命中** prima
 
 #### 启动时一次，session 内不变
 
-| 位置     | 内容                                                                                             | 何时可能变                |
-| -------- | ------------------------------------------------------------------------------------------------ | ------------------------- |
-| L190     | `process.env['QWEN_SYSTEM_MD']` 决定 basePrompt 来源（默认 vs 用户 system.md）                   | 进程内不变                |
-| L342-343 | `process.env['SANDBOX']` 决定 sandbox 段选哪一版（Seatbelt / Sandbox / Outside）                 | 进程内不变                |
-| L366     | `isGitRepository(process.cwd())` 决定 git 段是否插入                                             | cwd 同 session 内通常不变 |
+| 位置     | 内容                                                                                                  | 何时可能变                |
+| -------- | ----------------------------------------------------------------------------------------------------- | ------------------------- |
+| L190     | `process.env['QWEN_SYSTEM_MD']` 决定 basePrompt 来源（默认 vs 用户 system.md）                        | 进程内不变                |
+| L342-343 | `process.env['SANDBOX']` 决定 sandbox 段选哪一版（Seatbelt / Sandbox / Outside）                      | 进程内不变                |
+| L366     | `isGitRepository(process.cwd())` 决定 git 段是否插入                                                  | cwd 同 session 内通常不变 |
 | L871     | `process.env['QWEN_CODE_TOOL_CALL_STYLE']` 决定 tool call 风格（lailatul-coderr / qwen-vl / general） | 进程内不变                |
 
 #### 事件触发（低频）

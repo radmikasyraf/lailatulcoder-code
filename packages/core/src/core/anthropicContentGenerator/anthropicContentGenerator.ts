@@ -859,9 +859,7 @@ export class AnthropicContentGenerator implements ContentGenerator {
     // maxOutputTokens, the smaller of the two goes on the wire so
     // `prompt + max_tokens ≤ window` holds for samplingParams users too.
     const configMaxTokens = configSamplingParams?.max_tokens as
-      | number
-      | undefined
-      | null;
+      number | undefined | null;
     const requestMaxTokens = requestConfig.maxOutputTokens;
     const userMaxTokens =
       reconcileMaxTokens(configMaxTokens, requestMaxTokens) ??

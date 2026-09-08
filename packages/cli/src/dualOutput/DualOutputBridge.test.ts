@@ -71,8 +71,7 @@ describe('DualOutputBridge', () => {
   describe('--json-file output', () => {
     it('emits recording failures for the affected session and unsubscribes on shutdown', async () => {
       let listener:
-        | ((event: { sessionId: string; error: Error }) => void)
-        | undefined;
+        ((event: { sessionId: string; error: Error }) => void) | undefined;
       const unsubscribe = vi.fn();
       config = {
         ...createMockConfig(),
@@ -107,8 +106,7 @@ describe('DualOutputBridge', () => {
 
     it('disables dual output when recording failure reporting throws', () => {
       let listener:
-        | ((event: { sessionId: string; error: Error }) => void)
-        | undefined;
+        ((event: { sessionId: string; error: Error }) => void) | undefined;
       config = {
         ...createMockConfig(),
         onChatRecordingFailure: vi.fn((nextListener) => {

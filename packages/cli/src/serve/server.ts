@@ -586,8 +586,7 @@ export interface ServeAppDeps {
   getSessionBridges?: () => readonly AcpSessionBridge[];
   workspaceTrustHotReloadAvailable?: boolean;
   getWorkspaceTrustPolicySnapshot?: () =>
-    | DaemonTrustPolicySnapshot
-    | Promise<DaemonTrustPolicySnapshot>;
+    DaemonTrustPolicySnapshot | Promise<DaemonTrustPolicySnapshot>;
   createWorkspaceRuntime?: (
     cwd: string,
     options: { provenance: WorkspaceRuntimeProvenance },

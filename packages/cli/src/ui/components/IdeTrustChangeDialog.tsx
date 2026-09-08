@@ -48,4 +48,3 @@ export const IdeTrustChangeDialog = ({ reason }: IdeTrustChangeDialogProps) => {
     </Box>
   );
 };
-

@@ -26,7 +26,8 @@ import { isWindows } from './utils/platform.js';
 // into the active extension flow yet.
 export { createSdkDaemonSessionFactory as __daemonIdeSessionFactoryForBundle } from './services/daemonIdeConnection.js';
 
-const CLI_IDE_COMPANION_IDENTIFIER = 'LailatulCoder.lailatul-coder-vscode-ide-companion';
+const CLI_IDE_COMPANION_IDENTIFIER =
+  'LailatulCoder.lailatul-coder-vscode-ide-companion';
 const INFO_MESSAGE_SHOWN_KEY = 'qwenCodeInfoMessageShown';
 const IDE_WORKSPACE_PATH_ENV_VAR = 'QWEN_CODE_IDE_WORKSPACE_PATH';
 export const DIFF_SCHEME = 'qwen-diff';
@@ -112,7 +113,9 @@ async function checkForUpdates(
 }
 
 export async function activate(context: vscode.ExtensionContext) {
-  outputChannel = vscode.window.createOutputChannel('LailatulCoder Ai Companion');
+  outputChannel = vscode.window.createOutputChannel(
+    'LailatulCoder Ai Companion',
+  );
   createLogger(outputChannel, redactLogCredentials);
   logger.info('Extension activated');
 
@@ -330,8 +333,7 @@ export async function activate(context: vscode.ExtensionContext) {
       'lailatul-coder.runQwenCode',
       async (
         location?:
-          | vscode.TerminalLocation
-          | vscode.TerminalEditorLocationOptions,
+          vscode.TerminalLocation | vscode.TerminalEditorLocationOptions,
       ) => {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {

@@ -438,4 +438,3 @@ export const ThinkMessageContent: React.FC<ThinkMessageContentProps> = ({
     contentWidth={contentWidth}
   />
 );
-

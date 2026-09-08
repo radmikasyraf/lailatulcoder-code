@@ -1959,8 +1959,7 @@ describe('handleAtCommand', () => {
 
       const parts = result.processedQuery as Array<Record<string, unknown>>;
       const inline = parts.find((p) => 'inlineData' in p) as
-        | { inlineData: { mimeType: string; data: string } }
-        | undefined;
+        { inlineData: { mimeType: string; data: string } } | undefined;
       expect(inline).toBeDefined();
       expect(inline!.inlineData).toMatchObject({
         mimeType: 'image/png',

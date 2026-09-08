@@ -3069,9 +3069,9 @@ describe('qwen-autofix workflow', () => {
     // conflict handoff wake filter, and its scan-side mirror for the
     // stale-base park gate (a /command comment is not a trusted-human
     // response and must not unpark a conflict verdict in either).
-    expect(workflow.split('test("^\\\\s*@lailatul-coder /") | not').length - 1).toBe(
-      7,
-    );
+    expect(
+      workflow.split('test("^\\\\s*@lailatul-coder /") | not').length - 1,
+    ).toBe(7);
   });
 
   it('normalizes every paginated WORKDIR fetch to one flat array (>100-item PRs)', () => {
@@ -3485,7 +3485,16 @@ describe('qwen-autofix workflow', () => {
     const noticed = (noticeAt, rt) =>
       execFileSync(
         'jq',
-        ['-r', '--arg', 'ab', 'lailatul-coder-dev-bot', '--arg', 'rt', rt, dedup],
+        [
+          '-r',
+          '--arg',
+          'ab',
+          'lailatul-coder-dev-bot',
+          '--arg',
+          'rt',
+          rt,
+          dedup,
+        ],
         {
           encoding: 'utf8',
           input: JSON.stringify([
@@ -5285,7 +5294,9 @@ exit 1
       // the whole point: without the `// ""` guard jq aborts the program
       // (rc=5), gh exits non-zero, all three attempts fail, and the run reds
       // out without ever posting the blocked status it exists to post.
-      expect(calls).toContain('repos/LailatulCoder/lailatul-coder/issues/comments/123');
+      expect(calls).toContain(
+        'repos/LailatulCoder/lailatul-coder/issues/comments/123',
+      );
       expect(calls).toContain('autofix-status');
       expect(calls).toContain('AutoFix blocked');
       expect(calls).toContain('permission_lookup_failed');
@@ -5938,7 +5949,11 @@ exit 1
     ).toBe('|');
     // Non-PR comments and closed PRs are ignored; so is the bot itself.
     expect(
-      runCmd({ body: '@lailatul-coder /takeover', sender: 'human-a', hasPr: '' }),
+      runCmd({
+        body: '@lailatul-coder /takeover',
+        sender: 'human-a',
+        hasPr: '',
+      }),
     ).toBe('|');
     expect(
       runCmd({
@@ -6205,9 +6220,9 @@ exit 1
     const IN_REPO = 'LailatulCoder/lailatul-coder';
     const FORK = 'wenshao/lailatul-coder';
     // Unchanged: an in-repo bot PR is admitted, a human in-repo PR is not.
-    expect(run({ headRepo: IN_REPO, author: 'lailatul-coder-dev-bot' })).toContain(
-      'DO_REVIEW=true',
-    );
+    expect(
+      run({ headRepo: IN_REPO, author: 'lailatul-coder-dev-bot' }),
+    ).toContain('DO_REVIEW=true');
     expect(run({ headRepo: IN_REPO, author: 'someone' })).toContain(
       'DO_REVIEW=false',
     );
@@ -6235,10 +6250,18 @@ exit 1
     // In-repo routing is untouched: a non-main base and an untrusted sender
     // are still refused, so this change narrowed the fork case alone.
     expect(
-      run({ headRepo: IN_REPO, author: 'lailatul-coder-dev-bot', base: 'release' }),
+      run({
+        headRepo: IN_REPO,
+        author: 'lailatul-coder-dev-bot',
+        base: 'release',
+      }),
     ).toContain('DO_REVIEW=false');
     expect(
-      run({ headRepo: IN_REPO, author: 'lailatul-coder-dev-bot', perm: 'read' }),
+      run({
+        headRepo: IN_REPO,
+        author: 'lailatul-coder-dev-bot',
+        perm: 'read',
+      }),
     ).toContain('DO_REVIEW=false');
   });
 
@@ -6353,7 +6376,9 @@ exit 1
     // engage ack itself (the labeled event has been observed to not fire —
     // #7999, #8002 — so the ack cannot depend on this round-trip). Only the
     // ack is suppressed; the immediate scan still routes.
-    expect(run({ sender: 'lailatul-coder-dev-bot' })).toBe('ack= base= review=true');
+    expect(run({ sender: 'lailatul-coder-dev-bot' })).toBe(
+      'ack= base= review=true',
+    );
     // Still deliberately silent — these were never engaged and a comment on
     // them would be noise, not information: a closed PR, a fork (whose label
     // event carries no secrets to comment with), a non-takeover label, and
@@ -9853,7 +9878,9 @@ exit 1
       "const GHCR_REPOSITORY = 'LailatulCoder/lailatul-coder';",
     );
     expect(sandboxImageResolverScript).toContain('ghcr.io/${GHCR_REPOSITORY}');
-    expect(workflow).not.toContain('npm view @lailatul-coder/lailatul-coder@latest');
+    expect(workflow).not.toContain(
+      'npm view @lailatul-coder/lailatul-coder@latest',
+    );
     expect(workflow).not.toContain('KNOWN_BOTS');
   });
 

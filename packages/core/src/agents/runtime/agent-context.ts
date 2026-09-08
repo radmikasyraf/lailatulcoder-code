@@ -93,8 +93,7 @@ export function getCurrentAgentDepth(): number {
 }
 
 export function getRuntimeContentGenerator():
-  | RuntimeContentGeneratorView
-  | undefined {
+  RuntimeContentGeneratorView | undefined {
   return storage.getStore()?.runtimeView;
 }
 

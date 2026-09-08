@@ -40,9 +40,9 @@ describe('package.json command metadata', () => {
       manifest.contributes.viewsContainers.activitybar.find(
         (item) => item.id === 'lailatul-coder-sidebar',
       );
-    const sidebarView = manifest.contributes.views['lailatul-coder-sidebar']?.find(
-      (item) => item.id === 'lailatul-coder.chatView.sidebar',
-    );
+    const sidebarView = manifest.contributes.views[
+      'lailatul-coder-sidebar'
+    ]?.find((item) => item.id === 'lailatul-coder.chatView.sidebar');
 
     expect(sidebarContainer?.when).toBeUndefined();
     expect(sidebarView?.when).toBeUndefined();

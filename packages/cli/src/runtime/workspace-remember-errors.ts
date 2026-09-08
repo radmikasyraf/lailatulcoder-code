@@ -57,8 +57,7 @@ export function createWorkspaceMemoryExtractionErrorLogger(
 
 function reportRememberErrorExtractionFailure(
   onExtractionError:
-    | ((target: RememberErrorExtractionTarget, err: unknown) => void)
-    | undefined,
+    ((target: RememberErrorExtractionTarget, err: unknown) => void) | undefined,
   target: RememberErrorExtractionTarget,
   err: unknown,
 ): void {

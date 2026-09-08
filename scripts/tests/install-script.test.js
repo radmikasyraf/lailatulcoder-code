@@ -944,7 +944,9 @@ describe('standalone release packaging', () => {
     expect(installPowerShellSource).toContain('Save-CurrentCmdPathShim');
     expect(installPowerShellSource).toContain('current-cmd-shim.txt');
     expect(installPowerShellSource).toContain('Test-WritableDirectory');
-    expect(installPowerShellSource).toContain('LailatulCoder Ai current-session shim');
+    expect(installPowerShellSource).toContain(
+      'LailatulCoder Ai current-session shim',
+    );
     expect(installPowerShellSource).toContain(
       'TEMP environment variable is not set',
     );
@@ -1776,13 +1778,19 @@ describe('standalone release packaging', () => {
 
         expect(existsSync(path.join(extractDir, 'lailatul-coder'))).toBe(true);
         expect(
-          existsSync(path.join(extractDir, 'lailatul-coder', 'bin', 'qwen.cmd')),
+          existsSync(
+            path.join(extractDir, 'lailatul-coder', 'bin', 'qwen.cmd'),
+          ),
         ).toBe(true);
         expect(
-          existsSync(path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js')),
+          existsSync(
+            path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js'),
+          ),
         ).toBe(true);
         expect(
-          existsSync(path.join(extractDir, 'lailatul-coder', 'node', 'node.exe')),
+          existsSync(
+            path.join(extractDir, 'lailatul-coder', 'node', 'node.exe'),
+          ),
         ).toBe(true);
         const shim = readScript(
           path.join(extractDir, 'lailatul-coder', 'bin', 'qwen.cmd'),
@@ -1839,7 +1847,9 @@ describe('standalone release packaging', () => {
         );
 
         expect(
-          existsSync(path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js')),
+          existsSync(
+            path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js'),
+          ),
         ).toBe(true);
         expect(
           existsSync(
@@ -1966,7 +1976,9 @@ describe('standalone release packaging', () => {
         });
 
         expect(
-          existsSync(path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js')),
+          existsSync(
+            path.join(extractDir, 'lailatul-coder', 'lib', 'cli-entry.js'),
+          ),
         ).toBe(true);
         const shim = readScript(
           path.join(extractDir, 'lailatul-coder', 'bin', 'qwen'),
@@ -2641,7 +2653,14 @@ describe('Linux/macOS installer end-to-end', { timeout: 15000 }, () => {
         expect(existsSync(path.join(installRoot, 'bin', 'qwen'))).toBe(true);
         expect(
           existsSync(
-            path.join(installRoot, 'lib', 'lailatul-coder', 'node', 'bin', 'node'),
+            path.join(
+              installRoot,
+              'lib',
+              'lailatul-coder',
+              'node',
+              'bin',
+              'node',
+            ),
           ),
         ).toBe(true);
         expect(readScript(path.join(home, '.qwen', 'source.json'))).toContain(
@@ -3931,7 +3950,9 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
           true,
         );
         expect(
-          existsSync(path.join(installRoot, 'lailatul-coder', 'node', 'node.exe')),
+          existsSync(
+            path.join(installRoot, 'lailatul-coder', 'node', 'node.exe'),
+          ),
         ).toBe(true);
         expect(readScript(path.join(home, '.qwen', 'source.json'))).toContain(
           '"source": "smoke"',
@@ -4019,7 +4040,9 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
           true,
         );
         expect(
-          existsSync(path.join(installRoot, 'lailatul-coder', 'node', 'node.exe')),
+          existsSync(
+            path.join(installRoot, 'lailatul-coder', 'node', 'node.exe'),
+          ),
         ).toBe(true);
       } finally {
         rmSync(tmpDir, { recursive: true, force: true });
@@ -4143,7 +4166,9 @@ describe('Windows installer end-to-end', { timeout: 60_000 }, () => {
         expect(curlUrls).toContain(
           '/releases/lailatul-coder/v0.0.0/lailatul-coder-win-x64.zip',
         );
-        expect(curlUrls).toContain('/releases/lailatul-coder/v0.0.0/SHA256SUMS');
+        expect(curlUrls).toContain(
+          '/releases/lailatul-coder/v0.0.0/SHA256SUMS',
+        );
         expect(curlUrls).not.toContain(
           '/releases/lailatul-coder/latest/lailatul-coder-win-x64.zip',
         );
@@ -4383,7 +4408,10 @@ function ensureMinimalDist({
   writeFileSync(path.join(distPath, 'chunks/index.js'), 'export {};\n');
   writeFileSync(
     path.join(distPath, 'package.json'),
-    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', version: '0.0.0' }),
+    JSON.stringify({
+      name: '@lailatul-coder/lailatul-coder',
+      version: '0.0.0',
+    }),
   );
   return { backupPath, distPath };
 }
@@ -4482,7 +4510,10 @@ function createFakeWindowsStandaloneArchive(tmpDir) {
   writeFileSync(path.join(packageRoot, 'node', 'node.exe'), 'fake node.exe\n');
   writeFileSync(
     path.join(packageRoot, 'manifest.json'),
-    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', target: 'win-x64' }),
+    JSON.stringify({
+      name: '@lailatul-coder/lailatul-coder',
+      target: 'win-x64',
+    }),
   );
 
   const archive = path.join(outDir, 'lailatul-coder-win-x64.zip');
@@ -4500,7 +4531,10 @@ function createFakeWindowsStandaloneInstall(installRoot) {
 
   writeFileSync(
     path.join(installDir, 'manifest.json'),
-    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', target: 'win-x64' }),
+    JSON.stringify({
+      name: '@lailatul-coder/lailatul-coder',
+      target: 'win-x64',
+    }),
   );
   writeFileSync(
     path.join(installDir, 'bin', 'qwen.cmd'),
@@ -4967,7 +5001,10 @@ function createSymlinkStandaloneArchive(tmpDir) {
   chmodSync(path.join(packageRoot, 'node', 'bin', 'node'), 0o755);
   writeFileSync(
     path.join(packageRoot, 'manifest.json'),
-    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', target: 'linux-x64' }),
+    JSON.stringify({
+      name: '@lailatul-coder/lailatul-coder',
+      target: 'linux-x64',
+    }),
   );
 
   const outDir = path.join(tmpDir, 'out');
@@ -5002,7 +5039,10 @@ function createTraversalStandaloneArchive(tmpDir) {
   chmodSync(path.join(packageRoot, 'node', 'bin', 'node'), 0o755);
   writeFileSync(
     path.join(packageRoot, 'manifest.json'),
-    JSON.stringify({ name: '@lailatul-coder/lailatul-coder', target: 'linux-x64' }),
+    JSON.stringify({
+      name: '@lailatul-coder/lailatul-coder',
+      target: 'linux-x64',
+    }),
   );
   writeFileSync(path.join(tmpDir, 'qwen-slip'), 'path traversal\n');
 

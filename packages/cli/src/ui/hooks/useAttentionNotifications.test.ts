@@ -19,9 +19,8 @@ vi.mock('../../services/notificationService.js', () => ({
   sendNotification: vi.fn(),
 }));
 
-const { sendNotification: mockedSendNotification } = await import(
-  '../../services/notificationService.js'
-);
+const { sendNotification: mockedSendNotification } =
+  await import('../../services/notificationService.js');
 
 const mockTerminal: TerminalNotification = {
   notifyITerm2: vi.fn(),

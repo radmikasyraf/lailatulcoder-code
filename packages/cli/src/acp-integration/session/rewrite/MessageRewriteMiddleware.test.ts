@@ -26,9 +26,8 @@ vi.mock('./LlmRewriter.js', () => ({
 }));
 
 // Import after mocks are set up
-const { MessageRewriteMiddleware } = await import(
-  './MessageRewriteMiddleware.js'
-);
+const { MessageRewriteMiddleware } =
+  await import('./MessageRewriteMiddleware.js');
 
 function createMiddleware(
   target: 'message' | 'thought' | 'all' = 'all',
@@ -268,8 +267,7 @@ describe('MessageRewriteMiddleware', () => {
         (call: unknown[]) =>
           (
             (call[0] as Record<string, unknown>)['_meta'] as
-              | Record<string, unknown>
-              | undefined
+              Record<string, unknown> | undefined
           )?.['rewritten'] === true,
       );
       expect(rewriteCall).toBeDefined();
@@ -462,8 +460,7 @@ describe('MessageRewriteMiddleware', () => {
           (call: unknown[]) =>
             (
               (call[0] as Record<string, unknown>)['_meta'] as
-                | Record<string, unknown>
-                | undefined
+                Record<string, unknown> | undefined
             )?.['rewritten'] === true,
         );
         expect(rewriteCalls).toHaveLength(2);

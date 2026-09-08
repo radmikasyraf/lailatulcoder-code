@@ -530,15 +530,15 @@ it.each([
 
 | 场景                                                                    | 期望 `service.name`                                   | 期望 user attr                       |
 | ----------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------ |
-| 全空                                                                    | `'lailatul-coder'`                                         | 不存在                               |
+| 全空                                                                    | `'lailatul-coder'`                                    | 不存在                               |
 | 仅 env `OTEL_SERVICE_NAME=A`                                            | `'A'`                                                 | —                                    |
 | 仅 env `OTEL_RESOURCE_ATTRIBUTES=service.name=B`                        | `'B'`                                                 | —                                    |
 | `OTEL_SERVICE_NAME=A` + `OTEL_RESOURCE_ATTRIBUTES=service.name=B`       | `'A'`（OTEL_SERVICE_NAME 优先）                       | —                                    |
 | `OTEL_SERVICE_NAME=A` + `settings={service.name:C}`                     | `'A'`（OTEL_SERVICE_NAME 优先）                       | —                                    |
 | `OTEL_RESOURCE_ATTRIBUTES=service.name=B` + `settings={service.name:C}` | `'C'`（settings 优先于 env，无 OTEL_SERVICE_NAME 时） | —                                    |
-| `OTEL_RESOURCE_ATTRIBUTES=team=x` + `settings={team:y}`                 | `'lailatul-coder'`                                         | `team='y'`（settings 优先）          |
-| `OTEL_RESOURCE_ATTRIBUTES=service.version=fake`                         | `'lailatul-coder'` + warn                                  | service.version 仍为真实 cli version |
-| `settings={service.version:fake}`                                       | `'lailatul-coder'` + warn                                  | service.version 仍为真实 cli version |
+| `OTEL_RESOURCE_ATTRIBUTES=team=x` + `settings={team:y}`                 | `'lailatul-coder'`                                    | `team='y'`（settings 优先）          |
+| `OTEL_RESOURCE_ATTRIBUTES=service.version=fake`                         | `'lailatul-coder'` + warn                             | service.version 仍为真实 cli version |
+| `settings={service.version:fake}`                                       | `'lailatul-coder'` + warn                             | service.version 仍为真实 cli version |
 
 ### 8.3 Resource 内容快照测试
 
@@ -726,7 +726,7 @@ QWEN_TELEMETRY_METRICS_INCLUDE_SESSION_ID=true qwen "投资分析"
 
 ## 11. 与 claude-code 实现的对比
 
-| 维度                       | claude-code                                      | lailatul-coder 本设计                                 | 决策依据                                           |
+| 维度                       | claude-code                                      | lailatul-coder 本设计                            | 决策依据                                           |
 | -------------------------- | ------------------------------------------------ | ------------------------------------------------ | -------------------------------------------------- |
 | 标准 OTel env var          | `OTEL_RESOURCE_ATTRIBUTES` / `OTEL_SERVICE_NAME` | ✅ 一致                                          | 标准契约                                           |
 | `OTEL_SERVICE_NAME` 优先级 | 遵守 OTel 规范                                   | ✅ 遵守                                          | spec 明确规定                                      |
@@ -736,8 +736,8 @@ QWEN_TELEMETRY_METRICS_INCLUDE_SESSION_ID=true qwen "投资分析"
 | Per-attribute granularity  | 每 attribute 一个 toggle                         | ✅ 一致                                          | 灵活，符合实际诊断需求                             |
 | settings.json 等价物       | ❌ 无                                            | ✅ 有 `telemetry.resourceAttributes` + `metrics` | 企业 fleet 部署 base config                        |
 | Per-span 动态 hook         | ❌ 无                                            | ❌ 无                                            | 复杂度高，claude-code 也没解，本期不做             |
-| 多租户 `account_uuid`      | 有                                               | ❌ 无                                            | lailatul-coder metric 里没有此 attr                     |
-| Agent SDK `options.env`    | 有                                               | ❌ 无                                            | lailatul-coder 没有等价模式                             |
+| 多租户 `account_uuid`      | 有                                               | ❌ 无                                            | lailatul-coder metric 里没有此 attr                |
+| Agent SDK `options.env`    | 有                                               | ❌ 无                                            | lailatul-coder 没有等价模式                        |
 | 保留键策略                 | 不允许覆盖 built-in id                           | ✅ 一致                                          | 遥测可信度                                         |
 | 第一方上报通道             | claude-code 也有独立第一方通道（与 OTel 隔离）   | ✅ qwen-logger 同样隔离                          | 第一方与第三方通道职责分离                         |
 

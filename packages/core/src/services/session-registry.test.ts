@@ -134,7 +134,10 @@ function liveBody(over: Record<string, unknown> = {}): Record<string, unknown> {
 
 describe('deriveSessionName', () => {
   it('combines the cwd basename with a session-derived suffix', () => {
-    const name = deriveSessionName('/home/u/projects/lailatul-coder', 'abc-123');
+    const name = deriveSessionName(
+      '/home/u/projects/lailatul-coder',
+      'abc-123',
+    );
     expect(name).toMatch(/^lailatul-coder-[0-9a-f]{2}$/);
   });
 

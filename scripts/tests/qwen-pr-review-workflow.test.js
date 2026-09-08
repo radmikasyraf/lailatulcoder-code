@@ -3079,7 +3079,9 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
     );
     expect(job.if).toContain("needs.precheck-pr.result == 'failure'");
     expect(job.if).not.toContain("!= 'success'");
-    expect(job.if).toContain("github.repository == 'LailatulCoder/lailatul-coder'");
+    expect(job.if).toContain(
+      "github.repository == 'LailatulCoder/lailatul-coder'",
+    );
     // On pull_request_target and issue_comment events review_mode is null,
     // so collapsing this disjunction would skip the job exactly where dead
     // review runs happen.
@@ -3356,7 +3358,8 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
               GITHUB_EVENT_NAME: eventName,
               GITHUB_STEP_SUMMARY: summary,
               PR_NUMBER: '42',
-              RUN_URL: 'https://github.com/LailatulCoder/lailatul-coder/actions/runs/12345',
+              RUN_URL:
+                'https://github.com/LailatulCoder/lailatul-coder/actions/runs/12345',
               EXPECTED_HEAD_SHA: '',
               FAILURE_KIND: '',
               FAILURE_REASON:
@@ -3557,7 +3560,8 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
   // the invisible qwen-review-ledger marker — at least one, never neither —
   // and no foreign approval carries either. Matching on that evidence is how
   // the guard stays closed to a producer set no exclusion list can finish.
-  const REVIEW_FOOTER = '_— qwen3.8-max via LailatulCoder Ai /review (v0.21.14)_';
+  const REVIEW_FOOTER =
+    '_— qwen3.8-max via LailatulCoder Ai /review (v0.21.14)_';
   const REVIEW_LEDGER = '<!-- qwen-review-ledger {"v":1,"round":2} -->';
   const COMPOSED_REVIEW_BODIES = [
     // Attribution on: the footer and the ledger marker both ride the body.
@@ -3583,7 +3587,12 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
             prHead: 'HEADSHA1',
             runCreated: RUN_CREATED,
             runStartedAttempt: RUN_RESTARTED,
-            reviews: reviewFixture('lailatul-coder-ci-bot', 'HEADSHA1', AFTER, body),
+            reviews: reviewFixture(
+              'lailatul-coder-ci-bot',
+              'HEADSHA1',
+              AFTER,
+              body,
+            ),
           });
           expect(r.status, body).toBe(0);
           expect(r.posted, body).toBe('');
@@ -3652,7 +3661,12 @@ describe('fallback comment resilience (PR #8894 incident class)', () => {
             prHead: 'HEADSHA1',
             runCreated: RUN_CREATED,
             runStartedAttempt: RUN_RESTARTED,
-            reviews: reviewFixture('lailatul-coder-ci-bot', 'HEADSHA1', AFTER, body),
+            reviews: reviewFixture(
+              'lailatul-coder-ci-bot',
+              'HEADSHA1',
+              AFTER,
+              body,
+            ),
           });
           expect(r.posted, body).not.toBe('');
         }

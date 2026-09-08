@@ -88,7 +88,8 @@ export const reloadCommand: CommandModule<unknown, ReloadArgs> = {
 
     let sdk: DaemonSdkLike;
     try {
-      sdk = (await import('@lailatul-coder/sdk/daemon')) as unknown as DaemonSdkLike;
+      sdk =
+        (await import('@lailatul-coder/sdk/daemon')) as unknown as DaemonSdkLike;
     } catch (err) {
       writeStderrLine(
         `[Channel] Failed to load daemon SDK: ${safeChannelCommandErrorMessage(err)}`,

@@ -5,7 +5,10 @@
  */
 
 import { type CommandModule } from 'yargs';
-import { FatalConfigError, getErrorMessage } from '@lailatul-coder/lailatul-coder-core';
+import {
+  FatalConfigError,
+  getErrorMessage,
+} from '@lailatul-coder/lailatul-coder-core';
 import { writeStderrLine, writeStdoutLine } from '../../utils/stdioHelpers.js';
 import { getExtensionManager, resolveExtensionCommandScope } from './utils.js';
 import { t } from '../../i18n/index.js';

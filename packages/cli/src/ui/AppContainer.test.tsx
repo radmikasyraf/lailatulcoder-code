@@ -776,8 +776,7 @@ describe('AppContainer State Management', () => {
         truncateToItem: vi.fn(),
       });
       let listener:
-        | ((event: { sessionId: string; error: Error }) => void)
-        | undefined;
+        ((event: { sessionId: string; error: Error }) => void) | undefined;
       const unsubscribe = vi.fn();
       vi.spyOn(mockConfig, 'onChatRecordingFailure').mockImplementation(
         (nextListener) => {
@@ -1710,8 +1709,7 @@ describe('AppContainer State Management', () => {
       });
       const submitQuery = vi.fn(async (...args: unknown[]) => {
         const metadata = args[3] as
-          | { onAdmissionFailed?: () => void }
-          | undefined;
+          { onAdmissionFailed?: () => void } | undefined;
         metadata?.onAdmissionFailed?.();
         throw new Error('persistent prepare failure');
       }) as unknown as ReturnType<typeof useGeminiStream>['submitQuery'];
@@ -1952,8 +1950,7 @@ describe('AppContainer State Management', () => {
         submittedPrompt: '?btw wait for the tool',
       });
       const metadata = mockSubmitQuery.mock.calls[0]?.[3] as
-        | { onAdmissionFailed?: () => void }
-        | undefined;
+        { onAdmissionFailed?: () => void } | undefined;
       metadata?.onAdmissionFailed?.();
 
       expect(mockQueueMessage).toHaveBeenCalledWith(
@@ -6736,4 +6733,3 @@ describe('dedupeNewestFirst', () => {
     ).toEqual(['first prompt', 'third prompt', 'second prompt']);
   });
 });
-

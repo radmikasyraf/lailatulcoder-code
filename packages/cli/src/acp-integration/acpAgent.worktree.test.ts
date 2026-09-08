@@ -303,8 +303,7 @@ describe('QwenAgent loadSession — Phase C worktree context restore', () => {
   };
 
   let capturedAgentFactory:
-    | ((conn: AgentSideConnectionLike) => AgentLike)
-    | undefined;
+    ((conn: AgentSideConnectionLike) => AgentLike) | undefined;
   let mockConfig: Config;
   let lastSessionMock:
     | { pendingWorktreeNotice: string | null; getId: ReturnType<typeof vi.fn> }

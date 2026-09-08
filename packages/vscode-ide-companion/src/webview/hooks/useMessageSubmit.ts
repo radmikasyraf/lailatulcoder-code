@@ -159,7 +159,9 @@ export const useMessageSubmit = ({
           data: {},
         });
         try {
-          messageHandling.setWaitingForResponse('Authenticating LailatulCoder Ai...');
+          messageHandling.setWaitingForResponse(
+            'Authenticating LailatulCoder Ai...',
+          );
         } catch (_err) {
           // Best-effort UI hint; ignore if hook not available
         }

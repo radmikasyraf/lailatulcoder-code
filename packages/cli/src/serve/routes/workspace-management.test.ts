@@ -213,9 +213,12 @@ describe('owned workspace runtime publication', () => {
 
   it('does not let the Live root contain an existing workspace', async () => {
     const registry = createMockRegistry([
-      makeRuntime('/Users/test/Documents/LailatulCoder Ai/Conversations/project', {
-        primary: true,
-      }),
+      makeRuntime(
+        '/Users/test/Documents/LailatulCoder Ai/Conversations/project',
+        {
+          primary: true,
+        },
+      ),
     ]);
     const runtime = makeRuntime(
       '/Users/test/Documents/LailatulCoder Ai/Conversations',
@@ -926,7 +929,12 @@ describe('POST /workspaces', () => {
 
   it('does not expose the hidden Live runtime to workspace nesting checks', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'LailatulCoder Ai', 'Conversations');
+    const liveRoot = join(
+      parent,
+      'Documents',
+      'LailatulCoder Ai',
+      'Conversations',
+    );
     try {
       const { app } = createApp({
         workspaceRegistry: createMockRegistry([
@@ -948,7 +956,12 @@ describe('POST /workspaces', () => {
 
   it('still blocks a user workspace inside the hidden Live runtime', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'LailatulCoder Ai', 'Conversations');
+    const liveRoot = join(
+      parent,
+      'Documents',
+      'LailatulCoder Ai',
+      'Conversations',
+    );
     const child = join(liveRoot, 'conversation');
     try {
       await mkdir(child, { recursive: true });
@@ -1420,7 +1433,12 @@ describe('POST /workspaces', () => {
 
   it('promotes a workspace that contains the hidden Live runtime', async () => {
     const parent = await mkdtemp(join(REAL_DIR, 'qws-live-parent-'));
-    const liveRoot = join(parent, 'Documents', 'LailatulCoder Ai', 'Conversations');
+    const liveRoot = join(
+      parent,
+      'Documents',
+      'LailatulCoder Ai',
+      'Conversations',
+    );
     const add = vi.fn().mockResolvedValue(true);
     try {
       const { app } = createApp({

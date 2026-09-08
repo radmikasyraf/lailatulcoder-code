@@ -31,7 +31,9 @@ vi.mock('../../shared/RadioButtonSelect.js', () => ({
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return { ...actual, parseInstallSource: mockParseInstallSource };
 });
 
@@ -94,8 +96,7 @@ describe('SourcesTab', () => {
       activeKeypress()({ name: 'return' } as Key);
     });
     let input = mockTextInput.mock.calls.at(-1)?.[0] as
-      | TextInputProps
-      | undefined;
+      TextInputProps | undefined;
     await act(async () => {
       input?.onChange('owner/demo');
     });
@@ -118,4 +119,3 @@ describe('SourcesTab', () => {
     expect(manager.refreshCache).toHaveBeenCalledTimes(2);
   });
 });
-

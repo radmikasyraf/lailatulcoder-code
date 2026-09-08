@@ -627,4 +627,3 @@ describe('MemoryDialog', () => {
     expect(second.lastFrame()).toContain('Auto-skill: on');
   });
 });
-

@@ -1605,8 +1605,7 @@ describe('ChannelBase', () => {
 
       await vi.waitFor(() => expect(ch.userInputPresentations).toHaveLength(1));
       const segment = ch.responseChunks[0]!.segment as
-        | { segmentId?: string }
-        | undefined;
+        { segmentId?: string } | undefined;
       expect(segment?.segmentId).toEqual(expect.any(String));
       expect(ch.responseBoundaries).toEqual([]);
       expect(order).toEqual(['input_requested', 'present']);
@@ -12431,14 +12430,11 @@ describe('ChannelBase', () => {
       expect(ch.taskEvents[0]).not.toHaveProperty('segmentId');
       expect(ch.responseChunks).toHaveLength(3);
       const firstSegment = ch.responseChunks[0]!.segment as
-        | { runId?: string; segmentId?: string }
-        | undefined;
+        { runId?: string; segmentId?: string } | undefined;
       const repeatedSegment = ch.responseChunks[1]!.segment as
-        | { segmentId?: string }
-        | undefined;
+        { segmentId?: string } | undefined;
       const secondSegment = ch.responseChunks[2]!.segment as
-        | { segmentId?: string }
-        | undefined;
+        { segmentId?: string } | undefined;
       expect(firstSegment).toMatchObject({
         runId: expect.any(String),
         segmentId: expect.any(String),

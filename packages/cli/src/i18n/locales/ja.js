@@ -109,7 +109,8 @@ export default {
     '  {{name}} {{description}}  [ロック中：{{scope}}]',
   '↑/↓ navigate · backspace edits search': '↑/↓ 移動 · Backspace 検索編集',
   Bundled: '組み込み',
-  'Available LailatulCoder Ai CLI tools:': '利用可能な LailatulCoder Ai CLI ツール:',
+  'Available LailatulCoder Ai CLI tools:':
+    '利用可能な LailatulCoder Ai CLI ツール:',
   'No tools available': '利用可能なツールはありません',
   'View or change the approval mode for tool usage':
     'ツール使用の承認モードを表示または変更',
@@ -275,8 +276,10 @@ export default {
   '✗ Error:': '✗ エラー:',
   'Are you sure you want to delete agent "{{name}}"?':
     'エージェント "{{name}}" を削除してもよろしいですか?',
-  'Project Level (.lailatulcoder/agents/)': 'プロジェクトレベル (.lailatulcoder/agents/)',
-  'User Level (~/.lailatulcoder/agents/)': 'ユーザーレベル (~/.lailatulcoder/agents/)',
+  'Project Level (.lailatulcoder/agents/)':
+    'プロジェクトレベル (.lailatulcoder/agents/)',
+  'User Level (~/.lailatulcoder/agents/)':
+    'ユーザーレベル (~/.lailatulcoder/agents/)',
   '✓ Subagent Created Successfully!': '✓ サブエージェントの作成に成功しました!',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     'サブエージェント "{{name}}" を {{level}} に保存しました',
@@ -286,7 +289,8 @@ export default {
   'Warnings:': '警告:',
   'Step {{n}}: Choose Location': 'ステップ {{n}}: 場所を選択',
   'Step {{n}}: Choose Generation Method': 'ステップ {{n}}: 作成方法を選択',
-  'Generate with LailatulCoder Ai (Recommended)': 'LailatulCoder Ai で生成(推奨)',
+  'Generate with LailatulCoder Ai (Recommended)':
+    'LailatulCoder Ai で生成(推奨)',
   'Manual Creation': '手動作成',
   'Generating subagent configuration...': 'サブエージェント設定を生成中...',
   'Failed to generate subagent: {{error}}':
@@ -352,7 +356,8 @@ export default {
   // Commands - General (continued)
   'To see changes, LailatulCoder Ai must be restarted. Press r to exit and apply changes now.':
     '変更を確認するには LailatulCoder Ai を再起動する必要があります。 r を押して終了し、変更を適用してください',
-  'View and edit LailatulCoder Ai settings': 'LailatulCoder Ai の設定を表示・編集',
+  'View and edit LailatulCoder Ai settings':
+    'LailatulCoder Ai の設定を表示・編集',
   Settings: '設定',
   'Vim Mode': 'Vim モード',
   'Output Format': '出力形式',
@@ -1081,9 +1086,11 @@ export default {
   'From project settings': 'プロジェクト設定から',
   'From session': 'セッションから',
   'Project settings': 'プロジェクト設定',
-  'Checked in at .lailatulcoder/settings.json': '.lailatulcoder/settings.json にチェックイン',
+  'Checked in at .lailatulcoder/settings.json':
+    '.lailatulcoder/settings.json にチェックイン',
   'User settings': 'ユーザー設定',
-  'Saved in at ~/.lailatulcoder/settings.json': '~/.lailatulcoder/settings.json に保存',
+  'Saved in at ~/.lailatulcoder/settings.json':
+    '~/.lailatulcoder/settings.json に保存',
   'Add a new rule…': '新しいルールを追加…',
   'Add {{type}} permission rule': '{{type}} permission rule を追加',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':
@@ -1476,7 +1483,8 @@ export default {
     'すでにプランモードです。"/plan exit" でプランモードを終了します。',
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     'プランモードではありません。"/plan" で先にプランモードに入ってください。',
-  "Set up LailatulCoder Ai's status line UI": 'LailatulCoder Ai のステータスライン UI を設定',
+  "Set up LailatulCoder Ai's status line UI":
+    'LailatulCoder Ai のステータスライン UI を設定',
 
   // === Core: added from PR #3328 ===
   'Open the memory manager.': 'メモリマネージャーを開く。',
@@ -1944,7 +1952,8 @@ export default {
     'LailatulCoder Ai のアップデートがあります！{{current}} → {{latest}}',
   'A new version of LailatulCoder Ai is available! {{current}} → {{latest}}':
     'LailatulCoder Ai の新しいバージョンがあります！{{current}} → {{latest}}',
-  'LailatulCoder Ai {{version}} is up to date!': 'LailatulCoder Ai {{version}} は最新です！',
+  'LailatulCoder Ai {{version}} is up to date!':
+    'LailatulCoder Ai {{version}} は最新です！',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     'アップデートの確認に失敗しました（{{reason}}）。ネットワークまたはレジストリ設定を確認してください。',
   'Update check skipped ({{reason}}) — run /update to retry.':

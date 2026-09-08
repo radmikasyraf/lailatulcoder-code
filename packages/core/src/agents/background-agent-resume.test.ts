@@ -1798,8 +1798,7 @@ describe('BackgroundAgentResumeService', () => {
       expect(registry.get(agentId)?.status).toBe('completed');
     });
     const provider = subagent.setExternalMessageProvider.mock.calls[0]?.[0] as
-      | (() => string[])
-      | undefined;
+      (() => string[]) | undefined;
     expect(provider).toBeDefined();
     expect(executeExternalInputs).toHaveBeenCalledWith(
       ['second message'],
@@ -2042,8 +2041,7 @@ describe('BackgroundAgentResumeService', () => {
         tools: [{ name: 'Bash' }, { name: 'mcp__removed__search' }],
       },
       executionAllowedTools: ['Read', ToolNames.ASK_USER_QUESTION] as
-        | string[]
-        | undefined,
+        string[] | undefined,
       includeDisplayImage: false,
       deniedTool: 'Edit',
       expectedExecutionAllowedTools: ['Read'],
@@ -2269,8 +2267,7 @@ describe('BackgroundAgentResumeService', () => {
       });
       expect(executeContext).toBeDefined();
       const contextArg = executeContext as
-        | { get(key: string): unknown }
-        | undefined;
+        { get(key: string): unknown } | undefined;
       expect(contextArg).toBeDefined();
       if (!contextArg) {
         throw new Error('Expected resume execute context');
@@ -2629,8 +2626,7 @@ describe('BackgroundAgentResumeService', () => {
     expect(createSpy).toHaveBeenCalledTimes(1);
     expect(execute).toHaveBeenCalledTimes(1);
     const contextArg = execute.mock.calls[0]?.[0] as
-      | { get(key: string): unknown }
-      | undefined;
+      { get(key: string): unknown } | undefined;
     if (!contextArg) {
       throw new Error('Expected resume execute context');
     }
@@ -2955,8 +2951,7 @@ describe('BackgroundAgentResumeService', () => {
     const execute = vi.fn(
       async (context: { get: (key: string) => unknown }) => {
         const override = context.get('initial_messages_override') as
-          | Array<{ parts?: Array<{ text?: string }> }>
-          | undefined;
+          Array<{ parts?: Array<{ text?: string }> }> | undefined;
         expect(override).toBeUndefined();
         expect(context.get('task_prompt')).toBe('continue work');
       },

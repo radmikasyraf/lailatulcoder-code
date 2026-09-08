@@ -263,9 +263,8 @@ describe('BuiltinCommandLoader', () => {
 
   it('should still load all other commands when ideCommand() throws', async () => {
     // Simulate ideCommand() failure (e.g., platform-specific process detection fails)
-    const { ideCommand: ideCommandMock } = await import(
-      '../ui/commands/ideCommand.js'
-    );
+    const { ideCommand: ideCommandMock } =
+      await import('../ui/commands/ideCommand.js');
     (ideCommandMock as Mock).mockRejectedValueOnce(
       new Error('PowerShell not available'),
     );

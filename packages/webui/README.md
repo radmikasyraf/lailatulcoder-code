@@ -140,9 +140,7 @@ You can also use this library directly in the browser via CDN:
 
       // Use the components with React.createElement (no JSX)
       const App = React.createElement(ChatViewer, {
-        messages: [
-          /* your messages */
-        ],
+        messages: [/* your messages */],
       });
 
       ReactDOM.render(App, document.getElementById('root'));

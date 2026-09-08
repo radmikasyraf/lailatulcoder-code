@@ -212,8 +212,7 @@ import { SessionArchiveCoordinator } from './server/session-archive.js';
 const mockWt = vi.hoisted(() => ({
   impl: undefined as (() => Record<string, unknown>) | undefined,
   readSidecar: undefined as
-    | ((...args: unknown[]) => Promise<unknown>)
-    | undefined,
+    ((...args: unknown[]) => Promise<unknown>) | undefined,
   realpath: undefined as ((p: string) => string) | undefined,
 }));
 const mockTmpdir = vi.hoisted(() => ({
@@ -240,7 +239,9 @@ vi.mock('node:fs', async (importOriginal) => {
 });
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...original,
     readWorktreeSession: (...args: unknown[]) =>
@@ -28640,9 +28641,8 @@ describe('runQwenServe', () => {
       // changes the call shape (different deps order, different
       // fields), this test will start failing to type-check —
       // which is the point: the failure is the audit trail.
-      const { createWorkspaceFileSystemFactory } = await import(
-        './fs/index.js'
-      );
+      const { createWorkspaceFileSystemFactory } =
+        await import('./fs/index.js');
       const factory = createWorkspaceFileSystemFactory({
         boundWorkspaces: [wsRoot],
         trusted: false,
@@ -32797,7 +32797,8 @@ describe('T2.9 serve-side errorKind taxonomy (issue #4514)', () => {
     // (different package, no cross-package import). Together they
     // guarantee a PR adding a kind on one side without the other
     // fails CI.
-    const { SERVE_ERROR_KINDS } = await import('@lailatul-coder/acp-bridge/status');
+    const { SERVE_ERROR_KINDS } =
+      await import('@lailatul-coder/acp-bridge/status');
     expect(SERVE_ERROR_KINDS).toContain('prompt_deadline_exceeded');
     expect(SERVE_ERROR_KINDS).toContain('writer_idle_timeout');
   });
@@ -33562,8 +33563,7 @@ describe('Live conversation runtime lifecycle', () => {
     const setup = setupLiveRuntime();
     try {
       const setEnabled = setup.app.locals['setLiveVoiceEnabled'] as
-        | ((enabled: boolean) => Promise<void>)
-        | undefined;
+        ((enabled: boolean) => Promise<void>) | undefined;
       if (!setEnabled) throw new Error('Live hot-toggle hook missing.');
       const enabling = setEnabled(true);
       await vi.waitFor(() => {
@@ -33840,7 +33840,11 @@ describe('Live conversation runtime lifecycle', () => {
     const realHome = path.join(tmp, 'real-home');
     const linkedHome = path.join(tmp, 'linked-home');
     const alternateRootAlias = path.join(tmp, 'alternate-root-alias');
-    const relativeRoot = path.join('Documents', 'LailatulCoder Ai', 'Conversations');
+    const relativeRoot = path.join(
+      'Documents',
+      'LailatulCoder Ai',
+      'Conversations',
+    );
     const realRoot = path.join(realHome, relativeRoot);
     const realChild = path.join(realRoot, 'conversation-probe');
     await fsp.mkdir(realChild, { recursive: true });
@@ -33969,8 +33973,7 @@ describe('Live conversation runtime lifecycle', () => {
       });
       try {
         const setEnabled = setup.app.locals['setLiveVoiceEnabled'] as
-          | ((enabled: boolean) => Promise<void>)
-          | undefined;
+          ((enabled: boolean) => Promise<void>) | undefined;
         if (!setEnabled) throw new Error('Live hot-toggle hook missing.');
         const capabilitiesBefore = await request(setup.app)
           .get('/capabilities')
@@ -34032,8 +34035,7 @@ describe('Live conversation runtime lifecycle', () => {
       });
 
       const seal = setup.app.locals['sealAndWaitLiveCoordinator'] as
-        | (() => Promise<void>)
-        | undefined;
+        (() => Promise<void>) | undefined;
       let settled = false;
       const sealed = seal?.().then(() => {
         settled = true;
@@ -34441,8 +34443,7 @@ describe('Live Appshot server integration', () => {
     } finally {
       await (
         app?.locals['sealAndWaitLiveCoordinator'] as
-          | (() => Promise<void>)
-          | undefined
+          (() => Promise<void>) | undefined
       )?.();
       restoreEnv('QWEN_HOME', previousQwenHome);
       resetHomeEnvBootstrapForTesting();
@@ -34565,8 +34566,7 @@ describe('Live Appshot server integration', () => {
       });
 
       const seal = setup.app.locals['sealAndWaitLiveCoordinator'] as
-        | (() => Promise<void>)
-        | undefined;
+        (() => Promise<void>) | undefined;
       if (!seal) throw new Error('Live shutdown hook missing.');
       let settled = false;
       const shutdown = seal().then(() => {

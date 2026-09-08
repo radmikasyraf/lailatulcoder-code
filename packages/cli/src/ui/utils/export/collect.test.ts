@@ -82,8 +82,7 @@ describe('collectSessionData', () => {
     );
     const exportedText = (
       toolCall?.toolCall?.content?.[0] as
-        | { content?: { text?: string } }
-        | undefined
+        { content?: { text?: string } } | undefined
     )?.content?.text;
 
     expect(exportedText?.length).toBe(source.length);

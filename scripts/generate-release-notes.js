@@ -1308,7 +1308,10 @@ async function main() {
     throw new Error('--tag and --previous-tag are required.');
   }
 
-  const repo = args.repo || process.env.GITHUB_REPOSITORY || 'LailatulCoder/lailatul-coder';
+  const repo =
+    args.repo ||
+    process.env.GITHUB_REPOSITORY ||
+    'LailatulCoder/lailatul-coder';
   const generatedBody = fetchGeneratedNotes({
     repo,
     tag: args.tag,

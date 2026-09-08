@@ -128,7 +128,8 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ navigieren · Rücktaste bearbeitet Suche',
   Bundled: 'Mitgeliefert',
-  'Available LailatulCoder Ai CLI tools:': 'Verfügbare LailatulCoder Ai CLI-Werkzeuge:',
+  'Available LailatulCoder Ai CLI tools:':
+    'Verfügbare LailatulCoder Ai CLI-Werkzeuge:',
   'No tools available': 'Keine Werkzeuge verfügbar',
   'View or change the approval mode for tool usage':
     'Genehmigungsmodus für Werkzeugnutzung anzeigen oder ändern',
@@ -301,8 +302,10 @@ export default {
   // ============================================================================
   // Agents - Creation Wizard
   // ============================================================================
-  'Project Level (.lailatulcoder/agents/)': 'Projektebene (.lailatulcoder/agents/)',
-  'User Level (~/.lailatulcoder/agents/)': 'Benutzerebene (~/.lailatulcoder/agents/)',
+  'Project Level (.lailatulcoder/agents/)':
+    'Projektebene (.lailatulcoder/agents/)',
+  'User Level (~/.lailatulcoder/agents/)':
+    'Benutzerebene (~/.lailatulcoder/agents/)',
   '✓ Subagent Created Successfully!': '✓ Unteragent erfolgreich erstellt!',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     'Unteragent "{{name}}" wurde auf {{level}}-Ebene gespeichert.',
@@ -1327,9 +1330,11 @@ export default {
   'From project settings': 'Aus Projekteinstellungen',
   'From session': 'Aus Sitzung',
   'Project settings': 'Projekteinstellungen',
-  'Checked in at .lailatulcoder/settings.json': 'Eingecheckt in .lailatulcoder/settings.json',
+  'Checked in at .lailatulcoder/settings.json':
+    'Eingecheckt in .lailatulcoder/settings.json',
   'User settings': 'Benutzereinstellungen',
-  'Saved in at ~/.lailatulcoder/settings.json': 'Gespeichert in ~/.lailatulcoder/settings.json',
+  'Saved in at ~/.lailatulcoder/settings.json':
+    'Gespeichert in ~/.lailatulcoder/settings.json',
   'Add a new rule…': 'Neue Regel hinzufügen…',
   'Add {{type}} permission rule': '{{type}} permission rule hinzufügen',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':
@@ -1938,7 +1943,8 @@ export default {
     'Bereits im Plan-Modus. Verwenden Sie "/plan exit", um den Plan-Modus zu verlassen.',
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     'Nicht im Plan-Modus. Verwenden Sie "/plan", um zuerst in den Plan-Modus zu gelangen.',
-  "Set up LailatulCoder Ai's status line UI": 'LailatulCoder Ais Statusleisten-UI einrichten',
+  "Set up LailatulCoder Ai's status line UI":
+    'LailatulCoder Ais Statusleisten-UI einrichten',
 
   // === Core: added from PR #3328 ===
   'Open the memory manager.': 'Den Speicher-Manager öffnen.',
@@ -2177,7 +2183,8 @@ export default {
     'LailatulCoder Ai-Update verfügbar! {{current}} → {{latest}}',
   'A new version of LailatulCoder Ai is available! {{current}} → {{latest}}':
     'Eine neue Version von LailatulCoder Ai ist verfügbar! {{current}} → {{latest}}',
-  'LailatulCoder Ai {{version}} is up to date!': 'LailatulCoder Ai {{version}} ist aktuell!',
+  'LailatulCoder Ai {{version}} is up to date!':
+    'LailatulCoder Ai {{version}} ist aktuell!',
   'Failed to check for updates ({{reason}}). Please check your network or registry configuration.':
     'Suche nach Updates fehlgeschlagen ({{reason}}). Bitte Netzwerk- oder Registry-Konfiguration prüfen.',
   'Update check skipped ({{reason}}) — run /update to retry.':

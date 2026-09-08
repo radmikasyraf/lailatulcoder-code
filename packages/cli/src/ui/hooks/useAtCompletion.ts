@@ -6,7 +6,10 @@
 
 import { useEffect, useReducer, useRef } from 'react';
 import type { Config, FileSearch } from '@lailatul-coder/lailatul-coder-core';
-import { FileSearchFactory, escapePath } from '@lailatul-coder/lailatul-coder-core';
+import {
+  FileSearchFactory,
+  escapePath,
+} from '@lailatul-coder/lailatul-coder-core';
 import type { Suggestion } from '../components/SuggestionsDisplay.js';
 import { MAX_SUGGESTIONS_TO_SHOW } from '../components/SuggestionsDisplay.js';
 import { matchMcpServerPrefix, buildMcpResourceRef } from './mcpResourceRef.js';

@@ -50,4 +50,3 @@ export const CronPill: React.FC<CronPillProps> = ({ count }) => {
     </Text>
   );
 };
-

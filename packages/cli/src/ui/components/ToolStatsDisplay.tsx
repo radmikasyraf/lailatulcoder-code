@@ -232,4 +232,3 @@ export const ToolStatsDisplay: React.FC<ToolStatsDisplayProps> = ({
     </Box>
   );
 };
-

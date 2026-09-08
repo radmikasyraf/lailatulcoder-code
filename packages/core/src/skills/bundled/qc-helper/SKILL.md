@@ -119,10 +119,10 @@ When the user asks about configuration, the primary reference is `docs/configura
 
 ### Config File Locations & Priority
 
-| Level   | Path                                                                                                                                                       | Description                            |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| User    | `~/.qwen/settings.json`                                                                                                                                    | Personal global config                 |
-| Project | `<project>/.qwen/settings.json`                                                                                                                            | Project-specific, overrides user level |
+| Level   | Path                                                                                                                                                                 | Description                            |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| User    | `~/.qwen/settings.json`                                                                                                                                              | Personal global config                 |
+| Project | `<project>/.qwen/settings.json`                                                                                                                                      | Project-specific, overrides user level |
 | System  | Linux: `/etc/lailatul-coder/settings.json`<br>Windows: `C:\ProgramData\lailatul-coder\settings.json`<br>macOS: `/Library/Application Support/QwenCode/settings.json` | Admin-level config                     |
 
 **Priority** (highest to lowest): CLI args > env vars > system settings > project settings > user settings > defaults

@@ -98,7 +98,11 @@ describe('runFetchDiff', () => {
 
   it('keeps a trailing whitespace-only context line (no trim)', () => {
     ghRawMock.mockReturnValue('diff --git a/x b/x\n@@ -1 +1 @@\n ctx\n   \n');
-    runFetchDiff({ prNumber: 1, repo: 'LailatulCoder/lailatul-coder', out: OUT });
+    runFetchDiff({
+      prNumber: 1,
+      repo: 'LailatulCoder/lailatul-coder',
+      out: OUT,
+    });
     expect(writeFileSyncMock).toHaveBeenCalledWith(
       resolve(OUT),
       'diff --git a/x b/x\n@@ -1 +1 @@\n ctx\n   \n',

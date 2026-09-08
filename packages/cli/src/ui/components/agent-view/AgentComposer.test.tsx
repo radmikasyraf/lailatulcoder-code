@@ -133,4 +133,3 @@ describe('AgentComposer', () => {
     expect(setAgentApprovalMode).not.toHaveBeenCalled();
   });
 });
-

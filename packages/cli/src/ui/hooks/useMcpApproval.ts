@@ -10,7 +10,10 @@ import type {
   MCPServerConfig,
   McpServerScope,
 } from '@lailatul-coder/lailatul-coder-core';
-import { ApprovalMode, isGatedMcpScope } from '@lailatul-coder/lailatul-coder-core';
+import {
+  ApprovalMode,
+  isGatedMcpScope,
+} from '@lailatul-coder/lailatul-coder-core';
 import { loadMcpApprovals } from '../../config/mcpApprovals.js';
 import { McpApprovalChoice } from '../components/mcp/MCPServerApprovalDialog.js';
 import { appEvents, AppEvent } from '../../utils/events.js';

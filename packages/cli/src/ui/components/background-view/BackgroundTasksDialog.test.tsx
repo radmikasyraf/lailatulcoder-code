@@ -1968,4 +1968,3 @@ describe('BackgroundTasksDialog', () => {
     });
   });
 });
-

@@ -441,9 +441,8 @@ describe('startupPrefetch', () => {
 
   it('reports a timeout-specific reason when the update check times out', async () => {
     const config = makeConfig();
-    const { UpdateCheckTimeoutError, FETCH_TIMEOUT_MS } = await import(
-      '../ui/utils/updateCheck.js'
-    );
+    const { UpdateCheckTimeoutError, FETCH_TIMEOUT_MS } =
+      await import('../ui/utils/updateCheck.js');
     mockCheckForUpdatesDetailed.mockResolvedValue({
       status: 'error',
       error: new UpdateCheckTimeoutError(FETCH_TIMEOUT_MS, 'latest'),

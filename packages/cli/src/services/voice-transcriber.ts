@@ -40,8 +40,7 @@ export { resolveVoiceTransport };
 export type { VoiceTransport } from './voice-model.js';
 
 export type VoiceStreamingTransport =
-  | 'qwen-asr-realtime'
-  | 'dashscope-task-realtime';
+  'qwen-asr-realtime' | 'dashscope-task-realtime';
 
 export interface RecordedVoiceAudio {
   data: Uint8Array;

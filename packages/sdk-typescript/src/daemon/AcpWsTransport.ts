@@ -432,10 +432,12 @@ export class AcpWsTransport implements DaemonTransport {
       } else {
         // Node: cast through unknown because DOM typings only declare
         // (url, protocols?) — Node accepts an options bag.
-        ws = new (WebSocket as unknown as new (
-          url: string,
-          opts?: { headers?: Record<string, string> },
-        ) => WebSocket)(this.wsUrl, {
+        ws = new (
+          WebSocket as unknown as new (
+            url: string,
+            opts?: { headers?: Record<string, string> },
+          ) => WebSocket
+        )(this.wsUrl, {
           headers: { Authorization: `Bearer ${this.token}` },
         });
       }

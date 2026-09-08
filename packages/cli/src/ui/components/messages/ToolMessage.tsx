@@ -1107,4 +1107,3 @@ const TrailingIndicator: React.FC = () => (
     ←
   </Text>
 );
-

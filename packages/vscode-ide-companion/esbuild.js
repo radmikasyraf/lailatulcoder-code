@@ -84,9 +84,12 @@ const reactDedupPlugin = {
 const publicCliExportPlugin = {
   name: 'public-cli-export',
   setup(build) {
-    build.onResolve({ filter: /^@lailatul-coder\/lailatul-coder\/export$/ }, () => ({
-      path: resolve(repoRoot, 'packages/cli/src/export/index.ts'),
-    }));
+    build.onResolve(
+      { filter: /^@lailatul-coder\/lailatul-coder\/export$/ },
+      () => ({
+        path: resolve(repoRoot, 'packages/cli/src/export/index.ts'),
+      }),
+    );
   },
 };
 
@@ -224,7 +227,10 @@ async function main() {
     // without it esbuild only matches the bare package name and attempts to
     // bundle the sub-path, which triggers "Dynamic require is not supported"
     // at runtime in the browser.
-    external: ['@lailatul-coder/lailatul-coder-core', '@lailatul-coder/lailatul-coder-core/*'],
+    external: [
+      '@lailatul-coder/lailatul-coder-core',
+      '@lailatul-coder/lailatul-coder-core/*',
+    ],
     logLevel: 'silent',
     plugins: [reactDedupPlugin, cssInjectPlugin, esbuildProblemMatcherPlugin],
     jsx: 'automatic', // Use new JSX transform (React 17+)

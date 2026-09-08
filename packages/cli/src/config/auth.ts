@@ -120,8 +120,7 @@ function hasApiKeyForAuth(
   isExplicitEnvKey: boolean;
 } {
   const modelProviders = settings.modelProviders as
-    | ModelProvidersConfig
-    | undefined;
+    ModelProvidersConfig | undefined;
 
   // Use config.getModelsConfig() if available for accurate model resolution
   // that accounts for CLI args, env vars, and settings. Fall back to the
@@ -275,8 +274,7 @@ export function validateAuthMethod(
 
     // Check baseUrl - can come from modelProviders or environment
     const modelProviders = settings.merged.modelProviders as
-      | ModelProvidersConfig
-      | undefined;
+      ModelProvidersConfig | undefined;
     // Resolve the selected model + baseUrl so duplicate-id providers validate
     // the Anthropic baseUrl of the selected provider, not the first id match.
     const { modelId, baseUrl } = resolveSelectedModel(settings.merged, config);

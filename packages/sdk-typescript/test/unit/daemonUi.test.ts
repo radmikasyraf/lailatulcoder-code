@@ -2789,8 +2789,7 @@ describe('daemon UI normalizer and transcript reducer', () => {
     // `text` field. Cast through the union variant (not Extract on a
     // sub-literal, which yields `never`).
     const debug = events.find((event) => event.type === 'debug') as
-      | (DaemonUiEvent & { text: string })
-      | undefined;
+      (DaemonUiEvent & { text: string }) | undefined;
     expect(debug?.text).not.toContain('Bearer secret');
     expect(debug?.text).not.toContain('key-secret');
     expect(debug?.text).not.toContain('client-secret');
@@ -4188,9 +4187,8 @@ describe('daemon UI time schema (PR-B)', () => {
   });
 
   it('selectTranscriptBlocksOrderedByEventId sorts by eventId, ignoring out-of-order arrival', async () => {
-    const { selectTranscriptBlocksOrderedByEventId } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { selectTranscriptBlocksOrderedByEventId } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     // Push 3 blocks; insert ids in mixed arrival order (replay scenario)
     state = reduceDaemonTranscriptEvents(
@@ -4256,9 +4254,8 @@ describe('daemon UI time schema (PR-B)', () => {
   });
 
   it('formatBlockTimestamp prefers serverTimestamp over clientReceivedAt', async () => {
-    const { formatBlockTimestamp } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { formatBlockTimestamp } =
+      await import('../../src/daemon/ui/index.js');
     const events = normalizeDaemonEvent({
       id: 1,
       v: 1,
@@ -5039,9 +5036,8 @@ describe('daemon UI content extraction (PR-C)', () => {
 
 describe('daemon UI render contract (PR-D)', () => {
   it('daemonBlockToMarkdown renders user/assistant/tool/shell/permission/error', async () => {
-    const { daemonBlockToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = appendLocalUserTranscriptMessage(state, 'hello', { now: 2 });
     state = reduceDaemonTranscriptEvents(
@@ -5069,9 +5065,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('daemonBlockToMarkdown renders file_diff preview as unified diff', async () => {
-    const { daemonBlockToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = reduceDaemonTranscriptEvents(
       state,
@@ -5103,9 +5098,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('daemonBlockToMarkdown uses longer fences for embedded backticks', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown({
       kind: 'command',
       command: 'printf "```\\n"',
@@ -5117,9 +5111,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('daemonBlockToMarkdown renders mcp_invocation preview with server::tool', async () => {
-    const { daemonBlockToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = reduceDaemonTranscriptEvents(
       state,
@@ -5187,9 +5180,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('daemonBlockToPlainText drops markdown / html, suitable for copy-paste', async () => {
-    const { daemonBlockToPlainText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToPlainText } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = reduceDaemonTranscriptEvents(
       state,
@@ -5202,9 +5194,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('maxFieldLength truncates with ellipsis', async () => {
-    const { daemonBlockToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = appendLocalUserTranscriptMessage(state, 'X'.repeat(200), {
       now: 2,
@@ -5217,9 +5208,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('sanitizeUrls strips token query params in web_fetch preview', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown(
       {
         kind: 'web_fetch',
@@ -5232,9 +5222,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('sanitizeUrls rejects unsafe protocols and parse failures', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     expect(
       daemonToolPreviewToMarkdown(
         { kind: 'web_fetch', url: 'javascript:alert(1)' },
@@ -5250,9 +5239,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('sanitizeUrls strips common auth query params', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown(
       {
         kind: 'web_fetch',
@@ -5267,9 +5255,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('daemonBlockToMarkdown strips ANSI and bidi controls', async () => {
-    const { daemonBlockToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = appendLocalUserTranscriptMessage(
       state,
@@ -5283,9 +5270,8 @@ describe('daemon UI render contract (PR-D)', () => {
   });
 
   it('daemonToolPreviewToMarkdown escapes inline metadata delimiters', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown({
       kind: 'file_read',
       path: '` <img src=x onerror=alert(1)> `',
@@ -5472,9 +5458,8 @@ describe('daemon UI tool preview taxonomy — long-tail kinds (PR-F)', () => {
   });
 
   it('search preview renders to GFM markdown with bullet list', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown({
       kind: 'search',
       query: 'TODO',
@@ -5488,9 +5473,8 @@ describe('daemon UI tool preview taxonomy — long-tail kinds (PR-F)', () => {
   });
 
   it('tabular preview renders to GFM markdown table', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown({
       kind: 'tabular',
       columns: ['name', 'age'],
@@ -5505,9 +5489,8 @@ describe('daemon UI tool preview taxonomy — long-tail kinds (PR-F)', () => {
   });
 
   it('tabular preview escapes pipes in headers and cells', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown({
       kind: 'tabular',
       columns: ['Name | ID', 'value'],
@@ -5518,9 +5501,8 @@ describe('daemon UI tool preview taxonomy — long-tail kinds (PR-F)', () => {
   });
 
   it('image_generation renders with embedded markdown image', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown({
       kind: 'image_generation',
       prompt: 'A sunset',
@@ -5531,9 +5513,8 @@ describe('daemon UI tool preview taxonomy — long-tail kinds (PR-F)', () => {
   });
 
   it('subagent_delegation renders with delegate header + task quote', async () => {
-    const { daemonToolPreviewToMarkdown } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonToolPreviewToMarkdown } =
+      await import('../../src/daemon/ui/index.js');
     const md = daemonToolPreviewToMarkdown({
       kind: 'subagent_delegation',
       agentName: 'reviewer',
@@ -5596,9 +5577,8 @@ describe('daemon UI adapter conformance framework (PR-G)', () => {
   });
 
   it('detects redaction violations (leaked phrases in malformed-payload fixture)', async () => {
-    const { runAdapterConformanceSuite } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { runAdapterConformanceSuite } =
+      await import('../../src/daemon/ui/index.js');
     // Buggy adapter that dumps raw event data including secrets.
     const result = runAdapterConformanceSuite(
       {
@@ -5619,9 +5599,8 @@ describe('daemon UI adapter conformance framework (PR-G)', () => {
   });
 
   it('respects only / skip filter options', async () => {
-    const { runAdapterConformanceSuite } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { runAdapterConformanceSuite } =
+      await import('../../src/daemon/ui/index.js');
     const result = runAdapterConformanceSuite(
       {
         reduce() {
@@ -5731,9 +5710,8 @@ describe('daemon UI subagent nesting (PR-K, post-rebase)', () => {
   });
 
   it('reducer correlates parentBlockId at create time when parent already in state', async () => {
-    const { selectSubagentChildBlocks } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { selectSubagentChildBlocks } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     // Parent Task tool call first.
     state = reduceDaemonTranscriptEvents(
@@ -5868,9 +5846,8 @@ describe('daemon UI subagent nesting (PR-K, post-rebase)', () => {
   });
 
   it('isSubagentChildBlock discriminates tool blocks by parentToolCallId', async () => {
-    const { isSubagentChildBlock } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { isSubagentChildBlock } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = reduceDaemonTranscriptEvents(
       state,
@@ -5943,9 +5920,8 @@ describe('daemon UI subagent nesting — review hardening (R1-R4)', () => {
   });
 
   it('back-fills parentBlockId when parent appears AFTER child (out-of-order)', async () => {
-    const { selectSubagentChildBlocks } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { selectSubagentChildBlocks } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     // Child first, with parent stamp pointing to a parent not yet in state.
     state = reduceDaemonTranscriptEvents(
@@ -6303,9 +6279,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   };
 
   it('renders user block with qwen label', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'user',
@@ -6316,9 +6291,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders assistant block as sanitized text (no label prefix)', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'assistant',
@@ -6329,9 +6303,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders thought block dimly', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'thought',
@@ -6342,9 +6315,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders tool block with status and title', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'tool',
@@ -6358,9 +6330,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders shell block (stdout)', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'shell',
@@ -6372,9 +6343,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders shell block (stderr)', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'shell',
@@ -6385,9 +6355,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders unresolved permission block with options', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'permission',
@@ -6406,9 +6375,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders resolved permission block with resolved suffix', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'permission',
@@ -6422,9 +6390,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders status block', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'status',
@@ -6435,9 +6402,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders debug block', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'debug',
@@ -6448,9 +6414,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('renders error block', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const out = transcriptBlockToTerminalText({
       ...baseFields,
       kind: 'error',
@@ -6461,9 +6426,8 @@ describe('transcriptBlockToTerminalText (wenshao review — coverage)', () => {
   });
 
   it('degrades gracefully on unknown block kind (returns error line, does NOT throw)', async () => {
-    const { transcriptBlockToTerminalText } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { transcriptBlockToTerminalText } =
+      await import('../../src/daemon/ui/index.js');
     const fauxBlock = {
       ...baseFields,
       kind: 'experimental_kind_from_future_daemon' as never,
@@ -6520,9 +6484,8 @@ describe('daemon UI WeakMap memo hits (wenshao glm-5.1 review)', () => {
   // preserve `state.blocks` reference, so the WeakMap caches actually hit
   // across renders. Verify by checking reference identity.
   it('selectTranscriptBlocksOrderedByEventId returns the same array reference for sidechannel-only events', async () => {
-    const { selectTranscriptBlocksOrderedByEventId } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { selectTranscriptBlocksOrderedByEventId } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     // Dispatch a tool_call event to populate blocks.
     state = reduceDaemonTranscriptEvents(
@@ -6566,9 +6529,8 @@ describe('daemon UI WeakMap memo hits (wenshao glm-5.1 review)', () => {
   });
 
   it('selectSubagentChildBlocks returns same memoized array across sidechannel dispatches', async () => {
-    const { selectSubagentChildBlocks } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { selectSubagentChildBlocks } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = reduceDaemonTranscriptEvents(
       state,
@@ -6633,9 +6595,8 @@ describe('daemon UI WeakMap memo hits (wenshao glm-5.1 review)', () => {
   });
 
   it('selectSubagentChildBlocks returns a frozen list (caller mutation throws, cache safe)', async () => {
-    const { selectSubagentChildBlocks } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { selectSubagentChildBlocks } =
+      await import('../../src/daemon/ui/index.js');
     let state = createDaemonTranscriptState({ now: 1 });
     state = reduceDaemonTranscriptEvents(
       state,
@@ -6695,9 +6656,8 @@ describe('KNOWN_DEVICE_FLOW_ERROR_KINDS stays in sync with public type', async (
   // wenshao 5-23 13:03 (glm-5.1) suggestion: ensure the known-set
   // documentation export doesn't go stale.
   it('only contains canonical device-flow error kinds (compile-time assertion)', async () => {
-    const { KNOWN_DEVICE_FLOW_ERROR_KINDS } = await import(
-      '../../src/daemon/ui/normalizer.js'
-    );
+    const { KNOWN_DEVICE_FLOW_ERROR_KINDS } =
+      await import('../../src/daemon/ui/normalizer.js');
     // The `as const satisfies readonly DaemonAuthDeviceFlowSdkErrorKind[]`
     // at the declaration site already enforces type-level membership.
     // This runtime test guards against the array being silently emptied
@@ -6715,9 +6675,8 @@ describe('KNOWN_DEVICE_FLOW_ERROR_KINDS stays in sync with public type', async (
 
 describe('daemonBlockToPlainText forwards opts (wenshao review 4350741340)', () => {
   it('sanitizes URL on tool preview when opts.sanitizeUrls is set', async () => {
-    const { daemonBlockToPlainText, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToPlainText, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const block = {
       id: 'b',
       kind: 'tool' as const,
@@ -6747,9 +6706,8 @@ describe('daemonBlockToHtml — additional coverage (wenshao R3 qwen3.7-max)', (
   } as const;
 
   it('strips token query param + Basic Auth from web_fetch URL when sanitizeUrls:true', async () => {
-    const { daemonBlockToHtml, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToHtml, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const block = {
       ...baseFields,
       kind: 'tool' as const,
@@ -6771,9 +6729,8 @@ describe('daemonBlockToHtml — additional coverage (wenshao R3 qwen3.7-max)', (
   });
 
   it('protocol-validates thumbnailUrl even when sanitizeUrls:false', async () => {
-    const { daemonBlockToMarkdown, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const block = {
       ...baseFields,
       kind: 'tool' as const,
@@ -6976,9 +6933,8 @@ describe('Late permission.resolved after sentinel pruned (wenshao R3 qwen3.7-max
 
 describe('ensureSafeImageUrl tightened to data:image/* (audit follow-up)', () => {
   it('allows http/https/data:image/* but rejects data:text/html', async () => {
-    const { daemonBlockToMarkdown, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const mkBlock = (thumbnailUrl: string) => ({
       id: 'b',
       kind: 'tool' as const,
@@ -7036,17 +6992,14 @@ describe('R5 review batch — coverage additions', () => {
       id: 2,
       v: 1,
       type: 'auth_device_flow_cancelled',
-      data: {
-        /* no deviceFlowId */
-      },
+      data: {/* no deviceFlowId */},
     } as never);
     expect(events[0]?.type).toBe('debug');
   });
 
   it('sanitizeUrl clears OAuth implicit-grant access_token in #fragment', async () => {
-    const { daemonBlockToMarkdown, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const block = {
       id: 'b',
       kind: 'tool' as const,
@@ -7070,9 +7023,8 @@ describe('R5 review batch — coverage additions', () => {
   });
 
   it('sanitizeUrl strips AWS / GCP / Azure SAS credential params', async () => {
-    const { daemonBlockToMarkdown, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const mkBlock = (url: string) => ({
       id: 'b',
       kind: 'tool' as const,
@@ -7116,18 +7068,16 @@ describe('R5 review batch — coverage additions', () => {
   });
 
   it('formatMissedRange handles no-gap / single-event / multi-event', async () => {
-    const { formatMissedRange } = await import(
-      '../../src/daemon/ui/transcript.js'
-    );
+    const { formatMissedRange } =
+      await import('../../src/daemon/ui/transcript.js');
     expect(formatMissedRange(5, 6)).toContain('no events lost');
     expect(formatMissedRange(5, 7)).toContain('1 daemon event');
     expect(formatMissedRange(5, 10)).toContain('6-9');
   });
 
   it('detectFileDiff content alias rejected for non-write tools', async () => {
-    const { createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     // `{ path, content }` with READ-like tool name → NOT file_diff
     const read = createDaemonToolPreview(
       { path: '/x', content: 'expected text' },
@@ -7143,9 +7093,8 @@ describe('R5 review batch — coverage additions', () => {
   });
 
   it('writeIntent regex word-boundary: prewrite_check does NOT match write', async () => {
-    const { createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const preview = createDaemonToolPreview(
       { path: '/x', content: 'data' },
       { toolName: 'prewrite_check' },
@@ -7154,9 +7103,8 @@ describe('R5 review batch — coverage additions', () => {
   });
 
   it('conformance suite captures adapter throw as fixture failure (does not abort)', async () => {
-    const { runAdapterConformanceSuite } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { runAdapterConformanceSuite } =
+      await import('../../src/daemon/ui/index.js');
     const result = runAdapterConformanceSuite(
       {
         reduce: () => {
@@ -7466,9 +7414,8 @@ describe('R5 review batch — coverage additions', () => {
   });
 
   it('store.clearAwaitingResync clears latch', async () => {
-    const { createDaemonTranscriptStore } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { createDaemonTranscriptStore } =
+      await import('../../src/daemon/ui/index.js');
     const store = createDaemonTranscriptStore();
     store.dispatch({
       type: 'session.state_resync_required',
@@ -7512,9 +7459,8 @@ describe('R6 review batch — recovery flow + pending pointer', () => {
   });
 
   it('clearAwaitingResync FIRST then dispatch new events: events flow', async () => {
-    const { createDaemonTranscriptStore } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { createDaemonTranscriptStore } =
+      await import('../../src/daemon/ui/index.js');
     const store = createDaemonTranscriptStore();
     // Set the latch.
     store.dispatch({
@@ -7554,9 +7500,8 @@ describe('R6 review batch — recovery flow + pending pointer', () => {
     // This test pins the correct flow as documented: latch drops everything
     // until cleared. If a consumer dispatches events FIRST then clears, the
     // events are lost.
-    const { createDaemonTranscriptStore } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { createDaemonTranscriptStore } =
+      await import('../../src/daemon/ui/index.js');
     const store = createDaemonTranscriptStore();
     store.dispatch({
       type: 'session.state_resync_required',
@@ -7592,9 +7537,8 @@ describe('R6 review batch — recovery flow + pending pointer', () => {
 
 describe('R7 review batch — markdown escape + details sanitization', () => {
   it('escapeMarkdownText escapes < in metadata fields (titles/kinds) for HTML-backed pipelines', async () => {
-    const { daemonBlockToMarkdown, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     // `escapeMarkdownText` is applied to METADATA fields (title /
     // toolKind / status) — those are reviewer-untrusted and should
     // escape `<` to prevent raw HTML pass-through when consumers run
@@ -7628,9 +7572,8 @@ describe('R7 review batch — markdown escape + details sanitization', () => {
   });
 
   it('markdown tool block details strips URL credentials when sanitizeUrls:true', async () => {
-    const { daemonBlockToMarkdown, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const block = {
       id: 'b',
       kind: 'tool' as const,
@@ -7657,9 +7600,8 @@ describe('R7 review batch — markdown escape + details sanitization', () => {
   });
 
   it('markdown tool block details preserves URLs verbatim when sanitizeUrls:false (back-compat)', async () => {
-    const { daemonBlockToMarkdown, createDaemonToolPreview } = await import(
-      '../../src/daemon/ui/index.js'
-    );
+    const { daemonBlockToMarkdown, createDaemonToolPreview } =
+      await import('../../src/daemon/ui/index.js');
     const block = {
       id: 'b',
       kind: 'tool' as const,

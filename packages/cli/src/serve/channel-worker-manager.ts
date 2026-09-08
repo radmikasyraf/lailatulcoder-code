@@ -27,11 +27,7 @@ import type { ChannelWorkspaceGroup } from './channel-workspace-grouping.js';
 import type { ServeChannelSelection } from './types.js';
 
 export type ChannelWorkerControlTransition =
-  | 'idle'
-  | 'starting'
-  | 'reconciling'
-  | 'stopping'
-  | 'rolling_back';
+  'idle' | 'starting' | 'reconciling' | 'stopping' | 'rolling_back';
 
 export interface ChannelWorkerControlState {
   enabled: boolean;

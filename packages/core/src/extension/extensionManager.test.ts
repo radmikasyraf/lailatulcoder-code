@@ -2771,8 +2771,7 @@ describe('extension tests', () => {
         'disabled',
       );
       expect(loaded.isActive).toBe(false);
-      expect(onCommitted).toHaveBeenCalledOnce();
-      expect(onCommitted).toHaveBeenCalledWith(snapshot.generation);
+      expect(onCommitted).toHaveBeenCalledExactlyOnceWith(snapshot.generation);
       expect(refreshTools).toHaveBeenCalledOnce();
       await expect(
         manager.setExtensionDefaultActivation(declaredId, 'enabled'),
@@ -4009,10 +4008,7 @@ describe('extension tests', () => {
 
         await manager.refreshTools();
 
-        expect(mockReinitializeMcpServers).toHaveBeenCalledOnce();
-        expect(mockReinitializeMcpServers).toHaveBeenCalledWith(
-          mockSettingsMcpServers,
-        );
+        expect(mockReinitializeMcpServers).toHaveBeenCalledExactlyOnceWith(mockSettingsMcpServers);
         expect(mockRefreshCache).toHaveBeenCalledTimes(2); // skillManager and subagentManager
         expect(mockReloadHooks).toHaveBeenCalledOnce();
         expect(mockRefreshHierarchicalMemory).toHaveBeenCalledOnce();

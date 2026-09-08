@@ -1773,8 +1773,7 @@ class AgentToolInvocation extends BaseToolInvocation<AgentParams, ToolResult> {
 
       promptConfig = {
         renderedSystemPrompt: generationConfig.systemInstruction as
-          | string
-          | Content,
+          string | Content,
         initialMessages,
       };
       toolConfig = {
@@ -2965,8 +2964,8 @@ class AgentToolInvocation extends BaseToolInvocation<AgentParams, ToolResult> {
 
       const shouldBubble = Boolean(
         shouldRunInBackground &&
-          subagentConfig.approvalMode === BUBBLE_APPROVAL_MODE &&
-          this.config.isInteractive(),
+        subagentConfig.approvalMode === BUBBLE_APPROVAL_MODE &&
+        this.config.isInteractive(),
       );
       // Background agents have no inline UI. Preserve the resolved approval
       // mode while overriding only the prompt-avoidance policy used by their

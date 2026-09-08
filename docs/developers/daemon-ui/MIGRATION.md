@@ -103,7 +103,10 @@ for (const event of uiEvents) {
 Or use selectors for state-mirrored sidechannels:
 
 ```ts
-import { selectApprovalMode, selectCurrentTool } from '@lailatul-coder/sdk/daemon';
+import {
+  selectApprovalMode,
+  selectCurrentTool,
+} from '@lailatul-coder/sdk/daemon';
 
 const mode = selectApprovalMode(state); // mirrored from approval_mode.changed
 const currentTool = selectCurrentTool(state); // current in-flight tool

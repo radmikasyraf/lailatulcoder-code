@@ -104,4 +104,3 @@ function formatTypeDisplay(info: HookConfigDisplayInfo): string {
   const isAsync = config.type === HookType.Command && config.async === true;
   return isAsync ? `${config.type} async` : String(config.type);
 }
-

@@ -12,8 +12,7 @@ import { createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
 const debugLogger = createDebugLogger('LSP_CONFIG_WATCHER');
 
 export type LspConfigChangeEvent =
-  | LspConfigRuntimeChangeEvent
-  | LspConfigInvalidEvent;
+  LspConfigRuntimeChangeEvent | LspConfigInvalidEvent;
 
 export interface LspConfigRuntimeChangeEvent {
   path: string;

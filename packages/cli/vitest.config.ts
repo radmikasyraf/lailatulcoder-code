@@ -23,10 +23,11 @@ export default defineConfig({
         __dirname,
         '../core/src/utils/transcript-records.ts',
       ),
-      '@lailatul-coder/lailatul-coder-core/userPromptSubmitContext': path.resolve(
-        __dirname,
-        '../core/src/hooks/user-prompt-submit-context.ts',
-      ),
+      '@lailatul-coder/lailatul-coder-core/userPromptSubmitContext':
+        path.resolve(
+          __dirname,
+          '../core/src/hooks/user-prompt-submit-context.ts',
+        ),
       '@lailatul-coder/lailatul-coder-core/memoryScopes': path.resolve(
         __dirname,
         '../core/src/memory/scopes.ts',
@@ -35,7 +36,10 @@ export default defineConfig({
         __dirname,
         '../core/src/services/tool-write-origin.ts',
       ),
-      '@lailatul-coder/lailatul-coder-core': path.resolve(__dirname, '../core/index.ts'),
+      '@lailatul-coder/lailatul-coder-core': path.resolve(
+        __dirname,
+        '../core/index.ts',
+      ),
       // cli's daemon-status-provider.test.ts imports `FakeAgent` /
       // `makeChannel` from acp-bridge's package-private
       // `internal/testUtils` module. This alias overrides the runtime

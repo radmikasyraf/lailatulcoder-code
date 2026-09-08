@@ -827,8 +827,7 @@ export abstract class BaseJsonOutputAdapter {
     this.ensureMessageStarted(state, parentToolUseId);
 
     let current = state.blocks[state.blocks.length - 1] as
-      | TextBlock
-      | undefined;
+      TextBlock | undefined;
     const isNewBlock = !current || current.type !== 'text';
     if (isNewBlock) {
       current = { type: 'text', text: '' } satisfies TextBlock;
@@ -880,8 +879,7 @@ export abstract class BaseJsonOutputAdapter {
     this.ensureMessageStarted(state, actualParentToolUseId);
 
     let current = state.blocks[state.blocks.length - 1] as
-      | ThinkingBlock
-      | undefined;
+      ThinkingBlock | undefined;
     const isNewBlock = !current || current.type !== 'thinking';
     if (isNewBlock) {
       current = {

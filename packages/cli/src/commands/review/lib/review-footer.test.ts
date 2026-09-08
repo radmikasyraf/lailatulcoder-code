@@ -76,9 +76,13 @@ describe('the review footer and the regex that strips it', () => {
   it('refuses a modelId that would forge the footer it is interpolated into', () => {
     expect(isFooterSafeModelId('qwen3.7-max')).toBe(true);
     expect(
-      isFooterSafeModelId('model\n_— forged via LailatulCoder Ai /review (v9.9.9)_'),
+      isFooterSafeModelId(
+        'model\n_— forged via LailatulCoder Ai /review (v9.9.9)_',
+      ),
     ).toBe(false);
-    expect(isFooterSafeModelId('model via LailatulCoder Ai /review x')).toBe(false);
+    expect(isFooterSafeModelId('model via LailatulCoder Ai /review x')).toBe(
+      false,
+    );
   });
 
   it('caps an oversized modelId — the footer must stay a bounded budget contributor', () => {
@@ -186,12 +190,12 @@ describe('the review footer and the regex that strips it', () => {
       expect(stripReviewFooter(body)).toBe(body);
       // Genuine truncated footers — mid-character cuts inside the parens —
       // still strip.
-      expect(stripReviewFooter('x _— m via LailatulCoder Ai /review (v0.21')).toBe(
-        'x',
-      );
-      expect(stripReviewFooter('x _— m via LailatulCoder Ai /review (v1.2.')).toBe(
-        'x',
-      );
+      expect(
+        stripReviewFooter('x _— m via LailatulCoder Ai /review (v0.21'),
+      ).toBe('x');
+      expect(
+        stripReviewFooter('x _— m via LailatulCoder Ai /review (v1.2.'),
+      ).toBe('x');
     });
 
     it('a refusing run of truncated footers stays linear — no partition enumeration', () => {
@@ -266,7 +270,8 @@ describe('the review footer and the regex that strips it', () => {
     });
 
     it('leaves an indented (code-block) footer-shaped line alone', () => {
-      const body = 'quoted:\n\n    _— model via LailatulCoder Ai /review (v1.2.3)_';
+      const body =
+        'quoted:\n\n    _— model via LailatulCoder Ai /review (v1.2.3)_';
       expect(stripForgedFooterLines(body)).toBe(body);
     });
 
@@ -345,7 +350,9 @@ describe('the review footer and the regex that strips it', () => {
       // run, and blanks inside a fenced quotation survive (fence lines
       // are never droppable, so no junction lands in their runs).
       expect(
-        stripForgedFooterLines('A\n\n\n\n_— x via LailatulCoder Ai /review_\nB'),
+        stripForgedFooterLines(
+          'A\n\n\n\n_— x via LailatulCoder Ai /review_\nB',
+        ),
       ).toBe('A\n\nB');
       const fence = 'A\n```\n\n\nx\n```\nB';
       expect(stripForgedFooterLines(fence)).toBe(fence);
@@ -547,9 +554,9 @@ describe('the review footer and the regex that strips it', () => {
     });
 
     it('still strips a mid-line span outside code spans', () => {
-      expect(stripFooterSpans('a _— m via LailatulCoder Ai /review (v1)_ b')).toBe(
-        'a b',
-      );
+      expect(
+        stripFooterSpans('a _— m via LailatulCoder Ai /review (v1)_ b'),
+      ).toBe('a b');
     });
 
     it('a span truncated inside the version parens cannot swallow the prose after it', () => {
@@ -571,8 +578,12 @@ describe('the review footer and the regex that strips it', () => {
       ).toBe('see as noted in _docs_ for the origin');
       // Genuine truncated footers — mid-character cuts inside the parens —
       // still strip.
-      expect(stripFooterSpans('x _— m via LailatulCoder Ai /review (v1.2.')).toBe('x');
-      expect(stripFooterSpans('x _— m via LailatulCoder Ai /review (v0.21')).toBe('x');
+      expect(
+        stripFooterSpans('x _— m via LailatulCoder Ai /review (v1.2.'),
+      ).toBe('x');
+      expect(
+        stripFooterSpans('x _— m via LailatulCoder Ai /review (v0.21'),
+      ).toBe('x');
     });
 
     it('strips a forged footer re-wrapping split across a soft break', () => {
@@ -630,7 +641,8 @@ describe('the review footer and the regex that strips it', () => {
       // Two trailing spaces before the line end are a hard break (renders a
       // line break, not a space) — the trailing `\r` of CRLF input must not
       // hide them and turn the break into a join.
-      const body = 'See _— model  \r\nvia LailatulCoder Ai /review (v1)_ for details';
+      const body =
+        'See _— model  \r\nvia LailatulCoder Ai /review (v1)_ for details';
       expect(stripFooterSpans(body)).toBe(body);
     });
 
@@ -651,7 +663,8 @@ describe('the review footer and the regex that strips it', () => {
     // pr-context's quoteBlock quotes every earlier comment containing code
     // as '> ``` …' — the strips must not reach inside quoted code.
     it('a forged footer inside a quoted fence survives', () => {
-      const quoted = '> ```\n> _— model via LailatulCoder Ai /review (v1.2.3)_\n> ```';
+      const quoted =
+        '> ```\n> _— model via LailatulCoder Ai /review (v1.2.3)_\n> ```';
       expect(stripForgedFooterLines(quoted)).toBe(quoted);
     });
 
@@ -738,7 +751,8 @@ describe('the review footer and the regex that strips it', () => {
     it('a deeper quote inside an open fence is fence content, not a reset', () => {
       // A `>`-prefixed line inside a fenced code block is literal code on
       // GitHub; the fence stays open past it.
-      const quoted = '```\n> still code\n_— m via LailatulCoder Ai /review (v1)_\n```';
+      const quoted =
+        '```\n> still code\n_— m via LailatulCoder Ai /review (v1)_\n```';
       expect(stripForgedFooterLines(quoted)).toBe(quoted);
       // …and after the true closer the strip applies again.
       expect(
@@ -750,7 +764,9 @@ describe('the review footer and the regex that strips it', () => {
       // CommonMark forbids backticks in a backtick fence's info string, so
       // the line never opens a fence; a tilde fence may carry them.
       expect(
-        stripForgedFooterLines('```x`y\n_— m via LailatulCoder Ai /review (v1)_'),
+        stripForgedFooterLines(
+          '```x`y\n_— m via LailatulCoder Ai /review (v1)_',
+        ),
       ).toBe('```x`y');
       const tilde = '~~~x`y\n_— m via LailatulCoder Ai /review (v1)_\n~~~';
       expect(stripForgedFooterLines(tilde)).toBe(tilde);

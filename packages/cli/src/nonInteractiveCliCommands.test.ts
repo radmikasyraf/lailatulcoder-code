@@ -25,7 +25,9 @@ import { goalCommand } from './ui/commands/goalCommand.js';
 
 const recordAutoSkillUsageMock = vi.hoisted(() => vi.fn());
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>()),
+  ...(await importOriginal<
+    typeof import('@lailatul-coder/lailatul-coder-core')
+  >()),
   recordAutoSkillUsage: recordAutoSkillUsageMock,
 }));
 

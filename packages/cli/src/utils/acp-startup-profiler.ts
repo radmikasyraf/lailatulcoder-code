@@ -131,8 +131,7 @@ export function recordAcpConfigStartupEvent(name: string): void {
 }
 
 export function buildAndFreezeAcpStartupProfile():
-  | ChannelStartupProfileV1
-  | undefined {
+  ChannelStartupProfileV1 | undefined {
   if (!enabled) return undefined;
 
   const phases: ChannelStartupProfileV1['phases'] = {

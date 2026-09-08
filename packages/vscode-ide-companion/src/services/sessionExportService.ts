@@ -7,7 +7,10 @@
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import * as vscode from 'vscode';
-import { SessionService, type Config } from '@lailatul-coder/lailatul-coder-core';
+import {
+  SessionService,
+  type Config,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   collectSessionData,
   generateExportFilename,

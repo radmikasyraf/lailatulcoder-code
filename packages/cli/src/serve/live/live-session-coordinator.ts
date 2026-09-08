@@ -120,12 +120,7 @@ export interface LiveSessionHostControl {
   setCallState(
     epoch: number,
     state:
-      | 'starting'
-      | 'listening'
-      | 'thinking'
-      | 'speaking'
-      | 'stopping'
-      | 'error',
+      'starting' | 'listening' | 'thinking' | 'speaking' | 'stopping' | 'error',
   ): boolean;
   setCoordinator(epoch: number, locator: LiveSessionLocator): boolean;
   setPendingPermission(epoch: number, pending: boolean): boolean;
@@ -264,9 +259,7 @@ function errorMessage(error: unknown): string {
 }
 
 type ProviderFailureBlocker =
-  | 'provider_config'
-  | 'provider_unreachable'
-  | undefined;
+  'provider_config' | 'provider_unreachable' | undefined;
 
 function providerFailureBlocker(error: unknown): ProviderFailureBlocker {
   if (!(error instanceof QwenRealtimeError)) return undefined;

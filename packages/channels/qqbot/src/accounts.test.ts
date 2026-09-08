@@ -20,9 +20,8 @@ vi.mock('@lailatul-coder/channel-base', () => ({
   getGlobalQwenDir: () => '/tmp/test-qwen',
 }));
 
-const { getCredsFilePath, loadCredentials, saveCredentials } = await import(
-  './accounts.js'
-);
+const { getCredsFilePath, loadCredentials, saveCredentials } =
+  await import('./accounts.js');
 
 describe('getCredsFilePath', () => {
   it('returns path under channels dir with credentials suffix', () => {

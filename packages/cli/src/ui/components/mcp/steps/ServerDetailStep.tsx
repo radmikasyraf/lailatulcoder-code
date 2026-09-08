@@ -335,4 +335,3 @@ export const ServerDetailStep: React.FC<ServerDetailStepProps> = ({
     </Box>
   );
 };
-

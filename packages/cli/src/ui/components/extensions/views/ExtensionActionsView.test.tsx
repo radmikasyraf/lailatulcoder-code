@@ -110,8 +110,7 @@ function renderView(
 
 async function openScopeSelect(): Promise<SelectProps> {
   const detail = mockPluginDetailView.mock.calls.at(-1)?.[0] as
-    | DetailProps
-    | undefined;
+    DetailProps | undefined;
   await act(async () => {
     detail?.onAction('change-scope');
   });
@@ -206,8 +205,7 @@ describe('ExtensionActionsView', () => {
     const statuses: Array<StatusMessage | null> = [];
     const { onReload } = renderView(manager, (status) => statuses.push(status));
     const detail = mockPluginDetailView.mock.calls.at(-1)?.[0] as
-      | DetailProps
-      | undefined;
+      DetailProps | undefined;
 
     await act(async () => {
       await detail?.onAction('toggle');
@@ -237,8 +235,7 @@ describe('ExtensionActionsView', () => {
     const statuses: Array<StatusMessage | null> = [];
     const { onReload } = renderView(manager, (status) => statuses.push(status));
     const detail = mockPluginDetailView.mock.calls.at(-1)?.[0] as
-      | DetailProps
-      | undefined;
+      DetailProps | undefined;
 
     await act(async () => {
       await detail?.onAction('update');
@@ -263,14 +260,12 @@ describe('ExtensionActionsView', () => {
       statuses.push(status),
     );
     const detail = mockPluginDetailView.mock.calls.at(-1)?.[0] as
-      | DetailProps
-      | undefined;
+      DetailProps | undefined;
     await act(async () => {
       detail?.onAction('uninstall');
     });
     const confirm = mockUninstallConfirmStep.mock.calls.at(-1)?.[0] as
-      | ConfirmProps
-      | undefined;
+      ConfirmProps | undefined;
 
     await act(async () => {
       await confirm?.onConfirm(extension);
@@ -285,4 +280,3 @@ describe('ExtensionActionsView', () => {
     });
   });
 });
-

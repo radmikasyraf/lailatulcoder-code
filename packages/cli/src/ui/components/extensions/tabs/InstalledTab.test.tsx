@@ -86,8 +86,7 @@ describe('InstalledTab', () => {
     const listHandler = mockUseKeypress.mock.calls
       .filter((call) => call[1]?.isActive === true)
       .at(-1)?.[0] as
-      | ((key: { name: string; sequence: string }) => void)
-      | undefined;
+      ((key: { name: string; sequence: string }) => void) | undefined;
 
     await act(async () => {
       listHandler?.({ name: 'space', sequence: ' ' });
@@ -103,4 +102,3 @@ describe('InstalledTab', () => {
     });
   });
 });
-

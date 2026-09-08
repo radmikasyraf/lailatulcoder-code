@@ -250,4 +250,3 @@ describe('HookMatcherDetailStep', () => {
     expect(out).toContain('Esc to go back');
   });
 });
-

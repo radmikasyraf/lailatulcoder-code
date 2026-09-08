@@ -33,21 +33,10 @@ import { getLanguageSettingsOptions } from '../i18n/languages.js';
 export const DEFAULT_OPENAI_LOG_RETENTION_DAYS = 7;
 
 export type SettingsType =
-  | 'boolean'
-  | 'string'
-  | 'number'
-  | 'integer'
-  | 'array'
-  | 'object'
-  | 'enum';
+  'boolean' | 'string' | 'number' | 'integer' | 'array' | 'object' | 'enum';
 
 export type SettingsValue =
-  | boolean
-  | string
-  | number
-  | string[]
-  | object
-  | undefined;
+  boolean | string | number | string[] | object | undefined;
 
 /**
  * Setting datatypes that "toggle" through a fixed list of options
@@ -167,8 +156,7 @@ export type AsciiArtSource = string | { path: string };
  * both width tiers), or a width-aware `{small, large}` object.
  */
 export type CustomAsciiArtSetting =
-  | AsciiArtSource
-  | { small?: AsciiArtSource; large?: AsciiArtSource };
+  AsciiArtSource | { small?: AsciiArtSource; large?: AsciiArtSource };
 
 /**
  * Common items schema for hook definitions.

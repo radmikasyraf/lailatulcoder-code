@@ -61,9 +61,8 @@ describe('loadDaemonVoiceContext', () => {
     });
     mocks.isStreamingVoiceModel.mockReturnValue(false);
 
-    const { loadDaemonVoiceContext } = await import(
-      './resolve-voice-config.js'
-    );
+    const { loadDaemonVoiceContext } =
+      await import('./resolve-voice-config.js');
     const context = loadDaemonVoiceContext('/work/voice', {
       env: injectedEnv,
       workspaceTrusted: true,
@@ -120,9 +119,8 @@ describe('loadDaemonVoiceContext', () => {
     });
     mocks.isStreamingVoiceModel.mockReturnValue(false);
 
-    const { loadDaemonVoiceContext } = await import(
-      './resolve-voice-config.js'
-    );
+    const { loadDaemonVoiceContext } =
+      await import('./resolve-voice-config.js');
     loadDaemonVoiceContext('/work/voice', { env: {}, workspaceTrusted: true });
 
     const modelsArg = mocks.resolveVoiceTranscriptionConfig.mock.calls[0][0]
@@ -146,9 +144,8 @@ describe('loadDaemonVoiceContext', () => {
     });
     mocks.isStreamingVoiceModel.mockReturnValue(false);
 
-    const { loadDaemonVoiceContext } = await import(
-      './resolve-voice-config.js'
-    );
+    const { loadDaemonVoiceContext } =
+      await import('./resolve-voice-config.js');
     loadDaemonVoiceContext('/work/voice', {
       env: {},
       workspaceTrusted: false,

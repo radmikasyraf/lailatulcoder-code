@@ -7,7 +7,10 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useVSCode } from './useVSCode.js';
 import type { Conversation } from '../../services/conversationStore.js';
-import type { PermissionOption, PermissionToolCall } from '@lailatul-coder/webui';
+import type {
+  PermissionOption,
+  PermissionToolCall,
+} from '@lailatul-coder/webui';
 import type {
   ToolCallUpdate,
   UsageStatsPayload,
@@ -75,8 +78,7 @@ interface UseWebViewMessagesProps {
     messages: WebViewMessage[];
     setMessages: (
       messages:
-        | WebViewMessage[]
-        | ((prev: WebViewMessage[]) => WebViewMessage[]),
+        WebViewMessage[] | ((prev: WebViewMessage[]) => WebViewMessage[]),
     ) => void;
     addMessage: (message: WebViewMessage) => void;
     clearMessages: () => void;
@@ -185,8 +187,7 @@ type ConversationResetHandlers = {
  */
 export function liftToolNameFromMeta(
   toolCall:
-    | (PermissionToolCall & { _meta?: { toolName?: string } })
-    | undefined,
+    (PermissionToolCall & { _meta?: { toolName?: string } }) | undefined,
 ): void {
   if (
     toolCall &&
@@ -457,8 +458,7 @@ export const useWebViewMessages = ({
         case 'availableCommands': {
           try {
             const commands = message.data?.commands as
-              | AvailableCommand[]
-              | undefined;
+              AvailableCommand[] | undefined;
             if (commands) {
               handlers.setAvailableCommands?.(commands);
             }
@@ -745,8 +745,7 @@ export const useWebViewMessages = ({
 
         case 'streamStart': {
           const startData = message.data as
-            | { timestamp?: number; requestId?: string }
-            | undefined;
+            { timestamp?: number; requestId?: string } | undefined;
           // Store the requestId so we can validate streamEnd events
           activeRequestIdRef.current = startData?.requestId ?? null;
           handlers.messageHandling.startStreaming(startData?.timestamp);

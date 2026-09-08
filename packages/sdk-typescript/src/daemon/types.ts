@@ -17,11 +17,7 @@ export type DaemonMode = 'http-bridge' | 'native';
 
 /** Goal v2 wire types, duplicated here to keep the SDK independent of Core. */
 export type GoalStatus =
-  | 'active'
-  | 'paused'
-  | 'blocked'
-  | 'usage_limited'
-  | 'complete';
+  'active' | 'paused' | 'blocked' | 'usage_limited' | 'complete';
 
 export type GoalActivity = 'idle' | 'running' | 'verifying';
 
@@ -131,11 +127,7 @@ export interface DaemonWorkspaceRemovalResult {
 
 /** In-progress Git operation detected from the repo's transient state. */
 export type DaemonGitOperation =
-  | 'merge'
-  | 'rebase'
-  | 'cherry-pick'
-  | 'revert'
-  | 'bisect';
+  'merge' | 'rebase' | 'cherry-pick' | 'revert' | 'bisect';
 
 /**
  * Current Git metadata returned from a workspace Git status route.
@@ -346,16 +338,11 @@ export interface DaemonGitCommitResult {
 
 /** Review decision for an open pull request, lowercased from GitHub's enum. */
 export type DaemonGitHubPullRequestReviewDecision =
-  | 'approved'
-  | 'changes_requested'
-  | 'review_required';
+  'approved' | 'changes_requested' | 'review_required';
 
 /** Aggregated CI rollup state for an open pull request. */
 export type DaemonGitHubPullRequestChecks =
-  | 'passing'
-  | 'failing'
-  | 'pending'
-  | 'none';
+  'passing' | 'failing' | 'pending' | 'none';
 
 /** A single open pull request in the list. */
 export interface DaemonGitHubPullRequest {
@@ -1139,8 +1126,7 @@ export interface HistoricalBranchSessionRequest extends BranchSessionRequest {
 }
 
 export type DaemonBranchSessionRequest =
-  | BranchSessionRequest
-  | HistoricalBranchSessionRequest;
+  BranchSessionRequest | HistoricalBranchSessionRequest;
 
 export interface DaemonBranchPoint {
   assistantRecordUuid: string;
@@ -1154,12 +1140,10 @@ export interface DaemonPersistedBranchedSession {
 }
 
 export interface DaemonBranchedSession
-  extends DaemonRestoredSession,
-    DaemonPersistedBranchedSession {}
+  extends DaemonRestoredSession, DaemonPersistedBranchedSession {}
 
 export type DaemonBranchSessionResult =
-  | DaemonBranchedSession
-  | DaemonPersistedBranchedSession;
+  DaemonBranchedSession | DaemonPersistedBranchedSession;
 
 export interface SideTaskSessionRequest {
   name?: string;
@@ -1225,8 +1209,7 @@ export interface DaemonPendingUserQuestionInteraction {
 }
 
 export type DaemonPendingInteraction =
-  | DaemonPendingPermissionInteraction
-  | DaemonPendingUserQuestionInteraction;
+  DaemonPendingPermissionInteraction | DaemonPendingUserQuestionInteraction;
 
 /** Wire-format mirror of the bridge's `BridgeSessionSummary`; keep fields synchronized. */
 export interface DaemonSessionSummary {
@@ -1313,19 +1296,13 @@ export interface DaemonSubagentSessionResolution {
 export type DaemonSessionArchiveState = 'active' | 'archived';
 
 export type DaemonSessionGroupPresetColor =
-  | 'red'
-  | 'orange'
-  | 'yellow'
-  | 'green'
-  | 'blue'
-  | 'purple';
+  'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple';
 
 /** Shape hint only; the daemon validates exactly six Hex digits at runtime. */
 export type DaemonSessionGroupHexColor = `#${string}`;
 
 export type DaemonSessionGroupColor =
-  | DaemonSessionGroupPresetColor
-  | DaemonSessionGroupHexColor;
+  DaemonSessionGroupPresetColor | DaemonSessionGroupHexColor;
 
 export interface DaemonSessionGroup {
   id: string;
@@ -1370,10 +1347,7 @@ export interface DaemonSessionOrganizationResult {
 export type DaemonSessionListView = 'organized';
 
 export type DaemonSessionGroupFilter =
-  | 'all'
-  | 'pinned'
-  | 'ungrouped'
-  | (string & {});
+  'all' | 'pinned' | 'ungrouped' | (string & {});
 
 export interface DaemonSessionListPageOptions {
   pageSize?: number;
@@ -1477,10 +1451,7 @@ export type DaemonSessionArtifactKind =
   OpenStringUnion<KnownDaemonSessionArtifactKind>;
 
 export type KnownDaemonSessionArtifactStorage =
-  | 'workspace'
-  | 'external_url'
-  | 'managed'
-  | 'published';
+  'workspace' | 'external_url' | 'managed' | 'published';
 
 export type DaemonSessionArtifactStorage =
   OpenStringUnion<KnownDaemonSessionArtifactStorage>;
@@ -1491,9 +1462,7 @@ export type DaemonSessionArtifactSource =
   OpenStringUnion<KnownDaemonSessionArtifactSource>;
 
 export type KnownDaemonSessionArtifactStatus =
-  | 'available'
-  | 'missing'
-  | 'changed';
+  'available' | 'missing' | 'changed';
 
 export type DaemonSessionArtifactStatus =
   OpenStringUnion<KnownDaemonSessionArtifactStatus>;
@@ -1504,10 +1473,7 @@ export type DaemonSessionArtifactRetention =
   OpenStringUnion<KnownDaemonSessionArtifactRetention>;
 
 export type KnownDaemonSessionArtifactRestoreState =
-  | 'live'
-  | 'restored'
-  | 'unverified'
-  | 'blocked';
+  'live' | 'restored' | 'unverified' | 'blocked';
 
 export type DaemonSessionArtifactRestoreState =
   OpenStringUnion<KnownDaemonSessionArtifactRestoreState>;
@@ -1564,16 +1530,12 @@ export interface DaemonSessionArtifact {
 }
 
 export type KnownDaemonSessionArtifactChangeAction =
-  | 'created'
-  | 'updated'
-  | 'removed';
+  'created' | 'updated' | 'removed';
 export type DaemonSessionArtifactChangeAction =
   OpenStringUnion<KnownDaemonSessionArtifactChangeAction>;
 
 export type KnownDaemonSessionArtifactRemovalReason =
-  | 'eviction'
-  | 'explicit'
-  | 'unpin_to_ephemeral';
+  'eviction' | 'explicit' | 'unpin_to_ephemeral';
 export type DaemonSessionArtifactRemovalReason =
   OpenStringUnion<KnownDaemonSessionArtifactRemovalReason>;
 
@@ -1614,12 +1576,7 @@ export interface DaemonSessionArtifactWarningDetail {
 }
 
 export type DaemonStatus =
-  | 'ok'
-  | 'warning'
-  | 'error'
-  | 'disabled'
-  | 'not_started'
-  | 'unknown';
+  'ok' | 'warning' | 'error' | 'disabled' | 'not_started' | 'unknown';
 
 /**
  * Closed taxonomy of structured error categories surfaced on diagnostic
@@ -1664,22 +1621,13 @@ export interface DaemonStatusCell {
 }
 
 export type DaemonMcpDiscoveryState =
-  | 'not_started'
-  | 'in_progress'
-  | 'completed';
+  'not_started' | 'in_progress' | 'completed';
 
 export type DaemonMcpServerRuntimeStatus =
-  | 'connected'
-  | 'connecting'
-  | 'disconnected';
+  'connected' | 'connecting' | 'disconnected';
 
 export type DaemonMcpTransport =
-  | 'stdio'
-  | 'sse'
-  | 'http'
-  | 'websocket'
-  | 'sdk'
-  | 'unknown';
+  'stdio' | 'sse' | 'http' | 'websocket' | 'sdk' | 'unknown';
 
 export interface DaemonWorkspaceMcpServerStatus extends DaemonStatusCell {
   kind: 'mcp_server';
@@ -1992,19 +1940,13 @@ export interface DaemonWriteMemoryResult {
 export type DaemonWorkspaceMemoryRememberContextMode = 'workspace' | 'clean';
 
 export type DaemonWorkspaceMemoryTaskStatus =
-  | 'queued'
-  | 'running'
-  | 'completed'
-  | 'failed';
+  'queued' | 'running' | 'completed' | 'failed';
 
 export type DaemonWorkspaceMemoryRememberTaskStatus =
   DaemonWorkspaceMemoryTaskStatus;
 
 export type DaemonWorkspaceMemoryTopic =
-  | 'user'
-  | 'feedback'
-  | 'project'
-  | 'reference';
+  'user' | 'feedback' | 'project' | 'reference';
 
 export interface DaemonWorkspaceMemoryRememberResult {
   summary?: string;
@@ -2231,11 +2173,7 @@ export interface DaemonWorkspaceFileUploadResult {
  * source.
  */
 export type DaemonAgentLevel =
-  | 'project'
-  | 'user'
-  | 'builtin'
-  | 'extension'
-  | 'session';
+  'project' | 'user' | 'builtin' | 'extension' | 'session';
 
 export interface DaemonWorkspaceAgentSummary {
   kind: 'agent';
@@ -2259,8 +2197,7 @@ export interface DaemonWorkspaceAgentSummary {
   filePath?: string;
 }
 
-export interface DaemonWorkspaceAgentDetail
-  extends DaemonWorkspaceAgentSummary {
+export interface DaemonWorkspaceAgentDetail extends DaemonWorkspaceAgentSummary {
   systemPrompt: string;
   mcpServers?: Record<string, unknown>;
   hooks?: Record<string, unknown>;
@@ -2345,12 +2282,7 @@ export interface DaemonAgentMutationResult {
 }
 
 export type DaemonEnvKind =
-  | 'runtime'
-  | 'platform'
-  | 'sandbox'
-  | 'proxy'
-  | 'env_var'
-  | 'memory';
+  'runtime' | 'platform' | 'sandbox' | 'proxy' | 'env_var' | 'memory';
 
 export interface DaemonEnvCell extends DaemonStatusCell {
   kind: DaemonEnvKind;
@@ -2485,17 +2417,10 @@ export interface DaemonSessionSupportedCommandsStatus {
 }
 
 export type DaemonSessionTaskLifecycleStatus =
-  | 'running'
-  | 'paused'
-  | 'completed'
-  | 'failed'
-  | 'cancelled';
+  'running' | 'paused' | 'completed' | 'failed' | 'cancelled';
 
 export type DaemonSessionProcessTaskLifecycleStatus =
-  | 'running'
-  | 'completed'
-  | 'failed'
-  | 'cancelled';
+  'running' | 'completed' | 'failed' | 'cancelled';
 
 export interface DaemonSessionAgentTaskStatus {
   kind: 'agent';
@@ -2835,9 +2760,7 @@ export interface DaemonSkillToggleResult {
 }
 
 export type DaemonSkillBatchToggleErrorCode =
-  | 'skill_not_found'
-  | 'skill_not_toggleable'
-  | 'skill_inactive_extension';
+  'skill_not_found' | 'skill_not_toggleable' | 'skill_inactive_extension';
 
 export interface DaemonSkillBatchToggleError {
   skillName: string;
@@ -2931,9 +2854,7 @@ export interface DaemonModelDeleteResult {
 export type DaemonVoiceMode = 'hold' | 'tap';
 
 export type DaemonVoiceTransport =
-  | 'qwen-asr-chat'
-  | 'qwen-asr-realtime'
-  | 'dashscope-task-realtime';
+  'qwen-asr-chat' | 'qwen-asr-realtime' | 'dashscope-task-realtime';
 
 export interface DaemonVoiceModelDescriptor {
   id: string;
@@ -2998,11 +2919,7 @@ export type DaemonLiveBlocker =
   | 'provider_unreachable';
 
 export type DaemonLiveRequirementState =
-  | 'ready'
-  | 'missing'
-  | 'denied'
-  | 'unavailable'
-  | 'checking';
+  'ready' | 'missing' | 'denied' | 'unavailable' | 'checking';
 
 /** Process-global Live Voice state. It never contains provider credentials. */
 export interface DaemonLiveStatus {
@@ -3068,8 +2985,7 @@ export interface DaemonLiveSetupStatus {
 }
 
 export type DaemonLiveSetupApiKeyMutation =
-  | { operation: 'replace'; value: string }
-  | { operation: 'clear' };
+  { operation: 'replace'; value: string } | { operation: 'clear' };
 
 export interface DaemonLiveSetupUpdate {
   enabled?: boolean;
@@ -3087,9 +3003,7 @@ export type DaemonWorkspaceTrustState = 'trusted' | 'untrusted' | 'unknown';
 export type DaemonWorkspaceTrustSource = 'disabled' | 'ide' | 'file' | 'none';
 
 export type DaemonWorkspaceTrustLevel =
-  | 'TRUST_FOLDER'
-  | 'TRUST_PARENT'
-  | 'DO_NOT_TRUST';
+  'TRUST_FOLDER' | 'TRUST_PARENT' | 'DO_NOT_TRUST';
 
 export interface DaemonWorkspaceTrustStatus {
   v: 1;
@@ -3104,9 +3018,7 @@ export interface DaemonWorkspaceTrustStatus {
 }
 
 export type DaemonWorkspaceTrustReconciliationState =
-  | 'stable'
-  | 'applying'
-  | 'failed';
+  'stable' | 'applying' | 'failed';
 
 export interface DaemonWorkspaceTrustStatusV2 {
   v: 2;
@@ -3136,8 +3048,7 @@ export interface DaemonWorkspaceTrustStatusV2 {
 }
 
 export type DaemonWorkspaceTrustStatusResponse =
-  | DaemonWorkspaceTrustStatus
-  | DaemonWorkspaceTrustStatusV2;
+  DaemonWorkspaceTrustStatus | DaemonWorkspaceTrustStatusV2;
 
 export type DaemonWorkspaceTrustDesiredState = 'trusted' | 'untrusted';
 
@@ -3382,8 +3293,7 @@ export interface DaemonChannelStartupFailure {
   message: string;
 }
 
-export interface DaemonChannelStartupAttemptFailure
-  extends DaemonChannelStartupFailure {
+export interface DaemonChannelStartupAttemptFailure extends DaemonChannelStartupFailure {
   workspaceCwd: string;
 }
 
@@ -3412,8 +3322,7 @@ export interface DaemonChannelWorkerSnapshot {
 }
 
 export type DaemonChannelSelection =
-  | { mode: 'all' }
-  | { mode: 'names'; names: string[] };
+  { mode: 'all' } | { mode: 'names'; names: string[] };
 
 export interface DaemonChannelDelivery {
   kind: 'channel';
@@ -3435,15 +3344,10 @@ export interface DaemonChannelNotifyResult {
 }
 
 export type DaemonChannelControlTransition =
-  | 'idle'
-  | 'starting'
-  | 'reconciling'
-  | 'stopping'
-  | 'rolling_back';
+  'idle' | 'starting' | 'reconciling' | 'stopping' | 'rolling_back';
 
 /** A channel worker snapshot annotated with its owning workspace. */
-export interface DaemonChannelWorkerGroupSnapshot
-  extends DaemonChannelWorkerSnapshot {
+export interface DaemonChannelWorkerGroupSnapshot extends DaemonChannelWorkerSnapshot {
   workspaceId: string;
   workspaceCwd: string;
   primary: boolean;
@@ -3508,24 +3412,21 @@ interface DaemonChannelConfigFieldDescriptorBase {
   description?: string;
 }
 
-export interface DaemonChannelConfigValueFieldDescriptor
-  extends DaemonChannelConfigFieldDescriptorBase {
+export interface DaemonChannelConfigValueFieldDescriptor extends DaemonChannelConfigFieldDescriptorBase {
   kind: 'string' | 'secret';
   required?: boolean;
   envResolvable?: boolean;
   properties?: never;
 }
 
-export interface DaemonChannelConfigPlainValueFieldDescriptor
-  extends DaemonChannelConfigFieldDescriptorBase {
+export interface DaemonChannelConfigPlainValueFieldDescriptor extends DaemonChannelConfigFieldDescriptorBase {
   kind: 'boolean' | 'string-list' | 'record';
   required?: boolean;
   envResolvable?: never;
   properties?: never;
 }
 
-export interface DaemonChannelConfigEnumFieldDescriptor
-  extends DaemonChannelConfigFieldDescriptorBase {
+export interface DaemonChannelConfigEnumFieldDescriptor extends DaemonChannelConfigFieldDescriptorBase {
   kind: 'enum';
   required?: boolean;
   envResolvable?: never;
@@ -3533,8 +3434,7 @@ export interface DaemonChannelConfigEnumFieldDescriptor
   properties?: never;
 }
 
-export interface DaemonChannelConfigNumberFieldDescriptor
-  extends DaemonChannelConfigFieldDescriptorBase {
+export interface DaemonChannelConfigNumberFieldDescriptor extends DaemonChannelConfigFieldDescriptorBase {
   kind: 'number';
   required?: boolean;
   envResolvable?: never;
@@ -3542,8 +3442,7 @@ export interface DaemonChannelConfigNumberFieldDescriptor
   properties?: never;
 }
 
-export interface DaemonChannelConfigObjectFieldDescriptor
-  extends DaemonChannelConfigFieldDescriptorBase {
+export interface DaemonChannelConfigObjectFieldDescriptor extends DaemonChannelConfigFieldDescriptorBase {
   kind: 'object';
   required?: false;
   envResolvable?: never;
@@ -3655,8 +3554,7 @@ export interface DaemonChannelPairingApprovalRequest {
   code: string;
 }
 
-export interface DaemonChannelPairingApprovalResult
-  extends DaemonChannelPairingRequestsSnapshot {
+export interface DaemonChannelPairingApprovalResult extends DaemonChannelPairingRequestsSnapshot {
   approved: DaemonChannelPairingRequest;
 }
 
@@ -3666,11 +3564,9 @@ export interface DaemonChannelPairingApprovalsSnapshot {
 }
 
 export type DaemonChannelPairingRevocationRequest =
-  | { senderId: string; groupId?: never }
-  | { senderId?: never; groupId: string };
+  { senderId: string; groupId?: never } | { senderId?: never; groupId: string };
 
-export interface DaemonChannelPairingRevocationResult
-  extends DaemonChannelPairingApprovalsSnapshot {
+export interface DaemonChannelPairingRevocationResult extends DaemonChannelPairingApprovalsSnapshot {
   revoked: string;
 }
 
@@ -3706,11 +3602,7 @@ export type DaemonMcpRestartResult =
     };
 
 export type DaemonMcpManageAction =
-  | 'approve'
-  | 'enable'
-  | 'disable'
-  | 'authenticate'
-  | 'clear-auth';
+  'approve' | 'enable' | 'disable' | 'authenticate' | 'clear-auth';
 
 export interface DaemonMcpManageResult {
   serverName: string;
@@ -4039,8 +3931,7 @@ export interface PermissionOutcomeSelected {
 }
 
 export type PermissionOutcome =
-  | PermissionOutcomeCancelled
-  | PermissionOutcomeSelected;
+  PermissionOutcomeCancelled | PermissionOutcomeSelected;
 
 export interface PermissionResponse {
   outcome: PermissionOutcome;
@@ -4171,11 +4062,7 @@ export type DaemonHookConfig =
   | DaemonUnknownHookConfig;
 
 export type DaemonHookSource =
-  | 'project'
-  | 'user'
-  | 'system'
-  | 'extensions'
-  | 'session';
+  'project' | 'user' | 'system' | 'extensions' | 'session';
 
 export interface DaemonHookEntry {
   kind: 'hook';
@@ -4222,11 +4109,7 @@ export type DaemonExtensionInstallType =
   | 'snapshot';
 
 export type DaemonExtensionOriginSource =
-  | 'QwenCode'
-  | 'Claude'
-  | 'Gemini'
-  | 'Qoder'
-  | 'AgentPlugins';
+  'QwenCode' | 'Claude' | 'Gemini' | 'Qoder' | 'AgentPlugins';
 
 export interface DaemonExtensionCapabilities {
   mcpServerCount: number;
@@ -4305,11 +4188,9 @@ export interface ExtensionArchiveInstallRequest {
 }
 
 export type ExtensionInitialActivation =
-  | { scope: 'user' }
-  | { scope: 'workspace'; workspaceId: string };
+  { scope: 'user' } | { scope: 'workspace'; workspaceId: string };
 
-export interface ExtensionManagementInstallRequest
-  extends ExtensionInstallRequest {
+export interface ExtensionManagementInstallRequest extends ExtensionInstallRequest {
   consent: true;
   activation: ExtensionInitialActivation;
 }
@@ -4317,8 +4198,7 @@ export interface ExtensionManagementInstallRequest
 export type ExtensionActivationState = 'enabled' | 'disabled';
 export type ExtensionWorkspaceActivation = ExtensionActivationState | null;
 export type ExtensionWorkspaceBatchActivationState =
-  | ExtensionActivationState
-  | 'inherit';
+  ExtensionActivationState | 'inherit';
 
 export interface ExtensionCatalogEntry {
   id: string;
@@ -4344,10 +4224,7 @@ export interface WorkspaceExtensionProjectionEntry {
   workspaceActivation: ExtensionWorkspaceActivation;
   effectiveActivation: ExtensionActivationState;
   activationSource:
-    | 'cli_override'
-    | 'workspace_override'
-    | 'legacy_path_rule'
-    | 'default';
+    'cli_override' | 'workspace_override' | 'legacy_path_rule' | 'default';
 }
 
 export interface WorkspaceExtensionProjection {
@@ -4440,8 +4317,7 @@ export interface ExtensionActiveOperations {
 }
 
 export type ExtensionPendingInteraction =
-  | ExtensionMarketplacePluginInteraction
-  | ExtensionSettingInteraction;
+  ExtensionMarketplacePluginInteraction | ExtensionSettingInteraction;
 
 export interface ExtensionMarketplacePluginInteraction {
   id: string;
@@ -4467,9 +4343,7 @@ export interface ExtensionSettingInteraction {
 }
 
 export type ExtensionInteractionResponse =
-  | { pluginName: string }
-  | { value: string }
-  | { cancelled: true };
+  { pluginName: string } | { value: string } | { cancelled: true };
 
 export interface ExtensionInteractionResponseResult {
   accepted: true;

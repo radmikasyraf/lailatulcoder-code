@@ -81,7 +81,9 @@ export class SleepInhibitor {
     this.logger = config.logger ?? debugLogger;
   }
 
-  acquire(reason = 'LailatulCoder Ai is processing a request'): SleepInhibitorHandle {
+  acquire(
+    reason = 'LailatulCoder Ai is processing a request',
+  ): SleepInhibitorHandle {
     this.activeCount += 1;
 
     if (this.activeCount === 1) {

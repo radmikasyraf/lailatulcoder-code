@@ -17,13 +17,14 @@ FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaS
 ```
 
 用户报告的崩溃特征：
-| Issue | 崩溃时 Heap | 运行时长 | 平台 |
-|-------|------------|---------|------|
-| #4276 | 4014 MB | ~110 分钟 | Linux x64 |
-| #4315 | 2027 MB | ~19.6 小时 | macOS (默认 2GB limit) |
-| #4322 | 4023 MB | ~7 小时 | Windows |
-| #2868 | 2035 MB | ~1.7 分钟 | Linux |
-| #4309 | 7020 MB | 未知 | Windows (设了 8GB limit 仍崩) |
+
+| Issue | 崩溃时 Heap | 运行时长   | 平台                          |
+| ----- | ----------- | ---------- | ----------------------------- |
+| #4276 | 4014 MB     | ~110 分钟  | Linux x64                     |
+| #4315 | 2027 MB     | ~19.6 小时 | macOS (默认 2GB limit)        |
+| #4322 | 4023 MB     | ~7 小时    | Windows                       |
+| #2868 | 2035 MB     | ~1.7 分钟  | Linux                         |
+| #4309 | 7020 MB     | 未知       | Windows (设了 8GB limit 仍崩) |
 
 ---
 
@@ -50,7 +51,7 @@ history 足够大时会产生峰值放大，需要再用默认 heap 长任务验
 | Heap limit               | `--max-old-space-size=512`                                   |
 | Heap-pressure safety net | **禁用** (HEAP_PRESSURE_COMPRESSION_RATIO 设为 99.0)         |
 | 操作模式                 | YOLO + 自动化多轮 Read 文件任务                              |
-| 工作目录                 | lailatul-coder monorepo (3538 .ts files, 1.26M lines)             |
+| 工作目录                 | lailatul-coder monorepo (3538 .ts files, 1.26M lines)        |
 
 ### 关键配置修改
 

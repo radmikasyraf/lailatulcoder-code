@@ -511,15 +511,13 @@ export async function createContentGenerator(
   try {
     if (authType === AuthType.USE_OPENAI) {
       loadBaseGenerator = async () => {
-        const { createOpenAIContentGenerator } = await import(
-          './openaiContentGenerator/index.js'
-        );
+        const { createOpenAIContentGenerator } =
+          await import('./openaiContentGenerator/index.js');
         return createOpenAIContentGenerator(generatorConfig, config);
       };
     } else if (authType === AuthType.QWEN_OAUTH) {
-      const { getQwenOAuthClient: getQwenOauthClient } = await import(
-        '../qwen/qwenOAuth2.js'
-      );
+      const { getQwenOAuthClient: getQwenOauthClient } =
+        await import('../qwen/qwenOAuth2.js');
 
       try {
         const qwenClient = await getQwenOauthClient(
@@ -527,9 +525,8 @@ export async function createContentGenerator(
           isInitialAuth ? { requireCachedCredentials: true } : undefined,
         );
         loadBaseGenerator = async () => {
-          const { QwenContentGenerator } = await import(
-            '../qwen/qwenContentGenerator.js'
-          );
+          const { QwenContentGenerator } =
+            await import('../qwen/qwenContentGenerator.js');
           return new QwenContentGenerator(qwenClient, generatorConfig, config);
         };
       } catch (error) {
@@ -540,9 +537,8 @@ export async function createContentGenerator(
       }
     } else if (authType === AuthType.USE_ANTHROPIC) {
       loadBaseGenerator = async () => {
-        const { createAnthropicContentGenerator } = await import(
-          './anthropicContentGenerator/index.js'
-        );
+        const { createAnthropicContentGenerator } =
+          await import('./anthropicContentGenerator/index.js');
         return createAnthropicContentGenerator(generatorConfig, config);
       };
     } else if (
@@ -550,9 +546,8 @@ export async function createContentGenerator(
       authType === AuthType.USE_VERTEX_AI
     ) {
       loadBaseGenerator = async () => {
-        const { createGeminiContentGenerator } = await import(
-          './geminiContentGenerator/index.js'
-        );
+        const { createGeminiContentGenerator } =
+          await import('./geminiContentGenerator/index.js');
         return createGeminiContentGenerator(generatorConfig, config);
       };
     } else {

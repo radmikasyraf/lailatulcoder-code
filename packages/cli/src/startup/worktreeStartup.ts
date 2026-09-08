@@ -32,7 +32,10 @@ import {
   writeWorktreeSession,
   writeWorktreeSessionMarker,
 } from '@lailatul-coder/lailatul-coder-core';
-import type { Config, WorktreeSession } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  WorktreeSession,
+} from '@lailatul-coder/lailatul-coder-core';
 
 const debugLogger = createDebugLogger('WORKTREE_STARTUP');
 
@@ -80,8 +83,7 @@ export interface StartupWorktreeContext {
 }
 
 export type SetupStartupWorktreeResult =
-  | { ok: true; context: StartupWorktreeContext }
-  | { ok: false; error: string };
+  { ok: true; context: StartupWorktreeContext } | { ok: false; error: string };
 
 /**
  * Resolves slug, creates the worktree, switches `process.cwd()`, and returns

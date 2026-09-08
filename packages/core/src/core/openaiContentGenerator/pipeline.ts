@@ -746,13 +746,11 @@ export class ContentGenerationPipeline {
     let pendingFinishResponse: GenerateContentResponse | null = null;
     let finishYielded = false;
     let pendingFinishProtocolTagSanitized:
-      | NonNullable<RequestContext['protocolTagSanitized']>
-      | undefined;
+      NonNullable<RequestContext['protocolTagSanitized']> | undefined;
     const logPendingProtocolTagSanitized = (
       response: GenerateContentResponse,
       sanitization:
-        | NonNullable<RequestContext['protocolTagSanitized']>
-        | undefined,
+        NonNullable<RequestContext['protocolTagSanitized']> | undefined,
     ) => {
       if (!sanitization) return;
       const event = new ProtocolTagSanitizedEvent({
@@ -1229,8 +1227,7 @@ export class ContentGenerationPipeline {
         delete typed['reasoning_effort'];
       }
       const chatTemplateKwargs = typed['chat_template_kwargs'] as
-        | Record<string, unknown>
-        | undefined;
+        Record<string, unknown> | undefined;
       if (chatTemplateKwargs?.['enable_thinking'] === false) {
         const remaining = { ...chatTemplateKwargs };
         delete remaining['enable_thinking'];
@@ -1481,8 +1478,7 @@ export class ContentGenerationPipeline {
       const model = context.model.toLowerCase();
       const wireRequest = openaiRequest as Record<string, unknown> | undefined;
       const chatTemplateKwargs = wireRequest?.['chat_template_kwargs'] as
-        | Record<string, unknown>
-        | undefined;
+        Record<string, unknown> | undefined;
       if (
         (wireRequest?.['enable_thinking'] === false ||
           chatTemplateKwargs?.['enable_thinking'] === false ||

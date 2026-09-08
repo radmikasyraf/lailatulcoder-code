@@ -320,4 +320,3 @@ export const StatsDialog: React.FC<StatsDialogProps> = ({
     </Box>
   );
 };
-

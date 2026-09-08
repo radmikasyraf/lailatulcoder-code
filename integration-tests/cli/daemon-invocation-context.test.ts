@@ -198,8 +198,7 @@ describe('trusted daemon invocation context', () => {
       expect(
         (
           records[0]?.metadata?.[INVOCATION_META_KEY] as
-            | Record<string, unknown>
-            | undefined
+            Record<string, unknown> | undefined
         )?.['originatorClientId'],
       ).toBeUndefined();
 

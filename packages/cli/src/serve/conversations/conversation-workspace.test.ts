@@ -76,7 +76,12 @@ describe('Live conversation workspace root', () => {
   it('lazily creates the injected default root with a private canonical identity', async () => {
     const home = await tempHome();
     const workspace = new ConversationWorkspace({ homeDir: home });
-    const expected = join(home, 'Documents', 'LailatulCoder Ai', 'Conversations');
+    const expected = join(
+      home,
+      'Documents',
+      'LailatulCoder Ai',
+      'Conversations',
+    );
 
     expect(workspace.rootPath).toBe(expected);
     expect(getConversationRootPath(home)).toBe(expected);
@@ -118,7 +123,9 @@ describe('Live conversation workspace root', () => {
 
     const fileHome = await tempHome();
     const fileRoot = getConversationRootPath(fileHome);
-    await mkdir(join(fileHome, 'Documents', 'LailatulCoder Ai'), { recursive: true });
+    await mkdir(join(fileHome, 'Documents', 'LailatulCoder Ai'), {
+      recursive: true,
+    });
     await writeFile(fileRoot, 'not a directory');
     await expect(
       new ConversationWorkspace({ homeDir: fileHome }).getRoot(),

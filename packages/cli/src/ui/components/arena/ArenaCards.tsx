@@ -328,4 +328,3 @@ export const ArenaSessionCard: React.FC<ArenaSessionCardProps> = ({
     </Box>
   );
 };
-

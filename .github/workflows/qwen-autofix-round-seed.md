@@ -124,8 +124,8 @@ that runs inside that job never gets the chance
 else fails closed — no label, no seed, no partial effect, and, when the router
 never started, not even a log line.
 
-| Body                                 | Result                                      |
-| ------------------------------------ | ------------------------------------------- |
+| Body                                      | Result                                      |
+| ----------------------------------------- | ------------------------------------------- |
 | `@lailatul-coder /takeover from 4`        | engage, seed 4                              |
 | `@lailatul-coder /takeover from 04`       | engage, seed 4 (read as decimal, not octal) |
 | `@lailatul-coder /takeover from 0`        | engage, no seed — the explicit spelling     |
@@ -136,7 +136,7 @@ never started, not even a log line.
 | `@lailatul-coder /takeover  from 4`       | **nothing** — double space                  |
 | `please @lailatul-coder /takeover from 4` | **nothing** — must start the comment        |
 | `  @lailatul-coder /takeover from 4`      | **nothing** — leading spaces                |
-| blank line, then the command         | **nothing** — leading newline               |
+| blank line, then the command              | **nothing** — leading newline               |
 | `@lailatul-coder /takeover from 4 please` | **nothing** — must end the comment          |
 
 ## Reading the result

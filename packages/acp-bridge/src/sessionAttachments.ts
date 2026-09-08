@@ -30,8 +30,7 @@ export class SessionAttachmentReferenceError extends Error {
   constructor(
     message: string,
     readonly code:
-      | 'invalid_session_attachment_reference'
-      | 'session_attachment_gone',
+      'invalid_session_attachment_reference' | 'session_attachment_gone',
   ) {
     super(message);
     this.name = 'SessionAttachmentReferenceError';

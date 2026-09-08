@@ -184,4 +184,3 @@ describe('GoalPill', () => {
     expect(second.unsubscribe).toHaveBeenCalledOnce();
   });
 });
-

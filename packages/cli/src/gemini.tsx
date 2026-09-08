@@ -464,9 +464,8 @@ export async function main() {
     await initializeI18n(
       resolveLanguageSetting(settings.merged.general?.language as string),
     );
-    const { handleList: handleListExtensions } = await import(
-      './commands/extensions/list.js'
-    );
+    const { handleList: handleListExtensions } =
+      await import('./commands/extensions/list.js');
     await handleListExtensions();
     process.exit(0);
   }
@@ -485,9 +484,8 @@ export async function main() {
     validateDnsResolutionOrder(settings.merged.advanced?.dnsResolutionOrder),
   );
 
-  const { themeManager, AUTO_THEME_NAME } = await import(
-    './ui/themes/theme-manager.js'
-  );
+  const { themeManager, AUTO_THEME_NAME } =
+    await import('./ui/themes/theme-manager.js');
   // Load custom themes from settings
   themeManager.loadCustomThemes(settings.merged.ui?.customThemes);
 
@@ -518,9 +516,8 @@ export async function main() {
       await initializeI18n(
         resolveLanguageSetting(settings.merged.general?.language as string),
       );
-      const { updateBeforeRelaunch } = await import(
-        './utils/update-relaunch.js'
-      );
+      const { updateBeforeRelaunch } =
+        await import('./utils/update-relaunch.js');
       const shouldRelaunch = await updateBeforeRelaunch(
         settings,
         updateProjectRoot,
@@ -546,8 +543,8 @@ export async function main() {
       process.env[HOST_UPDATE_RELAUNCH_ENV_VAR] = String(
         Boolean(
           hostInstallationInfo.updateCommand ||
-            (hostInstallationInfo.isStandalone &&
-              hostInstallationInfo.standaloneDir),
+          (hostInstallationInfo.isStandalone &&
+            hostInstallationInfo.standaloneDir),
         ),
       );
     }
@@ -794,9 +791,8 @@ export async function main() {
 
     if (argv.resume === '') {
       // No argument — show picker
-      const { showResumeSessionPicker } = await import(
-        './ui/components/StandaloneSessionPicker.js'
-      );
+      const { showResumeSessionPicker } =
+        await import('./ui/components/StandaloneSessionPicker.js');
       resolvedSessionId = await showResumeSessionPicker();
     } else if (!cliConfig.isValidSessionId(argv.resume)) {
       // Non-UUID argument — treat as custom title search
@@ -809,9 +805,8 @@ export async function main() {
         writeStderrLine(
           `Multiple sessions found with title "${argv.resume}". Please select one:`,
         );
-        const { showResumeSessionPicker } = await import(
-          './ui/components/StandaloneSessionPicker.js'
-        );
+        const { showResumeSessionPicker } =
+          await import('./ui/components/StandaloneSessionPicker.js');
         resolvedSessionId = await showResumeSessionPicker(
           process.cwd(),
           matches,
@@ -1004,12 +999,10 @@ export async function main() {
       registerCleanup(installInteractiveSignalHandlers(wasRaw));
     }
     if (config.isInteractive() && !wasRaw && process.stdin.isTTY) {
-      const { startEarlyInputCapture, stopAndGetCapturedInput } = await import(
-        './utils/earlyInputCapture.js'
-      );
-      const { detectAndEnableKittyProtocol } = await import(
-        './ui/utils/kittyProtocolDetector.js'
-      );
+      const { startEarlyInputCapture, stopAndGetCapturedInput } =
+        await import('./utils/earlyInputCapture.js');
+      const { detectAndEnableKittyProtocol } =
+        await import('./ui/utils/kittyProtocolDetector.js');
       // Set this as early as possible to avoid spurious characters from
       // input showing up in the output.
       process.stdin.setRawMode(true);
@@ -1042,9 +1035,8 @@ export async function main() {
     }
 
     if (config.isInteractive()) {
-      const { setMaxSizedBoxDebugging } = await import(
-        './ui/components/shared/MaxSizedBox.js'
-      );
+      const { setMaxSizedBoxDebugging } =
+        await import('./ui/components/shared/MaxSizedBox.js');
       setMaxSizedBoxDebugging(isDebugMode);
     }
 
@@ -1292,9 +1284,8 @@ export async function main() {
       }
     }
 
-    const { validateNonInteractiveAuth } = await import(
-      './validateNonInterActiveAuth.js'
-    );
+    const { validateNonInteractiveAuth } =
+      await import('./validateNonInterActiveAuth.js');
     const nonInteractiveConfig = await validateNonInteractiveAuth(
       settings.merged.security?.auth?.useExternal,
       config,
@@ -1305,9 +1296,8 @@ export async function main() {
 
     if (inputFormat === InputFormat.STREAM_JSON) {
       const trimmedInput = (input ?? '').trim();
-      const { runNonInteractiveStreamJson } = await import(
-        './nonInteractive/session.js'
-      );
+      const { runNonInteractiveStreamJson } =
+        await import('./nonInteractive/session.js');
 
       nonInteractiveHousekeeping?.startNonInteractiveOpenAILogHousekeeping(
         nonInteractiveConfig,
@@ -1394,8 +1384,7 @@ export function registerLspHotReload(
   registerCleanup: (fn: () => void | Promise<void>) => void,
 ): void {
   const lspClient = config.getLspClient?.() as
-    | (ReturnType<Config['getLspClient']> & RuntimeLspClient)
-    | undefined;
+    (ReturnType<Config['getLspClient']> & RuntimeLspClient) | undefined;
   const runtimeConfig = config as Config & RuntimeLspConfig;
   const reinitializeLsp = runtimeConfig.reinitializeLsp;
   if (
@@ -1488,4 +1477,3 @@ function getRuntimeReloadFailedNames(reconcile: {
 }): readonly string[] {
   return reconcile.failed ?? [];
 }
-

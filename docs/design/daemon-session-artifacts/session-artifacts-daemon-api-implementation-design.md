@@ -523,10 +523,7 @@ export type ToolArtifactKind =
   | 'other';
 
 export type ToolArtifactStorage =
-  | 'workspace'
-  | 'managed'
-  | 'external_url'
-  | 'published';
+  'workspace' | 'managed' | 'external_url' | 'published';
 
 export interface ToolArtifact {
   kind?: ToolArtifactKind;

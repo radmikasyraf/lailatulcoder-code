@@ -13,7 +13,11 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { query, isSDKSystemMessage, type SDKMessage } from '@lailatul-coder/sdk';
+import {
+  query,
+  isSDKSystemMessage,
+  type SDKMessage,
+} from '@lailatul-coder/sdk';
 import {
   SDKTestHelper,
   createSharedTestOptions,

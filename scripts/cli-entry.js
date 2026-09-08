@@ -61,16 +61,14 @@ if (isTopLevelVersion && process.env['CLI_VERSION']) {
   process.exit(0);
 }
 
-const { existsSync, readFileSync, realpathSync, statSync } = await import(
-  'node:fs'
-);
+const { existsSync, readFileSync, realpathSync, statSync } =
+  await import('node:fs');
 const { createHash } = await import('node:crypto');
 const { homedir, tmpdir } = await import('node:os');
 const { parseEnv } = await import('node:util');
 const { fileURLToPath, pathToFileURL } = await import('node:url');
-const { delimiter, dirname, join, parse, resolve, sep } = await import(
-  'node:path'
-);
+const { delimiter, dirname, join, parse, resolve, sep } =
+  await import('node:path');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const currentEntryPath = realpathSync(fileURLToPath(import.meta.url));

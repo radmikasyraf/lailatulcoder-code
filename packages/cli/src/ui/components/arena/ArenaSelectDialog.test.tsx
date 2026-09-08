@@ -234,4 +234,3 @@ function createAgentResult({
     startedAt: 1,
   };
 }
-

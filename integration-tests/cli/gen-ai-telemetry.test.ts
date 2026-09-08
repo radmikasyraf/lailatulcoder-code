@@ -29,7 +29,7 @@ const SKIP =
   process.platform === 'win32' ||
   Boolean(
     process.env['QWEN_SANDBOX'] &&
-      process.env['QWEN_SANDBOX']!.toLowerCase() !== 'false',
+    process.env['QWEN_SANDBOX']!.toLowerCase() !== 'false',
   );
 const describeLocal = SKIP ? describe.skip : describe;
 

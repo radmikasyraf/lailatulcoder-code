@@ -155,11 +155,11 @@ This type of action can be used to invoke a general-purpose, conversational Lail
 
 We recommend setting the following values as repository variables so they can be reused across all workflows. Alternatively, you can set them inline as action inputs in individual workflows or to override repository-level values.
 
-| Name               | Description                                               | Type     | Required | When Required             |
-| ------------------ | --------------------------------------------------------- | -------- | -------- | ------------------------- |
+| Name               | Description                                                      | Type     | Required | When Required             |
+| ------------------ | ---------------------------------------------------------------- | -------- | -------- | ------------------------- |
 | `DEBUG`            | Enables debug logging for the LailatulCoder Ai CLI.              | Variable | No       | Never                     |
 | `QWEN_CLI_VERSION` | Controls which version of the LailatulCoder Ai CLI is installed. | Variable | No       | Pinning the CLI version   |
-| `APP_ID`           | GitHub App ID for custom authentication.                  | Variable | No       | Using a custom GitHub App |
+| `APP_ID`           | GitHub App ID for custom authentication.                         | Variable | No       | Using a custom GitHub App |
 
 To add a repository variable:
 

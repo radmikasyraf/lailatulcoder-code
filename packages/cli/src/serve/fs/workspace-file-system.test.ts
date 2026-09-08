@@ -9,7 +9,10 @@ import { promises as fsp, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { createHash, randomBytes } from 'node:crypto';
-import { Ignore, StandardFileSystemService } from '@lailatul-coder/lailatul-coder-core';
+import {
+  Ignore,
+  StandardFileSystemService,
+} from '@lailatul-coder/lailatul-coder-core';
 import { encodeTextCursor } from './text-cursor.js';
 import {
   FS_ACCESS_EVENT_TYPE,

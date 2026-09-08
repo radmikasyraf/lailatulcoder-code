@@ -8,7 +8,9 @@ import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     listSavedWorkflows: vi.fn(),

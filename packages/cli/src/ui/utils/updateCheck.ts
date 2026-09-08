@@ -316,10 +316,13 @@ export async function checkForUpdatesDetailed(
         return {
           status: 'update',
           info: {
-            message: t('LailatulCoder Ai update available! {{current}} → {{latest}}', {
-              current: version,
-              latest: updateInfo.latest,
-            }),
+            message: t(
+              'LailatulCoder Ai update available! {{current}} → {{latest}}',
+              {
+                current: version,
+                latest: updateInfo.latest,
+              },
+            ),
             update: { ...updateInfo, current: version },
           },
         };

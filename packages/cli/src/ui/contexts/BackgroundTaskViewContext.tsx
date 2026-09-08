@@ -19,7 +19,10 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { type Config, createDebugLogger } from '@lailatul-coder/lailatul-coder-core';
+import {
+  type Config,
+  createDebugLogger,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   type DialogEntry,
   useBackgroundTaskView,
@@ -30,10 +33,7 @@ const debugLogger = createDebugLogger('BG_TASK_VIEW');
 // ─── Types ──────────────────────────────────────────────────
 
 export type BackgroundDialogMode =
-  | 'closed'
-  | 'list'
-  | 'detail'
-  | 'detail-from-panel';
+  'closed' | 'list' | 'detail' | 'detail-from-panel';
 
 export interface BackgroundTaskViewState {
   /**
@@ -381,4 +381,3 @@ export function BackgroundTaskViewProvider({
     </BackgroundTaskViewStateContext.Provider>
   );
 }
-

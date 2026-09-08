@@ -11,14 +11,14 @@
 
 LailatulCoder Ai and Claude Code both provide a Ctrl+O shortcut for toggling between compact and detailed tool output views, but the **design philosophy, default state, and interaction model differ fundamentally**. This document provides a deep source-level comparison, identifies UX gaps, and proposes optimizations for LailatulCoder Ai.
 
-| Dimension            | Claude Code                                 | LailatulCoder Ai                                     |
-| -------------------- | ------------------------------------------- | --------------------------------------------- |
-| Default mode         | Compact (verbose=false)                     | Verbose (compactMode=false)                   |
-| Toggle semantics     | Temporary peek at details                   | Persistent preference switch                  |
-| Persistence          | Session-only, resets on restart             | Persisted to settings.json                    |
+| Dimension            | Claude Code                                | LailatulCoder Ai                              |
+| -------------------- | ------------------------------------------ | --------------------------------------------- |
+| Default mode         | Compact (verbose=false)                    | Verbose (compactMode=false)                   |
+| Toggle semantics     | Temporary peek at details                  | Persistent preference switch                  |
+| Persistence          | Session-only, resets on restart            | Persisted to settings.json                    |
 | Scope                | Global screen switch (prompt ↔ transcript) | Per-component rendering toggle                |
-| Frozen snapshot      | None (no concept)                           | None (removed)                                |
-| Per-tool expand hint | Yes ("ctrl+o to expand")                    | Yes ("Press Ctrl+O to show full tool output") |
+| Frozen snapshot      | None (no concept)                          | None (removed)                                |
+| Per-tool expand hint | Yes ("ctrl+o to expand")                   | Yes ("Press Ctrl+O to show full tool output") |
 
 ## 2. Claude Code Implementation Analysis
 
@@ -166,7 +166,7 @@ Session start → verbose mode (default)
 
 ### 4.1 Default Mode Philosophy
 
-| Aspect               | Claude Code (compact default)         | LailatulCoder Ai (verbose default)                   |
+| Aspect               | Claude Code (compact default)         | LailatulCoder Ai (verbose default)            |
 | -------------------- | ------------------------------------- | --------------------------------------------- |
 | First impression     | Clean, minimal — professional feel    | Information-rich — full transparency          |
 | Learning curve       | User must learn Ctrl+O to see details | User can immediately see everything           |
@@ -178,7 +178,7 @@ Session start → verbose mode (default)
 
 ### 4.2 Persistence Model
 
-| Aspect           | Claude Code               | LailatulCoder Ai                  |
+| Aspect           | Claude Code               | LailatulCoder Ai           |
 | ---------------- | ------------------------- | -------------------------- |
 | Persisted?       | No — session-only         | Yes — to settings.json     |
 | Rationale        | Verbose is temporary peek | Mode is user preference    |
@@ -188,7 +188,7 @@ Session start → verbose mode (default)
 
 ### 4.3 Confirmation Protection
 
-| Aspect                  | Claude Code                                 | LailatulCoder Ai                                            |
+| Aspect                  | Claude Code                                 | LailatulCoder Ai                                     |
 | ----------------------- | ------------------------------------------- | ---------------------------------------------------- |
 | Mechanism               | Overlay/modal layer (structurally separate) | Force-expand conditions in `showCompact`             |
 | Coverage                | Complete — approvals can never be hidden    | Complete — 4 conditions cover all interactive states |
@@ -198,12 +198,12 @@ Session start → verbose mode (default)
 
 ### 4.4 Rendering Approach
 
-| Aspect       | Claude Code                         | LailatulCoder Ai                                  |
-| ------------ | ----------------------------------- | ------------------------------------------ |
+| Aspect       | Claude Code                        | LailatulCoder Ai                           |
+| ------------ | ---------------------------------- | ------------------------------------------ |
 | Toggle scope | Screen-level (prompt ↔ transcript) | Component-level (each component decides)   |
-| Granularity  | All-or-nothing                      | Fine-grained per component                 |
-| Flexibility  | Low — global switch                 | High — components can override             |
-| Consistency  | Guaranteed                          | Depends on each component's implementation |
+| Granularity  | All-or-nothing                     | Fine-grained per component                 |
+| Flexibility  | Low — global switch                | High — components can override             |
+| Consistency  | Guaranteed                         | Depends on each component's implementation |
 
 **Analysis:** LailatulCoder Ai's component-level approach is more flexible (e.g., force-expand for specific conditions) but requires more discipline to maintain consistency. Claude Code's screen-level approach is simpler and guarantees consistent behavior.
 

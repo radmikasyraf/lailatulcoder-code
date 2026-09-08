@@ -4265,8 +4265,7 @@ export const useGeminiStream = (
 
             if (isTerminalState) {
               const completedOrCancelledCall = tc as
-                | TrackedCompletedToolCall
-                | TrackedCancelledToolCall;
+                TrackedCompletedToolCall | TrackedCancelledToolCall;
               return (
                 completedOrCancelledCall.response?.responseParts !== undefined
               );
@@ -5728,8 +5727,8 @@ export const useGeminiStream = (
   // otherwise a stale TeamManager could keep pushing into
   // the active queue ref after team recreation/remount.
   useEffect(() => {
-    let boundManager: import('@lailatul-coder/lailatul-coder-core').TeamManager | null =
-      null;
+    let boundManager:
+      import('@lailatul-coder/lailatul-coder-core').TeamManager | null = null;
     const handleManagerChange = (
       manager: import('@lailatul-coder/lailatul-coder-core').TeamManager | null,
     ) => {

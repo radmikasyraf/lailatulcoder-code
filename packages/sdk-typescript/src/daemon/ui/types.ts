@@ -419,8 +419,7 @@ export interface DaemonUiSessionArtifactChangedEvent extends DaemonUiEventBase {
   change: DaemonSessionArtifactChange;
 }
 
-export interface DaemonUiSessionApprovalModeChangedEvent
-  extends DaemonUiEventBase {
+export interface DaemonUiSessionApprovalModeChangedEvent extends DaemonUiEventBase {
   type: 'session.approval_mode.changed';
   sessionId: string;
   previous: string;
@@ -434,8 +433,7 @@ export interface DaemonUiSessionApprovalModeChangedEvent
  * to refresh command completion menus (TUI / web command palette / IDE
  * quick pick).
  */
-export interface DaemonUiSessionAvailableCommandsEvent
-  extends DaemonUiEventBase {
+export interface DaemonUiSessionAvailableCommandsEvent extends DaemonUiEventBase {
   type: 'session.available_commands';
   /** Total count exposed by the daemon; convenience for renderers. */
   count: number;
@@ -548,8 +546,7 @@ export interface DaemonUiWorkspaceToolToggledEvent extends DaemonUiEventBase {
   enabled: boolean;
 }
 
-export interface DaemonUiWorkspaceSettingsChangedEvent
-  extends DaemonUiEventBase {
+export interface DaemonUiWorkspaceSettingsChangedEvent extends DaemonUiEventBase {
   type: 'workspace.settings.changed';
   key: string;
   scope: string;
@@ -607,8 +604,7 @@ export interface DaemonUiMcpServerRestartedEvent extends DaemonUiEventBase {
   durationMs: number;
 }
 
-export interface DaemonUiMcpServerRestartRefusedEvent
-  extends DaemonUiEventBase {
+export interface DaemonUiMcpServerRestartRefusedEvent extends DaemonUiEventBase {
   type: 'workspace.mcp.server_restart_refused';
   serverName: string;
   reason:
@@ -636,12 +632,7 @@ export interface DaemonUiExtensionsChangedEvent extends DaemonUiEventBase {
   refreshed: number;
   failed: number;
   status?:
-    | 'installed'
-    | 'enabled'
-    | 'disabled'
-    | 'updated'
-    | 'uninstalled'
-    | 'failed';
+    'installed' | 'enabled' | 'disabled' | 'updated' | 'uninstalled' | 'failed';
   source?: string;
   name?: string;
   version?: string;
@@ -659,15 +650,13 @@ export interface DaemonUiAuthDeviceFlowStartedEvent extends DaemonUiEventBase {
   expiresAt: number;
 }
 
-export interface DaemonUiAuthDeviceFlowThrottledEvent
-  extends DaemonUiEventBase {
+export interface DaemonUiAuthDeviceFlowThrottledEvent extends DaemonUiEventBase {
   type: 'auth.device_flow.throttled';
   deviceFlowId: string;
   intervalMs: number;
 }
 
-export interface DaemonUiAuthDeviceFlowAuthorizedEvent
-  extends DaemonUiEventBase {
+export interface DaemonUiAuthDeviceFlowAuthorizedEvent extends DaemonUiEventBase {
   type: 'auth.device_flow.authorized';
   deviceFlowId: string;
   providerId: DaemonAuthProviderId;
@@ -682,8 +671,7 @@ export interface DaemonUiAuthDeviceFlowFailedEvent extends DaemonUiEventBase {
   hint?: string;
 }
 
-export interface DaemonUiAuthDeviceFlowCancelledEvent
-  extends DaemonUiEventBase {
+export interface DaemonUiAuthDeviceFlowCancelledEvent extends DaemonUiEventBase {
   type: 'auth.device_flow.cancelled';
   deviceFlowId: string;
 }
@@ -999,8 +987,7 @@ export interface DaemonShellTranscriptBlock extends DaemonTranscriptBlockBase {
   stream?: 'stdout' | 'stderr';
 }
 
-export interface DaemonUserShellTranscriptBlock
-  extends DaemonTranscriptBlockBase {
+export interface DaemonUserShellTranscriptBlock extends DaemonTranscriptBlockBase {
   kind: 'user_shell';
   text: string;
   command: string;
@@ -1008,8 +995,7 @@ export interface DaemonUserShellTranscriptBlock
   stream?: 'stdout' | 'stderr';
 }
 
-export interface DaemonPermissionTranscriptBlock
-  extends DaemonTranscriptBlockBase {
+export interface DaemonPermissionTranscriptBlock extends DaemonTranscriptBlockBase {
   kind: 'permission';
   requestId: string;
   sessionId?: string;
@@ -1032,8 +1018,7 @@ export interface DaemonStatusTranscriptBlock extends DaemonTranscriptBlockBase {
   debugReason?: DaemonUiDebugReason;
 }
 
-export interface DaemonPromptCancelledTranscriptBlock
-  extends DaemonTranscriptBlockBase {
+export interface DaemonPromptCancelledTranscriptBlock extends DaemonTranscriptBlockBase {
   kind: 'prompt_cancelled';
   reason?: string;
 }
@@ -1110,8 +1095,7 @@ export interface DaemonTranscriptSidechannelState {
   };
 }
 
-export interface DaemonTranscriptState
-  extends DaemonTranscriptSidechannelState {
+export interface DaemonTranscriptState extends DaemonTranscriptSidechannelState {
   // wenshao R5 (deepseek-v4-pro): `blocks` is frozen at the dispatch
   // boundary in `reduceDaemonTranscriptEvents` (defense against
   // consumer in-place mutation poisoning the shared snapshot under

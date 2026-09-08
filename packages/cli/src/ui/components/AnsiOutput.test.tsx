@@ -6,7 +6,10 @@
 
 import { render } from 'ink-testing-library';
 import { AnsiOutputText } from './AnsiOutput.js';
-import type { AnsiOutput, AnsiToken } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  AnsiOutput,
+  AnsiToken,
+} from '@lailatul-coder/lailatul-coder-core';
 import { getScreenBuffer } from '../selection/screen-buffer.js';
 import { getSelectedText } from '../selection/selection-text.js';
 
@@ -169,4 +172,3 @@ describe('<AnsiOutputText />', () => {
     }
   });
 });
-

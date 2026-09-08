@@ -1038,9 +1038,8 @@ Directly below the cron block (and before the monitor block), add:
 // All 9 are deferred — they surface only via ToolSearch keyword
 // match (see packages/core/src/tools/computer-use/).
 if (this.isComputerUseEnabled()) {
-  const { registerComputerUseTools } = await import(
-    '../tools/computer-use/index.js'
-  );
+  const { registerComputerUseTools } =
+    await import('../tools/computer-use/index.js');
   registerComputerUseTools(registry);
 }
 ```

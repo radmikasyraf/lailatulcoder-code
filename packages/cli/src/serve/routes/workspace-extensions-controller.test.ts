@@ -53,8 +53,7 @@ describe('createExtensionsController', () => {
     vi.useFakeTimers();
     let refreshCalls = 0;
     let releaseRefresh:
-      | ((result: { refreshed: number; failed: number }) => void)
-      | undefined;
+      ((result: { refreshed: number; failed: number }) => void) | undefined;
     const controller = createExtensionsController({
       boundWorkspace: '/work/bound',
       bridge: {} as AcpSessionBridge,

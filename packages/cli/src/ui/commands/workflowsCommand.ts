@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { WorkflowTask, WorkflowSnapshot } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  WorkflowTask,
+  WorkflowSnapshot,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   isActiveWorkflowStatus,
   isTerminalWorkflowStatus,

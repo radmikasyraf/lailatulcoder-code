@@ -760,9 +760,7 @@ Expected custom protocol type:
 
 ```ts
 type CustomApiProtocol =
-  | AuthType.USE_OPENAI
-  | AuthType.USE_ANTHROPIC
-  | AuthType.USE_GEMINI;
+  AuthType.USE_OPENAI | AuthType.USE_ANTHROPIC | AuthType.USE_GEMINI;
 ```
 
 Expected new state in `AuthDialog`:

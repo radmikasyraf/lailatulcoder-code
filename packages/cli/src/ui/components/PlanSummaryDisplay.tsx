@@ -40,4 +40,3 @@ export const PlanSummaryDisplay: React.FC<PlanSummaryDisplayProps> = ({
     </Box>
   );
 };
-

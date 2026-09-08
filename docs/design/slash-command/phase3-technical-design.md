@@ -220,17 +220,17 @@ function getCommandSourceBadge(cmd: SlashCommand): string | null {
 
 需要先为常用 built-in 命令补充 `argumentHint`。建议首批：
 
-| 命令             | argumentHint            |
+| 命令 | argumentHint |
 | ---------------- | ----------------------- | ------------------ | -------- | ------------- | ------- |
-| `/model`         | `[--fast] [<model-id>]` |
-| `/approval-mode` | `<mode>`                |
-| `/language`      | `ui                     | output <language>` |
-| `/export`        | `md                     | html               | json     | jsonl [path]` |
-| `/memory`        | `show                   | add                | refresh` |
-| `/mcp`           | `desc                   | nodesc             | schema   | auth          | noauth` |
-| `/stats`         | `[model                 | tools]`            |
-| `/docs`          | 空或不设置              |
-| `/doctor`        | 空或不设置              |
+| `/model` | `[--fast] [<model-id>]` |
+| `/approval-mode` | `<mode>` |
+| `/language` | `ui                     | output <language>` |
+| `/export` | `md                     | html               | json     | jsonl [path]` |
+| `/memory` | `show                   | add                | refresh` |
+| `/mcp` | `desc                   | nodesc             | schema   | auth          | noauth` |
+| `/stats` | `[model                 | tools]` |
+| `/docs` | 空或不设置 |
+| `/doctor` | 空或不设置 |
 
 ### 4.4 recently used 排序
 

@@ -6,7 +6,10 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render } from 'ink-testing-library';
-import { HooksConfigSource, HookType } from '@lailatul-coder/lailatul-coder-core';
+import {
+  HooksConfigSource,
+  HookType,
+} from '@lailatul-coder/lailatul-coder-core';
 import { HandlerListBody } from './HandlerListBody.js';
 import type { HookConfigDisplayInfo } from './types.js';
 
@@ -265,4 +268,3 @@ describe('HandlerListBody', () => {
     expect(arrowLine).toContain('/second.sh');
   });
 });
-

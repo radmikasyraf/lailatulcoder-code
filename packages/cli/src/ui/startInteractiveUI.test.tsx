@@ -20,7 +20,9 @@ const registerCleanup = vi.hoisted(() => vi.fn());
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     registerSession: (...args: unknown[]) => registerSession(...args),
@@ -149,4 +151,3 @@ describe('startInteractiveUI session registration', () => {
     expect(config.trackSessionRegistration).toHaveBeenCalledTimes(1);
   });
 });
-

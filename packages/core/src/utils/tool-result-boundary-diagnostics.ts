@@ -21,7 +21,8 @@ import type {
 } from '../tools/tools.js';
 import { canonicalToolName } from '../tools/tool-names.js';
 
-export const TOOL_RESULT_BOUNDARY_EVENT_NAME = 'lailatul-coder.tool_result.boundary';
+export const TOOL_RESULT_BOUNDARY_EVENT_NAME =
+  'lailatul-coder.tool_result.boundary';
 export const TOOL_RESULT_BOUNDARY_JSON_BYTE_THRESHOLD = 65_536;
 export const TOOL_RESULT_BOUNDARY_LOG_LIMIT = 50;
 export const TOOL_RESULT_BOUNDARY_LOG_WINDOW_MS = 60_000;
@@ -444,4 +445,3 @@ function jsonStringExceedsByteLength(
 ): boolean {
   return jsonStringByteLength(value, threshold) > threshold;
 }
-

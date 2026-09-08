@@ -7,7 +7,10 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import path from 'path';
 import { pathToFileURL } from 'node:url';
-import { parseInsightMessage, Storage } from '@lailatul-coder/lailatul-coder-core';
+import {
+  parseInsightMessage,
+  Storage,
+} from '@lailatul-coder/lailatul-coder-core';
 import { insightCommand } from './insightCommand.js';
 import type { CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
@@ -17,7 +20,9 @@ const mockOpenBrowserSecurely = vi.hoisted(() => vi.fn());
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     openBrowserSecurely: mockOpenBrowserSecurely,
@@ -109,8 +114,8 @@ describe('insightCommand', () => {
   it('streams ACP progress messages without waiting for generation to finish', async () => {
     let resolveInsight: ((outputPath: string) => void) | null = null;
     let progressCallback:
-      | ((stage: string, progress: number, detail?: string) => void)
-      | null = null;
+      ((stage: string, progress: number, detail?: string) => void) | null =
+      null;
 
     mockGenerateStaticInsight.mockImplementation(
       async (
@@ -172,14 +177,12 @@ describe('insightCommand', () => {
     })();
 
     const emitProgress = progressCallback as
-      | ((stage: string, progress: number, detail?: string) => void)
-      | null;
+      ((stage: string, progress: number, detail?: string) => void) | null;
     if (emitProgress) {
       emitProgress('Analyzing sessions', 42, '21/50');
     }
     const finishInsight = resolveInsight as
-      | ((outputPath: string) => void)
-      | null;
+      ((outputPath: string) => void) | null;
     if (finishInsight) {
       finishInsight(
         path.resolve('runtime-output', 'insights', 'insight-2026-03-05.html'),

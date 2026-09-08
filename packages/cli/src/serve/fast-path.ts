@@ -495,9 +495,8 @@ async function maybeOpenWebShellBrowser(
   } catch {
     return;
   }
-  const { maybeOpenWebShellBrowser: openBrowser } = await import(
-    '../commands/serve.js'
-  );
+  const { maybeOpenWebShellBrowser: openBrowser } =
+    await import('../commands/serve.js');
   await openBrowser(handle, true);
 }
 

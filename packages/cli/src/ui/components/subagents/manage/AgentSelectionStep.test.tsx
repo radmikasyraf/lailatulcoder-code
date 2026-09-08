@@ -77,4 +77,3 @@ describe('AgentSelectionStep', () => {
     expect(lastFrame()).toContain('●\uFE0E first');
   });
 });
-

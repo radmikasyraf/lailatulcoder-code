@@ -369,7 +369,8 @@ export default {
   '↑/↓ navigate · backspace edits search':
     '↑/↓ navigate · backspace edits search',
   Bundled: 'Bundled',
-  'Available LailatulCoder Ai CLI tools:': 'Available LailatulCoder Ai CLI tools:',
+  'Available LailatulCoder Ai CLI tools:':
+    'Available LailatulCoder Ai CLI tools:',
   'No tools available': 'No tools available',
   'View or change the approval mode for tool usage':
     'View or change the approval mode for tool usage',
@@ -576,8 +577,10 @@ export default {
   // ============================================================================
   // Agents - Creation Wizard
   // ============================================================================
-  'Project Level (.lailatulcoder/agents/)': 'Project Level (.lailatulcoder/agents/)',
-  'User Level (~/.lailatulcoder/agents/)': 'User Level (~/.lailatulcoder/agents/)',
+  'Project Level (.lailatulcoder/agents/)':
+    'Project Level (.lailatulcoder/agents/)',
+  'User Level (~/.lailatulcoder/agents/)':
+    'User Level (~/.lailatulcoder/agents/)',
   '✓ Subagent Created Successfully!': '✓ Subagent Created Successfully!',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     'Subagent "{{name}}" has been saved to {{level}} level.',
@@ -710,7 +713,8 @@ export default {
   // ============================================================================
   // Commands - General (continued)
   // ============================================================================
-  'View and edit LailatulCoder Ai settings': 'View and edit LailatulCoder Ai settings',
+  'View and edit LailatulCoder Ai settings':
+    'View and edit LailatulCoder Ai settings',
   Settings: 'Settings',
   'To see changes, LailatulCoder Ai must be restarted. Press r to exit and apply changes now.':
     'To see changes, LailatulCoder Ai must be restarted. Press r to exit and apply changes now.',
@@ -1828,9 +1832,11 @@ export default {
   'From project settings': 'From project settings',
   'From session': 'From session',
   'Project settings': 'Project settings',
-  'Checked in at .lailatulcoder/settings.json': 'Checked in at .lailatulcoder/settings.json',
+  'Checked in at .lailatulcoder/settings.json':
+    'Checked in at .lailatulcoder/settings.json',
   'User settings': 'User settings',
-  'Saved in at ~/.lailatulcoder/settings.json': 'Saved in at ~/.lailatulcoder/settings.json',
+  'Saved in at ~/.lailatulcoder/settings.json':
+    'Saved in at ~/.lailatulcoder/settings.json',
   'Add a new rule…': 'Add a new rule…',
   'Add {{type}} permission rule': 'Add {{type}} permission rule',
   'Permission rules are a tool name, optionally followed by a specifier in parentheses.':
@@ -2501,7 +2507,8 @@ export default {
     'Already in plan mode. Use "/plan exit" to exit plan mode.',
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     'Not in plan mode. Use "/plan" to enter plan mode first.',
-  "Set up LailatulCoder Ai's status line UI": "Set up LailatulCoder Ai's status line UI",
+  "Set up LailatulCoder Ai's status line UI":
+    "Set up LailatulCoder Ai's status line UI",
 
   // === Core: added from PR #3328 ===
   'Open the memory manager.': 'Open the memory manager.',

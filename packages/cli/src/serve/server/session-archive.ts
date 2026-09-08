@@ -62,8 +62,7 @@ export class SessionArchiveCoordinator {
   private maintenanceSealed = false;
   private activeMaintenance = 0;
   private maintenanceDrain:
-    | { promise: Promise<void>; resolve: () => void }
-    | undefined;
+    { promise: Promise<void>; resolve: () => void } | undefined;
 
   // Lock keys are canonicalized like every other session-id lookup: batch
   // delete/archive/unarchive lock raw caller spellings while restore locks

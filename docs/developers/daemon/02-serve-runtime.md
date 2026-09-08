@@ -107,7 +107,7 @@ Calling `createServeApp` directly still returns only an `Application`. An embedd
 
 | Upstream used by `serve/`                                                                       | Downstream using `serve/`                 |
 | ----------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| `@lailatul-coder/acp-bridge`: bridge, event bus, status types                                        | The `qwen` CLI `serve` subcommand handler |
+| `@lailatul-coder/acp-bridge`: bridge, event bus, status types                                   | The `qwen` CLI `serve` subcommand handler |
 | `packages/core`: `loadSettings`, `getCurrentGeminiMdFilename`, `Config`, `WorkspaceContext`     | Direct embedders, tests                   |
 | ACP SDK (`@agentclientprotocol/sdk`): `PROTOCOL_VERSION`, `ClientSideConnection` through bridge |                                           |
 | Express + body-parser, `node:crypto`, `node:fs`, `node:path`                                    |                                           |

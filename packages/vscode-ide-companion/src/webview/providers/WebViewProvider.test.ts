@@ -98,24 +98,21 @@ const {
   },
   endTurnCallbackRef: {
     current: undefined as
-      | ((reason?: string, source?: string) => void)
-      | undefined,
+      ((reason?: string, source?: string) => void) | undefined,
   },
   streamChunkCallbackRef: {
     current: undefined as ((chunk: string) => void) | undefined,
   },
   toolCallCallbackRef: {
     current: undefined as
-      | ((update: Record<string, unknown>) => void)
-      | undefined,
+      ((update: Record<string, unknown>) => void) | undefined,
   },
   permissionRequestCallbackRef: {
     current: undefined as ((request: unknown) => Promise<string>) | undefined,
   },
   askUserQuestionCallbackRef: {
     current: undefined as
-      | ((request: unknown) => Promise<{ optionId: string }>)
-      | undefined,
+      ((request: unknown) => Promise<{ optionId: string }>) | undefined,
   },
   mockShowInformationMessage: vi.fn<
     (message: string, ...items: string[]) => Thenable<string | undefined>
@@ -1331,7 +1328,10 @@ describe('WebViewProvider settings sync', () => {
 
     // Changing codingPlanRegion should NOT trigger de-auth
     await configChangeHandler?.(
-      createConfigChangeEvent('lailatul-coder', 'lailatul-coder.codingPlanRegion'),
+      createConfigChangeEvent(
+        'lailatul-coder',
+        'lailatul-coder.codingPlanRegion',
+      ),
     );
 
     expect(mockClearPersistedAuth).not.toHaveBeenCalled();

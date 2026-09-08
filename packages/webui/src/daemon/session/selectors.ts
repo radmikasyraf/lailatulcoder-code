@@ -16,10 +16,7 @@ import type {
 } from './types.js';
 
 export type DaemonStreamingState =
-  | 'idle'
-  | 'waiting'
-  | 'responding'
-  | 'thinking';
+  'idle' | 'waiting' | 'responding' | 'thinking';
 
 export function selectDaemonPendingPermissions(
   blocks: readonly DaemonTranscriptBlock[],

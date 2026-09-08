@@ -347,4 +347,3 @@ describe('RewindSelector', () => {
     await flush();
   });
 });
-

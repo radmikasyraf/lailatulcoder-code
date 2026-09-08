@@ -14,7 +14,10 @@ import {
   SETTINGS_DIRECTORY_NAME,
 } from '../config/settings.js';
 import { promisify } from 'node:util';
-import type { Config, SandboxConfig } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Config,
+  SandboxConfig,
+} from '@lailatul-coder/lailatul-coder-core';
 import {
   FatalSandboxError,
   Storage,

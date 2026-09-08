@@ -4062,8 +4062,7 @@ describe('BridgeClient — mid-turn queue drain (craft/drainMidTurnQueue)', () =
       pendingPromptList: [running, queued],
       events: { publish: vi.fn() },
       todoStopGuardAwaitingQueuedPromptOwnerPromptId: undefined as
-        | string
-        | undefined,
+        string | undefined,
     };
     const client = new BridgeClient(
       ((sessionId: string) =>

@@ -4,15 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { GoalControlRequest, GoalRecord } from '@lailatul-coder/sdk/daemon';
+import type {
+  GoalControlRequest,
+  GoalRecord,
+} from '@lailatul-coder/sdk/daemon';
 
 export type GoalControlAction =
-  | 'create'
-  | 'replace'
-  | 'edit'
-  | 'pause'
-  | 'resume'
-  | 'clear';
+  'create' | 'replace' | 'edit' | 'pause' | 'resume' | 'clear';
 
 /**
  * Build the versioned control request for `action` against the goal the daemon

@@ -808,4 +808,3 @@ describe('<HistoryItemDisplay />', () => {
     });
   });
 });
-

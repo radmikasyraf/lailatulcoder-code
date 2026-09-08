@@ -170,7 +170,9 @@ describe('createNativeAudioRecorder', () => {
     await expect(recorder.start()).rejects.toThrow(
       /mirror or private registry/,
     );
-    await expect(recorder.start()).rejects.toThrow(/@lailatul-coder\/audio-capture/);
+    await expect(recorder.start()).rejects.toThrow(
+      /@lailatul-coder\/audio-capture/,
+    );
   });
 
   it.each(['ERR_MODULE_NOT_FOUND', 'MODULE_NOT_FOUND'])(

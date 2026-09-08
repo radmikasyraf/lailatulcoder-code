@@ -185,7 +185,8 @@ function cleanupOldHeapSnapshots(
     .readdirSync(outputDir)
     .filter(
       (name) =>
-        name.startsWith('lailatul-coder-heap-') && name.endsWith('.heapsnapshot'),
+        name.startsWith('lailatul-coder-heap-') &&
+        name.endsWith('.heapsnapshot'),
     )
     .map((name) => path.join(outputDir, name))
     .sort((a, b) => {

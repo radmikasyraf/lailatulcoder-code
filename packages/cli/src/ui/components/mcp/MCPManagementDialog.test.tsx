@@ -36,4 +36,3 @@ describe('MCPManagementDialog', () => {
     expect(lastFrame()).toContain('╮');
   });
 });
-

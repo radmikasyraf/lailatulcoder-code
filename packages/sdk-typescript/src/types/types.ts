@@ -112,9 +112,7 @@ export interface McpOAuthConfig {
  * Auth provider type for MCP servers
  */
 export type McpAuthProviderType =
-  | 'dynamic_discovery'
-  | 'google_credentials'
-  | 'service_account_impersonation';
+  'dynamic_discovery' | 'google_credentials' | 'service_account_impersonation';
 
 /**
  * CLI MCP Server configuration

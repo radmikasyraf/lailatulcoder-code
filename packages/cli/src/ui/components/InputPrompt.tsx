@@ -2337,4 +2337,3 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
     </>
   );
 };
-

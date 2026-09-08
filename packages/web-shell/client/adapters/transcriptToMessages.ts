@@ -1416,8 +1416,7 @@ type ParsedInsight =
   | { type: 'insight_error'; error: string };
 
 type InsightSegment =
-  | { kind: 'text'; text: string }
-  | { kind: 'insight'; data: ParsedInsight };
+  { kind: 'text'; text: string } | { kind: 'insight'; data: ParsedInsight };
 
 const INSIGHT_PREFIXES = [
   '"insight_progress":',

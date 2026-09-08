@@ -14,7 +14,11 @@ import type {
   InsightProgressCallback,
 } from '../types/StaticInsightTypes.js';
 
-import { updateSymlink, Storage, type Config } from '@lailatul-coder/lailatul-coder-core';
+import {
+  updateSymlink,
+  Storage,
+  type Config,
+} from '@lailatul-coder/lailatul-coder-core';
 
 export class StaticInsightGenerator {
   private dataProcessor: DataProcessor;

@@ -170,4 +170,3 @@ export async function showResumeSessionPicker(
     });
   });
 }
-

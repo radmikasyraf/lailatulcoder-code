@@ -6,7 +6,10 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getExtensionManager, extensionToOutputString } from './utils.js';
-import type { Extension, ExtensionManager } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  Extension,
+  ExtensionManager,
+} from '@lailatul-coder/lailatul-coder-core';
 
 const mockRefreshCache = vi.fn();
 const mockExtensionManagerInstance = {
@@ -15,7 +18,9 @@ const mockExtensionManagerInstance = {
 
 vi.mock('@lailatul-coder/lailatul-coder-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@lailatul-coder/lailatul-coder-core')>();
+    await importOriginal<
+      typeof import('@lailatul-coder/lailatul-coder-core')
+    >();
   return {
     ...actual,
     ExtensionManager: vi
@@ -66,7 +71,8 @@ describe('getExtensionManager', () => {
   });
 
   it('should use current working directory as workspace', async () => {
-    const { ExtensionManager } = await import('@lailatul-coder/lailatul-coder-core');
+    const { ExtensionManager } =
+      await import('@lailatul-coder/lailatul-coder-core');
 
     await getExtensionManager();
 

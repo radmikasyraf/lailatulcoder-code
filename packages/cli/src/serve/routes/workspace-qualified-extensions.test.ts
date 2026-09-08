@@ -706,10 +706,7 @@ describe('extension management v2 REST', () => {
       ).toBe(true);
       expect(
         ExtensionManager.prototype.setExtensionDefaultActivations,
-      ).toHaveBeenCalledOnce();
-      expect(
-        ExtensionManager.prototype.setExtensionDefaultActivations,
-      ).toHaveBeenCalledWith(names, 'enabled', expect.any(Function));
+      ).toHaveBeenCalledExactlyOnceWith(names, 'enabled', expect.any(Function));
       expect(
         h.primary.bridge.refreshExtensionsForAllSessions,
       ).toHaveBeenCalledOnce();

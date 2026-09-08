@@ -17,9 +17,8 @@ vi.mock('../utils/osc.js', async (importOriginal) => {
   };
 });
 
-const { detectTerminal: mockedDetectTerminal } = await import(
-  '../utils/osc.js'
-);
+const { detectTerminal: mockedDetectTerminal } =
+  await import('../utils/osc.js');
 
 function createMockTerminal(): TerminalNotification {
   return {

@@ -11,7 +11,10 @@ import { act, createElement } from 'react';
 import type { Root } from 'react-dom/client';
 import { JSDOM } from 'jsdom';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
-import type { DaemonEvent, DaemonTranscriptBlock } from '@lailatul-coder/sdk/daemon';
+import type {
+  DaemonEvent,
+  DaemonTranscriptBlock,
+} from '@lailatul-coder/sdk/daemon';
 import {
   makeTempWorkspace,
   spawnDaemon,
@@ -57,9 +60,8 @@ beforeAll(async () => {
     value: true,
   });
   ({ createRoot } = await import('react-dom/client'));
-  ({ DaemonSessionProvider, useTranscriptBlocks } = await import(
-    '@lailatul-coder/webui/daemon-react-sdk'
-  ));
+  ({ DaemonSessionProvider, useTranscriptBlocks } =
+    await import('@lailatul-coder/webui/daemon-react-sdk'));
 });
 
 afterAll(() => {

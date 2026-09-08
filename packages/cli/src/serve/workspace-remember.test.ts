@@ -425,13 +425,11 @@ describe('workspace memory remember routes', () => {
   it('queues and completes a hidden workspace dream task', async () => {
     const bridge = buildBridgeStub({
       knownIds: ['client-1'],
-      dreamImpl: vi.fn(
-        async (): Promise<BridgeWorkspaceMemoryDreamResult> => ({
-          summary: 'dreamed',
-          touchedTopics: ['feedback', 'project'],
-          dedupedEntries: 1,
-        }),
-      ),
+      dreamImpl: vi.fn(async (): Promise<BridgeWorkspaceMemoryDreamResult> => ({
+        summary: 'dreamed',
+        touchedTopics: ['feedback', 'project'],
+        dedupedEntries: 1,
+      })),
     });
     const app = buildApp(bridge);
 

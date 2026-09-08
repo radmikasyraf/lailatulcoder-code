@@ -256,8 +256,7 @@ const PROMPTLESS_PROVIDER_DENIAL =
 
 const MAX_PAYLOAD_RECURSION_DEPTH = 3;
 
-interface TrustedDaemonToolGuardRequest
-  extends ExternalToolGuardPrepareRequest {
+interface TrustedDaemonToolGuardRequest extends ExternalToolGuardPrepareRequest {
   readonly effectiveCwd: string;
 }
 
@@ -841,9 +840,7 @@ function consumeTimeoutWrapper(run: GuardToken[], start: number): number {
 }
 
 type ShellWrapperScan =
-  | { kind: 'none' }
-  | { kind: 'static'; payload: string }
-  | { kind: 'dynamic' };
+  { kind: 'none' } | { kind: 'static'; payload: string } | { kind: 'dynamic' };
 
 // The next real argv entry: a redirection between the flag and its payload
 // (`sh -c > /dev/null 'cmd'`) is not the payload.

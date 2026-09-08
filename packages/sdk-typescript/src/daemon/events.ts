@@ -176,8 +176,10 @@ const MAX_PENDING_PER_SESSION = 64;
 export type DaemonKnownEventType =
   (typeof DAEMON_KNOWN_EVENT_TYPE_VALUES)[number];
 
-export interface DaemonEventEnvelope<TType extends string, TData>
-  extends Omit<DaemonEvent, 'type' | 'data'> {
+export interface DaemonEventEnvelope<TType extends string, TData> extends Omit<
+  DaemonEvent,
+  'type' | 'data'
+> {
   type: TType;
   data: TData;
 }
@@ -539,8 +541,7 @@ export interface DaemonManagedMemoryChangedData {
 }
 
 export type DaemonMemoryChangedData =
-  | DaemonFileMemoryChangedData
-  | DaemonManagedMemoryChangedData;
+  DaemonFileMemoryChangedData | DaemonManagedMemoryChangedData;
 
 /**
  * A workspace agent CRUD mutation completed successfully. `change`
@@ -562,11 +563,7 @@ export interface DaemonAgentChangedData {
 export type DaemonAuthDeviceFlowProviderId = 'qwen-oauth' | (string & {});
 
 export type DaemonAuthDeviceFlowStatus =
-  | 'pending'
-  | 'authorized'
-  | 'expired'
-  | 'error'
-  | 'cancelled';
+  'pending' | 'authorized' | 'expired' | 'error' | 'cancelled';
 
 /**
  * Known errorKind values surfaced on `auth_device_flow_failed`. The
@@ -907,11 +904,7 @@ export type DaemonMcpServerRemovedEvent = DaemonEventEnvelope<
 export interface DaemonMcpServerChangedData {
   readonly serverName: string;
   readonly action:
-    | 'approve'
-    | 'enable'
-    | 'disable'
-    | 'authenticate'
-    | 'clear-auth';
+    'approve' | 'enable' | 'disable' | 'authenticate' | 'clear-auth';
   readonly originatorClientId?: string;
   [key: string]: unknown;
 }
@@ -925,12 +918,7 @@ export interface DaemonExtensionsChangedData {
   readonly refreshed: number;
   readonly failed: number;
   readonly status?:
-    | 'installed'
-    | 'enabled'
-    | 'disabled'
-    | 'updated'
-    | 'uninstalled'
-    | 'failed';
+    'installed' | 'enabled' | 'disabled' | 'updated' | 'uninstalled' | 'failed';
   readonly source?: string;
   readonly name?: string;
   readonly version?: string;
@@ -1236,8 +1224,7 @@ export type DaemonStreamLifecycleEvent =
  * stream alive" can ignore this whole branch.
  */
 export type DaemonMcpGuardrailEvent =
-  | DaemonMcpBudgetWarningEvent
-  | DaemonMcpChildRefusedBatchEvent;
+  DaemonMcpBudgetWarningEvent | DaemonMcpChildRefusedBatchEvent;
 
 /**
  * Workspace-level mutation signals fanned out through every active

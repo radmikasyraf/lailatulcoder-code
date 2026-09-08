@@ -131,8 +131,7 @@ describe('createSpawnChannelFactory env policy', () => {
     });
 
     const spawnOptions = mockSpawn.mock.calls[0]?.[2] as
-      | { env?: NodeJS.ProcessEnv; windowsHide?: boolean }
-      | undefined;
+      { env?: NodeJS.ProcessEnv; windowsHide?: boolean } | undefined;
     expect(spawnOptions?.windowsHide).toBe(true);
     expect(spawnOptions?.env).not.toHaveProperty('QWEN_CODE_SIMPLE');
     expect(spawnOptions?.env).not.toHaveProperty('QWEN_SERVER_TOKEN');
@@ -149,8 +148,7 @@ describe('createSpawnChannelFactory env policy', () => {
     await factory('/tmp/project');
 
     const spawnOptions = mockSpawn.mock.calls[0]?.[2] as
-      | { env?: NodeJS.ProcessEnv }
-      | undefined;
+      { env?: NodeJS.ProcessEnv } | undefined;
     expect(spawnOptions?.env?.['QWEN_CODE_SERVE']).toBe('1');
   });
 
@@ -183,8 +181,7 @@ describe('createSpawnChannelFactory env policy', () => {
 
     const args = mockSpawn.mock.calls[0]?.[1] as string[] | undefined;
     const spawnOptions = mockSpawn.mock.calls[0]?.[2] as
-      | { env?: NodeJS.ProcessEnv }
-      | undefined;
+      { env?: NodeJS.ProcessEnv } | undefined;
     expect(args).toContain('/runtime/qwen.js');
     expect(args).not.toContain('/process/qwen.js');
     expect(spawnOptions?.env?.['RUNTIME_ONLY_FOR_TEST']).toBe('from-runtime');

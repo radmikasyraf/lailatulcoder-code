@@ -6,7 +6,10 @@
 
 import React from 'react';
 import { Box, Text } from 'ink';
-import type { GoalSnapshotV2, GoalStateCause } from '@lailatul-coder/lailatul-coder-core';
+import type {
+  GoalSnapshotV2,
+  GoalStateCause,
+} from '@lailatul-coder/lailatul-coder-core';
 import { theme } from '../../semantic-colors.js';
 import { ICON } from '../../constants.js';
 import { formatDuration } from '../../utils/formatters.js';
@@ -33,8 +36,7 @@ interface GoalStateMessageProps {
 }
 
 type GoalStatusMessageProps =
-  | LegacyGoalStatusMessageProps
-  | GoalStateMessageProps;
+  LegacyGoalStatusMessageProps | GoalStateMessageProps;
 
 const pluralTurns = (n: number) => (n === 1 ? 'turn' : 'turns');
 
@@ -263,4 +265,3 @@ const GoalStatusMessageInternal: React.FC<GoalStatusMessageProps> = (props) => {
 };
 
 export const GoalStatusMessage = React.memo(GoalStatusMessageInternal);
-
