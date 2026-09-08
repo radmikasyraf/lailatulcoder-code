@@ -46,21 +46,38 @@ if (Test-Path $INSTALL_DIR) { Remove-Item -Recurse -Force $INSTALL_DIR }
 New-Item -ItemType Directory -Path $INSTALL_DIR -Force | Out-Null
 Expand-Archive -Path $zipPath -DestinationPath $INSTALL_DIR -Force
 Remove-Item $zipPath -Force
-Write-Host "Extracted to $INSTALL_DIR" -ForegroundColor Green
+Write-Host "Extracted" -ForegroundColor Green
 
 # Install dependencies
 Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Yellow
 Push-Location $INSTALL_DIR
-cmd /c "npm install > nul 2>&1"
-Write-Host "Root dependencies installed" -ForegroundColor Green
+cmd /c "npm install --ignore-scripts > nul 2>&1"
+Write-Host "Dependencies installed" -ForegroundColor Green
 
-# Install workspace dependencies
+# Link workspace packages manually
 Write-Host "Linking workspace packages..." -ForegroundColor Yellow
-cmd /c "npm install --workspaces > nul 2>&1"
+$workspaces = @('packages/core', 'packages/web-templates', 'packages/channels/base', 'packages/acp-bridge')
+foreach ($ws in $workspaces) {
+    $wsPath = "$INSTALL_DIR\$($ws -replace '/', '\')"
+    if (Test-Path $wsPath) {
+        Push-Location $wsPath
+        cmd /c "npm link > nul 2>&1"
+        Pop-Location
+    }
+}
+
+# Link core in cli
+Push-Location "$INSTALL_DIR\packages\cli"
+cmd /c "npm link @lailatul-coder/lailatul-coder-core > nul 2>&1"
+cmd /c "npm link @lailatul-coder/web-templates > nul 2>&1"
+cmd /c "npm link @lailatul-coder/channel-base > nul 2>&1"
+cmd /c "npm link @lailatul-coder/acp-bridge > nul 2>&1"
+Pop-Location
+
 Pop-Location
 Write-Host "Workspace packages linked" -ForegroundColor Green
 
-# Link CLI
+# Link CLI command
 Write-Host "Setting up lailatulcoder command..." -ForegroundColor Yellow
 Push-Location "$INSTALL_DIR\packages\cli"
 cmd /c "npm link > nul 2>&1"
