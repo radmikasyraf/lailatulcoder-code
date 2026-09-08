@@ -29,7 +29,7 @@ if ($nodeMajor -lt $MIN_NODE_VERSION) {
 Write-Host "Node.js $nodeVersion OK" -ForegroundColor Green
 
 # Download release
-Write-Host "Downloading LailatulCoder Ai (13.6 MB)..." -ForegroundColor Yellow
+Write-Host "Downloading LailatulCoder Ai (19.7 MB)..." -ForegroundColor Yellow
 $zipPath = "$env:TEMP\lailatulcoder.zip"
 
 try {
@@ -92,3 +92,4 @@ Write-Host ""
 Write-Host "  Run: lailatulcoder" -ForegroundColor Cyan
 Write-Host "  Then type /auth to configure your API key" -ForegroundColor Cyan
 Write-Host ""
+
