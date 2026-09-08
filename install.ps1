@@ -52,8 +52,13 @@ Write-Host "Extracted to $INSTALL_DIR" -ForegroundColor Green
 Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Yellow
 Push-Location $INSTALL_DIR
 cmd /c "npm install > nul 2>&1"
+Write-Host "Root dependencies installed" -ForegroundColor Green
+
+# Install workspace dependencies
+Write-Host "Linking workspace packages..." -ForegroundColor Yellow
+cmd /c "npm install --workspaces > nul 2>&1"
 Pop-Location
-Write-Host "Dependencies installed" -ForegroundColor Green
+Write-Host "Workspace packages linked" -ForegroundColor Green
 
 # Link CLI
 Write-Host "Setting up lailatulcoder command..." -ForegroundColor Yellow
