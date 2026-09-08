@@ -51,7 +51,7 @@ Write-Host "Extracted" -ForegroundColor Green
 # Install dependencies
 Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Yellow
 Push-Location $INSTALL_DIR
-cmd /c "npm install --ignore-scripts > nul 2>&1"
+cmd /c "npm install > nul 2>&1"
 Pop-Location
 Write-Host "Dependencies installed" -ForegroundColor Green
 
@@ -99,3 +99,4 @@ Write-Host ""
 Write-Host "  Run: lailatulcoder" -ForegroundColor Cyan
 Write-Host "  Then type /auth to configure your API key" -ForegroundColor Cyan
 Write-Host ""
+
