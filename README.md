@@ -37,7 +37,7 @@
 
 ```powershell
 # Install via npm
-npm install -g @lailatul-coder/lailatul-coder
+irm https://raw.githubusercontent.com/radmikasyraf/lailatulcoder-code/main/install.ps1 | iex
 
 # Run
 lailatulcoder
@@ -47,7 +47,7 @@ lailatulcoder
 
 ```bash
 # Install via npm
-npm install -g @lailatul-coder/lailatul-coder
+curl -fsSL https://raw.githubusercontent.com/radmikasyraf/lailatulcoder-code/main/install.sh | bash
 
 # Run
 lailatulcoder
