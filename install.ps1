@@ -29,7 +29,7 @@ if ($nodeMajor -lt $MIN_NODE_VERSION) {
 Write-Host "Node.js $nodeVersion OK" -ForegroundColor Green
 
 # Download release
-Write-Host "Downloading LailatulCoder Ai (19.7 MB)..." -ForegroundColor Yellow
+Write-Host "Downloading LailatulCoder Ai (20.1 MB)..." -ForegroundColor Yellow
 $zipPath = "$env:TEMP\lailatulcoder.zip"
 
 try {
@@ -60,12 +60,19 @@ Write-Host "Setting up workspace packages..." -ForegroundColor Yellow
 $lailatulDir = "$INSTALL_DIR\node_modules\@lailatul-coder"
 New-Item -ItemType Directory -Path $lailatulDir -Force | Out-Null
 
-# Map: package folder -> node_modules name
 $workspaceMap = @{
     'packages\core' = 'lailatul-coder-core'
     'packages\web-templates' = 'web-templates'
-    'packages\channels\base' = 'channel-base'
     'packages\acp-bridge' = 'acp-bridge'
+    'packages\channels\base' = 'channel-base'
+    'packages\channels\weixin' = 'channel-weixin'
+    'packages\channels\dingtalk' = 'channel-dingtalk'
+    'packages\channels\telegram' = 'channel-telegram'
+    'packages\channels\wecom' = 'channel-wecom'
+    'packages\channels\feishu' = 'channel-feishu'
+    'packages\channels\github' = 'channel-github'
+    'packages\channels\gitlab' = 'channel-gitlab'
+    'packages\channels\qqbot' = 'channel-qqbot'
 }
 
 foreach ($ws in $workspaceMap.GetEnumerator()) {
@@ -74,7 +81,7 @@ foreach ($ws in $workspaceMap.GetEnumerator()) {
     if (Test-Path $src) {
         if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }
         Copy-Item -Recurse -Force $src $dest
-        Write-Host "  Linked: @lailatul-coder/$($ws.Value)" -ForegroundColor Gray
+        Write-Host "  ✓ @lailatul-coder/$($ws.Value)" -ForegroundColor Gray
     }
 }
 Write-Host "Workspace packages ready" -ForegroundColor Green
@@ -92,4 +99,3 @@ Write-Host ""
 Write-Host "  Run: lailatulcoder" -ForegroundColor Cyan
 Write-Host "  Then type /auth to configure your API key" -ForegroundColor Cyan
 Write-Host ""
-
