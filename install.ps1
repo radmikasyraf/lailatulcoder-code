@@ -56,7 +56,7 @@ Write-Host "Extracted to $INSTALL_DIR" -ForegroundColor Green
 # Install dependencies
 Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Yellow
 Set-Location $INSTALL_DIR
-npm install 2>&1 | Out-Null
+npm install 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: npm install failed" -ForegroundColor Red
     exit 1
@@ -75,4 +75,5 @@ Write-Host ""
 Write-Host "  Run: lailatulcoder" -ForegroundColor Cyan
 Write-Host "  Then type /auth to configure your API key" -ForegroundColor Cyan
 Write-Host ""
+
 
