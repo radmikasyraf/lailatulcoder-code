@@ -4,7 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { useState, useEffect, useRef } from 'react';
-const TIMER_REFRESH_INTERVAL_MS = 500;
+// Was 500ms; halved the redraw frequency during the "waiting for AI
+// response" spinner/timer loop to reduce Ink's full erase+redraw flicker
+// (createStandard writer) without touching incrementalRendering, which
+// fixes flicker but intermittently mispaints the fixed banner instead.
+const TIMER_REFRESH_INTERVAL_MS = 1000;
+
 function elapsedSeconds(elapsedMs) {
     return Number((Math.max(0, elapsedMs) / 1000).toFixed(1));
 }

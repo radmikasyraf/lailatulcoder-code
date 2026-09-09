@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * Copyright 2026 LailatulCoder Team
  * SPDX-License-Identifier: Apache-2.0
@@ -145,5 +145,23 @@ export function oscGhosttyNotify(title, message) {
  */
 export function generateKittyId() {
     return Math.floor(Math.random() * 2 ** 31);
+}
+/**
+ * Detect the classic Windows console host (conhost.exe, running behind a
+ * plain cmd.exe/powershell.exe window) as opposed to a modern terminal app
+ * (Windows Terminal, ConEmu). Same detection used by useTerminalProgress:
+ * WT_SESSION/ConEmuPID present means a modern terminal, so their absence on
+ * win32 means classic conhost.
+ *
+ * conhost's repaint path is slow enough that animations timed for smooth
+ * terminals (spinners, counters ticking every ~80-100ms) read as constant
+ * flicker there, since Ink has no way to update just the changed glyph on
+ * that host -- every commit is a full erase + redraw. Callers use this to
+ * fall back to a much slower, hand-rolled animation cadence in that case.
+ */
+export function isClassicWindowsConsole() {
+    return (process.platform === 'win32' &&
+        !process.env['WT_SESSION'] &&
+        !process.env['ConEmuPID']);
 }
 //# sourceMappingURL=osc.js.map

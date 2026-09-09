@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * Copyright 2025 Google LLC
  * SPDX-License-Identifier: Apache-2.0
@@ -14,6 +14,7 @@ import { GeminiRespondingSpinner } from './GeminiRespondingSpinner.js';
 import { formatDuration, formatTokenCount } from '../utils/formatters.js';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { useAnimationFrame } from '../hooks/useAnimationFrame.js';
+import { isClassicWindowsConsole } from '../../utils/osc.js';
 import { isNarrowWidth } from '../utils/isNarrowWidth.js';
 import { t } from '../../i18n/index.js';
 
@@ -63,10 +64,17 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
   // re-renders on each animation frame (100ms ≈ spinner cadence). Siblings
   // like InputPrompt / Footer stay static, which eliminates terminal flicker
   // during streaming output.
+  //
+  // On the classic Windows console (conhost), even this component's own
+  // full erase+redraw at 100ms reads as flicker (Ink has no way to update
+  // just the changed digit there), matching the same problem worked around
+  // for the GeminiSpinner glyph -- so slow this animation down there too,
+  // same as the tmux workaround.
   const fallbackRef = useRef(0);
+  const animationIntervalMs = isClassicWindowsConsole() ? 750 : 100;
   const animatedChars = useAnimationFrame(
     streamingCharsRef ?? fallbackRef,
-    streamingCharsRef && isStreaming ? 100 : null,
+    streamingCharsRef && isStreaming ? animationIntervalMs : null,
   );
 
   if (streamingState === StreamingState.Idle) {

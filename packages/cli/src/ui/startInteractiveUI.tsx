@@ -252,8 +252,30 @@ export async function startInteractiveUI(
       exitOnCtrlC: false,
       isScreenReaderEnabled: config.getScreenReader(),
       alternateScreen: useVP,
+      // NOTE: incrementalRendering (Ink's line-diff writer) fixes the
+      // long-standing chat-flicker issue, and a prior banner-mispaint it
+      // exposed was itself fixed (useBoxMetrics instead of a hand-rolled
+      // measureElement+useLayoutEffect -- see MainContent.tsx). But it was
+      // found to break packages/cli/dist/src/ui/utils/terminal-resize-
+      // reflow.js, a pre-existing fix for issue #8557 (terminal reflow on
+      // shrink leaves stale duplicate frames on screen): that file
+      // intercepts stdout.write and amplifies/replaces Ink's erase
+      // sequence, but its regex (ERASE_LINES_PATTERN, in
+      // terminalRedrawOptimizer.js) only matches the bulk
+      // ansiEscapes.eraseLines(N) shape createStandard (and
+      // createIncremental's shrink/grow branches) writes. createIncremental's
+      // steady-state per-line diff instead writes a single cursorUp(N)
+      // followed by per-line cursorTo(0)+line+eraseEndLine, which the
+      // regex never matches -- so on resize, that protection silently
+      // stops firing and issue #8557 (duplicated/stranded frame content,
+      // reproduced by growing then shrinking the window) comes back.
+      // Reverted in favor of keeping that protection intact; a one-shot
+      // instance.clear() workaround for the (separate, since-fixed)
+      // startup-transition duplication was also tried and reverted here
+      // earlier.
     },
   );
+
   if (useVP) {
     // Ink entered the alternate screen synchronously inside render() above.
     // The Kitty keyboard flags were pushed at startup on the main screen, and

@@ -25,33 +25,37 @@
 - 🌐 Supports Malay & English
 - 📁 Read & write files, run commands
 - 🔧 Multi-model support
+- 💻 Cross-platform — Windows, macOS, and Linux (Intel & Apple Silicon / ARM)
 
 ## Requirements
 
-- Node.js v22+
+- Node.js v22+ ([download for your OS](https://nodejs.org/en/download))
 - LailatulCoder.Ai API key
 
 ## Installation
 
-### Windows (PowerShell)
-
-```powershell
-# Install via npm
-irm https://raw.githubusercontent.com/radmikasyraf/lailatulcoder-code/main/install.ps1 | iex
-
-# Run
-lailatulcoder
-```
-
-### macOS / Linux
+Works the same way on **Windows**, **macOS**, and **Linux** — install globally via npm:
 
 ```bash
-# Install via npm
-curl -fsSL https://raw.githubusercontent.com/radmikasyraf/lailatulcoder-code/main/install.sh | bash
+npm install -g lailatulcoder
+```
 
-# Run
+Then run it from any terminal:
+
+```bash
 lailatulcoder
 ```
+
+<details>
+<summary>Platform-specific notes</summary>
+
+- **Windows**: Works in PowerShell, Command Prompt (`cmd.exe`), or Windows Terminal. If Node.js isn't installed yet, grab the LTS installer from [nodejs.org](https://nodejs.org/en/download) or install via `winget install OpenJS.NodeJS.LTS`.
+- **macOS**: Install Node.js via the [official installer](https://nodejs.org/en/download), [Homebrew](https://brew.sh) (`brew install node`), or `nvm`. Works on both Intel and Apple Silicon Macs.
+- **Linux**: Install Node.js via your distro's package manager, [NodeSource](https://github.com/nodesource/distributions), or `nvm`. Works on both x64 and ARM64.
+
+Clipboard image support and right-click paste (`@teddyzhu/clipboard`), the embedded terminal (`node-pty`), and image rendering (`sharp`) all ship as optional platform-specific dependencies — npm automatically installs the correct native binary for your OS and CPU architecture, no extra setup needed.
+
+</details>
 
 ## Quick Start
 
@@ -74,7 +78,7 @@ lailatulcoder
 
 ## Configuration
 
-Settings are stored in `~/.lailatulcoder/settings.json`
+Settings are stored in `~/.qwen/settings.json`
 
 ## License
 

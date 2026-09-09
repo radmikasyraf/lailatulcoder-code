@@ -1,10 +1,10 @@
-import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+﻿import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 /**
  * @license
  * Copyright 2025 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
-import { Box, Static } from 'ink';
+import { Box, Static, useBoxMetrics } from 'ink';
 import { memo, useCallback, useEffect, useMemo, useRef, useState, } from 'react';
 import { isHistoryItemVisibleAfterRestore, StreamingState, ToolCallStatus, } from '../types.js';
 import { HistoryItemDisplay } from './HistoryItemDisplay.js';
@@ -69,25 +69,32 @@ function initialReplayCount(length) {
 // Memoized wrapper used only by the virtual scroll path. Prevents re-rendering
 // stable completed items when unrelated UIState fields change during streaming.
 const VirtualHistoryItem = memo(HistoryItemDisplay);
-const VP_BANNER_ID = Number.MIN_SAFE_INTEGER;
-const VP_BANNER_ITEM = { type: 'vp-banner', id: VP_BANNER_ID };
 // Pure functions with no closure deps — defined outside the component so they
 // are stable references and never trigger useMemo/useCallback invalidation.
-// index 0 is always the banner sentinel (VP_BANNER_ITEM is prepended first).
-const virtualEstimatedItemHeight = (index) => (index === 0 ? 10 : 3);
-const virtualKeyExtractor = (item) => item.type === 'vp-banner'
-    ? 'vp-banner'
-    : item.id >= 0
-        ? `h-${item.id}`
-        : `p-${-item.id - 1}`;
-const virtualIsStaticItem = (item) => item.type === 'vp-banner' || item.id > 0;
+const virtualEstimatedItemHeight = (_index) => 3;
+const virtualKeyExtractor = (item) => item.id >= 0 ? `h-${item.id}` : `p-${-item.id - 1}`;
+const virtualIsStaticItem = (item) => item.id > 0;
 export const MainContent = ({ footerRef }) => {
     const { version } = useAppContext();
     const uiState = useUIState();
     const { allExpanded: fullDetail } = useThoughtExpanded();
     const streamingState = uiState.streamingState;
     const showScrollbar = uiState.showScrollbar ?? true;
-    const { pendingHistoryItems, terminalWidth, mainAreaWidth, staticAreaMaxItemHeight, availableTerminalHeight, historyRemountKey, } = uiState;
+const { pendingHistoryItems, terminalWidth, mainAreaWidth, staticAreaMaxItemHeight, availableTerminalHeight, historyRemountKey, } = uiState;
+    // Fixed banner (logo + tips + notifications), pinned above the scrollable
+    // history instead of scrolling away with it. Measured the same way
+    // AppContainer measures the footer (mainControlsRef): measureElement +
+    // subtract from the height budget handed to the scroll container below.
+    const bannerRef = useRef(null);
+    // Ink's own layout-metrics hook: unlike a hand-rolled measureElement +
+    // useLayoutEffect(deps) pair, this also subscribes to the root's
+    // layout-commit listener, so it picks up sibling-driven height changes
+    // (Notifications' startupWarnings/initError, DebugModeNotification's
+    // debug state, Tips' rotating text) that a fixed dependency list can
+    // never fully enumerate -- that gap left bannerHeight stale until a
+    // terminal resize (which happened to be in the old deps list) forced a
+    // remeasure. See node_modules/ink/build/hooks/use-box-metrics.js.
+    const { height: bannerHeight } = useBoxMetrics(bannerRef);
     // Filter out items whose display is suppressed (e.g. /history collapse).
     const visibleHistory = useMemo(() => uiState.history.filter(isHistoryItemVisibleAfterRestore), [uiState.history]);
     // History is rendered as-is (no cross-group merging).
@@ -209,7 +216,6 @@ export const MainContent = ({ footerRef }) => {
     // Pending items get negative IDs (-(i+1)) so renderItem can tell them apart.
     const allVirtualItems = useMemo(() => {
         const combined = [
-            VP_BANNER_ITEM,
             ...visibleHistory,
             ...pendingHistoryItems.map((item, i) => ({ ...item, id: -(i + 1) })),
         ];
@@ -318,9 +324,6 @@ export const MainContent = ({ footerRef }) => {
     // Streaming-only state — including pending source-copy offsets — is read
     // from refs so callback identity is stable.
     const renderVirtualItem = useCallback(({ item }) => {
-        if (item.type === 'vp-banner') {
-            return (_jsxs(Box, { flexDirection: "column", children: [_jsx(AppHeader, { version: version }), _jsx(DebugModeNotification, {}), _jsx(Notifications, {})] }));
-        }
         const isPending = item.id < 0;
         const sourceCopyIndexOffsets = isPending
             ? pendingSourceCopyOffsetsRef.current[-item.id - 1]
@@ -342,8 +345,8 @@ export const MainContent = ({ footerRef }) => {
         uiState.constrainHeight,
     ]);
     if (useVirtualScroll) {
-        const scrollContainerHeight = Math.max(0, uiState.availableTerminalHeight ?? 0);
-        return (_jsxs(OverflowProvider, { children: [_jsx(ScrollableList, { ref: scrollRef, hasFocus: !uiState.dialogsVisible, data: allVirtualItems, renderItem: renderVirtualItem, estimatedItemHeight: virtualEstimatedItemHeight, keyExtractor: virtualKeyExtractor, initialScrollIndex: allVirtualItems.length <= 1 ? 0 : SCROLL_TO_ITEM_END, isStaticItem: virtualIsStaticItem, containerHeight: scrollContainerHeight, measureAtFullHeight: hasPendingPlainTextConfirmation, showScrollbar: showScrollbar }), _jsx(TextSelectionController, { isActive: !uiState.dialogsVisible, getViewportRect: () => scrollRef.current?.getViewportRect() ?? null, getAdditionalSelectableRects: () => footerRef?.current
+        const scrollContainerHeight = Math.max(0, (uiState.availableTerminalHeight ?? 0) - bannerHeight);
+        return (_jsxs(OverflowProvider, { children: [_jsxs(Box, { ref: bannerRef, flexDirection: "column", children: [_jsx(AppHeader, { version: version }), _jsx(DebugModeNotification, {}), _jsx(Notifications, {})] }), _jsx(ScrollableList, { ref: scrollRef, hasFocus: !uiState.dialogsVisible, data: allVirtualItems, renderItem: renderVirtualItem, estimatedItemHeight: virtualEstimatedItemHeight, keyExtractor: virtualKeyExtractor, initialScrollIndex: allVirtualItems.length === 0 ? 0 : SCROLL_TO_ITEM_END, isStaticItem: virtualIsStaticItem, containerHeight: scrollContainerHeight, measureAtFullHeight: hasPendingPlainTextConfirmation, showScrollbar: showScrollbar }), _jsx(TextSelectionController, { isActive: !uiState.dialogsVisible, getViewportRect: () => scrollRef.current?.getViewportRect() ?? null, getAdditionalSelectableRects: () => footerRef?.current
                         ? [measureElementPosition(footerRef.current)]
                         : [], getScrollState: () => scrollRef.current?.getScrollState() ?? {
                         scrollTop: 0,

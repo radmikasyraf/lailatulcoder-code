@@ -1,6 +1,6 @@
 {
-  "name": "@lailatul-coder/lailatul-coder",
-  "version": "0.21.14",
+  "name": "lailatulcoder",
+  "version": "0.21.26",
   "engines": {
     "node": ">=22.0.0"
   },
@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LailatulCoder/lailatul-coder.git"
+    "url": "git+https://github.com/radmikasyraf/lailatulcoder-code.git"
   },
   "config": {
     "sandboxImageUri": "ghcr.io/LailatulCoder/lailatul-coder:0.21.14"
@@ -77,7 +77,6 @@
     "build:sdk:python": "python3 -m build packages/sdk-python",
     "check-i18n": "npm run check-i18n --workspace=packages/cli",
     "preflight": "npm run clean && npm ci && npm run format && npm run lint:ci && npm run build && npm run typecheck && npm run test:ci && npm run check:serve-fast-path-bundle",
-    "postinstall": "patch-package",
     "prepare": "node scripts/prepare.js",
     "prepare:package": "node scripts/prepare-package.js",
     "package:hosted-installation": "node scripts/build-hosted-installation-assets.js",
@@ -109,7 +108,7 @@
     "axios": "^1.19.0"
   },
   "bin": {
-    "qwen": "scripts/cli-entry.js"
+    "lailatulcoder": "scripts/cli-entry.js"
   },
   "files": [
     "dist/",
@@ -178,7 +177,15 @@
     "@lydell/node-pty-darwin-x64": "1.2.0-beta.10",
     "@lydell/node-pty-linux-x64": "1.2.0-beta.10",
     "@lydell/node-pty-win32-arm64": "1.2.0-beta.10",
-    "@lydell/node-pty-win32-x64": "1.2.0-beta.10"
+    "@lydell/node-pty-win32-x64": "1.2.0-beta.10",
+    "sharp": "^0.35.0",
+    "@teddyzhu/clipboard": "^0.0.5",
+    "@teddyzhu/clipboard-darwin-arm64": "^0.0.5",
+    "@teddyzhu/clipboard-darwin-x64": "^0.0.5",
+    "@teddyzhu/clipboard-linux-x64-gnu": "^0.0.5",
+    "@teddyzhu/clipboard-linux-arm64-gnu": "^0.0.5",
+    "@teddyzhu/clipboard-win32-x64-msvc": "^0.0.5",
+    "@teddyzhu/clipboard-win32-arm64-msvc": "^0.0.5"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

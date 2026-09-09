@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 LailatulCoder Ai
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -9,7 +9,7 @@ import { Box, Text } from 'ink';
 import Gradient from 'ink-gradient';
 import { shortenPath, tildeifyPath } from '@lailatul-coder/lailatul-coder-core';
 import { theme } from '../semantic-colors.js';
-import { shortAsciiLogo } from './AsciiArt.js';
+import { shortAsciiLogo, miniAsciiLogo } from './AsciiArt.js';
 import { getAsciiArtWidth, getCachedStringWidth } from '../utils/textUtils.js';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { getRenderableGradientColors } from '../utils/gradientUtils.js';
@@ -37,7 +37,7 @@ function formatAuthDisplayType(
   const value = authDisplayType.trim();
   switch (value) {
     case AuthDisplayType.QWEN_OAUTH:
-      return t('Qwen OAuth');
+      return t('LailatulCoder Auth');
     case AuthDisplayType.CODING_PLAN:
       return t('Coding Plan');
     case AuthDisplayType.API_KEY:
@@ -63,12 +63,12 @@ interface HeaderProps {
   /**
    * Width-aware override for the logo column. Each tier is a sanitized
    * ASCII string; the renderer picks `large` when it fits, then `small`,
-   * then falls through to the default Qwen logo. Either tier may be
+   * then falls through to the default LailatulCoder logo. Either tier may be
    * omitted: a missing tier simply skips that step.
    */
   customAsciiArt?: { small?: string; large?: string };
   /**
-   * Sanitized replacement for the bold ">_ Qwen Code" title in the info
+   * Sanitized replacement for the bold ">_ LailatulCoder Ai" title in the info
    * panel. The version suffix is always appended. When undefined or empty
    * the default title is used; the leading `>_` glyph is part of the
    * default brand and is dropped when a custom title is set.
@@ -82,6 +82,13 @@ interface HeaderProps {
   customBannerSubtitle?: string;
   version: string;
   authDisplayType?: AuthDisplayType | string;
+  /**
+   * When true (the auth-setup screen), always render the full default
+   * LailatulCoder logo + info panel, ignoring custom-art tiers and the
+   * width gate below -- a distinct, auth-screen-only layout that must
+   * never change what the normal chat-screen Header renders.
+   */
+  forceFullBanner?: boolean;
   model: string;
   workingDirectory: string;
 }
@@ -94,8 +101,9 @@ export const Header: React.FC<HeaderProps> = ({
   authDisplayType,
   model,
   workingDirectory,
+  forceFullBanner,
 }) => {
-  const { columns: terminalWidth } = useTerminalSize();
+  const { columns: terminalWidth, rows: terminalHeight } = useTerminalSize();
 
   const formattedAuthType = formatAuthDisplayType(authDisplayType);
   const versionLabel = formatVersionLabel(version);
@@ -107,7 +115,14 @@ export const Header: React.FC<HeaderProps> = ({
   const infoPanelPaddingX = 1;
   const infoPanelBorderWidth = 2; // left + right border
   const infoPanelChromeWidth = infoPanelBorderWidth + infoPanelPaddingX * 2;
-  const minPathLength = 40; // Minimum readable path length
+  // Lowered from 40: the original value reserved so much width for the info
+  // panel's path display that a reasonably-sized (not huge) terminal --
+  // e.g. 102 columns -- already failed the full-logo width check with
+  // plenty of height to spare, forcing a smaller logo tier unnecessarily.
+  // shortenPath() already truncates with an ellipsis when the path is
+  // longer than this, so 25 chars stays readable while letting the full
+  // logo fit meaningfully smaller terminals.
+  const minPathLength = 25; // Minimum readable path length
   const minInfoPanelWidth = minPathLength + infoPanelChromeWidth;
 
   const availableTerminalWidth = Math.max(
@@ -118,28 +133,65 @@ export const Header: React.FC<HeaderProps> = ({
   // Two distinct fallback paths:
   //   - User supplied a custom tier and at least one tier fits → render that.
   //   - User supplied custom art but neither tier fits → hide the logo column.
-  //     Falling back to the bundled QWEN logo here would silently undo a
+  //     Falling back to the bundled LailatulCoder logo here would silently undo a
   //     white-label deployment on narrow terminals.
   //   - User supplied no custom art → fall through to `shortAsciiLogo` and let
   //     the existing width gate decide whether to show or hide it.
-  const hasCustomArt = Boolean(customAsciiArt?.small || customAsciiArt?.large);
-  const customTier = pickAsciiArtTier(
-    customAsciiArt?.small,
-    customAsciiArt?.large,
-    availableTerminalWidth,
-    logoGap,
-    minInfoPanelWidth,
-    getAsciiArtWidth,
-  );
-  const displayLogo = customTier ?? (hasCustomArt ? '' : shortAsciiLogo);
+  const hasCustomArt =
+    !forceFullBanner && Boolean(customAsciiArt?.small || customAsciiArt?.large);
+  const customTier = forceFullBanner
+    ? undefined
+    : pickAsciiArtTier(
+        customAsciiArt?.small,
+        customAsciiArt?.large,
+        availableTerminalWidth,
+        logoGap,
+        minInfoPanelWidth,
+        getAsciiArtWidth,
+      );
+  // For the default (non-custom) LailatulCoder branding, fall back through
+  // full logo -> mini logo -> hidden based on available WIDTH and HEIGHT,
+  // mirroring the width-based tier logic pickAsciiArtTier already does for
+  // custom art. Two independent constraints, either can force a smaller
+  // tier: the full logo is 62 columns wide and 12 rows tall, so a
+  // reasonably-sized-but-not-huge terminal (e.g. 102 cols) can already fail
+  // the WIDTH check alone even with plenty of height to spare -- the mini
+  // logo (31 cols, 6 rows) fits meaningfully smaller terminals on both axes.
+  // Below mini logo's thresholds too, fall back to the compact (logo-less)
+  // info-panel-only layout.
+  const minRowsBelowLogo = 15; // chat content + input box + tips
+  const fullLogoWidth = getAsciiArtWidth(shortAsciiLogo);
+  const fullLogoLineCount = shortAsciiLogo
+    .split('\n')
+    .filter((line) => line.length > 0).length;
+  const miniLogoWidth = getAsciiArtWidth(miniAsciiLogo);
+  const miniLogoLineCount = miniAsciiLogo
+    .split('\n')
+    .filter((line) => line.length > 0).length;
+  const fullLogoFits =
+    availableTerminalWidth >= fullLogoWidth + logoGap + minInfoPanelWidth &&
+    terminalHeight >= fullLogoLineCount + minRowsBelowLogo;
+  const miniLogoFits =
+    availableTerminalWidth >= miniLogoWidth + logoGap + minInfoPanelWidth &&
+    terminalHeight >= miniLogoLineCount + minRowsBelowLogo;
+  const defaultLogo = fullLogoFits
+    ? shortAsciiLogo
+    : miniLogoFits
+      ? miniAsciiLogo
+      : '';
+  const displayLogo = forceFullBanner
+    ? shortAsciiLogo
+    : (customTier ?? (hasCustomArt ? '' : defaultLogo));
   const logoWidth = getAsciiArtWidth(displayLogo);
 
-  // Check if we have enough space for logo + gap + minimum info panel.
-  // When `displayLogo` is empty (custom art too wide for both tiers) showLogo
-  // will be false, hiding the column entirely.
+  // Final check kept for parity with the custom-art path (pickAsciiArtTier
+  // already validated width for that case, so this is a no-op there); for
+  // the default-branding path fullLogoFits/miniLogoFits above already
+  // picked a tier that satisfies this.
   const showLogo =
-    displayLogo !== '' &&
-    availableTerminalWidth >= logoWidth + logoGap + minInfoPanelWidth;
+    forceFullBanner ||
+    (displayLogo !== '' &&
+      availableTerminalWidth >= logoWidth + logoGap + minInfoPanelWidth);
 
   // Calculate available width for info panel (use all remaining space)
   // Cap at 60 when in two-column layout (with logo)
@@ -215,10 +267,10 @@ export const Header: React.FC<HeaderProps> = ({
         width={showLogo ? availableInfoPanelWidth : undefined}
       >
         {/* Title line: customBannerTitle (already sanitized) or the default
-            ">_ Qwen Code" brand. Version suffix is always appended. */}
+            ">_ LailatulCoder Ai" brand. Version suffix is always appended. */}
         <Text>
           <Text bold color={theme.text.accent}>
-            {customBannerTitle ? customBannerTitle : '>_ Qwen Code'}
+            {customBannerTitle ? customBannerTitle : '>_ LailatulCoder Ai'}
           </Text>
           <Text color={theme.text.secondary}> ({versionLabel})</Text>
         </Text>

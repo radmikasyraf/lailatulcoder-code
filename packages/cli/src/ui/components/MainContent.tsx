@@ -1,10 +1,10 @@
-/**
+﻿/**
  * @license
  * Copyright 2025 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Box, Static, type DOMElement } from 'ink';
+import { Box, Static, useBoxMetrics, type DOMElement } from 'ink';
 import {
   memo,
   useCallback,
@@ -102,26 +102,21 @@ function initialReplayCount(length: number): number {
 // stable completed items when unrelated UIState fields change during streaming.
 const VirtualHistoryItem = memo(HistoryItemDisplay);
 
-// Banner sentinel injected as the first virtual-scroll item so it scrolls with
-// content instead of being pinned at the top (saves vertical space on small
-// terminals).
-type VpBannerItem = { type: 'vp-banner'; id: number };
-type VpItem = HistoryItem | VpBannerItem;
-const VP_BANNER_ID = Number.MIN_SAFE_INTEGER;
-const VP_BANNER_ITEM: VpBannerItem = { type: 'vp-banner', id: VP_BANNER_ID };
+// The banner (AppHeader/Tips/notifications) used to be injected as the first
+// virtual-scroll item, scrolling away with content to save vertical space on
+// small terminals. It's now rendered as a fixed sibling ABOVE the scrollable
+// list instead (measured via bannerRef below) so it stays pinned while chat
+// history scrolls underneath -- matches the intentional footer-measurement
+// pattern in AppContainer.tsx (measureElement + subtract from the available
+// height budget).
+type VpItem = HistoryItem;
 
 // Pure functions with no closure deps — defined outside the component so they
 // are stable references and never trigger useMemo/useCallback invalidation.
-// index 0 is always the banner sentinel (VP_BANNER_ITEM is prepended first).
-const virtualEstimatedItemHeight = (index: number) => (index === 0 ? 10 : 3);
+const virtualEstimatedItemHeight = (_index: number) => 3;
 const virtualKeyExtractor = (item: VpItem) =>
-  item.type === 'vp-banner'
-    ? 'vp-banner'
-    : item.id >= 0
-      ? `h-${item.id}`
-      : `p-${-item.id - 1}`;
-const virtualIsStaticItem = (item: VpItem) =>
-  item.type === 'vp-banner' || item.id > 0;
+  item.id >= 0 ? `h-${item.id}` : `p-${-item.id - 1}`;
+const virtualIsStaticItem = (item: VpItem) => item.id > 0;
 
 interface MainContentProps {
   footerRef?: RefObject<DOMElement | null>;
@@ -141,6 +136,21 @@ export const MainContent = ({ footerRef }: MainContentProps) => {
     availableTerminalHeight,
     historyRemountKey,
   } = uiState;
+
+  // Fixed banner (logo + tips + notifications), pinned above the scrollable
+  // history instead of scrolling away with it. Measured the same way
+  // AppContainer measures the footer (mainControlsRef): measureElement +
+  // subtract from the height budget handed to the scroll container below.
+  const bannerRef = useRef<DOMElement>(null);
+  // Ink's own layout-metrics hook: unlike a hand-rolled measureElement +
+  // useLayoutEffect(deps) pair, this also subscribes to the root's
+  // layout-commit listener, so it picks up sibling-driven height changes
+  // (Notifications' startupWarnings/initError, DebugModeNotification's
+  // debug state, Tips' rotating text) that a fixed dependency list can
+  // never fully enumerate -- that gap left bannerHeight stale until a
+  // terminal resize (which happened to be in the old deps list) forced a
+  // remeasure. See node_modules/ink/build/hooks/use-box-metrics.js.
+  const { height: bannerHeight } = useBoxMetrics(bannerRef);
 
   // Filter out items whose display is suppressed (e.g. /history collapse).
   const visibleHistory = useMemo(
@@ -287,11 +297,9 @@ export const MainContent = ({ footerRef }: MainContentProps) => {
       : historyItemsWithSourceCopyOffsets.slice(0, replayCount);
 
   // Combine completed history + live pending items for the virtualized list.
-  // The banner sentinel is prepended so it scrolls with content (not pinned).
   // Pending items get negative IDs (-(i+1)) so renderItem can tell them apart.
   const allVirtualItems = useMemo((): VpItem[] => {
     const combined: VpItem[] = [
-      VP_BANNER_ITEM,
       ...visibleHistory,
       ...pendingHistoryItems.map((item, i) => ({ ...item, id: -(i + 1) })),
     ];
@@ -425,15 +433,6 @@ export const MainContent = ({ footerRef }: MainContentProps) => {
   // from refs so callback identity is stable.
   const renderVirtualItem = useCallback(
     ({ item }: { item: VpItem }) => {
-      if (item.type === 'vp-banner') {
-        return (
-          <Box flexDirection="column">
-            <AppHeader version={version} />
-            <DebugModeNotification />
-            <Notifications />
-          </Box>
-        );
-      }
       const isPending = item.id < 0;
       const sourceCopyIndexOffsets = isPending
         ? pendingSourceCopyOffsetsRef.current[-item.id - 1]
@@ -491,11 +490,16 @@ export const MainContent = ({ footerRef }: MainContentProps) => {
   if (useVirtualScroll) {
     const scrollContainerHeight = Math.max(
       0,
-      uiState.availableTerminalHeight ?? 0,
+      (uiState.availableTerminalHeight ?? 0) - bannerHeight,
     );
 
     return (
       <OverflowProvider>
+        <Box ref={bannerRef} flexDirection="column">
+          <AppHeader version={version} />
+          <DebugModeNotification />
+          <Notifications />
+        </Box>
         <ScrollableList
           ref={scrollRef}
           hasFocus={!uiState.dialogsVisible}
@@ -504,7 +508,7 @@ export const MainContent = ({ footerRef }: MainContentProps) => {
           estimatedItemHeight={virtualEstimatedItemHeight}
           keyExtractor={virtualKeyExtractor}
           initialScrollIndex={
-            allVirtualItems.length <= 1 ? 0 : SCROLL_TO_ITEM_END
+            allVirtualItems.length === 0 ? 0 : SCROLL_TO_ITEM_END
           }
           isStaticItem={virtualIsStaticItem}
           containerHeight={scrollContainerHeight}

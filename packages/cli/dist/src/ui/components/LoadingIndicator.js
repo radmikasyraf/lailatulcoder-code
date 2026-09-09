@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+﻿import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useRef } from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
@@ -8,6 +8,7 @@ import { GeminiRespondingSpinner } from './GeminiRespondingSpinner.js';
 import { formatDuration, formatTokenCount } from '../utils/formatters.js';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { useAnimationFrame } from '../hooks/useAnimationFrame.js';
+import { isClassicWindowsConsole } from '../../utils/osc.js';
 import { isNarrowWidth } from '../utils/isNarrowWidth.js';
 import { t } from '../../i18n/index.js';
 export const LoadingIndicator = ({ currentLoadingPhrase, elapsedTime, rightContent, candidatesTokens, taskStartTokens = 0, taskStartStreamingChars = 0, streamingCharsRef, isStreaming, showResponseTokensPerSecond = false, isReceivingContent = true, }) => {
@@ -19,7 +20,13 @@ export const LoadingIndicator = ({ currentLoadingPhrase, elapsedTime, rightConte
     // like InputPrompt / Footer stay static, which eliminates terminal flicker
     // during streaming output.
     const fallbackRef = useRef(0);
-    const animatedChars = useAnimationFrame(streamingCharsRef ?? fallbackRef, streamingCharsRef && isStreaming ? 100 : null);
+    // On the classic Windows console (conhost), even this component's own
+    // full erase+redraw at 100ms reads as flicker (Ink has no way to update
+    // just the changed digit there), matching the same problem worked around
+    // for the GeminiSpinner glyph -- so slow this animation down there too,
+    // same as the tmux workaround.
+    const animationIntervalMs = isClassicWindowsConsole() ? 750 : 100;
+    const animatedChars = useAnimationFrame(streamingCharsRef ?? fallbackRef, streamingCharsRef && isStreaming ? animationIntervalMs : null);
     if (streamingState === StreamingState.Idle) {
         return null;
     }

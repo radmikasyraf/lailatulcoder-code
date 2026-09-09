@@ -346,6 +346,87 @@ export async function clipboardHasImage(
 }
 
 /**
+ * Runs a command and captures its stdout as text (with timeout), used for
+ * reading plain-text clipboard content via wl-paste/xclip on Linux.
+ */
+function readTextFromCommand(
+  command: string,
+  args: string[],
+): Promise<string | null> {
+  return new Promise((resolve) => {
+    try {
+      const child = spawn(command, args, { stdio: ['ignore', 'pipe', 'ignore'] });
+      let stdout = '';
+
+      const timer = setTimeout(() => {
+        try {
+          child.kill();
+        } catch {
+          /* ignore */
+        }
+        resolve(null);
+      }, PROCESS_TIMEOUT_MS);
+
+      child.stdout.on('data', (data: Buffer) => {
+        stdout += data.toString('utf-8');
+      });
+
+      child.on('close', (code) => {
+        clearTimeout(timer);
+        resolve(code === 0 && stdout.length > 0 ? stdout : null);
+      });
+
+      child.on('error', () => {
+        clearTimeout(timer);
+        resolve(null);
+      });
+    } catch {
+      resolve(null);
+    }
+  });
+}
+
+/**
+ * Reads plain text from the system clipboard.
+ * Uses platform-native tools (wl-paste/xclip) on Linux, the native
+ * @teddyzhu/clipboard module on macOS/Windows.
+ * @returns The clipboard's plain text, or null if unavailable/empty.
+ */
+export async function readClipboardText(): Promise<string | null> {
+  if (process.platform === 'linux') {
+    try {
+      const tool = getLinuxClipboardTool();
+      if (tool === 'wl-paste') {
+        return await readTextFromCommand('wl-paste', ['--no-newline']);
+      }
+      if (tool === 'xclip') {
+        return await readTextFromCommand('xclip', [
+          '-selection',
+          'clipboard',
+          '-o',
+        ]);
+      }
+    } catch (error) {
+      debugLogger.error('Error reading clipboard text:', error);
+    }
+    return null;
+  }
+
+  try {
+    const mod = await getClipboardModule();
+    if (!mod) {
+      return null;
+    }
+    const clipboard = new mod.ClipboardManager();
+    const text = await clipboard.getTextAsync();
+    return text || null;
+  } catch (error) {
+    debugLogger.error('Error reading clipboard text:', error);
+    return null;
+  }
+}
+
+/**
  * Get the available image MIME types from wl-paste.
  * Uses cached result if available to avoid redundant calls.
  */
