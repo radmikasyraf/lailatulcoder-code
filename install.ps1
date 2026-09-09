@@ -1,97 +1,118 @@
-# LailatulCoder Ai - Windows Install Script
+#!/usr/bin/env pwsh
+# LailatulCoder Ai - Windows Installer
 # Usage: irm https://raw.githubusercontent.com/radmikasyraf/lailatulcoder-code/main/install.ps1 | iex
+#
+# 1. Checks for Node.js. Installs it if missing.
+# 2. Checks the version. Upgrades it if below the minimum.
+# 3. Installs lailatulcoder globally via npm.
 
-$RELEASE_URL = "https://github.com/radmikasyraf/lailatulcoder-code/releases/latest/download/lailatulcoder-ai-v0.21.14.zip"
-$INSTALL_DIR = "$env:USERPROFILE\.lailatulcoder-install"
-$MIN_NODE_VERSION = 22
+$ErrorActionPreference = "Stop"
+$MIN_NODE_MAJOR = 22
 
 Write-Host ""
 Write-Host "  LailatulCoder Ai - Installer" -ForegroundColor Cyan
 Write-Host "  =============================" -ForegroundColor Cyan
 Write-Host ""
 
-# Check Node.js
-Write-Host "Checking Node.js..." -ForegroundColor Yellow
-$nodeVersion = $null
-try { $nodeVersion = (node --version 2>&1) } catch {}
-
-if (-not $nodeVersion -or $nodeVersion -notmatch 'v\d+') {
-    Write-Host "ERROR: Node.js not found. Please install Node.js v$MIN_NODE_VERSION+" -ForegroundColor Red
-    Write-Host "Download from: https://nodejs.org/en/download" -ForegroundColor Yellow
-    exit 1
-}
-
-$nodeMajor = [int]($nodeVersion -replace 'v(\d+)\..*', '$1')
-if ($nodeMajor -lt $MIN_NODE_VERSION) {
-    Write-Host "ERROR: Node.js v$MIN_NODE_VERSION+ required. Found $nodeVersion" -ForegroundColor Red
-    exit 1
-}
-Write-Host "Node.js $nodeVersion OK" -ForegroundColor Green
-
-# Download release
-Write-Host "Downloading LailatulCoder Ai (20.1 MB)..." -ForegroundColor Yellow
-$zipPath = "$env:TEMP\lailatulcoder.zip"
-
-try {
-    Invoke-WebRequest -Uri $RELEASE_URL -OutFile $zipPath -UseBasicParsing
-    Write-Host "Download complete" -ForegroundColor Green
-} catch {
-    Write-Host "ERROR: Failed to download." -ForegroundColor Red
-    exit 1
-}
-
-# Extract
-Write-Host "Extracting..." -ForegroundColor Yellow
-if (Test-Path $INSTALL_DIR) { Remove-Item -Recurse -Force $INSTALL_DIR }
-New-Item -ItemType Directory -Path $INSTALL_DIR -Force | Out-Null
-Expand-Archive -Path $zipPath -DestinationPath $INSTALL_DIR -Force
-Remove-Item $zipPath -Force
-Write-Host "Extracted" -ForegroundColor Green
-
-# Install dependencies
-Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Yellow
-Push-Location $INSTALL_DIR
-cmd /c "npm install > nul 2>&1"
-Pop-Location
-Write-Host "Dependencies installed" -ForegroundColor Green
-
-# Copy workspace packages to node_modules
-Write-Host "Setting up workspace packages..." -ForegroundColor Yellow
-$lailatulDir = "$INSTALL_DIR\node_modules\@lailatul-coder"
-New-Item -ItemType Directory -Path $lailatulDir -Force | Out-Null
-
-$workspaceMap = @{
-    'packages\core' = 'lailatul-coder-core'
-    'packages\web-templates' = 'web-templates'
-    'packages\acp-bridge' = 'acp-bridge'
-    'packages\channels\base' = 'channel-base'
-    'packages\channels\weixin' = 'channel-weixin'
-    'packages\channels\dingtalk' = 'channel-dingtalk'
-    'packages\channels\telegram' = 'channel-telegram'
-    'packages\channels\wecom' = 'channel-wecom'
-    'packages\channels\feishu' = 'channel-feishu'
-    'packages\channels\github' = 'channel-github'
-    'packages\channels\gitlab' = 'channel-gitlab'
-    'packages\channels\qqbot' = 'channel-qqbot'
-}
-
-foreach ($ws in $workspaceMap.GetEnumerator()) {
-    $src = "$INSTALL_DIR\$($ws.Key)"
-    $dest = "$lailatulDir\$($ws.Value)"
-    if (Test-Path $src) {
-        if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }
-        Copy-Item -Recurse -Force $src $dest
-        Write-Host "  ✓ @lailatul-coder/$($ws.Value)" -ForegroundColor Gray
+function Get-NodeMajorVersion {
+    try {
+        $v = (& node --version) 2>$null
+        if ($v -match '^v(\d+)\.') {
+            return [int]$Matches[1]
+        }
+    } catch {
+        return $null
     }
+    return $null
 }
-Write-Host "Workspace packages ready" -ForegroundColor Green
 
-# Link CLI command
-Write-Host "Setting up lailatulcoder command..." -ForegroundColor Yellow
-Push-Location "$INSTALL_DIR\packages\cli"
-cmd /c "npm link > nul 2>&1"
-Pop-Location
-Write-Host "Command linked" -ForegroundColor Green
+function Get-LatestNodeMsiUrl {
+    # Pull the official release index and pick the newest LTS release that
+    # satisfies MIN_NODE_MAJOR, rather than hardcoding a version that will
+    # go stale.
+    $index = Invoke-RestMethod -Uri "https://nodejs.org/dist/index.json" -UseBasicParsing
+    $candidate = $index |
+        Where-Object { $_.lts -and ([int]($_.version -replace '^v(\d+)\..*', '$1')) -ge $MIN_NODE_MAJOR } |
+        Sort-Object { [version]($_.version -replace '^v', '') } -Descending |
+        Select-Object -First 1
+    if (-not $candidate) {
+        # No LTS yet on this major — fall back to the newest release of it, LTS or not.
+        $candidate = $index |
+            Where-Object { ([int]($_.version -replace '^v(\d+)\..*', '$1')) -ge $MIN_NODE_MAJOR } |
+            Sort-Object { [version]($_.version -replace '^v', '') } -Descending |
+            Select-Object -First 1
+    }
+    if (-not $candidate) {
+        throw "Could not find a Node.js v$MIN_NODE_MAJOR+ release in the official index."
+    }
+    $arch = if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x86" }
+    return "https://nodejs.org/dist/$($candidate.version)/node-$($candidate.version)-$arch.msi"
+}
+
+function Install-OrUpgrade-Node {
+    param([string]$Reason)
+    Write-Host $Reason -ForegroundColor Yellow
+
+    $winget = Get-Command winget -ErrorAction SilentlyContinue
+    if ($winget) {
+        Write-Host "Installing Node.js via winget..." -ForegroundColor Yellow
+        try {
+            winget install --id OpenJS.NodeJS.LTS --silent --accept-package-agreements --accept-source-agreements
+        } catch {
+            Write-Host "winget install failed, falling back to direct MSI download..." -ForegroundColor Yellow
+            Install-NodeViaMsi
+        }
+    } else {
+        Install-NodeViaMsi
+    }
+
+    # Refresh PATH in this session so node/npm resolve without reopening the terminal.
+    $machinePath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+    $userPath = [System.Environment]::GetEnvironmentVariable("Path", "User")
+    $env:Path = "$machinePath;$userPath"
+}
+
+function Install-NodeViaMsi {
+    $msiUrl = Get-LatestNodeMsiUrl
+    $installerPath = "$env:TEMP\lailatulcoder-node-installer.msi"
+    Write-Host "Downloading Node.js installer from $msiUrl ..." -ForegroundColor Yellow
+    Invoke-WebRequest -Uri $msiUrl -OutFile $installerPath -UseBasicParsing
+    Write-Host "Installing Node.js (may prompt for administrator permission)..." -ForegroundColor Yellow
+    Start-Process msiexec.exe -ArgumentList "/i", "`"$installerPath`"", "/quiet", "/norestart" -Wait
+    Remove-Item $installerPath -Force -ErrorAction SilentlyContinue
+}
+
+# 1 & 2: check Node.js, install or upgrade as needed.
+$nodeMajor = Get-NodeMajorVersion
+
+if ($null -eq $nodeMajor) {
+    Install-OrUpgrade-Node -Reason "Node.js not found. Installing Node.js LTS..."
+    $nodeMajor = Get-NodeMajorVersion
+    if ($null -eq $nodeMajor) {
+        Write-Host "ERROR: Node.js installation did not complete. Install it manually from https://nodejs.org/en/download, then re-run this script." -ForegroundColor Red
+        exit 1
+    }
+    Write-Host "Node.js v$nodeMajor installed." -ForegroundColor Green
+} elseif ($nodeMajor -lt $MIN_NODE_MAJOR) {
+    Install-OrUpgrade-Node -Reason "Node.js v$nodeMajor found, but v$MIN_NODE_MAJOR+ is required. Upgrading..."
+    $nodeMajor = Get-NodeMajorVersion
+    if ($null -eq $nodeMajor -or $nodeMajor -lt $MIN_NODE_MAJOR) {
+        Write-Host "ERROR: Node.js upgrade did not complete. Upgrade it manually from https://nodejs.org/en/download, then re-run this script." -ForegroundColor Red
+        exit 1
+    }
+    Write-Host "Node.js upgraded to v$nodeMajor." -ForegroundColor Green
+} else {
+    Write-Host "Node.js v$nodeMajor found (meets the v$MIN_NODE_MAJOR+ requirement)." -ForegroundColor Green
+}
+
+# 3: install lailatulcoder.
+Write-Host ""
+Write-Host "Installing LailatulCoder Ai..." -ForegroundColor Yellow
+& npm install -g lailatulcoder
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "ERROR: npm install failed (exit code $LASTEXITCODE)." -ForegroundColor Red
+    exit 1
+}
 
 Write-Host ""
 Write-Host "  Installation complete!" -ForegroundColor Green
@@ -99,4 +120,3 @@ Write-Host ""
 Write-Host "  Run: lailatulcoder" -ForegroundColor Cyan
 Write-Host "  Then type /auth to configure your API key" -ForegroundColor Cyan
 Write-Host ""
-

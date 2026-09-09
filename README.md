@@ -21,10 +21,22 @@
 
 ## Installation
 
-Works the same way on **Windows**, **macOS**, and **Linux** — install globally via npm:
+**Already have Node.js v22+?** Install directly:
 
 ```bash
 npm install -g lailatulcoder
+```
+
+**Not sure, or don't have Node.js yet?** Use the installer script below — it checks for Node.js, installs it (or upgrades it) automatically if needed, then installs LailatulCoder Ai:
+
+```powershell
+# Windows (PowerShell)
+irm https://raw.githubusercontent.com/radmikasyraf/lailatulcoder-code/main/install.ps1 | iex
+```
+
+```bash
+# macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/radmikasyraf/lailatulcoder-code/main/install.sh | bash
 ```
 
 Then run it from any terminal:
@@ -36,9 +48,9 @@ lailatulcoder
 <details>
 <summary>Platform-specific notes</summary>
 
-- **Windows**: Works in PowerShell, Command Prompt (`cmd.exe`), or Windows Terminal. If Node.js isn't installed yet, grab the LTS installer from [nodejs.org](https://nodejs.org/en/download) or install via `winget install OpenJS.NodeJS.LTS`.
-- **macOS**: Install Node.js via the [official installer](https://nodejs.org/en/download), [Homebrew](https://brew.sh) (`brew install node`), or `nvm`. Works on both Intel and Apple Silicon Macs.
-- **Linux**: Install Node.js via your distro's package manager, [NodeSource](https://github.com/nodesource/distributions), or `nvm`. Works on both x64 and ARM64.
+- **Windows**: Works in PowerShell, Command Prompt (`cmd.exe`), or Windows Terminal. The installer script uses `winget` when available, or downloads the official Node.js installer directly otherwise.
+- **macOS**: The installer script uses [Homebrew](https://brew.sh) when available, or [nvm](https://github.com/nvm-sh/nvm) otherwise. Works on both Intel and Apple Silicon Macs.
+- **Linux**: The installer script uses [nvm](https://github.com/nvm-sh/nvm) (works the same across distros, no root required). Works on both x64 and ARM64.
 
 Clipboard image support and right-click paste (`@teddyzhu/clipboard`), the embedded terminal (`node-pty`), and image rendering (`sharp`) all ship as optional platform-specific dependencies — npm automatically installs the correct native binary for your OS and CPU architecture, no extra setup needed.
 
