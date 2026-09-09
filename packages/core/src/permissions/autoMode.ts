@@ -147,15 +147,15 @@ const PERSISTENCE_PATH_PATTERNS: readonly RegExp[] = Object.freeze([
 ]);
 
 const SELF_MODIFICATION_PATH_PATTERNS: readonly RegExp[] = Object.freeze([
-  /(^|\/)\.qwen\/settings(?:\.[^/]*)?\.json$/,
+  /(^|\/)\.lailatulcoder\/settings(?:\.[^/]*)?\.json$/,
   /(^|\/)(qwen|agents)\.md$/,
-  /(^|\/)\.qwen\/qwen\.local\.md$/,
-  /(^|\/)\.qwen\/rules(?:\/|$)/,
-  /(^|\/)\.qwen\/commands(?:\/|$)/,
-  /(^|\/)\.qwen\/agents(?:\/|$)/,
-  /(^|\/)\.qwen\/skills(?:\/|$)/,
-  /(^|\/)\.qwen\/hooks(?:\/|$)/,
-  /(^|\/)\.qwen\/fork-profiles(?:\/|$)/,
+  /(^|\/)\.lailatulcoder\/qwen\.local\.md$/,
+  /(^|\/)\.lailatulcoder\/rules(?:\/|$)/,
+  /(^|\/)\.lailatulcoder\/commands(?:\/|$)/,
+  /(^|\/)\.lailatulcoder\/agents(?:\/|$)/,
+  /(^|\/)\.lailatulcoder\/skills(?:\/|$)/,
+  /(^|\/)\.lailatulcoder\/hooks(?:\/|$)/,
+  /(^|\/)\.lailatulcoder\/fork-profiles(?:\/|$)/,
   /(^|\/)\.mcp\.json$/,
 ]);
 

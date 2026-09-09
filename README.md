@@ -65,7 +65,7 @@ Clipboard image support and right-click paste (`@teddyzhu/clipboard`), the embed
 
 ## Configuration
 
-Settings are stored in `~/.qwen/settings.json`
+Settings are stored in `~/.lailatulcoder/settings.json`
 
 ## License
 
