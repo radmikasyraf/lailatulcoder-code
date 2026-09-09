@@ -44,6 +44,37 @@ Clipboard image support and right-click paste (`@teddyzhu/clipboard`), the embed
 
 </details>
 
+## Update
+
+Get the latest version:
+
+```bash
+npm update -g lailatulcoder
+```
+
+If that doesn't pick up the newest release, force it directly:
+
+```bash
+npm install -g lailatulcoder@latest
+```
+
+Check what version you have installed:
+
+```bash
+lailatulcoder --version
+```
+
+## Uninstall
+
+```bash
+npm uninstall -g lailatulcoder
+```
+
+This removes the CLI only. Your settings and API key stay at `~/.lailatulcoder/` — delete that folder too if you want a completely clean removal:
+
+- **macOS / Linux**: delete the `~/.lailatulcoder` folder
+- **Windows (PowerShell)**: delete the `.lailatulcoder` folder inside `%USERPROFILE%`
+
 ## Quick Start
 
 1. Run `lailatulcoder`
