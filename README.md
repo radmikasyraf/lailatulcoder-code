@@ -2,7 +2,7 @@
 
 > An open-source AI coding agent that lives in your terminal — powered by LailatulCoder.Ai
 
-![LailatulCoder Ai](banner.png)
+![LailatulCoder Ai]
 <img width="903" height="671" alt="image" src="https://github.com/user-attachments/assets/7ae00b23-4da1-4586-9593-8cb5d8154a5f" />
 
 
